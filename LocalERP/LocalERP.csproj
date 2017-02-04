@@ -1,0 +1,732 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{8EAF33D6-5147-4A1B-8790-3690D3D1FC50}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>LocalERP</RootNamespace>
+    <AssemblyName>LocalERP</AssemblyName>
+    <ApplicationIcon>start.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=10.2.3600.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
+    <Reference Include="CrystalDecisions.Enterprise.Framework, Version=10.2.3600.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
+    <Reference Include="CrystalDecisions.Enterprise.InfoStore, Version=10.2.3600.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
+    <Reference Include="CrystalDecisions.ReportSource, Version=10.2.3600.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
+    <Reference Include="CrystalDecisions.Shared, Version=10.2.3600.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
+    <Reference Include="CrystalDecisions.Windows.Forms, Version=10.2.3600.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
+    <Reference Include="Microsoft.ReportViewer.Common, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+    <Reference Include="Microsoft.ReportViewer.WinForms, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Services, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\WINDOWS\assembly\GAC_MSIL\System.Web.Services\2.0.0.0__b03f5f7f11d50a3a\System.Web.Services.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CrystalReport\OrderCrystalReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OrderCrystalReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CrystalReport\OrderDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OrderDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="CrystalReport\SellDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SellDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="CrystalReport\SellCrystalReport.cs">
+      <DependentUpon>SellCrystalReport.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="DataAccess\DataDAO\CharactorValueDao.cs" />
+    <Compile Include="DataAccess\DataDAO\ElementDao.cs" />
+    <Compile Include="DataAccess\DataDAO\ElementOrderDao.cs" />
+    <Compile Include="DataAccess\DataDAO\ElementOrderRecordDao.cs" />
+    <Compile Include="DataAccess\DataDAO\ElementFlowDao.cs" />
+    <Compile Include="DataAccess\DataDAO\ProductDao.cs" />
+    <Compile Include="DataAccess\DataDAO\ProductJobDao.cs" />
+    <Compile Include="DataAccess\DataDAO\ProductJobRecordDao.cs" />
+    <Compile Include="DataAccess\DataDAO\ProductFlowDao.cs" />
+    <Compile Include="DataAccess\DataDAO\ProductSellDao.cs" />
+    <Compile Include="DataAccess\DataDAO\ProductSellRecordDao.cs" />
+    <Compile Include="DataAccess\DataDAO\CustomerDao.cs" />
+    <Compile Include="DataAccess\DataDAO\ConfDao.cs" />
+    <Compile Include="DataAccess\DataDAO\CategoryDao.cs" />
+    <Compile Include="DataAccess\DataDAO\ProductClothesDao.cs" />
+    <Compile Include="DataAccess\DataDAO\ProductCirculationDao.cs" />
+    <Compile Include="DataAccess\DataDAO\ProductCirculationRecordDao.cs" />
+    <Compile Include="DataAccess\DataDAO\ProductSKUDao.cs" />
+    <Compile Include="DataAccess\DataDAO\ProductCirculationSKURecordDao.cs" />
+    <Compile Include="DataAccess\Data\Category.cs" />
+    <Compile Include="DataAccess\Data\Charactor.cs" />
+    <Compile Include="DataAccess\Data\Element.cs" />
+    <Compile Include="DataAccess\Data\ElementOrder.cs" />
+    <Compile Include="DataAccess\Data\ElementOrderRecord.cs" />
+    <Compile Include="DataAccess\Data\ElementFlow.cs" />
+    <Compile Include="DataAccess\Data\Product.cs" />
+    <Compile Include="DataAccess\Data\ProductJob.cs" />
+    <Compile Include="DataAccess\Data\ProductJobRecord.cs" />
+    <Compile Include="DataAccess\Data\ProductFlow.cs" />
+    <Compile Include="DataAccess\Data\ProductSell.cs" />
+    <Compile Include="DataAccess\Data\ProductSellRecord.cs" />
+    <Compile Include="DataAccess\Data\Customer.cs" />
+    <Compile Include="DataAccess\Data\CharactorValue.cs" />
+    <Compile Include="DataAccess\Data\ProductSKU.cs" />
+    <Compile Include="DataAccess\Data\ProductAttribute.cs" />
+    <Compile Include="DataAccess\Data\ProductCirculation.cs" />
+    <Compile Include="DataAccess\Data\ProductCirculationRecord.cs" />
+    <Compile Include="DataAccess\Data\ProductCirculationSKURecord.cs" />
+    <Compile Include="DataAccess\DbUtility\DbHelperAccess.cs" />
+    <Compile Include="DataAccess\Utility\AuthUtility.cs" />
+    <Compile Include="DataAccess\Utility\DataUtility.cs" />
+    <Compile Include="DataAccess\Utility\ValidateUtility.cs" />
+    <Compile Include="UiDataProxy\CustomerCategoryItemProxy.cs" />
+    <Compile Include="UiDataProxy\ProductCategoryItemProxy.cs" />
+    <Compile Include="UiDataProxy\QueryLibProxy.cs" />
+    <Compile Include="UiDataProxy\ProxyMgr.cs" />
+    <Compile Include="UiDataProxy\CategoryItemProxy.cs" />
+    <Compile Include="WinForm\Data\CustomerUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\Data\CustomerUC.Designer.cs">
+      <DependentUpon>CustomerUC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WinForm\Data\ProductClothesForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WinForm\Data\ProductClothesForm.Designer.cs">
+      <DependentUpon>ProductClothesForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WinForm\Data\ProductClothesInputNumForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WinForm\Data\ProductClothesInputNumForm.Designer.cs">
+      <DependentUpon>ProductClothesInputNumForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WinForm\Data\CharactorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WinForm\Data\CharactorForm.Designer.cs">
+      <DependentUpon>CharactorForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WinForm\FormMgr.cs" />
+    <Compile Include="WinForm\Element\ElementOrderReportForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WinForm\Element\ElementOrderReportForm.Designer.cs">
+      <DependentUpon>ElementOrderReportForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WinForm\MyDockContent.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WinForm\Query\QueryDetailForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WinForm\Query\QueryDetailForm.Designer.cs">
+      <DependentUpon>QueryDetailForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WinForm\Query\QueryLibForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WinForm\Query\QueryLibForm.Designer.cs">
+      <DependentUpon>QueryLibForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WinForm\Product\ProductLibForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WinForm\Product\ProductLibForm.Designer.cs">
+      <DependentUpon>ProductLibForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WinForm\Product\ProductFlowDetailForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WinForm\Product\ProductFlowDetailForm.Designer.cs">
+      <DependentUpon>ProductFlowDetailForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WinForm\Product\ProductSellReportForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WinForm\Product\ProductSellReportForm.Designer.cs">
+      <DependentUpon>ProductSellReportForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WinForm\Product\ProductSellDetailForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WinForm\Product\ProductSellDetailForm.Designer.cs">
+      <DependentUpon>ProductSellDetailForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WinForm\Product\ProductFlowForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WinForm\Product\ProductFlowForm.Designer.cs">
+      <DependentUpon>ProductFlowForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WinForm\Product\ProductSellForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WinForm\Product\ProductSellForm.Designer.cs">
+      <DependentUpon>ProductSellForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WinForm\Data\CategoryForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WinForm\Data\CategoryForm.Designer.cs">
+      <DependentUpon>CategoryForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WinForm\Product\ProductCirculationForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WinForm\Product\ProductCirculationForm.Designer.cs">
+      <DependentUpon>ProductCirculationForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WinForm\Product\ProductCirculationListForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WinForm\Product\ProductCirculationListForm.Designer.cs">
+      <DependentUpon>ProductCirculationListForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WinForm\Query\ProductStatisticForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WinForm\Query\ProductStatisticForm.Designer.cs">
+      <DependentUpon>ProductStatisticForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WinForm\System\LoadingForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WinForm\System\LoadingForm.Designer.cs">
+      <DependentUpon>LoadingForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WinForm\System\NavigationUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\System\NavigationUC.Designer.cs">
+      <DependentUpon>NavigationUC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WinForm\Data\ProductForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WinForm\Data\ProductForm.Designer.cs">
+      <DependentUpon>ProductForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WinForm\Data\CustomerForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WinForm\Data\CustomerForm.Designer.cs">
+      <DependentUpon>CustomerForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WinForm\Data\CategoryItemForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WinForm\Data\CategoryItemForm.Designer.cs">
+      <DependentUpon>CategoryItemForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WinForm\System\PasswordForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WinForm\System\PasswordForm.Designer.cs">
+      <DependentUpon>PasswordForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WinForm\System\AboutForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WinForm\System\AboutForm.Designer.cs">
+      <DependentUpon>AboutForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WinForm\System\LoginForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WinForm\System\LoginForm.Designer.cs">
+      <DependentUpon>LoginForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WinForm\System\WaitFormService.cs" />
+    <Compile Include="WinForm\LookupAndNotifyDockContent.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WinForm\System\WelcomeForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WinForm\System\WelcomeForm.Designer.cs">
+      <DependentUpon>WelcomeForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WinForm\System\SignForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WinForm\System\SignForm.Designer.cs">
+      <DependentUpon>SignForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WinForm\Utility\ComboBoxTree.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\Utility\DataGridViewCalendarColumn.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="WinForm\Utility\MSplitContainer.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="WinForm\Utility\MSplitContainer.Designer.cs">
+      <DependentUpon>MSplitContainer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WinForm\Utility\MySplitter.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="WinForm\Utility\MySplitter.Designer.cs">
+      <DependentUpon>MySplitter.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WinForm\Utility\MyDataGridView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="WinForm\Utility\MyTreeView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="WinForm\Utility\MyTreeView.Designer.cs">
+      <DependentUpon>MyTreeView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WinForm\Utility\PickValue.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\Utility\PickValue.Designer.cs">
+      <DependentUpon>PickValue.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WinForm\Utility\RowMergeView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="WinForm\Utility\RowMergeView.designer.cs">
+      <DependentUpon>RowMergeView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WinForm\System\WelcomeForm1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WinForm\System\WelcomeForm1.Designer.cs">
+      <DependentUpon>WelcomeForm1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WinForm\Data\ProductUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\Data\ProductUC.Designer.cs">
+      <DependentUpon>ProductUC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WinForm\Element\ElementLibForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WinForm\Element\ElementLibForm.Designer.cs">
+      <DependentUpon>ElementLibForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WinForm\Element\ElementOrderForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WinForm\Element\ElementOrderForm.Designer.cs">
+      <DependentUpon>ElementOrderForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WinForm\Data\ElementUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\Data\ElementUC.Designer.cs">
+      <DependentUpon>ElementUC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WinForm\System\MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WinForm\System\MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WinForm\Data\DataSettingForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WinForm\Data\DataSettingForm.Designer.cs">
+      <DependentUpon>DataSettingForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WinForm\Data\ElementForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WinForm\Data\ElementForm.Designer.cs">
+      <DependentUpon>ElementForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="CrystalReport\OrderCrystalReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>OrderCrystalReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CrystalReport\SellCrystalReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>SellCrystalReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\licenses.licx" />
+    <EmbeddedResource Include="WinForm\Data\CustomerUC.resx">
+      <DependentUpon>CustomerUC.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForm\Data\ProductClothesForm.resx">
+      <DependentUpon>ProductClothesForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForm\Data\ProductClothesInputNumForm.resx">
+      <DependentUpon>ProductClothesInputNumForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForm\Data\CharactorForm.resx">
+      <DependentUpon>CharactorForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForm\Element\ElementOrderReportForm.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ElementOrderReportForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForm\Query\QueryDetailForm.resx">
+      <DependentUpon>QueryDetailForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForm\Query\QueryLibForm.resx">
+      <DependentUpon>QueryLibForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForm\Product\ProductLibForm.resx">
+      <DependentUpon>ProductLibForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForm\Product\ProductFlowDetailForm.resx">
+      <DependentUpon>ProductFlowDetailForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForm\Product\ProductSellReportForm.resx">
+      <DependentUpon>ProductSellReportForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForm\Product\ProductSellDetailForm.resx">
+      <DependentUpon>ProductSellDetailForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForm\Product\ProductFlowForm.resx">
+      <DependentUpon>ProductFlowForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForm\Product\ProductSellForm.resx">
+      <DependentUpon>ProductSellForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForm\Data\CategoryForm.resx">
+      <DependentUpon>CategoryForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForm\Product\ProductCirculationForm.resx">
+      <DependentUpon>ProductCirculationForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForm\Product\ProductCirculationListForm.resx">
+      <DependentUpon>ProductCirculationListForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForm\Query\ProductStatisticForm.resx">
+      <DependentUpon>ProductStatisticForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForm\System\LoadingForm.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>LoadingForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForm\System\NavigationUC.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>NavigationUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForm\Data\ProductForm.resx">
+      <DependentUpon>ProductForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForm\Data\CustomerForm.resx">
+      <DependentUpon>CustomerForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForm\Data\CategoryItemForm.resx">
+      <DependentUpon>CategoryItemForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForm\System\PasswordForm.resx">
+      <DependentUpon>PasswordForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForm\System\AboutForm.resx">
+      <DependentUpon>AboutForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForm\System\LoginForm.resx">
+      <DependentUpon>LoginForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForm\System\WelcomeForm.resx">
+      <DependentUpon>WelcomeForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForm\System\SignForm.resx">
+      <DependentUpon>SignForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForm\Utility\ComboBoxTree.resx">
+      <DependentUpon>ComboBoxTree.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForm\Utility\MSplitContainer.resx">
+      <DependentUpon>MSplitContainer.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForm\Utility\PickValue.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>PickValue.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForm\Utility\RowMergeView.resx">
+      <DependentUpon>RowMergeView.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForm\System\WelcomeForm1.resx">
+      <DependentUpon>WelcomeForm1.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForm\Data\ProductUC.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ProductUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForm\Element\ElementLibForm.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ElementLibForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForm\Element\ElementOrderForm.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ElementOrderForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForm\Data\ElementUC.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ElementUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForm\System\MainForm.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForm\Data\DataSettingForm.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>DataSettingForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForm\Data\ElementForm.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ElementForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForm\Product\ProductJobForm.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ProductJobForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForm\Element\ElementFlowDetailForm.resx">
+      <DependentUpon>ElementFlowDetailForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForm\Element\ElementOrderDetailForm.resx">
+      <DependentUpon>ElementOrderDetailForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForm\Product\ProductJobDetailForm.resx">
+      <DependentUpon>ProductJobDetailForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForm\Element\ElementFlowForm.resx">
+      <DependentUpon>ElementFlowForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForm\Utility\LookupText.resx">
+      <DependentUpon>LookupText.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="app.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="WinForm\Product\ProductJobForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WinForm\Product\ProductJobForm.Designer.cs">
+      <DependentUpon>ProductJobForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WinForm\Element\ElementFlowDetailForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WinForm\Element\ElementFlowDetailForm.Designer.cs">
+      <DependentUpon>ElementFlowDetailForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WinForm\Element\ElementOrderDetailForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WinForm\Element\ElementOrderDetailForm.Designer.cs">
+      <DependentUpon>ElementOrderDetailForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WinForm\Product\ProductJobDetailForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WinForm\Product\ProductJobDetailForm.Designer.cs">
+      <DependentUpon>ProductJobDetailForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WinForm\Element\ElementFlowForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WinForm\Element\ElementFlowForm.Designer.cs">
+      <DependentUpon>ElementFlowForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WinForm\Utility\LookupText.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\Utility\DataGridViewLookupColumn.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinForm\Utility\DataGridViewResizeTextBoxColumn.cs">
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\OutlookBar\BSE.Windows.Forms.csproj">
+      <Project>{465D47B8-87D6-4E37-994A-63F5263179BE}</Project>
+      <Name>BSE.Windows.Forms</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WinFormsUI\WinFormsUI.csproj">
+      <Project>{C75532C4-765B-418E-B09B-46D36B2ABDB1}</Project>
+      <Name>WinFormsUI</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{967B4E0D-AD0C-4609-AB67-0FA40C0206D8}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ERP.mdb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Include="CrystalReport\OrderDataSet.xsc">
+      <DependentUpon>OrderDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="CrystalReport\OrderDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>OrderDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="CrystalReport\OrderDataSet.xss">
+      <DependentUpon>OrderDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="CrystalReport\SellDataSet.xsc">
+      <DependentUpon>SellDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="CrystalReport\SellDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>SellDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="CrystalReport\SellDataSet.xss">
+      <DependentUpon>SellDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="images\16pix\apply16.png" />
+    <None Include="images\16pix\add16-1.png" />
+    <None Include="images\16pix\arrival24.png" />
+    <None Include="images\16pix\print16.png" />
+    <None Include="images\32pix\cute\edit32.png" />
+    <None Include="images\toolBack.png" />
+    <None Include="images\toolBack1.png" />
+    <None Include="images\32pix\cute\1097638.png" />
+    <None Include="images\32pix\fuzzy\27186.png" />
+    <None Include="images\32pix\fuzzy\27773.png" />
+    <None Include="images\32pix\fuzzy\26758.png" />
+    <None Include="images\32pix\fuzzy\27178.png" />
+    <None Include="images\16pix\search.16px.png" />
+    <None Include="images\16pix\tree-node-add.16px.png" />
+    <None Include="images\16pix\tree-node-add.16px.1.png" />
+    <None Include="images\16pix\folder-open.16px.1.png" />
+    <None Include="images\16pix\user16.png" />
+    <None Include="images\16pix\arrivalSave16-2.png" />
+    <None Include="images\32pix\cute\statistic.png" />
+    <None Include="images\16pix\add-brother.png" />
+    <None Include="images\16pix\add-child.png" />
+    <None Include="images\16pix\up.png" />
+    <None Include="images\16pix\up16.png" />
+    <None Include="images\16pix\down16.png" />
+    <None Include="images\16pix\folder-open.16px.png" />
+    <None Include="images\16pix\selectall.png" />
+    <None Include="images\16pix\Yes.png" />
+    <None Include="images\16pix\yes1.png" />
+    <None Include="images\16pix\yes2.png" />
+    <None Include="images\16pix\cancel.png" />
+    <None Include="images\32pix\cute\in.png" />
+    <None Include="images\32pix\cute\out.png" />
+    <None Include="images\32pix\cute\statistic1.png" />
+    <None Include="images\32pix\cute\close.png" />
+    <None Include="images\16pix\add16.2.png" />
+    <Content Include="start.ico" />
+    <None Include="images\32pix\cute\arrival.png" />
+    <None Include="images\32pix\cute\del32.png" />
+    <None Include="images\32pix\cute\add32.png" />
+    <None Include="images\32pix\del32.png" />
+    <None Include="images\32pix\add32.png" />
+    <None Include="images\16pix\cancel16.png" />
+    <None Include="images\16pix\save16.png" />
+    <None Include="images\16pix\del16.png" />
+    <None Include="images\16pix\add16.png" />
+    <None Include="images\add1.png" />
+    <None Include="images\edit.png" />
+    <None Include="images\del.png" />
+    <None Include="images\add.png" />
+    <None Include="images\[Originals]\add-window-1.png" />
+    <None Include="images\add-window-1.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
