@@ -80,15 +80,15 @@ namespace LocalERP.WinForm
             this.label7 = new System.Windows.Forms.Label();
             this.button_savePay = new System.Windows.Forms.Button();
             this.panel_pay = new System.Windows.Forms.Panel();
+            this.label16 = new System.Windows.Forms.Label();
+            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.label17 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
-            this.label16 = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.label17 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
@@ -547,7 +547,7 @@ namespace LocalERP.WinForm
             // button_savePay
             // 
             this.button_savePay.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.button_savePay.Location = new System.Drawing.Point(699, 13);
+            this.button_savePay.Location = new System.Drawing.Point(495, 14);
             this.button_savePay.Name = "button_savePay";
             this.button_savePay.Size = new System.Drawing.Size(101, 23);
             this.button_savePay.TabIndex = 57;
@@ -578,6 +578,34 @@ namespace LocalERP.WinForm
             this.panel_pay.Name = "panel_pay";
             this.panel_pay.Size = new System.Drawing.Size(800, 79);
             this.panel_pay.TabIndex = 58;
+            // 
+            // label16
+            // 
+            this.label16.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(169, 52);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(21, 14);
+            this.label16.TabIndex = 66;
+            this.label16.Text = "元";
+            // 
+            // textBox3
+            // 
+            this.textBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.textBox3.Location = new System.Drawing.Point(73, 48);
+            this.textBox3.Name = "textBox3";
+            this.textBox3.Size = new System.Drawing.Size(94, 23);
+            this.textBox3.TabIndex = 65;
+            // 
+            // label17
+            // 
+            this.label17.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(6, 52);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(70, 14);
+            this.label17.TabIndex = 64;
+            this.label17.Text = "以上欠款:";
             // 
             // label10
             // 
@@ -635,34 +663,6 @@ namespace LocalERP.WinForm
             this.label14.Size = new System.Drawing.Size(70, 14);
             this.label14.TabIndex = 58;
             this.label14.Text = "实计货款:";
-            // 
-            // label16
-            // 
-            this.label16.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(169, 52);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(21, 14);
-            this.label16.TabIndex = 66;
-            this.label16.Text = "元";
-            // 
-            // textBox3
-            // 
-            this.textBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.textBox3.Location = new System.Drawing.Point(73, 48);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(94, 23);
-            this.textBox3.TabIndex = 65;
-            // 
-            // label17
-            // 
-            this.label17.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(6, 52);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(70, 14);
-            this.label17.TabIndex = 64;
-            this.label17.Text = "以上欠款:";
             // 
             // ProductCirculationForm
             // 
