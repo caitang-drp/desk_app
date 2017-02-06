@@ -48,3 +48,13 @@ F:\project_net\LocalERP\WinFormsUI\obj\Debug\WeifenLuo.WinFormsUI.Docking.String
 F:\project_net\LocalERP\WinFormsUI\obj\Debug\WinFormsUI.csproj.GenerateResource.Cache
 F:\project_net\LocalERP\WinFormsUI\obj\Debug\WeifenLuo.WinFormsUI.Docking.dll
 F:\project_net\LocalERP\WinFormsUI\obj\Debug\WeifenLuo.WinFormsUI.Docking.pdb
+F:\project_net\LocalERP-gitHub\WinFormsUI\bin\Debug\license.txt
+F:\project_net\LocalERP-gitHub\WinFormsUI\bin\Debug\WeifenLuo.WinFormsUI.Docking.dll
+F:\project_net\LocalERP-gitHub\WinFormsUI\bin\Debug\WeifenLuo.WinFormsUI.Docking.pdb
+F:\project_net\LocalERP-gitHub\WinFormsUI\obj\Debug\ResolveAssemblyReference.cache
+F:\project_net\LocalERP-gitHub\WinFormsUI\obj\Debug\WeifenLuo.WinFormsUI.Docking.DockPanel.bmp
+F:\project_net\LocalERP-gitHub\WinFormsUI\obj\Debug\WeifenLuo.WinFormsUI.Docking.Resources.resources
+F:\project_net\LocalERP-gitHub\WinFormsUI\obj\Debug\WeifenLuo.WinFormsUI.Docking.Strings.resources
+F:\project_net\LocalERP-gitHub\WinFormsUI\obj\Debug\WinFormsUI.csproj.GenerateResource.Cache
+F:\project_net\LocalERP-gitHub\WinFormsUI\obj\Debug\WeifenLuo.WinFormsUI.Docking.dll
+F:\project_net\LocalERP-gitHub\WinFormsUI\obj\Debug\WeifenLuo.WinFormsUI.Docking.pdb

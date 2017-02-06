@@ -58,3 +58,15 @@ F:\project_net\LocalERP\OutlookBar\obj\Debug\BSE.Windows.Forms.XPanderPanelList.
 F:\project_net\LocalERP\OutlookBar\obj\Debug\BSE.Windows.Forms.csproj.GenerateResource.Cache
 F:\project_net\LocalERP\OutlookBar\obj\Debug\BSE.Windows.Forms.dll
 F:\project_net\LocalERP\OutlookBar\obj\Debug\BSE.Windows.Forms.pdb
+F:\project_net\LocalERP-gitHub\OutlookBar\bin\Debug\BSE.Windows.Forms.dll
+F:\project_net\LocalERP-gitHub\OutlookBar\bin\Debug\BSE.Windows.Forms.pdb
+F:\project_net\LocalERP-gitHub\OutlookBar\obj\Debug\ResolveAssemblyReference.cache
+F:\project_net\LocalERP-gitHub\OutlookBar\obj\Debug\BSE.Windows.Forms.Resources.chevron_down.png
+F:\project_net\LocalERP-gitHub\OutlookBar\obj\Debug\BSE.Windows.Forms.Resources.chevron_up.png
+F:\project_net\LocalERP-gitHub\OutlookBar\obj\Debug\BSE.Windows.Forms.Properties.Resources.resources
+F:\project_net\LocalERP-gitHub\OutlookBar\obj\Debug\BSE.Windows.Forms.Panel.resources
+F:\project_net\LocalERP-gitHub\OutlookBar\obj\Debug\BSE.Windows.Forms.XPanderPanel.resources
+F:\project_net\LocalERP-gitHub\OutlookBar\obj\Debug\BSE.Windows.Forms.XPanderPanelList.resources
+F:\project_net\LocalERP-gitHub\OutlookBar\obj\Debug\BSE.Windows.Forms.csproj.GenerateResource.Cache
+F:\project_net\LocalERP-gitHub\OutlookBar\obj\Debug\BSE.Windows.Forms.dll
+F:\project_net\LocalERP-gitHub\OutlookBar\obj\Debug\BSE.Windows.Forms.pdb

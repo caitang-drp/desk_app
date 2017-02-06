@@ -1,3 +1,6 @@
+//created by stone: DockContent为《可停靠窗口框架WinFormsUI》的类，它继承了Form，所有要实现可停靠的窗口都要继承它
+//定义MyDockContent用于存放一些共有的方法和属性
+
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -7,6 +10,7 @@ namespace LocalERP.WinForm
 {
     public class MyDockContent : DockContent
     {
+        //commented by stone: 后台执行类，实现长时间的操作时，防止UI阻塞
         protected System.ComponentModel.BackgroundWorker backgroundWorker;
 
         public MyDockContent() {
@@ -14,7 +18,7 @@ namespace LocalERP.WinForm
             this.Activated += new EventHandler(MyDockContent_Activated);
             //this.GotFocus += new EventHandler(MyDockContent_GotFocus);
         }
-
+        /*
         void MyDockContent_GotFocus(object sender, EventArgs e)
         {
             bool refresh = false;
@@ -35,7 +39,7 @@ namespace LocalERP.WinForm
 
             if (refresh == true)
                 this.refresh();
-        }
+        }*/
 
         void MyDockContent_Activated(object sender, EventArgs e)
         {

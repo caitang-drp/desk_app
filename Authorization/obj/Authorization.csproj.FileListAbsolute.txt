@@ -38,3 +38,11 @@ F:\project_net\LocalERP\Authorization\obj\Debug\Authorization.Properties.Resourc
 F:\project_net\LocalERP\Authorization\obj\Debug\Authorization.csproj.GenerateResource.Cache
 F:\project_net\LocalERP\Authorization\obj\Debug\Authorization.exe
 F:\project_net\LocalERP\Authorization\obj\Debug\Authorization.pdb
+F:\project_net\LocalERP-gitHub\Authorization\bin\Debug\Authorization.exe
+F:\project_net\LocalERP-gitHub\Authorization\bin\Debug\Authorization.pdb
+F:\project_net\LocalERP-gitHub\Authorization\obj\Debug\ResolveAssemblyReference.cache
+F:\project_net\LocalERP-gitHub\Authorization\obj\Debug\AuthForm.resources
+F:\project_net\LocalERP-gitHub\Authorization\obj\Debug\Authorization.Properties.Resources.resources
+F:\project_net\LocalERP-gitHub\Authorization\obj\Debug\Authorization.csproj.GenerateResource.Cache
+F:\project_net\LocalERP-gitHub\Authorization\obj\Debug\Authorization.exe
+F:\project_net\LocalERP-gitHub\Authorization\obj\Debug\Authorization.pdb
