@@ -81,9 +81,9 @@ namespace LocalERP.WinForm
                     FormMgr.getInstance().getProductLibLossForm().Show(this.dockPanel1);
                     FormMgr.getInstance().getProductLibLossForm().reload(openMode, ID);
                     break;
-                case DataUtility.ELEMENT_LIB:
+                /*case DataUtility.ELEMENT_LIB:
                     //getElementLibForm().Show(this.dockPanel1);
-                    break;
+                    break;*/
                 case DataUtility.QUERY_LIB:
                     FormMgr.getInstance().getQueryLibForm().Show(this.dockPanel1);
                     break;

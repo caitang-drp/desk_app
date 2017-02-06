@@ -26,9 +26,9 @@ namespace LocalERP.WinForm
                 new string[] { DataUtility.PURCHASE_LIST, DataUtility.PURCHASE, DataUtility.PURCHASE_BACK });
             this.xPanderPanel_pur.Controls.Add(treeView_purchase);
 
-            TreeView treeView1 = this.getTreeView(
-                new string[] { DataUtility.ELEMENT_ORDER, DataUtility.ELEMENT_FLOW });
-            this.xPanderPanel1.Controls.Add(treeView1);
+            TreeView treeView_manufacture = this.getTreeView(
+                new string[] { DataUtility.MANUFACTURE_LIST, DataUtility.EASY });
+            this.xPanderPanel_manu.Controls.Add(treeView_manufacture);
 
             TreeView treeView_sell = this.getTreeView(
                 new string[] { DataUtility.SELL_LIST, DataUtility.SELL, DataUtility.SELL_BACK });
@@ -40,12 +40,12 @@ namespace LocalERP.WinForm
             
             TreeView treeView_queryStatistic = this.getTreeView(
                 new string[] {DataUtility.QUERY_LIB, DataUtility.QUERY_DETAIL, DataUtility.STATISTIC});
-            this.xPanderPanel3.Controls.Add(treeView_queryStatistic);
+            this.xPanderPanel_query.Controls.Add(treeView_queryStatistic);
 
             //tree4
             TreeView treeView_data = this.getTreeView(
                 new string[] { DataUtility.DATA_PRODUCT, DataUtility.DATA_CUSTOMER/*, DataUtility.ACCOUNT_INPUT, DataUtility.ACCOUNT_OPEN*/ });
-            this.xPanderPanel4.Controls.Add(treeView_data);
+            this.xPanderPanel_data.Controls.Add(treeView_data);
 
         }
 

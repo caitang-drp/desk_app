@@ -32,11 +32,11 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NavigationUC));
             this.xPanderPanelList1 = new BSE.Windows.Forms.XPanderPanelList();
             this.xPanderPanel_pur = new BSE.Windows.Forms.XPanderPanel();
-            this.xPanderPanel1 = new BSE.Windows.Forms.XPanderPanel();
+            this.xPanderPanel_manu = new BSE.Windows.Forms.XPanderPanel();
             this.xPanderPanel_sell = new BSE.Windows.Forms.XPanderPanel();
             this.xPanderPanel_lib = new BSE.Windows.Forms.XPanderPanel();
-            this.xPanderPanel3 = new BSE.Windows.Forms.XPanderPanel();
-            this.xPanderPanel4 = new BSE.Windows.Forms.XPanderPanel();
+            this.xPanderPanel_query = new BSE.Windows.Forms.XPanderPanel();
+            this.xPanderPanel_data = new BSE.Windows.Forms.XPanderPanel();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.xPanderPanelList1.SuspendLayout();
             this.SuspendLayout();
@@ -45,11 +45,11 @@
             // 
             this.xPanderPanelList1.ColorScheme = BSE.Windows.Forms.ColorScheme.Custom;
             this.xPanderPanelList1.Controls.Add(this.xPanderPanel_pur);
-            this.xPanderPanelList1.Controls.Add(this.xPanderPanel1);
+            this.xPanderPanelList1.Controls.Add(this.xPanderPanel_manu);
             this.xPanderPanelList1.Controls.Add(this.xPanderPanel_sell);
             this.xPanderPanelList1.Controls.Add(this.xPanderPanel_lib);
-            this.xPanderPanelList1.Controls.Add(this.xPanderPanel3);
-            this.xPanderPanelList1.Controls.Add(this.xPanderPanel4);
+            this.xPanderPanelList1.Controls.Add(this.xPanderPanel_query);
+            this.xPanderPanelList1.Controls.Add(this.xPanderPanel_data);
             this.xPanderPanelList1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.xPanderPanelList1.Font = new System.Drawing.Font("宋体", 10F);
             this.xPanderPanelList1.GradientBackground = System.Drawing.Color.Empty;
@@ -79,23 +79,22 @@
             this.xPanderPanel_pur.TabIndex = 5;
             this.xPanderPanel_pur.Text = "采购管理";
             // 
-            // xPanderPanel1
+            // xPanderPanel_manu
             // 
-            this.xPanderPanel1.BackColor = System.Drawing.SystemColors.Window;
-            this.xPanderPanel1.CaptionFont = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
-            this.xPanderPanel1.CaptionForeColor = System.Drawing.SystemColors.ControlText;
-            this.xPanderPanel1.ColorCaptionGradientBegin = System.Drawing.Color.FromArgb(((int)(((byte)(216)))), ((int)(((byte)(232)))), ((int)(((byte)(252)))));
-            this.xPanderPanel1.ColorCaptionGradientEnd = System.Drawing.Color.FromArgb(((int)(((byte)(140)))), ((int)(((byte)(177)))), ((int)(((byte)(230)))));
-            this.xPanderPanel1.ColorCaptionGradientMiddle = System.Drawing.Color.FromArgb(((int)(((byte)(186)))), ((int)(((byte)(210)))), ((int)(((byte)(243)))));
-            this.xPanderPanel1.ColorScheme = BSE.Windows.Forms.ColorScheme.Custom;
-            this.xPanderPanel1.Font = new System.Drawing.Font("宋体", 10F);
-            this.xPanderPanel1.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.xPanderPanel1.Image = global::LocalERP.Properties.Resources.apply16;
-            this.xPanderPanel1.Name = "xPanderPanel1";
-            this.xPanderPanel1.Padding = new System.Windows.Forms.Padding(12, 33, 12, 11);
-            this.xPanderPanel1.TabIndex = 0;
-            this.xPanderPanel1.Text = "配件管理";
-            this.xPanderPanel1.Visible = false;
+            this.xPanderPanel_manu.BackColor = System.Drawing.SystemColors.Window;
+            this.xPanderPanel_manu.CaptionFont = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
+            this.xPanderPanel_manu.CaptionForeColor = System.Drawing.SystemColors.ControlText;
+            this.xPanderPanel_manu.ColorCaptionGradientBegin = System.Drawing.Color.FromArgb(((int)(((byte)(216)))), ((int)(((byte)(232)))), ((int)(((byte)(252)))));
+            this.xPanderPanel_manu.ColorCaptionGradientEnd = System.Drawing.Color.FromArgb(((int)(((byte)(140)))), ((int)(((byte)(177)))), ((int)(((byte)(230)))));
+            this.xPanderPanel_manu.ColorCaptionGradientMiddle = System.Drawing.Color.FromArgb(((int)(((byte)(186)))), ((int)(((byte)(210)))), ((int)(((byte)(243)))));
+            this.xPanderPanel_manu.ColorScheme = BSE.Windows.Forms.ColorScheme.Custom;
+            this.xPanderPanel_manu.Font = new System.Drawing.Font("宋体", 10F);
+            this.xPanderPanel_manu.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.xPanderPanel_manu.Image = global::LocalERP.Properties.Resources.apply16;
+            this.xPanderPanel_manu.Name = "xPanderPanel_manu";
+            this.xPanderPanel_manu.Padding = new System.Windows.Forms.Padding(12, 33, 12, 11);
+            this.xPanderPanel_manu.TabIndex = 0;
+            this.xPanderPanel_manu.Text = "生产管理";
             // 
             // xPanderPanel_sell
             // 
@@ -129,37 +128,37 @@
             this.xPanderPanel_lib.TabIndex = 4;
             this.xPanderPanel_lib.Text = "库存盘点";
             // 
-            // xPanderPanel3
+            // xPanderPanel_query
             // 
-            this.xPanderPanel3.BackColor = System.Drawing.SystemColors.Window;
-            this.xPanderPanel3.CaptionFont = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
-            this.xPanderPanel3.CaptionForeColor = System.Drawing.SystemColors.ControlText;
-            this.xPanderPanel3.ColorCaptionGradientBegin = System.Drawing.Color.FromArgb(((int)(((byte)(216)))), ((int)(((byte)(232)))), ((int)(((byte)(252)))));
-            this.xPanderPanel3.ColorCaptionGradientEnd = System.Drawing.Color.FromArgb(((int)(((byte)(140)))), ((int)(((byte)(177)))), ((int)(((byte)(230)))));
-            this.xPanderPanel3.ColorCaptionGradientMiddle = System.Drawing.Color.FromArgb(((int)(((byte)(186)))), ((int)(((byte)(210)))), ((int)(((byte)(243)))));
-            this.xPanderPanel3.ColorScheme = BSE.Windows.Forms.ColorScheme.Custom;
-            this.xPanderPanel3.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.xPanderPanel3.Image = global::LocalERP.Properties.Resources.apply16;
-            this.xPanderPanel3.Name = "xPanderPanel3";
-            this.xPanderPanel3.Padding = new System.Windows.Forms.Padding(12, 33, 12, 11);
-            this.xPanderPanel3.TabIndex = 2;
-            this.xPanderPanel3.Text = "查询统计";
+            this.xPanderPanel_query.BackColor = System.Drawing.SystemColors.Window;
+            this.xPanderPanel_query.CaptionFont = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
+            this.xPanderPanel_query.CaptionForeColor = System.Drawing.SystemColors.ControlText;
+            this.xPanderPanel_query.ColorCaptionGradientBegin = System.Drawing.Color.FromArgb(((int)(((byte)(216)))), ((int)(((byte)(232)))), ((int)(((byte)(252)))));
+            this.xPanderPanel_query.ColorCaptionGradientEnd = System.Drawing.Color.FromArgb(((int)(((byte)(140)))), ((int)(((byte)(177)))), ((int)(((byte)(230)))));
+            this.xPanderPanel_query.ColorCaptionGradientMiddle = System.Drawing.Color.FromArgb(((int)(((byte)(186)))), ((int)(((byte)(210)))), ((int)(((byte)(243)))));
+            this.xPanderPanel_query.ColorScheme = BSE.Windows.Forms.ColorScheme.Custom;
+            this.xPanderPanel_query.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.xPanderPanel_query.Image = global::LocalERP.Properties.Resources.apply16;
+            this.xPanderPanel_query.Name = "xPanderPanel_query";
+            this.xPanderPanel_query.Padding = new System.Windows.Forms.Padding(12, 33, 12, 11);
+            this.xPanderPanel_query.TabIndex = 2;
+            this.xPanderPanel_query.Text = "查询统计";
             // 
-            // xPanderPanel4
+            // xPanderPanel_data
             // 
-            this.xPanderPanel4.BackColor = System.Drawing.SystemColors.Window;
-            this.xPanderPanel4.CaptionFont = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
-            this.xPanderPanel4.CaptionForeColor = System.Drawing.SystemColors.ControlText;
-            this.xPanderPanel4.ColorCaptionGradientBegin = System.Drawing.Color.FromArgb(((int)(((byte)(216)))), ((int)(((byte)(232)))), ((int)(((byte)(252)))));
-            this.xPanderPanel4.ColorCaptionGradientEnd = System.Drawing.Color.FromArgb(((int)(((byte)(140)))), ((int)(((byte)(177)))), ((int)(((byte)(230)))));
-            this.xPanderPanel4.ColorCaptionGradientMiddle = System.Drawing.Color.FromArgb(((int)(((byte)(186)))), ((int)(((byte)(210)))), ((int)(((byte)(243)))));
-            this.xPanderPanel4.ColorScheme = BSE.Windows.Forms.ColorScheme.Custom;
-            this.xPanderPanel4.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.xPanderPanel4.Image = global::LocalERP.Properties.Resources.apply16;
-            this.xPanderPanel4.Name = "xPanderPanel4";
-            this.xPanderPanel4.Padding = new System.Windows.Forms.Padding(12, 33, 12, 11);
-            this.xPanderPanel4.TabIndex = 3;
-            this.xPanderPanel4.Text = "数据设置";
+            this.xPanderPanel_data.BackColor = System.Drawing.SystemColors.Window;
+            this.xPanderPanel_data.CaptionFont = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
+            this.xPanderPanel_data.CaptionForeColor = System.Drawing.SystemColors.ControlText;
+            this.xPanderPanel_data.ColorCaptionGradientBegin = System.Drawing.Color.FromArgb(((int)(((byte)(216)))), ((int)(((byte)(232)))), ((int)(((byte)(252)))));
+            this.xPanderPanel_data.ColorCaptionGradientEnd = System.Drawing.Color.FromArgb(((int)(((byte)(140)))), ((int)(((byte)(177)))), ((int)(((byte)(230)))));
+            this.xPanderPanel_data.ColorCaptionGradientMiddle = System.Drawing.Color.FromArgb(((int)(((byte)(186)))), ((int)(((byte)(210)))), ((int)(((byte)(243)))));
+            this.xPanderPanel_data.ColorScheme = BSE.Windows.Forms.ColorScheme.Custom;
+            this.xPanderPanel_data.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.xPanderPanel_data.Image = global::LocalERP.Properties.Resources.apply16;
+            this.xPanderPanel_data.Name = "xPanderPanel_data";
+            this.xPanderPanel_data.Padding = new System.Windows.Forms.Padding(12, 33, 12, 11);
+            this.xPanderPanel_data.TabIndex = 3;
+            this.xPanderPanel_data.Text = "数据设置";
             // 
             // imageList1
             // 
@@ -183,10 +182,10 @@
         #endregion
 
         private BSE.Windows.Forms.XPanderPanelList xPanderPanelList1;
-        private BSE.Windows.Forms.XPanderPanel xPanderPanel1;
+        private BSE.Windows.Forms.XPanderPanel xPanderPanel_manu;
         private BSE.Windows.Forms.XPanderPanel xPanderPanel_sell;
-        private BSE.Windows.Forms.XPanderPanel xPanderPanel3;
-        private BSE.Windows.Forms.XPanderPanel xPanderPanel4;
+        private BSE.Windows.Forms.XPanderPanel xPanderPanel_query;
+        private BSE.Windows.Forms.XPanderPanel xPanderPanel_data;
         private System.Windows.Forms.ImageList imageList1;
         private BSE.Windows.Forms.XPanderPanel xPanderPanel_lib;
         private BSE.Windows.Forms.XPanderPanel xPanderPanel_pur;
