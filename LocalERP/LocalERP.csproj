@@ -104,6 +104,7 @@
     <Compile Include="DataAccess\Data\ProductCirculation.cs" />
     <Compile Include="DataAccess\Data\ProductCirculationRecord.cs" />
     <Compile Include="DataAccess\Data\ProductCirculationSKURecord.cs" />
+    <Compile Include="DataAccess\Data\ProductStainless.cs" />
     <Compile Include="DataAccess\DbUtility\DbHelperAccess.cs" />
     <Compile Include="DataAccess\Utility\AuthUtility.cs" />
     <Compile Include="DataAccess\Utility\DataUtility.cs" />
@@ -113,6 +114,7 @@
     <Compile Include="UiDataProxy\QueryLibProxy.cs" />
     <Compile Include="UiDataProxy\ProxyMgr.cs" />
     <Compile Include="UiDataProxy\CategoryItemProxy.cs" />
+    <Compile Include="UiDataProxy\ProductStainlessCategoryItemProxy.cs" />
     <Compile Include="WinForm\Data\ProductClothesForm.cs">
       <SubType>Form</SubType>
     </Compile>

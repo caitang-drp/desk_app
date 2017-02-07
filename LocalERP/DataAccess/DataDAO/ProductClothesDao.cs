@@ -21,7 +21,7 @@ namespace LocalERP.DataAccess.DataDAO
         {
             try
             {
-                string commandText = string.Format("insert into Product(name, comment, parent, price) values('{0}', '{1}', {2}, {3})", info.Name, info.Comment, info.CategoryID, info.Price);
+                string commandText = string.Format("insert into Product(name, comment, parent, price) values('{0}', '{1}', {2}, {3})", info.Name, info.Comment, info.CategoryID, info.PricePurchase);
                 DbHelperAccess.executeNonQuery(commandText);
                 int productID = DbHelperAccess.executeLastID("ID", "Product");
                 setAttribute(productID, info, colors, sizes);
@@ -53,7 +53,7 @@ namespace LocalERP.DataAccess.DataDAO
                 {
                     string composeID = string.Format("{0}:{1};{2}:{3}", color.CharactorId, color.Id, size.CharactorId, size.Id);
                     commandText = string.Format("insert into ProductSKU(productID, composeID, price, colorID, colorName, sizeID, sizeName) values({0},'{1}',{2}, {3}, '{4}', {5}, '{6}')",
-                        productID, composeID, info.Price, color.Id, color.Name, size.Id, size.Name);
+                        productID, composeID, info.PricePurchase, color.Id, color.Name, size.Id, size.Name);
                     DbHelperAccess.executeNonQuery(commandText);
                 }
             }
@@ -72,7 +72,7 @@ namespace LocalERP.DataAccess.DataDAO
             try
             {
                 string commandText = string.Format("update Product set name='{0}', price={1}, comment='{2}', parent={3} where ID={4}",
-                    info.Name, info.Price, info.Comment, info.CategoryID, info.ID);
+                    info.Name, info.PricePurchase, info.Comment, info.CategoryID, info.ID);
 
                 DbHelperAccess.executeNonQuery(commandText);
                 return true;
@@ -129,7 +129,7 @@ namespace LocalERP.DataAccess.DataDAO
 
                 double price;
                 double.TryParse(dr["price"].ToString(), out price);
-                product.Price = price;
+                product.PricePurchase = price;
 
                 return product;
             }

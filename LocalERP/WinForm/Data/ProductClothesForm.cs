@@ -60,7 +60,7 @@ namespace LocalERP.WinForm
 
             Product product = ProductClothesDao.getInstance().FindByID(productID);
             this.textBox_name.Text = product.Name;
-            this.textBox_price.Text = product.Price.ToString();
+            this.textBox_price.Text = product.PricePurchase.ToString();
             this.textBox_comment.Text = product.Comment;
 
             this.comboBoxTree1.setSelectNode(product.CategoryID.ToString());

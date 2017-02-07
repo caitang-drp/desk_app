@@ -46,20 +46,47 @@ namespace LocalERP.DataAccess.Data
             set { num = value; }
         }
 
-        private double price;
+        private double pricePurchase;
 
-        public double Price
+        public double PricePurchase
         {
-            get { return price; }
-            set { price = value; }
+            get { return pricePurchase; }
+            set { pricePurchase = value; }
+        }
+
+        private double priceSell;
+
+        public double PriceSell
+        {
+            get { return priceSell; }
+            set { priceSell = value; }
+        }
+
+        private string unit;
+
+        public string Unit
+        {
+            get { return unit; }
+            set { unit = value; }
         }
 
         public Product(string name, int categoryID, double price, string comment) {
             this.name = name;
             this.categoryID = categoryID;
-            this.price = price;
+            this.pricePurchase = price;
             this.comment = comment;
         }
+
+        public Product(string name, int categoryID, double pricePurchase, double priceSell, string unit, string comment)
+        {
+            this.name = name;
+            this.categoryID = categoryID;
+            this.pricePurchase = pricePurchase;
+            this.priceSell = priceSell;
+            this.unit = unit;
+            this.comment = comment;
+        }
+
         public Product() { }
     }
 }
