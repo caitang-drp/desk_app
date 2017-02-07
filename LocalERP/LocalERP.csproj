@@ -77,10 +77,6 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="DataAccess\DataDAO\CharactorValueDao.cs" />
-    <Compile Include="DataAccess\DataDAO\ElementDao.cs" />
-    <Compile Include="DataAccess\DataDAO\ElementOrderDao.cs" />
-    <Compile Include="DataAccess\DataDAO\ElementOrderRecordDao.cs" />
-    <Compile Include="DataAccess\DataDAO\ElementFlowDao.cs" />
     <Compile Include="DataAccess\DataDAO\ProductDao.cs" />
     <Compile Include="DataAccess\DataDAO\ProductJobDao.cs" />
     <Compile Include="DataAccess\DataDAO\ProductJobRecordDao.cs" />
@@ -97,10 +93,6 @@
     <Compile Include="DataAccess\DataDAO\ProductCirculationSKURecordDao.cs" />
     <Compile Include="DataAccess\Data\Category.cs" />
     <Compile Include="DataAccess\Data\Charactor.cs" />
-    <Compile Include="DataAccess\Data\Element.cs" />
-    <Compile Include="DataAccess\Data\ElementOrder.cs" />
-    <Compile Include="DataAccess\Data\ElementOrderRecord.cs" />
-    <Compile Include="DataAccess\Data\ElementFlow.cs" />
     <Compile Include="DataAccess\Data\Product.cs" />
     <Compile Include="DataAccess\Data\ProductJob.cs" />
     <Compile Include="DataAccess\Data\ProductJobRecord.cs" />
@@ -140,6 +132,12 @@
     </Compile>
     <Compile Include="WinForm\Data\CharactorForm.Designer.cs">
       <DependentUpon>CharactorForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WinForm\Data\ProductStainlessForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WinForm\Data\ProductStainlessForm.Designer.cs">
+      <DependentUpon>ProductStainlessForm.cs</DependentUpon>
     </Compile>
     <Compile Include="WinForm\FormMgr.cs" />
     <Compile Include="WinForm\MyDockContent.cs">
@@ -198,12 +196,6 @@
     </Compile>
     <Compile Include="WinForm\System\NavigationUC.Designer.cs">
       <DependentUpon>NavigationUC.cs</DependentUpon>
-    </Compile>
-    <Compile Include="WinForm\Data\ProductForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="WinForm\Data\ProductForm.Designer.cs">
-      <DependentUpon>ProductForm.cs</DependentUpon>
     </Compile>
     <Compile Include="WinForm\Data\CustomerForm.cs">
       <SubType>Form</SubType>
@@ -325,6 +317,10 @@
       <DependentUpon>CharactorForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="WinForm\Data\ProductStainlessForm.resx">
+      <DependentUpon>ProductStainlessForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="WinForm\Query\QueryDetailForm.resx">
       <DependentUpon>QueryDetailForm.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -360,10 +356,6 @@
     <EmbeddedResource Include="WinForm\System\NavigationUC.resx">
       <SubType>Designer</SubType>
       <DependentUpon>NavigationUC.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForm\Data\ProductForm.resx">
-      <DependentUpon>ProductForm.cs</DependentUpon>
-      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForm\Data\CustomerForm.resx">
       <DependentUpon>CustomerForm.cs</DependentUpon>
