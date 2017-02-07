@@ -141,6 +141,12 @@
     <Compile Include="WinForm\Data\CharactorForm.Designer.cs">
       <DependentUpon>CharactorForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="WinForm\Data\ProductStainlessForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WinForm\Data\ProductStainlessForm.Designer.cs">
+      <DependentUpon>ProductStainlessForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="WinForm\FormMgr.cs" />
     <Compile Include="WinForm\MyDockContent.cs">
       <SubType>Form</SubType>
@@ -317,6 +323,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="WinForm\Data\CharactorForm.resx">
       <DependentUpon>CharactorForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForm\Data\ProductStainlessForm.resx">
+      <DependentUpon>ProductStainlessForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForm\Query\QueryDetailForm.resx">
