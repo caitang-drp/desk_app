@@ -12,7 +12,7 @@ using LocalERP.WinForm.Utility;
 
 namespace LocalERP.WinForm
 {
-    public partial class ProductClothesForm : MyDockContent
+    public partial class ProductStainlessForm : MyDockContent
     {
         //openMode 0:add   1:edit
         private int openMode = 0;
@@ -20,18 +20,12 @@ namespace LocalERP.WinForm
 
         private bool attributeChanged = false;
 
-        public ProductClothesForm()
+        public ProductStainlessForm()
         {
             InitializeComponent();
 
             openMode = 0;
             productID = 0;
-
-            this.pickValue_color.initValue(CharactorValueDao.getInstance().FindList(1), "Name", "Id");
-            this.pickValue_size.initValue(CharactorValueDao.getInstance().FindList(2), "Name", "Id");
-
-            this.pickValue_color.selectValueChanged += new PickValue.SelectValueChanged(pickValue_color_selectValueChanged);
-            this.pickValue_size.selectValueChanged += new PickValue.SelectValueChanged(pickValue_color_selectValueChanged);
 
             ProxyMgr.getInstance().getProductCIProxy().initTree(this.comboBoxTree1.tvTreeView);
         }

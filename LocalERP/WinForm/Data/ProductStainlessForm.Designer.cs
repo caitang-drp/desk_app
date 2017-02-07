@@ -1,6 +1,6 @@
 ﻿namespace LocalERP.WinForm
 {
-    partial class ProductClothesForm
+    partial class ProductStainlessForm
     {
         /// <summary>
         /// 必需的设计器变量。
