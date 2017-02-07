@@ -178,19 +178,19 @@ namespace LocalERP.WinForm
                     this.initControlsEnable(true, false, false, false, true, true, true, false, false,false);
                     break;
                 case 1:
-                    this.label_status.Text = ProductSell.statusEnum[0];
+                    this.label_status.Text = ProductCirculation.circulationStatusContext[0];
                     this.initControlsEnable(true, true, true, false, true, true, true, false, false,false);
                     break;
                 case 2:
-                    this.label_status.Text = ProductSell.statusEnum[1];
+                    this.label_status.Text = ProductCirculation.circulationStatusContext[1];
                     this.initControlsEnable(false, false, true, true, false, false, false, true, true, false);
                     break;
                 case 3:
-                    this.label_status.Text = ProductSell.statusEnum[2];
+                    this.label_status.Text = ProductCirculation.circulationStatusContext[2];
                     this.initControlsEnable(false, false, false, true, false, false, false, true, true, false);
                     break;
                 case 4:
-                    this.label_status.Text = ProductSell.statusEnum[3];
+                    this.label_status.Text = ProductCirculation.circulationStatusContext[3];
                     this.initControlsEnable(false, false, false, true, false, false, false, false, true, true);
                     break;
                 default:

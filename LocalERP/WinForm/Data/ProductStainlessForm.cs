@@ -49,7 +49,7 @@ namespace LocalERP.WinForm
         }
 
         private void initProduct()
-        {
+        {/*
             this.label4.Text = "编辑商品, ID:" + productID;
 
             Product product = ProductClothesDao.getInstance().FindByID(productID);
@@ -69,19 +69,19 @@ namespace LocalERP.WinForm
             else
                 this.setPickValue(true);
 
-            attributeChanged = false;
+            attributeChanged = false;*/
         }
 
-        private void setPickValue(bool value) {
+        private void setPickValue(bool value) {/*
             this.pickValue_color.Enabled = value;
             this.button_color.Enabled = value;
             this.pickValue_size.Enabled = value;
             this.button_size.Enabled = value;
-        
+        */
         }
 
         private void clearProduct()
-        {
+        {/*
             this.label4.Text = "新增";
             this.textBox_name.Text = "";
             this.textBox_price.Text = "";
@@ -92,7 +92,7 @@ namespace LocalERP.WinForm
 
             this.attributeChanged = false;
 
-            this.setPickValue(true);
+            this.setPickValue(true);*/
         }
 
         public override void refresh()
@@ -123,14 +123,14 @@ namespace LocalERP.WinForm
 
         private bool getPrice(out double price) {
             double tempPrice = 0;
-            if (string.IsNullOrEmpty(this.textBox_price.Text) || double.TryParse(this.textBox_price.Text, out tempPrice))
+            if (string.IsNullOrEmpty(this.textBox_purchasePrice.Text) || double.TryParse(this.textBox_purchasePrice.Text, out tempPrice))
             {
-                this.errorProvider1.SetError(this.textBox_price, string.Empty);
+                this.errorProvider1.SetError(this.textBox_purchasePrice, string.Empty);
                 price = tempPrice;
                 return true;
             }
             else {
-                this.errorProvider1.SetError(this.textBox_price, "请输入数字!");
+                this.errorProvider1.SetError(this.textBox_purchasePrice, "请输入数字!");
                 price = tempPrice;
                 return false;
             }
@@ -178,7 +178,7 @@ namespace LocalERP.WinForm
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void toolStripButton3_Click(object sender, EventArgs e)
-        {
+        {/*
             Product product = null;
             if (this.getProduct(out product) == false)
                 return;
@@ -200,7 +200,7 @@ namespace LocalERP.WinForm
             }
             this.attributeChanged = false;
             this.invokeUpdateNotify(UpdateType.ProductUpdate);
-            this.Close();
+            this.Close();*/
         }
 
         private void toolStripButton4_Click(object sender, EventArgs e)
@@ -220,7 +220,7 @@ namespace LocalERP.WinForm
         }
 
         void form_FormClosed(object sender, FormClosedEventArgs e)
-        {
+        {/*
             CharactorForm form = sender as CharactorForm;
             if (form.Modify == true)
             {
@@ -234,7 +234,7 @@ namespace LocalERP.WinForm
                 pickValue.initValue(CharactorValueDao.getInstance().FindList(form.CharactorId), "Name", "Id");
 
                 pickValue.setSelectItems(values);
-            }
+            }*/
         }
     }
 }

@@ -16,7 +16,7 @@ namespace LocalERP.WinForm
         private ProductSell sell;
         private List<ProductSellRecord> records;
 
-        public ProductSellReportForm(ProductSell sell, List<ProductSellRecord> records)
+        public ProductSellReportForm(/*ProductSell sell, List<ProductSellRecord> records*/)
         {
             InitializeComponent();
 
