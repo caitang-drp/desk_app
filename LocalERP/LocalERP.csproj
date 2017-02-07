@@ -123,12 +123,6 @@
     <Compile Include="UiDataProxy\QueryLibProxy.cs" />
     <Compile Include="UiDataProxy\ProxyMgr.cs" />
     <Compile Include="UiDataProxy\CategoryItemProxy.cs" />
-    <Compile Include="WinForm\Data\CustomerUC.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="WinForm\Data\CustomerUC.Designer.cs">
-      <DependentUpon>CustomerUC.cs</DependentUpon>
-    </Compile>
     <Compile Include="WinForm\Data\ProductClothesForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -148,12 +142,6 @@
       <DependentUpon>CharactorForm.cs</DependentUpon>
     </Compile>
     <Compile Include="WinForm\FormMgr.cs" />
-    <Compile Include="WinForm\Element\ElementOrderReportForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="WinForm\Element\ElementOrderReportForm.Designer.cs">
-      <DependentUpon>ElementOrderReportForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="WinForm\MyDockContent.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -169,41 +157,11 @@
     <Compile Include="WinForm\Query\QueryLibForm.Designer.cs">
       <DependentUpon>QueryLibForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="WinForm\Product\ProductLibForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="WinForm\Product\ProductLibForm.Designer.cs">
-      <DependentUpon>ProductLibForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="WinForm\Product\ProductFlowDetailForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="WinForm\Product\ProductFlowDetailForm.Designer.cs">
-      <DependentUpon>ProductFlowDetailForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="WinForm\Product\ProductSellReportForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="WinForm\Product\ProductSellReportForm.Designer.cs">
       <DependentUpon>ProductSellReportForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="WinForm\Product\ProductSellDetailForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="WinForm\Product\ProductSellDetailForm.Designer.cs">
-      <DependentUpon>ProductSellDetailForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="WinForm\Product\ProductFlowForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="WinForm\Product\ProductFlowForm.Designer.cs">
-      <DependentUpon>ProductFlowForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="WinForm\Product\ProductSellForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="WinForm\Product\ProductSellForm.Designer.cs">
-      <DependentUpon>ProductSellForm.cs</DependentUpon>
     </Compile>
     <Compile Include="WinForm\Data\CategoryForm.cs">
       <SubType>Form</SubType>
@@ -338,47 +296,11 @@
     <Compile Include="WinForm\System\WelcomeForm1.Designer.cs">
       <DependentUpon>WelcomeForm1.cs</DependentUpon>
     </Compile>
-    <Compile Include="WinForm\Data\ProductUC.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="WinForm\Data\ProductUC.Designer.cs">
-      <DependentUpon>ProductUC.cs</DependentUpon>
-    </Compile>
-    <Compile Include="WinForm\Element\ElementLibForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="WinForm\Element\ElementLibForm.Designer.cs">
-      <DependentUpon>ElementLibForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="WinForm\Element\ElementOrderForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="WinForm\Element\ElementOrderForm.Designer.cs">
-      <DependentUpon>ElementOrderForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="WinForm\Data\ElementUC.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="WinForm\Data\ElementUC.Designer.cs">
-      <DependentUpon>ElementUC.cs</DependentUpon>
-    </Compile>
     <Compile Include="WinForm\System\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="WinForm\System\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="WinForm\Data\DataSettingForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="WinForm\Data\DataSettingForm.Designer.cs">
-      <DependentUpon>DataSettingForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="WinForm\Data\ElementForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="WinForm\Data\ElementForm.Designer.cs">
-      <DependentUpon>ElementForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -391,10 +313,6 @@
       <LastGenOutput>SellCrystalReport.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\licenses.licx" />
-    <EmbeddedResource Include="WinForm\Data\CustomerUC.resx">
-      <DependentUpon>CustomerUC.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Include="WinForm\Data\ProductClothesForm.resx">
       <DependentUpon>ProductClothesForm.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -407,10 +325,6 @@
       <DependentUpon>CharactorForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForm\Element\ElementOrderReportForm.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>ElementOrderReportForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="WinForm\Query\QueryDetailForm.resx">
       <DependentUpon>QueryDetailForm.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -419,28 +333,8 @@
       <DependentUpon>QueryLibForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForm\Product\ProductLibForm.resx">
-      <DependentUpon>ProductLibForm.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForm\Product\ProductFlowDetailForm.resx">
-      <DependentUpon>ProductFlowDetailForm.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Include="WinForm\Product\ProductSellReportForm.resx">
       <DependentUpon>ProductSellReportForm.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForm\Product\ProductSellDetailForm.resx">
-      <DependentUpon>ProductSellDetailForm.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForm\Product\ProductFlowForm.resx">
-      <DependentUpon>ProductFlowForm.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForm\Product\ProductSellForm.resx">
-      <DependentUpon>ProductSellForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForm\Data\CategoryForm.resx">
@@ -519,57 +413,13 @@
       <DependentUpon>WelcomeForm1.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForm\Data\ProductUC.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>ProductUC.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForm\Element\ElementLibForm.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>ElementLibForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForm\Element\ElementOrderForm.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>ElementOrderForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForm\Data\ElementUC.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>ElementUC.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="WinForm\System\MainForm.resx">
       <SubType>Designer</SubType>
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForm\Data\DataSettingForm.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>DataSettingForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForm\Data\ElementForm.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>ElementForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForm\Product\ProductJobForm.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>ProductJobForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForm\Element\ElementFlowDetailForm.resx">
-      <DependentUpon>ElementFlowDetailForm.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForm\Element\ElementOrderDetailForm.resx">
-      <DependentUpon>ElementOrderDetailForm.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForm\Product\ProductJobDetailForm.resx">
-      <DependentUpon>ProductJobDetailForm.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForm\Element\ElementFlowForm.resx">
-      <DependentUpon>ElementFlowForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForm\Utility\LookupText.resx">
@@ -590,36 +440,6 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
-    <Compile Include="WinForm\Product\ProductJobForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="WinForm\Product\ProductJobForm.Designer.cs">
-      <DependentUpon>ProductJobForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="WinForm\Element\ElementFlowDetailForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="WinForm\Element\ElementFlowDetailForm.Designer.cs">
-      <DependentUpon>ElementFlowDetailForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="WinForm\Element\ElementOrderDetailForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="WinForm\Element\ElementOrderDetailForm.Designer.cs">
-      <DependentUpon>ElementOrderDetailForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="WinForm\Product\ProductJobDetailForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="WinForm\Product\ProductJobDetailForm.Designer.cs">
-      <DependentUpon>ProductJobDetailForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="WinForm\Element\ElementFlowForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="WinForm\Element\ElementFlowForm.Designer.cs">
-      <DependentUpon>ElementFlowForm.cs</DependentUpon>
     </Compile>
     <Compile Include="WinForm\Utility\LookupText.cs">
       <SubType>UserControl</SubType>

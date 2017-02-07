@@ -31,9 +31,9 @@ namespace LocalERP.WinForm
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ProductCirculationForm));
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -73,13 +73,22 @@ namespace LocalERP.WinForm
             this.toolStripButton_approval = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton_finish = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton_print = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.textBox_payed = new System.Windows.Forms.TextBox();
             this.textBox_pay = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.button_savePay = new System.Windows.Forms.Button();
             this.panel_pay = new System.Windows.Forms.Panel();
-            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
+            this.label16 = new System.Windows.Forms.Label();
+            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.label17 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
@@ -121,12 +130,12 @@ namespace LocalERP.WinForm
             this.dataGridView2.AllowUserToAddRows = false;
             this.dataGridView2.AllowUserToDeleteRows = false;
             this.dataGridView2.AllowUserToResizeRows = false;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.PaleGreen;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.Black;
-            this.dataGridView2.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.PaleGreen;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
+            this.dataGridView2.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.dataGridView2.BackgroundColor = System.Drawing.Color.White;
+            this.dataGridView2.BackgroundColor = System.Drawing.Color.LightYellow;
             this.dataGridView2.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
             this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView2.ColumnHeadersVisible = false;
@@ -137,7 +146,7 @@ namespace LocalERP.WinForm
             this.dataGridView2.Enabled = false;
             this.dataGridView2.EnableHeadersVisualStyles = false;
             this.dataGridView2.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.dataGridView2.Location = new System.Drawing.Point(18, 426);
+            this.dataGridView2.Location = new System.Drawing.Point(18, 394);
             this.dataGridView2.Margin = new System.Windows.Forms.Padding(2);
             this.dataGridView2.Name = "dataGridView2";
             this.dataGridView2.ReadOnly = true;
@@ -167,9 +176,9 @@ namespace LocalERP.WinForm
             this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.AllowUserToDeleteRows = false;
             this.dataGridView1.AllowUserToResizeRows = false;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.PaleGreen;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.Black;
-            this.dataGridView1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.PaleGreen;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black;
+            this.dataGridView1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
@@ -192,7 +201,7 @@ namespace LocalERP.WinForm
             this.dataGridView1.RowTemplate.DefaultCellStyle.SelectionForeColor = System.Drawing.Color.Black;
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(792, 224);
+            this.dataGridView1.Size = new System.Drawing.Size(792, 192);
             this.dataGridView1.TabIndex = 5;
             this.dataGridView1.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.dataGridView1_EditingControlShowing);
             // 
@@ -226,8 +235,8 @@ namespace LocalERP.WinForm
             // 
             // num
             // 
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.num.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.num.DefaultCellStyle = dataGridViewCellStyle3;
             this.num.HeaderText = "数量/个";
             this.num.LookupForm = null;
             this.num.Name = "num";
@@ -355,22 +364,22 @@ namespace LocalERP.WinForm
             // 
             this.label15.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(6, 13);
+            this.label15.Location = new System.Drawing.Point(249, 52);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(70, 14);
             this.label15.TabIndex = 49;
-            this.label15.Text = "应付货款:";
+            this.label15.Text = "本次还款:";
             // 
             // label12
             // 
             this.label12.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label12.AutoSize = true;
-            this.label12.ForeColor = System.Drawing.Color.Red;
-            this.label12.Location = new System.Drawing.Point(249, 13);
+            this.label12.ForeColor = System.Drawing.Color.Black;
+            this.label12.Location = new System.Drawing.Point(492, 52);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(70, 14);
             this.label12.TabIndex = 46;
-            this.label12.Text = "已付货款:";
+            this.label12.Text = "累计欠款:";
             // 
             // label_title
             // 
@@ -489,10 +498,20 @@ namespace LocalERP.WinForm
             this.toolStripButton_print.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.toolStripButton_print.Click += new System.EventHandler(this.toolStripButton_print_Click);
             // 
+            // toolStripButton1
+            // 
+            this.toolStripButton1.Image = global::LocalERP.Properties.Resources.cancel16;
+            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton1.Name = "toolStripButton1";
+            this.toolStripButton1.Size = new System.Drawing.Size(39, 34);
+            this.toolStripButton1.Text = "取消";
+            this.toolStripButton1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton_cancel_Click);
+            // 
             // textBox_payed
             // 
             this.textBox_payed.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.textBox_payed.Location = new System.Drawing.Point(316, 9);
+            this.textBox_payed.Location = new System.Drawing.Point(559, 48);
             this.textBox_payed.Name = "textBox_payed";
             this.textBox_payed.Size = new System.Drawing.Size(97, 23);
             this.textBox_payed.TabIndex = 53;
@@ -500,16 +519,16 @@ namespace LocalERP.WinForm
             // textBox_pay
             // 
             this.textBox_pay.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.textBox_pay.Location = new System.Drawing.Point(73, 9);
+            this.textBox_pay.Location = new System.Drawing.Point(316, 48);
             this.textBox_pay.Name = "textBox_pay";
-            this.textBox_pay.Size = new System.Drawing.Size(94, 23);
+            this.textBox_pay.Size = new System.Drawing.Size(97, 23);
             this.textBox_pay.TabIndex = 54;
             // 
             // label6
             // 
             this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(186, 13);
+            this.label6.Location = new System.Drawing.Point(415, 52);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(21, 14);
             this.label6.TabIndex = 55;
@@ -519,7 +538,7 @@ namespace LocalERP.WinForm
             // 
             this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(434, 13);
+            this.label7.Location = new System.Drawing.Point(658, 52);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(21, 14);
             this.label7.TabIndex = 56;
@@ -528,7 +547,7 @@ namespace LocalERP.WinForm
             // button_savePay
             // 
             this.button_savePay.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.button_savePay.Location = new System.Drawing.Point(480, 8);
+            this.button_savePay.Location = new System.Drawing.Point(495, 14);
             this.button_savePay.Name = "button_savePay";
             this.button_savePay.Size = new System.Drawing.Size(101, 23);
             this.button_savePay.TabIndex = 57;
@@ -539,6 +558,15 @@ namespace LocalERP.WinForm
             // panel_pay
             // 
             this.panel_pay.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.panel_pay.Controls.Add(this.label16);
+            this.panel_pay.Controls.Add(this.textBox3);
+            this.panel_pay.Controls.Add(this.label17);
+            this.panel_pay.Controls.Add(this.label10);
+            this.panel_pay.Controls.Add(this.label11);
+            this.panel_pay.Controls.Add(this.textBox1);
+            this.panel_pay.Controls.Add(this.textBox2);
+            this.panel_pay.Controls.Add(this.label13);
+            this.panel_pay.Controls.Add(this.label14);
             this.panel_pay.Controls.Add(this.button_savePay);
             this.panel_pay.Controls.Add(this.label7);
             this.panel_pay.Controls.Add(this.label6);
@@ -546,20 +574,95 @@ namespace LocalERP.WinForm
             this.panel_pay.Controls.Add(this.textBox_payed);
             this.panel_pay.Controls.Add(this.label15);
             this.panel_pay.Controls.Add(this.label12);
-            this.panel_pay.Location = new System.Drawing.Point(10, 457);
+            this.panel_pay.Location = new System.Drawing.Point(10, 421);
             this.panel_pay.Name = "panel_pay";
-            this.panel_pay.Size = new System.Drawing.Size(596, 42);
+            this.panel_pay.Size = new System.Drawing.Size(800, 79);
             this.panel_pay.TabIndex = 58;
             // 
-            // toolStripButton1
+            // label16
             // 
-            this.toolStripButton1.Image = global::LocalERP.Properties.Resources.cancel16;
-            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(39, 34);
-            this.toolStripButton1.Text = "取消";
-            this.toolStripButton1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton_cancel_Click);
+            this.label16.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(169, 52);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(21, 14);
+            this.label16.TabIndex = 66;
+            this.label16.Text = "元";
+            // 
+            // textBox3
+            // 
+            this.textBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.textBox3.Location = new System.Drawing.Point(73, 48);
+            this.textBox3.Name = "textBox3";
+            this.textBox3.Size = new System.Drawing.Size(94, 23);
+            this.textBox3.TabIndex = 65;
+            // 
+            // label17
+            // 
+            this.label17.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(6, 52);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(70, 14);
+            this.label17.TabIndex = 64;
+            this.label17.Text = "以上欠款:";
+            // 
+            // label10
+            // 
+            this.label10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(415, 18);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(21, 14);
+            this.label10.TabIndex = 63;
+            this.label10.Text = "元";
+            // 
+            // label11
+            // 
+            this.label11.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(169, 18);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(14, 14);
+            this.label11.TabIndex = 62;
+            this.label11.Text = "%";
+            // 
+            // textBox1
+            // 
+            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.textBox1.Location = new System.Drawing.Point(73, 14);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(94, 23);
+            this.textBox1.TabIndex = 61;
+            // 
+            // textBox2
+            // 
+            this.textBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.textBox2.Location = new System.Drawing.Point(316, 14);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(97, 23);
+            this.textBox2.TabIndex = 60;
+            // 
+            // label13
+            // 
+            this.label13.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(6, 18);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(70, 14);
+            this.label13.TabIndex = 59;
+            this.label13.Text = "整单折扣:";
+            // 
+            // label14
+            // 
+            this.label14.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label14.AutoSize = true;
+            this.label14.ForeColor = System.Drawing.Color.Black;
+            this.label14.Location = new System.Drawing.Point(249, 18);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(70, 14);
+            this.label14.TabIndex = 58;
+            this.label14.Text = "实计货款:";
             // 
             // ProductCirculationForm
             // 
@@ -656,6 +759,15 @@ namespace LocalERP.WinForm
         private System.Windows.Forms.TextBox textBox_pay;
         private System.Windows.Forms.Panel panel_pay;
         private System.Windows.Forms.ToolStripButton toolStripButton1;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.Label label17;
         
        
     }
