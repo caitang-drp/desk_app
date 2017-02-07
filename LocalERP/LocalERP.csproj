@@ -77,10 +77,6 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="DataAccess\DataDAO\CharactorValueDao.cs" />
-    <Compile Include="DataAccess\DataDAO\ElementDao.cs" />
-    <Compile Include="DataAccess\DataDAO\ElementOrderDao.cs" />
-    <Compile Include="DataAccess\DataDAO\ElementOrderRecordDao.cs" />
-    <Compile Include="DataAccess\DataDAO\ElementFlowDao.cs" />
     <Compile Include="DataAccess\DataDAO\ProductDao.cs" />
     <Compile Include="DataAccess\DataDAO\ProductJobDao.cs" />
     <Compile Include="DataAccess\DataDAO\ProductJobRecordDao.cs" />
@@ -97,10 +93,6 @@
     <Compile Include="DataAccess\DataDAO\ProductCirculationSKURecordDao.cs" />
     <Compile Include="DataAccess\Data\Category.cs" />
     <Compile Include="DataAccess\Data\Charactor.cs" />
-    <Compile Include="DataAccess\Data\Element.cs" />
-    <Compile Include="DataAccess\Data\ElementOrder.cs" />
-    <Compile Include="DataAccess\Data\ElementOrderRecord.cs" />
-    <Compile Include="DataAccess\Data\ElementFlow.cs" />
     <Compile Include="DataAccess\Data\Product.cs" />
     <Compile Include="DataAccess\Data\ProductJob.cs" />
     <Compile Include="DataAccess\Data\ProductJobRecord.cs" />
