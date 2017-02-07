@@ -199,12 +199,6 @@
     <Compile Include="WinForm\System\NavigationUC.Designer.cs">
       <DependentUpon>NavigationUC.cs</DependentUpon>
     </Compile>
-    <Compile Include="WinForm\Data\ProductForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="WinForm\Data\ProductForm.Designer.cs">
-      <DependentUpon>ProductForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="WinForm\Data\CustomerForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -360,10 +354,6 @@
     <EmbeddedResource Include="WinForm\System\NavigationUC.resx">
       <SubType>Designer</SubType>
       <DependentUpon>NavigationUC.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForm\Data\ProductForm.resx">
-      <DependentUpon>ProductForm.cs</DependentUpon>
-      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForm\Data\CustomerForm.resx">
       <DependentUpon>CustomerForm.cs</DependentUpon>
