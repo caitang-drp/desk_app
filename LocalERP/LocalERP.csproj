@@ -77,7 +77,6 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="DataAccess\DataDAO\CharactorValueDao.cs" />
-    <Compile Include="DataAccess\DataDAO\ProductDao.cs" />
     <Compile Include="DataAccess\DataDAO\ProductJobDao.cs" />
     <Compile Include="DataAccess\DataDAO\ProductJobRecordDao.cs" />
     <Compile Include="DataAccess\DataDAO\CustomerDao.cs" />

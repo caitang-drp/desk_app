@@ -128,7 +128,7 @@ namespace LocalERP.UiDataProxy
         {
             dataGridView1.Rows.Clear();
             Category parent = CategoryDao.getInstance().FindById(this.CategoryTableName, parentId);
-            DataTable dataTable = ProductDao.getInstance().FindList(parent);
+            DataTable dataTable = ProductClothesDao.getInstance().FindList(parent,null);
             foreach (DataRow dr in dataTable.Rows)
             {
                 int index = dataGridView1.Rows.Add();

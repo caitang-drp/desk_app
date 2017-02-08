@@ -454,7 +454,7 @@ namespace LocalERP.WinForm
             for (int i = 0; i < records.Count; i++)
             {
                 int productID = records[i].ProductID;
-                int leftNum = ProductDao.getInstance().FindByID(productID).Num;
+                int leftNum = ProductClothesDao.getInstance().FindByID(productID).Num;
                 if (records[i].TotalNum > leftNum)
                     isLeftEnought = false;
             }
@@ -645,7 +645,7 @@ namespace LocalERP.WinForm
                     int.TryParse((control.EditingControlDataGridView.Rows[control.EditingControlRowIndex].Cells["product"].Value).ToString(), out oldID);
                     if (productID != oldID)
                     {
-                        control.EditingControlDataGridView.Rows[control.EditingControlRowIndex].Cells["price"].Value = ProductDao.getInstance().FindPriceByID(productID);
+                        control.EditingControlDataGridView.Rows[control.EditingControlRowIndex].Cells["price"].Value = ProductClothesDao.getInstance().FindPriceByID(productID);
                         DataGridViewLookupEditingControl lookup = sender as DataGridViewLookupEditingControl;
                         this.setCellEnable(control.EditingControlDataGridView.Rows[control.EditingControlRowIndex].Cells["num"], true);
                         control.EditingControlDataGridView.Rows[control.EditingControlRowIndex].Cells["num"].Value = new LookupArg("", "");

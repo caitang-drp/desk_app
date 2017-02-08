@@ -122,7 +122,7 @@ namespace LocalERP.UiDataProxy
             if(parentId > 0)
                 parent = CategoryDao.getInstance().FindById(this.CategoryTableName, parentId);
             
-            DataTable dataTable = ProductStainlessDao.getInstance().FindList(parent, name);
+            DataTable dataTable = ProductClothesDao.getInstance().FindList(parent, name);
             return dataTable;
         }
 
@@ -130,7 +130,7 @@ namespace LocalERP.UiDataProxy
         {
             dataGridView1.Rows.Clear();
             Category parent = CategoryDao.getInstance().FindById(this.CategoryTableName, parentId);
-            DataTable dataTable = ProductDao.getInstance().FindList(parent);
+            DataTable dataTable = ProductClothesDao.getInstance().FindList(parent, null);
             foreach (DataRow dr in dataTable.Rows)
             {
                 int index = dataGridView1.Rows.Add();
@@ -154,12 +154,12 @@ namespace LocalERP.UiDataProxy
 
         public override void delItems(int id)
         {
-            ProductStainlessDao.getInstance().Delete(id);
+            ProductClothesDao.getInstance().Delete(id);
         }
 
         public override MyDockContent getItemForm(int openMode, int ID)
         {
-            ProductStainlessForm form = FormMgr.getInstance().getProductStainlessForm();
+            ProductClothesForm form = FormMgr.getInstance().getProductForm();
             form.reload(openMode, ID);
             return form;
 
