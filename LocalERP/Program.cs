@@ -17,6 +17,7 @@ namespace LocalERP
         [STAThread]
         static void Main()
         {
+            /*
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
@@ -30,7 +31,7 @@ namespace LocalERP
             LoginForm loginForm = new LoginForm();
             loginForm.ShowDialog();
             if (loginForm.DialogResult == DialogResult.OK)
-                Application.Run(new MainForm());
+                */Application.Run(new MainForm());
             
         }
     }
