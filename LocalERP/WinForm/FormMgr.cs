@@ -60,6 +60,18 @@ namespace LocalERP.WinForm
             return productPurchaseListForm;
         }
 
+        // 销售收款单
+        private SellReceiptBillForm sellReceiptBillForm = null;
+        public SellReceiptBillForm getSellReceiptBillForm()
+        {
+            if (sellReceiptBillForm == null || sellReceiptBillForm.IsDisposed)
+            {
+                sellReceiptBillForm = new SellReceiptBillForm(ProductCirculation.CirculationTypeConf_Purchase);
+                appendEvent(sellReceiptBillForm);
+            }
+            return sellReceiptBillForm;
+        }
+
         //product purchase detail form
         private ProductCirculationForm productPurchaseForm = null;
         public ProductCirculationForm getProductPurchaseForm()
