@@ -17,10 +17,10 @@ namespace LocalERP
         [STAThread]
         static void Main()
         {
-            /*
+            
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-
+            /*
             if (AuthUtility.checkSN() == false) {
                 SignForm signForm = new SignForm();
                 signForm.ShowDialog();
