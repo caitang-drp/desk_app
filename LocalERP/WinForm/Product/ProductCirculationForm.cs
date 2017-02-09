@@ -55,10 +55,13 @@ namespace LocalERP.WinForm
 
         private void ProductCirculationForm_Load(object sender, EventArgs e)
         {
-            (this.dataGridView1.Columns["product"] as DataGridViewLookupColumn).LookupForm = FormMgr.getInstance().getProductCIForm_select();  
+            //特别注意：如果这个地方的ProductCIForm不是新建，用的是以前的窗口
+            //那就可能有多个CirculationForm的DataGridViewLookupColumn指向同一个ProductCIForm
+            //那么当以前的CirculationForm没有销毁的情况下，ProductCIForm就会触发以前的valueChanged事件，从而出现异常
+            (this.dataGridView1.Columns["product"] as DataGridViewLookupColumn).LookupForm = FormSingletonFactory.getInstance().getProductCIForm_select();  
             (this.dataGridView1.Columns["num"] as DataGridViewLookupColumn).LookupForm = new ProductClothesInputNumForm(this);
 
-            this.lookupText1.LookupForm = FormMgr.getInstance().getCustomerCIForm_Select();
+            this.lookupText1.LookupForm = FormSingletonFactory.getInstance().getCustomerCIForm_Select();
             
             dataGridView2.Rows.Add("总价合计/元:", "");
 

@@ -22,6 +22,14 @@ namespace LocalERP.DataAccess.Data
             set { name = value; }
         }
 
+        private string serial;
+
+        public string Serial
+        {
+            get { return serial; }
+            set { serial = value; }
+        }
+
         private int categoryID;
 
         public int CategoryID
@@ -77,8 +85,9 @@ namespace LocalERP.DataAccess.Data
             this.comment = comment;
         }
 
-        public Product(string name, int categoryID, double pricePurchase, double priceSell, string unit, string comment)
+        public Product(string serial, string name, int categoryID, double pricePurchase, double priceSell, string unit, string comment)
         {
+            this.serial = serial;
             this.name = name;
             this.categoryID = categoryID;
             this.pricePurchase = pricePurchase;

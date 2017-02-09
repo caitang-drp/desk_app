@@ -87,6 +87,7 @@ namespace LocalERP.WinForm
         }
 
         private bool isAdd = false;
+
         //add child
         private void toolStripButton_addType_Click(object sender, EventArgs e)
         {
@@ -94,6 +95,12 @@ namespace LocalERP.WinForm
                 TreeNode node = new TreeNode("新建类别");
                 treeView1.SelectedNode.Nodes.Add(node);
                 treeView1.SelectedNode.Expand();
+                isAdd = true;
+                node.BeginEdit();
+            }
+            else if (treeView1.Nodes == null && treeView1.Nodes.Count == 0) {
+                TreeNode node = new TreeNode("新建类别");
+                treeView1.Nodes.Add(node);
                 isAdd = true;
                 node.BeginEdit();
             }
@@ -110,6 +117,13 @@ namespace LocalERP.WinForm
                 else
                     treeView1.Nodes.Insert(treeView1.SelectedNode.Index+1, node);
                 
+                isAdd = true;
+                node.BeginEdit();
+            }
+            else if (treeView1.Nodes == null && treeView1.Nodes.Count == 0)
+            {
+                TreeNode node = new TreeNode("新建类别");
+                treeView1.Nodes.Add(node);
                 isAdd = true;
                 node.BeginEdit();
             }

@@ -16,30 +16,7 @@ namespace LocalERP.WinForm
         public MyDockContent() {
             backgroundWorker = new System.ComponentModel.BackgroundWorker();
             this.Activated += new EventHandler(MyDockContent_Activated);
-            //this.GotFocus += new EventHandler(MyDockContent_GotFocus);
         }
-        /*
-        void MyDockContent_GotFocus(object sender, EventArgs e)
-        {
-            bool refresh = false;
-            Dictionary<UpdateType, int> dic = FormMgr.getInstance().getVersions();
-            List<UpdateType> needUpdateVersions = new List<UpdateType>();
-            foreach (UpdateType key in versionDic.Keys)
-            {
-
-                if (versionDic[key] < dic[key])
-                {
-                    needUpdateVersions.Add(key);
-                    refresh = true;
-                }
-            }
-
-            foreach (UpdateType version in needUpdateVersions)
-                versionDic[version] = dic[version];
-
-            if (refresh == true)
-                this.refresh();
-        }*/
 
         void MyDockContent_Activated(object sender, EventArgs e)
         {
@@ -64,6 +41,7 @@ namespace LocalERP.WinForm
                 this.refresh();
         }
 
+        //²Î¿¼FormMgr.updateVersionµÄ×¢ÊÍ
         protected Dictionary<UpdateType, int> versionDic = new Dictionary<UpdateType, int>();
         public void initVersions(Dictionary<UpdateType, int> dicCVs, params UpdateType[] cvs)
         {

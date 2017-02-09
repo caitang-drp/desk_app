@@ -102,7 +102,7 @@ namespace LocalERP.UiDataProxy
             return node;
         }
 
-        public override void initItems(DataGridView dataGridView1, int parentId)
+        /*public override void initItems(DataGridView dataGridView1, int parentId)
         {
             dataGridView1.Rows.Clear();
             Category parent = CategoryDao.getInstance().FindById(this.CategoryTableName, parentId);
@@ -116,7 +116,7 @@ namespace LocalERP.UiDataProxy
                 numCell.Value = ProductClothesDao.getInstance().getNumString((int)(dr["Product.ID"]));
                 numCell.resetSize(dataGridView1.Rows[index].Cells["num"].Value.ToString());
             }
-        }
+        }*/
 
         public override DataTable getRecordsTable(int parentId, string name)
         {

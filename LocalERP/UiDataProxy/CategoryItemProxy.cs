@@ -54,7 +54,7 @@ namespace LocalERP.UiDataProxy
 
         public abstract void initColumns(DataGridView dgv);
         public abstract void initTree(TreeView tv);
-        public abstract void initItems(DataGridView dgv, int parentId);
+        //public abstract void initItems(DataGridView dgv, int parentId);
         public abstract DataTable getRecordsTable(int parentId, string name);
         public abstract void initRecords(DataGridView dgv, DataTable dt);
 

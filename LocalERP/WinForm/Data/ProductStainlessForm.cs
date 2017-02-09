@@ -18,8 +18,6 @@ namespace LocalERP.WinForm
         private int openMode = 0;
         private int productID = 0;
 
-        private bool attributeChanged = false;
-
         public ProductStainlessForm()
         {
             InitializeComponent();
@@ -27,12 +25,8 @@ namespace LocalERP.WinForm
             openMode = 0;
             productID = 0;
 
-            ProxyMgr.getInstance().getProductCIProxy().initTree(this.comboBoxTree1.tvTreeView);
-        }
-
-        void pickValue_color_selectValueChanged()
-        {
-            attributeChanged = true;
+            ProductStainlessCategoryItemProxy categoryItemProxy = new ProductStainlessCategoryItemProxy();
+            categoryItemProxy.initTree(this.comboBoxTree_category.tvTreeView);
         }
 
         public void reload(int openMode, int ID) {
@@ -49,35 +43,15 @@ namespace LocalERP.WinForm
         }
 
         private void initProduct()
-        {/*
-            this.label4.Text = "编辑商品, ID:" + productID;
+        {
+            this.label4.Text = "编辑货品, ID:" + productID;
 
-            Product product = ProductClothesDao.getInstance().FindByID(productID);
+            ProductStainless product = ProductStainlessDao.getInstance().FindByID(productID);
             this.textBox_name.Text = product.Name;
-            this.textBox_price.Text = product.Price.ToString();
+            this.textBox_purchasePrice.Text = product.PricePurchase.ToString();
             this.textBox_comment.Text = product.Comment;
 
-            this.comboBoxTree1.setSelectNode(product.CategoryID.ToString());
-
-            this.pickValue_color.allToLeft();
-            this.pickValue_color.setSelectItems(ProductClothesDao.getInstance().findAttributes(productID, 1));
-            this.pickValue_size.allToLeft();
-            this.pickValue_size.setSelectItems(ProductClothesDao.getInstance().findAttributes(productID, 2));
-
-            if (ProductCirculationRecordDao.getInstance().FindCount(productID) > 0)
-                this.setPickValue(false);
-            else
-                this.setPickValue(true);
-
-            attributeChanged = false;*/
-        }
-
-        private void setPickValue(bool value) {/*
-            this.pickValue_color.Enabled = value;
-            this.button_color.Enabled = value;
-            this.pickValue_size.Enabled = value;
-            this.button_size.Enabled = value;
-        */
+            this.comboBoxTree_category.setSelectNode(product.CategoryID.ToString());
         }
 
         private void clearProduct()
@@ -97,7 +71,7 @@ namespace LocalERP.WinForm
 
         public override void refresh()
         {
-            ProxyMgr.getInstance().getProductCIProxy().initTree(this.comboBoxTree1.tvTreeView);
+            ProxyMgr.getInstance().getProductCIProxy().initTree(this.comboBoxTree_category.tvTreeView);
         }
 
         /// <summary>
@@ -137,21 +111,21 @@ namespace LocalERP.WinForm
         }
 
         private bool getCategoryID(out int categoryID) { 
-            if(this.comboBoxTree1.SelectedNode == null)
+            if(this.comboBoxTree_category.SelectedNode == null)
             {
-                this.errorProvider1.SetError(this.comboBoxTree1, "请选择类别!");
+                this.errorProvider1.SetError(this.comboBoxTree_category, "请选择类别!");
                 categoryID = 1;
                 return false;
             }
             else
             {
-                this.errorProvider1.SetError(this.comboBoxTree1, string.Empty);
-                categoryID = int.Parse(this.comboBoxTree1.SelectedNode.Name);
+                this.errorProvider1.SetError(this.comboBoxTree_category, string.Empty);
+                categoryID = int.Parse(this.comboBoxTree_category.SelectedNode.Name);
                 return true;
             }
         }
 
-        private bool getProduct(out Product product) {
+        private bool getProduct(out ProductStainless product) {
             double price;
             string name;
             int categoryID;
@@ -161,7 +135,7 @@ namespace LocalERP.WinForm
             bool isCategoryCorrect = this.getCategoryID(out categoryID);
             if ( isNameCorrect && isPriceCorrect && isCategoryCorrect)
             {
-                product = new Product(name, categoryID, price, this.textBox_comment.Text);
+                product = new ProductStainless("serial", name, categoryID, price, price, "个", 10, this.textBox_comment.Text);
                 product.ID = productID;
                 return true;
             }
@@ -177,30 +151,29 @@ namespace LocalERP.WinForm
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void toolStripButton3_Click(object sender, EventArgs e)
-        {/*
-            Product product = null;
+        private void toolStripButton_save_Click(object sender, EventArgs e)
+        {
+            ProductStainless product = null;
             if (this.getProduct(out product) == false)
                 return;
 
             if (openMode == 0) {
-                ProductClothesDao.getInstance().Insert(product, this.pickValue_color.getListRight(), this.pickValue_size.getListRight());
-                MessageBox.Show("保存商品成功,在相应的类别目录下可以找到该商品!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                ProductStainlessDao.getInstance().Insert(product);
+                MessageBox.Show("保存货品成功,在相应的类别目录下可以找到该商品!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else if (openMode == 1) {
-                product.ID = productID;
-                bool basicResult = ProductClothesDao.getInstance().UpdateBasicInfo(product);
+                /*product.ID = productID;
+                bool basicResult = ProductStainlessDao.getInstance().UpdateBasicInfo(product);
                 bool basicAttr = true;
                 if (attributeChanged)
                     basicAttr = ProductClothesDao.getInstance().UpdateAttributes(productID, product, this.pickValue_color.getListRight(), this.pickValue_size.getListRight());
                 if(basicResult && basicAttr)
                     MessageBox.Show("修改商品成功!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 else
-                    MessageBox.Show("该商品已被单据引用，无法修改颜色和尺码等属性!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("该商品已被单据引用，无法修改颜色和尺码等属性!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);*/
             }
-            this.attributeChanged = false;
             this.invokeUpdateNotify(UpdateType.ProductUpdate);
-            this.Close();*/
+            this.Close();
         }
 
         private void toolStripButton4_Click(object sender, EventArgs e)

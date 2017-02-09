@@ -30,7 +30,8 @@ namespace LocalERP.UiDataProxy
             DataGridViewTextBoxColumn ID = new DataGridViewTextBoxColumn();
             DataGridViewTextBoxColumn name = new DataGridViewTextBoxColumn();
             DataGridViewTextBoxColumn category = new DataGridViewTextBoxColumn();
-            DataGridViewTextBoxColumn price = new DataGridViewTextBoxColumn();
+            DataGridViewTextBoxColumn pricePurchase = new DataGridViewTextBoxColumn();
+            DataGridViewTextBoxColumn priceSell = new DataGridViewTextBoxColumn();
 
             check.HeaderText = "选择";
             check.Name = "check";
@@ -61,17 +62,23 @@ namespace LocalERP.UiDataProxy
             // 
             // comment
             // 
-            price.HeaderText = "采购价格/元";
-            price.Name = "price";
-            price.ReadOnly = true;
-            price.Width = 100;
+            pricePurchase.HeaderText = "采购价格/元";
+            pricePurchase.Name = "pricePurchase";
+            pricePurchase.ReadOnly = true;
+            pricePurchase.Width = 120;
+
+            priceSell.HeaderText = "销售价格/元";
+            priceSell.Name = "priceSell";
+            priceSell.ReadOnly = true;
+            priceSell.Width = 120;
 
             dgv.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
                 check,
                 ID,
                 name,
                 category,
-                price});
+                pricePurchase,
+                priceSell});
         }
 
         public override void initTree(TreeView tv)
@@ -122,45 +129,48 @@ namespace LocalERP.UiDataProxy
             if(parentId > 0)
                 parent = CategoryDao.getInstance().FindById(this.CategoryTableName, parentId);
             
-            DataTable dataTable = ProductClothesDao.getInstance().FindList(parent, name);
+            DataTable dataTable = ProductStainlessDao.getInstance().FindList(parent, name);
             return dataTable;
         }
 
+        /*
         public override void initItems(DataGridView dataGridView1, int parentId)
         {
             dataGridView1.Rows.Clear();
             Category parent = CategoryDao.getInstance().FindById(this.CategoryTableName, parentId);
-            DataTable dataTable = ProductClothesDao.getInstance().FindList(parent, null);
+            DataTable dataTable = ProductStainlessDao.getInstance().FindList(parent, null);
             foreach (DataRow dr in dataTable.Rows)
             {
                 int index = dataGridView1.Rows.Add();
-                dataGridView1.Rows[index].Cells["ID"].Value = dr["Product.ID"];
-                dataGridView1.Rows[index].Cells["name"].Value = dr["Product.name"];
+                dataGridView1.Rows[index].Cells["ID"].Value = dr["ProductStainless.ID"];
+                dataGridView1.Rows[index].Cells["name"].Value = dr["ProductStainless.name"];
             }
-        }
+        }*/
 
+        //初始化列表
         public override void initRecords(DataGridView dataGridView1, DataTable dataTable)
         {
             dataGridView1.Rows.Clear();
             foreach (DataRow dr in dataTable.Rows)
             {
                 int index = dataGridView1.Rows.Add();
-                dataGridView1.Rows[index].Cells["ID"].Value = dr["Product.ID"];
-                dataGridView1.Rows[index].Cells["name"].Value = dr["Product.name"];
+                dataGridView1.Rows[index].Cells["ID"].Value = dr["ProductStainless.ID"];
+                dataGridView1.Rows[index].Cells["name"].Value = dr["ProductStainless.name"];
                 dataGridView1.Rows[index].Cells["category"].Value = dr["ProductStainlessCategory.name"];
-                dataGridView1.Rows[index].Cells["price"].Value = dr["price"];
+                dataGridView1.Rows[index].Cells["pricePurchase"].Value = dr["pricePurchase"];
+                dataGridView1.Rows[index].Cells["priceSell"].Value = dr["priceSell"];
             }
         }
 
         public override void delItems(int id)
         {
-            ProductClothesDao.getInstance().Delete(id);
+            ProductStainlessDao.getInstance().Delete(id);
         }
 
         public override MyDockContent getItemForm(int openMode, int ID)
         {
-            ProductClothesForm form = FormMgr.getInstance().getProductForm();
-            form.reload(openMode, ID);
+            MyDockContent form = FormSingletonFactory.getInstance().getProductForm();
+            (form as ProductStainlessForm).reload(openMode, ID);
             return form;
 
         }

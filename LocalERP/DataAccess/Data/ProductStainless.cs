@@ -7,14 +7,6 @@ namespace LocalERP.DataAccess.Data
 {
     public class ProductStainless : Product
     {
-        private string serial;
-
-        public string Serial
-        {
-            get { return serial; }
-            set { serial = value; }
-        }
-
         private int quantityPerPiece;
 
         public int QuantityPerPiece
@@ -23,10 +15,11 @@ namespace LocalERP.DataAccess.Data
             set { quantityPerPiece = value; }
         }
 
-        public ProductStainless(string serial, string name, int categoryID, double pricePurchase, double priceSell, string unit, int quantityPerPiece, string comment)
-            :base(name, categoryID, pricePurchase, priceSell, unit, comment){
+        public ProductStainless() { }
 
-            this.serial = serial;
+        public ProductStainless(string serial, string name, int categoryID, double pricePurchase, double priceSell, string unit, int quantityPerPiece, string comment)
+            : base(serial, name, categoryID, pricePurchase, priceSell, unit, comment)
+        {
             this.quantityPerPiece = quantityPerPiece;
         }
     }

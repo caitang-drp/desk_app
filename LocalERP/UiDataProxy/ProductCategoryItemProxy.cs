@@ -124,7 +124,7 @@ namespace LocalERP.UiDataProxy
             return dataTable;
         }
 
-        public override void initItems(DataGridView dataGridView1, int parentId)
+        /*public override void initItems(DataGridView dataGridView1, int parentId)
         {
             dataGridView1.Rows.Clear();
             Category parent = CategoryDao.getInstance().FindById(this.CategoryTableName, parentId);
@@ -135,7 +135,7 @@ namespace LocalERP.UiDataProxy
                 dataGridView1.Rows[index].Cells["ID"].Value = dr["Product.ID"];
                 dataGridView1.Rows[index].Cells["name"].Value = dr["Product.name"];
             }
-        }
+        }*/
 
         public override void initRecords(DataGridView dataGridView1, DataTable dataTable)
         {
@@ -157,8 +157,8 @@ namespace LocalERP.UiDataProxy
 
         public override MyDockContent getItemForm(int openMode, int ID)
         {
-            ProductClothesForm form = FormMgr.getInstance().getProductForm();
-            form.reload(openMode, ID);
+            MyDockContent form = FormSingletonFactory.getInstance().getProductForm();
+            (form as ProductClothesForm).reload(openMode, ID);
             return form;
 
         }

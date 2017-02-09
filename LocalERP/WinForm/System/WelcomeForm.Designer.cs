@@ -325,7 +325,7 @@
             this.Controls.Add(this.linkLabel3);
             this.Controls.Add(this.linkLabel2);
             this.Controls.Add(this.pictureBox4);
-            this.Font = new System.Drawing.Font("宋体", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Font = new System.Drawing.Font("宋体", 10F);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "WelcomeForm";
             this.Text = "欢迎页";

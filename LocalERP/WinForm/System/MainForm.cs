@@ -16,16 +16,15 @@ namespace LocalERP.WinForm
 {
     public partial class MainForm : Form
     {
-
-        LoadingForm loadingForm;
         public MainForm()
         {
             InitializeComponent();
-            loadingForm = new LoadingForm();
         }
 
         private void MainForm_Load(object sender, EventArgs e)
         {
+            loadingForm = new LoadingForm();
+
             NavigationUC navigation = new NavigationUC(this);
             navigation.Dock = DockStyle.Fill;
             this.panel1.Controls.Add(navigation);
@@ -33,10 +32,13 @@ namespace LocalERP.WinForm
             getWelcomeForm().Show(this.dockPanel1);
             this.toolStripStatusLabel1.Text = "当前日期: " + DateTime.Now.ToShortDateString();
 
-            FormMgr.getInstance().MainForm = this;
+            FormSingletonFactory.getInstance().MainForm = this;
 
             Control.CheckForIllegalCrossThreadCalls = false;
         }
+
+        //用于显示等待界面
+        private LoadingForm loadingForm;
 
         private WelcomeForm welcomeForm = null;
         private WelcomeForm getWelcomeForm() { if (welcomeForm == null || welcomeForm.IsDisposed) welcomeForm = new WelcomeForm(this); return welcomeForm; }
@@ -49,55 +51,52 @@ namespace LocalERP.WinForm
         {
             switch (buttonText) {
                 case DataUtility.PURCHASE_LIST:
-                    FormMgr.getInstance().getProductPurchaseListForm().Show(this.dockPanel1);
+                    FormSingletonFactory.getInstance().getProductPurchaseListForm().Show(this.dockPanel1);
                     break;
                 case DataUtility.PURCHASE:
-                    FormMgr.getInstance().getProductPurchaseForm().Show(this.dockPanel1);
-                    FormMgr.getInstance().getProductPurchaseForm().reload(openMode, ID);
+                    FormSingletonFactory.getInstance().getProductPurchaseForm().Show(this.dockPanel1);
+                    FormSingletonFactory.getInstance().getProductPurchaseForm().reload(openMode, ID);
                     break;
                 case DataUtility.PURCHASE_BACK:
-                    FormMgr.getInstance().getProductPurchaseBackForm().Show(this.dockPanel1);
-                    FormMgr.getInstance().getProductPurchaseBackForm().reload(openMode, ID);
+                    FormSingletonFactory.getInstance().getProductPurchaseBackForm().Show(this.dockPanel1);
+                    FormSingletonFactory.getInstance().getProductPurchaseBackForm().reload(openMode, ID);
                     break;
                 case DataUtility.SELL_LIST:
-                    FormMgr.getInstance().getProductSellListForm().Show(this.dockPanel1);
+                    FormSingletonFactory.getInstance().getProductSellListForm().Show(this.dockPanel1);
                     break;
                 case DataUtility.SELL:
-                    FormMgr.getInstance().getProductSellForm().Show(this.dockPanel1);
-                    FormMgr.getInstance().getProductSellForm().reload(openMode, ID);
+                    FormSingletonFactory.getInstance().getProductSellForm().Show(this.dockPanel1);
+                    FormSingletonFactory.getInstance().getProductSellForm().reload(openMode, ID);
                     break;
                 case DataUtility.SELL_BACK:
-                    FormMgr.getInstance().getProductSellBackForm().Show(this.dockPanel1);
-                    FormMgr.getInstance().getProductSellBackForm().reload(openMode, ID);
+                    FormSingletonFactory.getInstance().getProductSellBackForm().Show(this.dockPanel1);
+                    FormSingletonFactory.getInstance().getProductSellBackForm().reload(openMode, ID);
                     break;
                 case DataUtility.LIB_LIST:
-                    FormMgr.getInstance().getProductLibListForm().Show(this.dockPanel1);
+                    FormSingletonFactory.getInstance().getProductLibListForm().Show(this.dockPanel1);
                     break;
                 case DataUtility.LIB_OVERFLOW:
-                    FormMgr.getInstance().getProductLibOverflowForm().Show(this.dockPanel1);
-                    FormMgr.getInstance().getProductLibOverflowForm().reload(openMode, ID);
+                    FormSingletonFactory.getInstance().getProductLibOverflowForm().Show(this.dockPanel1);
+                    FormSingletonFactory.getInstance().getProductLibOverflowForm().reload(openMode, ID);
                     break;
                 case DataUtility.LIB_LOSS:
-                    FormMgr.getInstance().getProductLibLossForm().Show(this.dockPanel1);
-                    FormMgr.getInstance().getProductLibLossForm().reload(openMode, ID);
+                    FormSingletonFactory.getInstance().getProductLibLossForm().Show(this.dockPanel1);
+                    FormSingletonFactory.getInstance().getProductLibLossForm().reload(openMode, ID);
                     break;
-                /*case DataUtility.ELEMENT_LIB:
-                    //getElementLibForm().Show(this.dockPanel1);
-                    break;*/
                 case DataUtility.QUERY_LIB:
-                    FormMgr.getInstance().getQueryLibForm().Show(this.dockPanel1);
+                    FormSingletonFactory.getInstance().getQueryLibForm().Show(this.dockPanel1);
                     break;
                 case DataUtility.QUERY_DETAIL:
-                    FormMgr.getInstance().getQueryDetailForm().Show(this.dockPanel1);
+                    FormSingletonFactory.getInstance().getQueryDetailForm().Show(this.dockPanel1);
                     break;
                 case DataUtility.STATISTIC:
-                    FormMgr.getInstance().getProductStatisticForm().Show(this.dockPanel1);
+                    FormSingletonFactory.getInstance().getProductStatisticForm().Show(this.dockPanel1);
                     break;
                 case DataUtility.DATA_CUSTOMER:
-                    FormMgr.getInstance().getCustomerCIForm().Show(this.dockPanel1);
+                    FormSingletonFactory.getInstance().getCustomerCIForm().Show(this.dockPanel1);
                     break;
                 case DataUtility.DATA_PRODUCT:
-                    FormMgr.getInstance().getProductCIForm().Show(this.dockPanel1);
+                    FormSingletonFactory.getInstance().getProductCIForm().Show(this.dockPanel1);
                     break;
                 default:
                     break;

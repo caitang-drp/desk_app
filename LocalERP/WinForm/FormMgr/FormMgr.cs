@@ -10,7 +10,7 @@ using System.IO;
 
 namespace LocalERP.WinForm
 {
-    class FormMgr
+    public class FormMgr
     {
         //singleton
         private static FormMgr formMgr;
@@ -21,6 +21,9 @@ namespace LocalERP.WinForm
             return formMgr;
         }
 
+        //updateVersion存放各种业务数据的版本，数值越高，数据越新
+        //如果Form的数据版本低于updateVersion，则显示窗口时需要刷新
+        //这个解决多窗口数据同步问题，如果有窗口数据更新了，其他相关窗口可以同步更新
         private Dictionary<UpdateType, int> updateVersions = null;
         public Dictionary<UpdateType, int> getVersions()
         {
@@ -36,7 +39,7 @@ namespace LocalERP.WinForm
             return updateVersions;
         }
 
-        private MainForm mainForm;
+        protected MainForm mainForm;
 
         public MainForm MainForm
         {
@@ -47,12 +50,12 @@ namespace LocalERP.WinForm
         /*************  purchase  *****************/
         //product purchase list form
         private ProductCirculationListForm productPurchaseListForm = null;
-        public ProductCirculationListForm getProductPurchaseListForm()
+        public virtual ProductCirculationListForm getProductPurchaseListForm()
         {
             if (productPurchaseListForm == null || productPurchaseListForm.IsDisposed)
             {
                 productPurchaseListForm = new ProductCirculationListForm(mainForm, 1, "采购单据列表");
-                productPurchaseListForm.initVersions(FormMgr.getInstance().getVersions(), 
+                productPurchaseListForm.initVersions(getVersions(), 
                     UpdateType.PurchaseUpdate, UpdateType.PurchaseFinishUpdate, UpdateType.CustomerUpdate);
                 
                 appendEvent(productPurchaseListForm);
@@ -62,7 +65,7 @@ namespace LocalERP.WinForm
 
         //product purchase detail form
         private ProductCirculationForm productPurchaseForm = null;
-        public ProductCirculationForm getProductPurchaseForm()
+        public virtual ProductCirculationForm getProductPurchaseForm()
         {
             if (productPurchaseForm == null || productPurchaseForm.IsDisposed)
             {
@@ -74,7 +77,7 @@ namespace LocalERP.WinForm
 
         //product purchase back detail form
         private ProductCirculationForm productPurchaseBackForm = null;
-        public ProductCirculationForm getProductPurchaseBackForm()
+        public virtual ProductCirculationForm getProductPurchaseBackForm()
         {
             if (productPurchaseBackForm == null || productPurchaseBackForm.IsDisposed)
             {
@@ -87,12 +90,12 @@ namespace LocalERP.WinForm
         /***************  sell   ************************/
         //product sell list form
         private ProductCirculationListForm productSellListForm = null;
-        public ProductCirculationListForm getProductSellListForm()
+        public virtual ProductCirculationListForm getProductSellListForm()
         {
             if (productSellListForm == null || productSellListForm.IsDisposed)
             {
                 productSellListForm = new ProductCirculationListForm(mainForm, 2, "销售单据列表");
-                productSellListForm.initVersions(FormMgr.getInstance().getVersions(),
+                productSellListForm.initVersions(getVersions(),
                     UpdateType.SellUpdate, UpdateType.SellFinishUpdate, UpdateType.CustomerUpdate);
 
                 appendEvent(productSellListForm);
@@ -102,7 +105,7 @@ namespace LocalERP.WinForm
 
         //product sell detail form
         private ProductCirculationForm productSellForm = null;
-        public ProductCirculationForm getProductSellForm()
+        public virtual ProductCirculationForm getProductSellForm()
         {
             if (productSellForm == null || productSellForm.IsDisposed)
             {
@@ -114,7 +117,7 @@ namespace LocalERP.WinForm
 
         //product sell back detail form
         private ProductCirculationForm productSellBackForm = null;
-        public ProductCirculationForm getProductSellBackForm()
+        public virtual ProductCirculationForm getProductSellBackForm()
         {
             if (productSellBackForm == null || productSellBackForm.IsDisposed)
             {
@@ -127,12 +130,12 @@ namespace LocalERP.WinForm
         /***************  lib  ************************/
         //product lib list form
         private ProductCirculationListForm productLibListForm = null;
-        public ProductCirculationListForm getProductLibListForm()
+        public virtual ProductCirculationListForm getProductLibListForm()
         {
             if (productLibListForm == null || productLibListForm.IsDisposed)
             {
                 productLibListForm = new ProductCirculationListForm(mainForm, 3, "盘点单据列表");
-                productLibListForm.initVersions(FormMgr.getInstance().getVersions(),
+                productLibListForm.initVersions(getVersions(),
                     UpdateType.LibUpdate, UpdateType.LibFinishUpdate);
                 productLibListForm.hideControls();
 
@@ -143,7 +146,7 @@ namespace LocalERP.WinForm
 
         //product lib overflow detail form
         private ProductCirculationForm productLibOverflowForm = null;
-        public ProductCirculationForm getProductLibOverflowForm()
+        public virtual ProductCirculationForm getProductLibOverflowForm()
         {
             if (productLibOverflowForm == null || productLibOverflowForm.IsDisposed)
             {
@@ -156,7 +159,7 @@ namespace LocalERP.WinForm
 
         //product Lib loss detail form
         private ProductCirculationForm productLibLossForm = null;
-        public ProductCirculationForm getProductLibLossForm()
+        public virtual ProductCirculationForm getProductLibLossForm()
         {
             if (productLibLossForm == null || productLibLossForm.IsDisposed)
             {
@@ -170,12 +173,12 @@ namespace LocalERP.WinForm
         /**************** query statistic ***************************/
         //product lib query form
         private QueryLibForm queryLibForm = null;
-        public QueryLibForm getQueryLibForm()
+        public virtual QueryLibForm getQueryLibForm()
         {
             if (queryLibForm == null || queryLibForm.IsDisposed)
             {
                 queryLibForm = new QueryLibForm(ProxyMgr.getInstance().getProductLibQueryProxy(), null, "库存查询");
-                queryLibForm.initVersions(FormMgr.getInstance().getVersions(),
+                queryLibForm.initVersions(getVersions(),
                     UpdateType.PurchaseFinishUpdate, UpdateType.SellFinishUpdate, UpdateType.LibFinishUpdate, UpdateType.ProductUpdate, UpdateType.ProductCategoryUpdate);
                 appendEvent(queryLibForm);
             }
@@ -184,12 +187,12 @@ namespace LocalERP.WinForm
 
         //product detail query form
         private QueryDetailForm queryDetailForm = null;
-        public QueryDetailForm getQueryDetailForm()
+        public virtual QueryDetailForm getQueryDetailForm()
         {
             if (queryDetailForm == null || queryDetailForm.IsDisposed)
             {
                 queryDetailForm = new QueryDetailForm();
-                queryDetailForm.initVersions(FormMgr.getInstance().getVersions(),
+                queryDetailForm.initVersions(getVersions(),
                     UpdateType.PurchaseFinishUpdate, UpdateType.SellFinishUpdate, UpdateType.LibFinishUpdate, UpdateType.ProductUpdate, UpdateType.CustomerUpdate);
 
                 appendEvent(queryDetailForm);
@@ -199,12 +202,12 @@ namespace LocalERP.WinForm
 
         //product statistic form
         private ProductStatisticForm productStatisticForm = null;
-        public ProductStatisticForm getProductStatisticForm()
+        public virtual ProductStatisticForm getProductStatisticForm()
         {
             if (productStatisticForm == null || productStatisticForm.IsDisposed)
             {
                 productStatisticForm = new ProductStatisticForm();
-                productStatisticForm.initVersions(FormMgr.getInstance().getVersions(),
+                productStatisticForm.initVersions(getVersions(),
                     UpdateType.PurchaseFinishUpdate, UpdateType.SellFinishUpdate, UpdateType.LibFinishUpdate, UpdateType.ProductUpdate, UpdateType.CustomerUpdate);
                 appendEvent(productStatisticForm);
             }
@@ -213,133 +216,71 @@ namespace LocalERP.WinForm
 
         /******************** data setting********************************/
         //product category item form
-        private CategoryItemForm productCIForm = null;
-        public CategoryItemForm getProductCIForm()
+        protected CategoryItemForm productCIForm = null;
+        public virtual CategoryItemForm getProductCIForm()
         {
             if (productCIForm == null || productCIForm.IsDisposed)
             {
                 productCIForm = new CategoryItemForm(1, new ProductCategoryItemProxy(), DataUtility.DATA_PRODUCT, this.mainForm);
-                productCIForm.initVersions(FormMgr.getInstance().getVersions(),
+                productCIForm.initVersions(getVersions(),
                     UpdateType.ProductUpdate, UpdateType.ProductCategoryUpdate, UpdateType.CustomerUpdate, UpdateType.CustomerCategoryUpdate);
                 appendEvent(productCIForm);
             }
             return productCIForm;
         }
 
-        //private CategoryItemForm productCIForm_select = null;
-        public CategoryItemForm getProductCIForm_select()
+        public virtual CategoryItemForm getProductCIForm_select()
         {
-            //if (productCIForm_select == null || productCIForm_select.IsDisposed)
-            //{
-                //File.AppendAllText("e:\\debug.txt", "get product ci form, form = null\r\n");
+            //此处必须新建，详见ProductCirculationForm中引用到此方法时的注释
             CategoryItemForm productCIForm_select = new CategoryItemForm(0, new ProductCategoryItemProxy(), DataUtility.DATA_PRODUCT, this.mainForm);
-            productCIForm_select.initVersions(FormMgr.getInstance().getVersions(),
+            productCIForm_select.initVersions(getVersions(),
                 UpdateType.ProductUpdate, UpdateType.ProductCategoryUpdate, UpdateType.CustomerUpdate, UpdateType.CustomerCategoryUpdate);
                     
             appendEvent(productCIForm_select);
-            //}
-            //File.AppendAllText("e:\\debug.txt", string.Format("get product ci form, form hash code={0}\r\n", productCIForm_select.GetHashCode()));
+
             return productCIForm_select;
         }
-        
 
-        //private ProductClothesForm productForm = null;
-        public ProductClothesForm getProductForm() {
-            //if (productForm == null || productForm.IsDisposed)
-            //{
-                ProductClothesForm productForm = new ProductClothesForm();
-                appendEvent(productForm);
-            //}
+        public virtual MyDockContent getProductForm()
+        {
+            ProductClothesForm productForm = new ProductClothesForm();
+            appendEvent(productForm);
             return productForm;
         }
 
-        //customer category item form
-        //private CustomerForm customerForm = null;
-        public CustomerForm getCustomerForm()
+        public virtual CustomerForm getCustomerForm()
         {
-            //if (customerForm == null || customerForm.IsDisposed)
-            //{
-                CustomerForm customerForm = new CustomerForm();
-                appendEvent(customerForm);
-            //}
+            CustomerForm customerForm = new CustomerForm();
+            appendEvent(customerForm);
             return customerForm;
         }
 
         private CategoryItemForm customerCIForm = null;
-        public CategoryItemForm getCustomerCIForm()
+        public virtual CategoryItemForm getCustomerCIForm()
         {
             if (customerCIForm == null || customerCIForm.IsDisposed)
             {
                 customerCIForm = new CategoryItemForm(1, new CustomerCategoryItemProxy(), DataUtility.DATA_CUSTOMER, this.mainForm);
-                customerCIForm.initVersions(FormMgr.getInstance().getVersions(), UpdateType.CustomerCategoryUpdate, UpdateType.CustomerUpdate);
+                customerCIForm.initVersions(getVersions(), UpdateType.CustomerCategoryUpdate, UpdateType.CustomerUpdate);
                 appendEvent(customerCIForm);
             }
             return customerCIForm;
         }
 
         private CategoryItemForm customerCIForm_select = null;
-        public CategoryItemForm getCustomerCIForm_Select()
+        public virtual CategoryItemForm getCustomerCIForm_Select()
         {
             if (customerCIForm_select == null || customerCIForm_select.IsDisposed)
             {
                 customerCIForm_select = new CategoryItemForm(0, new CustomerCategoryItemProxy(), DataUtility.DATA_CUSTOMER, this.mainForm);
-                customerCIForm_select.initVersions(FormMgr.getInstance().getVersions(), UpdateType.CustomerCategoryUpdate, UpdateType.CustomerUpdate);
+                customerCIForm_select.initVersions(getVersions(), UpdateType.CustomerCategoryUpdate, UpdateType.CustomerUpdate);
                 appendEvent(customerCIForm_select);
             }
             return customerCIForm_select;
         }
 
-        /*void updateNotify(UpdateNotifyType notifyType)
+        protected void appendEvent(MyDockContent form)
         {
-            switch (notifyType)
-            {
-                case UpdateNotifyType.PurchaseUpdate:
-                    refreshForm(this.productPurchaseListForm, this.queryLibForm, this.queryDetailForm);
-                    break;
-                case UpdateNotifyType.SellUpdate:
-                    refreshForm(this.productSellListForm, this.queryLibForm, this.queryDetailForm);
-                    break;
-                case UpdateNotifyType.LibUpdate:
-                    refreshForm(this.productLibListForm, this.queryLibForm, this.queryDetailForm);
-                    break;
-                case UpdateNotifyType.ProductUpdate:
-                    refreshForm(this.productPurchaseForm, this.productPurchaseBackForm, 
-                        this.productSellForm, this.productSellBackForm,
-                        this.productLibOverflowForm, this.productLibLossForm,
-                        this.queryLibForm, this.queryDetailForm, 
-                        this.productCIForm);
-                    break;
-                case UpdateNotifyType.ProductCategoryUpdate:
-                    refreshForm(this.productPurchaseForm, this.productPurchaseBackForm,
-                        this.productSellForm, this.productSellBackForm,
-                        this.productLibOverflowForm, this.productLibLossForm,
-                        this.queryLibForm, this.queryDetailForm, 
-                        this.productForm);
-                    break;
-                case UpdateNotifyType.CustomerUpdate:
-                    refreshForm(
-                        this.queryDetailForm,
-                        this.customerCIForm, this.customerCIForm_select);
-                    break;
-                case UpdateNotifyType.CustomerCategoryUpdate:
-                    refreshForm(
-                        this.queryDetailForm,
-                        this.customerForm, this.customerCIForm, this.customerCIForm_select);
-                    break;
-                default:
-                    return;
-            }
-        }
-         
-        private void refreshForm(params MyDockContent [] forms) {
-            foreach (MyDockContent form in forms) {
-                if (form != null && !form.IsDisposed)
-                    form.refresh();
-            }
-        }
-        */
-
-        private void appendEvent(MyDockContent form) {
             form.updateNotify += new MyDockContent.UpdateNotify(updateNotify);
             form.beginLoadNotify += new MyDockContent.BeginLoadNotify(beginLoadNotify);
             form.endLoadNotify += new MyDockContent.EndLoadNotify(endLoadNotify); 
@@ -347,7 +288,7 @@ namespace LocalERP.WinForm
 
         void updateNotify(UpdateType notifyType)
         {
-            FormMgr.getInstance().getVersions()[notifyType]++;
+            getVersions()[notifyType]++;
         }
 
         void beginLoadNotify()

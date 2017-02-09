@@ -89,6 +89,7 @@
     <Compile Include="DataAccess\DataDAO\ProductSellRecordDao.cs" />
     <Compile Include="DataAccess\DataDAO\ProductSKUDao.cs" />
     <Compile Include="DataAccess\DataDAO\ProductCirculationSKURecordDao.cs" />
+    <Compile Include="DataAccess\DataDAO\ProductStainlessDao.cs" />
     <Compile Include="DataAccess\Data\Category.cs" />
     <Compile Include="DataAccess\Data\Charactor.cs" />
     <Compile Include="DataAccess\Data\Product.cs" />
@@ -138,7 +139,8 @@
     <Compile Include="WinForm\Data\ProductStainlessForm.Designer.cs">
       <DependentUpon>ProductStainlessForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="WinForm\FormMgr.cs" />
+    <Compile Include="WinForm\FormMgr\FormMgr.cs" />
+    <Compile Include="WinForm\FormMgr\FormSingletonFactory.cs" />
     <Compile Include="WinForm\MyDockContent.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -440,6 +442,9 @@
     </Compile>
     <Compile Include="WinForm\Utility\DataGridViewResizeTextBoxColumn.cs">
     </Compile>
+    <Compile Include="WinForm\FormMgr\FormClothesMgr.cs">
+    </Compile>
+    <Compile Include="WinForm\FormMgr\FormStainlessMgr.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\OutlookBar\BSE.Windows.Forms.csproj">
