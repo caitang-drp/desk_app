@@ -47,6 +47,11 @@ namespace LocalERP.WinForm
                 new string[] { DataUtility.DATA_PRODUCT, DataUtility.DATA_CUSTOMER/*, DataUtility.ACCOUNT_INPUT, DataUtility.ACCOUNT_OPEN*/ });
             this.xPanderPanel_data.Controls.Add(treeView_data);
 
+            // should pay, should receipt
+            TreeView treeView_should_pay_receipt = this.getTreeView(
+                new string[] { "销售收款单", "销售退点单", "采购付款单", "采购退点单"});
+            this.xPanderPanel_should_pay_receipt.Controls.Add(treeView_should_pay_receipt);
+
         }
 
         void treeView_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
@@ -73,5 +78,6 @@ namespace LocalERP.WinForm
 
             return treeView;
         }
+
     }
 }

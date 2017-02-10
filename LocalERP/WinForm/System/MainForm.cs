@@ -98,6 +98,16 @@ namespace LocalERP.WinForm
                 case DataUtility.DATA_PRODUCT:
                     FormSingletonFactory.getInstance().getProductCIForm().Show(this.dockPanel1);
                     break;
+                case "销售收款单":
+                    FormMgr.getInstance().getSellReceiptBillForm().Show(this.dockPanel1);
+                    //FormMgr.getInstance().getSellReceiptBillForm().reload(openMode, ID);
+                    break;
+                case "销售退点单":
+                    break;
+                case "采购付款单":
+                    break;
+                case "采购退点单":
+                    break;
                 default:
                     break;
             }
