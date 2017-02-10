@@ -75,6 +75,18 @@ namespace LocalERP.WinForm
             return sellReceiptBillForm;
         }
 
+        // 应收应付，单据列表
+        private PayReceiptListForm payReceiptListForm = null;
+        public PayReceiptListForm getPayReceiptListForm()
+        {
+            if (payReceiptListForm == null || payReceiptListForm.IsDisposed)
+            {
+                payReceiptListForm = new PayReceiptListForm(mainForm, 2, "单据列表");
+                appendEvent(payReceiptListForm);
+            }
+            return payReceiptListForm;
+        }
+
         //product purchase detail form
         private ProductCirculationForm productPurchaseForm = null;
         public virtual ProductCirculationForm getProductPurchaseForm()
