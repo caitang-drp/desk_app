@@ -57,7 +57,7 @@ namespace LocalERP.WinForm
             this.label_title.Text = "销售收款单";
 
             // 点击，选择客户
-            this.lookuptext_customer.LookupForm = FormMgr.getInstance().getCustomerCIForm_Select();
+            this.lookuptext_customer.LookupForm = FormSingletonFactory.getInstance().getCustomerCIForm_Select();
 
             // 设置单据编号
             int max = ProductCirculationDao.getInstance().getMaxCode(code);
@@ -107,8 +107,16 @@ namespace LocalERP.WinForm
         // 把“销售收款单”写入数据库
         private void write_bill_to_db()
         {
-            // TODO,
+            PayReceipt tmp = new PayReceipt();
+            tmp.bill_type = PayReceipt.BillType.SellReceipt;
+            tmp.comment = textBox_comment.Text;
+            tmp.create_time = dateTime_pay_time.Value;
+            ValidateUtility.getLookupValueID(lookuptext_customer, this.errorProvider1, out tmp.customer_id);
+            tmp.serial = textBox_serial.Text;
+            tmp.handle_people = textBox_operator.Text;
+            tmp.amount = Convert.ToDouble(textBox_receipt_amount.Text);
 
+            PayReceiptDao.getInstance().Insert(tmp);
         }
 
         // 点击 保存 响应事件
@@ -116,6 +124,9 @@ namespace LocalERP.WinForm
         {
             update_customer_arrear();
             write_bill_to_db();
+
+            // 关闭窗口
+            this.Close();
         }
 
 
