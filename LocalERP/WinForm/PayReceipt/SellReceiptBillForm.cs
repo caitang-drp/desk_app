@@ -83,13 +83,26 @@ namespace LocalERP.WinForm
             }
 
             this.textBox_now_arrear.Text = now_arrear.ToString();
+            this.textBox_last_arrear.Text = last_receipt.ToString();
         }
 
         // 获取 以上欠款
         private double get_customer_last_receipt()
         {
-            // TODO
-            return 99999999999.9;
+            double res = 0.0;
+
+            try {
+                // NOTICE, xdz
+                // 有可能还没选择客户
+                int customer_id = 0;
+                ValidateUtility.getLookupValueID(lookuptext_customer, this.errorProvider1, out customer_id);
+                res = (double)CustomerDao.getInstance().FindByID(customer_id).arrear;
+            }
+            catch {
+                res = 0.0;
+            }
+
+            return res;
         }
 
         // 更新客户欠款
@@ -97,7 +110,11 @@ namespace LocalERP.WinForm
         {
             try {
                 double now_customer_arrear = Convert.ToDouble(this.textBox_now_arrear.Text);
-                // TODO,写入数据库
+
+                int customer_id = 0;
+                ValidateUtility.getLookupValueID(lookuptext_customer, this.errorProvider1, out customer_id);
+
+                CustomerDao.getInstance().update_arrear(customer_id, now_customer_arrear);
             }
             catch {
 
@@ -796,19 +813,5 @@ namespace LocalERP.WinForm
             resetNeedSave(true);
         }
 
-        /*
-        private void button_savePay_Click(object sender, EventArgs e)
-        {
-            double pay = 0;
-            double payed = 0;
-            if (ValidateUtility.getDouble(this.textBox_now_arrear, this.errorProvider1, false, out payed) &&
-                ValidateUtility.getDouble(this.textBox_pay, this.errorProvider1,false, out pay))
-            {
-                ProductCirculationDao.getInstance().UpdatePay(circulationID, pay, payed);
-                MessageBox.Show("保存货款信息成功!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                this.invokeUpdateNotify(notifyType);
-            }
-        }
-        */
     }
 }
