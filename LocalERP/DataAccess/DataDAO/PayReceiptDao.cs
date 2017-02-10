@@ -20,8 +20,8 @@ namespace LocalERP.DataAccess.DataDAO
         {
             try
             {
-                string commandText = string.Format("insert into PayReceipt(serial, create_time, comment, customer_id, bill_type, handle_people, amount) values('{0}', '{1}', '{2}', {3}, {4}, '{5}', {6})", 
-                    info.serial, info.create_time, info.comment, (int)info.customer_id, (int)info.bill_type, info.handle_people, info.amount);
+                string commandText = string.Format("insert into PayReceipt(serial, bill_time, comment, customer_id, bill_type, handle_people, amount) values('{0}', '{1}', '{2}', {3}, {4}, '{5}', {6})", 
+                    info.serial, info.bill_time, info.comment, (int)info.customer_id, (int)info.bill_type, info.handle_people, info.amount);
                 return DbHelperAccess.executeNonQuery(commandText);
             }
             catch (Exception ex)

@@ -14,8 +14,8 @@ namespace LocalERP.DataAccess.Data
         public int id;
         // 单据编号
         public string serial;
-        // 表单创建时间
-        public DateTime create_time;
+        // 表单相关日期
+        public DateTime bill_time;
         // 备注
         public string comment;
         // 用户id

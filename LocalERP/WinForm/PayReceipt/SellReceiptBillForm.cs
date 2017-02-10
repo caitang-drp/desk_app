@@ -110,7 +110,7 @@ namespace LocalERP.WinForm
             PayReceipt tmp = new PayReceipt();
             tmp.bill_type = PayReceipt.BillType.SellReceipt;
             tmp.comment = textBox_comment.Text;
-            tmp.create_time = dateTime_pay_time.Value;
+            tmp.bill_time = dateTime_pay_time.Value;
             ValidateUtility.getLookupValueID(lookuptext_customer, this.errorProvider1, out tmp.customer_id);
             tmp.serial = textBox_serial.Text;
             tmp.handle_people = textBox_operator.Text;
