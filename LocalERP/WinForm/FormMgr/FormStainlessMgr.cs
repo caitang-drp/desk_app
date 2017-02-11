@@ -12,6 +12,16 @@ namespace LocalERP.WinForm
 {
     class FormStainlessMgr: FormMgr
     {
+        public override ProductCirculationForm getProductPurchaseForm()
+        {
+            if (productPurchaseForm == null || productPurchaseForm.IsDisposed)
+            {
+                productPurchaseForm = new ProductStainlessCirculationForm(ProductCirculation.CirculationTypeConf_Purchase);
+                appendEvent(productPurchaseForm);
+            }
+            return productPurchaseForm;
+        }
+
         /******************** data setting********************************/
         //product category item form
         //private CategoryItemForm productCIForm = null;

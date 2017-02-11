@@ -33,7 +33,6 @@ namespace LocalERP.WinForm
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ProductCirculationForm));
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -42,12 +41,6 @@ namespace LocalERP.WinForm
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridView1 = new LocalERP.WinForm.MyDataGridView();
-            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.check = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.product = new LocalERP.WinForm.Utility.DataGridViewLookupColumn();
-            this.price = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.num = new LocalERP.WinForm.Utility.DataGridViewLookupColumn();
-            this.totalPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.textBox_comment = new System.Windows.Forms.TextBox();
             this.textBox_serial = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -135,7 +128,7 @@ namespace LocalERP.WinForm
             this.dataGridView2.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.dataGridView2.BackgroundColor = System.Drawing.Color.LightYellow;
+            this.dataGridView2.BackgroundColor = System.Drawing.Color.White;
             this.dataGridView2.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
             this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView2.ColumnHeadersVisible = false;
@@ -184,13 +177,6 @@ namespace LocalERP.WinForm
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView1.BackgroundColor = System.Drawing.Color.White;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.ID,
-            this.check,
-            this.product,
-            this.price,
-            this.num,
-            this.totalPrice});
             this.dataGridView1.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.dataGridView1.ImeMode = System.Windows.Forms.ImeMode.On;
             this.dataGridView1.Location = new System.Drawing.Point(18, 203);
@@ -204,50 +190,6 @@ namespace LocalERP.WinForm
             this.dataGridView1.Size = new System.Drawing.Size(792, 192);
             this.dataGridView1.TabIndex = 5;
             this.dataGridView1.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.dataGridView1_EditingControlShowing);
-            // 
-            // ID
-            // 
-            this.ID.HeaderText = "ID";
-            this.ID.Name = "ID";
-            this.ID.Visible = false;
-            this.ID.Width = 60;
-            // 
-            // check
-            // 
-            this.check.HeaderText = "选择";
-            this.check.Name = "check";
-            this.check.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.check.Width = 46;
-            // 
-            // product
-            // 
-            this.product.HeaderText = "产品";
-            this.product.LookupForm = null;
-            this.product.Name = "product";
-            this.product.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.product.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.product.Width = 140;
-            // 
-            // price
-            // 
-            this.price.HeaderText = "价格/元";
-            this.price.Name = "price";
-            // 
-            // num
-            // 
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.num.DefaultCellStyle = dataGridViewCellStyle3;
-            this.num.HeaderText = "数量/个";
-            this.num.LookupForm = null;
-            this.num.Name = "num";
-            this.num.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.num.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.num.Width = 240;
-            // 
-            // totalPrice
-            // 
-            this.totalPrice.HeaderText = "总价/元";
-            this.totalPrice.Name = "totalPrice";
             // 
             // textBox_comment
             // 
@@ -746,12 +688,6 @@ namespace LocalERP.WinForm
         private LookupText lookupText1;
         private System.Windows.Forms.Label label_title;
         private System.Windows.Forms.TextBox textBox_operator;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ID;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn check;
-        private LocalERP.WinForm.Utility.DataGridViewLookupColumn product;
-        private System.Windows.Forms.DataGridViewTextBoxColumn price;
-        private LocalERP.WinForm.Utility.DataGridViewLookupColumn num;
-        private System.Windows.Forms.DataGridViewTextBoxColumn totalPrice;
         private System.Windows.Forms.TextBox textBox_payed;
         private System.Windows.Forms.Button button_savePay;
         private System.Windows.Forms.Label label7;
