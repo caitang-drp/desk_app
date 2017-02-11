@@ -229,7 +229,7 @@ namespace LocalERP.WinForm
             this.lookuptext_customer.TabIndex = 50;
             this.lookuptext_customer.Text_Lookup = "单击选择...";
             this.lookuptext_customer.Value_Lookup = null;
-            this.lookuptext_customer.Load += new System.EventHandler(this.lookuptext_customer_Load);
+            //this.lookuptext_customer.Load += new System.EventHandler(this.lookuptext_customer_Load);
             // 
             // toolStrip2
             // 
