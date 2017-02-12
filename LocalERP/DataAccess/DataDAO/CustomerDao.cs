@@ -57,10 +57,18 @@ namespace LocalERP.DataAccess.DataDAO
 
         public int Update(Customer info)
         {
-            string commandText = string.Format("update Customer set name='{0}', comment='{1}', tel='{2}', phone='{3}', address='{4}', arrear={5} where ID={6}",
-                info.Name, info.Comment, info.Tel, info.Phone, info.Address, info.arrear, info.ID);
+            string commandText = string.Format("update Customer set name='{0}', comment='{1}', tel='{2}', phone='{3}', address='{4}', arrear={5}, receipt={6} where ID={7}",
+                info.Name, info.Comment, info.Tel, info.Phone, info.Address, info.arrear, info.receipt, info.ID);
 
             return DbHelperAccess.executeNonQuery(commandText);
+        }
+
+        // 更新用户的收款，也就是我们欠供应商的钱
+        public void update_receipt(int customer_id, double now)
+        {
+                Customer customer = FindByID(customer_id);
+                customer.receipt = now;
+                Update(customer);
         }
 
         // 更新用户的欠款
@@ -94,6 +102,13 @@ namespace LocalERP.DataAccess.DataDAO
                     customer.arrear = 0.0;
                 }
                 
+                try {
+                    customer.receipt = (double)dr["receipt"];
+                }
+                catch {
+                    customer.receipt = 0.0;
+                }
+
                 return customer;
             }
             return null;
