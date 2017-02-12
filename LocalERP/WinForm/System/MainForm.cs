@@ -108,6 +108,7 @@ namespace LocalERP.WinForm
                 case "销售退点单":
                     break;
                 case "采购付款单":
+                    FormMgr.getInstance().getbuyPayBillForm().Show(this.dockPanel1);
                     break;
                 case "采购退点单":
                     break;

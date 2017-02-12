@@ -62,6 +62,8 @@ namespace LocalERP.DataAccess.Data
 
         // Ç·¿î
         public double arrear;
+        // ÊÕ¿î
+        public double receipt;
 
         public Customer(string name, string comment, string tel, string phone, string address, int parent)
         {
