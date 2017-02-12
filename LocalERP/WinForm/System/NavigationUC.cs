@@ -49,7 +49,8 @@ namespace LocalERP.WinForm
 
             // should pay, should receipt
             TreeView treeView_should_pay_receipt = this.getTreeView(
-                new string[] { "销售收款单", "销售退点单", "采购付款单", "采购退点单", "单据列表"});
+                //new string[] { "销售收款单", "销售退点单", "采购付款单", "采购退点单", "单据列表"});
+                new string[] { "销售收款单", "采购付款单", "单据列表"});
             this.xPanderPanel_should_pay_receipt.Controls.Add(treeView_should_pay_receipt);
 
         }
