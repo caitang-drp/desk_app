@@ -30,8 +30,8 @@ namespace LocalERP.WinForm
         private ProductCirculation sell = null;
         public List<ProductCirculationRecord> records = null;
 
-        private bool needSave = false;
-        private bool recordChanged = false;
+        protected bool needSave = false;
+        protected bool recordChanged = false;
 
         public ProductCirculationForm(CirculationTypeConf conf)
         {
@@ -51,24 +51,28 @@ namespace LocalERP.WinForm
             this.code = conf.code;
             this.label2.Text = conf.date;
             this.label_customer.Text = conf.customer;
+
+            initDatagridview(this.dataGridView1);
         }
 
         private void ProductCirculationForm_Load(object sender, EventArgs e)
         {
-            //特别注意：如果这个地方的ProductCIForm不是新建，用的是以前的窗口
-            //那就可能有多个CirculationForm的DataGridViewLookupColumn指向同一个ProductCIForm
-            //那么当以前的CirculationForm没有销毁的情况下，ProductCIForm就会触发以前的valueChanged事件，从而出现异常
-            (this.dataGridView1.Columns["product"] as DataGridViewLookupColumn).LookupForm = FormSingletonFactory.getInstance().getProductCIForm_select();  
-            (this.dataGridView1.Columns["num"] as DataGridViewLookupColumn).LookupForm = new ProductClothesInputNumForm(this);
-
             this.lookupText1.LookupForm = FormSingletonFactory.getInstance().getCustomerCIForm_Select();
             
             dataGridView2.Rows.Add("总价合计/元:", "");
-
+            dataGridView2[0, 0].Style.BackColor = Color.Yellow;
+            dataGridView2[0, 0].Style.SelectionBackColor = Color.Yellow;
+            dataGridView2[1, 0].Style.BackColor = Color.Yellow;
             this.backgroundWorker.DoWork += new DoWorkEventHandler(backgroundWorker_DoWork);
             this.backgroundWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(backgroundWorker_RunWorkerCompleted);
 
             initCirculation();
+        }
+
+        public virtual void initDatagridview(DataGridView dgv)
+        {
+
+                       
         }
 
         public void reload(int mode, int id) {
@@ -234,25 +238,27 @@ namespace LocalERP.WinForm
             this.panel_pay.Enabled = pay;
         }
 
-        private void setCellEnable(DataGridViewCell cell, bool enable) {
+        protected void setCellEnable(DataGridViewCell cell, bool enable)
+        {
             if (enable == false)
             {
                 cell.ReadOnly = true;
 
-                cell.Style.BackColor = System.Drawing.SystemColors.Control;
-                cell.Style.ForeColor = System.Drawing.SystemColors.ControlDark;
+                cell.Style.BackColor = Color.Yellow;
+                //cell.Style.ForeColor = System.Drawing.SystemColors.ControlDark;
 
-                cell.Style.SelectionBackColor = System.Drawing.SystemColors.Control;
-                cell.Style.SelectionForeColor = System.Drawing.SystemColors.ControlDark;
+                cell.Style.SelectionBackColor = Color.Yellow;
+                //cell.Style.SelectionBackColor = System.Drawing.SystemColors.Control;
+                //cell.Style.SelectionForeColor = System.Drawing.SystemColors.ControlDark;
             }
             else {
                 cell.ReadOnly = false;
 
                 cell.Style.BackColor = Color.White;
-                cell.Style.ForeColor = Color.Black;
+                //cell.Style.ForeColor = Color.Black;
 
                 cell.Style.SelectionBackColor = Color.White;
-                cell.Style.SelectionForeColor = Color.Black;
+                //cell.Style.SelectionForeColor = Color.Black;
             }
         }
 
@@ -274,24 +280,17 @@ namespace LocalERP.WinForm
         /// set datagridview value
         /// </summary>
         /// <param name="rowIndex"></param>
-        private void setSubTotalPrice(int rowIndex)
+        protected virtual void setSubTotalPrice(int rowIndex)
         {
             DataGridViewRow row = this.dataGridView1.Rows[rowIndex];
             double price;
             int num=0;
             ValidateUtility.getDouble(row.Cells["price"], out price);
-            try
-            {
-                object temp = (row.Cells["num"] as DataGridViewLookupCell).EditedValue;
-                num = ((temp as LookupArg).Value as ProductCirculationRecord).TotalNum;
-            }
-            catch(Exception ex) {
-                ex.Message.ToString();
-            }
+            ValidateUtility.getInt(row.Cells["num"], false, true, out num);
             row.Cells["totalPrice"].Value = num * price;
         }
 
-        private void setTotalPrice()
+        protected void setTotalPrice()
         {
             double total = 0;
             int number = this.dataGridView1.RowCount;
@@ -564,7 +563,7 @@ namespace LocalERP.WinForm
             
             DataGridViewRow row = this.dataGridView1.Rows[this.dataGridView1.Rows.Count - 1];
             this.setCellEnable(row.Cells["totalPrice"], false);
-            this.setCellEnable(row.Cells["num"], false);
+            //this.setCellEnable(row.Cells["num"], false);
             
             setSubTotalPrice(row.Index);
             setTotalPrice();
@@ -592,86 +591,14 @@ namespace LocalERP.WinForm
         }
 
         //for event: caculate total price
-        private void dataGridView1_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
-        {
-            if (e.Control.GetType().Equals(typeof(DataGridViewTextBoxEditingControl)))//cell为类TextBox时
-            {
-                e.CellStyle.BackColor = Color.FromName("window");
-                DataGridViewTextBoxEditingControl editingControl = e.Control as DataGridViewTextBoxEditingControl;
-                
-                editingControl.TextChanged -= new EventHandler(editingControl_TextChanged);
-                editingControl.TextChanged += new EventHandler(editingControl_TextChanged);
-            }
-            else if (e.Control.GetType().Equals(typeof(DataGridViewLookupEditingControl)))
-            {
-                DataGridViewLookupEditingControl editingControl = e.Control as DataGridViewLookupEditingControl;
-                string columnName = this.dataGridView1.CurrentCell.OwningColumn.Name;
-                editingControl.valueSetted -= new LookupText.ValueSetted(productEditingControl_valueSetted);
-                editingControl.valueSetted += new LookupText.ValueSetted(productEditingControl_valueSetted);
-                if(columnName == "num"){
-                    ProductClothesInputNumForm form = editingControl.LookupForm as ProductClothesInputNumForm;
-                    LookupArg arg = this.dataGridView1.CurrentCell.OwningRow.Cells["product"].Value as LookupArg;
-                    form.setTitle(arg.Text);
-                    form.ProductId = (int)(arg.Value);
+        protected virtual void dataGridView1_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e){}
 
-                    editingControl.LookupArg = (this.dataGridView1.CurrentCell.OwningRow.Cells["num"] as DataGridViewLookupCell).Value as LookupArg;
-                }
-            }
- 
-        }
+        protected virtual void productEditingControl_valueSetted(object sender, LookupArg arg) { }
 
-        void productEditingControl_valueSetted(object sender, LookupArg arg)
-        {
-            //File.AppendAllText("e:\\debug.txt", string.Format("value changed, thread:{0}\r\n", System.Threading.Thread.CurrentThread.ManagedThreadId));
-
-            DataGridViewLookupEditingControl control = (sender as DataGridViewLookupEditingControl);
-
-            /*if (dataGridView1.Columns.Count <= control.ColumnIndex)
-            {
-                System.Threading.Thread.Sleep(0);
-            }*/
-            
-            //DataGridViewCell cell = this.dataGridView1[control.ColumnIndex, control.EditingControlRowIndex];
-            
-            //if (cell.OwningColumn.Name == "product")
-            try
-            {
-                //File.AppendAllText("e:\\debug.txt", string.Format("value changed, dataGridView hash code={0}, dataGridView name={1}\r\n", control.EditingControlDataGridView.GetHashCode(), control.EditingControlDataGridView.Name));
-                if (control.EditingControlDataGridView.Rows.Count == 0 || control.EditingControlDataGridView.CurrentCell == null)
-                    throw new Exception();
-
-                //if(control.EditingControlDataGridView.CurrentCell.OwningColumn.Name == "product")
-                if (!string.IsNullOrEmpty(arg.ArgName) && arg.ArgName == "Product")
-                {
-                    int productID = (int)(arg.Value);
-                    int oldID = -1;
-                    int.TryParse((control.EditingControlDataGridView.Rows[control.EditingControlRowIndex].Cells["product"].Value).ToString(), out oldID);
-                    if (productID != oldID)
-                    {
-                        control.EditingControlDataGridView.Rows[control.EditingControlRowIndex].Cells["price"].Value = ProductClothesDao.getInstance().FindPriceByID(productID);
-                        DataGridViewLookupEditingControl lookup = sender as DataGridViewLookupEditingControl;
-                        this.setCellEnable(control.EditingControlDataGridView.Rows[control.EditingControlRowIndex].Cells["num"], true);
-                        control.EditingControlDataGridView.Rows[control.EditingControlRowIndex].Cells["num"].Value = new LookupArg("", "");
-                    }
-                }
-                //not reasonal
-                setSubTotalPrice(control.EditingControlRowIndex);
-                setTotalPrice();
-            }
-            catch(Exception ex) {
-                //File.AppendAllText("e:\\debug.txt",string.Format("exception, dataGridView.Rows.Count={0}\r\n", this.dataGridView1.Rows.Count));
-                //File.AppendAllText("e:\\debug.txt", string.Format("exception, dataGridView hash code={0}, dataGridView name={1}\r\n", control.EditingControlDataGridView.GetHashCode(), control.EditingControlDataGridView.Name));
-                System.Threading.Thread.Sleep(0);
-            }
-
-            this.resetNeedSave(true);
-            this.recordChanged = true;
-        }
-
-        void editingControl_TextChanged(object sender, EventArgs e)
+        protected virtual void editingControl_TextChanged(object sender, EventArgs e)
         {
             DataGridViewTextBoxEditingControl control = (sender as DataGridViewTextBoxEditingControl);
-            File.AppendAllText("e:\\debug.txt", string.Format("editingControl text changed, dataGridView hash code={0}, dataGridView name={1}\r\n", control.EditingControlDataGridView.GetHashCode(), control.EditingControlDataGridView.Name));
+            //File.AppendAllText("e:\\debug.txt", string.Format("editingControl text changed, dataGridView hash code={0}, dataGridView name={1}\r\n", control.EditingControlDataGridView.GetHashCode(), control.EditingControlDataGridView.Name));
 
             DataGridViewCell cell = this.dataGridView1.CurrentCell;
             String columnName = cell.OwningColumn.Name;
@@ -690,7 +617,7 @@ namespace LocalERP.WinForm
             ValidateUtility.getName(this.textBox_serial, this.errorProvider1, out temp);
         }
 
-        private void resetNeedSave(bool value)
+        protected void resetNeedSave(bool value)
         {
             if (openMode < 2)
                 this.toolStripButton_save.Enabled = value;

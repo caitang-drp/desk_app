@@ -79,12 +79,18 @@ namespace LocalERP.DataAccess.DataDAO
                 product.Name = dr["name"] as string;
                 product.CategoryID = (int)dr["parent"];
 
-                product.Comment = dr["comment"] as string;
+                product.QuantityPerPiece = (int)dr["quantityPerPiece"];
+                product.Unit = dr["unit"] as string;
                 product.Num = (int)dr["num"];
 
-                double price;
-                double.TryParse(dr["pricePurchase"].ToString(), out price);
-                product.PricePurchase = price;
+                product.Comment = dr["comment"] as string;
+
+                double pricePurchase, priceSell;
+                double.TryParse(dr["pricePurchase"].ToString(), out pricePurchase);
+                product.PricePurchase = pricePurchase;
+
+                double.TryParse(dr["priceSell"].ToString(), out priceSell);
+                product.PriceSell = priceSell;
 
                 return product;
             }
@@ -109,7 +115,7 @@ namespace LocalERP.DataAccess.DataDAO
 
         public double FindPriceByID(int ID)
         {
-            string commandText = string.Format("select price from Product where ID={0}", ID);
+            string commandText = string.Format("select pricePurchase from ProductStainless where ID={0}", ID);
             DataRow dr = DbHelperAccess.executeQueryGetOneRow(commandText);
             double result = 0;
             if (dr != null)

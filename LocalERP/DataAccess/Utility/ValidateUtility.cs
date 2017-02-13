@@ -76,6 +76,7 @@ namespace LocalERP.DataAccess.Utility
             }
         }
 
+        //commented by stone:还需增加判断是否超过int的最大值
         public static bool getInt(DataGridViewCell cell, bool required, bool positive, out int result)
         {
             result = 0;
