@@ -60,6 +60,11 @@ namespace LocalERP.DataAccess.Data
             set { address = value; }
         }
 
+        // Ç·¿î
+        public double arrear;
+        // ÊÕ¿î
+        public double receipt;
+
         public Customer(string name, string comment, string tel, string phone, string address, int parent)
         {
             this.name = name;

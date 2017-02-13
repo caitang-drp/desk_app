@@ -14,7 +14,7 @@ using System.IO;
 
 namespace LocalERP.WinForm
 {
-    public partial class SellReceiptBillForm: MyDockContent
+    public partial class BuyPayBillForm: MyDockContent
     {
         //open mode       | 0:add 1:edit | 2:approval  | 3:partArrival | 4:arrival
         //status          | 1:apply      | 2:approval  | 3:partArrival | 4:arrival  
@@ -33,7 +33,7 @@ namespace LocalERP.WinForm
         private bool needSave = false;
         private bool recordChanged = false;
 
-        public SellReceiptBillForm(CirculationTypeConf conf)
+        public BuyPayBillForm(CirculationTypeConf conf)
         {
             InitializeComponent();
 
@@ -53,8 +53,8 @@ namespace LocalERP.WinForm
 
 
             // 设置标题
-            this.Text = "销售收款单";
-            this.label_title.Text = "销售收款单";
+            this.Text = "采购付款单";
+            this.label_title.Text = "采购付款单";
 
             // 点击，选择客户
             this.lookuptext_customer.LookupForm = FormSingletonFactory.getInstance().getCustomerCIForm_Select();
@@ -64,7 +64,7 @@ namespace LocalERP.WinForm
             this.textBox_serial.Text = string.Format("{0}-{1}-{2:0000}", code, DateTime.Now.ToString("yyyyMMdd"), max+1);
 
             // 设置以上欠款
-            this.textBox_last_arrear.Text = this.get_customer_last_receipt().ToString();
+            this.textBox_last_arrear.Text = this.get_my_last_receipt().ToString();
             // 设置累计欠款
             this.textBox_now_arrear.Text = "0.0";
         }
@@ -72,11 +72,11 @@ namespace LocalERP.WinForm
         // 
         private void textBox_receipt_amount_textchanged(object sender, EventArgs e)
         {
-            double last_receipt = this.get_customer_last_receipt();
+            double last_receipt = this.get_my_last_receipt();
             double now_arrear;
 
             try {
-                now_arrear = last_receipt - Convert.ToDouble(this.textBox_receipt_amount.Text);
+                now_arrear = last_receipt - Convert.ToDouble(this.textBox_pay_amount.Text);
             }
             catch {
                 now_arrear = last_receipt;
@@ -87,7 +87,7 @@ namespace LocalERP.WinForm
         }
 
         // 获取 以上欠款
-        private double get_customer_last_receipt()
+        private double get_my_last_receipt()
         {
             double res = 0.0;
 
@@ -96,7 +96,7 @@ namespace LocalERP.WinForm
                 // 有可能还没选择客户
                 int customer_id = 0;
                 ValidateUtility.getLookupValueID(lookuptext_customer, this.errorProvider1, out customer_id);
-                res = (double)CustomerDao.getInstance().FindByID(customer_id).arrear;
+                res = (double)CustomerDao.getInstance().FindByID(customer_id).receipt;
             }
             catch {
                 res = 0.0;
@@ -106,7 +106,7 @@ namespace LocalERP.WinForm
         }
 
         // 更新客户欠款
-        private void update_customer_arrear()
+        private void update_my_arrear()
         {
             try {
                 double now_customer_arrear = Convert.ToDouble(this.textBox_now_arrear.Text);
@@ -114,7 +114,7 @@ namespace LocalERP.WinForm
                 int customer_id = 0;
                 ValidateUtility.getLookupValueID(lookuptext_customer, this.errorProvider1, out customer_id);
 
-                CustomerDao.getInstance().update_arrear(customer_id, now_customer_arrear);
+                CustomerDao.getInstance().update_receipt(customer_id, now_customer_arrear);
             }
             catch {
 
@@ -125,13 +125,13 @@ namespace LocalERP.WinForm
         private void write_bill_to_db()
         {
             PayReceipt tmp = new PayReceipt();
-            tmp.bill_type = PayReceipt.BillType.SellReceipt;
+            tmp.bill_type = PayReceipt.BillType.BuyPay;
             tmp.comment = textBox_comment.Text;
             tmp.bill_time = dateTime_pay_time.Value;
             ValidateUtility.getLookupValueID(lookuptext_customer, this.errorProvider1, out tmp.customer_id);
             tmp.serial = textBox_serial.Text;
             tmp.handle_people = textBox_operator.Text;
-            tmp.amount = Convert.ToDouble(textBox_receipt_amount.Text);
+            tmp.amount = Convert.ToDouble(textBox_pay_amount.Text);
 
             PayReceiptDao.getInstance().Insert(tmp);
         }
@@ -139,7 +139,7 @@ namespace LocalERP.WinForm
         // 点击 保存 响应事件
         private void toolStripButton_save_Click(object sender, EventArgs e)
         {
-            update_customer_arrear();
+            update_my_arrear();
             write_bill_to_db();
 
             // 关闭窗口
