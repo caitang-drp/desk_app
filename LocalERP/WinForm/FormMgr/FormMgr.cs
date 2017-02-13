@@ -100,7 +100,7 @@ namespace LocalERP.WinForm
         }
 
         //product purchase detail form
-        private ProductCirculationForm productPurchaseForm = null;
+        protected ProductCirculationForm productPurchaseForm = null;
         public virtual ProductCirculationForm getProductPurchaseForm()
         {
             if (productPurchaseForm == null || productPurchaseForm.IsDisposed)

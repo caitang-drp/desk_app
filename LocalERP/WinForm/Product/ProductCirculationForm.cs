@@ -69,11 +69,7 @@ namespace LocalERP.WinForm
             initCirculation();
         }
 
-        public virtual void initDatagridview(DataGridView dgv)
-        {
-
-                       
-        }
+        public virtual void initDatagridview(DataGridView dgv) { }
 
         public void reload(int mode, int id) {
             if (needSave && affirmQuit() != DialogResult.OK)
@@ -104,8 +100,8 @@ namespace LocalERP.WinForm
                 this.dataGridView1.Rows.Clear();
                 this.dataGridView2[1, 0].Value = null;
 
-                this.textBox_payed.Text = null;
-                this.textBox_pay.Text = null;
+                this.textBox_thisPayed.Text = null;
+                this.textBox_realTotal.Text = null;
 
                 this.resetNeedSave(false);
                 this.recordChanged = false;
@@ -122,8 +118,8 @@ namespace LocalERP.WinForm
             this.lookupText1.Text_Lookup = sell.CustomerName;
             this.textBox_operator.Text = sell.Oper;
 
-            this.textBox_payed.Text = sell.Payed.ToString();
-            this.textBox_pay.Text = sell.Pay.ToString();
+            this.textBox_thisPayed.Text = sell.Payed.ToString();
+            this.textBox_realTotal.Text = sell.Pay.ToString();
 
             this.backgroundWorker.RunWorkerAsync(sell.ID);
             this.invokeBeginLoadNotify();
@@ -182,19 +178,19 @@ namespace LocalERP.WinForm
             switch(mode){
                 case 0:
                     this.label_status.Text = "新增";
-                    this.initControlsEnable(true, false, false, false, true, true, true, false, false,false);
+                    this.initControlsEnable(true, false, false, false, true, true, true, false, false,true);
                     break;
                 case 1:
                     this.label_status.Text = ProductCirculation.circulationStatusContext[0];
-                    this.initControlsEnable(true, true, true, false, true, true, true, false, false,false);
+                    this.initControlsEnable(true, true, true, false, true, true, true, false, false,true);
                     break;
                 case 2:
                     this.label_status.Text = ProductCirculation.circulationStatusContext[1];
-                    this.initControlsEnable(false, false, true, true, false, false, false, true, true, false);
+                    this.initControlsEnable(false, false, true, true, false, false, false, true, true, true);
                     break;
                 case 3:
                     this.label_status.Text = ProductCirculation.circulationStatusContext[2];
-                    this.initControlsEnable(false, false, false, true, false, false, false, true, true, false);
+                    this.initControlsEnable(false, false, false, true, false, false, false, true, true, true);
                     break;
                 case 4:
                     this.label_status.Text = ProductCirculation.circulationStatusContext[3];
@@ -298,6 +294,10 @@ namespace LocalERP.WinForm
                 total += (double)row.Cells["totalPrice"].Value;
 
             this.dataGridView2[1, 0].Value = total;
+            float cutoff = 100;
+            float.TryParse(this.textBox_cutoff.Text, out cutoff);
+            double realTotal = total * cutoff / 100;
+            this.textBox_accumulative.Text =realTotal.ToString();
         }
 
         /// <summary>
@@ -510,8 +510,8 @@ namespace LocalERP.WinForm
 
             //commented by stone:very not reasonable
             ProductCirculationDao.getInstance().UpdatePay(circulationID, double.Parse(dataGridView2[1, 0].Value.ToString()), 0);
-            this.textBox_pay.Text = dataGridView2[1, 0].Value.ToString();
-            this.textBox_payed.Text = "0";
+            this.textBox_realTotal.Text = dataGridView2[1, 0].Value.ToString();
+            this.textBox_thisPayed.Text = "0";
             
             MessageBox.Show("审核成功!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
@@ -644,8 +644,8 @@ namespace LocalERP.WinForm
         {
             double pay = 0;
             double payed = 0;
-            if (ValidateUtility.getDouble(this.textBox_payed, this.errorProvider1, false, out payed) &&
-                ValidateUtility.getDouble(this.textBox_pay, this.errorProvider1,false, out pay))
+            if (ValidateUtility.getDouble(this.textBox_thisPayed, this.errorProvider1, false, out payed) &&
+                ValidateUtility.getDouble(this.textBox_realTotal, this.errorProvider1,false, out pay))
             {
                 ProductCirculationDao.getInstance().UpdatePay(circulationID, pay, payed);
                 MessageBox.Show("保存货款信息成功!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
