@@ -59,8 +59,9 @@ namespace LocalERP.WinForm
             // 点击，选择客户
             this.lookuptext_customer.LookupForm = FormSingletonFactory.getInstance().getCustomerCIForm_Select();
 
+            //modified by stone
             // 设置单据编号
-            int max = ProductCirculationDao.getInstance().getMaxCode(code);
+            int max = ProductStainlessCirculationDao.getInstance().getMaxCode(code);
             this.textBox_serial.Text = string.Format("{0}-{1}-{2:0000}", code, DateTime.Now.ToString("yyyyMMdd"), max+1);
 
             // 设置以上欠款

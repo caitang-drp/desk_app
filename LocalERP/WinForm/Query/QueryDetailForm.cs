@@ -30,7 +30,7 @@ namespace LocalERP.WinForm
 
         private void initList()
         {
-            DataTable dataTable = ProductCirculationSKURecordDao.getInstance().FindList(
+            DataTable dataTable = ProductClothesCirculationSKURecordDao.getInstance().FindList(
                 this.dateTimePicker3.Value, this.dateTimePicker4.Value.AddDays(1), 0, 
                 this.textBox_product.Text, -1, this.textBox_customer.Text, -1);
             this.dataGridView1.Rows.Clear();

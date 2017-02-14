@@ -190,7 +190,7 @@ namespace LocalERP.WinForm
         }
 
         private void getSum(DateTime start, DateTime end, int type, int productID, int customerID, out int totalNum, out double sum) {
-            DataTable dt = ProductCirculationSKURecordDao.getInstance().FindList(start, end.AddDays(1).AddSeconds(-1), type, null, productID, null, customerID);
+            DataTable dt = ProductClothesCirculationSKURecordDao.getInstance().FindList(start, end.AddDays(1).AddSeconds(-1), type, null, productID, null, customerID);
             totalNum = 0;
             sum = 0; 
             foreach (DataRow row in dt.Rows)

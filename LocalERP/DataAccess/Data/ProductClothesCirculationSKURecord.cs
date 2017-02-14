@@ -4,7 +4,7 @@ using System.Text;
 
 namespace LocalERP.DataAccess.Data
 {
-    public class ProductCirculationSKURecord
+    public class ProductClothesCirculationSKURecord
     {
         private int id;
 

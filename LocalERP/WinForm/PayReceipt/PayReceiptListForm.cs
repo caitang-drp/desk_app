@@ -118,12 +118,14 @@ namespace LocalERP.WinForm
             {
                 for (int i = 0; i < list.Count; i++)
                 {
-                    if (ProductCirculationDao.getInstance().FindByID(list[i]).Status > 1) {
+                    //modified by stone: 这里应该是PayReceiptDao，不是ProductCirculationDao
+                    if (ProductStainlessCirculationDao.getInstance().FindByID(list[i]).Status > 1)
+                    {
                         MessageBox.Show(string.Format("ID为{0}的单据已经审核, 无法删除!", list[i]), "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         initList();
                         return;
                     }
-                    ProductCirculationDao.getInstance().DeleteByID(list[i]);
+                    ProductStainlessCirculationDao.getInstance().DeleteByID(list[i]);
                 }
                 initList();
                 MessageBox.Show("删除单据成功!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);

@@ -18,11 +18,11 @@ namespace LocalERP.WinForm
     {
         //open mode       | 0:add 1:edit | 2:approval  | 3:partArrival | 4:arrival
         //status          | 1:apply      | 2:approval  | 3:partArrival | 4:arrival  
-        private int openMode = 0;
-        private int circulationID = 0;
-        private ProductCirculation.CirculationType type;
-        private UpdateType notifyType;
-        private UpdateType finishNotifyType;
+        protected int openMode = 0;
+        protected int circulationID = 0;
+        protected ProductCirculation.CirculationType type;
+        protected UpdateType notifyType;
+        protected UpdateType finishNotifyType;
 
         private int flowType;
         private string code;
@@ -86,7 +86,7 @@ namespace LocalERP.WinForm
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void initCirculation()
-        {
+        {/*
             if (openMode == 0)
             {
                 switchMode(openMode);
@@ -118,11 +118,11 @@ namespace LocalERP.WinForm
             this.lookupText1.Text_Lookup = sell.CustomerName;
             this.textBox_operator.Text = sell.Oper;
 
-            this.textBox_thisPayed.Text = sell.Payed.ToString();
-            this.textBox_realTotal.Text = sell.Pay.ToString();
+            this.textBox_thisPayed.Text = sell.ThisPayed.ToString();
+            this.textBox_realTotal.Text = sell.RealTotal.ToString();
 
             this.backgroundWorker.RunWorkerAsync(sell.ID);
-            this.invokeBeginLoadNotify();
+            this.invokeBeginLoadNotify();*/
         }
 
         public override void refresh()
@@ -134,18 +134,19 @@ namespace LocalERP.WinForm
 
         private void backgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
+            /*
             int sellID = (int)e.Argument;
-            records = ProductCirculationRecordDao.getInstance().FindList(sellID);
+            records = ProductClothesCirculationRecordDao.getInstance().FindList(sellID);
             foreach (ProductCirculationRecord record in records)
             {
-                record.SkuRecords = ProductCirculationSKURecordDao.getInstance().FindList(record.ID);
+                record.SkuRecords = ProductClothesCirculationSKURecordDao.getInstance().FindList(record.ID);
                 record.NumText = record.getTxt();            
-            }
+            }*/
         }
 
         private void backgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            
+            /*
             this.dataGridView1.Rows.Clear();
             foreach (ProductCirculationRecord record in records)
             {
@@ -170,7 +171,7 @@ namespace LocalERP.WinForm
             this.resetNeedSave(false);
             this.recordChanged = false;
 
-            this.invokeEndLoadNotify();
+            this.invokeEndLoadNotify();*/
         }
         //end init
 
@@ -297,14 +298,14 @@ namespace LocalERP.WinForm
             float cutoff = 100;
             float.TryParse(this.textBox_cutoff.Text, out cutoff);
             double realTotal = total * cutoff / 100;
-            this.textBox_accumulative.Text =realTotal.ToString();
+            this.textBox_realTotal.Text =realTotal.ToString();
         }
 
         /// <summary>
         /// for get value from controls
         /// </summary>
 
-        private bool getCirculation(out ProductCirculation sell)
+        protected bool getCirculation(out ProductCirculation sell)
         {
             sell = new ProductCirculation();
             sell.ID = circulationID;
@@ -327,39 +328,12 @@ namespace LocalERP.WinForm
             sell.Oper = this.textBox_operator.Text;
 
             if (dataGridView2[1, 0].Value == null || dataGridView2[1, 0].Value.ToString()=="")
-                sell.TotalPrice = 0;
+                sell.Total = 0;
             else
-                sell.TotalPrice = (double)dataGridView2[1, 0].Value;
+                sell.Total = (double)dataGridView2[1, 0].Value;
 
             sell.CustomerName = this.lookupText1.Text_Lookup;
             return true;
-        }
-
-        private bool getRecords(out List<ProductCirculationRecord> records)
-        {
-            records = new List<ProductCirculationRecord>();
-
-            int number = this.dataGridView1.RowCount;
-
-            double tempDouble;
-            //int tempInt;
-            bool isInputCorrect = true;
-
-            foreach (DataGridViewRow row in this.dataGridView1.Rows)
-            {
-                object productID = null;
-                object tempRecord = null;
-
-                if (ValidateUtility.getLookupValue(row.Cells["product"], out productID) == false || ValidateUtility.getDouble(row.Cells["price"], out tempDouble) == false || ValidateUtility.getLookupValue(row.Cells["num"], out tempRecord) == false)
-                    return false;
-                ProductCirculationRecord record = tempRecord as ProductCirculationRecord;
-                
-                record.ProductName = ((row.Cells["product"] as DataGridViewLookupCell).EditedValue as LookupArg).Text;
-                record.Price = tempDouble;
-                records.Add(record);
-            }
-
-            return isInputCorrect;
         }
 
         private List<int> getSelectRows()
@@ -379,65 +353,12 @@ namespace LocalERP.WinForm
         /// for event
         /// </summary>
         /// 
-        private void toolStripButton_save_Click(object sender, EventArgs e)
+        protected virtual void toolStripButton_save_Click(object sender, EventArgs e)
         {
-            //for datagridview validate
-            if (dataGridView1.Rows.Count > 0 && dataGridView1.Columns["totalPrice"].Visible == true)
-                dataGridView1.CurrentCell = dataGridView1.Rows[0].Cells["totalPrice"];
-
-            List<ProductCirculationRecord> records;
-            bool isRecordsCorrect = getRecords(out records);
-
-            ProductCirculation circulation;
-            bool isSellCorrect = getCirculation(out circulation);
-            if (isRecordsCorrect == false || isSellCorrect == false)
-                return;
-
-            for(int i=0;i<records.Count;i++){
-                ProductCirculationRecord record = records[i];
-                for (int j = 0; j < records.Count; j++)
-                {
-                    ProductCirculationRecord compare = records[j];
-                    if (compare.ProductID == record.ProductID && i != j) {
-                        MessageBox.Show(string.Format("商品{0}有多条记录,请在同一记录里输入该商品的所有数量!", compare.ProductName), "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        return;
-                    }
-                }
-            }
-
-            try
-            {
-                if (openMode == 0)
-                {
-                    circulation.Status = 1;
-                    ProductCirculationDao.getInstance().Insert(circulation, records, out circulationID);
-                    MessageBox.Show(string.Format("增加{0}成功!", this.Text), "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-                else if (openMode == 1)
-                {
-                    ProductCirculationDao.getInstance().UpdateBaiscInfo(circulation);
-                    if (recordChanged)
-                        ProductCirculationDao.getInstance().updateRecords(circulation.ID, records);
-                    MessageBox.Show(string.Format("保存{0}成功!", this.Text), "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-
-                openMode = 1;
-                this.initCirculation();
-
-
-            }catch(Exception ex){
-                if (openMode == 0)
-                    ProductCirculationDao.getInstance().DeleteByID(circulationID);
-                MessageBox.Show("保存有误,可能是往来单位或商品属性被修改过,请重新编辑!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-
-            //so important: if edit ,it should be refresh also, because edit will del exist item and add new item
-            
-            this.invokeUpdateNotify(notifyType);
         }
 
         private void toolStripButton_approval_Click(object sender, EventArgs e)
-        {
+        {/*
             if (this.toolStripButton_save.Enabled == true)
             {
                 MessageBox.Show("请先保存单据,再下单!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -469,11 +390,11 @@ namespace LocalERP.WinForm
             openMode = 2;
             this.switchMode(2);
 
-            this.invokeUpdateNotify(notifyType);
+            this.invokeUpdateNotify(notifyType);*/
         }
 
         private void toolStripButton_finish_Click(object sender, EventArgs e)
-        {
+        {/*
             if (MessageBox.Show("审核后，将修改库存数量，且该单据不能修改或删除，是否审核？", "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) != DialogResult.OK)
                 return;
 
@@ -485,7 +406,7 @@ namespace LocalERP.WinForm
 
             if(flowType == -1)
                 foreach (ProductCirculationRecord record in records) {
-                    foreach (ProductCirculationSKURecord skuRecord in record.SkuRecords) { 
+                    foreach (ProductClothesCirculationSKURecord skuRecord in record.SkuRecords) { 
                         int leftNum = ProductSKUDao.getInstance().FindNumByID(skuRecord.ProductSKUID);
                         if (skuRecord.Num > leftNum)
                         {
@@ -498,7 +419,7 @@ namespace LocalERP.WinForm
 
             foreach (ProductCirculationRecord record in records)
             {
-                foreach (ProductCirculationSKURecord skuRecord in record.SkuRecords)
+                foreach (ProductClothesCirculationSKURecord skuRecord in record.SkuRecords)
                 {
                     int leftNum = ProductSKUDao.getInstance().FindNumByID(skuRecord.ProductSKUID);
                     int newLeftNum = leftNum + flowType * skuRecord.Num;
@@ -519,7 +440,7 @@ namespace LocalERP.WinForm
             this.switchMode(4);
 
             this.invokeUpdateNotify(this.finishNotifyType);
-
+            */
         }
 
 
@@ -641,7 +562,7 @@ namespace LocalERP.WinForm
         }
 
         private void button_savePay_Click(object sender, EventArgs e)
-        {
+        {/*
             double pay = 0;
             double payed = 0;
             if (ValidateUtility.getDouble(this.textBox_thisPayed, this.errorProvider1, false, out payed) &&
@@ -650,7 +571,7 @@ namespace LocalERP.WinForm
                 ProductCirculationDao.getInstance().UpdatePay(circulationID, pay, payed);
                 MessageBox.Show("保存货款信息成功!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.invokeUpdateNotify(notifyType);
-            }
+            }*/
         }
     }
 }

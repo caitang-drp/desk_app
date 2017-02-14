@@ -70,7 +70,7 @@ namespace LocalERP.WinForm
             this.pickValue_size.allToLeft();
             this.pickValue_size.setSelectItems(ProductClothesDao.getInstance().findAttributes(productID, 2));
 
-            if (ProductCirculationRecordDao.getInstance().FindCount(productID) > 0)
+            if (ProductClothesCirculationRecordDao.getInstance().FindCount(productID) > 0)
                 this.setPickValue(false);
             else
                 this.setPickValue(true);

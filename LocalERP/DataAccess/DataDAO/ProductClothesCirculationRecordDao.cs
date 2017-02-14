@@ -7,17 +7,17 @@ using System.Data;
 
 namespace LocalERP.DataAccess.DataDAO
 {
-    class ProductCirculationRecordDao
+    class ProductClothesCirculationRecordDao
     {
-        public static ProductCirculationRecordDao dao;
-        public static ProductCirculationRecordDao getInstance()
+        public static ProductClothesCirculationRecordDao dao;
+        public static ProductClothesCirculationRecordDao getInstance()
         {
             if (dao == null)
-                dao = new ProductCirculationRecordDao();
+                dao = new ProductClothesCirculationRecordDao();
             return dao;
         }
 
-        public int Insert(ProductCirculationRecord info)
+        public int Insert(ProductClothesCirculationRecord info)
         {
             try
             {
@@ -26,9 +26,9 @@ namespace LocalERP.DataAccess.DataDAO
                 DbHelperAccess.executeNonQuery(commandText);
                 int recordID = DbHelperAccess.executeLastID("ID", "ProductCirculationRecord");
 
-                List<ProductCirculationSKURecord> skuRecords = info.SkuRecords;
-                ProductCirculationSKURecordDao dao = new ProductCirculationSKURecordDao();
-                foreach (ProductCirculationSKURecord record in skuRecords)
+                List<ProductClothesCirculationSKURecord> skuRecords = info.SkuRecords;
+                ProductClothesCirculationSKURecordDao dao = new ProductClothesCirculationSKURecordDao();
+                foreach (ProductClothesCirculationSKURecord record in skuRecords)
                 {
                     record.RecordID = recordID;
                     dao.Insert(record);

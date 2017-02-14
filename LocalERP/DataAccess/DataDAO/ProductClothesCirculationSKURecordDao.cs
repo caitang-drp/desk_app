@@ -7,18 +7,18 @@ using System.Data;
 
 namespace LocalERP.DataAccess.DataDAO
 {
-    class ProductCirculationSKURecordDao
+    class ProductClothesCirculationSKURecordDao
     {
-        public static ProductCirculationSKURecordDao dao;
+        public static ProductClothesCirculationSKURecordDao dao;
         private string temp;
-        public static ProductCirculationSKURecordDao getInstance()
+        public static ProductClothesCirculationSKURecordDao getInstance()
         {
             if (dao == null)
-                dao = new ProductCirculationSKURecordDao();
+                dao = new ProductClothesCirculationSKURecordDao();
             return dao;
         }
 
-        public int Insert(ProductCirculationSKURecord info)
+        public int Insert(ProductClothesCirculationSKURecord info)
         {
             try
             {
@@ -33,14 +33,14 @@ namespace LocalERP.DataAccess.DataDAO
             }
         }
 
-        public List<ProductCirculationSKURecord> FindList(int recordID)
+        public List<ProductClothesCirculationSKURecord> FindList(int recordID)
         {
-            List < ProductCirculationSKURecord> records = new List<ProductCirculationSKURecord>();
+            List < ProductClothesCirculationSKURecord> records = new List<ProductClothesCirculationSKURecord>();
 
             string commandText = string.Format("select * from ProductCirculationSKURecord where recordID = {0}", recordID);
             DataTable dt = DbHelperAccess.executeQuery(commandText);
             foreach (DataRow dr in dt.Rows) {
-                ProductCirculationSKURecord record = new ProductCirculationSKURecord();
+                ProductClothesCirculationSKURecord record = new ProductClothesCirculationSKURecord();
                 record.RecordID = recordID;
                 record.ID = (int)dr["ID"];
                 record.Num = (int)dr["num"];

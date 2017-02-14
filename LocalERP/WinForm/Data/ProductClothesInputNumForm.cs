@@ -72,9 +72,9 @@ namespace LocalERP.WinForm
             {
                 try
                 {
-                    ProductCirculationRecord record = value as ProductCirculationRecord;
-                    List<ProductCirculationSKURecord> records = record.SkuRecords;
-                    foreach (ProductCirculationSKURecord skuRecord in records)
+                    ProductClothesCirculationRecord record = value as ProductClothesCirculationRecord;
+                    List<ProductClothesCirculationSKURecord> records = record.SkuRecords;
+                    foreach (ProductClothesCirculationSKURecord skuRecord in records)
                     {
                         int i = 0, j = 0;
                         for (; i < colorAttrs.Count; i++)
@@ -94,10 +94,10 @@ namespace LocalERP.WinForm
 
         }
 
-        private bool getRecord(out ProductCirculationRecord record) {
+        private bool getRecord(out ProductClothesCirculationRecord record) {
 
-            record = new ProductCirculationRecord();
-            record.SkuRecords = new List<ProductCirculationSKURecord>();
+            record = new ProductClothesCirculationRecord();
+            record.SkuRecords = new List<ProductClothesCirculationSKURecord>();
             int totalNum = 0;
 
             for (int i=0;i<this.dataGridView1.Rows.Count;i++) {
@@ -109,7 +109,7 @@ namespace LocalERP.WinForm
                     if (num == 0)
                         continue;
 
-                    ProductCirculationSKURecord skuRecord = new ProductCirculationSKURecord();
+                    ProductClothesCirculationSKURecord skuRecord = new ProductClothesCirculationSKURecord();
                     skuRecord.Num = num;
                     skuRecord.ProductSKU = ProductSKUDao.getInstance().FindByComposeID(productId, colorAttrs[i].CharactorValueId, sizeAttrs[j - 1].CharactorValueId);
                     skuRecord.ProductSKUID = skuRecord.ProductSKU.ID;
@@ -127,7 +127,7 @@ namespace LocalERP.WinForm
 
         private void button_save_Click(object sender, EventArgs e)
         {
-            ProductCirculationRecord record = null;
+            ProductClothesCirculationRecord record = null;
             if (this.getRecord(out record))
             {
                 LookupArg arg = new LookupArg(record, record.getTxt());

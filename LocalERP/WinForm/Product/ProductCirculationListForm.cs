@@ -61,7 +61,7 @@ namespace LocalERP.WinForm
         {
             try
             {
-                DataTable dataTable = ProductCirculationDao.getInstance().FindList(circulationType, this.dateTimePicker3.Value, this.dateTimePicker4.Value.AddDays(1), (int)(comboBox1.SelectedValue), textBox_customer.Text.Trim());
+                DataTable dataTable = ProductStainlessCirculationDao.getInstance().FindList(circulationType, this.dateTimePicker3.Value, this.dateTimePicker4.Value.AddDays(1), (int)(comboBox1.SelectedValue), textBox_customer.Text.Trim());
                 this.dataGridView1.Rows.Clear();
                 foreach (DataRow dr in dataTable.Rows)
                 {
@@ -126,7 +126,7 @@ namespace LocalERP.WinForm
 
         //del
         private void toolStripButton2_Click(object sender, EventArgs e)
-        {
+        {/*
             List<int> list = this.dataGridView1.getSelectIDs("ID", "check");
             if (list == null || list.Count <= 0)
             {
@@ -152,7 +152,7 @@ namespace LocalERP.WinForm
                 }
                 initList();
                 MessageBox.Show("删除单据成功!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
+            }*/
         }
 
         //edit

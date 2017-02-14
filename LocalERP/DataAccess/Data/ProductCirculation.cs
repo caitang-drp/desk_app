@@ -62,27 +62,36 @@ namespace LocalERP.DataAccess.Data
             set { customerName = value; }
         }
 
-        private double totalPrice;
+        private double total;
 
-        public double TotalPrice
+        public double Total
         {
-            get { return totalPrice; }
-            set { totalPrice = value; }
+            get { return total; }
+            set { total = value; }
         }
 
-        private double pay;
+        private double realTotal;
 
-        public double Pay
+        public double RealTotal
         {
-            get { return pay; }
-            set { pay = value; }
+            get { return realTotal; }
+            set { realTotal = value; }
         }
-        private double payed;
 
-        public double Payed
+        private double previousArrears;
+
+        public double PreviousArrears
         {
-            get { return payed; }
-            set { payed = value; }
+            get { return previousArrears; }
+            set { previousArrears = value; }
+        }
+
+        private double thisPayed;
+
+        public double ThisPayed
+        {
+            get { return thisPayed; }
+            set { thisPayed = value; }
         }
 
         private string oper;
