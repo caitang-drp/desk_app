@@ -7,7 +7,7 @@ using System.Data;
 
 namespace LocalERP.DataAccess.DataDAO
 {
-    class ProductStainlessCirculationRecordDao
+    class ProductStainlessCirculationRecordDao : ProductCirculationRecordDao
     {
         public static ProductStainlessCirculationRecordDao dao;
         public static ProductStainlessCirculationRecordDao getInstance()
@@ -21,8 +21,8 @@ namespace LocalERP.DataAccess.DataDAO
         {
             try
             {
-                string commandText = string.Format("insert into ProductStainlessCirculationRecord(productID, totalNum, price, circulationID) values('{0}', '{1}', '{2}', '{3}')",
-                    info.ProductID, info.TotalNum, info.Price, info.CirculationID);
+                string commandText = string.Format("insert into ProductStainlessCirculationRecord(productID, quantityPerPiece, pieces, totalNum, unit, price, circulationID) values('{0}', {1}, {2}, '{3}','{4}', '{5}', '{6}')",
+                    info.ProductID, info.QuantityPerPiece, info.Pieces, info.TotalNum, info.Unit, info.Price, info.CirculationID);
                 DbHelperAccess.executeNonQuery(commandText);
                 int recordID = DbHelperAccess.executeLastID("ID", "ProductStainlessCirculationRecord");
                 return recordID;
@@ -33,19 +33,19 @@ namespace LocalERP.DataAccess.DataDAO
             }
         }
 
-        public List<ProductCirculationRecord> FindList(int circulationID)
+        public override List<ProductCirculationRecord> FindList(int circulationID)
         {
             List<ProductCirculationRecord> records = new List<ProductCirculationRecord>();
 
-            string commandText = string.Format("select * from ProductCirculationRecord, Product where ProductCirculationRecord.productID = Product.ID and circulationID = {0} order by ProductCirculationRecord.ID", circulationID);
+            string commandText = string.Format("select * from ProductStainlessCirculationRecord, Product where ProductStainlessCirculationRecord.productID = Product.ID and circulationID = {0} order by ProductStainlessCirculationRecord.ID", circulationID);
             DataTable dt = DbHelperAccess.executeQuery(commandText);
             foreach (DataRow dr in dt.Rows) {
-                ProductCirculationRecord record = new ProductCirculationRecord();
+                ProductStainlessCirculationRecord record = new ProductStainlessCirculationRecord();
                 record.CirculationID = circulationID;
-                record.ID = (int)dr["ProductCirculationRecord.ID"];
+                record.ID = (int)dr["ProductStainlessCirculationRecord.ID"];
 
                 double price;
-                double.TryParse(dr["ProductCirculationRecord.price"].ToString(), out price);
+                double.TryParse(dr["ProductStainlessCirculationRecord.price"].ToString(), out price);
                 record.Price = price;
 
                 record.ProductID = (int)dr["Product.ID"];

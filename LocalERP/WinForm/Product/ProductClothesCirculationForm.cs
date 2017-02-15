@@ -16,7 +16,7 @@ namespace LocalERP.WinForm
 {
     public class ProductClothesCirculationForm : ProductCirculationForm
     {
-        public ProductClothesCirculationForm(CirculationTypeConf conf):base(conf)
+        public ProductClothesCirculationForm(CirculationTypeConf conf, ProductCirculationDao dao):base(conf, dao)
         {
         }
         
@@ -123,6 +123,25 @@ namespace LocalERP.WinForm
                 ex.Message.ToString();
             }
             row.Cells["totalPrice"].Value = num * price;
+        }
+
+        protected override bool getRecords(out List<ProductCirculationRecord> records)
+        {
+            records = null;
+            return true;
+            /*for (int i = 0; i < records.Count; i++)
+            {
+                ProductClothesCirculationRecord record = records[i];
+                for (int j = 0; j < records.Count; j++)
+                {
+                    ProductClothesCirculationRecord compare = records[j];
+                    if (compare.ProductID == record.ProductID && i != j)
+                    {
+                        MessageBox.Show(string.Format("商品{0}有多条记录,请在同一记录里输入该商品的所有数量!", compare.ProductName), "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+                }
+            }*/
         }
 
     }

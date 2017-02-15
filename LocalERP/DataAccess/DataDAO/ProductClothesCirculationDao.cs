@@ -106,54 +106,6 @@ namespace LocalERP.DataAccess.DataDAO
             return DbHelperAccess.executeQuery(commandText.ToString());
         }
 
-        public ProductCirculation FindByID(int ID)
-        {
-            string commandText = string.Format("select * from ProductCirculation where ID={0}", ID);
-            DataRow dr = DbHelperAccess.executeQueryGetOneRow(commandText);
-            ProductCirculation sell = new ProductCirculation(); 
-            if (dr != null) {
-                sell.ID = (int)dr["ID"];
-                sell.Code = dr["code"] as string;
-                sell.CirculationTime = (DateTime)dr["circulationTime"];
-                sell.Comment = dr["comment"] as string;
-                sell.Status = (int)dr["status"];
-                
-                int customerID = 0;
-                if(int.TryParse(dr["customerID"].ToString(), out customerID))
-                    sell.CustomerID = customerID;
-                
-                sell.Oper = dr["operator"] as string;
-                double pay = 0, payed;
-                if (double.TryParse(dr["pay"].ToString(), out pay))
-                    sell.RealTotal = pay;
-                if (double.TryParse(dr["payed"].ToString(), out payed))
-                    sell.ThisPayed = payed;
-                //not reasonal
-                if(customerID > 0)
-                    sell.CustomerName = CustomerDao.getInstance().FindByID(sell.CustomerID).Name;
-                return sell;
-            }
-            return null;
-            
-        }
-
-        public int getMaxCode(string code)
-        {
-            string commandText = string.Format("select max(code) from ProductCirculation where code like '{0}-{1}-%'", code, DateTime.Now.ToString("yyyyMMdd"));
-            DataRow dr = DbHelperAccess.executeQueryGetOneRow(commandText);
-            string result = dr[0] as string;
-            if (string.IsNullOrEmpty(result))
-                return 0;
-            else
-            {
-                int max = 0;
-                if (int.TryParse(result.Substring(result.LastIndexOf('-')), out max))
-                    return Math.Abs(max);
-                else
-                    return 0;
-            }
-        }
-
         public int DeleteByID(int ID) {
             string commandText = string.Format("delete from ProductCirculation where ID={0}", ID);
             return DbHelperAccess.executeNonQuery(commandText);

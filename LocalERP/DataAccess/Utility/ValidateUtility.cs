@@ -81,34 +81,31 @@ namespace LocalERP.DataAccess.Utility
         {
             result = 0;
             string temp = cell.EditedFormattedValue.ToString();
-            if (required == false && positive ==false) 
+
+            if (int.TryParse(temp, out result))
             {
-                if (temp == null || temp == "" || int.TryParse(temp, out result))
-                {
-                    cell.ErrorText = string.Empty;
-                    return true;
-                }
-                else
-                {
-                    cell.ErrorText = "请输入整数!";
-                    return false;
-                }
-            }
-            else if (required == false && positive == true) {
-                uint resultTemp=0;
-                if (temp == null || temp == "" || uint.TryParse(temp, out resultTemp))
-                {
-                    result = (int)resultTemp;
-                    cell.ErrorText = string.Empty;
-                    return true;
-                }
-                else
+                if (positive == true && result < 0)
                 {
                     cell.ErrorText = "请输入正整数!";
                     return false;
                 }
+                else
+                {
+                    cell.ErrorText = string.Empty;
+                    return true;
+                }
             }
-            return false;
+            else {
+                if (required == false && string.IsNullOrEmpty(temp))
+                {
+                    cell.ErrorText = string.Empty;
+                    return true;
+                }
+                else {
+                    cell.ErrorText = "请输入整数!";
+                    return false;
+                }
+            }
         }
 
         public static bool getString(DataGridViewCell cell, bool required, out string result)

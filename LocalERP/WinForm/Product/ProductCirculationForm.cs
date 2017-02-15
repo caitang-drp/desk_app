@@ -33,7 +33,8 @@ namespace LocalERP.WinForm
         protected bool needSave = false;
         protected bool recordChanged = false;
 
-        public ProductCirculationForm(CirculationTypeConf conf)
+        private ProductCirculationDao cirDao;
+        public ProductCirculationForm(CirculationTypeConf conf, ProductCirculationDao cirDao)
         {
             InitializeComponent();
 
@@ -52,7 +53,10 @@ namespace LocalERP.WinForm
             this.label2.Text = conf.date;
             this.label_customer.Text = conf.customer;
 
+            this.cirDao = cirDao;
+
             initDatagridview(this.dataGridView1);
+
         }
 
         private void ProductCirculationForm_Load(object sender, EventArgs e)
@@ -86,11 +90,11 @@ namespace LocalERP.WinForm
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void initCirculation()
-        {/*
+        {
             if (openMode == 0)
             {
                 switchMode(openMode);
-                int max = ProductCirculationDao.getInstance().getMaxCode(code);
+                int max = cirDao.getMaxCode(code);
                 this.textBox_serial.Text = string.Format("{0}-{1}-{2:0000}", code, DateTime.Now.ToString("yyyyMMdd"), max+1);
                 this.dateTime_sellTime.Value = DateTime.Now;
                 this.textBox_comment.Text = null;
@@ -100,8 +104,11 @@ namespace LocalERP.WinForm
                 this.dataGridView1.Rows.Clear();
                 this.dataGridView2[1, 0].Value = null;
 
-                this.textBox_thisPayed.Text = null;
                 this.textBox_realTotal.Text = null;
+                this.textBox_previousArrears.Text = null;
+                this.textBox_accumulative.Text = null;
+                this.textBox_thisPayed.Text = null;
+
 
                 this.resetNeedSave(false);
                 this.recordChanged = false;
@@ -109,7 +116,7 @@ namespace LocalERP.WinForm
                 return;
             }
 
-            sell = ProductCirculationDao.getInstance().FindByID(circulationID);
+            sell = cirDao.FindByID(circulationID);
 
             this.textBox_serial.Text = sell.Code;
             this.dateTime_sellTime.Value = sell.CirculationTime;
@@ -122,7 +129,7 @@ namespace LocalERP.WinForm
             this.textBox_realTotal.Text = sell.RealTotal.ToString();
 
             this.backgroundWorker.RunWorkerAsync(sell.ID);
-            this.invokeBeginLoadNotify();*/
+            this.invokeBeginLoadNotify();
         }
 
         public override void refresh()
@@ -132,21 +139,16 @@ namespace LocalERP.WinForm
             (this.lookupText1.LookupForm as CategoryItemForm).initTree();
         }
 
+        protected virtual void setRecord(ProductCirculationRecord record) { }
+
         private void backgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
-            /*
             int sellID = (int)e.Argument;
-            records = ProductClothesCirculationRecordDao.getInstance().FindList(sellID);
-            foreach (ProductCirculationRecord record in records)
-            {
-                record.SkuRecords = ProductClothesCirculationSKURecordDao.getInstance().FindList(record.ID);
-                record.NumText = record.getTxt();            
-            }*/
+            records = cirDao.getRecordDao().FindList(sellID);
         }
 
         private void backgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            /*
             this.dataGridView1.Rows.Clear();
             foreach (ProductCirculationRecord record in records)
             {
@@ -155,9 +157,6 @@ namespace LocalERP.WinForm
                 this.dataGridView1.Rows[index].Cells["ID"].Value = record.ID;
                 this.dataGridView1.Rows[index].Cells["product"].Value = new LookupArg(record.ProductID, record.ProductName);
                 this.dataGridView1.Rows[index].Cells["price"].Value = record.Price;
-                DataGridViewLookupCell numCell = this.dataGridView1.Rows[index].Cells["num"] as DataGridViewLookupCell;
-                numCell.resetSize(record.NumText);
-                numCell.Value = new LookupArg(record, record.NumText);
 
                 this.setSubTotalPrice(index);
             }
@@ -171,7 +170,7 @@ namespace LocalERP.WinForm
             this.resetNeedSave(false);
             this.recordChanged = false;
 
-            this.invokeEndLoadNotify();*/
+            this.invokeEndLoadNotify();
         }
         //end init
 
@@ -305,6 +304,11 @@ namespace LocalERP.WinForm
         /// for get value from controls
         /// </summary>
 
+        protected virtual bool getRecords(out List<ProductCirculationRecord> records) {
+            records = null;
+            return true;
+        }
+
         protected bool getCirculation(out ProductCirculation sell)
         {
             sell = new ProductCirculation();
@@ -352,9 +356,52 @@ namespace LocalERP.WinForm
         /// <summary>
         /// for event
         /// </summary>
-        /// 
-        protected virtual void toolStripButton_save_Click(object sender, EventArgs e)
+        ///
+        protected void toolStripButton_save_Click(object sender, EventArgs e)
         {
+            //for datagridview validate
+            if (dataGridView1.Rows.Count > 0 && dataGridView1.Columns["totalPrice"].Visible == true)
+                dataGridView1.CurrentCell = dataGridView1.Rows[0].Cells["totalPrice"];
+
+            List<ProductCirculationRecord> records;
+            bool isRecordsCorrect = getRecords(out records);
+
+            ProductCirculation circulation;
+            bool isSellCorrect = getCirculation(out circulation);
+            if (isRecordsCorrect == false || isSellCorrect == false)
+                return;
+
+            try
+            {
+                if (openMode == 0)
+                {
+                    circulation.Status = 1;
+                    cirDao.Insert(circulation, records, out circulationID);
+                    MessageBox.Show(string.Format("增加{0}成功!", this.Text), "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else if (openMode == 1)
+                {/*
+                    ProductStainlessCirculationDao.getInstance().UpdateBaiscInfo(circulation);
+                    if (recordChanged)
+                        ProductStainlessCirculationDao.getInstance().updateRecords(circulation.ID, records);
+                    MessageBox.Show(string.Format("保存{0}成功!", this.Text), "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);*/
+                }
+
+                openMode = 1;
+                this.initCirculation();
+
+
+            }
+            catch (Exception ex)
+            {
+                if (openMode == 0)
+                    ProductStainlessCirculationDao.getInstance().DeleteByID(circulationID);
+                MessageBox.Show("保存有误,可能是往来单位或商品属性被修改过,请重新编辑!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+
+            //so important: if edit ,it should be refresh also, because edit will del exist item and add new item
+
+            this.invokeUpdateNotify(notifyType);
         }
 
         private void toolStripButton_approval_Click(object sender, EventArgs e)
@@ -462,9 +509,6 @@ namespace LocalERP.WinForm
 
         private void toolStripButton_cancel_Click(object sender, EventArgs e)
         {
-            if (this.needSave && affirmQuit() != DialogResult.OK)
-                return;
-
             this.Close();
         }
 

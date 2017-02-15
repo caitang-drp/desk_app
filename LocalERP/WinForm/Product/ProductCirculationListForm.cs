@@ -18,7 +18,9 @@ namespace LocalERP.WinForm
         private MainForm mainForm;
         private int circulationType;
 
-        public ProductCirculationListForm(MainForm mf, int type, string title)
+        private ProductCirculationDao cirDao;
+
+        public ProductCirculationListForm(MainForm mf, int type, string title, ProductCirculationDao cirDao)
         {
             InitializeComponent();
 
@@ -28,6 +30,8 @@ namespace LocalERP.WinForm
 
             DateTime dateTime = DateTime.Now;
             this.dateTimePicker3.Value = dateTime.AddMonths(-1);
+
+            this.cirDao = cirDao;
         }
 
         private void ProductCirculationListForm_Load(object sender, EventArgs e)
@@ -61,7 +65,7 @@ namespace LocalERP.WinForm
         {
             try
             {
-                DataTable dataTable = ProductStainlessCirculationDao.getInstance().FindList(circulationType, this.dateTimePicker3.Value, this.dateTimePicker4.Value.AddDays(1), (int)(comboBox1.SelectedValue), textBox_customer.Text.Trim());
+                DataTable dataTable = cirDao.FindList(circulationType, this.dateTimePicker3.Value, this.dateTimePicker4.Value.AddDays(1), (int)(comboBox1.SelectedValue), textBox_customer.Text.Trim());
                 this.dataGridView1.Rows.Clear();
                 foreach (DataRow dr in dataTable.Rows)
                 {
@@ -85,28 +89,6 @@ namespace LocalERP.WinForm
                         this.dataGridView1.Rows[index].Cells["status"].Style.SelectionForeColor = Color.Black;
                     }
 
-                    if (circulationType < 3)
-                    {
-                        this.dataGridView1.Rows[index].Cells["customer"].Value = dr["name"];
-                        double pay = 0;
-                        double payed = 0;
-                        double.TryParse(dr["payed"].ToString(), out payed);
-                        double.TryParse(dr["pay"].ToString(), out pay);
-                        if (status != 1)
-                            if (payed - pay >= 0)
-                            {
-                                this.dataGridView1.Rows[index].Cells["pay"].Value = "ÒÑ¸¶Çå";
-                                this.dataGridView1.Rows[index].Cells["pay"].Style.ForeColor = Color.Black;
-                                this.dataGridView1.Rows[index].Cells["pay"].Style.SelectionForeColor = Color.Black;
-                            }
-                            else
-                            {
-                                this.dataGridView1.Rows[index].Cells["pay"].Value = "Î´¸¶Çå";
-                                this.dataGridView1.Rows[index].Cells["pay"].Style.ForeColor = Color.Red;
-                                this.dataGridView1.Rows[index].Cells["pay"].Style.SelectionForeColor = Color.Red;
-
-                            }
-                    }
                     this.dataGridView1.Rows[index].Cells["sellTime"].Value = dr["circulationTime"];                    
                 }
             }

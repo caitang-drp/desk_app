@@ -7,6 +7,7 @@ using LocalERP.UiDataProxy;
 using LocalERP.DataAccess.Utility;
 using System.Windows.Forms;
 using System.IO;
+using LocalERP.DataAccess.DataDAO;
 
 namespace LocalERP.WinForm
 {
@@ -47,22 +48,6 @@ namespace LocalERP.WinForm
             set { mainForm = value; }
         }
 
-        /*************  purchase  *****************/
-        //product purchase list form
-        private ProductCirculationListForm productPurchaseListForm = null;
-        public virtual ProductCirculationListForm getProductPurchaseListForm()
-        {
-            if (productPurchaseListForm == null || productPurchaseListForm.IsDisposed)
-            {
-                productPurchaseListForm = new ProductCirculationListForm(mainForm, 1, "采购单据列表");
-                productPurchaseListForm.initVersions(getVersions(), 
-                    UpdateType.PurchaseUpdate, UpdateType.PurchaseFinishUpdate, UpdateType.CustomerUpdate);
-                
-                appendEvent(productPurchaseListForm);
-            }
-            return productPurchaseListForm;
-        }
-
         // 销售收款单
         private SellReceiptBillForm sellReceiptBillForm = null;
         public SellReceiptBillForm getSellReceiptBillForm()
@@ -99,28 +84,26 @@ namespace LocalERP.WinForm
             return payReceiptListForm;
         }
 
+        /*************  purchase  *****************/
+        //product purchase list form
+        protected ProductCirculationListForm productPurchaseListForm = null;
+        public virtual ProductCirculationListForm getProductPurchaseListForm()
+        {
+            return null;
+        }
+
         //product purchase detail form
         protected ProductCirculationForm productPurchaseForm = null;
         public virtual ProductCirculationForm getProductPurchaseForm()
         {
-            if (productPurchaseForm == null || productPurchaseForm.IsDisposed)
-            {
-                productPurchaseForm = new ProductCirculationForm(ProductCirculation.CirculationTypeConf_Purchase);
-                appendEvent(productPurchaseForm);
-            }
-            return productPurchaseForm;
+            return null;
         }
 
         //product purchase back detail form
-        private ProductCirculationForm productPurchaseBackForm = null;
+        protected ProductCirculationForm productPurchaseBackForm = null;
         public virtual ProductCirculationForm getProductPurchaseBackForm()
         {
-            if (productPurchaseBackForm == null || productPurchaseBackForm.IsDisposed)
-            {
-                productPurchaseBackForm = new ProductCirculationForm(ProductCirculation.CirculationTypeConf_PurchaseBack);
-                appendEvent(productPurchaseBackForm);
-            }
-            return productPurchaseBackForm;
+            return null;
         }
 
         /***************  sell   ************************/
@@ -130,7 +113,7 @@ namespace LocalERP.WinForm
         {
             if (productSellListForm == null || productSellListForm.IsDisposed)
             {
-                productSellListForm = new ProductCirculationListForm(mainForm, 2, "销售单据列表");
+                productSellListForm = new ProductCirculationListForm(mainForm, 2, "销售单据列表", ProductStainlessCirculationDao.getInstance());
                 productSellListForm.initVersions(getVersions(),
                     UpdateType.SellUpdate, UpdateType.SellFinishUpdate, UpdateType.CustomerUpdate);
 
@@ -145,7 +128,7 @@ namespace LocalERP.WinForm
         {
             if (productSellForm == null || productSellForm.IsDisposed)
             {
-                productSellForm = new ProductCirculationForm(ProductCirculation.CirculationTypeConf_Sell);
+                productSellForm = new ProductCirculationForm(ProductCirculation.CirculationTypeConf_Sell, ProductStainlessCirculationDao.getInstance());
                 appendEvent(productSellForm);
             }
             return productSellForm;
@@ -157,7 +140,7 @@ namespace LocalERP.WinForm
         {
             if (productSellBackForm == null || productSellBackForm.IsDisposed)
             {
-                productSellBackForm = new ProductCirculationForm(ProductCirculation.CirculationTypeConf_SellBack);
+                productSellBackForm = new ProductCirculationForm(ProductCirculation.CirculationTypeConf_SellBack, ProductStainlessCirculationDao.getInstance());
                 appendEvent(productSellBackForm);
             }
             return productSellBackForm;
@@ -170,7 +153,7 @@ namespace LocalERP.WinForm
         {
             if (productLibListForm == null || productLibListForm.IsDisposed)
             {
-                productLibListForm = new ProductCirculationListForm(mainForm, 3, "盘点单据列表");
+                productLibListForm = new ProductCirculationListForm(mainForm, 3, "盘点单据列表", ProductStainlessCirculationDao.getInstance());
                 productLibListForm.initVersions(getVersions(),
                     UpdateType.LibUpdate, UpdateType.LibFinishUpdate);
                 productLibListForm.hideControls();
@@ -186,7 +169,7 @@ namespace LocalERP.WinForm
         {
             if (productLibOverflowForm == null || productLibOverflowForm.IsDisposed)
             {
-                productLibOverflowForm = new ProductCirculationForm(ProductCirculation.CirculationTypeConf_LibOverflow);
+                productLibOverflowForm = new ProductCirculationForm(ProductCirculation.CirculationTypeConf_LibOverflow, ProductStainlessCirculationDao.getInstance());
                 productLibOverflowForm.hideSomeControls();
                 appendEvent(productLibOverflowForm);
             }
@@ -199,7 +182,7 @@ namespace LocalERP.WinForm
         {
             if (productLibLossForm == null || productLibLossForm.IsDisposed)
             {
-                productLibLossForm = new ProductCirculationForm(ProductCirculation.CirculationTypeConf_LibLoss);
+                productLibLossForm = new ProductCirculationForm(ProductCirculation.CirculationTypeConf_LibLoss, ProductStainlessCirculationDao.getInstance());
                 productLibLossForm.hideSomeControls();
                 appendEvent(productLibLossForm);
             }

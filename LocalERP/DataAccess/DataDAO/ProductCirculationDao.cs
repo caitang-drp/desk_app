@@ -7,7 +7,7 @@ using System.Data;
 
 namespace LocalERP.DataAccess.DataDAO
 {
-    class ProductCirculationDao
+    public abstract class ProductCirculationDao
     {
         private string tableName;
 
@@ -17,13 +17,17 @@ namespace LocalERP.DataAccess.DataDAO
             set { tableName = value; }
         }
 
+        public abstract ProductCirculationRecordDao getRecordDao();
+
+        public abstract bool Insert(ProductCirculation info, List<ProductCirculationRecord> records, out int ProductCirculationID); 
+
         public bool Insert(ProductCirculation info, out int ProductCirculationID)
         {
             ProductCirculationID = 0;
             try
             {
-                string commandText = string.Format("insert into {0}(code, circulationTime, comment, status, customerID, type, flowType, total, realTotal, previousArrears, thisPayed, operator) values('{1}','{2}', '{3}', '{4}', {5}, {6}, {7}, {8}, {9},{10},'{11}')",
-                    tableName, info.Code, info.CirculationTime, info.Comment, info.Status, info.CustomerID <= 0 ? "null" : info.CustomerID.ToString(), info.Type, info.FlowType, info.Total, info.RealTotal, info.PreviousArrears, info.Oper);
+                string commandText = string.Format("insert into {0}(code, circulationTime, comment, status, customerID, type, flowType, total, realTotal, previousArrears, thisPayed, operator) values('{1}','{2}', '{3}', '{4}', {5}, {6}, {7}, {8}, {9},{10},{11},'{12}')",
+                    tableName, info.Code, info.CirculationTime, info.Comment, info.Status, info.CustomerID <= 0 ? "null" : info.CustomerID.ToString(), info.Type, info.FlowType, info.Total, info.RealTotal, info.ThisPayed, info.PreviousArrears, info.Oper);
                 DbHelperAccess.executeNonQuery(commandText);
                 ProductCirculationID = DbHelperAccess.executeLastID("ID", tableName);
                 return true;
@@ -55,9 +59,9 @@ namespace LocalERP.DataAccess.DataDAO
         {
             StringBuilder commandText = null;
             if(type < 3)
-                commandText = new StringBuilder(string.Format("select ProductCirculation.*, Customer.name from ProductCirculation, Customer where Customer.ID = ProductCirculation.customerID and circulationTime between #{0}# and #{1}# ", startTime.ToString("yyyy-MM-dd"), endTime.ToString("yyyy-MM-dd")));
+                commandText = new StringBuilder(string.Format("select {0}.*, Customer.name from {0}, Customer where Customer.ID = {0}.customerID and circulationTime between #{1}# and #{2}# ",tableName, startTime.ToString("yyyy-MM-dd"), endTime.ToString("yyyy-MM-dd")));
             else if(type == 3)
-                commandText = new StringBuilder(string.Format("select ProductCirculation.* from ProductCirculation where circulationTime between #{0}# and #{1}# ", startTime.ToString("yyyy-MM-dd"), endTime.ToString("yyyy-MM-dd")));
+                commandText = new StringBuilder(string.Format("select {0}.* from {0} where circulationTime between #{1}# and #{2}# ", tableName, startTime.ToString("yyyy-MM-dd"), endTime.ToString("yyyy-MM-dd")));
             if(type > 0)
                 commandText.Append(string.Format(" and type between {0} and {1}", type*2-1, type*2));
             if (status > 0)
@@ -65,13 +69,13 @@ namespace LocalERP.DataAccess.DataDAO
             if (!string.IsNullOrEmpty(customerName))
                 commandText.Append(string.Format(" and Customer.name like '%{0}%'", customerName));
 
-            commandText.Append(" order by ProductCirculation.ID desc");
+            commandText.Append(string.Format(" order by {0}.ID desc", tableName));
             return DbHelperAccess.executeQuery(commandText.ToString());
         }
 
         public ProductCirculation FindByID(int ID)
         {
-            string commandText = string.Format("select * from ProductCirculation where ID={0}", ID);
+            string commandText = string.Format("select * from {0} where ID={1}", tableName, ID);
             DataRow dr = DbHelperAccess.executeQueryGetOneRow(commandText);
             ProductCirculation sell = new ProductCirculation(); 
             if (dr != null) {
@@ -86,11 +90,11 @@ namespace LocalERP.DataAccess.DataDAO
                     sell.CustomerID = customerID;
                 
                 sell.Oper = dr["operator"] as string;
-                double pay = 0, payed;
-                if (double.TryParse(dr["pay"].ToString(), out pay))
-                    sell.RealTotal = pay;
-                if (double.TryParse(dr["payed"].ToString(), out payed))
-                    sell.ThisPayed = payed;
+                double realTotal = 0, thisPayed;
+                if (double.TryParse(dr["realTotal"].ToString(), out realTotal))
+                    sell.RealTotal = realTotal;
+                if (double.TryParse(dr["thisPayed"].ToString(), out thisPayed))
+                    sell.ThisPayed = thisPayed;
                 //not reasonal
                 if(customerID > 0)
                     sell.CustomerName = CustomerDao.getInstance().FindByID(sell.CustomerID).Name;
@@ -102,7 +106,7 @@ namespace LocalERP.DataAccess.DataDAO
 
         public int getMaxCode(string code)
         {
-            string commandText = string.Format("select max(code) from ProductCirculation where code like '{0}-{1}-%'", code, DateTime.Now.ToString("yyyyMMdd"));
+            string commandText = string.Format("select max(code) from {0} where code like '{1}-{2}-%'", tableName, code, DateTime.Now.ToString("yyyyMMdd"));
             DataRow dr = DbHelperAccess.executeQueryGetOneRow(commandText);
             string result = dr[0] as string;
             if (string.IsNullOrEmpty(result))
@@ -121,6 +125,6 @@ namespace LocalERP.DataAccess.DataDAO
             string commandText = string.Format("delete from ProductCirculation where ID={0}", ID);
             return DbHelperAccess.executeNonQuery(commandText);
         }
-        
+
     }
 }
