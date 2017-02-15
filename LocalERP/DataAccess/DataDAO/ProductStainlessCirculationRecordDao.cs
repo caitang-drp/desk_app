@@ -21,8 +21,8 @@ namespace LocalERP.DataAccess.DataDAO
         {
             try
             {
-                string commandText = string.Format("insert into ProductStainlessCirculationRecord(productID, quantityPerPiece, pieces, totalNum, unit, price, circulationID) values('{0}', {1}, {2}, '{3}','{4}', '{5}', '{6}')",
-                    info.ProductID, info.QuantityPerPiece, info.Pieces, info.TotalNum, info.Unit, info.Price, info.CirculationID);
+                string commandText = string.Format("insert into ProductStainlessCirculationRecord(productID, quantityPerPiece, pieces, totalNum, unit, price, totalPrice, circulationID) values('{0}', {1}, {2}, '{3}','{4}', '{5}', '{6}', '{7}')",
+                    info.ProductID, info.QuantityPerPiece, info.Pieces, info.TotalNum, info.Unit, info.Price, info.TotalPrice, info.CirculationID);
                 DbHelperAccess.executeNonQuery(commandText);
                 int recordID = DbHelperAccess.executeLastID("ID", "ProductStainlessCirculationRecord");
                 return recordID;
@@ -37,7 +37,7 @@ namespace LocalERP.DataAccess.DataDAO
         {
             List<ProductCirculationRecord> records = new List<ProductCirculationRecord>();
 
-            string commandText = string.Format("select * from ProductStainlessCirculationRecord, Product where ProductStainlessCirculationRecord.productID = Product.ID and circulationID = {0} order by ProductStainlessCirculationRecord.ID", circulationID);
+            string commandText = string.Format("select * from ProductStainlessCirculationRecord, ProductStainless where ProductStainlessCirculationRecord.productID = ProductStainless.ID and circulationID = {0} order by ProductStainlessCirculationRecord.ID", circulationID);
             DataTable dt = DbHelperAccess.executeQuery(commandText);
             foreach (DataRow dr in dt.Rows) {
                 ProductStainlessCirculationRecord record = new ProductStainlessCirculationRecord();
@@ -45,10 +45,10 @@ namespace LocalERP.DataAccess.DataDAO
                 record.ID = (int)dr["ProductStainlessCirculationRecord.ID"];
 
                 double price;
-                double.TryParse(dr["ProductStainlessCirculationRecord.price"].ToString(), out price);
+                double.TryParse(dr["price"].ToString(), out price);
                 record.Price = price;
 
-                record.ProductID = (int)dr["Product.ID"];
+                record.ProductID = (int)dr["ProductStainless.ID"];
                 record.ProductName = dr["name"].ToString();
 
                 record.TotalNum = (int)dr["totalNum"];

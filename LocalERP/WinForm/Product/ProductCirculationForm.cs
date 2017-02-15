@@ -309,34 +309,50 @@ namespace LocalERP.WinForm
             return true;
         }
 
-        protected bool getCirculation(out ProductCirculation sell)
+        protected bool getCirculation(out ProductCirculation circulation)
         {
-            sell = new ProductCirculation();
-            sell.ID = circulationID;
-            sell.Type = (int)type;
-            sell.FlowType = flowType;
+            circulation = new ProductCirculation();
+            circulation.ID = circulationID;
+            circulation.Type = (int)type;
+            circulation.FlowType = flowType;
 
             string name;
             if (ValidateUtility.getName(this.textBox_serial, this.errorProvider1, out name) == false)
                 return false;
-            sell.Code = name;
+            circulation.Code = name;
 
             int customerID=-1;
             if (this.lookupText1.Visible == true && ValidateUtility.getLookupValueID(this.lookupText1, this.errorProvider1, out customerID) == false)
                 return false;
 
-            sell.CustomerID = customerID;
+            circulation.CustomerID = customerID;
 
-            sell.CirculationTime = this.dateTime_sellTime.Value;
-            sell.Comment = this.textBox_comment.Text;
-            sell.Oper = this.textBox_operator.Text;
+            circulation.CirculationTime = this.dateTime_sellTime.Value;
+            circulation.Comment = this.textBox_comment.Text;
+            circulation.Oper = this.textBox_operator.Text;
 
             if (dataGridView2[1, 0].Value == null || dataGridView2[1, 0].Value.ToString()=="")
-                sell.Total = 0;
+                circulation.Total = 0;
             else
-                sell.Total = (double)dataGridView2[1, 0].Value;
+                circulation.Total = (double)dataGridView2[1, 0].Value;
 
-            sell.CustomerName = this.lookupText1.Text_Lookup;
+            circulation.CustomerName = this.lookupText1.Text_Lookup;
+
+            double total, realTotal, previousArrears, thisPayed;
+
+            if (ValidateUtility.getDouble(this.dataGridView2[1, 0], out total)
+                && ValidateUtility.getDouble(this.textBox_realTotal, this.errorProvider1, false, out realTotal)
+                && ValidateUtility.getDouble(this.textBox_previousArrears, this.errorProvider1, false, out previousArrears)
+                && ValidateUtility.getDouble(this.textBox_thisPayed, this.errorProvider1, false, out thisPayed))
+            {
+                circulation.Total = total;
+                circulation.RealTotal = realTotal;
+                circulation.PreviousArrears = previousArrears;
+                circulation.ThisPayed = thisPayed;
+            }
+            else
+                return false;
+
             return true;
         }
 

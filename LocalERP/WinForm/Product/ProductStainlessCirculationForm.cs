@@ -186,7 +186,7 @@ namespace LocalERP.WinForm
 
             int number = this.dataGridView1.RowCount;
 
-            double quantityPerPiece, pieces, price;
+            double quantityPerPiece, pieces, price, totalPrice;
             int num;
             string unit;
             bool isInputCorrect = true;
@@ -200,7 +200,8 @@ namespace LocalERP.WinForm
                     || ValidateUtility.getDouble(row.Cells["pieces"], out pieces) == false
                     || ValidateUtility.getInt(row.Cells["num"], true, true, out num) == false
                     || ValidateUtility.getString(row.Cells["unit"], false, out unit) == false
-                    || ValidateUtility.getDouble(row.Cells["price"], out price) == false)
+                    || ValidateUtility.getDouble(row.Cells["price"], out price) == false
+                    || ValidateUtility.getDouble(row.Cells["totalPrice"], out totalPrice) == false)
                     return false;
                 ProductStainlessCirculationRecord record = new ProductStainlessCirculationRecord();
 
@@ -212,6 +213,7 @@ namespace LocalERP.WinForm
                 record.TotalNum = num;
                 record.Unit = unit;
                 record.Price = price;
+                record.TotalPrice = totalPrice;
                 
                 records.Add(record);
             }
