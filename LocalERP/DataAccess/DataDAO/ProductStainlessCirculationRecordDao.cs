@@ -44,12 +44,20 @@ namespace LocalERP.DataAccess.DataDAO
                 record.CirculationID = circulationID;
                 record.ID = (int)dr["ProductStainlessCirculationRecord.ID"];
 
-                double price;
+                double quantityPerPiece, pieces, price;
                 double.TryParse(dr["price"].ToString(), out price);
                 record.Price = price;
 
                 record.ProductID = (int)dr["ProductStainless.ID"];
                 record.ProductName = dr["name"].ToString();
+
+                double.TryParse(dr["ProductStainlessCirculationRecord.quantityPerPiece"].ToString(), out quantityPerPiece);
+                record.QuantityPerPiece = quantityPerPiece;
+
+                double.TryParse(dr["pieces"].ToString(), out pieces);
+                record.Pieces = pieces;
+
+                record.Unit = dr["ProductStainlessCirculationRecord.unit"].ToString();
 
                 record.TotalNum = (int)dr["totalNum"];
                 records.Add(record);

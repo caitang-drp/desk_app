@@ -73,7 +73,6 @@ namespace LocalERP.WinForm
             this.textBox_realTotal = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.button_savePay = new System.Windows.Forms.Button();
             this.panel_pay = new System.Windows.Forms.Panel();
             this.label16 = new System.Windows.Forms.Label();
             this.textBox_previousArrears = new System.Windows.Forms.TextBox();
@@ -495,18 +494,6 @@ namespace LocalERP.WinForm
             this.label7.TabIndex = 56;
             this.label7.Text = "元";
             // 
-            // button_savePay
-            // 
-            this.button_savePay.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.button_savePay.Location = new System.Drawing.Point(552, 15);
-            this.button_savePay.Name = "button_savePay";
-            this.button_savePay.Size = new System.Drawing.Size(101, 23);
-            this.button_savePay.TabIndex = 57;
-            this.button_savePay.Text = "保存付款信息";
-            this.button_savePay.UseVisualStyleBackColor = true;
-            this.button_savePay.Visible = false;
-            this.button_savePay.Click += new System.EventHandler(this.button_savePay_Click);
-            // 
             // panel_pay
             // 
             this.panel_pay.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
@@ -519,7 +506,6 @@ namespace LocalERP.WinForm
             this.panel_pay.Controls.Add(this.textBox_accumulative);
             this.panel_pay.Controls.Add(this.label13);
             this.panel_pay.Controls.Add(this.label14);
-            this.panel_pay.Controls.Add(this.button_savePay);
             this.panel_pay.Controls.Add(this.label7);
             this.panel_pay.Controls.Add(this.label6);
             this.panel_pay.Controls.Add(this.textBox_realTotal);
@@ -700,7 +686,6 @@ namespace LocalERP.WinForm
         private System.Windows.Forms.Label label_title;
         private System.Windows.Forms.TextBox textBox_operator;
         private System.Windows.Forms.TextBox textBox_thisPayed;
-        private System.Windows.Forms.Button button_savePay;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox textBox_realTotal;

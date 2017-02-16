@@ -27,7 +27,7 @@ namespace LocalERP.WinForm
         private int flowType;
         private string code;
 
-        private ProductCirculation sell = null;
+        private ProductCirculation circulation = null;
         public List<ProductCirculationRecord> records = null;
 
         protected bool needSave = false;
@@ -116,19 +116,20 @@ namespace LocalERP.WinForm
                 return;
             }
 
-            sell = cirDao.FindByID(circulationID);
+            circulation = cirDao.FindByID(circulationID);
 
-            this.textBox_serial.Text = sell.Code;
-            this.dateTime_sellTime.Value = sell.CirculationTime;
-            this.textBox_comment.Text = sell.Comment;
-            this.lookupText1.LookupArg = new LookupArg(sell.CustomerID, sell.CustomerName);
-            this.lookupText1.Text_Lookup = sell.CustomerName;
-            this.textBox_operator.Text = sell.Oper;
+            this.textBox_serial.Text = circulation.Code;
+            this.dateTime_sellTime.Value = circulation.CirculationTime;
+            this.textBox_comment.Text = circulation.Comment;
+            this.lookupText1.LookupArg = new LookupArg(circulation.CustomerID, circulation.CustomerName);
+            this.lookupText1.Text_Lookup = circulation.CustomerName;
+            this.textBox_operator.Text = circulation.Oper;
 
-            this.textBox_thisPayed.Text = sell.ThisPayed.ToString();
-            this.textBox_realTotal.Text = sell.RealTotal.ToString();
+            this.textBox_realTotal.Text = circulation.RealTotal.ToString();
+            this.textBox_previousArrears.Text = circulation.PreviousArrears.ToString();
+            this.textBox_thisPayed.Text = circulation.ThisPayed.ToString();
 
-            this.backgroundWorker.RunWorkerAsync(sell.ID);
+            this.backgroundWorker.RunWorkerAsync(circulation.ID);
             this.invokeBeginLoadNotify();
         }
 
@@ -139,7 +140,7 @@ namespace LocalERP.WinForm
             (this.lookupText1.LookupForm as CategoryItemForm).initTree();
         }
 
-        protected virtual void setRecord(ProductCirculationRecord record) { }
+        protected virtual void setRecord(DataGridViewRow row, ProductCirculationRecord record) { }
 
         private void backgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
@@ -152,19 +153,15 @@ namespace LocalERP.WinForm
             this.dataGridView1.Rows.Clear();
             foreach (ProductCirculationRecord record in records)
             {
-                
                 int index = this.dataGridView1.Rows.Add();
-                this.dataGridView1.Rows[index].Cells["ID"].Value = record.ID;
-                this.dataGridView1.Rows[index].Cells["product"].Value = new LookupArg(record.ProductID, record.ProductName);
-                this.dataGridView1.Rows[index].Cells["price"].Value = record.Price;
-
+                this.setRecord(this.dataGridView1.Rows[index], record);
                 this.setSubTotalPrice(index);
             }
 
             this.setTotalPrice();
 
-            if (sell != null)
-                openMode = sell.Status;
+            if (circulation != null)
+                openMode = circulation.Status;
             switchMode(openMode);
 
             this.resetNeedSave(false);
@@ -619,19 +616,6 @@ namespace LocalERP.WinForm
         private void lookupText1_valueSetted(object sender, LookupArg arg)
         {
             resetNeedSave(true);
-        }
-
-        private void button_savePay_Click(object sender, EventArgs e)
-        {/*
-            double pay = 0;
-            double payed = 0;
-            if (ValidateUtility.getDouble(this.textBox_thisPayed, this.errorProvider1, false, out payed) &&
-                ValidateUtility.getDouble(this.textBox_realTotal, this.errorProvider1,false, out pay))
-            {
-                ProductCirculationDao.getInstance().UpdatePay(circulationID, pay, payed);
-                MessageBox.Show("保存货款信息成功!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                this.invokeUpdateNotify(notifyType);
-            }*/
         }
     }
 }

@@ -22,7 +22,7 @@ namespace LocalERP.WinForm
         {
             bool refresh = false;
             //reference to FormMgr is high coupling
-            Dictionary<UpdateType, int> dic = FormMgr.getInstance().getVersions();
+            Dictionary<UpdateType, int> dic = FormSingletonFactory.getInstance().getVersions();
             List<UpdateType> needUpdateVersions = new List<UpdateType>();
             foreach (UpdateType key in versionDic.Keys)
             {
@@ -55,7 +55,7 @@ namespace LocalERP.WinForm
         protected void refreshVersion(UpdateType type) {
             //reference to FormMgr is high coupling
             if (this.versionDic.ContainsKey(type))
-                this.versionDic[type] = FormMgr.getInstance().getVersions()[type];
+                this.versionDic[type] = FormSingletonFactory.getInstance().getVersions()[type];
         }
 
         public delegate void UpdateNotify(UpdateType notifyType);

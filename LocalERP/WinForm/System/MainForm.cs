@@ -99,7 +99,7 @@ namespace LocalERP.WinForm
                     FormSingletonFactory.getInstance().getProductCIForm().Show(this.dockPanel1);
                     break;
                 case "销售收款单":
-                    FormMgr.getInstance().getSellReceiptBillForm().Show(this.dockPanel1);
+                    FormSingletonFactory.getInstance().getSellReceiptBillForm().Show(this.dockPanel1);
                     //FormMgr.getInstance().getSellReceiptBillForm().reload(openMode, ID);
                     break;
                 case "单据列表":
@@ -108,7 +108,7 @@ namespace LocalERP.WinForm
                 case "销售退点单":
                     break;
                 case "采购付款单":
-                    FormMgr.getInstance().getbuyPayBillForm().Show(this.dockPanel1);
+                    FormSingletonFactory.getInstance().getbuyPayBillForm().Show(this.dockPanel1);
                     break;
                 case "采购退点单":
                     break;

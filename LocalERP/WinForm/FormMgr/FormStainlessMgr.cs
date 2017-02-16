@@ -13,6 +13,7 @@ namespace LocalERP.WinForm
 {
     class FormStainlessMgr: FormMgr
     {
+        /************* purchase ******************/
         public override ProductCirculationListForm getProductPurchaseListForm()
         {
             if (productPurchaseListForm == null || productPurchaseListForm.IsDisposed)
@@ -40,21 +41,128 @@ namespace LocalERP.WinForm
         {
             if (productPurchaseBackForm == null || productPurchaseBackForm.IsDisposed)
             {
-                productPurchaseBackForm = new ProductCirculationForm(ProductCirculation.CirculationTypeConf_PurchaseBack, ProductStainlessCirculationDao.getInstance());
+                productPurchaseBackForm = new ProductStainlessCirculationForm(ProductCirculation.CirculationTypeConf_PurchaseBack, ProductStainlessCirculationDao.getInstance());
                 appendEvent(productPurchaseBackForm);
             }
             return productPurchaseBackForm;
         }
 
-        /******************** data setting********************************/
-        //product category item form
-        //private CategoryItemForm productCIForm = null;
+        /****************** sell ****************/
+        public override ProductCirculationListForm getProductSellListForm()
+        {
+            if (productSellListForm == null || productSellListForm.IsDisposed)
+            {
+                productSellListForm = new ProductCirculationListForm(mainForm, 2, "销售单据列表", ProductStainlessCirculationDao.getInstance());
+                productSellListForm.initVersions(getVersions(),
+                    UpdateType.SellUpdate, UpdateType.SellFinishUpdate, UpdateType.CustomerUpdate);
+
+                appendEvent(productSellListForm);
+            }
+            return productSellListForm;
+        }
+
+        public override ProductCirculationForm getProductSellForm()
+        {
+            if (productSellForm == null || productSellForm.IsDisposed)
+            {
+                productSellForm = new ProductStainlessCirculationForm(ProductCirculation.CirculationTypeConf_Sell, ProductStainlessCirculationDao.getInstance());
+                appendEvent(productSellForm);
+            }
+            return productSellForm;
+        }
+
+        public override ProductCirculationForm getProductSellBackForm()
+        {
+            if (productSellBackForm == null || productSellBackForm.IsDisposed)
+            {
+                productSellBackForm = new ProductStainlessCirculationForm(ProductCirculation.CirculationTypeConf_SellBack, ProductStainlessCirculationDao.getInstance());
+                appendEvent(productSellBackForm);
+            }
+            return productSellBackForm;
+        }
+
+        /************ lib *************/
+        public override ProductCirculationListForm getProductLibListForm()
+        {
+            if (productLibListForm == null || productLibListForm.IsDisposed)
+            {
+                productLibListForm = new ProductCirculationListForm(mainForm, 3, "盘点单据列表", ProductStainlessCirculationDao.getInstance());
+                productLibListForm.initVersions(getVersions(),
+                    UpdateType.LibUpdate, UpdateType.LibFinishUpdate);
+                productLibListForm.hideControls();
+
+                appendEvent(productLibListForm);
+            }
+            return productLibListForm;
+        }
+
+        public override ProductCirculationForm getProductLibOverflowForm()
+        {
+            if (productLibOverflowForm == null || productLibOverflowForm.IsDisposed)
+            {
+                productLibOverflowForm = new ProductCirculationForm(ProductCirculation.CirculationTypeConf_LibOverflow, ProductStainlessCirculationDao.getInstance());
+                productLibOverflowForm.hideSomeControls();
+                appendEvent(productLibOverflowForm);
+            }
+            return productLibOverflowForm;
+        }
+
+        public override ProductCirculationForm getProductLibLossForm()
+        {
+            if (productLibLossForm == null || productLibLossForm.IsDisposed)
+            {
+                productLibLossForm = new ProductCirculationForm(ProductCirculation.CirculationTypeConf_LibLoss, ProductStainlessCirculationDao.getInstance());
+                productLibLossForm.hideSomeControls();
+                appendEvent(productLibLossForm);
+            }
+            return productLibLossForm;
+        }
+
+        /*************** query statistic ****************/
+        public override QueryLibForm getQueryLibForm()
+        {
+            if (queryLibForm == null || queryLibForm.IsDisposed)
+            {
+                queryLibForm = new QueryLibForm(ProxyMgr.getInstance().getProductLibQueryProxy(), null, "库存查询");
+                queryLibForm.initVersions(getVersions(),
+                    UpdateType.PurchaseFinishUpdate, UpdateType.SellFinishUpdate, UpdateType.LibFinishUpdate, UpdateType.ProductUpdate, UpdateType.ProductCategoryUpdate);
+                appendEvent(queryLibForm);
+            }
+            return queryLibForm;
+        }
+
+        public override QueryDetailForm getQueryDetailForm()
+        {
+            if (queryDetailForm == null || queryDetailForm.IsDisposed)
+            {
+                queryDetailForm = new QueryDetailForm();
+                queryDetailForm.initVersions(getVersions(),
+                    UpdateType.PurchaseFinishUpdate, UpdateType.SellFinishUpdate, UpdateType.LibFinishUpdate, UpdateType.ProductUpdate, UpdateType.CustomerUpdate);
+
+                appendEvent(queryDetailForm);
+            }
+            return queryDetailForm;
+        }
+
+        public override ProductStatisticForm getProductStatisticForm()
+        {
+            if (productStatisticForm == null || productStatisticForm.IsDisposed)
+            {
+                productStatisticForm = new ProductStatisticForm();
+                productStatisticForm.initVersions(getVersions(),
+                    UpdateType.PurchaseFinishUpdate, UpdateType.SellFinishUpdate, UpdateType.LibFinishUpdate, UpdateType.ProductUpdate, UpdateType.CustomerUpdate);
+                appendEvent(productStatisticForm);
+            }
+            return productStatisticForm;
+        }
+
+        /************** data setting ************************/
         public override CategoryItemForm getProductCIForm()
         {
             if (productCIForm == null || productCIForm.IsDisposed)
             {
                 productCIForm = new CategoryItemForm(1, new ProductStainlessCategoryItemProxy(), DataUtility.DATA_PRODUCT, this.mainForm);
-                productCIForm.initVersions(FormMgr.getInstance().getVersions(),
+                productCIForm.initVersions(this.getVersions(),
                     UpdateType.ProductUpdate, UpdateType.ProductCategoryUpdate, UpdateType.CustomerUpdate, UpdateType.CustomerCategoryUpdate);
                 appendEvent(productCIForm);
             }
@@ -64,7 +172,7 @@ namespace LocalERP.WinForm
         public override CategoryItemForm getProductCIForm_select()
         {
             CategoryItemForm productCIForm_select = new CategoryItemForm(0, new ProductStainlessCategoryItemProxy(), DataUtility.DATA_PRODUCT, this.mainForm);
-            productCIForm_select.initVersions(FormMgr.getInstance().getVersions(),
+            productCIForm_select.initVersions(getVersions(),
                 UpdateType.ProductUpdate, UpdateType.ProductCategoryUpdate, UpdateType.CustomerUpdate, UpdateType.CustomerCategoryUpdate);
                     
             appendEvent(productCIForm_select);

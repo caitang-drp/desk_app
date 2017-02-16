@@ -27,7 +27,7 @@ namespace LocalERP.DataAccess.DataDAO
             try
             {
                 string commandText = string.Format("insert into {0}(code, circulationTime, comment, status, customerID, type, flowType, total, realTotal, previousArrears, thisPayed, operator) values('{1}','{2}', '{3}', '{4}', {5}, {6}, {7}, {8}, {9},{10},{11},'{12}')",
-                    tableName, info.Code, info.CirculationTime, info.Comment, info.Status, info.CustomerID <= 0 ? "null" : info.CustomerID.ToString(), info.Type, info.FlowType, info.Total, info.RealTotal, info.ThisPayed, info.PreviousArrears, info.Oper);
+                    tableName, info.Code, info.CirculationTime, info.Comment, info.Status, info.CustomerID <= 0 ? "null" : info.CustomerID.ToString(), info.Type, info.FlowType, info.Total, info.RealTotal, info.PreviousArrears, info.ThisPayed, info.Oper);
                 DbHelperAccess.executeNonQuery(commandText);
                 ProductCirculationID = DbHelperAccess.executeLastID("ID", tableName);
                 return true;
@@ -77,28 +77,32 @@ namespace LocalERP.DataAccess.DataDAO
         {
             string commandText = string.Format("select * from {0} where ID={1}", tableName, ID);
             DataRow dr = DbHelperAccess.executeQueryGetOneRow(commandText);
-            ProductCirculation sell = new ProductCirculation(); 
+            ProductCirculation circulation = new ProductCirculation(); 
             if (dr != null) {
-                sell.ID = (int)dr["ID"];
-                sell.Code = dr["code"] as string;
-                sell.CirculationTime = (DateTime)dr["circulationTime"];
-                sell.Comment = dr["comment"] as string;
-                sell.Status = (int)dr["status"];
+                circulation.ID = (int)dr["ID"];
+                circulation.Code = dr["code"] as string;
+                circulation.CirculationTime = (DateTime)dr["circulationTime"];
+                circulation.Comment = dr["comment"] as string;
+                circulation.Status = (int)dr["status"];
                 
                 int customerID = 0;
                 if(int.TryParse(dr["customerID"].ToString(), out customerID))
-                    sell.CustomerID = customerID;
+                    circulation.CustomerID = customerID;
                 
-                sell.Oper = dr["operator"] as string;
-                double realTotal = 0, thisPayed;
+                circulation.Oper = dr["operator"] as string;
+
+                double realTotal = 0, previousArrears, thisPayed;
+                
                 if (double.TryParse(dr["realTotal"].ToString(), out realTotal))
-                    sell.RealTotal = realTotal;
+                    circulation.RealTotal = realTotal;
+                if (double.TryParse(dr["previousArrears"].ToString(), out previousArrears))
+                    circulation.PreviousArrears = previousArrears;
                 if (double.TryParse(dr["thisPayed"].ToString(), out thisPayed))
-                    sell.ThisPayed = thisPayed;
+                    circulation.ThisPayed = thisPayed;
                 //not reasonal
                 if(customerID > 0)
-                    sell.CustomerName = CustomerDao.getInstance().FindByID(sell.CustomerID).Name;
-                return sell;
+                    circulation.CustomerName = CustomerDao.getInstance().FindByID(circulation.CustomerID).Name;
+                return circulation;
             }
             return null;
             

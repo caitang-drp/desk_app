@@ -180,7 +180,7 @@ namespace LocalERP.UiDataProxy
 
         public override MyDockContent getItemForm(int openMode, int ID)
         {
-            CustomerForm form = FormMgr.getInstance().getCustomerForm();
+            CustomerForm form = FormSingletonFactory.getInstance().getCustomerForm();
             form.reload(openMode, ID);
             return form;
         }

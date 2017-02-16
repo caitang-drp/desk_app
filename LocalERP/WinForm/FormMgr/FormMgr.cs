@@ -11,16 +11,16 @@ using LocalERP.DataAccess.DataDAO;
 
 namespace LocalERP.WinForm
 {
-    public class FormMgr
+    public abstract class FormMgr
     {
         //singleton
-        private static FormMgr formMgr;
+        /*private static FormMgr formMgr;
         public static FormMgr getInstance()
         {
             if (formMgr == null)
                 formMgr = new FormMgr();
             return formMgr;
-        }
+        }*/
 
         //updateVersion存放各种业务数据的版本，数值越高，数据越新
         //如果Form的数据版本低于updateVersion，则显示窗口时需要刷新
@@ -48,6 +48,46 @@ namespace LocalERP.WinForm
             set { mainForm = value; }
         }
 
+        /*************  purchase  *****************/
+        //product purchase list form
+        protected ProductCirculationListForm productPurchaseListForm = null;
+        public abstract ProductCirculationListForm getProductPurchaseListForm();
+
+        //product purchase detail form
+        protected ProductCirculationForm productPurchaseForm = null;
+        public abstract ProductCirculationForm getProductPurchaseForm();
+
+        //product purchase back detail form
+        protected ProductCirculationForm productPurchaseBackForm = null;
+        public abstract ProductCirculationForm getProductPurchaseBackForm();
+
+        /***************  sell   ************************/
+        //product sell list form
+        protected ProductCirculationListForm productSellListForm = null;
+        public abstract ProductCirculationListForm getProductSellListForm();
+
+        //product sell detail form
+        protected ProductCirculationForm productSellForm = null;
+        public abstract ProductCirculationForm getProductSellForm();
+
+        //product sell back detail form
+        protected ProductCirculationForm productSellBackForm = null;
+        public abstract ProductCirculationForm getProductSellBackForm();
+
+        /***************  lib  ************************/
+        //product lib list form
+        protected ProductCirculationListForm productLibListForm = null;
+        public abstract ProductCirculationListForm getProductLibListForm();
+
+        //product lib overflow detail form
+        protected ProductCirculationForm productLibOverflowForm = null;
+        public abstract ProductCirculationForm getProductLibOverflowForm();
+
+        //product Lib loss detail form
+        protected ProductCirculationForm productLibLossForm = null;
+        public abstract ProductCirculationForm getProductLibLossForm();
+
+        /****************cash circulation************************/
         // 销售收款单
         private SellReceiptBillForm sellReceiptBillForm = null;
         public SellReceiptBillForm getSellReceiptBillForm()
@@ -84,196 +124,29 @@ namespace LocalERP.WinForm
             return payReceiptListForm;
         }
 
-        /*************  purchase  *****************/
-        //product purchase list form
-        protected ProductCirculationListForm productPurchaseListForm = null;
-        public virtual ProductCirculationListForm getProductPurchaseListForm()
-        {
-            return null;
-        }
-
-        //product purchase detail form
-        protected ProductCirculationForm productPurchaseForm = null;
-        public virtual ProductCirculationForm getProductPurchaseForm()
-        {
-            return null;
-        }
-
-        //product purchase back detail form
-        protected ProductCirculationForm productPurchaseBackForm = null;
-        public virtual ProductCirculationForm getProductPurchaseBackForm()
-        {
-            return null;
-        }
-
-        /***************  sell   ************************/
-        //product sell list form
-        private ProductCirculationListForm productSellListForm = null;
-        public virtual ProductCirculationListForm getProductSellListForm()
-        {
-            if (productSellListForm == null || productSellListForm.IsDisposed)
-            {
-                productSellListForm = new ProductCirculationListForm(mainForm, 2, "销售单据列表", ProductStainlessCirculationDao.getInstance());
-                productSellListForm.initVersions(getVersions(),
-                    UpdateType.SellUpdate, UpdateType.SellFinishUpdate, UpdateType.CustomerUpdate);
-
-                appendEvent(productSellListForm);
-            }
-            return productSellListForm;
-        }
-
-        //product sell detail form
-        private ProductCirculationForm productSellForm = null;
-        public virtual ProductCirculationForm getProductSellForm()
-        {
-            if (productSellForm == null || productSellForm.IsDisposed)
-            {
-                productSellForm = new ProductCirculationForm(ProductCirculation.CirculationTypeConf_Sell, ProductStainlessCirculationDao.getInstance());
-                appendEvent(productSellForm);
-            }
-            return productSellForm;
-        }
-
-        //product sell back detail form
-        private ProductCirculationForm productSellBackForm = null;
-        public virtual ProductCirculationForm getProductSellBackForm()
-        {
-            if (productSellBackForm == null || productSellBackForm.IsDisposed)
-            {
-                productSellBackForm = new ProductCirculationForm(ProductCirculation.CirculationTypeConf_SellBack, ProductStainlessCirculationDao.getInstance());
-                appendEvent(productSellBackForm);
-            }
-            return productSellBackForm;
-        }
-
-        /***************  lib  ************************/
-        //product lib list form
-        private ProductCirculationListForm productLibListForm = null;
-        public virtual ProductCirculationListForm getProductLibListForm()
-        {
-            if (productLibListForm == null || productLibListForm.IsDisposed)
-            {
-                productLibListForm = new ProductCirculationListForm(mainForm, 3, "盘点单据列表", ProductStainlessCirculationDao.getInstance());
-                productLibListForm.initVersions(getVersions(),
-                    UpdateType.LibUpdate, UpdateType.LibFinishUpdate);
-                productLibListForm.hideControls();
-
-                appendEvent(productLibListForm);
-            }
-            return productLibListForm;
-        }
-
-        //product lib overflow detail form
-        private ProductCirculationForm productLibOverflowForm = null;
-        public virtual ProductCirculationForm getProductLibOverflowForm()
-        {
-            if (productLibOverflowForm == null || productLibOverflowForm.IsDisposed)
-            {
-                productLibOverflowForm = new ProductCirculationForm(ProductCirculation.CirculationTypeConf_LibOverflow, ProductStainlessCirculationDao.getInstance());
-                productLibOverflowForm.hideSomeControls();
-                appendEvent(productLibOverflowForm);
-            }
-            return productLibOverflowForm;
-        }
-
-        //product Lib loss detail form
-        private ProductCirculationForm productLibLossForm = null;
-        public virtual ProductCirculationForm getProductLibLossForm()
-        {
-            if (productLibLossForm == null || productLibLossForm.IsDisposed)
-            {
-                productLibLossForm = new ProductCirculationForm(ProductCirculation.CirculationTypeConf_LibLoss, ProductStainlessCirculationDao.getInstance());
-                productLibLossForm.hideSomeControls();
-                appendEvent(productLibLossForm);
-            }
-            return productLibLossForm;
-        }
-
         /**************** query statistic ***************************/
         //product lib query form
-        private QueryLibForm queryLibForm = null;
-        public virtual QueryLibForm getQueryLibForm()
-        {
-            if (queryLibForm == null || queryLibForm.IsDisposed)
-            {
-                queryLibForm = new QueryLibForm(ProxyMgr.getInstance().getProductLibQueryProxy(), null, "库存查询");
-                queryLibForm.initVersions(getVersions(),
-                    UpdateType.PurchaseFinishUpdate, UpdateType.SellFinishUpdate, UpdateType.LibFinishUpdate, UpdateType.ProductUpdate, UpdateType.ProductCategoryUpdate);
-                appendEvent(queryLibForm);
-            }
-            return queryLibForm; 
-        }
+        protected QueryLibForm queryLibForm = null;
+        public abstract QueryLibForm getQueryLibForm();
 
         //product detail query form
-        private QueryDetailForm queryDetailForm = null;
-        public virtual QueryDetailForm getQueryDetailForm()
-        {
-            if (queryDetailForm == null || queryDetailForm.IsDisposed)
-            {
-                queryDetailForm = new QueryDetailForm();
-                queryDetailForm.initVersions(getVersions(),
-                    UpdateType.PurchaseFinishUpdate, UpdateType.SellFinishUpdate, UpdateType.LibFinishUpdate, UpdateType.ProductUpdate, UpdateType.CustomerUpdate);
-
-                appendEvent(queryDetailForm);
-            }
-            return queryDetailForm;
-        }
+        protected QueryDetailForm queryDetailForm = null;
+        public abstract QueryDetailForm getQueryDetailForm();
 
         //product statistic form
-        private ProductStatisticForm productStatisticForm = null;
-        public virtual ProductStatisticForm getProductStatisticForm()
-        {
-            if (productStatisticForm == null || productStatisticForm.IsDisposed)
-            {
-                productStatisticForm = new ProductStatisticForm();
-                productStatisticForm.initVersions(getVersions(),
-                    UpdateType.PurchaseFinishUpdate, UpdateType.SellFinishUpdate, UpdateType.LibFinishUpdate, UpdateType.ProductUpdate, UpdateType.CustomerUpdate);
-                appendEvent(productStatisticForm);
-            }
-            return productStatisticForm;
-        }
+        protected ProductStatisticForm productStatisticForm = null;
+        public abstract ProductStatisticForm getProductStatisticForm();
 
         /******************** data setting********************************/
         //product category item form
         protected CategoryItemForm productCIForm = null;
-        public virtual CategoryItemForm getProductCIForm()
-        {
-            if (productCIForm == null || productCIForm.IsDisposed)
-            {
-                productCIForm = new CategoryItemForm(1, new ProductCategoryItemProxy(), DataUtility.DATA_PRODUCT, this.mainForm);
-                productCIForm.initVersions(getVersions(),
-                    UpdateType.ProductUpdate, UpdateType.ProductCategoryUpdate, UpdateType.CustomerUpdate, UpdateType.CustomerCategoryUpdate);
-                appendEvent(productCIForm);
-            }
-            return productCIForm;
-        }
+        public abstract CategoryItemForm getProductCIForm();
 
-        public virtual CategoryItemForm getProductCIForm_select()
-        {
-            //此处必须新建，详见ProductCirculationForm中引用到此方法时的注释
-            CategoryItemForm productCIForm_select = new CategoryItemForm(0, new ProductCategoryItemProxy(), DataUtility.DATA_PRODUCT, this.mainForm);
-            productCIForm_select.initVersions(getVersions(),
-                UpdateType.ProductUpdate, UpdateType.ProductCategoryUpdate, UpdateType.CustomerUpdate, UpdateType.CustomerCategoryUpdate);
-                    
-            appendEvent(productCIForm_select);
+        public abstract CategoryItemForm getProductCIForm_select();
 
-            return productCIForm_select;
-        }
+        public abstract MyDockContent getProductForm();
 
-        public virtual MyDockContent getProductForm()
-        {
-            ProductClothesForm productForm = new ProductClothesForm();
-            appendEvent(productForm);
-            return productForm;
-        }
-
-        public virtual CustomerForm getCustomerForm()
-        {
-            CustomerForm customerForm = new CustomerForm();
-            appendEvent(customerForm);
-            return customerForm;
-        }
-
+        //customer category item form
         private CategoryItemForm customerCIForm = null;
         public virtual CategoryItemForm getCustomerCIForm()
         {
@@ -298,6 +171,14 @@ namespace LocalERP.WinForm
             return customerCIForm_select;
         }
 
+        public virtual CustomerForm getCustomerForm()
+        {
+            CustomerForm customerForm = new CustomerForm();
+            appendEvent(customerForm);
+            return customerForm;
+        }
+
+        /*************** general method *********************/
         protected void appendEvent(MyDockContent form)
         {
             form.updateNotify += new MyDockContent.UpdateNotify(updateNotify);

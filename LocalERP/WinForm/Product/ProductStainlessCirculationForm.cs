@@ -86,6 +86,18 @@ namespace LocalERP.WinForm
             (dgv.Columns["product"] as DataGridViewLookupColumn).LookupForm = FormSingletonFactory.getInstance().getProductCIForm_select();
         }
 
+        //set
+        protected override void setRecord(DataGridViewRow row, ProductCirculationRecord rec) {
+            ProductStainlessCirculationRecord record = rec as ProductStainlessCirculationRecord;
+            row.Cells["ID"].Value = record.ID;
+            row.Cells["product"].Value = new LookupArg(record.ProductID, record.ProductName);
+            row.Cells["quantityPerPiece"].Value = record.QuantityPerPiece;
+            row.Cells["pieces"].Value = record.Pieces;
+            row.Cells["num"].Value = record.TotalNum;
+            row.Cells["unit"].Value = record.Unit;
+            row.Cells["price"].Value = record.Price;
+        }
+
         //for event: caculate total price
         protected override void dataGridView1_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
         {
