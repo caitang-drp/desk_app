@@ -37,7 +37,12 @@ namespace LocalERP.WinForm
             TreeView treeView_lib = this.getTreeView(
                 new string[] {DataUtility.LIB_LIST, DataUtility.LIB_OVERFLOW, DataUtility.LIB_LOSS });
             this.xPanderPanel_lib.Controls.Add(treeView_lib);
-            
+
+            // should pay, should receipt
+            TreeView treeView_should_pay_receipt = this.getTreeView(
+                new string[] { DataUtility.CASH_LIST, DataUtility.CASH_PAY, DataUtility.CASH_RECEIPT });
+            this.xPanderPanel_should_pay_receipt.Controls.Add(treeView_should_pay_receipt);
+
             TreeView treeView_queryStatistic = this.getTreeView(
                 new string[] {DataUtility.QUERY_LIB, DataUtility.QUERY_DETAIL, DataUtility.STATISTIC});
             this.xPanderPanel_query.Controls.Add(treeView_queryStatistic);
@@ -46,12 +51,6 @@ namespace LocalERP.WinForm
             TreeView treeView_data = this.getTreeView(
                 new string[] { DataUtility.DATA_PRODUCT, DataUtility.DATA_CUSTOMER/*, DataUtility.ACCOUNT_INPUT, DataUtility.ACCOUNT_OPEN*/ });
             this.xPanderPanel_data.Controls.Add(treeView_data);
-
-            // should pay, should receipt
-            TreeView treeView_should_pay_receipt = this.getTreeView(
-                //new string[] { "销售收款单", "销售退点单", "采购付款单", "采购退点单", "单据列表"});
-                new string[] { "销售收款单", "采购付款单", "单据列表"});
-            this.xPanderPanel_should_pay_receipt.Controls.Add(treeView_should_pay_receipt);
 
         }
 
