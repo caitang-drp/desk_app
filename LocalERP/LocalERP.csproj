@@ -77,6 +77,7 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="DataAccess\DataDAO\CharactorValueDao.cs" />
+    <Compile Include="DataAccess\DataDAO\PayReceiptDao.cs" />
     <Compile Include="DataAccess\DataDAO\ProductJobDao.cs" />
     <Compile Include="DataAccess\DataDAO\ProductJobRecordDao.cs" />
     <Compile Include="DataAccess\DataDAO\CustomerDao.cs" />
@@ -84,14 +85,19 @@
     <Compile Include="DataAccess\DataDAO\CategoryDao.cs" />
     <Compile Include="DataAccess\DataDAO\ProductClothesDao.cs" />
     <Compile Include="DataAccess\DataDAO\ProductCirculationDao.cs" />
-    <Compile Include="DataAccess\DataDAO\ProductCirculationRecordDao.cs" />
+    <Compile Include="DataAccess\DataDAO\ProductClothesCirculationRecordDao.cs" />
     <Compile Include="DataAccess\DataDAO\ProductSellDao.cs" />
     <Compile Include="DataAccess\DataDAO\ProductSellRecordDao.cs" />
     <Compile Include="DataAccess\DataDAO\ProductSKUDao.cs" />
-    <Compile Include="DataAccess\DataDAO\ProductCirculationSKURecordDao.cs" />
+    <Compile Include="DataAccess\DataDAO\ProductClothesCirculationSKURecordDao.cs" />
     <Compile Include="DataAccess\DataDAO\ProductStainlessDao.cs" />
+    <Compile Include="DataAccess\DataDAO\ProductClothesCirculationDao.cs" />
+    <Compile Include="DataAccess\DataDAO\ProductStainlessCirculationDao.cs" />
+    <Compile Include="DataAccess\DataDAO\ProductStainlessCirculationRecordDao.cs" />
+    <Compile Include="DataAccess\DataDAO\ProductCirculationRecordDao.cs" />
     <Compile Include="DataAccess\Data\Category.cs" />
     <Compile Include="DataAccess\Data\Charactor.cs" />
+    <Compile Include="DataAccess\Data\PayReceipt.cs" />
     <Compile Include="DataAccess\Data\Product.cs" />
     <Compile Include="DataAccess\Data\ProductJob.cs" />
     <Compile Include="DataAccess\Data\ProductJobRecord.cs" />
@@ -103,8 +109,10 @@
     <Compile Include="DataAccess\Data\ProductAttribute.cs" />
     <Compile Include="DataAccess\Data\ProductCirculation.cs" />
     <Compile Include="DataAccess\Data\ProductCirculationRecord.cs" />
-    <Compile Include="DataAccess\Data\ProductCirculationSKURecord.cs" />
+    <Compile Include="DataAccess\Data\ProductClothesCirculationSKURecord.cs" />
     <Compile Include="DataAccess\Data\ProductStainless.cs" />
+    <Compile Include="DataAccess\Data\ProductClothesCirculationRecord.cs" />
+    <Compile Include="DataAccess\Data\ProductStainlessCirculationRecord.cs" />
     <Compile Include="DataAccess\DbUtility\DbHelperAccess.cs" />
     <Compile Include="DataAccess\Utility\AuthUtility.cs" />
     <Compile Include="DataAccess\Utility\DataUtility.cs" />
@@ -143,6 +151,18 @@
     <Compile Include="WinForm\FormMgr\FormSingletonFactory.cs" />
     <Compile Include="WinForm\MyDockContent.cs">
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WinForm\PayReceipt\BuyPayBillForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WinForm\PayReceipt\BuyPayBillForm.Designer.cs">
+      <DependentUpon>BuyPayBillForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WinForm\PayReceipt\PayReceiptListForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WinForm\PayReceipt\PayReceiptListForm.Designer.cs">
+      <DependentUpon>PayReceiptListForm.cs</DependentUpon>
     </Compile>
     <Compile Include="WinForm\PayReceipt\SellReceiptBillForm.cs">
       <SubType>Form</SubType>
@@ -332,6 +352,14 @@
     </EmbeddedResource>
     <EmbeddedResource Include="WinForm\Data\ProductStainlessForm.resx">
       <DependentUpon>ProductStainlessForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForm\PayReceipt\BuyPayBillForm.resx">
+      <DependentUpon>BuyPayBillForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForm\PayReceipt\PayReceiptListForm.resx">
+      <DependentUpon>PayReceiptListForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForm\PayReceipt\SellReceiptBillForm.resx">
