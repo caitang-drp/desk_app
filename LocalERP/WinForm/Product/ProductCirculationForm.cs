@@ -205,6 +205,8 @@ namespace LocalERP.WinForm
             this.toolStripButton_approval.Enabled = approval;
             this.toolStripButton_finish.Enabled = finish;
             this.toolStripButton_print.Enabled = print;
+            // TODO
+            this.toolStripButton_print.Enabled = true;
 
             this.textBox_serial.Enabled = basicInfo;
             this.dateTime_sellTime.Enabled = basicInfo;
@@ -506,14 +508,13 @@ namespace LocalERP.WinForm
 
         private void toolStripButton_print_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("系统暂未开放打印功能.", "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            /*
+            //MessageBox.Show("系统暂未开放打印功能.", "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             ProductCirculation sell;
             List<ProductCirculationRecord> records;
             this.getCirculation(out sell);
             this.getRecords(out records);
             ProductSellReportForm form = new ProductSellReportForm(sell, records);
-            form.ShowDialog();*/
+            form.ShowDialog();
         }
 
         private DialogResult affirmQuit() {
