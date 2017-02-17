@@ -18,6 +18,7 @@ namespace LocalERP.DataAccess.DataDAO
         }
 
         public abstract ProductCirculationRecordDao getRecordDao();
+        public abstract ProductDao getProductDao();
 
         public abstract bool Insert(ProductCirculation info, List<ProductCirculationRecord> records, out int ProductCirculationID); 
 

@@ -26,6 +26,11 @@ namespace LocalERP.DataAccess.DataDAO
             return ProductStainlessCirculationRecordDao.getInstance();
         }
 
+        public override ProductDao getProductDao()
+        {
+            return ProductStainlessDao.getInstance();
+        }
+
         public override bool Insert(ProductCirculation info, List<ProductCirculationRecord> records, out int ProductCirculationID)
         {
             ProductCirculationID = 0;

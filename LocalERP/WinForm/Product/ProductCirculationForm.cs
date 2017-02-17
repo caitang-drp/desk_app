@@ -414,6 +414,7 @@ namespace LocalERP.WinForm
             this.invokeUpdateNotify(notifyType);
         }
 
+        //下单后不能修改，现在不用这个功能
         private void toolStripButton_approval_Click(object sender, EventArgs e)
         {/*
             if (this.toolStripButton_save.Enabled == true)
@@ -450,8 +451,9 @@ namespace LocalERP.WinForm
             this.invokeUpdateNotify(notifyType);*/
         }
 
+        //审核
         private void toolStripButton_finish_Click(object sender, EventArgs e)
-        {/*
+        {
             if (MessageBox.Show("审核后，将修改库存数量，且该单据不能修改或删除，是否审核？", "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) != DialogResult.OK)
                 return;
 
@@ -461,6 +463,7 @@ namespace LocalERP.WinForm
             ProductCirculation sell;
             this.getCirculation(out sell);
 
+            /*
             if(flowType == -1)
                 foreach (ProductCirculationRecord record in records) {
                     foreach (ProductClothesCirculationSKURecord skuRecord in record.SkuRecords) { 
@@ -473,31 +476,24 @@ namespace LocalERP.WinForm
                         }
                     }
                 }
+            */
 
             foreach (ProductCirculationRecord record in records)
             {
-                foreach (ProductClothesCirculationSKURecord skuRecord in record.SkuRecords)
-                {
-                    int leftNum = ProductSKUDao.getInstance().FindNumByID(skuRecord.ProductSKUID);
-                    int newLeftNum = leftNum + flowType * skuRecord.Num;
-                    ProductSKUDao.getInstance().UpdateNum(skuRecord.ProductSKUID, newLeftNum);
-                }
+                int leftNum = cirDao.getProductDao().FindNumByID(record.ProductID);
+                int newLeftNum = leftNum + flowType * record.TotalNum;
+                cirDao.getProductDao().UpdateNum(record.ProductID, newLeftNum);
             }
 
-            ProductCirculationDao.getInstance().UpdateStatus(circulationID, 4);
-
-            //commented by stone:very not reasonable
-            ProductCirculationDao.getInstance().UpdatePay(circulationID, double.Parse(dataGridView2[1, 0].Value.ToString()), 0);
-            this.textBox_realTotal.Text = dataGridView2[1, 0].Value.ToString();
-            this.textBox_thisPayed.Text = "0";
-            
+            cirDao.UpdateStatus(circulationID, 4);
+ 
             MessageBox.Show("审核成功!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             openMode = 4;
             this.switchMode(4);
 
             this.invokeUpdateNotify(this.finishNotifyType);
-            */
+            
         }
 
 

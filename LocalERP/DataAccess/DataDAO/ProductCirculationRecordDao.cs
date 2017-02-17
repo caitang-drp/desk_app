@@ -35,6 +35,9 @@ namespace LocalERP.DataAccess.DataDAO
         }*/
 
         public abstract List<ProductCirculationRecord> FindList(int circulationID);
+        /*public abstract int FindNumByID(int recordID);
+        public abstract int UpdateNum(int id, int num);*/
+
         /*
         public int FindCount(int productID)
         {
