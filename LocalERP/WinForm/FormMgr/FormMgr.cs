@@ -61,6 +61,14 @@ namespace LocalERP.WinForm
         protected ProductCirculationForm productPurchaseBackForm = null;
         public abstract ProductCirculationForm getProductPurchaseBackForm();
 
+        /*************** manufacture *************************/
+        protected ProductCirculationListForm manufactureListForm = null;
+        public abstract ProductCirculationListForm getManufactureListForm();
+
+        //易耗品领用
+        protected ProductCirculationForm easyForm = null;
+        public abstract ProductCirculationForm getEasyForm();
+
         /***************  sell   ************************/
         //product sell list form
         protected ProductCirculationListForm productSellListForm = null;
@@ -181,7 +189,10 @@ namespace LocalERP.WinForm
         /*************** general method *********************/
         protected void appendEvent(MyDockContent form)
         {
+            //发布更新
             form.updateNotify += new MyDockContent.UpdateNotify(updateNotify);
+
+            //界面等待
             form.beginLoadNotify += new MyDockContent.BeginLoadNotify(beginLoadNotify);
             form.endLoadNotify += new MyDockContent.EndLoadNotify(endLoadNotify); 
         }

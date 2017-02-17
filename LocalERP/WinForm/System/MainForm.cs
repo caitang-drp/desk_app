@@ -61,6 +61,15 @@ namespace LocalERP.WinForm
                     FormSingletonFactory.getInstance().getProductPurchaseBackForm().Show(this.dockPanel1);
                     FormSingletonFactory.getInstance().getProductPurchaseBackForm().reload(openMode, ID);
                     break;
+
+                case DataUtility.MANUFACTURE_LIST:
+                    FormSingletonFactory.getInstance().getManufactureListForm().Show(this.dockPanel1);
+                    break;
+                case DataUtility.EASY:
+                    FormSingletonFactory.getInstance().getEasyForm().Show(this.dockPanel1);
+                    FormSingletonFactory.getInstance().getEasyForm().reload(openMode, ID);
+                    break;
+
                 case DataUtility.SELL_LIST:
                     FormSingletonFactory.getInstance().getProductSellListForm().Show(this.dockPanel1);
                     break;
@@ -72,6 +81,18 @@ namespace LocalERP.WinForm
                     FormSingletonFactory.getInstance().getProductSellBackForm().Show(this.dockPanel1);
                     FormSingletonFactory.getInstance().getProductSellBackForm().reload(openMode, ID);
                     break;
+
+                case DataUtility.CASH_LIST:
+                    FormSingletonFactory.getInstance().getPayReceiptListForm().Show(this.dockPanel1);
+                    break;
+                case DataUtility.CASH_PAY:
+                    FormSingletonFactory.getInstance().getbuyPayBillForm().Show(this.dockPanel1);
+                    break;
+                case DataUtility.CASH_RECEIPT:
+                    FormSingletonFactory.getInstance().getSellReceiptBillForm().Show(this.dockPanel1);
+                    //FormMgr.getInstance().getSellReceiptBillForm().reload(openMode, ID);
+                    break;
+
                 case DataUtility.LIB_LIST:
                     FormSingletonFactory.getInstance().getProductLibListForm().Show(this.dockPanel1);
                     break;
@@ -83,6 +104,7 @@ namespace LocalERP.WinForm
                     FormSingletonFactory.getInstance().getProductLibLossForm().Show(this.dockPanel1);
                     FormSingletonFactory.getInstance().getProductLibLossForm().reload(openMode, ID);
                     break;
+
                 case DataUtility.QUERY_LIB:
                     FormSingletonFactory.getInstance().getQueryLibForm().Show(this.dockPanel1);
                     break;
@@ -92,21 +114,12 @@ namespace LocalERP.WinForm
                 case DataUtility.STATISTIC:
                     FormSingletonFactory.getInstance().getProductStatisticForm().Show(this.dockPanel1);
                     break;
+
                 case DataUtility.DATA_CUSTOMER:
                     FormSingletonFactory.getInstance().getCustomerCIForm().Show(this.dockPanel1);
                     break;
                 case DataUtility.DATA_PRODUCT:
                     FormSingletonFactory.getInstance().getProductCIForm().Show(this.dockPanel1);
-                    break;
-                case DataUtility.CASH_LIST:
-                    FormSingletonFactory.getInstance().getPayReceiptListForm().Show(this.dockPanel1);
-                    break;
-                case DataUtility.CASH_PAY:
-                    FormSingletonFactory.getInstance().getbuyPayBillForm().Show(this.dockPanel1);
-                    break;
-                case DataUtility.CASH_RECEIPT:
-                    FormSingletonFactory.getInstance().getSellReceiptBillForm().Show(this.dockPanel1);
-                    //FormMgr.getInstance().getSellReceiptBillForm().reload(openMode, ID);
                     break;
                 default:
                     break;

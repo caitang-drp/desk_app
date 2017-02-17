@@ -6,7 +6,7 @@ using System.Data;
 
 namespace LocalERP.DataAccess.DataDAO
 {
-    class ProductStainlessDao
+    class ProductStainlessDao : ProductDao
     {
         //singleton
         public static ProductStainlessDao dao;
@@ -60,9 +60,22 @@ namespace LocalERP.DataAccess.DataDAO
             return DbHelperAccess.executeQuery(commandText.ToString());
         }
 
-        public int UpdateNum(int id, int num)
+        public override int FindNumByID(int ID)
         {
-            string commandText = string.Format("update Product set num={0} where ID={1}",
+            string commandText = string.Format("select num from ProductStainless where ID={0}", ID);
+            DataRow dr = DbHelperAccess.executeQueryGetOneRow(commandText);
+            int result = 0;
+            if (dr != null)
+            {
+                string str = dr[0].ToString();
+                int.TryParse(str, out result);
+            }
+            return result;
+        }
+
+        public override int UpdateNum(int id, int num)
+        {
+            string commandText = string.Format("update ProductStainless set num={0} where ID={1}",
                 num, id);
 
             return DbHelperAccess.executeNonQuery(commandText);

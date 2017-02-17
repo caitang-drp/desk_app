@@ -18,6 +18,7 @@ namespace LocalERP.WinForm
             this.Activated += new EventHandler(MyDockContent_Activated);
         }
 
+        //打开窗口时，检查是否需要更新
         void MyDockContent_Activated(object sender, EventArgs e)
         {
             bool refresh = false;
@@ -42,6 +43,7 @@ namespace LocalERP.WinForm
         }
 
         //参考FormMgr.updateVersion的注释
+        //跟本窗口相关的version
         protected Dictionary<UpdateType, int> versionDic = new Dictionary<UpdateType, int>();
         public void initVersions(Dictionary<UpdateType, int> dicCVs, params UpdateType[] cvs)
         {
@@ -58,6 +60,7 @@ namespace LocalERP.WinForm
                 this.versionDic[type] = FormSingletonFactory.getInstance().getVersions()[type];
         }
 
+        //向外发布更新提示
         public delegate void UpdateNotify(UpdateType notifyType);
         public event UpdateNotify updateNotify;
 
@@ -66,6 +69,7 @@ namespace LocalERP.WinForm
                 updateNotify.Invoke(type);
         }
 
+        //用于界面等待
         public delegate void BeginLoadNotify();
         public event BeginLoadNotify beginLoadNotify;
 
@@ -87,9 +91,14 @@ namespace LocalERP.WinForm
         public virtual void refresh() { }
     }
 
-    public enum UpdateType { 
+    public enum UpdateType {
+        //表示货单更新
         PurchaseUpdate,
+        //表示或货单审核了，库存有改变
         PurchaseFinishUpdate,
+
+        ManuUpdate,
+        ManuFinishUpdate,
 
         SellUpdate,
         SellFinishUpdate,

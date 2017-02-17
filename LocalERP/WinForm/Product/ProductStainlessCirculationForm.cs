@@ -69,7 +69,7 @@ namespace LocalERP.WinForm
 
             unit.HeaderText = "单位";
             unit.Name = "unit";
-            unit.Width = 60;
+            unit.Width = 100;
 
             price.HeaderText = this.Text.Substring(0, 2) + "单价/元";
             price.Name = "price";
@@ -84,6 +84,13 @@ namespace LocalERP.WinForm
             //那就可能有多个CirculationForm的DataGridViewLookupColumn指向同一个ProductCIForm
             //那么当以前的CirculationForm没有销毁的情况下，ProductCIForm就会触发以前的valueChanged事件，从而出现异常
             (dgv.Columns["product"] as DataGridViewLookupColumn).LookupForm = FormSingletonFactory.getInstance().getProductCIForm_select();
+        }
+
+        public override void hideSomeControls()
+        {
+            base.hideSomeControls();
+            this.dataGridView1.Columns["price"].Visible = false;
+            this.dataGridView1.Columns["totalPrice"].Visible = false;
         }
 
         //set

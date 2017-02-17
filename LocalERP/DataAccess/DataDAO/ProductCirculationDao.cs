@@ -18,6 +18,7 @@ namespace LocalERP.DataAccess.DataDAO
         }
 
         public abstract ProductCirculationRecordDao getRecordDao();
+        public abstract ProductDao getProductDao();
 
         public abstract bool Insert(ProductCirculation info, List<ProductCirculationRecord> records, out int ProductCirculationID); 
 
@@ -60,7 +61,7 @@ namespace LocalERP.DataAccess.DataDAO
             StringBuilder commandText = null;
             if(type < 3)
                 commandText = new StringBuilder(string.Format("select {0}.*, Customer.name from {0}, Customer where Customer.ID = {0}.customerID and circulationTime between #{1}# and #{2}# ",tableName, startTime.ToString("yyyy-MM-dd"), endTime.ToString("yyyy-MM-dd")));
-            else if(type == 3)
+            else if(type >= 3)
                 commandText = new StringBuilder(string.Format("select {0}.* from {0} where circulationTime between #{1}# and #{2}# ", tableName, startTime.ToString("yyyy-MM-dd"), endTime.ToString("yyyy-MM-dd")));
             if(type > 0)
                 commandText.Append(string.Format(" and type between {0} and {1}", type*2-1, type*2));

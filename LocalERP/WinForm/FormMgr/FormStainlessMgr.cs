@@ -20,6 +20,7 @@ namespace LocalERP.WinForm
             {
                 productPurchaseListForm = new ProductCirculationListForm(mainForm, 1, "采购单据列表", ProductStainlessCirculationDao.getInstance());
                 productPurchaseListForm.initVersions(getVersions(), 
+                    //表示如果这三个业务有更新，窗口也要刷新
                     UpdateType.PurchaseUpdate, UpdateType.PurchaseFinishUpdate, UpdateType.CustomerUpdate);
                 
                 appendEvent(productPurchaseListForm);
@@ -45,6 +46,32 @@ namespace LocalERP.WinForm
                 appendEvent(productPurchaseBackForm);
             }
             return productPurchaseBackForm;
+        }
+
+        /***************** manufacture ************************/
+        public override ProductCirculationListForm getManufactureListForm()
+        {
+            if (manufactureListForm == null || manufactureListForm.IsDisposed)
+            {
+                manufactureListForm = new ProductCirculationListForm(mainForm, 4, "生产单据列表", ProductStainlessCirculationDao.getInstance());
+                manufactureListForm.initVersions(getVersions(),
+                    UpdateType.ManuUpdate, UpdateType.ManuFinishUpdate);
+
+                manufactureListForm.hideControls();
+                appendEvent(manufactureListForm);
+            }
+            return manufactureListForm;
+        }
+
+        public override ProductCirculationForm  getEasyForm()
+        {
+            if (easyForm == null || easyForm.IsDisposed)
+            {
+                easyForm = new ProductStainlessCirculationForm(ProductCirculation.CirculationTypeConf_Easy, ProductStainlessCirculationDao.getInstance());
+                appendEvent(easyForm);
+                easyForm.hideSomeControls();
+            }
+            return easyForm;
         }
 
         /****************** sell ****************/
@@ -100,7 +127,7 @@ namespace LocalERP.WinForm
         {
             if (productLibOverflowForm == null || productLibOverflowForm.IsDisposed)
             {
-                productLibOverflowForm = new ProductCirculationForm(ProductCirculation.CirculationTypeConf_LibOverflow, ProductStainlessCirculationDao.getInstance());
+                productLibOverflowForm = new ProductStainlessCirculationForm(ProductCirculation.CirculationTypeConf_LibOverflow, ProductStainlessCirculationDao.getInstance());
                 productLibOverflowForm.hideSomeControls();
                 appendEvent(productLibOverflowForm);
             }
@@ -111,7 +138,7 @@ namespace LocalERP.WinForm
         {
             if (productLibLossForm == null || productLibLossForm.IsDisposed)
             {
-                productLibLossForm = new ProductCirculationForm(ProductCirculation.CirculationTypeConf_LibLoss, ProductStainlessCirculationDao.getInstance());
+                productLibLossForm = new ProductStainlessCirculationForm(ProductCirculation.CirculationTypeConf_LibLoss, ProductStainlessCirculationDao.getInstance());
                 productLibLossForm.hideSomeControls();
                 appendEvent(productLibLossForm);
             }
