@@ -47,6 +47,16 @@ namespace LocalERP.WinForm
             return productPurchaseBackForm;
         }
 
+        public override ProductCirculationListForm getManufactureListForm()
+        {
+            throw new Exception("The method or operation is not implemented.");
+        }
+
+        public override ProductCirculationForm getEasyForm()
+        {
+            throw new Exception("The method or operation is not implemented.");
+        }
+
         /****************** sell ****************/
         public override ProductCirculationListForm getProductSellListForm()
         {

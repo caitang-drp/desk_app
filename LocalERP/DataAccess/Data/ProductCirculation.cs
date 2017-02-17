@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using LocalERP.WinForm;
+using LocalERP.DataAccess.Utility;
 
 namespace LocalERP.DataAccess.Data
 {
@@ -131,18 +132,20 @@ namespace LocalERP.DataAccess.Data
 
         public enum CirculationType
         {
-            purchase = 1, purchaseBack = 2, sell = 3, sellBack = 4, libOverflow = 5, libLoss = 6
+            purchase = 1, purchaseBack = 2, sell = 3, sellBack = 4, libOverflow = 5, libLoss = 6, easy=7
         }
 
+        //用于控制ProductCirculation的具体类型
         public static CirculationTypeConf CirculationTypeConf_Purchase = new CirculationTypeConf(ProductCirculation.CirculationType.purchase , UpdateType.PurchaseUpdate, UpdateType.PurchaseFinishUpdate, 1, "采购入库", "CGRK", "供 应 商:", "入库时间:");
         public static CirculationTypeConf CirculationTypeConf_PurchaseBack = new CirculationTypeConf(ProductCirculation.CirculationType.purchaseBack, UpdateType.PurchaseUpdate, UpdateType.PurchaseFinishUpdate, - 1, "采购退货", "CGTH", "供 应 商:", "退货时间:");
+        public static CirculationTypeConf CirculationTypeConf_Easy = new CirculationTypeConf(ProductCirculation.CirculationType.easy, UpdateType.ManuUpdate, UpdateType.ManuFinishUpdate, -1, DataUtility.EASY, "YHLY", "供 应 商:", "领用时间:");
         public static CirculationTypeConf CirculationTypeConf_Sell = new CirculationTypeConf(ProductCirculation.CirculationType.sell, UpdateType.SellUpdate, UpdateType.SellFinishUpdate, - 1, "销售出库", "XSCK", "客    户:", "出库时间:");
         public static CirculationTypeConf CirculationTypeConf_SellBack = new CirculationTypeConf(ProductCirculation.CirculationType.sellBack, UpdateType.SellUpdate, UpdateType.SellFinishUpdate, 1, "销售退货", "XSTH", "客    户:", "退货时间:");
         public static CirculationTypeConf CirculationTypeConf_LibOverflow = new CirculationTypeConf(ProductCirculation.CirculationType.libOverflow, UpdateType.LibUpdate, UpdateType.LibFinishUpdate, 1, "盘点报溢", "PDBY", "供 应 商:", "报溢时间:");
         public static CirculationTypeConf CirculationTypeConf_LibLoss = new CirculationTypeConf(ProductCirculation.CirculationType.libLoss, UpdateType.LibUpdate, UpdateType.LibFinishUpdate, - 1, "盘点报损", "PDBS", "供 应 商:", "报损时间:");
         
-        public static CirculationTypeConf[] CirculationTypeConfs = new CirculationTypeConf[] 
-            {CirculationTypeConf_Purchase, CirculationTypeConf_PurchaseBack, CirculationTypeConf_Sell, CirculationTypeConf_SellBack, CirculationTypeConf_LibOverflow, CirculationTypeConf_LibLoss };
+        //这里要按照type值的顺序
+        public static CirculationTypeConf[] CirculationTypeConfs = new CirculationTypeConf[] { CirculationTypeConf_Purchase, CirculationTypeConf_PurchaseBack, CirculationTypeConf_Sell, CirculationTypeConf_SellBack, CirculationTypeConf_LibOverflow, CirculationTypeConf_LibLoss, CirculationTypeConf_Easy};
     }
 
     public class CirculationTypeConf {

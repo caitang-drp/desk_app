@@ -149,6 +149,7 @@ namespace LocalERP.WinForm
             mainForm.setForm(DataUtility.PURCHASE, 1, list[0]);
         }
 
+        //
         private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (this.dataGridView1.SelectedRows == null || this.dataGridView1.SelectedRows.Count <= 0)
@@ -164,6 +165,9 @@ namespace LocalERP.WinForm
                     break;
                 case (int)ProductCirculation.CirculationType.purchaseBack:
                     formString = DataUtility.PURCHASE_BACK;
+                    break;
+                case (int)ProductCirculation.CirculationType.easy:
+                    formString = DataUtility.EASY;
                     break;
                 case (int)ProductCirculation.CirculationType.sell:
                     formString = DataUtility.SELL;

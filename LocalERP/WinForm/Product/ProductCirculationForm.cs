@@ -255,16 +255,13 @@ namespace LocalERP.WinForm
             }
         }
 
-        public void hideSomeControls() {
+        public virtual void hideSomeControls() {
+
+            //Òþ²ØÀ´Íùµ¥Î»
             this.label9.Visible = false;
             this.label_customer.Visible = false;
             this.lookupText1.Visible = false;
 
-            //this.label_operator.Visible = false;
-            //this.textBox_operator.Visible = false;
-
-            this.dataGridView1.Columns["price"].Visible = false;
-            this.dataGridView1.Columns["totalPrice"].Visible = false;
             this.dataGridView2.Visible = false;
             this.panel_pay.Visible = false;
         }
