@@ -135,6 +135,34 @@ namespace LocalERP.DataAccess.Data
             purchase = 1, purchaseBack = 2, sell = 3, sellBack = 4, libOverflow = 5, libLoss = 6, easy=7
         }
 
+        public string get_circulation_type_string(CirculationType x)
+        {
+            switch (x)
+            {
+                case CirculationType.purchase:
+                    return "采购入库";
+                case CirculationType.purchaseBack:
+                    return "采购退库";
+                case CirculationType.sell:
+                    return "销售出库";
+                case CirculationType.sellBack:
+                    return "销售退库";
+                case CirculationType.libLoss:
+                    return "盘点报损";
+                case CirculationType.libOverflow:
+                    return "盘点报溢";
+                case CirculationType.easy:
+                    return "易耗品领用";
+            }
+
+            return "未知";
+        }
+
+        public int get_circulation_type_value(CirculationType x)
+        {
+            return Convert.ToInt32(x);
+        }
+
         //用于控制ProductCirculation的具体类型
         public static CirculationTypeConf CirculationTypeConf_Purchase = new CirculationTypeConf(ProductCirculation.CirculationType.purchase , UpdateType.PurchaseUpdate, UpdateType.PurchaseFinishUpdate, 1, "采购入库", "CGRK", "供 应 商:", "入库时间:");
         public static CirculationTypeConf CirculationTypeConf_PurchaseBack = new CirculationTypeConf(ProductCirculation.CirculationType.purchaseBack, UpdateType.PurchaseUpdate, UpdateType.PurchaseFinishUpdate, - 1, "采购退货", "CGTH", "供 应 商:", "退货时间:");
