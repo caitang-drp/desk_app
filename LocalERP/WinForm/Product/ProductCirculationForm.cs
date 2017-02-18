@@ -205,8 +205,6 @@ namespace LocalERP.WinForm
             this.toolStripButton_approval.Enabled = approval;
             this.toolStripButton_finish.Enabled = finish;
             this.toolStripButton_print.Enabled = print;
-            // TODO
-            this.toolStripButton_print.Enabled = true;
 
             this.textBox_serial.Enabled = basicInfo;
             this.dateTime_sellTime.Enabled = basicInfo;
