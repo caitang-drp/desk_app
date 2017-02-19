@@ -141,6 +141,10 @@ namespace LocalERP.WinForm
         protected QueryDetailForm queryDetailForm = null;
         public abstract QueryDetailForm getQueryDetailForm();
 
+        // 销售利润查询表
+        protected QuerySellProfitForm querySellProfitForm = null;
+        public abstract QuerySellProfitForm getQuerySellProfitForm();
+
         //product statistic form
         protected ProductStatisticForm productStatisticForm = null;
         public abstract ProductStatisticForm getProductStatisticForm();

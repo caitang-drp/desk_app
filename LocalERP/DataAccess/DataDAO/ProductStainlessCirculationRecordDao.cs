@@ -60,6 +60,7 @@ namespace LocalERP.DataAccess.DataDAO
                 record.Unit = dr["ProductStainlessCirculationRecord.unit"].ToString();
 
                 record.TotalNum = (int)dr["totalNum"];
+                record.TotalPrice = Convert.ToDouble(dr["totalPrice"]);
                 records.Add(record);
             }
             return records;
@@ -86,6 +87,87 @@ namespace LocalERP.DataAccess.DataDAO
             string commandText = string.Format("delete from ProductCirculationRecord where circulationID={0}", circulationID);
             return DbHelperAccess.executeNonQuery(commandText);
         }
-        
+
+        // 获得销售单列表 对于的明细列表
+        public List<ProductCirculationRecord> get_sell_records(List<ProductCirculation> ls)
+        {
+            // 只需要 销售的 单
+            List<int> buy_circulation_id_ls = new List<int>();
+            foreach (ProductCirculation one in ls)
+            {
+                // 吐槽一下，enum居然要实例化才能用，应该放到全局变量，不然每次都要new一个对象才能用
+                if (one.Type == 3)
+                {
+                    buy_circulation_id_ls.Add(one.ID);
+                }
+            }
+
+            // 获取对应的 明细
+            List<ProductCirculationRecord> records = new List<ProductCirculationRecord>();
+            foreach (int ID in buy_circulation_id_ls)
+            {
+                records.AddRange(ProductStainlessCirculationRecordDao.getInstance().FindList(ID));
+            }
+
+            return records;
+        }
+
+        // 获取 商品的 平均采购价格
+        // ret: [(商品id, 平均价格), ....]
+        public Dictionary<int, double> get_product_average_buy_cost(List<ProductCirculation> ls)
+        {
+            // 只需要 采购的 单
+            List<int> buy_circulation_id_ls = new List<int>();
+            foreach (ProductCirculation one in ls)
+            {
+                if (one.Type == 1)
+                {
+                    buy_circulation_id_ls.Add(one.ID);
+                }
+            }
+
+            // 获取对应的 明细
+            List<ProductCirculationRecord> records = new List<ProductCirculationRecord>();
+            foreach (int ID in buy_circulation_id_ls)
+            {
+                records.AddRange(ProductStainlessCirculationRecordDao.getInstance().FindList(ID));
+            }
+
+            // 根据商品进行分组
+            Dictionary<int, List<ProductCirculationRecord>> group = new Dictionary<int, List<ProductCirculationRecord>>();
+            foreach (ProductCirculationRecord record in records)
+            {
+                int key = record.ProductID;
+
+                if (!group.ContainsKey(key))
+                {
+                    group.Add(key, new List<ProductCirculationRecord>());
+                }
+
+                List<ProductCirculationRecord> val = group[key];
+                val.Add(record);
+
+                group[key] = val;
+            }
+
+            // 计算每组的 单价
+            Dictionary<int, double> res = new Dictionary<int, double>();
+            foreach (var product in group)
+            {
+                List<ProductCirculationRecord> product_record_ls = product.Value;
+
+                int cnt = 0;
+                double sum = 0.0;
+                foreach (var record in product_record_ls)
+                {
+                    cnt += record.TotalNum;
+                    sum += record.TotalPrice;
+                }
+
+                res[product.Key] = sum / cnt;
+            }
+
+            return res;
+        }  
     }
 }
