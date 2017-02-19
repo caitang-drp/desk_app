@@ -86,6 +86,25 @@ namespace LocalERP.WinForm
             (dgv.Columns["product"] as DataGridViewLookupColumn).LookupForm = FormSingletonFactory.getInstance().getProductCIForm_select();
         }
 
+        protected override void initDatagridviewEnable(bool elementReadonly)
+        {
+            foreach (DataGridViewRow row in this.dataGridView1.Rows)
+            {
+                if (elementReadonly == true)
+                {
+                    setCellEnable(row.Cells["product"], false);
+                    setCellEnable(row.Cells["quantityPerPiece"], false);
+                    setCellEnable(row.Cells["pieces"], false);
+                    setCellEnable(row.Cells["num"], false);
+                    setCellEnable(row.Cells["unit"], false);
+                    setCellEnable(row.Cells["price"], false);
+                }
+                setCellEnable(row.Cells["totalPrice"], false);
+            }
+
+            this.dataGridView1.Columns["check"].Visible = !elementReadonly;
+        }
+
         public override void hideSomeControls()
         {
             base.hideSomeControls();
@@ -205,8 +224,8 @@ namespace LocalERP.WinForm
 
             int number = this.dataGridView1.RowCount;
 
-            double quantityPerPiece, pieces, price, totalPrice;
-            int num;
+            double price, totalPrice;
+            int quantityPerPiece, pieces, num;
             string unit;
             bool isInputCorrect = true;
 
@@ -215,8 +234,8 @@ namespace LocalERP.WinForm
                 object productID = null;
 
                 if (ValidateUtility.getLookupValue(row.Cells["product"], out productID) == false 
-                    || ValidateUtility.getDouble(row.Cells["quantityPerPiece"], out quantityPerPiece) == false
-                    || ValidateUtility.getDouble(row.Cells["pieces"], out pieces) == false
+                    || ValidateUtility.getInt(row.Cells["quantityPerPiece"], false, true, out quantityPerPiece) == false
+                    || ValidateUtility.getInt(row.Cells["pieces"], false, true, out pieces) == false
                     || ValidateUtility.getInt(row.Cells["num"], true, true, out num) == false
                     || ValidateUtility.getString(row.Cells["unit"], false, out unit) == false
                     || ValidateUtility.getDouble(row.Cells["price"], out price) == false

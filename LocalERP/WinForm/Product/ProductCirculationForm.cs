@@ -198,6 +198,9 @@ namespace LocalERP.WinForm
             }
         }
 
+        protected virtual void initDatagridviewEnable(bool elementReadonly) {
+        }
+
         private void initControlsEnable(bool save, bool approval, bool finish, bool print, bool basicInfo,
             bool add, bool del, bool saveArrival, bool elementReadonly, bool pay)
         {
@@ -216,17 +219,7 @@ namespace LocalERP.WinForm
             this.button_del.Enabled = del;
             //this.toolStripButton_saveArrival.Enabled = saveArrival;
 
-            foreach (DataGridViewRow row in this.dataGridView1.Rows) {
-                if (elementReadonly == true) {
-                    setCellEnable(row.Cells["product"], false);
-                    setCellEnable(row.Cells["num"], false);
-                    setCellEnable(row.Cells["price"], false);
-                    //setCellDisable(row.Cells["check"]);
-                }
-                setCellEnable(row.Cells["totalPrice"], false);
-            }
-
-            this.dataGridView1.Columns["check"].Visible = !elementReadonly;
+            initDatagridviewEnable(elementReadonly);
 
             this.panel_pay.Enabled = pay;
         }
@@ -236,12 +229,9 @@ namespace LocalERP.WinForm
             if (enable == false)
             {
                 cell.ReadOnly = true;
-
-                cell.Style.BackColor = Color.Yellow;
                 //cell.Style.ForeColor = System.Drawing.SystemColors.ControlDark;
-
-                cell.Style.SelectionBackColor = Color.Yellow;
-                //cell.Style.SelectionBackColor = System.Drawing.SystemColors.Control;
+                cell.Style.BackColor = System.Drawing.SystemColors.Control;
+                cell.Style.SelectionBackColor = System.Drawing.SystemColors.Control;
                 //cell.Style.SelectionForeColor = System.Drawing.SystemColors.ControlDark;
             }
             else {
