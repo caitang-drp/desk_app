@@ -85,6 +85,7 @@ namespace LocalERP.DataAccess.DataDAO
                 circulation.CirculationTime = (DateTime)dr["circulationTime"];
                 circulation.Comment = dr["comment"] as string;
                 circulation.Status = (int)dr["status"];
+                circulation.Type = (int)dr["type"];
                 
                 int customerID = 0;
                 if(int.TryParse(dr["customerID"].ToString(), out customerID))

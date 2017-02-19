@@ -171,6 +171,19 @@ namespace LocalERP.WinForm
             return queryDetailForm;
         }
 
+        public override QuerySellProfitForm getQuerySellProfitForm()
+        {
+            if (querySellProfitForm == null || querySellProfitForm.IsDisposed)
+            {
+                querySellProfitForm = new QuerySellProfitForm();
+                querySellProfitForm.initVersions(getVersions(),
+                    UpdateType.PurchaseFinishUpdate, UpdateType.SellFinishUpdate, UpdateType.LibFinishUpdate, UpdateType.ProductUpdate, UpdateType.CustomerUpdate);
+
+                appendEvent(querySellProfitForm);
+            }
+            return querySellProfitForm;
+        }
+
         public override ProductStatisticForm getProductStatisticForm()
         {
             if (productStatisticForm == null || productStatisticForm.IsDisposed)

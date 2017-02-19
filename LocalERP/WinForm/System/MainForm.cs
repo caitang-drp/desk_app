@@ -93,6 +93,10 @@ namespace LocalERP.WinForm
                     //FormMgr.getInstance().getSellReceiptBillForm().reload(openMode, ID);
                     break;
 
+                case "销售利润表":
+                    FormSingletonFactory.getInstance().getQuerySellProfitForm().Show(this.dockPanel1);
+                    break;
+
                 case DataUtility.LIB_LIST:
                     FormSingletonFactory.getInstance().getProductLibListForm().Show(this.dockPanel1);
                     break;
