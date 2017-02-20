@@ -62,7 +62,7 @@ namespace LocalERP.WinForm
 
         private ProductCirculation find_circulation_with_id(int ID, List<ProductCirculation> ls)
         {
-            foreach (var cir in ls)
+            foreach (ProductCirculation cir in ls)
             {
                 if (ID == cir.ID)
                 {
