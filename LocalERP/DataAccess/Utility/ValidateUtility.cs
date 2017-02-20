@@ -4,11 +4,13 @@ using System.Text;
 using System.Windows.Forms;
 using LocalERP.WinForm;
 using LocalERP.WinForm.Utility;
+using System.Data;
 
 namespace LocalERP.DataAccess.Utility
 {
     public static class ValidateUtility
     {
+        /************** textbox ******************/
         public static bool getDouble(TextBox textBox, ErrorProvider errorProvider, bool required, out double result)
         {
             result = 0;
@@ -60,6 +62,7 @@ namespace LocalERP.DataAccess.Utility
             }
         }
 
+        /************** cell *****************/
         public static bool getDouble(DataGridViewCell cell, out double result)
         {
             result = 0;
@@ -108,6 +111,13 @@ namespace LocalERP.DataAccess.Utility
             }
         }
 
+        public static bool getInt(DataGridViewCell cell, bool required, bool positive, out int result, out bool isNull) { 
+            string temp = cell.EditedFormattedValue.ToString();
+            isNull = string.IsNullOrEmpty(temp) ? true : false;
+
+            return getInt(cell, required, positive, out result);
+        }
+
         public static bool getString(DataGridViewCell cell, bool required, out string result)
         {
             result = cell.EditedFormattedValue.ToString();
@@ -137,6 +147,38 @@ namespace LocalERP.DataAccess.Utility
             {
                 cell.ErrorText = "此项为必填!";
                 return false;
+            }
+        }
+
+        /******************** DataRow **************/
+        public static bool getInt(DataRow dr, string name, out int result, out bool isNull) {
+            object drValue = dr[name];
+            if (drValue != null && !string.IsNullOrEmpty(drValue.ToString()))
+            {
+                isNull = false;
+                return int.TryParse(drValue.ToString(), out result);
+            }
+            else
+            {
+                result = 0;
+                isNull = true;
+                return true;
+            }
+        }
+
+        public static bool getDouble(DataRow dr, string name, out double result, out bool isNull)
+        {
+            object drValue = dr[name];
+            if (drValue != null && !string.IsNullOrEmpty(drValue.ToString()))
+            {
+                isNull = false;
+                return double.TryParse(drValue.ToString(), out result);
+            }
+            else
+            {
+                result = 0;
+                isNull = true;
+                return true;
             }
         }
     }

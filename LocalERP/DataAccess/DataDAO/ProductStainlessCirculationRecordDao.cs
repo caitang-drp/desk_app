@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Data.SqlClient;
 using System.Data;
+using LocalERP.DataAccess.Utility;
 
 namespace LocalERP.DataAccess.DataDAO
 {
@@ -22,7 +23,7 @@ namespace LocalERP.DataAccess.DataDAO
             try
             {
                 string commandText = string.Format("insert into ProductStainlessCirculationRecord(productID, quantityPerPiece, pieces, totalNum, unit, price, totalPrice, circulationID) values('{0}', {1}, {2}, '{3}','{4}', '{5}', '{6}', '{7}')",
-                    info.ProductID, info.QuantityPerPiece, info.Pieces, info.TotalNum, info.Unit, info.Price, info.TotalPrice, info.CirculationID);
+                    info.ProductID, info.QuantityNull?"NULL":info.QuantityPerPiece.ToString(), info.PiecesNull?"NULL":info.Pieces.ToString(), info.TotalNum, info.Unit, info.Price, info.TotalPrice, info.CirculationID);
                 DbHelperAccess.executeNonQuery(commandText);
                 int recordID = DbHelperAccess.executeLastID("ID", "ProductStainlessCirculationRecord");
                 return recordID;
@@ -40,27 +41,36 @@ namespace LocalERP.DataAccess.DataDAO
             string commandText = string.Format("select * from ProductStainlessCirculationRecord, ProductStainless where ProductStainlessCirculationRecord.productID = ProductStainless.ID and circulationID = {0} order by ProductStainlessCirculationRecord.ID", circulationID);
             DataTable dt = DbHelperAccess.executeQuery(commandText);
             foreach (DataRow dr in dt.Rows) {
+                bool tempBool = false;
+                
                 ProductStainlessCirculationRecord record = new ProductStainlessCirculationRecord();
                 record.CirculationID = circulationID;
                 record.ID = (int)dr["ProductStainlessCirculationRecord.ID"];
 
-                double quantityPerPiece, pieces, price;
+                int quantityPerPiece, pieces;
+                double price, totalPrice;
+
                 double.TryParse(dr["price"].ToString(), out price);
                 record.Price = price;
 
                 record.ProductID = (int)dr["ProductStainless.ID"];
                 record.ProductName = dr["name"].ToString();
 
-                double.TryParse(dr["ProductStainlessCirculationRecord.quantityPerPiece"].ToString(), out quantityPerPiece);
+                ValidateUtility.getInt(dr, "ProductStainlessCirculationRecord.quantityPerPiece", out quantityPerPiece, out tempBool);
                 record.QuantityPerPiece = quantityPerPiece;
+                record.QuantityNull = tempBool;
 
-                double.TryParse(dr["pieces"].ToString(), out pieces);
+                ValidateUtility.getInt(dr, "pieces", out pieces, out tempBool);
                 record.Pieces = pieces;
+                record.PiecesNull = tempBool;
 
                 record.Unit = dr["ProductStainlessCirculationRecord.unit"].ToString();
 
                 record.TotalNum = (int)dr["totalNum"];
-                record.TotalPrice = Convert.ToDouble(dr["totalPrice"]);
+                
+                ValidateUtility.getDouble(dr, "totalPrice", out totalPrice, out tempBool);
+                record.TotalPrice = totalPrice;
+
                 records.Add(record);
             }
             return records;
@@ -152,13 +162,13 @@ namespace LocalERP.DataAccess.DataDAO
 
             // 计算每组的 单价
             Dictionary<int, double> res = new Dictionary<int, double>();
-            foreach (var product in group)
+            foreach (KeyValuePair<int,List<ProductCirculationRecord>> product in group)
             {
                 List<ProductCirculationRecord> product_record_ls = product.Value;
 
                 int cnt = 0;
                 double sum = 0.0;
-                foreach (var record in product_record_ls)
+                foreach (ProductCirculationRecord record in product_record_ls)
                 {
                     cnt += record.TotalNum;
                     sum += record.TotalPrice;

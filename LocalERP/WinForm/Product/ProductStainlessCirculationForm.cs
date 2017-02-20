@@ -25,6 +25,8 @@ namespace LocalERP.WinForm
 
         public override void initDatagridview(DataGridView dgv)
         {
+            this.label1_tip.Text = "（“每件数量”和“件数”可为空）";
+
             DataGridViewTextBoxColumn ID = new DataGridViewTextBoxColumn();
             DataGridViewCheckBoxColumn check = new DataGridViewCheckBoxColumn();
             DataGridViewLookupColumn product = new DataGridViewLookupColumn();
@@ -117,8 +119,8 @@ namespace LocalERP.WinForm
             ProductStainlessCirculationRecord record = rec as ProductStainlessCirculationRecord;
             row.Cells["ID"].Value = record.ID;
             row.Cells["product"].Value = new LookupArg(record.ProductID, record.ProductName);
-            row.Cells["quantityPerPiece"].Value = record.QuantityPerPiece;
-            row.Cells["pieces"].Value = record.Pieces;
+            row.Cells["quantityPerPiece"].Value = record.QuantityNull?null:record.QuantityPerPiece.ToString();
+            row.Cells["pieces"].Value = record.PiecesNull?null:record.Pieces.ToString();
             row.Cells["num"].Value = record.TotalNum;
             row.Cells["unit"].Value = record.Unit;
             row.Cells["price"].Value = record.Price;
@@ -226,6 +228,7 @@ namespace LocalERP.WinForm
 
             double price, totalPrice;
             int quantityPerPiece, pieces, num;
+            bool isQuantityNull = false, isPiecesNull = false;
             string unit;
             bool isInputCorrect = true;
 
@@ -234,8 +237,8 @@ namespace LocalERP.WinForm
                 object productID = null;
 
                 if (ValidateUtility.getLookupValue(row.Cells["product"], out productID) == false 
-                    || ValidateUtility.getInt(row.Cells["quantityPerPiece"], false, true, out quantityPerPiece) == false
-                    || ValidateUtility.getInt(row.Cells["pieces"], false, true, out pieces) == false
+                    || ValidateUtility.getInt(row.Cells["quantityPerPiece"], false, true, out quantityPerPiece, out isQuantityNull) == false
+                    || ValidateUtility.getInt(row.Cells["pieces"], false, true, out pieces, out isPiecesNull) == false
                     || ValidateUtility.getInt(row.Cells["num"], true, true, out num) == false
                     || ValidateUtility.getString(row.Cells["unit"], false, out unit) == false
                     || ValidateUtility.getDouble(row.Cells["price"], out price) == false
@@ -246,8 +249,13 @@ namespace LocalERP.WinForm
                 LookupArg arg = ((row.Cells["product"] as DataGridViewLookupCell).EditedValue as LookupArg);
                 record.ProductID = (int)arg.Value;
                 record.ProductName = arg.Text;
+                
                 record.QuantityPerPiece = quantityPerPiece;
+                record.QuantityNull = isQuantityNull;
+
                 record.Pieces = pieces;
+                record.PiecesNull = isPiecesNull;
+
                 record.TotalNum = num;
                 record.Unit = unit;
                 record.Price = price;

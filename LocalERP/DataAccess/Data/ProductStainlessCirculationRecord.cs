@@ -6,21 +6,36 @@ namespace LocalERP.DataAccess.Data
 {
     public class ProductStainlessCirculationRecord : ProductCirculationRecord
     {
-        private double quantityPerPiece;
+        private int quantityPerPiece;
 
-        public double QuantityPerPiece
+        public int QuantityPerPiece
         {
             get { return quantityPerPiece; }
             set { quantityPerPiece = value; }
         }
 
-        private double pieces;
+        private bool quantityNull = false;
 
-        public double Pieces
+        public bool QuantityNull
+        {
+            get { return quantityNull; }
+            set { quantityNull = value; }
+        }
+
+        private int pieces;
+
+        public int Pieces
         {
             get { return pieces; }
             set { pieces = value; }
         }
 
+        private bool piecesNull = false;
+
+        public bool PiecesNull
+        {
+            get { return piecesNull; }
+            set { piecesNull = value; }
+        }
     }
 }

@@ -599,5 +599,15 @@ namespace LocalERP.WinForm
         {
             resetNeedSave(true);
         }
+
+        private void textBox_cutoff_TextChanged(object sender, EventArgs e)
+        {
+            setTotalPrice();
+        }
+
+        private void textBox_realTotal_TextChanged(object sender, EventArgs e)
+        {
+            System.Threading.Thread.Sleep(0);
+        }
     }
 }
