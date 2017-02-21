@@ -323,7 +323,6 @@
             this.sum_cost.HeaderText = "成本金额";
             this.sum_cost.Name = "sum_cost";
             this.sum_cost.ReadOnly = true;
-            this.sum_cost.Visible = false;
             // 
             // profit
             // 

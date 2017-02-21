@@ -95,6 +95,7 @@ namespace LocalERP.WinForm
 
                 case "销售利润表":
                     FormSingletonFactory.getInstance().getQuerySellProfitForm().Show(this.dockPanel1);
+                    FormSingletonFactory.getInstance().getQuerySellProfitForm().refresh();
                     break;
 
                 case DataUtility.LIB_LIST:
