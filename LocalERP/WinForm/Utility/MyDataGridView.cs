@@ -10,6 +10,12 @@ namespace LocalERP.WinForm
     {
         public MyDataGridView() : base() {
             this.CellPainting += new DataGridViewCellPaintingEventHandler(MyDataGridView_CellPainting);
+            this.CellFormatting += new DataGridViewCellFormattingEventHandler(MyDataGridView_CellFormatting);
+        }
+
+        void MyDataGridView_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            e.CellStyle.SelectionForeColor = e.CellStyle.ForeColor;
         }
 
         void MyDataGridView_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
