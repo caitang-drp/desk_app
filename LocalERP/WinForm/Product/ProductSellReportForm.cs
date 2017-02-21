@@ -9,7 +9,6 @@ using LocalERP.CrystalReport;
 using LocalERP.DataAccess.Data;
 using CrystalDecisions.CrystalReports.Engine;
 using LocalERP.DataAccess.DataDAO;
-using static LocalERP.DataAccess.Data.ProductCirculation;
 
 namespace LocalERP.WinForm
 {
@@ -79,7 +78,7 @@ namespace LocalERP.WinForm
             beizhu.Text = "备注：" + sell.Comment;
             // 标题
             TextObject ti = sellCR.ReportDefinition.ReportObjects["Text6"] as TextObject;
-            string title = new ProductCirculation().get_circulation_type_string((CirculationType)this.sell.Type) + "单";
+            string title = new ProductCirculation().get_circulation_type_string((ProductCirculation.CirculationType)this.sell.Type) + "单";
             ti.Text = title;
 
             sellCR.SetDataSource(sellDS);
@@ -117,7 +116,7 @@ namespace LocalERP.WinForm
             beizhu.Text = "备注：" + sell.Comment;
             // 标题
             TextObject ti = sellCR.ReportDefinition.ReportObjects["Text6"] as TextObject;
-            string title = new ProductCirculation().get_circulation_type_string((CirculationType)this.sell.Type) + "单";
+            string title = new ProductCirculation().get_circulation_type_string((ProductCirculation.CirculationType)this.sell.Type) + "单";
             ti.Text = title;
 
             sellCR.SetDataSource(sellDS);
