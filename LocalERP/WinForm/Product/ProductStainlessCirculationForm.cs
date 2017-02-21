@@ -124,6 +124,7 @@ namespace LocalERP.WinForm
             row.Cells["num"].Value = record.TotalNum;
             row.Cells["unit"].Value = record.Unit;
             row.Cells["price"].Value = record.Price;
+            row.Cells["totalPrice"].Value = record.TotalPrice;
         }
 
         //for event: caculate total price

@@ -125,6 +125,8 @@ namespace LocalERP.WinForm
             this.lookupText1.Text_Lookup = circulation.CustomerName;
             this.textBox_operator.Text = circulation.Oper;
 
+            this.dataGridView2[1, 0].Value = circulation.Total;
+
             this.textBox_realTotal.Text = circulation.RealTotal.ToString();
             this.textBox_previousArrears.Text = circulation.PreviousArrears.ToString();
             this.textBox_thisPayed.Text = circulation.ThisPayed.ToString();
@@ -155,10 +157,10 @@ namespace LocalERP.WinForm
             {
                 int index = this.dataGridView1.Rows.Add();
                 this.setRecord(this.dataGridView1.Rows[index], record);
-                this.setSubTotalPrice(index);
+                //this.setSubTotalPrice(index);
             }
 
-            this.setTotalPrice();
+            //this.setTotalPrice();
 
             if (circulation != null)
                 openMode = circulation.Status;
