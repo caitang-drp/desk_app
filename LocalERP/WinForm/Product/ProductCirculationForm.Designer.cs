@@ -468,6 +468,7 @@ namespace LocalERP.WinForm
             this.textBox_thisPayed.Name = "textBox_thisPayed";
             this.textBox_thisPayed.Size = new System.Drawing.Size(97, 23);
             this.textBox_thisPayed.TabIndex = 53;
+            this.textBox_thisPayed.TextChanged += new System.EventHandler(this.textBox_thisPayed_TextChanged);
             // 
             // textBox_realTotal
             // 
@@ -562,6 +563,7 @@ namespace LocalERP.WinForm
             this.textBox_previousArrears.Name = "textBox_previousArrears";
             this.textBox_previousArrears.Size = new System.Drawing.Size(94, 23);
             this.textBox_previousArrears.TabIndex = 65;
+            this.textBox_previousArrears.TextChanged += new System.EventHandler(this.textBox_previousArrears_TextChanged);
             // 
             // label17
             // 

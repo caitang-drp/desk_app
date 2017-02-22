@@ -89,6 +89,12 @@ namespace LocalERP.WinForm
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
+        /// 
+
+        //cutoff和realTotal会互相影响，加个控制防止死循环
+        private bool cutoffNeedReCaculate = true;
+        private bool realTotalNeedRecaculate = true;
+
         private void initCirculation()
         {
             if (openMode == 0)
@@ -104,7 +110,9 @@ namespace LocalERP.WinForm
                 this.dataGridView1.Rows.Clear();
                 this.dataGridView2[1, 0].Value = null;
 
-                this.textBox_realTotal.Text = null;
+                this.textBox_cutoff.Text = "100";
+
+                this.textBox_realTotal.Text = "";
                 this.textBox_previousArrears.Text = null;
                 this.textBox_accumulative.Text = null;
                 this.textBox_thisPayed.Text = null;
@@ -128,9 +136,12 @@ namespace LocalERP.WinForm
             this.dataGridView2[1, 0].Value = circulation.Total;
 
             this.textBox_realTotal.Text = circulation.RealTotal.ToString();
+            
+            //this.textBox_cutoff.Text = circulation.Total == 0?"":string.Format("{0:F}", circulation.RealTotal / circulation.Total);
+            
             this.textBox_previousArrears.Text = circulation.PreviousArrears.ToString();
             this.textBox_thisPayed.Text = circulation.ThisPayed.ToString();
-
+            this.textBox_accumulative.Text = string.Format("{0}", circulation.PreviousArrears + circulation.RealTotal - circulation.ThisPayed);
             this.backgroundWorker.RunWorkerAsync(circulation.ID);
             this.invokeBeginLoadNotify();
         }
@@ -280,10 +291,15 @@ namespace LocalERP.WinForm
                 total += (double)row.Cells["totalPrice"].Value;
 
             this.dataGridView2[1, 0].Value = total;
-            float cutoff = 100;
-            float.TryParse(this.textBox_cutoff.Text, out cutoff);
+
+            //this.cutoffNeedReCaculate = false;
+
+            double cutoff = 100;
+            double.TryParse(this.textBox_cutoff.Text, out cutoff);
             double realTotal = total * cutoff / 100;
             this.textBox_realTotal.Text =realTotal.ToString();
+
+            //this.cutoffNeedReCaculate = true;
         }
 
         /// <summary>
@@ -527,8 +543,8 @@ namespace LocalERP.WinForm
             this.setCellEnable(row.Cells["totalPrice"], false);
             //this.setCellEnable(row.Cells["num"], false);
             
-            setSubTotalPrice(row.Index);
-            setTotalPrice();
+            //setSubTotalPrice(row.Index);
+            //setTotalPrice();
 
             this.resetNeedSave(true);
             this.recordChanged = true;
@@ -604,12 +620,41 @@ namespace LocalERP.WinForm
 
         private void textBox_cutoff_TextChanged(object sender, EventArgs e)
         {
-            setTotalPrice();
+            this.cutoffNeedReCaculate = false;
+
+            if (this.realTotalNeedRecaculate == true)
+            {
+                double cutoff = 100;
+                double.TryParse(this.textBox_cutoff.Text, out cutoff);
+                double realTotal = (double)this.dataGridView2[1, 0].Value * cutoff / 100;
+                this.textBox_realTotal.Text = realTotal.ToString();
+                //这里的textBox_realTotal_TextChanged是不是异步？
+            }
+
+            this.cutoffNeedReCaculate = true;
         }
 
         private void textBox_realTotal_TextChanged(object sender, EventArgs e)
         {
-            System.Threading.Thread.Sleep(0);
+            this.realTotalNeedRecaculate = false;
+            if (this.cutoffNeedReCaculate == true) {
+                double realTotal = 0;
+                double.TryParse(this.textBox_realTotal.Text, out realTotal);
+                double total = (double)this.dataGridView2[1, 0].Value;
+                if(total != 0)
+                    this.textBox_cutoff.Text = string.Format("{0:F}", realTotal / total * 100);
+            }
+            this.realTotalNeedRecaculate = true;
+        }
+
+        private void textBox_previousArrears_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox_thisPayed_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
