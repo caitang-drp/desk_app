@@ -21,6 +21,13 @@ namespace LocalERP.WinForm
         public QuerySellProfitForm()
         {
             InitializeComponent();
+
+            ArrayList typeList = new ArrayList();
+            typeList.Add(new DictionaryEntry(1, "按明细"));
+            //typeList.Add(new DictionaryEntry(3, "按销售商品"));
+            this.comboBox1.DataSource = typeList;
+            this.comboBox1.ValueMember = "Key";
+            this.comboBox1.DisplayMember = "Value";
         }
 
         private void ProductSellForm_Load(object sender, EventArgs e)
@@ -220,7 +227,7 @@ namespace LocalERP.WinForm
             return true;
         }
 
-        private void initDoneList(List<SellProfit> done_ls)
+        private void initDoneListRecord(List<SellProfit> done_ls)
         {
             foreach (SellProfit one in done_ls)
             {
@@ -236,7 +243,7 @@ namespace LocalERP.WinForm
             }
         }
 
-        private void initUndoList(
+        private void initUndoListRecord(
             List<ProductCirculation> ls,
             List<SellProfit> done_profit_ls,
             Dictionary<int, double> product_average_price_map)
@@ -289,7 +296,7 @@ namespace LocalERP.WinForm
             }
         }
 
-        private void initStatisticLine()
+        private void initRecordStatisticLine()
         {
             int index = this.dataGridView1.Rows.Add();
             index = this.dataGridView1.Rows.Add();
@@ -309,7 +316,7 @@ namespace LocalERP.WinForm
             }
         }
 
-        private void initList()
+        private void initListRecord()
         {
             statistic_record = new SellProfit();
             this.dataGridView1.Rows.Clear();
@@ -321,13 +328,18 @@ namespace LocalERP.WinForm
             Dictionary<int, double> product_average_price_map = 
                 ProductStainlessCirculationRecordDao.getInstance().get_product_average_buy_cost(reviewed_all_bill);
 
-            initDoneList(done_profit_ls);
+            initDoneListRecord(done_profit_ls);
 
-            initUndoList(reviewed_all_bill, done_profit_ls, product_average_price_map);
+            initUndoListRecord(reviewed_all_bill, done_profit_ls, product_average_price_map);
 
-            initStatisticLine();
+            initRecordStatisticLine();
         }
 
+        private void initList()
+        {
+            // 按照明细
+            initListRecord();
+        }
         /// <summary>
         /// event
         /// </summary>
