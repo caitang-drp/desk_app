@@ -15,6 +15,9 @@ namespace LocalERP.WinForm
 {
     public partial class QuerySellProfitForm : MyDockContent
     {
+        // 统计数据，按照明细方式
+        SellProfit statistic_record;
+
         public QuerySellProfitForm()
         {
             InitializeComponent();
@@ -104,6 +107,13 @@ namespace LocalERP.WinForm
                 //this.dataGridView1.Rows[index].DefaultCellStyle.ForeColor = Color.Red;
                 //this.dataGridView1.Rows[index].Cells["profit_margin"].Style.BackColor = Color.Red;
             }
+
+            // 记录统计信息
+            statistic_record.ID ++;
+            statistic_record.cnt += one.cnt;
+            statistic_record.sum_cost += one.sum_cost;
+            statistic_record.sum_price += one.sum_price;
+            statistic_record.profit += one.profit;
         }
 
         private SellProfit format_sellprofit(
@@ -279,8 +289,29 @@ namespace LocalERP.WinForm
             }
         }
 
+        private void initStatisticLine()
+        {
+            int index = this.dataGridView1.Rows.Add();
+            index = this.dataGridView1.Rows.Add();
+            index = this.dataGridView1.Rows.Add();
+            index = this.dataGridView1.Rows.Add();
+            index = this.dataGridView1.Rows.Add();
+
+            this.dataGridView1.Rows[index].Cells["serial"].Value = statistic_record.ID;
+            this.dataGridView1.Rows[index].Cells["sell_cnt"].Value = statistic_record.cnt;
+            this.dataGridView1.Rows[index].Cells["sell_sum_price"].Value = statistic_record.sum_price;
+            this.dataGridView1.Rows[index].Cells["sum_cost"].Value = statistic_record.sum_cost;
+            this.dataGridView1.Rows[index].Cells["profit"].Value = statistic_record.profit;
+
+            if (statistic_record.profit <= 0.0000)
+            {
+                this.dataGridView1.Rows[index].DefaultCellStyle.ForeColor = Color.Red;
+            }
+        }
+
         private void initList()
         {
+            statistic_record = new SellProfit();
             this.dataGridView1.Rows.Clear();
 
             // 获取审核通过的订单
@@ -293,6 +324,8 @@ namespace LocalERP.WinForm
             initDoneList(done_profit_ls);
 
             initUndoList(reviewed_all_bill, done_profit_ls, product_average_price_map);
+
+            initStatisticLine();
         }
 
         /// <summary>
