@@ -23,7 +23,7 @@ namespace LocalERP.WinForm
         private void ProductSellForm_Load(object sender, EventArgs e)
         {
             DateTime dateTime = DateTime.Now;
-            this.dateTimePicker3.Value = dateTime.AddMonths(-1);
+            this.start_time.Value = dateTime.AddMonths(-1);
 
             initList();
         }
@@ -90,7 +90,7 @@ namespace LocalERP.WinForm
             this.dataGridView1.Rows[index].Cells["ope"].Value = one.oper;
             this.dataGridView1.Rows[index].Cells["sum_cost"].Value = one.sum_cost;
 
-            this.dataGridView1.Rows[index].Cells["sell_cnt"].Style.BackColor = Color.Yellow;
+            //this.dataGridView1.Rows[index].Cells["sell_cnt"].Style.BackColor = Color.Yellow;
             this.dataGridView1.Rows[index].Cells["sell_price"].Style.BackColor = Color.Yellow;
             this.dataGridView1.Rows[index].Cells["sell_sum_price"].Style.BackColor = Color.Yellow;
             this.dataGridView1.Rows[index].Cells["cost"].Style.BackColor = Color.YellowGreen;
@@ -170,10 +170,56 @@ namespace LocalERP.WinForm
             return undo_ls;
         }
 
+        // 只需要 日期
+        private DateTime get_date(DateTime x)
+        {
+            return new DateTime(x.Year, x.Month, x.Day);
+        }
+
+        // 比较日期
+        private bool if_in_time_range(DateTime start, DateTime end, DateTime x)
+        {
+            start = get_date(start);
+            end = get_date(end);
+            x = get_date(x);
+
+            // 错误的时间范围
+            if (DateTime.Compare(start, end) > 0)
+            {
+                return false;
+            }
+
+            if (DateTime.Compare(start, x) <= 0 && DateTime.Compare(x, end) <= 0)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        private bool if_ok(DateTime t)
+        {
+            DateTime start = start_time.Value;
+            DateTime end = end_time.Value;
+
+            if (!if_in_time_range(start, end, t))
+            {
+                return false;
+            }
+
+            return true;
+        }
+
         private void initDoneList(List<SellProfit> done_ls)
         {
             foreach (SellProfit one in done_ls)
             {
+                // 过滤条件
+                if (!if_ok(one.sell_time))
+                {
+                    continue;
+                }
+
                 int index = this.dataGridView1.Rows.Add();
 
                 sellprofit_to_grid(one, index);
@@ -208,9 +254,15 @@ namespace LocalERP.WinForm
 
             foreach (ProductCirculationRecord record in record_ls)
             {
-                int index = this.dataGridView1.Rows.Add();
-
                 ProductCirculation cir = find_circulation_with_id(record.CirculationID, ls);
+
+                // 过滤条件
+                if (!if_ok(cir.CirculationTime))
+                {
+                    continue;
+                }
+
+                int index = this.dataGridView1.Rows.Add();
 
                 // 销售退货
                 if (cir.Type == 4)
