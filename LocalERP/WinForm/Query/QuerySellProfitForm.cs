@@ -140,6 +140,12 @@ namespace LocalERP.WinForm
                 one.customer = cir.CustomerName;
                 one.oper = cir.Oper;
             }
+            else {
+                one.serial = "";
+                one.sell_time = new DateTime();
+                one.customer = "";
+                one.oper = "";
+            }
 
             one.product = product.Name;
             one.unit = product.Unit;
@@ -313,7 +319,7 @@ namespace LocalERP.WinForm
             index = this.dataGridView1.Rows.Add();
             index = this.dataGridView1.Rows.Add();
 
-            this.dataGridView1.Rows[index].Cells["serial"].Value = statistic_record.ID;
+            this.dataGridView1.Rows[index].Cells["serial"].Value = statistic_record.ID.ToString();
             this.dataGridView1.Rows[index].Cells["sell_cnt"].Value = statistic_record.cnt;
             this.dataGridView1.Rows[index].Cells["sell_sum_price"].Value = statistic_record.sum_price;
             this.dataGridView1.Rows[index].Cells["sum_cost"].Value = statistic_record.sum_cost;
@@ -361,12 +367,11 @@ namespace LocalERP.WinForm
                     if (cir.Type == 4)
                     {
                         record.TotalNum = -record.TotalNum;
-                        record.TotalPrice = -record.TotalPrice;
                     }
 
                     one.ProductID = record.ProductID;
                     one.TotalNum += record.TotalNum;
-                    one.TotalPrice += record.TotalPrice;
+                    one.TotalPrice += (record.TotalNum * record.Price);
                 }
 
                 SellProfit one_data =  format_sellprofit(index, null, one, product_average_price_map[product_id]);
@@ -382,7 +387,7 @@ namespace LocalERP.WinForm
             index = this.dataGridView1.Rows.Add();
             index = this.dataGridView1.Rows.Add();
 
-            this.dataGridView1.Rows[index].Cells["product"].Value = statistic_record.ID;
+            this.dataGridView1.Rows[index].Cells["product"].Value = statistic_record.ID.ToString();
             this.dataGridView1.Rows[index].Cells["sell_cnt"].Value = statistic_record.cnt;
             this.dataGridView1.Rows[index].Cells["sell_sum_price"].Value = statistic_record.sum_price;
             this.dataGridView1.Rows[index].Cells["sum_cost"].Value = statistic_record.sum_cost;
