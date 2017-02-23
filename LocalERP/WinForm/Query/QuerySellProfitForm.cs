@@ -106,6 +106,7 @@ namespace LocalERP.WinForm
             this.dataGridView1.Rows[index].Cells["cost"].Style.BackColor = Color.YellowGreen;
             this.dataGridView1.Rows[index].Cells["sum_cost"].Style.BackColor = Color.YellowGreen;
 
+            this.dataGridView1.Rows[index].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             // 设置亏损，显示为红色
             if (Convert.ToDouble(this.dataGridView1.Rows[index].Cells["profit"].Value) <= 0.0000)
             {
@@ -314,6 +315,8 @@ namespace LocalERP.WinForm
             {
                 this.dataGridView1.Rows[index].DefaultCellStyle.ForeColor = Color.Red;
             }
+
+            this.dataGridView1.Rows[index].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
         }
 
         private void initListRecord()
