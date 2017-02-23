@@ -213,10 +213,13 @@ namespace LocalERP.DataAccess.DataDAO
                 }
 
                 // ²É¹ºÍË³§
-                foreach (ProductCirculationRecord record in purchase_back_group[key])
+                if (purchase_back_group.ContainsKey(key))
                 {
-                    cnt -= record.TotalNum;
-                    sum -= record.TotalPrice;
+                    foreach (ProductCirculationRecord record in purchase_back_group[key])
+                    {
+                        cnt -= record.TotalNum;
+                        sum -= record.TotalPrice;
+                    }
                 }
 
                 res[product.Key] = sum / cnt;
