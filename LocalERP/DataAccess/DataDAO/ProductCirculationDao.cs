@@ -93,8 +93,10 @@ namespace LocalERP.DataAccess.DataDAO
                 
                 circulation.Oper = dr["operator"] as string;
 
-                double realTotal = 0, previousArrears, thisPayed;
-                
+                double total, realTotal, previousArrears, thisPayed;
+
+                if (double.TryParse(dr["total"].ToString(), out total))
+                    circulation.Total = total;
                 if (double.TryParse(dr["realTotal"].ToString(), out realTotal))
                     circulation.RealTotal = realTotal;
                 if (double.TryParse(dr["previousArrears"].ToString(), out previousArrears))

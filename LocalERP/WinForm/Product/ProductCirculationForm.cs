@@ -135,6 +135,7 @@ namespace LocalERP.WinForm
 
             this.dataGridView2[1, 0].Value = circulation.Total;
 
+            //textbox_cutoff是自动计算的，类似textbox_accumulative
             this.textBox_realTotal.Text = circulation.RealTotal.ToString();
             
             //this.textBox_cutoff.Text = circulation.Total == 0?"":string.Format("{0:F}", circulation.RealTotal / circulation.Total);
@@ -292,14 +293,10 @@ namespace LocalERP.WinForm
 
             this.dataGridView2[1, 0].Value = total;
 
-            //this.cutoffNeedReCaculate = false;
-
             double cutoff = 100;
             double.TryParse(this.textBox_cutoff.Text, out cutoff);
             double realTotal = total * cutoff / 100;
             this.textBox_realTotal.Text =realTotal.ToString();
-
-            //this.cutoffNeedReCaculate = true;
         }
 
         /// <summary>
@@ -642,7 +639,7 @@ namespace LocalERP.WinForm
                 double.TryParse(this.textBox_realTotal.Text, out realTotal);
                 double total = (double)this.dataGridView2[1, 0].Value;
                 if(total != 0)
-                    this.textBox_cutoff.Text = string.Format("{0:F}", realTotal / total * 100);
+                    this.textBox_cutoff.Text = string.Format("{0}", realTotal / total * 100);
             }
             this.realTotalNeedRecaculate = true;
         }
