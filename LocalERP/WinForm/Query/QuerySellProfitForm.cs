@@ -169,7 +169,12 @@ namespace LocalERP.WinForm
 
             List<double> profit = get_profit(sum_cost, sum_price);
             one.profit = profit[0];
+
             one.profit_margin = profit[1];
+            if (sell_cnt < 0 && one.profit_margin > 0)
+            {
+                one.profit_margin = -one.profit_margin;
+            }
 
             one.record_id = record.ID;
 
