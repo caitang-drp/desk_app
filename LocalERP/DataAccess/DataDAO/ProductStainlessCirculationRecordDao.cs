@@ -206,11 +206,9 @@ namespace LocalERP.DataAccess.DataDAO
             Dictionary<int, List<ProductCirculationRecord>> purchase_group = get_record_group_by_product(get_wanted_type_circulation_ls(1, ls));
             // 采购退厂
             Dictionary<int, List<ProductCirculationRecord>> purchase_back_group = get_record_group_by_product(get_wanted_type_circulation_ls(2, ls));
-
-
-            // 销售不影响成本
-            //var sell_group = get_record_group_by_product(get_wanted_type_circulation_ls(3, ls));
-            //var sell_back_group = get_record_group_by_product(get_wanted_type_circulation_ls(4, ls));
+            // 销售退货
+            // NOTE: 销售退货相当于进了一件货
+            Dictionary<int, List<ProductCirculationRecord>> sell_back_group = get_record_group_by_product(get_wanted_type_circulation_ls(4, ls));
 
             // 计算每组的 单价
             Dictionary<int, double> res = new Dictionary<int, double>();
@@ -235,6 +233,16 @@ namespace LocalERP.DataAccess.DataDAO
                     {
                         cnt -= record.TotalNum;
                         sum -= record.TotalPrice;
+                    }
+                }
+
+                // 销售退货
+                if (sell_back_group.ContainsKey(key))
+                {
+                    foreach (ProductCirculationRecord record in sell_back_group[key])
+                    {
+                        cnt += record.TotalNum;
+                        sum += record.TotalPrice;
                     }
                 }
 
