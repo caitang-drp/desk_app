@@ -15,15 +15,25 @@ namespace LocalERP.WinForm
 {
     public partial class QuerySellProfitForm : MyDockContent
     {
+        // 统计数据，按照明细方式
+        SellProfit statistic_record;
+
         public QuerySellProfitForm()
         {
             InitializeComponent();
+
+            ArrayList typeList = new ArrayList();
+            typeList.Add(new DictionaryEntry(1, "按明细"));
+            //typeList.Add(new DictionaryEntry(3, "按销售商品"));
+            this.comboBox1.DataSource = typeList;
+            this.comboBox1.ValueMember = "Key";
+            this.comboBox1.DisplayMember = "Value";
         }
 
         private void ProductSellForm_Load(object sender, EventArgs e)
         {
             DateTime dateTime = DateTime.Now;
-            this.dateTimePicker3.Value = dateTime.AddMonths(-1);
+            this.start_time.Value = dateTime.AddMonths(-1);
 
             initList();
         }
@@ -90,7 +100,7 @@ namespace LocalERP.WinForm
             this.dataGridView1.Rows[index].Cells["ope"].Value = one.oper;
             this.dataGridView1.Rows[index].Cells["sum_cost"].Value = one.sum_cost;
 
-            this.dataGridView1.Rows[index].Cells["sell_cnt"].Style.BackColor = Color.Yellow;
+            //this.dataGridView1.Rows[index].Cells["sell_cnt"].Style.BackColor = Color.Yellow;
             this.dataGridView1.Rows[index].Cells["sell_price"].Style.BackColor = Color.Yellow;
             this.dataGridView1.Rows[index].Cells["sell_sum_price"].Style.BackColor = Color.Yellow;
             this.dataGridView1.Rows[index].Cells["cost"].Style.BackColor = Color.YellowGreen;
@@ -104,6 +114,13 @@ namespace LocalERP.WinForm
                 //this.dataGridView1.Rows[index].DefaultCellStyle.ForeColor = Color.Red;
                 //this.dataGridView1.Rows[index].Cells["profit_margin"].Style.BackColor = Color.Red;
             }
+
+            // 记录统计信息
+            statistic_record.ID ++;
+            statistic_record.cnt += one.cnt;
+            statistic_record.sum_cost += one.sum_cost;
+            statistic_record.sum_price += one.sum_price;
+            statistic_record.profit += one.profit;
         }
 
         private SellProfit format_sellprofit(
@@ -170,17 +187,63 @@ namespace LocalERP.WinForm
             return undo_ls;
         }
 
-        private void initDoneList(List<SellProfit> done_ls)
+        // 只需要 日期
+        private DateTime get_date(DateTime x)
+        {
+            return new DateTime(x.Year, x.Month, x.Day);
+        }
+
+        // 比较日期
+        private bool if_in_time_range(DateTime start, DateTime end, DateTime x)
+        {
+            start = get_date(start);
+            end = get_date(end);
+            x = get_date(x);
+
+            // 错误的时间范围
+            if (DateTime.Compare(start, end) > 0)
+            {
+                return false;
+            }
+
+            if (DateTime.Compare(start, x) <= 0 && DateTime.Compare(x, end) <= 0)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        private bool if_ok(DateTime t)
+        {
+            DateTime start = start_time.Value;
+            DateTime end = end_time.Value;
+
+            if (!if_in_time_range(start, end, t))
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        private void initDoneListRecord(List<SellProfit> done_ls)
         {
             foreach (SellProfit one in done_ls)
             {
+                // 过滤条件
+                if (!if_ok(one.sell_time))
+                {
+                    continue;
+                }
+
                 int index = this.dataGridView1.Rows.Add();
 
                 sellprofit_to_grid(one, index);
             }
         }
 
-        private void initUndoList(
+        private void initUndoListRecord(
             List<ProductCirculation> ls,
             List<SellProfit> done_profit_ls,
             Dictionary<int, double> product_average_price_map)
@@ -208,9 +271,15 @@ namespace LocalERP.WinForm
 
             foreach (ProductCirculationRecord record in record_ls)
             {
-                int index = this.dataGridView1.Rows.Add();
-
                 ProductCirculation cir = find_circulation_with_id(record.CirculationID, ls);
+
+                // 过滤条件
+                if (!if_ok(cir.CirculationTime))
+                {
+                    continue;
+                }
+
+                int index = this.dataGridView1.Rows.Add();
 
                 // 销售退货
                 if (cir.Type == 4)
@@ -227,8 +296,29 @@ namespace LocalERP.WinForm
             }
         }
 
-        private void initList()
+        private void initRecordStatisticLine()
         {
+            int index = this.dataGridView1.Rows.Add();
+            index = this.dataGridView1.Rows.Add();
+            index = this.dataGridView1.Rows.Add();
+            index = this.dataGridView1.Rows.Add();
+            index = this.dataGridView1.Rows.Add();
+
+            this.dataGridView1.Rows[index].Cells["serial"].Value = statistic_record.ID;
+            this.dataGridView1.Rows[index].Cells["sell_cnt"].Value = statistic_record.cnt;
+            this.dataGridView1.Rows[index].Cells["sell_sum_price"].Value = statistic_record.sum_price;
+            this.dataGridView1.Rows[index].Cells["sum_cost"].Value = statistic_record.sum_cost;
+            this.dataGridView1.Rows[index].Cells["profit"].Value = statistic_record.profit;
+
+            if (statistic_record.profit <= 0.0000)
+            {
+                this.dataGridView1.Rows[index].DefaultCellStyle.ForeColor = Color.Red;
+            }
+        }
+
+        private void initListRecord()
+        {
+            statistic_record = new SellProfit();
             this.dataGridView1.Rows.Clear();
 
             // 获取审核通过的订单
@@ -238,11 +328,18 @@ namespace LocalERP.WinForm
             Dictionary<int, double> product_average_price_map = 
                 ProductStainlessCirculationRecordDao.getInstance().get_product_average_buy_cost(reviewed_all_bill);
 
-            initDoneList(done_profit_ls);
+            initDoneListRecord(done_profit_ls);
 
-            initUndoList(reviewed_all_bill, done_profit_ls, product_average_price_map);
+            initUndoListRecord(reviewed_all_bill, done_profit_ls, product_average_price_map);
+
+            initRecordStatisticLine();
         }
 
+        private void initList()
+        {
+            // 按照明细
+            initListRecord();
+        }
         /// <summary>
         /// event
         /// </summary>
