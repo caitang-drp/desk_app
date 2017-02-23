@@ -34,6 +34,22 @@ namespace LocalERP.DataAccess.DataDAO
             }
         }
 
+        public ProductCirculationRecord find_record_by_id(int ID)
+        {
+            string commandText = string.Format("select * from ProductStainlessCirculationRecord where ID = " + ID.ToString());
+            DataRow dr = DbHelperAccess.executeQueryGetOneRow(commandText);
+
+            ProductCirculationRecord one = new ProductCirculationRecord();
+
+            if (dr != null)
+            {
+                one.ID = (int)dr["ID"];
+                one.ProductID = (int)dr["productID"];
+            }
+
+            return one;
+        }
+
         public override List<ProductCirculationRecord> FindList(int circulationID)
         {
             List<ProductCirculationRecord> records = new List<ProductCirculationRecord>();
