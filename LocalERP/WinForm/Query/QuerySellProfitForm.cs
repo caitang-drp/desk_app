@@ -63,7 +63,7 @@ namespace LocalERP.WinForm
             profit = double_n(profit, 6);
 
             // 利润率，如果利润为负，利润率应该也是负数的
-            double profit_margin = profit / Math.Abs(cost) * 100.0;
+            double profit_margin = profit / Math.Abs(price) * 100.0;
             profit_margin = double_n(profit_margin, 2);
 
             ret.Add(profit);
