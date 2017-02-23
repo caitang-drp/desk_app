@@ -24,7 +24,7 @@ namespace LocalERP.WinForm
 
             ArrayList typeList = new ArrayList();
             typeList.Add(new DictionaryEntry(1, "按明细"));
-            //typeList.Add(new DictionaryEntry(3, "按销售商品"));
+            typeList.Add(new DictionaryEntry(2, "按销售商品"));
             this.comboBox1.DataSource = typeList;
             this.comboBox1.ValueMember = "Key";
             this.comboBox1.DisplayMember = "Value";
@@ -106,6 +106,7 @@ namespace LocalERP.WinForm
             this.dataGridView1.Rows[index].Cells["cost"].Style.BackColor = Color.YellowGreen;
             this.dataGridView1.Rows[index].Cells["sum_cost"].Style.BackColor = Color.YellowGreen;
 
+            this.dataGridView1.Rows[index].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             // 设置亏损，显示为红色
             if (Convert.ToDouble(this.dataGridView1.Rows[index].Cells["profit"].Value) <= 0.0000)
             {
@@ -132,9 +133,14 @@ namespace LocalERP.WinForm
             ProductStainless product = ProductStainlessDao.getInstance().FindByID(record.ProductID);
             SellProfit one = new SellProfit();
 
-            one.serial = cir.Code;
-            one.sell_time = cir.CirculationTime;
-            one.customer = cir.CustomerName;
+            if (cir != null)
+            {
+                one.serial = cir.Code;
+                one.sell_time = cir.CirculationTime;
+                one.customer = cir.CustomerName;
+                one.oper = cir.Oper;
+            }
+
             one.product = product.Name;
             one.unit = product.Unit;
 
@@ -144,6 +150,10 @@ namespace LocalERP.WinForm
             one.price = (double)record.Price;
 
             double sum_price = record.Price * sell_cnt;
+            if (cir == null)
+            {
+                sum_price = record.TotalPrice;
+            }
             one.sum_price = sum_price;
 
             one.cost = double_n(average_price, 6);
@@ -155,7 +165,6 @@ namespace LocalERP.WinForm
             one.profit = profit[0];
             one.profit_margin = profit[1];
 
-            one.oper = cir.Oper;
             one.record_id = record.ID;
 
             return one;
@@ -314,6 +323,93 @@ namespace LocalERP.WinForm
             {
                 this.dataGridView1.Rows[index].DefaultCellStyle.ForeColor = Color.Red;
             }
+
+            this.dataGridView1.Rows[index].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+        }
+
+        private void do_init_product_list(
+            List<ProductCirculation> ls,
+            Dictionary<int, double> product_average_price_map)
+        {
+
+            // 获取审核通过的销售单id列表
+            List<int> reviewed_sell_cir_id_ls =
+                ProductStainlessCirculationRecordDao.getInstance().get_wanted_type_circulation_ls(3, ls);
+            // 获取审核通过的销售退货单id列表
+            List<int> reviewed_sell_back_cir_id_ls =
+                ProductStainlessCirculationRecordDao.getInstance().get_wanted_type_circulation_ls(4, ls);
+            // 合并
+            List<int> reviewed_cir_id_ls = reviewed_sell_cir_id_ls;
+            reviewed_cir_id_ls.AddRange(reviewed_sell_back_cir_id_ls);
+
+            // 按照产品分组
+            Dictionary<int, List<ProductCirculationRecord>> sell_group =
+                ProductStainlessCirculationRecordDao.getInstance().get_record_group_by_product(reviewed_cir_id_ls);
+            foreach (KeyValuePair<int, List<ProductCirculationRecord>> sell in sell_group)
+            {
+                int product_id = sell.Key;
+                List<ProductCirculationRecord> record_ls = sell.Value;
+
+                int index = this.dataGridView1.Rows.Add();
+
+                ProductCirculationRecord one = new ProductCirculationRecord();
+                foreach (ProductCirculationRecord record in record_ls)
+                {
+                    ProductCirculation cir = find_circulation_with_id(record.CirculationID, ls);
+
+                    // 销售退货
+                    if (cir.Type == 4)
+                    {
+                        record.TotalNum = -record.TotalNum;
+                        record.TotalPrice = -record.TotalPrice;
+                    }
+
+                    one.ProductID = record.ProductID;
+                    one.TotalNum += record.TotalNum;
+                    one.TotalPrice += record.TotalPrice;
+                }
+
+                SellProfit one_data =  format_sellprofit(index, null, one, product_average_price_map[product_id]);
+                sellprofit_to_grid(one_data, index);
+            }
+        }
+
+        private void initProductStatisticLine()
+        {
+            int index = this.dataGridView1.Rows.Add();
+            index = this.dataGridView1.Rows.Add();
+            index = this.dataGridView1.Rows.Add();
+            index = this.dataGridView1.Rows.Add();
+            index = this.dataGridView1.Rows.Add();
+
+            this.dataGridView1.Rows[index].Cells["product"].Value = statistic_record.ID;
+            this.dataGridView1.Rows[index].Cells["sell_cnt"].Value = statistic_record.cnt;
+            this.dataGridView1.Rows[index].Cells["sell_sum_price"].Value = statistic_record.sum_price;
+            this.dataGridView1.Rows[index].Cells["sum_cost"].Value = statistic_record.sum_cost;
+            this.dataGridView1.Rows[index].Cells["profit"].Value = statistic_record.profit;
+
+            if (statistic_record.profit <= 0.0000)
+            {
+                this.dataGridView1.Rows[index].DefaultCellStyle.ForeColor = Color.Red;
+            }
+
+            this.dataGridView1.Rows[index].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+        }
+
+        private void initListProduct()
+        {
+            statistic_record = new SellProfit();
+            this.dataGridView1.Rows.Clear();
+
+            // 获取审核通过的订单
+            List<ProductCirculation> reviewed_all_bill = ProductStainlessCirculationDao.getInstance().get_reviewed_bill();
+            // 获取商品的平均成本价格
+            Dictionary<int, double> product_average_price_map = 
+                ProductStainlessCirculationRecordDao.getInstance().get_product_average_buy_cost(reviewed_all_bill);
+
+            do_init_product_list(reviewed_all_bill, product_average_price_map);
+
+            initProductStatisticLine();
         }
 
         private void initListRecord()
@@ -335,10 +431,31 @@ namespace LocalERP.WinForm
             initRecordStatisticLine();
         }
 
+        private void chg_visible(bool x)
+        {
+            serial.Visible = x;
+            sell_time.Visible = x;
+            customer.Visible = x;
+            sell_price.Visible = x;
+            cost.Visible = x;
+            ope.Visible = x;
+        }
+
         private void initList()
         {
             // 按照明细
-            initListRecord();
+            if ((int)comboBox1.SelectedValue == 1)
+            {
+                chg_visible(true);
+                initListRecord();
+            }
+
+            // 按照产品
+            if ((int)comboBox1.SelectedValue == 2)
+            {
+                chg_visible(false);
+                initListProduct();
+            }
         }
         /// <summary>
         /// event
