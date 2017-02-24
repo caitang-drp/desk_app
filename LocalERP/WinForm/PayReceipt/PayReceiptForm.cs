@@ -182,14 +182,24 @@ namespace LocalERP.WinForm
         /// for get value from controls
         /// </summary>
 
-        protected bool getCirculation(out ProductCirculation circulation)
+        protected bool getPayReceipt(out PayReceipt payReceipt)
         {
-            circulation = new ProductCirculation();
-            circulation.ID = payReceiptID;
-            circulation.Type = (int)type;
-            circulation.FlowType = flowType;
+            payReceipt = new PayReceipt();
+            payReceipt.bill_type = this.type;
 
-            string name;
+            payReceipt.serial = textBox_serial.Text;
+            ValidateUtility.getLookupValueID(this.lookupText1, this.errorProvider1, out payReceipt.customer_id);
+            payReceipt.bill_time = this.dateTime_time.Value;
+            payReceipt.handle_people = textBox_operator.Text;
+
+            payReceipt.previousArrears = Convert.ToDouble(this.textBox_previousArrears.Text);
+            payReceipt.amount = Convert.ToDouble(this.textBox_thisPayed.Text);
+
+            payReceipt.comment = textBox_comment.Text;
+
+            return true;
+
+            /*
             if (ValidateUtility.getName(this.textBox_serial, this.errorProvider1, out name) == false)
                 return false;
             circulation.Code = name;
@@ -203,28 +213,6 @@ namespace LocalERP.WinForm
             circulation.CirculationTime = this.dateTime_time.Value;
             circulation.Comment = this.textBox_comment.Text;
             circulation.Oper = this.textBox_operator.Text;
-            /*
-            if (dataGridView2[1, 0].Value == null || dataGridView2[1, 0].Value.ToString()=="")
-                circulation.Total = 0;
-            else
-                circulation.Total = (double)dataGridView2[1, 0].Value;
-
-            circulation.CustomerName = this.lookupText1.Text_Lookup;
-
-            double total, realTotal, previousArrears, thisPayed;
-
-            if (ValidateUtility.getDouble(this.dataGridView2[1, 0], out total)
-                && ValidateUtility.getDouble(this.textBox_, this.errorProvider1, false, out realTotal)
-                && ValidateUtility.getDouble(this.textBox_previousArrears, this.errorProvider1, false, out previousArrears)
-                && ValidateUtility.getDouble(this.textBox_thisPayed, this.errorProvider1, false, out thisPayed))
-            {
-                circulation.Total = total;
-                circulation.RealTotal = realTotal;
-                circulation.PreviousArrears = previousArrears;
-                circulation.ThisPayed = thisPayed;
-            }
-            else
-                return false;
             */
             return true;
         }
@@ -314,9 +302,9 @@ namespace LocalERP.WinForm
         private void toolStripButton_print_Click(object sender, EventArgs e)
         {
             //MessageBox.Show("系统暂未开放打印功能.", "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            ProductCirculation sell;
+            PayReceipt sell;
             List<ProductCirculationRecord> records;
-            this.getCirculation(out sell);
+            this.getPayReceipt(out sell);
             //ProductSellReportForm form = new ProductSellReportForm(sell, records);
             //form.ShowDialog();
         }

@@ -45,6 +45,8 @@ namespace LocalERP.DataAccess.Data
         public string comment;
         // 用户id
         public int customer_id;
+        //added by stone,以上欠款
+        public double previousArrears;
         // 金额
         public double amount;
         // 经手人
