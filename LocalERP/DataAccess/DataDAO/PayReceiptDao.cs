@@ -42,44 +42,22 @@ namespace LocalERP.DataAccess.DataDAO
             return DbHelperAccess.executeQuery(commandText.ToString());
         }
 
-        /*
-        public DataTable FindListForStatistic(Category parent)
+        public int getMaxCode(string code)
         {
-            string commandText = "select ID, name from Customer";
-            if (parent != null)
-                commandText = string.Format("select Customer.ID, Customer.name from PayReceipt, CustomerCategory where Customer.parent=CustomerCategory.ID and CustomerCategory.lft>={0} and CustomerCategory.rgt<={1}", parent.Left, parent.Right);
-            return DbHelperAccess.executeQuery(commandText);
-        }
-
-        public int Update(Customer info)
-        {
-            string commandText = string.Format("update PayReceipt set name='{0}', comment='{1}', tel='{2}', phone='{3}', address='{4}' where ID={5}",
-                info.Name, info.Comment, info.Tel, info.Phone, info.Address, info.ID);
-
-            return DbHelperAccess.executeNonQuery(commandText);
-        }
-
-        public Customer FindByID(int ID)
-        {
-            string commandText = string.Format("select * from PayReceipt where ID={0}", ID);
+            string commandText = string.Format("select max(serial) from PayReceipt where serial like '{0}-{1}-%'", code, DateTime.Now.ToString("yyyyMMdd"));
             DataRow dr = DbHelperAccess.executeQueryGetOneRow(commandText);
-            Customer customer = new Customer();
-            if (dr != null)
+            string result = dr[0] as string;
+            if (string.IsNullOrEmpty(result))
+                return 0;
+            else
             {
-                customer.ID = (int)dr["ID"];
-                customer.Parent = (int)dr["parent"];
-
-                customer.Name = dr["name"] as string;
-                customer.Comment = dr["comment"] as string;
-                customer.Tel = dr["tel"] as string;
-                customer.Phone = dr["phone"] as string;
-                customer.Address = dr["address"] as string;
-                
-                return customer;
+                int max = 0;
+                if (int.TryParse(result.Substring(result.LastIndexOf('-')), out max))
+                    return Math.Abs(max);
+                else
+                    return 0;
             }
-            return null;
         }
-        */
 
     }
 }

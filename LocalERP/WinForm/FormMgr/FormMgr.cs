@@ -109,12 +109,12 @@ namespace LocalERP.WinForm
         }
 
         // ²É¹º¸¶¿îµ¥
-        private BuyPayBillForm buyPayBillForm = null;
-        public BuyPayBillForm getbuyPayBillForm()
+        private PayReceiptForm buyPayBillForm = null;
+        public PayReceiptForm getBuyPayBillForm()
         {
             if (buyPayBillForm == null || buyPayBillForm.IsDisposed)
             {
-                buyPayBillForm = new BuyPayBillForm(ProductCirculation.CirculationTypeConf_Purchase);
+                buyPayBillForm = new PayReceiptForm(PayReceipt.PayReceiptTypeConf_BuyPay);
                 appendEvent(buyPayBillForm);
             }
             return buyPayBillForm;

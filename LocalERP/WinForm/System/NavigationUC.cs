@@ -40,7 +40,7 @@ namespace LocalERP.WinForm
 
             // should pay, should receipt
             TreeView treeView_should_pay_receipt = this.getTreeView(
-                new string[] { DataUtility.CASH_LIST, DataUtility.CASH_PAY, DataUtility.CASH_RECEIPT });
+                new string[] { DataUtility.CASH_LIST, DataUtility.CASH_PAY, DataUtility.CASH_PAY_REFUND, DataUtility.CASH_RECEIPT, DataUtility.CASH_RECEIPT_REFUND });
             this.xPanderPanel_should_pay_receipt.Controls.Add(treeView_should_pay_receipt);
 
             TreeView treeView_queryStatistic = this.getTreeView(
