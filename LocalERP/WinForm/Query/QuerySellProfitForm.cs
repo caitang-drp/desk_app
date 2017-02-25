@@ -265,8 +265,7 @@ namespace LocalERP.WinForm
 
         private void initUndoListRecord(
             List<ProductCirculation> ls,
-            List<SellProfit> done_profit_ls,
-            Dictionary<int, double> product_average_price_map)
+            List<SellProfit> done_profit_ls)
         {
             // 获取审核通过的销售单的明细
             List<ProductCirculationRecord> reviewed_sell_record_ls =
@@ -308,7 +307,8 @@ namespace LocalERP.WinForm
                     record.TotalNum = -record.TotalNum;
                 }
 
-                SellProfit one =  format_sellprofit(index, cir, record, product_average_price_map[record.ProductID]);
+                double product_purchase_average_price = ProductStainlessDao.getInstance().find_purchase_price_by_id(record.ProductID);
+                SellProfit one =  format_sellprofit(index, cir, record, product_purchase_average_price);
                 sellprofit_to_grid(one, index);
 
                 // 存储
@@ -408,13 +408,10 @@ namespace LocalERP.WinForm
             // 获取审核通过的订单
             List<ProductCirculation> reviewed_all_bill = ProductStainlessCirculationDao.getInstance().get_reviewed_bill();
             List<SellProfit> done_profit_ls = SellProfitDao.getInstance().FindList();
-            // 获取商品的平均成本价格
-            Dictionary<int, double> product_average_price_map = 
-                ProductStainlessCirculationRecordDao.getInstance().get_product_average_buy_cost(reviewed_all_bill);
 
             initDoneListRecord(done_profit_ls);
 
-            initUndoListRecord(reviewed_all_bill, done_profit_ls, product_average_price_map);
+            initUndoListRecord(reviewed_all_bill, done_profit_ls);
 
             initRecordStatisticLine();
         }

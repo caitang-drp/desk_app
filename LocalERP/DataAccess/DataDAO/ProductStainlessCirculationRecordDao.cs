@@ -241,6 +241,7 @@ namespace LocalERP.DataAccess.DataDAO
                 {
                     foreach (ProductCirculationRecord record in sell_back_group[key])
                     {
+                        // 数据库中的cnt是正数的
                         cnt += record.TotalNum;
                         sum += record.TotalPrice;
                     }

@@ -491,7 +491,13 @@ namespace LocalERP.WinForm
             }
 
             cirDao.UpdateStatus(circulationID, 4);
- 
+
+
+            // 重新计算产品的平均成本，并更新到数据库
+            ProductStainless product_stainless_obj = new ProductStainless();
+            product_stainless_obj.recal_product_stainless_purchase_price();
+
+
             MessageBox.Show("审核成功!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             openMode = 4;
