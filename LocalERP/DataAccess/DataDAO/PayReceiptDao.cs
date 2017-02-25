@@ -16,13 +16,15 @@ namespace LocalERP.DataAccess.DataDAO
             return dao;
         }
 
-        public int Insert(PayReceipt info)
+        public bool Insert(PayReceipt info, out int id)
         {
             try
             {
-                string commandText = string.Format("insert into PayReceipt(serial, bill_time, comment, customer_id, bill_type, handle_people, amount) values('{0}', '{1}', '{2}', {3}, {4}, '{5}', {6})", 
-                    info.serial, info.bill_time, info.comment, (int)info.customer_id, (int)info.bill_type, info.handle_people, info.amount);
-                return DbHelperAccess.executeNonQuery(commandText);
+                string commandText = string.Format("insert into PayReceipt(serial, bill_time, comment, customer_id, bill_type, handle_people, previousArrears, amount, status) values('{0}', '{1}', '{2}', {3}, {4}, '{5}', {6}, {7}, {8})", 
+                    info.serial, info.bill_time, info.comment, (int)info.customer_id, (int)info.bill_type, info.handle_people, info.previousArrears, info.amount, info.status);
+                DbHelperAccess.executeNonQuery(commandText);
+                id = DbHelperAccess.executeLastID("ID", "PayReceipt");
+                return true;
             }
             catch (Exception ex)
             {

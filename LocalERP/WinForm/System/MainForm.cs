@@ -89,12 +89,20 @@ namespace LocalERP.WinForm
                     FormSingletonFactory.getInstance().getBuyPayBillForm().Show(this.dockPanel1);
                     FormSingletonFactory.getInstance().getBuyPayBillForm().reload(openMode, ID);
                     break;
+                case DataUtility.CASH_PAY_REFUND:
+                    FormSingletonFactory.getInstance().getBuyRefundBillForm().Show(this.dockPanel1);
+                    FormSingletonFactory.getInstance().getBuyRefundBillForm().reload(openMode, ID);
+                    break;
                 case DataUtility.CASH_RECEIPT:
                     FormSingletonFactory.getInstance().getSellReceiptBillForm().Show(this.dockPanel1);
-                    //FormMgr.getInstance().getSellReceiptBillForm().reload(openMode, ID);
+                    FormSingletonFactory.getInstance().getSellReceiptBillForm().reload(openMode, ID);
+                    break;
+                case DataUtility.CASH_RECEIPT_REFUND:
+                    FormSingletonFactory.getInstance().getSellRefundBillForm().Show(this.dockPanel1);
+                    FormSingletonFactory.getInstance().getSellRefundBillForm().reload(openMode, ID);
                     break;
 
-                case "销售利润表":
+                case DataUtility.STATISTIC_PROFIT:
                     FormSingletonFactory.getInstance().getQuerySellProfitForm().Show(this.dockPanel1);
                     FormSingletonFactory.getInstance().getQuerySellProfitForm().refresh();
                     break;
@@ -114,10 +122,10 @@ namespace LocalERP.WinForm
                 case DataUtility.QUERY_LIB:
                     FormSingletonFactory.getInstance().getQueryLibForm().Show(this.dockPanel1);
                     break;
-                case DataUtility.QUERY_DETAIL:
+                case DataUtility.QUERY_PRODUCT_DETAIL:
                     FormSingletonFactory.getInstance().getQueryDetailForm().Show(this.dockPanel1);
                     break;
-                case DataUtility.STATISTIC:
+                case DataUtility.STATISTIC_PRODUCT:
                     FormSingletonFactory.getInstance().getProductStatisticForm().Show(this.dockPanel1);
                     break;
 
@@ -238,7 +246,7 @@ namespace LocalERP.WinForm
 
         private void toolStripButton_statistic_Click(object sender, EventArgs e)
         {
-            this.setForm(DataUtility.STATISTIC);
+            this.setForm(DataUtility.STATISTIC_PRODUCT);
         }
     }
 }

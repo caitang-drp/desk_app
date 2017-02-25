@@ -98,8 +98,8 @@ namespace LocalERP.WinForm
                 this.textBox_operator.Text = null;
 
                 this.textBox_previousArrears.Text = null;
-                this.textBox_accumulative.Text = null;
                 this.textBox_thisPayed.Text = null;
+                this.textBox_accumulative.Text = null;
 
                 this.textBox_comment.Text = null;
 
@@ -197,8 +197,6 @@ namespace LocalERP.WinForm
 
             payReceipt.comment = textBox_comment.Text;
 
-            return true;
-
             /*
             if (ValidateUtility.getName(this.textBox_serial, this.errorProvider1, out name) == false)
                 return false;
@@ -222,50 +220,44 @@ namespace LocalERP.WinForm
         /// </summary>
         ///
         protected void toolStripButton_save_Click(object sender, EventArgs e)
-        {/*
-            //for datagridview validate
-            if (dataGridView1.Rows.Count > 0 && dataGridView1.Columns["totalPrice"].Visible == true)
-                dataGridView1.CurrentCell = dataGridView1.Rows[0].Cells["totalPrice"];
+        {
+            PayReceipt payReceipt;
+            bool isCorrect = getPayReceipt(out payReceipt);
 
-            List<ProductCirculationRecord> records;
-            bool isRecordsCorrect = getRecords(out records);
-
-            ProductCirculation circulation;
-            bool isSellCorrect = getCirculation(out circulation);
-            if (isRecordsCorrect == false || isSellCorrect == false)
+            if (isCorrect == false)
                 return;
 
             try
             {
                 if (openMode == 0)
                 {
-                    circulation.Status = 1;
-                    cirDao.Insert(circulation, records, out circulationID);
+                    payReceipt.status = 1;
+                    PayReceiptDao.getInstance().Insert(payReceipt, out payReceiptID);
                     MessageBox.Show(string.Format("增加{0}成功!", this.Text), "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else if (openMode == 1)
-                {
+                {/*
                     ProductStainlessCirculationDao.getInstance().UpdateBaiscInfo(circulation);
                     if (recordChanged)
                         ProductStainlessCirculationDao.getInstance().updateRecords(circulation.ID, records);
-                    MessageBox.Show(string.Format("保存{0}成功!", this.Text), "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show(string.Format("保存{0}成功!", this.Text), "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);*/
                 }
 
                 openMode = 1;
-                this.initCirculation();
+                //this.initPayReceipt();
 
 
             }
             catch (Exception ex)
             {
                 if (openMode == 0)
-                    ProductStainlessCirculationDao.getInstance().DeleteByID(circulationID);
-                MessageBox.Show("保存有误,可能是往来单位或商品属性被修改过,请重新编辑!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    PayReceiptDao.getInstance().Delete(payReceiptID);
+                MessageBox.Show("保存有误,可能是往来单位被修改过,请重新编辑!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
 
             //so important: if edit ,it should be refresh also, because edit will del exist item and add new item
 
-            this.invokeUpdateNotify(notifyType);*/
+            this.invokeUpdateNotify(notifyType);
         }
 
         //审核

@@ -34,10 +34,10 @@
             this.xPanderPanel_pur = new BSE.Windows.Forms.XPanderPanel();
             this.xPanderPanel_manu = new BSE.Windows.Forms.XPanderPanel();
             this.xPanderPanel_sell = new BSE.Windows.Forms.XPanderPanel();
+            this.xPanderPanel_should_pay_receipt = new BSE.Windows.Forms.XPanderPanel();
             this.xPanderPanel_lib = new BSE.Windows.Forms.XPanderPanel();
             this.xPanderPanel_query = new BSE.Windows.Forms.XPanderPanel();
             this.xPanderPanel_data = new BSE.Windows.Forms.XPanderPanel();
-            this.xPanderPanel_should_pay_receipt = new BSE.Windows.Forms.XPanderPanel();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.xPanderPanelList1.SuspendLayout();
             this.SuspendLayout();
@@ -114,6 +114,22 @@
             this.xPanderPanel_sell.TabIndex = 1;
             this.xPanderPanel_sell.Text = "销售管理";
             // 
+            // xPanderPanel_should_pay_receipt
+            // 
+            this.xPanderPanel_should_pay_receipt.BackColor = System.Drawing.SystemColors.Window;
+            this.xPanderPanel_should_pay_receipt.CaptionFont = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
+            this.xPanderPanel_should_pay_receipt.CaptionForeColor = System.Drawing.SystemColors.ControlText;
+            this.xPanderPanel_should_pay_receipt.ColorCaptionGradientBegin = System.Drawing.Color.FromArgb(((int)(((byte)(216)))), ((int)(((byte)(232)))), ((int)(((byte)(252)))));
+            this.xPanderPanel_should_pay_receipt.ColorCaptionGradientEnd = System.Drawing.Color.FromArgb(((int)(((byte)(140)))), ((int)(((byte)(177)))), ((int)(((byte)(230)))));
+            this.xPanderPanel_should_pay_receipt.ColorCaptionGradientMiddle = System.Drawing.Color.FromArgb(((int)(((byte)(186)))), ((int)(((byte)(210)))), ((int)(((byte)(243)))));
+            this.xPanderPanel_should_pay_receipt.ColorScheme = BSE.Windows.Forms.ColorScheme.Custom;
+            this.xPanderPanel_should_pay_receipt.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.xPanderPanel_should_pay_receipt.Image = global::LocalERP.Properties.Resources.apply16;
+            this.xPanderPanel_should_pay_receipt.Name = "xPanderPanel_should_pay_receipt";
+            this.xPanderPanel_should_pay_receipt.Padding = new System.Windows.Forms.Padding(12, 33, 12, 11);
+            this.xPanderPanel_should_pay_receipt.TabIndex = 3;
+            this.xPanderPanel_should_pay_receipt.Text = "收款付款";
+            // 
             // xPanderPanel_lib
             // 
             this.xPanderPanel_lib.BackColor = System.Drawing.SystemColors.Window;
@@ -161,22 +177,6 @@
             this.xPanderPanel_data.Padding = new System.Windows.Forms.Padding(12, 33, 12, 11);
             this.xPanderPanel_data.TabIndex = 3;
             this.xPanderPanel_data.Text = "数据设置";
-            // 
-            // xPanderPanel_should_pay_receipt
-            // 
-            this.xPanderPanel_should_pay_receipt.BackColor = System.Drawing.SystemColors.Window;
-            this.xPanderPanel_should_pay_receipt.CaptionFont = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
-            this.xPanderPanel_should_pay_receipt.CaptionForeColor = System.Drawing.SystemColors.ControlText;
-            this.xPanderPanel_should_pay_receipt.ColorCaptionGradientBegin = System.Drawing.Color.FromArgb(((int)(((byte)(216)))), ((int)(((byte)(232)))), ((int)(((byte)(252)))));
-            this.xPanderPanel_should_pay_receipt.ColorCaptionGradientEnd = System.Drawing.Color.FromArgb(((int)(((byte)(140)))), ((int)(((byte)(177)))), ((int)(((byte)(230)))));
-            this.xPanderPanel_should_pay_receipt.ColorCaptionGradientMiddle = System.Drawing.Color.FromArgb(((int)(((byte)(186)))), ((int)(((byte)(210)))), ((int)(((byte)(243)))));
-            this.xPanderPanel_should_pay_receipt.ColorScheme = BSE.Windows.Forms.ColorScheme.Custom;
-            this.xPanderPanel_should_pay_receipt.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.xPanderPanel_should_pay_receipt.Image = global::LocalERP.Properties.Resources.apply16;
-            this.xPanderPanel_should_pay_receipt.Name = "xPanderPanel_should_pay_receipt";
-            this.xPanderPanel_should_pay_receipt.Padding = new System.Windows.Forms.Padding(12, 33, 12, 11);
-            this.xPanderPanel_should_pay_receipt.TabIndex = 3;
-            this.xPanderPanel_should_pay_receipt.Text = "应收应付";
             // 
             // imageList1
             // 

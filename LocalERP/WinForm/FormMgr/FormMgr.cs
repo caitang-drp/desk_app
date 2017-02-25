@@ -96,16 +96,16 @@ namespace LocalERP.WinForm
         public abstract ProductCirculationForm getProductLibLossForm();
 
         /****************cash circulation************************/
-        // 销售收款单
-        private SellReceiptBillForm sellReceiptBillForm = null;
-        public SellReceiptBillForm getSellReceiptBillForm()
+        // 应收应付，单据列表
+        private PayReceiptListForm payReceiptListForm = null;
+        public PayReceiptListForm getPayReceiptListForm()
         {
-            if (sellReceiptBillForm == null || sellReceiptBillForm.IsDisposed)
+            if (payReceiptListForm == null || payReceiptListForm.IsDisposed)
             {
-                sellReceiptBillForm = new SellReceiptBillForm(ProductCirculation.CirculationTypeConf_Purchase);
-                appendEvent(sellReceiptBillForm);
+                payReceiptListForm = new PayReceiptListForm(mainForm, 2, "单据列表");
+                appendEvent(payReceiptListForm);
             }
-            return sellReceiptBillForm;
+            return payReceiptListForm;
         }
 
         // 采购付款单
@@ -120,16 +120,40 @@ namespace LocalERP.WinForm
             return buyPayBillForm;
         }
 
-        // 应收应付，单据列表
-        private PayReceiptListForm payReceiptListForm = null;
-        public PayReceiptListForm getPayReceiptListForm()
+        //采购退点单
+        private PayReceiptForm buyRefundBillForm = null;
+        public PayReceiptForm getBuyRefundBillForm()
         {
-            if (payReceiptListForm == null || payReceiptListForm.IsDisposed)
+            if (buyRefundBillForm == null || buyRefundBillForm.IsDisposed)
             {
-                payReceiptListForm = new PayReceiptListForm(mainForm, 2, "单据列表");
-                appendEvent(payReceiptListForm);
+                buyRefundBillForm = new PayReceiptForm(PayReceipt.PayReceiptTypeConf_BuyRefund);
+                appendEvent(buyRefundBillForm);
             }
-            return payReceiptListForm;
+            return buyRefundBillForm;
+        }
+
+        // 销售收款单
+        private PayReceiptForm sellReceiptBillForm = null;
+        public PayReceiptForm getSellReceiptBillForm()
+        {
+            if (sellReceiptBillForm == null || sellReceiptBillForm.IsDisposed)
+            {
+                sellReceiptBillForm = new PayReceiptForm(PayReceipt.PayReceiptTypeConf_SellReceipt);
+                appendEvent(sellReceiptBillForm);
+            }
+            return sellReceiptBillForm;
+        }
+
+        // 销售退点单
+        private PayReceiptForm sellRefundBillForm = null;
+        public PayReceiptForm getSellRefundBillForm()
+        {
+            if (sellRefundBillForm == null || sellRefundBillForm.IsDisposed)
+            {
+                sellRefundBillForm = new PayReceiptForm(PayReceipt.PayReceiptTypeConf_SellRefund);
+                appendEvent(sellRefundBillForm);
+            }
+            return sellRefundBillForm;
         }
 
         /**************** query statistic ***************************/

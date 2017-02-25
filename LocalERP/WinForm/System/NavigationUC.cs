@@ -44,7 +44,7 @@ namespace LocalERP.WinForm
             this.xPanderPanel_should_pay_receipt.Controls.Add(treeView_should_pay_receipt);
 
             TreeView treeView_queryStatistic = this.getTreeView(
-                new string[] {DataUtility.QUERY_LIB, DataUtility.QUERY_DETAIL, "销售利润表", DataUtility.STATISTIC});
+                new string[] { DataUtility.QUERY_LIB, DataUtility.QUERY_PRODUCT_DETAIL, DataUtility.STATISTIC_PRODUCT, DataUtility.QUERY_CASH_DETAIL, DataUtility.STATISTIC_DEBT, DataUtility.STATISTIC_PROFIT});
             this.xPanderPanel_query.Controls.Add(treeView_queryStatistic);
 
             //tree4

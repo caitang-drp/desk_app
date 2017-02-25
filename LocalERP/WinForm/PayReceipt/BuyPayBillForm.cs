@@ -134,7 +134,7 @@ namespace LocalERP.WinForm
             tmp.handle_people = textBox_operator.Text;
             tmp.amount = Convert.ToDouble(textBox_pay_amount.Text);
 
-            PayReceiptDao.getInstance().Insert(tmp);
+            //PayReceiptDao.getInstance().Insert(tmp);
         }
 
         // 点击 保存 响应事件

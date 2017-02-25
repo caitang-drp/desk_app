@@ -21,10 +21,10 @@ namespace LocalERP.DataAccess.Utility
         public const String SELL = "销售出库";
         public const String SELL_BACK = "销售退货";
 
-        public const String CASH_LIST = "应收应付单据列表";
-        public const String CASH_PAY = "采购应付";
+        public const String CASH_LIST = "收付单据列表";
+        public const String CASH_PAY = "采购付款";
         public const String CASH_PAY_REFUND = "采购退点";
-        public const String CASH_RECEIPT = "销售应收";
+        public const String CASH_RECEIPT = "销售收款";
         public const String CASH_RECEIPT_REFUND = "销售退点";
         
         public const String LIB_LIST = "盘点单据列表";
@@ -32,9 +32,11 @@ namespace LocalERP.DataAccess.Utility
         public const String LIB_LOSS = "盘点报损";
 
         public const String QUERY_LIB = "库存查询";
-        public const String QUERY_DETAIL = "明细查询";
-        public const String STATISTIC = "统计报表";
-        public const String STATISTIC_SELL = "销售统计";
+        public const String QUERY_PRODUCT_DETAIL = "产品进销明细";
+        public const String QUERY_CASH_DETAIL = "收款付款明细";
+        public const String STATISTIC_PRODUCT = "产品进销统计";
+        public const String STATISTIC_DEBT = "应收应付统计";
+        public const String STATISTIC_PROFIT = "销售利润计算";
         //经营统计
 
         public const String DATA_SETTING = "数据设置";
