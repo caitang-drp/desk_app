@@ -23,7 +23,9 @@ namespace LocalERP.DataAccess.Utility
 
         public const String CASH_LIST = "应收应付单据列表";
         public const String CASH_PAY = "采购应付";
+        public const String CASH_PAY_REFUND = "采购退点";
         public const String CASH_RECEIPT = "销售应收";
+        public const String CASH_RECEIPT_REFUND = "销售退点";
         
         public const String LIB_LIST = "盘点单据列表";
         public const String LIB_OVERFLOW = "盘点报溢";

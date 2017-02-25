@@ -103,6 +103,9 @@ namespace LocalERP.WinForm
         SellUpdate,
         SellFinishUpdate,
         
+        PayReceiptUpdate,
+        PayReceiptFinishUpdate,
+
         LibUpdate,
         LibFinishUpdate,
         

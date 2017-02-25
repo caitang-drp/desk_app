@@ -10,7 +10,8 @@ namespace LocalERP.DataAccess.DataDAO
     {
         //singleton
         public static CustomerDao dao;
-        public static CustomerDao getInstance(){
+        public static CustomerDao getInstance()
+        {
             if (dao == null)
                 dao = new CustomerDao();
             return dao;
@@ -20,8 +21,8 @@ namespace LocalERP.DataAccess.DataDAO
         {
             try
             {
-                string commandText = string.Format("insert into Customer(name, comment, tel, phone, address, parent) values('{0}', '{1}', '{2}', '{3}', '{4}', {5})", 
-                    info.Name,info.Comment, info.Tel, info.Phone, info.Address, info.Parent);
+                string commandText = string.Format("insert into Customer(name, comment, tel, phone, address, parent) values('{0}', '{1}', '{2}', '{3}', '{4}', {5})",
+                    info.Name, info.Comment, info.Tel, info.Phone, info.Address, info.Parent);
                 return DbHelperAccess.executeNonQuery(commandText);
             }
             catch (Exception ex)
@@ -39,9 +40,9 @@ namespace LocalERP.DataAccess.DataDAO
         public DataTable FindList(Category parent, string name)
         {
             StringBuilder commandText = new StringBuilder("select * from Customer, CustomerCategory where Customer.parent=CustomerCategory.ID");
-            if(parent != null)
+            if (parent != null)
                 commandText.AppendFormat(" and CustomerCategory.lft>={0} and CustomerCategory.rgt<={1}", parent.Left, parent.Right);
-            
+
             if (!string.IsNullOrEmpty(name))
                 commandText.AppendFormat(" and Customer.name like '%{0}%'", name);
             return DbHelperAccess.executeQuery(commandText.ToString());
@@ -66,17 +67,17 @@ namespace LocalERP.DataAccess.DataDAO
         // 更新用户的收款，也就是我们欠供应商的钱
         public void update_receipt(int customer_id, double now)
         {
-                Customer customer = FindByID(customer_id);
-                customer.receipt = now;
-                Update(customer);
+            Customer customer = FindByID(customer_id);
+            customer.receipt = now;
+            Update(customer);
         }
 
         // 更新用户的欠款
         public void update_arrear(int customer_id, double now)
         {
-                Customer customer = FindByID(customer_id);
-                customer.arrear = now;
-                Update(customer);
+            Customer customer = FindByID(customer_id);
+            customer.arrear = now;
+            Update(customer);
         }
 
         public Customer FindByID(int ID)
@@ -95,17 +96,21 @@ namespace LocalERP.DataAccess.DataDAO
                 customer.Phone = dr["phone"] as string;
                 customer.Address = dr["address"] as string;
 
-                try {
+                try
+                {
                     customer.arrear = (double)dr["arrear"];
                 }
-                catch {
+                catch
+                {
                     customer.arrear = 0.0;
                 }
-                
-                try {
+
+                try
+                {
                     customer.receipt = (double)dr["receipt"];
                 }
-                catch {
+                catch
+                {
                     customer.receipt = 0.0;
                 }
 

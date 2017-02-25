@@ -86,7 +86,8 @@ namespace LocalERP.WinForm
                     FormSingletonFactory.getInstance().getPayReceiptListForm().Show(this.dockPanel1);
                     break;
                 case DataUtility.CASH_PAY:
-                    FormSingletonFactory.getInstance().getbuyPayBillForm().Show(this.dockPanel1);
+                    FormSingletonFactory.getInstance().getBuyPayBillForm().Show(this.dockPanel1);
+                    FormSingletonFactory.getInstance().getBuyPayBillForm().reload(openMode, ID);
                     break;
                 case DataUtility.CASH_RECEIPT:
                     FormSingletonFactory.getInstance().getSellReceiptBillForm().Show(this.dockPanel1);

@@ -351,6 +351,7 @@ namespace LocalERP.WinForm
             this.textBox_operator.Name = "textBox_operator";
             this.textBox_operator.Size = new System.Drawing.Size(153, 23);
             this.textBox_operator.TabIndex = 52;
+            this.textBox_operator.TextChanged += new System.EventHandler(this.Controls_TextChanged);
             // 
             // lookupText1
             // 
@@ -468,6 +469,8 @@ namespace LocalERP.WinForm
             this.textBox_thisPayed.Name = "textBox_thisPayed";
             this.textBox_thisPayed.Size = new System.Drawing.Size(97, 23);
             this.textBox_thisPayed.TabIndex = 53;
+            this.textBox_thisPayed.TextChanged += new System.EventHandler(this.textBox_thisPayed_TextChanged);
+            this.textBox_thisPayed.TextChanged += new System.EventHandler(this.Controls_TextChanged);
             // 
             // textBox_realTotal
             // 
@@ -477,6 +480,7 @@ namespace LocalERP.WinForm
             this.textBox_realTotal.Size = new System.Drawing.Size(97, 23);
             this.textBox_realTotal.TabIndex = 54;
             this.textBox_realTotal.TextChanged += new System.EventHandler(this.textBox_realTotal_TextChanged);
+            this.textBox_realTotal.TextChanged += new System.EventHandler(this.Controls_TextChanged);
             // 
             // label6
             // 
@@ -562,6 +566,8 @@ namespace LocalERP.WinForm
             this.textBox_previousArrears.Name = "textBox_previousArrears";
             this.textBox_previousArrears.Size = new System.Drawing.Size(94, 23);
             this.textBox_previousArrears.TabIndex = 65;
+            this.textBox_previousArrears.TextChanged += new System.EventHandler(this.textBox_previousArrears_TextChanged);
+            this.textBox_previousArrears.TextChanged += new System.EventHandler(this.Controls_TextChanged);
             // 
             // label17
             // 
@@ -602,6 +608,7 @@ namespace LocalERP.WinForm
             this.textBox_cutoff.TabIndex = 61;
             this.textBox_cutoff.Text = "100";
             this.textBox_cutoff.TextChanged += new System.EventHandler(this.textBox_cutoff_TextChanged);
+            this.textBox_cutoff.TextChanged += new System.EventHandler(this.Controls_TextChanged);
             // 
             // textBox_accumulative
             // 
