@@ -236,6 +236,7 @@ namespace LocalERP.DataAccess.DataDAO
                     }
                 }
 
+                /*
                 // œ˙ €ÕÀªı
                 if (sell_back_group.ContainsKey(key))
                 {
@@ -246,6 +247,7 @@ namespace LocalERP.DataAccess.DataDAO
                         sum += record.TotalPrice;
                     }
                 }
+                */
 
                 res[product.Key] = sum / cnt;
             }
