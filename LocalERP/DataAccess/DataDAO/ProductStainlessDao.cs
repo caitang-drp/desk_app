@@ -73,6 +73,8 @@ namespace LocalERP.DataAccess.DataDAO
             return result;
         }
 
+
+
         public override int UpdateNum(int id, int num)
         {
             string commandText = string.Format("update ProductStainless set num={0} where ID={1}",
@@ -137,6 +139,26 @@ namespace LocalERP.DataAccess.DataDAO
                 double.TryParse(str, out result);
             }
             return result;
+        }
+
+        public double find_purchase_price_by_id(int ID)
+        {
+            string commandText = string.Format("select pricePurchase from ProductStainless where ID={0}", ID);
+            DataRow dr = DbHelperAccess.executeQueryGetOneRow(commandText);
+            double result = 0;
+            if (dr != null)
+            {
+                string str = dr[0].ToString();
+                double.TryParse(str, out result);
+            }
+            return result;
+        }
+        public int update_purchase_price_by_id(int id, double purchase_price)
+        {
+            string commandText = string.Format("update ProductStainless set pricePurchase={0} where ID={1}",
+                purchase_price, id);
+
+            return DbHelperAccess.executeNonQuery(commandText);
         }
     }
 }

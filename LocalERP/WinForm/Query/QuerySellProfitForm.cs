@@ -10,6 +10,7 @@ using LocalERP.DataAccess.DataDAO;
 using LocalERP.DataAccess.Data;
 using System.Collections;
 using LocalERP.DataAccess.Utility;
+using LocalERP.DataAccess;
 
 namespace LocalERP.WinForm
 {
@@ -36,52 +37,6 @@ namespace LocalERP.WinForm
             this.start_time.Value = dateTime.AddMonths(-1);
 
             initList();
-        }
-
-        // 处理 销售退货 和 采购退货
-        private void deal_with_return()
-        {
-
-        }
-
-        private double double_n(double x, int n)
-        {
-            return Convert.ToDouble(decimal.Round(decimal.Parse(x.ToString()), n).ToString());
-        }
-
-        // 计算利润和利润率
-        // input: 
-        //      cost        成本
-        //      price       售价 
-        // output:
-        //      {利润，利润率%}
-        private List<double> get_profit(double cost, double price)
-        {
-            List<double> ret = new List<double>();
-
-            double profit = price - cost;
-            profit = double_n(profit, 6);
-
-            // 利润率，如果利润为负，利润率应该也是负数的
-            double profit_margin = profit / Math.Abs(cost) * 100.0;
-            profit_margin = double_n(profit_margin, 2);
-
-            ret.Add(profit);
-            ret.Add(profit_margin);
-            return ret;
-        }
-
-        private ProductCirculation find_circulation_with_id(int ID, List<ProductCirculation> ls)
-        {
-            foreach (ProductCirculation cir in ls)
-            {
-                if (ID == cir.ID)
-                {
-                    return cir;
-                }
-            }
-
-            return null;
         }
 
         private void sellprofit_to_grid(SellProfit one, int index)
@@ -124,77 +79,7 @@ namespace LocalERP.WinForm
             statistic_record.profit += one.profit;
         }
 
-        private SellProfit format_sellprofit(
-            int index,
-            ProductCirculation cir,
-            ProductCirculationRecord record,
-            double average_price)
-        {
-            ProductStainless product = ProductStainlessDao.getInstance().FindByID(record.ProductID);
-            SellProfit one = new SellProfit();
 
-            if (cir != null)
-            {
-                one.serial = cir.Code;
-                one.sell_time = cir.CirculationTime;
-                one.customer = cir.CustomerName;
-                one.oper = cir.Oper;
-            }
-
-            one.product = product.Name;
-            one.unit = product.Unit;
-
-
-            int sell_cnt = record.TotalNum;
-            one.cnt = sell_cnt;
-            one.price = (double)record.Price;
-
-            double sum_price = record.Price * sell_cnt;
-            if (cir == null)
-            {
-                sum_price = record.TotalPrice;
-            }
-            one.sum_price = sum_price;
-
-            one.cost = double_n(average_price, 6);
-
-            double sum_cost = double_n(average_price, 6) * sell_cnt;
-            one.sum_cost = sum_cost;
-
-            List<double> profit = get_profit(sum_cost, sum_price);
-            one.profit = profit[0];
-            one.profit_margin = profit[1];
-
-            one.record_id = record.ID;
-
-            return one;
-        }
-
-        // 过滤已经计算过的
-        private List<ProductCirculationRecord> filter_done_record(List<ProductCirculationRecord> ls, List<SellProfit> done_profit_ls)
-        {
-            List<ProductCirculationRecord> undo_ls = new List<ProductCirculationRecord>();
-
-            foreach (ProductCirculationRecord one in ls)
-            {
-                bool ok = false;
-                foreach (SellProfit done in done_profit_ls)
-                {
-                    if (done.record_id == one.ID)
-                    {
-                        ok = true;
-                        break;
-                    }
-                }
-
-                if (!ok)
-                {
-                    undo_ls.Add(one);
-                }
-            }
-
-            return undo_ls;
-        }
 
         // 只需要 日期
         private DateTime get_date(DateTime x)
@@ -252,59 +137,6 @@ namespace LocalERP.WinForm
             }
         }
 
-        private void initUndoListRecord(
-            List<ProductCirculation> ls,
-            List<SellProfit> done_profit_ls,
-            Dictionary<int, double> product_average_price_map)
-        {
-            // 获取审核通过的销售单的明细
-            List<ProductCirculationRecord> reviewed_sell_record_ls =
-                ProductStainlessCirculationRecordDao.getInstance().get_sell_records(ls);
-            // 销售退货明细
-            List<ProductCirculationRecord> reviewed_sell_back_record_ls =
-                ProductStainlessCirculationRecordDao.getInstance().get_sell_back_records(ls);
-
-            // 过滤已经计算过的
-            List<ProductCirculationRecord> reviewed_undo_sell_record = filter_done_record(reviewed_sell_record_ls, done_profit_ls);
-            List<ProductCirculationRecord> reviewed_undo_sell_back_record = filter_done_record(reviewed_sell_back_record_ls, done_profit_ls);
-
-            // 所有的明细
-            List<ProductCirculationRecord> record_ls = reviewed_undo_sell_record;
-            record_ls.AddRange(reviewed_undo_sell_back_record);
-            // 按照ID排序
-            record_ls.Sort(delegate(ProductCirculationRecord x, ProductCirculationRecord y)
-            {
-                return x.ID.CompareTo(y.ID);
-            });
-
-
-            foreach (ProductCirculationRecord record in record_ls)
-            {
-                ProductCirculation cir = find_circulation_with_id(record.CirculationID, ls);
-
-                // 过滤条件
-                if (!if_ok(cir.CirculationTime))
-                {
-                    continue;
-                }
-
-                int index = this.dataGridView1.Rows.Add();
-
-                // 销售退货
-                if (cir.Type == 4)
-                {
-                    // 设置数量为负数
-                    record.TotalNum = -record.TotalNum;
-                }
-
-                SellProfit one =  format_sellprofit(index, cir, record, product_average_price_map[record.ProductID]);
-                sellprofit_to_grid(one, index);
-
-                // 存储
-                SellProfitDao.getInstance().Insert(one);
-            }
-        }
-
         private void initRecordStatisticLine()
         {
             int index = this.dataGridView1.Rows.Add();
@@ -313,7 +145,7 @@ namespace LocalERP.WinForm
             index = this.dataGridView1.Rows.Add();
             index = this.dataGridView1.Rows.Add();
 
-            this.dataGridView1.Rows[index].Cells["serial"].Value = statistic_record.ID;
+            this.dataGridView1.Rows[index].Cells["serial"].Value = statistic_record.ID.ToString();
             this.dataGridView1.Rows[index].Cells["sell_cnt"].Value = statistic_record.cnt;
             this.dataGridView1.Rows[index].Cells["sell_sum_price"].Value = statistic_record.sum_price;
             this.dataGridView1.Rows[index].Cells["sum_cost"].Value = statistic_record.sum_cost;
@@ -327,50 +159,33 @@ namespace LocalERP.WinForm
             this.dataGridView1.Rows[index].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
         }
 
-        private void do_init_product_list(
-            List<ProductCirculation> ls,
-            Dictionary<int, double> product_average_price_map)
+        private void do_init_product_list()
         {
-
-            // 获取审核通过的销售单id列表
-            List<int> reviewed_sell_cir_id_ls =
-                ProductStainlessCirculationRecordDao.getInstance().get_wanted_type_circulation_ls(3, ls);
-            // 获取审核通过的销售退货单id列表
-            List<int> reviewed_sell_back_cir_id_ls =
-                ProductStainlessCirculationRecordDao.getInstance().get_wanted_type_circulation_ls(4, ls);
-            // 合并
-            List<int> reviewed_cir_id_ls = reviewed_sell_cir_id_ls;
-            reviewed_cir_id_ls.AddRange(reviewed_sell_back_cir_id_ls);
-
-            // 按照产品分组
-            Dictionary<int, List<ProductCirculationRecord>> sell_group =
-                ProductStainlessCirculationRecordDao.getInstance().get_record_group_by_product(reviewed_cir_id_ls);
-            foreach (KeyValuePair<int, List<ProductCirculationRecord>> sell in sell_group)
+            List<SellProfit> done_profit_ls = SellProfitDao.getInstance().FindList();
+            SellProfit sell_profit_obj = new SellProfit();
+            
+            // 根据商品进行分组
+            Dictionary<int, List<SellProfit>> group = SellProfitDao.getInstance().group_by_product_id(done_profit_ls);
+            foreach (KeyValuePair<int, List<SellProfit>> one in group)
             {
-                int product_id = sell.Key;
-                List<ProductCirculationRecord> record_ls = sell.Value;
+                int product_id = one.Key;
+                List<SellProfit> sell_profit_ls = one.Value;
 
-                int index = this.dataGridView1.Rows.Add();
-
-                ProductCirculationRecord one = new ProductCirculationRecord();
-                foreach (ProductCirculationRecord record in record_ls)
+                SellProfit merge = new SellProfit();
+                foreach (SellProfit sell in sell_profit_ls)
                 {
-                    ProductCirculation cir = find_circulation_with_id(record.CirculationID, ls);
-
-                    // 销售退货
-                    if (cir.Type == 4)
-                    {
-                        record.TotalNum = -record.TotalNum;
-                        record.TotalPrice = -record.TotalPrice;
-                    }
-
-                    one.ProductID = record.ProductID;
-                    one.TotalNum += record.TotalNum;
-                    one.TotalPrice += record.TotalPrice;
+                    merge.product = sell.product;
+                    merge.cnt += sell.cnt;
+                    merge.sum_price += sell.sum_price;
+                    merge.sum_cost += sell.sum_cost;
+                    merge.profit += sell.profit;
                 }
 
-                SellProfit one_data =  format_sellprofit(index, null, one, product_average_price_map[product_id]);
-                sellprofit_to_grid(one_data, index);
+                List<double> profit = sell_profit_obj.get_profit(merge.sum_cost, merge.sum_price);
+                merge.profit_margin = profit[1];
+
+                int index = this.dataGridView1.Rows.Add();
+                sellprofit_to_grid(merge, index);
             }
         }
 
@@ -382,7 +197,7 @@ namespace LocalERP.WinForm
             index = this.dataGridView1.Rows.Add();
             index = this.dataGridView1.Rows.Add();
 
-            this.dataGridView1.Rows[index].Cells["product"].Value = statistic_record.ID;
+            this.dataGridView1.Rows[index].Cells["product"].Value = statistic_record.ID.ToString();
             this.dataGridView1.Rows[index].Cells["sell_cnt"].Value = statistic_record.cnt;
             this.dataGridView1.Rows[index].Cells["sell_sum_price"].Value = statistic_record.sum_price;
             this.dataGridView1.Rows[index].Cells["sum_cost"].Value = statistic_record.sum_cost;
@@ -401,13 +216,8 @@ namespace LocalERP.WinForm
             statistic_record = new SellProfit();
             this.dataGridView1.Rows.Clear();
 
-            // 获取审核通过的订单
-            List<ProductCirculation> reviewed_all_bill = ProductStainlessCirculationDao.getInstance().get_reviewed_bill();
-            // 获取商品的平均成本价格
-            Dictionary<int, double> product_average_price_map = 
-                ProductStainlessCirculationRecordDao.getInstance().get_product_average_buy_cost(reviewed_all_bill);
-
-            do_init_product_list(reviewed_all_bill, product_average_price_map);
+            // 使用已经计算好的SellProfit表来统计就可以了
+            do_init_product_list();
 
             initProductStatisticLine();
         }
@@ -417,16 +227,9 @@ namespace LocalERP.WinForm
             statistic_record = new SellProfit();
             this.dataGridView1.Rows.Clear();
 
-            // 获取审核通过的订单
-            List<ProductCirculation> reviewed_all_bill = ProductStainlessCirculationDao.getInstance().get_reviewed_bill();
             List<SellProfit> done_profit_ls = SellProfitDao.getInstance().FindList();
-            // 获取商品的平均成本价格
-            Dictionary<int, double> product_average_price_map = 
-                ProductStainlessCirculationRecordDao.getInstance().get_product_average_buy_cost(reviewed_all_bill);
 
             initDoneListRecord(done_profit_ls);
-
-            initUndoListRecord(reviewed_all_bill, done_profit_ls, product_average_price_map);
 
             initRecordStatisticLine();
         }
@@ -476,6 +279,19 @@ namespace LocalERP.WinForm
             e.Handled = true;
             e.PaintBackground(e.CellBounds, true);
             e.PaintContent(e.CellBounds);
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            string commandText = "";
+            commandText = string.Format("delete * from ProductStainlessCirculationRecord;");
+            DbHelperAccess.executeNonQuery(commandText);
+            commandText = string.Format("delete * from ProductStainlessCirculation;");
+            DbHelperAccess.executeNonQuery(commandText);
+            commandText = string.Format("delete * from ProductStainless;");
+            DbHelperAccess.executeNonQuery(commandText);
+            commandText = string.Format("delete * from SellProfit;");
+            DbHelperAccess.executeNonQuery(commandText);
         }
     }
 }

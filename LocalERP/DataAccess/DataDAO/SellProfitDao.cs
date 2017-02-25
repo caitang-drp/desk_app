@@ -42,6 +42,27 @@ namespace LocalERP.DataAccess.DataDAO
             }
         }
 
+        // 把SellProfit列表，按照产品id分组
+        public Dictionary<int, List<SellProfit>> group_by_product_id(List<SellProfit> ls)
+        {
+            Dictionary<int, List<SellProfit>> d = new Dictionary<int, List<SellProfit>>();
+
+            foreach (SellProfit one in ls)
+            {
+                ProductCirculationRecord record = ProductStainlessCirculationRecordDao.getInstance().find_record_by_id(one.record_id);
+                int product_id = record.ProductID;
+
+                if (!d.ContainsKey(product_id))
+                {
+                    d[product_id] = new List<SellProfit>();
+                }
+
+                d[product_id].Add(one);
+            }
+
+            return d;
+        }
+
         public List<SellProfit> FindList()
         {
             string commandText = string.Format("select * from SellProfit");

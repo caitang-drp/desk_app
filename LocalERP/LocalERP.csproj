@@ -1,4 +1,5 @@
-﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="14.0">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -10,6 +11,27 @@
     <RootNamespace>LocalERP</RootNamespace>
     <AssemblyName>LocalERP</AssemblyName>
     <ApplicationIcon>start.ico</ApplicationIcon>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>2.0</OldToolsVersion>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -31,12 +53,10 @@
     <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=10.2.3600.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
-    <Reference Include="CrystalDecisions.Enterprise.Framework, Version=10.2.3600.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
-    <Reference Include="CrystalDecisions.Enterprise.InfoStore, Version=10.2.3600.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
-    <Reference Include="CrystalDecisions.ReportSource, Version=10.2.3600.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
-    <Reference Include="CrystalDecisions.Shared, Version=10.2.3600.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
-    <Reference Include="CrystalDecisions.Windows.Forms, Version=10.2.3600.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Windows.Forms, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.ReportViewer.Common, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
     <Reference Include="Microsoft.ReportViewer.WinForms, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
     <Reference Include="System" />
@@ -91,6 +111,7 @@
     <Compile Include="DataAccess\DataDAO\ProductSellRecordDao.cs" />
     <Compile Include="DataAccess\DataDAO\ProductSKUDao.cs" />
     <Compile Include="DataAccess\DataDAO\ProductClothesCirculationSKURecordDao.cs" />
+    <Compile Include="DataAccess\DataDAO\SellProfitDao.cs" />
     <Compile Include="DataAccess\DataDAO\ProductStainlessDao.cs" />
     <Compile Include="DataAccess\DataDAO\ProductClothesCirculationDao.cs" />
     <Compile Include="DataAccess\DataDAO\ProductStainlessCirculationDao.cs" />
@@ -101,6 +122,7 @@
     <Compile Include="DataAccess\Data\Charactor.cs" />
     <Compile Include="DataAccess\Data\PayReceipt.cs" />
     <Compile Include="DataAccess\Data\Product.cs" />
+    <Compile Include="DataAccess\Data\SellProfit.cs" />
     <Compile Include="DataAccess\Data\ProductJob.cs" />
     <Compile Include="DataAccess\Data\ProductJobRecord.cs" />
     <Compile Include="DataAccess\Data\Customer.cs" />
@@ -185,6 +207,12 @@
     <Compile Include="WinForm\Product\ProductClothesCirculationForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="WinForm\Query\QuerySellProfitForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WinForm\Query\QuerySellProfitForm.Designer.cs">
+      <DependentUpon>QuerySellProfitForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="WinForm\Query\QueryDetailForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -226,12 +254,6 @@
     </Compile>
     <Compile Include="WinForm\Query\ProductStatisticForm.Designer.cs">
       <DependentUpon>ProductStatisticForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="WinForm\Query\QuerySellProfitForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="WinForm\Query\QuerySellProfitForm.Designer.cs">
-      <DependentUpon>QuerySellProfitForm.cs</DependentUpon>
     </Compile>
     <Compile Include="WinForm\System\LoadingForm.cs">
       <SubType>Form</SubType>
@@ -294,9 +316,7 @@
     <Compile Include="WinForm\Utility\ComboBoxTree.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="WinForm\Utility\DataGridViewCalendarColumn.cs">
-      <SubType>Component</SubType>
-    </Compile>
+    <Compile Include="WinForm\Utility\DataGridViewCalendarColumn.cs" />
     <Compile Include="WinForm\Utility\MSplitContainer.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -385,6 +405,10 @@
       <DependentUpon>SellReceiptBillForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="WinForm\Query\QuerySellProfitForm.resx">
+      <DependentUpon>QuerySellProfitForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="WinForm\Query\QueryDetailForm.resx">
       <DependentUpon>QueryDetailForm.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -411,10 +435,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="WinForm\Query\ProductStatisticForm.resx">
       <DependentUpon>ProductStatisticForm.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForm\Query\QuerySellProfitForm.resx">
-      <DependentUpon>QuerySellProfitForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForm\System\LoadingForm.resx">
@@ -501,12 +521,8 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="WinForm\Utility\LookupText.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="WinForm\Utility\DataGridViewLookupColumn.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
+    <Compile Include="WinForm\Utility\LookupText.cs" />
+    <Compile Include="WinForm\Utility\DataGridViewLookupColumn.cs" />
     <Compile Include="WinForm\Utility\DataGridViewResizeTextBoxColumn.cs">
     </Compile>
     <Compile Include="WinForm\FormMgr\FormClothesMgr.cs">
@@ -525,6 +541,7 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{967B4E0D-AD0C-4609-AB67-0FA40C0206D8}" />
+    <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="ERP.mdb">
@@ -603,6 +620,13 @@
     <None Include="images\add.png" />
     <None Include="images\[Originals]\add-window-1.png" />
     <None Include="images\add-window-1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

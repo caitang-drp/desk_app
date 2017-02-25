@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using LocalERP.DataAccess.DataDAO;
 
 namespace LocalERP.DataAccess.Data
 {
@@ -21,6 +22,24 @@ namespace LocalERP.DataAccess.Data
             : base(serial, name, categoryID, pricePurchase, priceSell, unit, comment)
         {
             this.quantityPerPiece = quantityPerPiece;
+        }
+
+        // 重新计算商品的平均成本价格
+        public void recal_product_stainless_purchase_price()
+        {
+            // 获取审核通过的订单
+            List<ProductCirculation> reviewed_all_bill = ProductStainlessCirculationDao.getInstance().get_reviewed_bill();
+            // 获取商品的平均成本价格
+            Dictionary<int, double> product_average_price_map =
+                ProductStainlessCirculationRecordDao.getInstance().get_product_average_buy_cost(reviewed_all_bill);
+
+            foreach (KeyValuePair<int, double> pair in product_average_price_map)
+            {
+                int product_id = pair.Key;
+                double purchase_price = pair.Value;
+
+                ProductStainlessDao.getInstance().update_purchase_price_by_id(product_id, purchase_price);
+            }
         }
     }
 }
