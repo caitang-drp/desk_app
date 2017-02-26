@@ -32,6 +32,55 @@ namespace LocalERP.DataAccess.DataDAO
             }
         }
 
+        public int UpdateStatus(int ID, int status)
+        {
+            string commandText = string.Format("update PayReceipt set status = {0} where ID={1}",status, ID);
+
+            return DbHelperAccess.executeNonQuery(commandText);
+        }
+
+        public void Update(PayReceipt info)
+        {
+            string commandText = string.Format("update PayReceipt set serial='{0}', bill_time='{1}', comment='{2}', customer_id={3}, bill_type={4}, handle_people='{5}', previousArrears={6}, amount={7} where ID={8}",
+                info.serial, info.bill_time, info.comment, info.customer_id, (int)info.bill_type, info.handle_people, info.previousArrears, info.amount, info.id);
+
+            DbHelperAccess.executeNonQuery(commandText);
+        }
+
+        public PayReceipt FindByID(int ID)
+        {
+            string commandText = string.Format("select * from PayReceipt where ID={0}", ID);
+            DataRow dr = DbHelperAccess.executeQueryGetOneRow(commandText);
+            PayReceipt payReceipt = new PayReceipt();
+            if (dr != null)
+            {
+                payReceipt.id = (int)dr["ID"];
+                payReceipt.serial = dr["serial"] as string;
+                payReceipt.bill_time = (DateTime)dr["bill_time"];
+                payReceipt.comment = dr["comment"] as string;
+                payReceipt.status = (int)dr["status"];
+                payReceipt.bill_type = (PayReceipt.BillType)dr["bill_type"];
+
+                int customerID = 0;
+                if (int.TryParse(dr["customer_id"].ToString(), out customerID))
+                    payReceipt.customer_id = customerID;
+
+                payReceipt.handle_people = dr["handle_people"] as string;
+
+                double previousArrears, amount;
+                if (double.TryParse(dr["previousArrears"].ToString(), out previousArrears))
+                    payReceipt.previousArrears = previousArrears;
+                if (double.TryParse(dr["amount"].ToString(), out amount))
+                    payReceipt.amount = amount;
+                //not reasonal
+                if (customerID > 0)
+                    payReceipt.customerName = CustomerDao.getInstance().FindByID(customerID).Name;
+                return payReceipt;
+            }
+            return null;
+
+        }
+
         public int Delete(int id)
         {
             string commandText = string.Format("delete from PayReceipt where ID={0}", id);

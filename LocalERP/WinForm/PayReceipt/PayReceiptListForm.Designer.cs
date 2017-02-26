@@ -29,14 +29,6 @@
         private void InitializeComponent()
         {
             this.dataGridView1 = new LocalERP.WinForm.MyDataGridView();
-            this.check = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.bill_type = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.serial = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.bill_time = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.custom = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.comment = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.button1 = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -64,6 +56,15 @@
             this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.textBox_customer = new System.Windows.Forms.TextBox();
             this.button2 = new System.Windows.Forms.Button();
+            this.check = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.bill_type = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.typeValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.serial = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.bill_time = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.custom = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.comment = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.panel1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -74,15 +75,16 @@
             this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.AllowUserToDeleteRows = false;
             this.dataGridView1.AllowUserToResizeRows = false;
-            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView1.BackgroundColor = System.Drawing.Color.White;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.check,
             this.ID,
             this.bill_type,
+            this.typeValue,
             this.serial,
             this.bill_time,
             this.custom,
@@ -98,55 +100,6 @@
             this.dataGridView1.Size = new System.Drawing.Size(886, 407);
             this.dataGridView1.TabIndex = 5;
             this.dataGridView1.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellDoubleClick);
-            // 
-            // check
-            // 
-            this.check.HeaderText = "选择";
-            this.check.Name = "check";
-            this.check.Width = 60;
-            // 
-            // ID
-            // 
-            this.ID.HeaderText = "ID";
-            this.ID.Name = "ID";
-            this.ID.ReadOnly = true;
-            // 
-            // bill_type
-            // 
-            this.bill_type.HeaderText = "类型";
-            this.bill_type.Name = "bill_type";
-            this.bill_type.ReadOnly = true;
-            // 
-            // serial
-            // 
-            this.serial.HeaderText = "单据编号";
-            this.serial.Name = "serial";
-            this.serial.ReadOnly = true;
-            this.serial.Width = 200;
-            // 
-            // bill_time
-            // 
-            this.bill_time.HeaderText = "日期";
-            this.bill_time.Name = "bill_time";
-            this.bill_time.ReadOnly = true;
-            // 
-            // custom
-            // 
-            this.custom.HeaderText = "往来单位";
-            this.custom.Name = "custom";
-            this.custom.ReadOnly = true;
-            // 
-            // amount
-            // 
-            this.amount.HeaderText = "金额";
-            this.amount.Name = "amount";
-            this.amount.ReadOnly = true;
-            // 
-            // comment
-            // 
-            this.comment.HeaderText = "备注";
-            this.comment.Name = "comment";
-            this.comment.ReadOnly = true;
             // 
             // button1
             // 
@@ -295,9 +248,9 @@
             // 
             // panel1
             // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.Controls.Add(this.toolStrip1);
             this.panel1.Location = new System.Drawing.Point(0, 66);
             this.panel1.Name = "panel1";
@@ -429,11 +382,67 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
+            // check
+            // 
+            this.check.HeaderText = "选择";
+            this.check.Name = "check";
+            this.check.Width = 60;
+            // 
+            // ID
+            // 
+            this.ID.HeaderText = "ID";
+            this.ID.Name = "ID";
+            this.ID.ReadOnly = true;
+            // 
+            // bill_type
+            // 
+            this.bill_type.HeaderText = "类型";
+            this.bill_type.Name = "bill_type";
+            this.bill_type.ReadOnly = true;
+            // 
+            // typeValue
+            // 
+            this.typeValue.HeaderText = "类型值";
+            this.typeValue.Name = "typeValue";
+            this.typeValue.Visible = false;
+            // 
+            // serial
+            // 
+            this.serial.HeaderText = "单据编号";
+            this.serial.Name = "serial";
+            this.serial.ReadOnly = true;
+            this.serial.Width = 200;
+            // 
+            // bill_time
+            // 
+            this.bill_time.HeaderText = "日期";
+            this.bill_time.Name = "bill_time";
+            this.bill_time.ReadOnly = true;
+            // 
+            // custom
+            // 
+            this.custom.HeaderText = "往来单位";
+            this.custom.Name = "custom";
+            this.custom.ReadOnly = true;
+            // 
+            // amount
+            // 
+            this.amount.HeaderText = "金额";
+            this.amount.Name = "amount";
+            this.amount.ReadOnly = true;
+            // 
+            // comment
+            // 
+            this.comment.HeaderText = "备注";
+            this.comment.Name = "comment";
+            this.comment.ReadOnly = true;
+            // 
             // PayReceiptListForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(886, 498);
+            this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.textBox_customer);
             this.Controls.Add(this.label8);
@@ -448,7 +457,6 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("宋体", 10F);
             this.HideOnClose = true;
@@ -495,14 +503,15 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
         private System.Windows.Forms.ToolStripButton toolStripButton_cancelAll;
         private System.Windows.Forms.TextBox textBox_customer;
+        private System.Windows.Forms.Button button2;
         private System.Windows.Forms.DataGridViewCheckBoxColumn check;
         private System.Windows.Forms.DataGridViewTextBoxColumn ID;
         private System.Windows.Forms.DataGridViewTextBoxColumn bill_type;
+        private System.Windows.Forms.DataGridViewTextBoxColumn typeValue;
         private System.Windows.Forms.DataGridViewTextBoxColumn serial;
         private System.Windows.Forms.DataGridViewTextBoxColumn bill_time;
         private System.Windows.Forms.DataGridViewTextBoxColumn custom;
         private System.Windows.Forms.DataGridViewTextBoxColumn amount;
         private System.Windows.Forms.DataGridViewTextBoxColumn comment;
-        private System.Windows.Forms.Button button2;
     }
 }

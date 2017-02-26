@@ -71,8 +71,13 @@ namespace LocalERP.WinForm
                     this.dataGridView1.Rows[index].Cells["bill_time"].Value = dr["bill_time"];                    
                     this.dataGridView1.Rows[index].Cells["comment"].Value = dr["comment"];                    
                     this.dataGridView1.Rows[index].Cells["amount"].Value = dr["amount"];                    
-                    this.dataGridView1.Rows[index].Cells["bill_time"].Value = dr["bill_time"];                    
-                    this.dataGridView1.Rows[index].Cells["bill_type"].Value = new PayReceipt().get_bill_type_name((int)dr["bill_type"]);                    
+                    this.dataGridView1.Rows[index].Cells["bill_time"].Value = dr["bill_time"];
+
+                    int type = (int)(dr["bill_type"]);
+
+                    this.dataGridView1.Rows[index].Cells["bill_type"].Value = PayReceipt.PayReceiptTypeConfs[type - 1].name;
+                    this.dataGridView1.Rows[index].Cells["typeValue"].Value = type;
+
                     this.dataGridView1.Rows[index].Cells["custom"].Value = CustomerDao.getInstance().FindByID(Convert.ToInt32(dr["customer_id"])).Name;                    
                 }
             }
@@ -98,6 +103,7 @@ namespace LocalERP.WinForm
         // TODO, add by xdz
         // TODO, add by xdz
         // 不能删除操作，以为每条单据都对应着客户的欠款情况，删除就乱了
+        //commented by stone: 未审核的可以删除
 
         //del
         private void toolStripButton2_Click(object sender, EventArgs e)
@@ -146,7 +152,7 @@ namespace LocalERP.WinForm
 
         private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-        /*
+        
             if (this.dataGridView1.SelectedRows == null || this.dataGridView1.SelectedRows.Count <= 0)
             {
                 MessageBox.Show("请选择任务!");
@@ -155,30 +161,23 @@ namespace LocalERP.WinForm
             int typeValue = (int)this.dataGridView1.SelectedRows[0].Cells["typeValue"].Value;
             string formString = "";
             switch (typeValue) { 
-                case (int)ProductCirculation.CirculationType.purchase:
-                    formString = DataUtility.PURCHASE;
+                case (int)PayReceipt.BillType.BuyPay:
+                    formString = DataUtility.CASH_PAY;
                     break;
-                case (int)ProductCirculation.CirculationType.purchaseBack:
-                    formString = DataUtility.PURCHASE_BACK;
+                case (int)PayReceipt.BillType.BuyRefund:
+                    formString = DataUtility.CASH_PAY_REFUND;
                     break;
-                case (int)ProductCirculation.CirculationType.sell:
-                    formString = DataUtility.SELL;
+                case (int)PayReceipt.BillType.SellReceipt:
+                    formString = DataUtility.CASH_RECEIPT;
                     break;
-                case (int)ProductCirculation.CirculationType.sellBack:
-                    formString = DataUtility.SELL_BACK;
-                    break;
-                case (int)ProductCirculation.CirculationType.libOverflow:
-                    formString = DataUtility.LIB_OVERFLOW;
-                    break;
-                case (int)ProductCirculation.CirculationType.libLoss:e
-                    formString = DataUtility.LIB_LOSS;
+                case (int)PayReceipt.BillType.SellRefund:
+                    formString = DataUtility.CASH_RECEIPT_REFUND;
                     break;
                 default:
                     break;
 
             }
             mainForm.setForm(formString, 1, (int)this.dataGridView1.SelectedRows[0].Cells["ID"].Value);
-            */
         }
 
         private void button1_Click(object sender, EventArgs e)

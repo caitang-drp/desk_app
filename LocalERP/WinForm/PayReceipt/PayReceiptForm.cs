@@ -107,26 +107,19 @@ namespace LocalERP.WinForm
                 
                 return;
             }
-            /*
-            circulation = null;//PayReceiptDao.getInstance().FindByID(circulationID);
-
-            this.textBox_serial.Text = circulation.Code;
-            this.dateTime_sellTime.Value = circulation.CirculationTime;
-            this.textBox_comment.Text = circulation.Comment;
-            this.lookupText1.LookupArg = new LookupArg(circulation.CustomerID, circulation.CustomerName);
-            this.lookupText1.Text_Lookup = circulation.CustomerName;
-            this.textBox_operator.Text = circulation.Oper;
-
-            this.dataGridView2[1, 0].Value = circulation.Total;
-
-            //textbox_cutoff是自动计算的，类似textbox_accumulative
-            this.textBox_realTotal.Text = circulation.RealTotal.ToString();
             
-            //this.textBox_cutoff.Text = circulation.Total == 0?"":string.Format("{0:F}", circulation.RealTotal / circulation.Total);
-            
-            this.textBox_previousArrears.Text = circulation.PreviousArrears.ToString();
-            this.textBox_thisPayed.Text = circulation.ThisPayed.ToString();
-            this.textBox_accumulative.Text = string.Format("{0}", circulation.PreviousArrears + circulation.RealTotal - circulation.ThisPayed);*/
+            payReceipt = PayReceiptDao.getInstance().FindByID(payReceiptID);
+
+            this.textBox_serial.Text = payReceipt.serial;
+            this.dateTime_time.Value = payReceipt.bill_time;
+            this.textBox_comment.Text = payReceipt.comment;
+            this.lookupText1.LookupArg = new LookupArg(payReceipt.customer_id, payReceipt.customerName);
+            this.lookupText1.Text_Lookup = payReceipt.customerName;
+            this.textBox_operator.Text = payReceipt.handle_people;
+
+            //如果是未审核状态，以前欠款应该如何生成？
+            this.textBox_previousArrears.Text = payReceipt.previousArrears.ToString();
+            this.textBox_thisPayed.Text = payReceipt.amount.ToString();
         }
         //end init
 
@@ -185,6 +178,7 @@ namespace LocalERP.WinForm
         protected bool getPayReceipt(out PayReceipt payReceipt)
         {
             payReceipt = new PayReceipt();
+            payReceipt.id = this.payReceiptID;
             payReceipt.bill_type = this.type;
 
             payReceipt.serial = textBox_serial.Text;
@@ -236,15 +230,13 @@ namespace LocalERP.WinForm
                     MessageBox.Show(string.Format("增加{0}成功!", this.Text), "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else if (openMode == 1)
-                {/*
-                    ProductStainlessCirculationDao.getInstance().UpdateBaiscInfo(circulation);
-                    if (recordChanged)
-                        ProductStainlessCirculationDao.getInstance().updateRecords(circulation.ID, records);
-                    MessageBox.Show(string.Format("保存{0}成功!", this.Text), "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);*/
+                {
+                    PayReceiptDao.getInstance().Update(payReceipt);
+                    MessageBox.Show(string.Format("保存{0}成功!", this.Text), "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
 
                 openMode = 1;
-                //this.initPayReceipt();
+                this.initPayReceipt();
 
 
             }

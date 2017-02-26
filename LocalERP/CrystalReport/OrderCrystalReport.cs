@@ -14,6 +14,7 @@ namespace LocalERP.CrystalReport {
     using CrystalDecisions.Shared;
     using CrystalDecisions.ReportSource;
     using CrystalDecisions.CrystalReports.Engine;
+    using Microsoft.ReportingServices.Diagnostics;
     
     
     public class OrderCrystalReport : ReportClass {
@@ -116,7 +117,7 @@ namespace LocalERP.CrystalReport {
             return rpt;
         }
         
-        public virtual string GetCustomizedCacheKey(RequestContext request) {
+        public virtual string GetCustomizedCacheKey(CrystalDecisions.Shared.RequestContext request) {
             String key = null;
             // // The following is the code used to generate the default
             // // cache key for caching report jobs in the ASP.NET Cache.

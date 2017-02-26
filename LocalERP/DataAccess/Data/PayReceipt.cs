@@ -11,6 +11,7 @@ namespace LocalERP.DataAccess.Data
         // 应收应付，(采购付款， 采购退点， 销售收款， 销售退点)
         //重新排序
         public enum BillType { BuyPay=1, BuyRefund=2, SellReceipt=3, SellRefund=4};
+        /*
         public string get_bill_type_name(int y)
         {
             string ans = "未知";
@@ -33,7 +34,7 @@ namespace LocalERP.DataAccess.Data
             }
 
             return ans;
-        }
+        }*/
 
         // 数据表的唯一id
         public int id;
@@ -45,6 +46,7 @@ namespace LocalERP.DataAccess.Data
         public string comment;
         // 用户id
         public int customer_id;
+        public string customerName;
         //added by stone,以上欠款
         public double previousArrears;
         // 金额
