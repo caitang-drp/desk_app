@@ -333,7 +333,7 @@
             this.toolStripButton_statistic.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton_statistic.Name = "toolStripButton_statistic";
             this.toolStripButton_statistic.Size = new System.Drawing.Size(99, 36);
-            this.toolStripButton_statistic.Text = "统计报表";
+            this.toolStripButton_statistic.Text = "进销统计";
             this.toolStripButton_statistic.Click += new System.EventHandler(this.toolStripButton_statistic_Click);
             // 
             // toolStripButton_close

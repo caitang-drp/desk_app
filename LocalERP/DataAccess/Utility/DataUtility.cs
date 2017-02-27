@@ -32,11 +32,11 @@ namespace LocalERP.DataAccess.Utility
         public const String LIB_LOSS = "盘点报损";
 
         public const String QUERY_LIB = "库存查询";
-        public const String QUERY_PRODUCT_DETAIL = "产品进销明细";
-        public const String QUERY_CASH_DETAIL = "收款付款明细";
-        public const String STATISTIC_PRODUCT = "产品进销统计";
-        public const String STATISTIC_DEBT = "应收应付统计";
-        public const String STATISTIC_PROFIT = "销售利润计算";
+        public const String QUERY_PRODUCT_DETAIL = "进销明细";
+        public const String QUERY_CASH_DETAIL = "收付明细";
+        public const String STATISTIC_PRODUCT = "进销统计";
+        public const String STATISTIC_DEBT = "应收应付";
+        public const String STATISTIC_PROFIT = "销售利润";
         //经营统计
 
         public const String DATA_SETTING = "数据设置";

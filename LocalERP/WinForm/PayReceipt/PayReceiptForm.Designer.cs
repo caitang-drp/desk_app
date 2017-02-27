@@ -329,8 +329,8 @@ namespace LocalERP.WinForm
             this.textBox_thisPayed.Name = "textBox_thisPayed";
             this.textBox_thisPayed.Size = new System.Drawing.Size(150, 23);
             this.textBox_thisPayed.TabIndex = 53;
+            this.textBox_thisPayed.TextChanged += new System.EventHandler(this.textBox_thisPayed_TextChanged);
             this.textBox_thisPayed.TextChanged += new System.EventHandler(this.Controls_TextChanged);
-            this.textBox_thisPayed.TextChanged += new System.EventHandler(textBox_thisPayed_TextChanged);
             // 
             // label6
             // 
@@ -372,6 +372,7 @@ namespace LocalERP.WinForm
             // 
             // textBox_previousArrears
             // 
+            this.textBox_previousArrears.Enabled = false;
             this.textBox_previousArrears.Location = new System.Drawing.Point(88, 167);
             this.textBox_previousArrears.Name = "textBox_previousArrears";
             this.textBox_previousArrears.Size = new System.Drawing.Size(133, 23);
@@ -389,6 +390,7 @@ namespace LocalERP.WinForm
             // 
             // textBox_accumulative
             // 
+            this.textBox_accumulative.Enabled = false;
             this.textBox_accumulative.Location = new System.Drawing.Point(723, 167);
             this.textBox_accumulative.Name = "textBox_accumulative";
             this.textBox_accumulative.Size = new System.Drawing.Size(154, 23);

@@ -31,10 +31,10 @@ namespace LocalERP.WinForm
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ProductCirculationForm));
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -86,6 +86,7 @@ namespace LocalERP.WinForm
             this.label13 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.label1_tip = new System.Windows.Forms.Label();
+            this.panel_basic = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
@@ -93,12 +94,13 @@ namespace LocalERP.WinForm
             ((System.ComponentModel.ISupportInitialize)(this.sellDataSetBindingSource)).BeginInit();
             this.toolStrip2.SuspendLayout();
             this.panel_pay.SuspendLayout();
+            this.panel_basic.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(15, 139);
+            this.label1.Location = new System.Drawing.Point(5, 43);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(70, 14);
             this.label1.TabIndex = 0;
@@ -107,7 +109,7 @@ namespace LocalERP.WinForm
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(282, 139);
+            this.label2.Location = new System.Drawing.Point(272, 43);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(70, 14);
             this.label2.TabIndex = 2;
@@ -115,7 +117,7 @@ namespace LocalERP.WinForm
             // 
             // dateTime_sellTime
             // 
-            this.dateTime_sellTime.Location = new System.Drawing.Point(355, 134);
+            this.dateTime_sellTime.Location = new System.Drawing.Point(345, 38);
             this.dateTime_sellTime.Margin = new System.Windows.Forms.Padding(2);
             this.dateTime_sellTime.Name = "dateTime_sellTime";
             this.dateTime_sellTime.Size = new System.Drawing.Size(150, 23);
@@ -127,9 +129,9 @@ namespace LocalERP.WinForm
             this.dataGridView2.AllowUserToAddRows = false;
             this.dataGridView2.AllowUserToDeleteRows = false;
             this.dataGridView2.AllowUserToResizeRows = false;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.PaleGreen;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.Black;
-            this.dataGridView2.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.PaleGreen;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
+            this.dataGridView2.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView2.BackgroundColor = System.Drawing.Color.Yellow;
@@ -148,9 +150,9 @@ namespace LocalERP.WinForm
             this.dataGridView2.Name = "dataGridView2";
             this.dataGridView2.ReadOnly = true;
             this.dataGridView2.RowHeadersVisible = false;
-            dataGridViewCellStyle6.BackColor = System.Drawing.Color.Yellow;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.Yellow;
-            this.dataGridView2.RowsDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.Yellow;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.Yellow;
+            this.dataGridView2.RowsDefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridView2.RowTemplate.DefaultCellStyle.BackColor = System.Drawing.Color.White;
             this.dataGridView2.RowTemplate.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.White;
             this.dataGridView2.RowTemplate.DefaultCellStyle.SelectionForeColor = System.Drawing.Color.Black;
@@ -176,9 +178,9 @@ namespace LocalERP.WinForm
             this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.AllowUserToDeleteRows = false;
             this.dataGridView1.AllowUserToResizeRows = false;
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.Color.PaleGreen;
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.Color.Black;
-            this.dataGridView1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.PaleGreen;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black;
+            this.dataGridView1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
@@ -190,10 +192,10 @@ namespace LocalERP.WinForm
             this.dataGridView1.Margin = new System.Windows.Forms.Padding(2);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersVisible = false;
-            dataGridViewCellStyle8.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.Color.Black;
-            this.dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.Black;
+            this.dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle4;
             this.dataGridView1.RowTemplate.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.White;
             this.dataGridView1.RowTemplate.DefaultCellStyle.SelectionForeColor = System.Drawing.Color.Black;
             this.dataGridView1.RowTemplate.Height = 23;
@@ -204,7 +206,7 @@ namespace LocalERP.WinForm
             // 
             // textBox_comment
             // 
-            this.textBox_comment.Location = new System.Drawing.Point(88, 135);
+            this.textBox_comment.Location = new System.Drawing.Point(78, 39);
             this.textBox_comment.Margin = new System.Windows.Forms.Padding(2);
             this.textBox_comment.Name = "textBox_comment";
             this.textBox_comment.Size = new System.Drawing.Size(154, 23);
@@ -213,7 +215,7 @@ namespace LocalERP.WinForm
             // 
             // textBox_serial
             // 
-            this.textBox_serial.Location = new System.Drawing.Point(355, 102);
+            this.textBox_serial.Location = new System.Drawing.Point(345, 6);
             this.textBox_serial.Margin = new System.Windows.Forms.Padding(2);
             this.textBox_serial.Name = "textBox_serial";
             this.textBox_serial.Size = new System.Drawing.Size(150, 23);
@@ -224,7 +226,7 @@ namespace LocalERP.WinForm
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(282, 107);
+            this.label3.Location = new System.Drawing.Point(272, 11);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(70, 14);
             this.label3.TabIndex = 19;
@@ -233,7 +235,7 @@ namespace LocalERP.WinForm
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(15, 107);
+            this.label4.Location = new System.Drawing.Point(5, 11);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(70, 14);
             this.label4.TabIndex = 21;
@@ -244,7 +246,7 @@ namespace LocalERP.WinForm
             this.label_status.AutoSize = true;
             this.label_status.Font = new System.Drawing.Font("宋体", 10F);
             this.label_status.ForeColor = System.Drawing.Color.Red;
-            this.label_status.Location = new System.Drawing.Point(85, 107);
+            this.label_status.Location = new System.Drawing.Point(75, 11);
             this.label_status.Name = "label_status";
             this.label_status.Size = new System.Drawing.Size(35, 14);
             this.label_status.TabIndex = 22;
@@ -258,7 +260,7 @@ namespace LocalERP.WinForm
             // 
             this.label5.AutoSize = true;
             this.label5.ForeColor = System.Drawing.Color.Red;
-            this.label5.Location = new System.Drawing.Point(269, 107);
+            this.label5.Location = new System.Drawing.Point(259, 11);
             this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(14, 14);
@@ -278,7 +280,7 @@ namespace LocalERP.WinForm
             // 
             this.label9.AutoSize = true;
             this.label9.ForeColor = System.Drawing.Color.Red;
-            this.label9.Location = new System.Drawing.Point(540, 107);
+            this.label9.Location = new System.Drawing.Point(530, 11);
             this.label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(14, 14);
@@ -288,7 +290,7 @@ namespace LocalERP.WinForm
             // label_customer
             // 
             this.label_customer.AutoSize = true;
-            this.label_customer.Location = new System.Drawing.Point(553, 107);
+            this.label_customer.Location = new System.Drawing.Point(543, 11);
             this.label_customer.Name = "label_customer";
             this.label_customer.Size = new System.Drawing.Size(70, 14);
             this.label_customer.TabIndex = 41;
@@ -307,7 +309,7 @@ namespace LocalERP.WinForm
             // label_operator
             // 
             this.label_operator.AutoSize = true;
-            this.label_operator.Location = new System.Drawing.Point(553, 138);
+            this.label_operator.Location = new System.Drawing.Point(543, 42);
             this.label_operator.Name = "label_operator";
             this.label_operator.Size = new System.Drawing.Size(70, 14);
             this.label_operator.TabIndex = 45;
@@ -346,7 +348,7 @@ namespace LocalERP.WinForm
             // 
             // textBox_operator
             // 
-            this.textBox_operator.Location = new System.Drawing.Point(626, 134);
+            this.textBox_operator.Location = new System.Drawing.Point(616, 38);
             this.textBox_operator.Margin = new System.Windows.Forms.Padding(2);
             this.textBox_operator.Name = "textBox_operator";
             this.textBox_operator.Size = new System.Drawing.Size(153, 23);
@@ -356,7 +358,7 @@ namespace LocalERP.WinForm
             // lookupText1
             // 
             this.lookupText1.BackColor = System.Drawing.Color.Transparent;
-            this.lookupText1.Location = new System.Drawing.Point(626, 103);
+            this.lookupText1.Location = new System.Drawing.Point(616, 7);
             this.lookupText1.LookupForm = null;
             this.lookupText1.LookupFormType = null;
             this.lookupText1.Name = "lookupText1";
@@ -469,8 +471,8 @@ namespace LocalERP.WinForm
             this.textBox_thisPayed.Name = "textBox_thisPayed";
             this.textBox_thisPayed.Size = new System.Drawing.Size(97, 23);
             this.textBox_thisPayed.TabIndex = 53;
-            this.textBox_thisPayed.TextChanged += new System.EventHandler(this.textBox_thisPayed_TextChanged);
             this.textBox_thisPayed.TextChanged += new System.EventHandler(this.Controls_TextChanged);
+            this.textBox_thisPayed.TextChanged += new System.EventHandler(this.textBox_thisPayed_TextChanged);
             // 
             // textBox_realTotal
             // 
@@ -479,7 +481,6 @@ namespace LocalERP.WinForm
             this.textBox_realTotal.Name = "textBox_realTotal";
             this.textBox_realTotal.Size = new System.Drawing.Size(97, 23);
             this.textBox_realTotal.TabIndex = 54;
-            this.textBox_realTotal.TextChanged += new System.EventHandler(this.textBox_realTotal_TextChanged);
             this.textBox_realTotal.TextChanged += new System.EventHandler(this.Controls_TextChanged);
             // 
             // label6
@@ -562,12 +563,13 @@ namespace LocalERP.WinForm
             // textBox_previousArrears
             // 
             this.textBox_previousArrears.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.textBox_previousArrears.Enabled = false;
             this.textBox_previousArrears.Location = new System.Drawing.Point(83, 48);
             this.textBox_previousArrears.Name = "textBox_previousArrears";
             this.textBox_previousArrears.Size = new System.Drawing.Size(94, 23);
             this.textBox_previousArrears.TabIndex = 65;
-            this.textBox_previousArrears.TextChanged += new System.EventHandler(this.textBox_previousArrears_TextChanged);
             this.textBox_previousArrears.TextChanged += new System.EventHandler(this.Controls_TextChanged);
+            this.textBox_previousArrears.TextChanged += new System.EventHandler(this.textBox_previousArrears_TextChanged);
             // 
             // label17
             // 
@@ -607,12 +609,12 @@ namespace LocalERP.WinForm
             this.textBox_cutoff.Size = new System.Drawing.Size(94, 23);
             this.textBox_cutoff.TabIndex = 61;
             this.textBox_cutoff.Text = "100";
-            this.textBox_cutoff.TextChanged += new System.EventHandler(this.textBox_cutoff_TextChanged);
             this.textBox_cutoff.TextChanged += new System.EventHandler(this.Controls_TextChanged);
             // 
             // textBox_accumulative
             // 
             this.textBox_accumulative.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.textBox_accumulative.Enabled = false;
             this.textBox_accumulative.Location = new System.Drawing.Point(620, 48);
             this.textBox_accumulative.Name = "textBox_accumulative";
             this.textBox_accumulative.Size = new System.Drawing.Size(97, 23);
@@ -648,35 +650,43 @@ namespace LocalERP.WinForm
             this.label1_tip.Size = new System.Drawing.Size(0, 14);
             this.label1_tip.TabIndex = 59;
             // 
+            // panel_basic
+            // 
+            this.panel_basic.Controls.Add(this.textBox_operator);
+            this.panel_basic.Controls.Add(this.lookupText1);
+            this.panel_basic.Controls.Add(this.label_operator);
+            this.panel_basic.Controls.Add(this.label9);
+            this.panel_basic.Controls.Add(this.label_customer);
+            this.panel_basic.Controls.Add(this.label5);
+            this.panel_basic.Controls.Add(this.label_status);
+            this.panel_basic.Controls.Add(this.label4);
+            this.panel_basic.Controls.Add(this.textBox_serial);
+            this.panel_basic.Controls.Add(this.label3);
+            this.panel_basic.Controls.Add(this.textBox_comment);
+            this.panel_basic.Controls.Add(this.dateTime_sellTime);
+            this.panel_basic.Controls.Add(this.label2);
+            this.panel_basic.Controls.Add(this.label1);
+            this.panel_basic.Location = new System.Drawing.Point(10, 96);
+            this.panel_basic.Name = "panel_basic";
+            this.panel_basic.Size = new System.Drawing.Size(788, 83);
+            this.panel_basic.TabIndex = 60;
+            // 
             // ProductCirculationForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(832, 522);
+            this.Controls.Add(this.panel_basic);
             this.Controls.Add(this.label1_tip);
             this.Controls.Add(this.panel_pay);
-            this.Controls.Add(this.textBox_operator);
             this.Controls.Add(this.label_title);
-            this.Controls.Add(this.lookupText1);
-            this.Controls.Add(this.label_operator);
-            this.Controls.Add(this.label9);
-            this.Controls.Add(this.label_customer);
             this.Controls.Add(this.button_del);
             this.Controls.Add(this.button_add);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.dataGridView2);
             this.Controls.Add(this.dataGridView1);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.label_status);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.textBox_serial);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.textBox_comment);
             this.Controls.Add(this.toolStrip2);
-            this.Controls.Add(this.dateTime_sellTime);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
             this.Font = new System.Drawing.Font("宋体", 10F);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "ProductCirculationForm";
@@ -692,6 +702,8 @@ namespace LocalERP.WinForm
             this.toolStrip2.PerformLayout();
             this.panel_pay.ResumeLayout(false);
             this.panel_pay.PerformLayout();
+            this.panel_basic.ResumeLayout(false);
+            this.panel_basic.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -749,6 +761,7 @@ namespace LocalERP.WinForm
         protected System.Windows.Forms.Label label1_tip;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.Panel panel_basic;
         
        
     }

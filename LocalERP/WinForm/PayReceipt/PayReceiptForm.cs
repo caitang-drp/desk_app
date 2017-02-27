@@ -120,55 +120,54 @@ namespace LocalERP.WinForm
             //如果是未审核状态，以前欠款应该如何生成？
             this.textBox_previousArrears.Text = payReceipt.previousArrears.ToString();
             this.textBox_thisPayed.Text = payReceipt.amount.ToString();
+
+            openMode = payReceipt.status;
+            this.switchMode(payReceipt.status);
         }
         //end init
 
-        private void switchMode(int mode) { /*
+        private void switchMode(int mode) {
             switch(mode){
                 case 0:
                     this.label_status.Text = "新增";
-                    this.initControlsEnable(true, false, false, false, true, true, true, false, false,true);
+                    this.initControlsEnable(true, false, false, true);
                     break;
                 case 1:
-                    this.label_status.Text = ProductCirculation.circulationStatusContext[0];
-                    this.initControlsEnable(true, true, true, false, true, true, true, false, false,true);
+                    this.label_status.Text = PayReceipt.statusContext[0];
+                    this.initControlsEnable(false, true, false, true);
                     break;
-                case 2:
+                /*case 2:
                     this.label_status.Text = ProductCirculation.circulationStatusContext[1];
                     this.initControlsEnable(false, false, true, true, false, false, false, true, true, true);
                     break;
                 case 3:
                     this.label_status.Text = ProductCirculation.circulationStatusContext[2];
                     this.initControlsEnable(false, false, false, true, false, false, false, true, true, true);
-                    break;
+                    break;*/
                 case 4:
                     this.label_status.Text = ProductCirculation.circulationStatusContext[3];
-                    this.initControlsEnable(false, false, false, true, false, false, false, false, true, true);
+                    this.initControlsEnable(false, false, false, false);
                     break;
                 default:
                     break;
-            }*/
+            }
         }
 
 
-        private void initControlsEnable(bool save, bool approval, bool finish, bool print, bool basicInfo,
-            bool add, bool del, bool saveArrival, bool elementReadonly, bool pay)
-        {/*
-            //this.toolStripButton_save.Enabled = save;
-            this.toolStripButton_approval.Enabled = approval;
+        private void initControlsEnable(bool save, bool finish, bool print, bool basicInfo)
+        {
+            this.toolStripButton_save.Enabled = save;
             this.toolStripButton_finish.Enabled = finish;
             this.toolStripButton_print.Enabled = print;
 
             this.textBox_serial.Enabled = basicInfo;
-            this.dateTime_sellTime.Enabled = basicInfo;
-            this.textBox_comment.Enabled = basicInfo;
+            this.dateTime_time.Enabled = basicInfo;
             this.lookupText1.Enabled = basicInfo;
             this.textBox_operator.Enabled = basicInfo;
 
-            this.button_add.Enabled = add;
-            this.button_del.Enabled = del;
-            //this.toolStripButton_saveArrival.Enabled = saveArrival;
-            this.panel_pay.Enabled = pay;*/
+            this.textBox_thisPayed.Enabled = basicInfo;
+
+            this.textBox_comment.Enabled = basicInfo;
         }
 
         /// <summary>
@@ -181,31 +180,26 @@ namespace LocalERP.WinForm
             payReceipt.id = this.payReceiptID;
             payReceipt.bill_type = this.type;
 
-            payReceipt.serial = textBox_serial.Text;
-            ValidateUtility.getLookupValueID(this.lookupText1, this.errorProvider1, out payReceipt.customer_id);
+            string name;
+            if (ValidateUtility.getName(this.textBox_serial, this.errorProvider1, out name) == false)
+                return false;
+            payReceipt.serial = name;
+
+            if (ValidateUtility.getLookupValueID(this.lookupText1, this.errorProvider1, out payReceipt.customer_id) == false)
+                return false;
+
             payReceipt.bill_time = this.dateTime_time.Value;
             payReceipt.handle_people = textBox_operator.Text;
 
             payReceipt.previousArrears = Convert.ToDouble(this.textBox_previousArrears.Text);
-            payReceipt.amount = Convert.ToDouble(this.textBox_thisPayed.Text);
+            
+            double pay;
+            if (ValidateUtility.getDouble(this.textBox_thisPayed, this.errorProvider1, true, out pay) == false)
+                return false;
+            payReceipt.amount = pay;
 
             payReceipt.comment = textBox_comment.Text;
 
-            /*
-            if (ValidateUtility.getName(this.textBox_serial, this.errorProvider1, out name) == false)
-                return false;
-            circulation.Code = name;
-
-            int customerID=-1;
-            if (this.lookupText1.Visible == true && ValidateUtility.getLookupValueID(this.lookupText1, this.errorProvider1, out customerID) == false)
-                return false;
-
-            circulation.CustomerID = customerID;
-
-            circulation.CirculationTime = this.dateTime_time.Value;
-            circulation.Comment = this.textBox_comment.Text;
-            circulation.Oper = this.textBox_operator.Text;
-            */
             return true;
         }
 

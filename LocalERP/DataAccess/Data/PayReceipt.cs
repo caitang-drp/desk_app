@@ -58,6 +58,8 @@ namespace LocalERP.DataAccess.Data
 
         public int status;
 
+        public static string[] statusContext = new string[] { "未审核", "undefined", "undefined", "已审核" };
+
         //用于控制PayReceipt窗口的具体类型
         public static PayReceiptTypeConf PayReceiptTypeConf_BuyPay = new PayReceiptTypeConf(PayReceipt.BillType.BuyPay, UpdateType.PayReceiptUpdate, UpdateType.PayReceiptFinishUpdate, 1, "采购付款", "CGYF", "供 应 商:", "付款");
         public static PayReceiptTypeConf PayReceiptTypeConf_BuyRefund = new PayReceiptTypeConf(PayReceipt.BillType.BuyRefund, UpdateType.PayReceiptUpdate, UpdateType.PayReceiptFinishUpdate, -1, "采购退点", "CGTD", "供 应 商:", "退点");

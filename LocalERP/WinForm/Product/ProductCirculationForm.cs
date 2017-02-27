@@ -95,6 +95,9 @@ namespace LocalERP.WinForm
         private bool cutoffNeedReCaculate = true;
         private bool realTotalNeedRecaculate = true;
 
+        private bool previousArrearNeedChanged = true;
+        private bool thisPayedNeedChanged = true;
+
         private void initCirculation()
         {
             if (openMode == 0)
@@ -113,10 +116,10 @@ namespace LocalERP.WinForm
                 this.textBox_cutoff.Text = "100";
 
                 this.textBox_realTotal.Text = "";
-                this.textBox_previousArrears.Text = null;
-                this.textBox_accumulative.Text = null;
-                this.textBox_thisPayed.Text = null;
 
+                this.textBox_previousArrears.Text = null;
+                this.textBox_thisPayed.Text = null;
+                this.textBox_accumulative.Text = null;
 
                 this.resetNeedSave(false);
                 this.recordChanged = false;
@@ -142,7 +145,7 @@ namespace LocalERP.WinForm
             
             this.textBox_previousArrears.Text = circulation.PreviousArrears.ToString();
             this.textBox_thisPayed.Text = circulation.ThisPayed.ToString();
-            this.textBox_accumulative.Text = string.Format("{0}", circulation.PreviousArrears + circulation.RealTotal - circulation.ThisPayed);
+            
             this.backgroundWorker.RunWorkerAsync(circulation.ID);
             this.invokeBeginLoadNotify();
         }
@@ -205,7 +208,7 @@ namespace LocalERP.WinForm
                     break;
                 case 4:
                     this.label_status.Text = ProductCirculation.circulationStatusContext[3];
-                    this.initControlsEnable(false, false, false, true, false, false, false, false, true, true);
+                    this.initControlsEnable(false, false, false, true, false, false, false, false, true, false);
                     break;
                 default:
                     break;
@@ -223,11 +226,13 @@ namespace LocalERP.WinForm
             this.toolStripButton_finish.Enabled = finish;
             this.toolStripButton_print.Enabled = print;
 
+            this.panel_basic.Enabled = basicInfo;
+            /*
             this.textBox_serial.Enabled = basicInfo;
             this.dateTime_sellTime.Enabled = basicInfo;
             this.textBox_comment.Enabled = basicInfo;
             this.lookupText1.Enabled = basicInfo;
-            this.textBox_operator.Enabled = basicInfo;
+            this.textBox_operator.Enabled = basicInfo;*/
 
             this.button_add.Enabled = add;
             this.button_del.Enabled = del;
@@ -621,11 +626,6 @@ namespace LocalERP.WinForm
             resetNeedSave(true);
         }
 
-        private void lookupText1_valueSetted(object sender, LookupArg arg)
-        {
-            resetNeedSave(true);
-        }
-
         private void textBox_cutoff_TextChanged(object sender, EventArgs e)
         {
             this.cutoffNeedReCaculate = false;
@@ -655,14 +655,45 @@ namespace LocalERP.WinForm
             this.realTotalNeedRecaculate = true;
         }
 
+
+        private void lookupText1_valueSetted(object sender, LookupArg arg)
+        {
+            Customer customer = CustomerDao.getInstance().FindByID((int)arg.Value);
+            this.textBox_previousArrears.Text = customer.arrear.ToString();
+            resetNeedSave(true);
+        }
+
+        private void setAccumulative()
+        {
+            double arrear, pay;
+            double.TryParse(this.textBox_previousArrears.Text, out arrear);
+            double.TryParse(this.textBox_thisPayed.Text, out pay);
+            double accumulative = arrear - pay;
+            this.textBox_accumulative.Text = accumulative.ToString();
+        }
+
         private void textBox_previousArrears_TextChanged(object sender, EventArgs e)
         {
+            this.previousArrearNeedChanged = false;
 
+            if (this.thisPayedNeedChanged == true)
+            {
+                this.setAccumulative();
+            }
+
+            this.previousArrearNeedChanged = true;
         }
 
         private void textBox_thisPayed_TextChanged(object sender, EventArgs e)
         {
+            this.thisPayedNeedChanged = false;
 
+            if (this.previousArrearNeedChanged == true)
+            {
+                this.setAccumulative();
+            }
+
+            this.thisPayedNeedChanged = true;
         }
     }
 }

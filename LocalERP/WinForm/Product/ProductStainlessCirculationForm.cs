@@ -170,7 +170,8 @@ namespace LocalERP.WinForm
                     if (productID != oldID)
                     {
                         ProductStainless product = ProductStainlessDao.getInstance().FindByID(productID);
-                        control.EditingControlDataGridView.Rows[control.EditingControlRowIndex].Cells["quantityPerPiece"].Value = product.QuantityPerPiece;
+                        //stone ¡Ÿ ±πÿ±’
+                        //control.EditingControlDataGridView.Rows[control.EditingControlRowIndex].Cells["quantityPerPiece"].Value = product.QuantityPerPiece;
                         control.EditingControlDataGridView.Rows[control.EditingControlRowIndex].Cells["unit"].Value = product.Unit;
                         control.EditingControlDataGridView.Rows[control.EditingControlRowIndex].Cells["price"].Value = product.PricePurchase;
                     }
