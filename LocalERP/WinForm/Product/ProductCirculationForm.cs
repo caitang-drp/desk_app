@@ -497,9 +497,15 @@ namespace LocalERP.WinForm
             // 先计算利润
             SellProfit sell_profit_obj = new SellProfit();
             sell_profit_obj.update_sell_profit();
-            // 重新计算产品的平均成本，并更新到数据库
-            ProductStainless product_stainless_obj = new ProductStainless();
-            product_stainless_obj.recal_product_stainless_purchase_price();
+
+            // 使用“移动加权平均法”，只有采购才需要重新计算
+            // http://blog.sina.com.cn/s/blog_552cccd7010002rt.html
+            if (this.type == ProductCirculation.CirculationTypeConf_Purchase.type)
+            {
+                // 重新计算产品的平均成本，并更新到数据库
+                ProductStainless product_stainless_obj = new ProductStainless();
+                product_stainless_obj.recal_product_stainless_purchase_price();
+            }
             ////////////////////////////////////////////////////////////////////////
 
 
