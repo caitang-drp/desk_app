@@ -196,6 +196,25 @@ namespace LocalERP.DataAccess.DataDAO
             return group;
         }
 
+        // 将输入的单列表的明细，按照产品划分
+        public Dictionary<int, List<ProductCirculationRecord>>
+        get_record_group_by_product_sorted_by_id(
+            List<int> id_ls)
+        {
+            Dictionary<int, List<ProductCirculationRecord>> ret = get_record_group_by_product(id_ls);
+
+            foreach (KeyValuePair<int, List<ProductCirculationRecord>> item in ret)
+            {
+                item.Value.Sort(delegate(ProductCirculationRecord x, ProductCirculationRecord y)
+                {
+                    return x.ID.CompareTo(y.ID);
+                });
+            }
+
+            return ret;
+        }
+
+ 
         // 获取 商品的 平均采购价格
         // input:
         //      ls      某段时间内的单
@@ -250,6 +269,142 @@ namespace LocalERP.DataAccess.DataDAO
                 */
 
                 res[product.Key] = sum / cnt;
+            }
+
+            return res;
+        }  
+
+        // 获取 商品的 成本价格（移动加权平均法）
+        // input:
+        //      ls      某段时间内的单
+        // ret: [(商品id, 平均价格), ....]
+        public Dictionary<int, double> get_product_moving_weighted_average_method_cost(List<ProductCirculation> ls)
+        {
+            // 采购
+            Dictionary<int, List<ProductCirculationRecord>> purchase_group = get_record_group_by_product_sorted_by_id(get_wanted_type_circulation_ls(1, ls));
+            // 采购退厂
+            Dictionary<int, List<ProductCirculationRecord>> purchase_back_group = get_record_group_by_product_sorted_by_id(get_wanted_type_circulation_ls(2, ls));
+            // 销售
+            Dictionary<int, List<ProductCirculationRecord>> sell_group = get_record_group_by_product_sorted_by_id(get_wanted_type_circulation_ls(3, ls));
+            // 销售退货
+            // NOTE: 销售退货相当于进了一件货
+            Dictionary<int, List<ProductCirculationRecord>> sell_back_group = get_record_group_by_product_sorted_by_id(get_wanted_type_circulation_ls(4, ls));
+
+            // 计算每组的 单价
+            Dictionary<int, double> res = new Dictionary<int, double>();
+            // 以采购为主
+            foreach (KeyValuePair<int, List<ProductCirculationRecord>> product in purchase_group)
+            {
+                int key = product.Key;
+
+                // 采购
+                List<ProductCirculationRecord> purchase_ls = new List<ProductCirculationRecord>();
+                // 采购退厂
+                List<ProductCirculationRecord> purchase_back_ls = new List<ProductCirculationRecord>();
+                // 销售
+                List<ProductCirculationRecord> sell_ls = new List<ProductCirculationRecord>();
+                // 销售退货
+                List<ProductCirculationRecord> sell_back_ls = new List<ProductCirculationRecord>();
+
+                if (purchase_group.ContainsKey(key))
+                {
+                    purchase_ls = purchase_group[key];
+                }
+                if (purchase_back_group.ContainsKey(key))
+                {
+                    purchase_back_ls = purchase_back_group[key];
+                }
+                if (sell_group.ContainsKey(key))
+                {
+                    sell_ls = sell_group[key];
+                }
+                if (sell_back_group.ContainsKey(key))
+                {
+                    sell_back_ls = sell_back_group[key];
+                }
+
+                // 成本
+                double product_cost = 0.0;
+                // 上一次采购时候的序号
+                int min_id = 0;
+
+                double last_left_sum_cost = 0.0;
+                int last_left_cnt = 0;
+
+                if (purchase_ls.Count > 0)
+                {
+                    try
+                    {
+                        min_id = purchase_ls[0].ID;
+                        last_left_cnt = purchase_ls[0].TotalNum;
+                        last_left_sum_cost = purchase_ls[0].TotalPrice;
+                        product_cost = purchase_ls[0].TotalPrice / purchase_ls[0].TotalNum;
+
+                        purchase_ls = purchase_ls.GetRange(1, purchase_ls.Count - 1);
+                    }
+                    catch
+                    {
+
+                    }
+                }
+
+                foreach (ProductCirculationRecord purchase in purchase_ls)
+                {
+                    foreach (ProductCirculationRecord sell in sell_ls)
+                    {
+                        if (sell.ID < min_id)
+                        {
+                            continue;
+                        }
+
+                        if (sell.ID > purchase.ID)
+                        {
+                            break;
+                        }
+
+                        last_left_sum_cost -= (product_cost * sell.TotalNum);
+                        last_left_cnt -= sell.TotalNum;
+                    }
+
+                    foreach (ProductCirculationRecord sell_back in sell_back_ls)
+                    {
+                        if (sell_back.ID < min_id)
+                        {
+                            continue;
+                        }
+
+                        if (sell_back.ID > purchase.ID)
+                        {
+                            break;
+                        }
+
+                        last_left_sum_cost += (product_cost * sell_back.TotalNum);
+                        last_left_cnt += sell_back.TotalNum;
+                    }
+
+                    foreach (ProductCirculationRecord purchase_back in purchase_back_ls)
+                    {
+                        if (purchase_back.ID < min_id)
+                        {
+                            continue;
+                        }
+
+                        if (purchase_back.ID > purchase.ID)
+                        {
+                            break;
+                        }
+
+                        last_left_sum_cost -= purchase_back.TotalPrice;
+                        last_left_cnt -= purchase_back.TotalNum;
+                    }
+
+                    last_left_sum_cost += purchase.TotalPrice;
+                    last_left_cnt += purchase.TotalNum;
+
+                    min_id = purchase.ID;
+                    product_cost = last_left_sum_cost / last_left_cnt;
+                }
+                res[key] = product_cost;
             }
 
             return res;

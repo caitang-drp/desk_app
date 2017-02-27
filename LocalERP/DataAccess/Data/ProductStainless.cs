@@ -31,7 +31,7 @@ namespace LocalERP.DataAccess.Data
             List<ProductCirculation> reviewed_all_bill = ProductStainlessCirculationDao.getInstance().get_reviewed_bill();
             // 获取商品的平均成本价格
             Dictionary<int, double> product_average_price_map =
-                ProductStainlessCirculationRecordDao.getInstance().get_product_average_buy_cost(reviewed_all_bill);
+                ProductStainlessCirculationRecordDao.getInstance().get_product_moving_weighted_average_method_cost(reviewed_all_bill);
 
             foreach (KeyValuePair<int, double> pair in product_average_price_map)
             {
