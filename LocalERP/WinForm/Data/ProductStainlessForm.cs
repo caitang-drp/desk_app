@@ -9,6 +9,7 @@ using LocalERP.DataAccess.DataDAO;
 using LocalERP.DataAccess.Data;
 using LocalERP.UiDataProxy;
 using LocalERP.WinForm.Utility;
+using LocalERP.DataAccess.Utility;
 
 namespace LocalERP.WinForm
 {
@@ -48,25 +49,34 @@ namespace LocalERP.WinForm
 
             ProductStainless product = ProductStainlessDao.getInstance().FindByID(productID);
             this.textBox_name.Text = product.Name;
-            this.textBox_purchasePrice.Text = product.PricePurchase.ToString();
-            this.textBox_comment.Text = product.Comment;
+            this.textBox_serial.Text = product.Serial;
 
             this.comboBoxTree_category.setSelectNode(product.CategoryID.ToString());
+
+            this.textBox_purchasePrice.Text = product.PricePurchase.ToString();
+            this.textBox_sellPrice.Text = product.PriceSell.ToString();
+
+            this.textBox_quantityPerPiece.Text = product.QuantityPerPiece.ToString();
+            this.comboBox_unit.Text = product.Unit;
+
+            this.textBox_comment.Text = product.Comment;
         }
 
         private void clearProduct()
-        {/*
+        {
             this.label4.Text = "新增";
-            this.textBox_name.Text = "";
-            this.textBox_price.Text = "";
+            this.textBox_name.Text = null;
+            this.textBox_serial.Text = null;
+
+            this.comboBoxTree_category.setSelectNode(null);
+
+            this.textBox_purchasePrice.Text = null;
+            this.textBox_sellPrice.Text = null;
+
+            this.textBox_quantityPerPiece.Text = null;
+            this.comboBox_unit.Text = null;
+            
             this.textBox_comment.Text = "";
-            this.comboBoxTree1.setSelectNode(null);
-            this.pickValue_color.allToLeft();
-            this.pickValue_size.allToLeft();
-
-            this.attributeChanged = false;
-
-            this.setPickValue(true);*/
         }
 
         public override void refresh()
@@ -79,36 +89,6 @@ namespace LocalERP.WinForm
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-
-        private bool getName(out string name) {
-            if (string.IsNullOrEmpty(this.textBox_name.Text))
-            {
-                this.errorProvider1.SetError(this.textBox_name, "输入不能为空!");
-                name = "";
-                return false;
-            }
-            else
-            {
-                this.errorProvider1.SetError(this.textBox_name, string.Empty);
-                name = this.textBox_name.Text;
-                return true;
-            }
-        }
-
-        private bool getPrice(out double price) {
-            double tempPrice = 0;
-            if (string.IsNullOrEmpty(this.textBox_purchasePrice.Text) || double.TryParse(this.textBox_purchasePrice.Text, out tempPrice))
-            {
-                this.errorProvider1.SetError(this.textBox_purchasePrice, string.Empty);
-                price = tempPrice;
-                return true;
-            }
-            else {
-                this.errorProvider1.SetError(this.textBox_purchasePrice, "请输入数字!");
-                price = tempPrice;
-                return false;
-            }
-        }
 
         private bool getCategoryID(out int categoryID) { 
             if(this.comboBoxTree_category.SelectedNode == null)
@@ -126,16 +106,17 @@ namespace LocalERP.WinForm
         }
 
         private bool getProduct(out ProductStainless product) {
-            double price;
+            double price_purchase, price_sell;
             string name;
-            int categoryID;
+            int quantityPerPiece, categoryID;
 
-            bool isNameCorrect = this.getName(out name);
-            bool isPriceCorrect = this.getPrice(out price);
-            bool isCategoryCorrect = this.getCategoryID(out categoryID);
-            if ( isNameCorrect && isPriceCorrect && isCategoryCorrect)
+            if (ValidateUtility.getName(this.textBox_name, this.errorProvider1, out name) && 
+                ValidateUtility.getPrice(this.textBox_purchasePrice, this.errorProvider1, false, out price_purchase) && 
+                ValidateUtility.getPrice(this.textBox_sellPrice, this.errorProvider1, false, out price_sell) && 
+                ValidateUtility.getInt(this.textBox_quantityPerPiece, this.errorProvider1, false, out quantityPerPiece) &&
+                this.getCategoryID(out categoryID))
             {
-                product = new ProductStainless("serial", name, categoryID, price, price, "个", 10, this.textBox_comment.Text);
+                product = new ProductStainless(this.textBox_serial.Text, name, categoryID, price_purchase, price_sell, this.comboBox_unit.Text, quantityPerPiece, this.textBox_comment.Text);
                 product.ID = productID;
                 return true;
             }

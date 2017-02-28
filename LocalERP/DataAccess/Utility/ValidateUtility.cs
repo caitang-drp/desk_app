@@ -29,6 +29,42 @@ namespace LocalERP.DataAccess.Utility
             
         }
 
+        public static bool getPrice(TextBox textBox, ErrorProvider errorProvider, bool required, out double result)
+        {
+            result = 0;
+            string temp = textBox.Text.ToString();
+            if (required == true && (string.IsNullOrEmpty(temp) || !double.TryParse(temp, out result))
+                || required == false && !string.IsNullOrEmpty(temp) && !double.TryParse(temp, out result))
+            {
+                errorProvider.SetError(textBox, "请输入正确的数字!");
+                return false;
+            }
+            else
+            {
+                result = double.Parse(result.ToString("0.00"));
+                errorProvider.SetError(textBox, string.Empty);
+                return true;
+            }
+
+        }
+
+        public static bool getInt(TextBox textBox, ErrorProvider errorProvider, bool required, out int result)
+        {
+            result = 0;
+            string temp = textBox.Text.ToString();
+            if (required == true && (string.IsNullOrEmpty(temp) || !int.TryParse(temp, out result))
+                || required == false && !string.IsNullOrEmpty(temp) && !int.TryParse(temp, out result))
+            {
+                errorProvider.SetError(textBox, "请输入正确的整数!");
+                return false;
+            }
+            else
+            {
+                errorProvider.SetError(textBox, string.Empty);
+                return true;
+            }
+
+        }
 
         public static bool getName(TextBox textBox, ErrorProvider errorProvider, out string name)
         {

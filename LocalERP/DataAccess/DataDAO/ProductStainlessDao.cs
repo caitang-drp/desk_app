@@ -92,6 +92,7 @@ namespace LocalERP.DataAccess.DataDAO
             {
                 product.ID = (int)dr["ID"];
                 product.Name = dr["name"] as string;
+                product.Serial = dr["serial"] as string;
                 product.CategoryID = (int)dr["parent"];
 
                 product.QuantityPerPiece = (int)dr["quantityPerPiece"];
