@@ -156,7 +156,7 @@ namespace LocalERP.WinForm
             //File.AppendAllText("e:\\debug.txt", string.Format("value changed, thread:{0}\r\n", System.Threading.Thread.CurrentThread.ManagedThreadId));
 
             DataGridViewLookupEditingControl control = (sender as DataGridViewLookupEditingControl);
-            File.AppendAllText("e:\\debug.txt", string.Format("value changed, control hash code={0}, control name={1}\r\n", control.GetHashCode(), control.Name));
+            //File.AppendAllText("e:\\debug.txt", string.Format("value changed, control hash code={0}, control name={1}\r\n", control.GetHashCode(), control.Name));
             try
             {
                 //File.AppendAllText("e:\\debug.txt", string.Format("value changed, dataGridView hash code={0}, dataGridView name={1}\r\n", control.EditingControlDataGridView.GetHashCode(), control.EditingControlDataGridView.Name));
