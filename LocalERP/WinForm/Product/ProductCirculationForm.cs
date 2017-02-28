@@ -152,9 +152,9 @@ namespace LocalERP.WinForm
 
         public override void refresh()
         {
-            ((this.dataGridView1.Columns["product"] as DataGridViewLookupColumn).LookupForm as CategoryItemForm).initTree();
+            /*((this.dataGridView1.Columns["product"] as DataGridViewLookupColumn).LookupForm as CategoryItemForm).initTree();
             //not reasonal
-            (this.lookupText1.LookupForm as CategoryItemForm).initTree();
+            (this.lookupText1.LookupForm as CategoryItemForm).initTree();*/
         }
 
         protected virtual void setRecord(DataGridViewRow row, ProductCirculationRecord record) { }
@@ -294,7 +294,11 @@ namespace LocalERP.WinForm
             double total = 0;
             int number = this.dataGridView1.RowCount;
             foreach (DataGridViewRow row in this.dataGridView1.Rows)
-                total += (double)row.Cells["totalPrice"].Value;
+            {
+                double totalPrice = 0;
+                ValidateUtility.getDouble(row.Cells["totalPrice"], out totalPrice);
+                total += totalPrice;
+            }
 
             this.dataGridView2[1, 0].Value = total;
 

@@ -26,7 +26,7 @@ namespace LocalERP.WinForm
             DataGridViewLookupColumn num = new DataGridViewLookupColumn();
 
             num.HeaderText = "ÊýÁ¿/¸ö";
-            num.LookupForm = null;
+            //num.LookupForm = null;
             num.Name = "num";
             num.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             num.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
@@ -34,7 +34,7 @@ namespace LocalERP.WinForm
 
             dgv.Columns.Insert(3, num);
 
-            (dgv.Columns["num"] as DataGridViewLookupColumn).LookupForm = new ProductClothesInputNumForm(this);
+            //(dgv.Columns["num"] as DataGridViewLookupColumn).LookupForm = new ProductClothesInputNumForm(this);
         }
 
         protected override void dataGridView1_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)

@@ -41,14 +41,6 @@ namespace LocalERP.WinForm.Utility
                 base.CellTemplate = value;
             }
         }
-
-        private LookupAndNotifyDockContent lookupForm;
-
-        public LookupAndNotifyDockContent LookupForm
-        {
-            get { return lookupForm; }
-            set { lookupForm = value; }
-        }
     }
     /// <summary>
     /// 日期选择DataGridViewTextBoxCell
@@ -81,7 +73,7 @@ namespace LocalERP.WinForm.Utility
                 DataGridView.EditingControl as DataGridViewLookupEditingControl;
             
             //added by stone
-            ctl.LookupForm = (this.DataGridView.Columns[this.ColumnIndex] as DataGridViewLookupColumn).LookupForm;
+            //ctl.LookupForm = lookupForm;//(this.DataGridView.Columns[this.ColumnIndex] as DataGridViewLookupColumn).LookupForm;
             ctl.Text_Lookup = (this.Value as LookupArg).Text;
 
             //File.AppendAllText("e:\\debug.txt", string.Format("InitializeEditingControl: ctl-{0}; form-{1}\r\n", ctl.GetHashCode(), cif.GetHashCode()));
@@ -174,6 +166,11 @@ namespace LocalERP.WinForm.Utility
         {
             //this.Format = DateTimePickerFormat.Short;
             this.SelectButtonBackGround = global::LocalERP.Properties.Resources.folder_open_16px;
+
+            //modified by stone:原来lookupForm是放在column里，但是同个column不同的controlEdit有可能不一样，
+            //所以不同的controlEdit会对应到一个form，这样导致form的valueChanged会传递到不需要的controlEdit里
+            //现在临时放在control里，如果有其他类型的选择窗口，再做扩展
+            this.LookupForm = FormSingletonFactory.getInstance().getProductCIForm_select();
         }
 
         

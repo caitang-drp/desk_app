@@ -51,7 +51,7 @@ namespace LocalERP.WinForm
             check.Width = 46;
 
             product.HeaderText = "产品";
-            product.LookupForm = null;
+            //product.LookupForm = null;
             product.Name = "product";
             product.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             product.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
@@ -82,10 +82,12 @@ namespace LocalERP.WinForm
 
             dgv.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] { ID, check, product, quantityPerPiece, pieces, num, unit, price, totalPrice });
 
+            //2017-02-28:这个地方再次出现bug，自己写的控件就是蛋疼
+
             //特别注意：如果这个地方的ProductCIForm不是新建，用的是以前的窗口
             //那就可能有多个CirculationForm的DataGridViewLookupColumn指向同一个ProductCIForm
             //那么当以前的CirculationForm没有销毁的情况下，ProductCIForm就会触发以前的valueChanged事件，从而出现异常
-            (dgv.Columns["product"] as DataGridViewLookupColumn).LookupForm = FormSingletonFactory.getInstance().getProductCIForm_select();
+            //(dgv.Columns["product"] as DataGridViewLookupColumn).LookupForm = FormSingletonFactory.getInstance().getProductCIForm_select();
         }
 
         protected override void initDatagridviewEnable(bool elementReadonly)
@@ -154,7 +156,7 @@ namespace LocalERP.WinForm
             //File.AppendAllText("e:\\debug.txt", string.Format("value changed, thread:{0}\r\n", System.Threading.Thread.CurrentThread.ManagedThreadId));
 
             DataGridViewLookupEditingControl control = (sender as DataGridViewLookupEditingControl);
-
+            File.AppendAllText("e:\\debug.txt", string.Format("value changed, control hash code={0}, control name={1}\r\n", control.GetHashCode(), control.Name));
             try
             {
                 //File.AppendAllText("e:\\debug.txt", string.Format("value changed, dataGridView hash code={0}, dataGridView name={1}\r\n", control.EditingControlDataGridView.GetHashCode(), control.EditingControlDataGridView.Name));
