@@ -99,7 +99,7 @@ namespace LocalERP.WinForm
                 }
             }
             catch(Exception ex) {
-                MessageBox.Show("查询错误, 请输入正确的条件.", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                //MessageBox.Show("查询错误, 请输入正确的条件.", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
@@ -218,6 +218,5 @@ namespace LocalERP.WinForm
                 cell.Value = value;
             }
         }
-
     }
 }

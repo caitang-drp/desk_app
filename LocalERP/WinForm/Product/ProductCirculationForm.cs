@@ -144,7 +144,10 @@ namespace LocalERP.WinForm
             //textbox_cutoff是自动计算的，类似textbox_accumulative
             this.textBox_realTotal.Text = circulation.RealTotal.ToString();
             
-            this.textBox_previousArrears.Text = circulation.PreviousArrears.ToString();
+            //如果未审核，欠款有可能变
+            if(circulation.Status <= 1)
+                this.textBox_previousArrears.Text = circulation.PreviousArrears.ToString();
+            
             this.textBox_thisPayed.Text = circulation.ThisPayed.ToString();
             
             this.backgroundWorker.RunWorkerAsync(circulation.ID);
