@@ -60,6 +60,6 @@ namespace LocalERP.UiDataProxy
 
         public virtual void delItems(int id) { }
 
-        public abstract MyDockContent getItemForm(int openMode, int ID);
+        public abstract MyDockContent getItemForm(Form owner, int openMode, int ID);
     }
 }

@@ -178,9 +178,10 @@ namespace LocalERP.UiDataProxy
             CustomerDao.getInstance().Delete(id);
         }
 
-        public override MyDockContent getItemForm(int openMode, int ID)
+        public override MyDockContent getItemForm(Form owner, int openMode, int ID)
         {
             CustomerForm form = FormSingletonFactory.getInstance().getCustomerForm();
+            form.Owner = owner;
             form.reload(openMode, ID);
             return form;
         }

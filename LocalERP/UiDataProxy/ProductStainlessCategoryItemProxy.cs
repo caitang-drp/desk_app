@@ -28,57 +28,72 @@ namespace LocalERP.UiDataProxy
         {
             DataGridViewCheckBoxColumn check = new DataGridViewCheckBoxColumn();
             DataGridViewTextBoxColumn ID = new DataGridViewTextBoxColumn();
+            DataGridViewTextBoxColumn serial = new DataGridViewTextBoxColumn();
             DataGridViewTextBoxColumn name = new DataGridViewTextBoxColumn();
             DataGridViewTextBoxColumn category = new DataGridViewTextBoxColumn();
             DataGridViewTextBoxColumn pricePurchase = new DataGridViewTextBoxColumn();
             DataGridViewTextBoxColumn priceSell = new DataGridViewTextBoxColumn();
+            DataGridViewTextBoxColumn libNum = new DataGridViewTextBoxColumn();
 
             check.HeaderText = "选择";
             check.Name = "check";
             check.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             check.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            check.Width = 60;
+            check.Width = 70;
             // 
             // ID
             // 
             ID.HeaderText = "ID";
+            ID.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
             ID.Name = "ID";
             ID.ReadOnly = true;
-            ID.Width = 60;
+            ID.Width = 40;
+
+            serial.HeaderText = "货号";
+            serial.Name = "serial";
+            serial.ReadOnly = true;
+            serial.Width = 100;
             // 
             // name
             // 
             name.HeaderText = "货品名称";
             name.Name = "name";
             name.ReadOnly = true;
-            name.Width = 240;
+            name.Width = 160;
             // 
             // category
             // 
             category.HeaderText = "类别";
             category.Name = "category";
             category.ReadOnly = true;
-            category.Width = 120;
+            category.Width = 90;
             // 
             // comment
             // 
             pricePurchase.HeaderText = "采购价格/元";
             pricePurchase.Name = "pricePurchase";
             pricePurchase.ReadOnly = true;
-            pricePurchase.Width = 120;
+            pricePurchase.Width = 115;
 
             priceSell.HeaderText = "销售价格/元";
             priceSell.Name = "priceSell";
             priceSell.ReadOnly = true;
-            priceSell.Width = 120;
+            priceSell.Width = 115;
+
+            libNum.HeaderText = "库存数量";
+            libNum.Name = "libNum";
+            libNum.ReadOnly = true;
+            libNum.Width = 90;
 
             dgv.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
                 check,
                 ID,
+                serial,
                 name,
                 category,
                 pricePurchase,
-                priceSell});
+                priceSell,
+                libNum});
         }
 
         public override void initTree(TreeView tv)
@@ -155,10 +170,12 @@ namespace LocalERP.UiDataProxy
             {
                 int index = dataGridView1.Rows.Add();
                 dataGridView1.Rows[index].Cells["ID"].Value = dr["ProductStainless.ID"];
+                dataGridView1.Rows[index].Cells["serial"].Value = dr["serial"];
                 dataGridView1.Rows[index].Cells["name"].Value = dr["ProductStainless.name"];
                 dataGridView1.Rows[index].Cells["category"].Value = dr["ProductStainlessCategory.name"];
                 dataGridView1.Rows[index].Cells["pricePurchase"].Value = dr["pricePurchase"];
                 dataGridView1.Rows[index].Cells["priceSell"].Value = dr["priceSell"];
+                dataGridView1.Rows[index].Cells["libNum"].Value = dr["num"];
             }
         }
 
@@ -167,9 +184,10 @@ namespace LocalERP.UiDataProxy
             ProductStainlessDao.getInstance().Delete(id);
         }
 
-        public override MyDockContent getItemForm(int openMode, int ID)
+        public override MyDockContent getItemForm(Form owner, int openMode, int ID)
         {
             MyDockContent form = FormSingletonFactory.getInstance().getProductForm();
+            form.Owner = owner;
             (form as ProductStainlessForm).reload(openMode, ID);
             return form;
 

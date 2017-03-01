@@ -85,6 +85,7 @@
             // 
             // textBox_purchasePrice
             // 
+            this.errorProvider1.SetIconPadding(this.textBox_purchasePrice, 20);
             this.textBox_purchasePrice.Location = new System.Drawing.Point(87, 159);
             this.textBox_purchasePrice.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.textBox_purchasePrice.Name = "textBox_purchasePrice";
@@ -307,6 +308,7 @@
             // 
             // textBox_sellPrice
             // 
+            this.errorProvider1.SetIconPadding(this.textBox_sellPrice, 20);
             this.textBox_sellPrice.Location = new System.Drawing.Point(87, 193);
             this.textBox_sellPrice.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.textBox_sellPrice.Name = "textBox_sellPrice";

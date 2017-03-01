@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using WeifenLuo.WinFormsUI.Docking;
+using System.IO;
 
 namespace LocalERP.WinForm
 {
@@ -21,6 +22,7 @@ namespace LocalERP.WinForm
         //打开窗口时，检查是否需要更新
         void MyDockContent_Activated(object sender, EventArgs e)
         {
+            //File.AppendAllText("e:\\debug.txt", string.Format("Form:{0} activted. time:{1}\r\n", this.Name, DateTime.Now.ToLongTimeString()));
             bool refresh = false;
             //reference to FormMgr is high coupling
             Dictionary<UpdateType, int> dic = FormSingletonFactory.getInstance().getVersions();

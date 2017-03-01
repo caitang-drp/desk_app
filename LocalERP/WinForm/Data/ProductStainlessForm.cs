@@ -143,15 +143,10 @@ namespace LocalERP.WinForm
                 MessageBox.Show("保存货品成功,在相应的类别目录下可以找到该商品!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else if (openMode == 1) {
-                /*product.ID = productID;
-                bool basicResult = ProductStainlessDao.getInstance().UpdateBasicInfo(product);
-                bool basicAttr = true;
-                if (attributeChanged)
-                    basicAttr = ProductClothesDao.getInstance().UpdateAttributes(productID, product, this.pickValue_color.getListRight(), this.pickValue_size.getListRight());
-                if(basicResult && basicAttr)
+                product.ID = productID;
+                bool basicResult = ProductStainlessDao.getInstance().Update(product);
+                if(basicResult)
                     MessageBox.Show("修改商品成功!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                else
-                    MessageBox.Show("该商品已被单据引用，无法修改颜色和尺码等属性!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);*/
             }
             this.invokeUpdateNotify(UpdateType.ProductUpdate);
             this.Close();
@@ -160,35 +155,6 @@ namespace LocalERP.WinForm
         private void toolStripButton4_Click(object sender, EventArgs e)
         {
             this.Close();
-        }
-
-        private void button_charactor_Click(object sender, EventArgs e)
-        {
-            Button button = sender as Button;
-            int charactorId = 1;
-            if(button.Name.Equals("button_size"))
-                charactorId = 2;
-            CharactorForm form = new CharactorForm(charactorId);
-            form.FormClosed += new FormClosedEventHandler(form_FormClosed);
-            form.ShowDialog();
-        }
-
-        void form_FormClosed(object sender, FormClosedEventArgs e)
-        {/*
-            CharactorForm form = sender as CharactorForm;
-            if (form.Modify == true)
-            {
-                PickValue pickValue = null;
-                if (form.CharactorId == 1)
-                    pickValue = pickValue_color;
-                else
-                    pickValue = pickValue_size;
-
-                List<CharactorValue> values = pickValue.getListRight();
-                pickValue.initValue(CharactorValueDao.getInstance().FindList(form.CharactorId), "Name", "Id");
-
-                pickValue.setSelectItems(values);
-            }*/
         }
     }
 }

@@ -77,7 +77,7 @@ namespace LocalERP.WinForm
                 MessageBox.Show("请选择类型，如无类型请先增加!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
-            categoryItemProxy.getItemForm(0,0).ShowDialog();
+            categoryItemProxy.getItemForm(this, 0,0).ShowDialog();
         }
 
         public override void refresh()

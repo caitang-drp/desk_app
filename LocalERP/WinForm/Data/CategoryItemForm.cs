@@ -44,9 +44,6 @@ namespace LocalERP.WinForm
             
             this.Owner = parentForm;
 
-            this.backgroundWorker.DoWork += new DoWorkEventHandler(backgroundWorker_DoWork);
-            this.backgroundWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(backgroundWorker_RunWorkerCompleted);
-
             categoryItemProxy.initColumns(this.dataGridView1);
             categoryItemProxy.initTree(this.treeView1);
         }
@@ -58,19 +55,13 @@ namespace LocalERP.WinForm
                 parent = int.Parse(treeView1.SelectedNode.Name);
             searchName = null;
 
-            backgroundWorker.RunWorkerAsync(parent);
-            this.invokeBeginLoadNotify();
+            selectCategory(parent);
         }
 
-        private void backgroundWorker_DoWork(object sender, DoWorkEventArgs e)
-        {
-            recordsDataTable = categoryItemProxy.getRecordsTable((int)e.Argument, this.searchName);
-        }
-
-        private void backgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
+        private void selectCategory(int parent) {
+            searchName = this.textBox_name.Text;
+            recordsDataTable = categoryItemProxy.getRecordsTable(parent, this.searchName);
             categoryItemProxy.initRecords(this.dataGridView1, recordsDataTable);
-            this.invokeEndLoadNotify();
         }
 
         public override void refresh()
@@ -224,7 +215,8 @@ namespace LocalERP.WinForm
                 MessageBox.Show("请选择类别，如无类别请先增加!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
-            MyDockContent form = categoryItemProxy.getItemForm(0, 0);
+            MyDockContent form = categoryItemProxy.getItemForm(this, 0, 0);
+            //这个地方可能还可以改进
             form.updateNotify -= new UpdateNotify(form_updateNotify);
             form.updateNotify += new UpdateNotify(form_updateNotify);
             form.ShowDialog();
@@ -243,7 +235,11 @@ namespace LocalERP.WinForm
 
         private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
+            if (e.RowIndex < 0)
+                return;
+
             int id = (int)this.dataGridView1.Rows[e.RowIndex].Cells["ID"].Value;
+            //openMode == 0用于选择
             if (openMode == 0)
             {
                 string name = this.dataGridView1.Rows[e.RowIndex].Cells["name"].Value.ToString();
@@ -256,7 +252,10 @@ namespace LocalERP.WinForm
                 this.invokeLookupCallback(lookupArg);
             }
             else if (openMode == 1) {
-                categoryItemProxy.getItemForm(1, id).ShowDialog();
+                MyDockContent form = categoryItemProxy.getItemForm(this, 1, id);
+                form.updateNotify -= new UpdateNotify(form_updateNotify);
+                form.updateNotify += new UpdateNotify(form_updateNotify);
+                form.ShowDialog();
             }
         }
 
@@ -268,7 +267,10 @@ namespace LocalERP.WinForm
                 MessageBox.Show("请选择编辑" + categoryItemProxy.ItemName, "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
-            categoryItemProxy.getItemForm(1, list[0]).ShowDialog();
+            MyDockContent form = categoryItemProxy.getItemForm(this, 1, list[0]);
+            form.updateNotify -= new UpdateNotify(form_updateNotify);
+            form.updateNotify += new UpdateNotify(form_updateNotify);
+            form.ShowDialog();
         }
 
         private void toolStripButton_delItem_Click(object sender, EventArgs e)
@@ -312,10 +314,12 @@ namespace LocalERP.WinForm
 
         private void button_search_Click(object sender, EventArgs e)
         {
-            searchName = this.textBox_name.Text;
+            selectCategory(-1);
+        }
 
-            backgroundWorker.RunWorkerAsync(-1);
-            this.invokeBeginLoadNotify();
+        private void textBox_name_TextChanged(object sender, EventArgs e)
+        {
+            selectCategory(-1);
         }
     }
 }

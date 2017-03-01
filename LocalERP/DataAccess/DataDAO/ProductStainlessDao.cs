@@ -35,11 +35,11 @@ namespace LocalERP.DataAccess.DataDAO
 
         }
 
-        public bool UpdateBasicInfo(Product info) {
+        public bool Update(ProductStainless info) {
             try
             {
-                string commandText = string.Format("update Product set name='{0}', price={1}, comment='{2}', parent={3} where ID={4}",
-                    info.Name, info.PricePurchase, info.Comment, info.CategoryID, info.ID);
+                string commandText = string.Format("update ProductStainless set serial='{0}', name='{1}', comment='{2}', parent={3}, pricePurchase={4}, priceSell={5}, unit='{6}', quantityPerPiece={7} where ID={8}",
+                    info.Serial, info.Name, info.Comment, info.CategoryID, info.PricePurchase, info.PriceSell, info.Unit, info.QuantityPerPiece, info.ID);
 
                 DbHelperAccess.executeNonQuery(commandText);
                 return true;
@@ -56,7 +56,7 @@ namespace LocalERP.DataAccess.DataDAO
                 commandText.AppendFormat("  and ProductStainlessCategory.lft>={0} and ProductStainlessCategory.rgt<={1}", parent.Left, parent.Right);
 
             if (!string.IsNullOrEmpty(name))
-                commandText.AppendFormat(" and ProductStainless.name like '%{0}%'", name);
+                commandText.AppendFormat(" and ( ProductStainless.name like '%{0}%' or ProductStainless.serial like '%{0}%')", name);
             return DbHelperAccess.executeQuery(commandText.ToString());
         }
 
@@ -118,7 +118,7 @@ namespace LocalERP.DataAccess.DataDAO
         {
             try
             {
-                string commandText = string.Format("delete from Product where ID={0}", id);
+                string commandText = string.Format("delete from ProductStainless where ID={0}", id);
                 DbHelperAccess.executeNonQuery(commandText);
                 return true;
             }

@@ -142,7 +142,7 @@ namespace LocalERP.UiDataProxy
             }
         }
 
-        public override MyDockContent getItemForm(int openMode, int ID)
+        public override MyDockContent getItemForm(Form owner, int openMode, int ID)
         {
             return null;
         }
