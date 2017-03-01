@@ -24,7 +24,7 @@ namespace LocalERP.WinForm
         protected UpdateType notifyType;
         protected UpdateType finishNotifyType;
 
-        private int flowType;
+        protected int flowType;
         private string code;
 
         private ProductCirculation circulation = null;
@@ -70,6 +70,10 @@ namespace LocalERP.WinForm
             this.backgroundWorker.DoWork += new DoWorkEventHandler(backgroundWorker_DoWork);
             this.backgroundWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(backgroundWorker_RunWorkerCompleted);
 
+            this.textBox_cutoff.TextChanged += new EventHandler(textBox_cutoff_TextChanged);
+            this.textBox_realTotal.TextChanged += new EventHandler(textBox_realTotal_TextChanged);
+            this.textBox_thisPayed.TextChanged += new EventHandler(textBox_thisPayed_TextChanged);
+
             initCirculation();
         }
 
@@ -114,7 +118,6 @@ namespace LocalERP.WinForm
                 this.dataGridView2[1, 0].Value = null;
 
                 this.textBox_cutoff.Text = "100";
-
                 this.textBox_realTotal.Text = "";
 
                 this.textBox_previousArrears.Text = null;
@@ -141,8 +144,6 @@ namespace LocalERP.WinForm
             //textbox_cutoff是自动计算的，类似textbox_accumulative
             this.textBox_realTotal.Text = circulation.RealTotal.ToString();
             
-            //this.textBox_cutoff.Text = circulation.Total == 0?"":string.Format("{0:F}", circulation.RealTotal / circulation.Total);
-            
             this.textBox_previousArrears.Text = circulation.PreviousArrears.ToString();
             this.textBox_thisPayed.Text = circulation.ThisPayed.ToString();
             
@@ -150,12 +151,7 @@ namespace LocalERP.WinForm
             this.invokeBeginLoadNotify();
         }
 
-        public override void refresh()
-        {
-            /*((this.dataGridView1.Columns["product"] as DataGridViewLookupColumn).LookupForm as CategoryItemForm).initTree();
-            //not reasonal
-            (this.lookupText1.LookupForm as CategoryItemForm).initTree();*/
-        }
+        //不需要实现refresh，因为窗口Actived时会自动检测
 
         protected virtual void setRecord(DataGridViewRow row, ProductCirculationRecord record) { }
 
@@ -227,12 +223,6 @@ namespace LocalERP.WinForm
             this.toolStripButton_print.Enabled = print;
 
             this.panel_basic.Enabled = basicInfo;
-            /*
-            this.textBox_serial.Enabled = basicInfo;
-            this.dateTime_sellTime.Enabled = basicInfo;
-            this.textBox_comment.Enabled = basicInfo;
-            this.lookupText1.Enabled = basicInfo;
-            this.textBox_operator.Enabled = basicInfo;*/
 
             this.button_add.Enabled = add;
             this.button_del.Enabled = del;
@@ -346,12 +336,13 @@ namespace LocalERP.WinForm
 
             circulation.CustomerName = this.lookupText1.Text_Lookup;
 
-            double total, realTotal, previousArrears, thisPayed;
+            double total, cutoff, realTotal, previousArrears, thisPayed;
 
-            if (ValidateUtility.getDouble(this.dataGridView2[1, 0], out total)
-                && ValidateUtility.getDouble(this.textBox_realTotal, this.errorProvider1, false, out realTotal)
-                && ValidateUtility.getDouble(this.textBox_previousArrears, this.errorProvider1, false, out previousArrears)
-                && ValidateUtility.getDouble(this.textBox_thisPayed, this.errorProvider1, false, out thisPayed))
+            if (ValidateUtility.getPrice(this.dataGridView2[1, 0], true, out total)
+                && ValidateUtility.getDouble(this.textBox_cutoff, this.errorProvider1, false, out cutoff)
+                && ValidateUtility.getPrice(this.textBox_realTotal, this.errorProvider1, true, out realTotal)
+                && ValidateUtility.getPrice(this.textBox_previousArrears, this.errorProvider1, false, out previousArrears)
+                && ValidateUtility.getPrice(this.textBox_thisPayed, this.errorProvider1, false, out thisPayed))
             {
                 circulation.Total = total;
                 circulation.RealTotal = realTotal;
@@ -404,11 +395,11 @@ namespace LocalERP.WinForm
                     MessageBox.Show(string.Format("增加{0}成功!", this.Text), "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else if (openMode == 1)
-                {/*
-                    ProductStainlessCirculationDao.getInstance().UpdateBaiscInfo(circulation);
+                {
+                    cirDao.UpdateBaiscInfo(circulation);
                     if (recordChanged)
-                        ProductStainlessCirculationDao.getInstance().updateRecords(circulation.ID, records);
-                    MessageBox.Show(string.Format("保存{0}成功!", this.Text), "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);*/
+                        cirDao.updateRecords(circulation.ID, records);
+                    MessageBox.Show(string.Format("保存{0}成功!", this.Text), "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
 
                 openMode = 1;
@@ -426,43 +417,6 @@ namespace LocalERP.WinForm
             //so important: if edit ,it should be refresh also, because edit will del exist item and add new item
 
             this.invokeUpdateNotify(notifyType);
-        }
-
-        //下单后不能修改，现在不用这个功能
-        private void toolStripButton_approval_Click(object sender, EventArgs e)
-        {/*
-            if (this.toolStripButton_save.Enabled == true)
-            {
-                MessageBox.Show("请先保存单据,再下单!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            if (MessageBox.Show("下单后，该单据不能修改，是否下单？", "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) != DialogResult.OK)
-                return;
-
-            List<ProductCirculationRecord> records;
-            this.getRecords(out records);
-
-            bool isLeftEnought = true;
-
-            //no reasonable
-            for (int i = 0; i < records.Count; i++)
-            {
-                int productID = records[i].ProductID;
-                int leftNum = ProductClothesDao.getInstance().FindByID(productID).Num;
-                if (records[i].TotalNum > leftNum)
-                    isLeftEnought = false;
-            }
-
-            if(isLeftEnought == false)
-                if (MessageBox.Show("库存不足，是否继续下单？", "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) != DialogResult.OK)
-                    return;
-
-            ProductSellDao.getInstance().UpdateStatus(circulationID, 2);
-            openMode = 2;
-            this.switchMode(2);
-
-            this.invokeUpdateNotify(notifyType);*/
         }
 
         //审核

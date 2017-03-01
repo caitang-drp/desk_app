@@ -74,7 +74,6 @@ namespace LocalERP.WinForm
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.panel_pay = new System.Windows.Forms.Panel();
-            this.label19 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
             this.textBox_previousArrears = new System.Windows.Forms.TextBox();
@@ -432,7 +431,6 @@ namespace LocalERP.WinForm
             this.toolStripButton_approval.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.toolStripButton_approval.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.toolStripButton_approval.Visible = false;
-            this.toolStripButton_approval.Click += new System.EventHandler(this.toolStripButton_approval_Click);
             // 
             // toolStripButton_finish
             // 
@@ -472,11 +470,11 @@ namespace LocalERP.WinForm
             this.textBox_thisPayed.Size = new System.Drawing.Size(97, 23);
             this.textBox_thisPayed.TabIndex = 53;
             this.textBox_thisPayed.TextChanged += new System.EventHandler(this.Controls_TextChanged);
-            this.textBox_thisPayed.TextChanged += new System.EventHandler(this.textBox_thisPayed_TextChanged);
             // 
             // textBox_realTotal
             // 
             this.textBox_realTotal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.errorProvider1.SetIconPadding(this.textBox_realTotal, 20);
             this.textBox_realTotal.Location = new System.Drawing.Point(355, 14);
             this.textBox_realTotal.Name = "textBox_realTotal";
             this.textBox_realTotal.Size = new System.Drawing.Size(97, 23);
@@ -506,7 +504,6 @@ namespace LocalERP.WinForm
             // panel_pay
             // 
             this.panel_pay.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.panel_pay.Controls.Add(this.label19);
             this.panel_pay.Controls.Add(this.label18);
             this.panel_pay.Controls.Add(this.label16);
             this.panel_pay.Controls.Add(this.textBox_previousArrears);
@@ -527,17 +524,6 @@ namespace LocalERP.WinForm
             this.panel_pay.Name = "panel_pay";
             this.panel_pay.Size = new System.Drawing.Size(800, 79);
             this.panel_pay.TabIndex = 58;
-            // 
-            // label19
-            // 
-            this.label19.AutoSize = true;
-            this.label19.ForeColor = System.Drawing.Color.Red;
-            this.label19.Location = new System.Drawing.Point(3, 18);
-            this.label19.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(14, 14);
-            this.label19.TabIndex = 68;
-            this.label19.Text = "*";
             // 
             // label18
             // 
@@ -568,7 +554,6 @@ namespace LocalERP.WinForm
             this.textBox_previousArrears.Name = "textBox_previousArrears";
             this.textBox_previousArrears.Size = new System.Drawing.Size(94, 23);
             this.textBox_previousArrears.TabIndex = 65;
-            this.textBox_previousArrears.TextChanged += new System.EventHandler(this.Controls_TextChanged);
             this.textBox_previousArrears.TextChanged += new System.EventHandler(this.textBox_previousArrears_TextChanged);
             // 
             // label17
@@ -604,6 +589,7 @@ namespace LocalERP.WinForm
             // textBox_cutoff
             // 
             this.textBox_cutoff.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.errorProvider1.SetIconPadding(this.textBox_cutoff, 20);
             this.textBox_cutoff.Location = new System.Drawing.Point(83, 14);
             this.textBox_cutoff.Name = "textBox_cutoff";
             this.textBox_cutoff.Size = new System.Drawing.Size(94, 23);
@@ -760,7 +746,6 @@ namespace LocalERP.WinForm
         private System.Windows.Forms.Label label17;
         protected System.Windows.Forms.Label label1_tip;
         private System.Windows.Forms.Label label18;
-        private System.Windows.Forms.Label label19;
         private System.Windows.Forms.Panel panel_basic;
         
        

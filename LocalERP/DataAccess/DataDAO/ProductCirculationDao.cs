@@ -20,7 +20,8 @@ namespace LocalERP.DataAccess.DataDAO
         public abstract ProductCirculationRecordDao getRecordDao();
         public abstract ProductDao getProductDao();
 
-        public abstract bool Insert(ProductCirculation info, List<ProductCirculationRecord> records, out int ProductCirculationID); 
+        public abstract bool Insert(ProductCirculation info, List<ProductCirculationRecord> records, out int ProductCirculationID);
+        public abstract bool updateRecords(int ID, List<ProductCirculationRecord> records); 
 
         public bool Insert(ProductCirculation info, out int ProductCirculationID)
         {
@@ -50,8 +51,8 @@ namespace LocalERP.DataAccess.DataDAO
 
         public void UpdateBaiscInfo(ProductCirculation info)
         {
-            string commandText = string.Format("update ProductCirculation set code='{0}', circulationTime='{1}', comment='{2}', customerID={3}, operator='{4}' where ID={5}",
-                info.Code, info.CirculationTime, info.Comment, info.CustomerID <= 0 ? "null" : info.CustomerID.ToString(), info.Oper, info.ID);
+            string commandText = string.Format("update {0} set code='{1}', circulationTime='{2}', comment='{3}', customerID={4}, total={5}, realTotal={6}, previousArrears={7}, thisPayed ={8}, operator='{9}' where ID={10}",
+                tableName, info.Code, info.CirculationTime, info.Comment, info.CustomerID <= 0 ? "null" : info.CustomerID.ToString(), info.Total, info.RealTotal, info.PreviousArrears, info.ThisPayed, info.Oper, info.ID);
 
             DbHelperAccess.executeNonQuery(commandText);
         }
@@ -130,7 +131,7 @@ namespace LocalERP.DataAccess.DataDAO
         }
 
         public int DeleteByID(int ID) {
-            string commandText = string.Format("delete from ProductCirculation where ID={0}", ID);
+            string commandText = string.Format("delete from {0} where ID={1}", tableName, ID);
             return DbHelperAccess.executeNonQuery(commandText);
         }
 

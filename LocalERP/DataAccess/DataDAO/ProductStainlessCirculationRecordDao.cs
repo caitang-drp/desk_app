@@ -94,23 +94,14 @@ namespace LocalERP.DataAccess.DataDAO
 
         public int FindCount(int productID)
         {
-            string commandText = string.Format("select count(*) from ProductCirculationRecord where ProductCirculationRecord.productID = {0}", productID);
+            string commandText = string.Format("select count(*) from ProductStainlessCirculationRecord where ProductStainlessCirculationRecord.productID = {0}", productID);
             int result = DbHelperAccess.executeQueryNum(commandText);
             return result;
         }
 
-        /*
-        public int Update(ProductSellRecord info)
-        {
-            string commandText = string.Format("update ProductSellRecord set productID={0}, num={1}, price={2} where ID={3}", 
-                info.ProductID, info.Num, info.Price, info.ID);
-
-            return DbHelperAccess.executeNonQuery(commandText);
-        }*/
-
         public int DeleteByCirculationID(int circulationID)
         {
-            string commandText = string.Format("delete from ProductCirculationRecord where circulationID={0}", circulationID);
+            string commandText = string.Format("delete from ProductStainlessCirculationRecord where circulationID={0}", circulationID);
             return DbHelperAccess.executeNonQuery(commandText);
         }
 

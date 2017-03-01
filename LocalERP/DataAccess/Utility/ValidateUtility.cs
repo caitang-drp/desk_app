@@ -115,6 +115,25 @@ namespace LocalERP.DataAccess.Utility
             }
         }
 
+        public static bool getPrice(DataGridViewCell cell, bool required, out double result)
+        {
+            result = 0;
+            string temp = cell.EditedFormattedValue.ToString();
+            if (required == true && (string.IsNullOrEmpty(temp) || !double.TryParse(temp, out result))
+                || required == false && !string.IsNullOrEmpty(temp) && !double.TryParse(temp, out result))
+            {
+                cell.ErrorText = "请输入正确的数字!";
+                return false;
+            }
+            else
+            {
+                result = double.Parse(result.ToString("0.00"));
+                cell.ErrorText = string.Empty;
+                return true;
+            }
+
+        }
+
         //commented by stone:还需增加判断是否超过int的最大值
         public static bool getInt(DataGridViewCell cell, bool required, bool positive, out int result)
         {

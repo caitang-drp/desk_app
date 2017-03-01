@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dataGridView1 = new LocalERP.WinForm.MyDataGridView();
             this.button1 = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
@@ -58,12 +59,12 @@
             this.check = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sellTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.type = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.typeValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.realTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.status = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.customer = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.pay = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.sellTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.panel1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -83,12 +84,12 @@
             this.check,
             this.ID,
             this.name,
+            this.sellTime,
             this.type,
             this.typeValue,
+            this.realTotal,
             this.status,
-            this.customer,
-            this.pay,
-            this.sellTime});
+            this.customer});
             this.dataGridView1.Location = new System.Drawing.Point(-1, 91);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersVisible = false;
@@ -360,6 +361,7 @@
             this.ID.HeaderText = "ID";
             this.ID.Name = "ID";
             this.ID.ReadOnly = true;
+            this.ID.Width = 80;
             // 
             // name
             // 
@@ -367,6 +369,13 @@
             this.name.Name = "name";
             this.name.ReadOnly = true;
             this.name.Width = 200;
+            // 
+            // sellTime
+            // 
+            this.sellTime.HeaderText = "时间";
+            this.sellTime.Name = "sellTime";
+            this.sellTime.ReadOnly = true;
+            this.sellTime.Width = 180;
             // 
             // type
             // 
@@ -381,6 +390,14 @@
             this.typeValue.ReadOnly = true;
             this.typeValue.Visible = false;
             // 
+            // realTotal
+            // 
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.realTotal.DefaultCellStyle = dataGridViewCellStyle1;
+            this.realTotal.HeaderText = "金额/元";
+            this.realTotal.Name = "realTotal";
+            this.realTotal.ReadOnly = true;
+            // 
             // status
             // 
             this.status.HeaderText = "状态";
@@ -392,19 +409,6 @@
             this.customer.HeaderText = "往来单位";
             this.customer.Name = "customer";
             this.customer.ReadOnly = true;
-            // 
-            // pay
-            // 
-            this.pay.HeaderText = "付款情况";
-            this.pay.Name = "pay";
-            this.pay.ReadOnly = true;
-            // 
-            // sellTime
-            // 
-            this.sellTime.HeaderText = "时间";
-            this.sellTime.Name = "sellTime";
-            this.sellTime.ReadOnly = true;
-            this.sellTime.Width = 180;
             // 
             // ProductCirculationListForm
             // 
@@ -474,11 +478,11 @@
         private System.Windows.Forms.DataGridViewCheckBoxColumn check;
         private System.Windows.Forms.DataGridViewTextBoxColumn ID;
         private System.Windows.Forms.DataGridViewTextBoxColumn name;
+        private System.Windows.Forms.DataGridViewTextBoxColumn sellTime;
         private System.Windows.Forms.DataGridViewTextBoxColumn type;
         private System.Windows.Forms.DataGridViewTextBoxColumn typeValue;
+        private System.Windows.Forms.DataGridViewTextBoxColumn realTotal;
         private System.Windows.Forms.DataGridViewTextBoxColumn status;
         private System.Windows.Forms.DataGridViewTextBoxColumn customer;
-        private System.Windows.Forms.DataGridViewTextBoxColumn pay;
-        private System.Windows.Forms.DataGridViewTextBoxColumn sellTime;
     }
 }

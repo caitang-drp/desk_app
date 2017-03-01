@@ -57,7 +57,7 @@ namespace LocalERP.WinForm
         public void hideControls() {
             this.label8.Visible = false;
             this.dataGridView1.Columns["customer"].Visible = false;
-            this.dataGridView1.Columns["pay"].Visible = false;
+            this.dataGridView1.Columns["realTotal"].Visible = false;
             this.textBox_customer.Visible = false;
         }
 
@@ -76,6 +76,8 @@ namespace LocalERP.WinForm
                     this.dataGridView1.Rows[index].Cells["type"].Value = ProductCirculation.CirculationTypeConfs[type - 1].name;
                     this.dataGridView1.Rows[index].Cells["typeValue"].Value = type;
 
+                    this.dataGridView1.Rows[index].Cells["realTotal"].Value = double.Parse(dr["realTotal"].ToString()).ToString("0.00");
+
                     int status = (int)(dr["status"]);
                     this.dataGridView1.Rows[index].Cells["status"].Value = ProductCirculation.circulationStatusContext[status - 1];
                     if (status == 1)
@@ -88,6 +90,10 @@ namespace LocalERP.WinForm
                         this.dataGridView1.Rows[index].Cells["status"].Style.ForeColor = Color.Black;
                         this.dataGridView1.Rows[index].Cells["status"].Style.SelectionForeColor = Color.Black;
                     }
+
+                    if (circulationType < 3)
+                        this.dataGridView1.Rows[index].Cells["customer"].Value = dr["name"];
+
 
                     this.dataGridView1.Rows[index].Cells["sellTime"].Value = dr["circulationTime"];                    
                 }
@@ -108,7 +114,7 @@ namespace LocalERP.WinForm
 
         //del
         private void toolStripButton2_Click(object sender, EventArgs e)
-        {/*
+        {
             List<int> list = this.dataGridView1.getSelectIDs("ID", "check");
             if (list == null || list.Count <= 0)
             {
@@ -125,16 +131,16 @@ namespace LocalERP.WinForm
             {
                 for (int i = 0; i < list.Count; i++)
                 {
-                    if (ProductCirculationDao.getInstance().FindByID(list[i]).Status > 1) {
+                    if (cirDao.FindByID(list[i]).Status > 1) {
                         MessageBox.Show(string.Format("ID为{0}的单据已经审核, 无法删除!", list[i]), "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         initList();
                         return;
                     }
-                    ProductCirculationDao.getInstance().DeleteByID(list[i]);
+                    cirDao.DeleteByID(list[i]);
                 }
                 initList();
                 MessageBox.Show("删除单据成功!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }*/
+            }
         }
 
         //edit
