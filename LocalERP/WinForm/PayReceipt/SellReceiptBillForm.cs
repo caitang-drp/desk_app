@@ -44,11 +44,11 @@ namespace LocalERP.WinForm
             this.notifyType = conf.notifyType;
             this.finishNotifyType = conf.finishNotifyType;
 
-            this.flowType = conf.flowType;
+            this.flowType = conf.productDirection;
 
             this.label_title.Text = this.Text;
             this.code = conf.code;
-            this.label2.Text = conf.date;
+            this.label2.Text = conf.business;
             this.label_customer.Text = conf.customer;
 
 

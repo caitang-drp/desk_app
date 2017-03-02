@@ -73,7 +73,7 @@ namespace LocalERP.WinForm
             unit.Name = "unit";
             unit.Width = 100;
 
-            price.HeaderText = this.Text.Substring(0, 2) + "单价/元";
+            price.HeaderText = this.conf.business + "单价/元";
             price.Name = "price";
             price.Width = 140;
 
@@ -175,7 +175,7 @@ namespace LocalERP.WinForm
                         //stone 临时关闭
                         //control.EditingControlDataGridView.Rows[control.EditingControlRowIndex].Cells["quantityPerPiece"].Value = product.QuantityPerPiece;
                         control.EditingControlDataGridView.Rows[control.EditingControlRowIndex].Cells["unit"].Value = product.Unit;
-                        if(flowType == 1)
+                        if(conf.productDirection == 1)
                             control.EditingControlDataGridView.Rows[control.EditingControlRowIndex].Cells["price"].Value = product.PricePurchase;
                         else
                             control.EditingControlDataGridView.Rows[control.EditingControlRowIndex].Cells["price"].Value = product.PriceSell;

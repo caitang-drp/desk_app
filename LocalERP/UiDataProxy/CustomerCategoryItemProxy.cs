@@ -42,7 +42,7 @@ namespace LocalERP.UiDataProxy
             ID.HeaderText = "ID";
             ID.Name = "ID";
             ID.ReadOnly = true;
-            ID.Width = 60;
+            ID.Width = 40;
             // 
             // name
             // 
@@ -55,26 +55,26 @@ namespace LocalERP.UiDataProxy
             category.HeaderText = "类别";
             category.Name = "category";
             category.ReadOnly = true;
-            category.Width = 120;
+            category.Width = 90;
             // 
             // tel
             // 
             tel.HeaderText = "电话";
             tel.Name = "tel";
             tel.ReadOnly = true;
-            tel.Width = 120;
+            tel.Width = 80;
             // 
             // phone
             // 
             phone.HeaderText = "手机";
             phone.Name = "phone";
-            phone.Width = 120;
+            phone.Width = 100;
             // 
             // address
             // 
             address.HeaderText = "地址";
             address.Name = "address";
-            address.Width = 160;
+            address.Width = 100;
             // 
             // comment
             // 

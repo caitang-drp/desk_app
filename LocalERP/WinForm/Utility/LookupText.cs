@@ -60,7 +60,17 @@ namespace LocalERP.WinForm
         public LookupArg LookupArg
         {
             get { return lookupArg; }
-            set { lookupArg = value; }
+            set {
+                try
+                {
+                    if (lookupArg != value && valueSetted != null)
+                        this.valueSetted.Invoke(this, value);
+                }
+                catch (Exception e) {
+                    e.ToString();
+                }
+                lookupArg = value;
+            }
         }
 
         protected String value_Lookup;

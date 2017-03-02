@@ -20,12 +20,8 @@ namespace LocalERP.WinForm
         //status          | 1:apply      | 2:approval  | 3:partArrival | 4:arrival  
         protected int openMode = 0;
         protected int circulationID = 0;
-        protected ProductCirculation.CirculationType type;
-        protected UpdateType notifyType;
-        protected UpdateType finishNotifyType;
 
-        protected int flowType;
-        private string code;
+        protected CirculationTypeConf conf;
 
         private ProductCirculation circulation = null;
         public List<ProductCirculationRecord> records = null;
@@ -34,24 +30,22 @@ namespace LocalERP.WinForm
         protected bool recordChanged = false;
 
         private ProductCirculationDao cirDao;
-        public ProductCirculationForm(CirculationTypeConf conf, ProductCirculationDao cirDao)
+        public ProductCirculationForm(CirculationTypeConf c, ProductCirculationDao cirDao)
         {
             InitializeComponent();
 
             openMode = 0;
             circulationID = 0;
 
-            this.type = conf.type;
-            this.notifyType = conf.notifyType;
-            this.finishNotifyType = conf.finishNotifyType;
-
-            this.flowType = conf.flowType;
+            this.conf = c;
 
             this.Text = conf.name + "单";
             this.label_title.Text = this.Text;
-            this.code = conf.code;
-            this.label2.Text = conf.date;
+            this.label2.Text = conf.business+"时间:";
             this.label_customer.Text = conf.customer;
+            this.label_thisPayed.Text = conf.productDirection == 1 ? "我方本次付款(-):" : "我方本次收款(+):";
+            this.label_arrears.Text =  conf.arrearsDirection==1? "我方以上欠款:":"对方以上欠款:";
+            this.label1_accumulative.Text = conf.arrearsDirection == 1 ? "我方累计欠款:" : "对方累计欠款:";
 
             this.cirDao = cirDao;
 
@@ -72,7 +66,10 @@ namespace LocalERP.WinForm
 
             this.textBox_cutoff.TextChanged += new EventHandler(textBox_cutoff_TextChanged);
             this.textBox_realTotal.TextChanged += new EventHandler(textBox_realTotal_TextChanged);
-            this.textBox_thisPayed.TextChanged += new EventHandler(textBox_thisPayed_TextChanged);
+            this.textBox_realTotal.TextChanged += new EventHandler(setAccumulative);
+
+            this.textBox_previousArrears.TextChanged += new EventHandler(setAccumulative);
+            this.textBox_thisPayed.TextChanged += new EventHandler(setAccumulative);
 
             initCirculation();
         }
@@ -99,16 +96,13 @@ namespace LocalERP.WinForm
         private bool cutoffNeedReCaculate = true;
         private bool realTotalNeedRecaculate = true;
 
-        private bool previousArrearNeedChanged = true;
-        private bool thisPayedNeedChanged = true;
-
         private void initCirculation()
         {
             if (openMode == 0)
             {
                 switchMode(openMode);
-                int max = cirDao.getMaxCode(code);
-                this.textBox_serial.Text = string.Format("{0}-{1}-{2:0000}", code, DateTime.Now.ToString("yyyyMMdd"), max+1);
+                int max = cirDao.getMaxCode(conf.code);
+                this.textBox_serial.Text = string.Format("{0}-{1}-{2:0000}", conf.code, DateTime.Now.ToString("yyyyMMdd"), max + 1);
                 this.dateTime_sellTime.Value = DateTime.Now;
                 this.textBox_comment.Text = null;
                 this.lookupText1.LookupArg = null;
@@ -135,8 +129,6 @@ namespace LocalERP.WinForm
             this.textBox_serial.Text = circulation.Code;
             this.dateTime_sellTime.Value = circulation.CirculationTime;
             this.textBox_comment.Text = circulation.Comment;
-            this.lookupText1.LookupArg = new LookupArg(circulation.CustomerID, circulation.CustomerName);
-            this.lookupText1.Text_Lookup = circulation.CustomerName;
             this.textBox_operator.Text = circulation.Oper;
 
             this.dataGridView2[1, 0].Value = circulation.Total;
@@ -144,10 +136,14 @@ namespace LocalERP.WinForm
             //textbox_cutoff是自动计算的，类似textbox_accumulative
             this.textBox_realTotal.Text = circulation.RealTotal.ToString();
             
+            //这个时候有重置previousArrears
+            this.lookupText1.LookupArg = new LookupArg(circulation.CustomerID, circulation.CustomerName);
+            this.lookupText1.Text_Lookup = circulation.CustomerName;
+
             //如果未审核，欠款有可能变
-            if(circulation.Status <= 1)
+            if (circulation.Status > 1)
                 this.textBox_previousArrears.Text = circulation.PreviousArrears.ToString();
-            
+
             this.textBox_thisPayed.Text = circulation.ThisPayed.ToString();
             
             this.backgroundWorker.RunWorkerAsync(circulation.ID);
@@ -314,8 +310,8 @@ namespace LocalERP.WinForm
         {
             circulation = new ProductCirculation();
             circulation.ID = circulationID;
-            circulation.Type = (int)type;
-            circulation.FlowType = flowType;
+            circulation.Type = (int)conf.type;
+            circulation.FlowType = conf.productDirection;
 
             string name;
             if (ValidateUtility.getName(this.textBox_serial, this.errorProvider1, out name) == false)
@@ -419,7 +415,7 @@ namespace LocalERP.WinForm
 
             //so important: if edit ,it should be refresh also, because edit will del exist item and add new item
 
-            this.invokeUpdateNotify(notifyType);
+            this.invokeUpdateNotify(conf.notifyType);
         }
 
         //审核
@@ -452,7 +448,7 @@ namespace LocalERP.WinForm
             foreach (ProductCirculationRecord record in records)
             {
                 int leftNum = cirDao.getProductDao().FindNumByID(record.ProductID);
-                int newLeftNum = leftNum + flowType * record.TotalNum;
+                int newLeftNum = leftNum + conf.productDirection * record.TotalNum;
                 cirDao.getProductDao().UpdateNum(record.ProductID, newLeftNum);
             }
 
@@ -466,7 +462,7 @@ namespace LocalERP.WinForm
 
             // 使用“移动加权平均法”，只有采购才需要重新计算
             // http://blog.sina.com.cn/s/blog_552cccd7010002rt.html
-            if (this.type == ProductCirculation.CirculationTypeConf_Purchase.type)
+            if (this.conf.type == ProductCirculation.CirculationTypeConf_Purchase.type)
             {
                 // 重新计算产品的平均成本，并更新到数据库
                 ProductStainless product_stainless_obj = new ProductStainless();
@@ -480,7 +476,7 @@ namespace LocalERP.WinForm
             openMode = 4;
             this.switchMode(4);
 
-            this.invokeUpdateNotify(this.finishNotifyType);
+            this.invokeUpdateNotify(this.conf.finishNotifyType);
             
         }
 
@@ -613,9 +609,9 @@ namespace LocalERP.WinForm
         {
             this.realTotalNeedRecaculate = false;
             if (this.cutoffNeedReCaculate == true) {
-                double realTotal = 0;
+                double realTotal = 0, total = 0;
                 double.TryParse(this.textBox_realTotal.Text, out realTotal);
-                double total = (double)this.dataGridView2[1, 0].Value;
+                ValidateUtility.getDouble(this.dataGridView2[1, 0], out total);
                 if(total != 0)
                     this.textBox_cutoff.Text = string.Format("{0}", realTotal / total * 100);
             }
@@ -625,42 +621,25 @@ namespace LocalERP.WinForm
 
         private void lookupText1_valueSetted(object sender, LookupArg arg)
         {
-            Customer customer = CustomerDao.getInstance().FindByID((int)arg.Value);
-            this.textBox_previousArrears.Text = customer.arrear.ToString();
+            if (arg != null)
+            {
+                Customer customer = CustomerDao.getInstance().FindByID((int)arg.Value);
+                this.textBox_previousArrears.Text = (this.conf.arrearsDirection * customer.arrear).ToString();
+            }
+            else
+                this.textBox_previousArrears.Text = "";
+
             resetNeedSave(true);
         }
 
-        private void setAccumulative()
+        private void setAccumulative(object sender, EventArgs e)
         {
-            double arrear, pay;
+            double arrear, pay, realTotal;
             double.TryParse(this.textBox_previousArrears.Text, out arrear);
             double.TryParse(this.textBox_thisPayed.Text, out pay);
-            double accumulative = arrear - pay;
-            this.textBox_accumulative.Text = accumulative.ToString();
-        }
-
-        private void textBox_previousArrears_TextChanged(object sender, EventArgs e)
-        {
-            this.previousArrearNeedChanged = false;
-
-            if (this.thisPayedNeedChanged == true)
-            {
-                this.setAccumulative();
-            }
-
-            this.previousArrearNeedChanged = true;
-        }
-
-        private void textBox_thisPayed_TextChanged(object sender, EventArgs e)
-        {
-            this.thisPayedNeedChanged = false;
-
-            if (this.previousArrearNeedChanged == true)
-            {
-                this.setAccumulative();
-            }
-
-            this.thisPayedNeedChanged = true;
+            double.TryParse(this.textBox_realTotal.Text, out realTotal);
+            double accumulative = conf.arrearsDirection * arrear + conf.productDirection * realTotal - conf.arrearsDirection * pay;
+            this.textBox_accumulative.Text = (conf.arrearsDirection * accumulative).ToString();
         }
     }
 }
