@@ -141,11 +141,11 @@ namespace LocalERP.WinForm
             return queryLibForm;
         }
 
-        public override QueryDetailForm getQueryDetailForm()
+        public override QueryProductDetailForm getQueryDetailForm()
         {
             if (queryDetailForm == null || queryDetailForm.IsDisposed)
             {
-                queryDetailForm = new QueryDetailForm();
+                queryDetailForm = new QueryProductDetailForm();
                 queryDetailForm.initVersions(getVersions(),
                     UpdateType.PurchaseFinishUpdate, UpdateType.SellFinishUpdate, UpdateType.LibFinishUpdate, UpdateType.ProductUpdate, UpdateType.CustomerUpdate);
 

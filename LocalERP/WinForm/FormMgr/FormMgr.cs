@@ -162,8 +162,8 @@ namespace LocalERP.WinForm
         public abstract QueryLibForm getQueryLibForm();
 
         //product detail query form
-        protected QueryDetailForm queryDetailForm = null;
-        public abstract QueryDetailForm getQueryDetailForm();
+        protected QueryProductDetailForm queryDetailForm = null;
+        public abstract QueryProductDetailForm getQueryDetailForm();
 
         // 销售利润查询表
         protected QuerySellProfitForm querySellProfitForm = null;

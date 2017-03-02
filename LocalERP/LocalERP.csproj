@@ -212,11 +212,11 @@
     <Compile Include="WinForm\Query\QuerySellProfitForm.Designer.cs">
       <DependentUpon>QuerySellProfitForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="WinForm\Query\QueryDetailForm.cs">
+    <Compile Include="WinForm\Query\QueryProductDetailForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="WinForm\Query\QueryDetailForm.Designer.cs">
-      <DependentUpon>QueryDetailForm.cs</DependentUpon>
+    <Compile Include="WinForm\Query\QueryProductDetailForm.Designer.cs">
+      <DependentUpon>QueryProductDetailForm.cs</DependentUpon>
     </Compile>
     <Compile Include="WinForm\Query\QueryLibForm.cs">
       <SubType>Form</SubType>
@@ -253,6 +253,18 @@
     </Compile>
     <Compile Include="WinForm\Query\ProductStatisticForm.Designer.cs">
       <DependentUpon>ProductStatisticForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WinForm\Query\QueryProductClothesDetailForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WinForm\Query\QueryProductClothesDetailForm.Designer.cs">
+      <DependentUpon>QueryProductClothesDetailForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WinForm\Query\QueryProductStainlessDetailForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WinForm\Query\QueryProductStainlessDetailForm.Designer.cs">
+      <DependentUpon>QueryProductStainlessDetailForm.cs</DependentUpon>
     </Compile>
     <Compile Include="WinForm\System\LoadingForm.cs">
       <SubType>Form</SubType>
@@ -410,8 +422,8 @@
       <DependentUpon>QuerySellProfitForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForm\Query\QueryDetailForm.resx">
-      <DependentUpon>QueryDetailForm.cs</DependentUpon>
+    <EmbeddedResource Include="WinForm\Query\QueryProductDetailForm.resx">
+      <DependentUpon>QueryProductDetailForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForm\Query\QueryLibForm.resx">
@@ -436,6 +448,14 @@
     </EmbeddedResource>
     <EmbeddedResource Include="WinForm\Query\ProductStatisticForm.resx">
       <DependentUpon>ProductStatisticForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForm\Query\QueryProductClothesDetailForm.resx">
+      <DependentUpon>QueryProductClothesDetailForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForm\Query\QueryProductStainlessDetailForm.resx">
+      <DependentUpon>QueryProductStainlessDetailForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForm\System\LoadingForm.resx">

@@ -13,14 +13,14 @@ using LocalERP.DataAccess.Utility;
 
 namespace LocalERP.WinForm
 {
-    public partial class QueryDetailForm : MyDockContent
+    public partial class QueryProductStainlessDetailForm : MyDockContent
     {
-        public QueryDetailForm()
+        public QueryProductStainlessDetailForm()
         {
             InitializeComponent();
         }
 
-        private void ProductSellForm_Load(object sender, EventArgs e)
+        private void QueryProductDetailForm_Load(object sender, EventArgs e)
         {
             DateTime dateTime = DateTime.Now;
             this.dateTimePicker3.Value = dateTime.AddMonths(-1);

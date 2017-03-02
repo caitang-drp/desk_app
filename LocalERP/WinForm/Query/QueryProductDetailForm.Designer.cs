@@ -1,6 +1,6 @@
 ﻿namespace LocalERP.WinForm
 {
-    partial class QueryDetailForm
+    partial class QueryProductDetailForm
     {
         /// <summary>
         /// 必需的设计器变量。
@@ -367,7 +367,7 @@
             this.Name = "QueryDetailForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "明细列表";
-            this.Load += new System.EventHandler(this.ProductSellForm_Load);
+            this.Load += new System.EventHandler(this.QueryProductDetailForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
