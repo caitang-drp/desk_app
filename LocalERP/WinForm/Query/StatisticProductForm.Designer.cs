@@ -1,6 +1,6 @@
 ﻿namespace LocalERP.WinForm
 {
-    partial class ProductStatisticForm
+    partial class StatisticProductForm
     {
         /// <summary>
         /// 必需的设计器变量。
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ProductStatisticForm));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StatisticProductForm));
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.button_search = new System.Windows.Forms.Button();
@@ -239,16 +239,16 @@
         private System.Windows.Forms.ImageList imageList1;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.Button button_search;
-        private System.Windows.Forms.DateTimePicker dateTimePicker4;
-        private System.Windows.Forms.DateTimePicker dateTimePicker3;
+        protected System.Windows.Forms.DateTimePicker dateTimePicker4;
+        protected System.Windows.Forms.DateTimePicker dateTimePicker3;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
-        private MyDataGridView dataGridView1;
-        private System.Windows.Forms.ComboBox comboBox1;
+        protected MyDataGridView dataGridView1;
+        protected System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label_title;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox comboBox2;
+        protected System.Windows.Forms.ComboBox comboBox2;
         private System.Windows.Forms.Label label_notice;
     }
 }

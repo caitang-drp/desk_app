@@ -123,7 +123,7 @@ namespace LocalERP.WinForm
                     FormSingletonFactory.getInstance().getQueryLibForm().Show(this.dockPanel1);
                     break;
                 case DataUtility.QUERY_PRODUCT_DETAIL:
-                    FormSingletonFactory.getInstance().getQueryDetailForm().Show(this.dockPanel1);
+                    FormSingletonFactory.getInstance().getQueryProductDetailForm().Show(this.dockPanel1);
                     break;
                 case DataUtility.STATISTIC_PRODUCT:
                     FormSingletonFactory.getInstance().getProductStatisticForm().Show(this.dockPanel1);

@@ -345,6 +345,7 @@
             this.linkLabel14.TabIndex = 43;
             this.linkLabel14.TabStop = true;
             this.linkLabel14.Text = "生产单据列表";
+            this.linkLabel14.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel_LinkClicked);
             // 
             // linkLabel17
             // 

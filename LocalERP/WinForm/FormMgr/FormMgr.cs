@@ -13,15 +13,6 @@ namespace LocalERP.WinForm
 {
     public abstract class FormMgr
     {
-        //singleton
-        /*private static FormMgr formMgr;
-        public static FormMgr getInstance()
-        {
-            if (formMgr == null)
-                formMgr = new FormMgr();
-            return formMgr;
-        }*/
-
         //updateVersion存放各种业务数据的版本，数值越高，数据越新
         //如果Form的数据版本低于updateVersion，则显示窗口时需要刷新
         //这个解决多窗口数据同步问题，如果有窗口数据更新了，其他相关窗口可以同步更新
@@ -162,16 +153,16 @@ namespace LocalERP.WinForm
         public abstract QueryLibForm getQueryLibForm();
 
         //product detail query form
-        protected QueryProductDetailForm queryDetailForm = null;
-        public abstract QueryProductDetailForm getQueryDetailForm();
+        protected QueryProductDetailForm queryProductDetailForm = null;
+        public abstract QueryProductDetailForm getQueryProductDetailForm();
 
         // 销售利润查询表
         protected QuerySellProfitForm querySellProfitForm = null;
         public abstract QuerySellProfitForm getQuerySellProfitForm();
 
         //product statistic form
-        protected ProductStatisticForm productStatisticForm = null;
-        public abstract ProductStatisticForm getProductStatisticForm();
+        protected StatisticProductForm productStatisticForm = null;
+        public abstract StatisticProductForm getProductStatisticForm();
 
         /******************** data setting********************************/
         //product category item form

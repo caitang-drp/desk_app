@@ -141,22 +141,22 @@ namespace LocalERP.WinForm
             return queryLibForm;
         }
 
-        public override QueryProductDetailForm getQueryDetailForm()
+        public override QueryProductDetailForm getQueryProductDetailForm()
         {
-            if (queryDetailForm == null || queryDetailForm.IsDisposed)
+            if (queryProductDetailForm == null || queryProductDetailForm.IsDisposed)
             {
-                queryDetailForm = new QueryProductDetailForm();
-                queryDetailForm.initVersions(getVersions(),
+                queryProductDetailForm = new QueryProductDetailForm();
+                queryProductDetailForm.initVersions(getVersions(),
                     UpdateType.PurchaseFinishUpdate, UpdateType.SellFinishUpdate, UpdateType.LibFinishUpdate, UpdateType.ProductUpdate, UpdateType.CustomerUpdate);
 
-                appendEvent(queryDetailForm);
+                appendEvent(queryProductDetailForm);
             }
-            return queryDetailForm;
+            return queryProductDetailForm;
         }
 
         public override QuerySellProfitForm getQuerySellProfitForm()
         {
-            if (queryDetailForm == null || querySellProfitForm.IsDisposed)
+            if (queryProductDetailForm == null || querySellProfitForm.IsDisposed)
             {
                 querySellProfitForm = new QuerySellProfitForm();
                 querySellProfitForm.initVersions(getVersions(),
@@ -167,11 +167,11 @@ namespace LocalERP.WinForm
             return querySellProfitForm;
         }
 
-        public override ProductStatisticForm getProductStatisticForm()
+        public override StatisticProductForm getProductStatisticForm()
         {
             if (productStatisticForm == null || productStatisticForm.IsDisposed)
             {
-                productStatisticForm = new ProductStatisticForm();
+                productStatisticForm = new StatisticProductForm();
                 productStatisticForm.initVersions(getVersions(),
                     UpdateType.PurchaseFinishUpdate, UpdateType.SellFinishUpdate, UpdateType.LibFinishUpdate, UpdateType.ProductUpdate, UpdateType.CustomerUpdate);
                 appendEvent(productStatisticForm);

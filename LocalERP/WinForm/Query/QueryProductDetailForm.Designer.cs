@@ -47,25 +47,16 @@
             this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridView1 = new LocalERP.WinForm.MyDataGridView();
-            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.product = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.color = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.size = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.num = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.code = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.type = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.customer = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.time = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.status = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.textBox_product = new System.Windows.Forms.TextBox();
             this.textBox_customer = new System.Windows.Forms.TextBox();
+            this.label_notice = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // dateTimePicker2
             // 
             this.dateTimePicker2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.dateTimePicker2.Location = new System.Drawing.Point(667, 14);
+            this.dateTimePicker2.Location = new System.Drawing.Point(797, 14);
             this.dateTimePicker2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dateTimePicker2.Name = "dateTimePicker2";
             this.dateTimePicker2.Size = new System.Drawing.Size(118, 23);
@@ -74,7 +65,7 @@
             // dateTimePicker1
             // 
             this.dateTimePicker1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.dateTimePicker1.Location = new System.Drawing.Point(472, 14);
+            this.dateTimePicker1.Location = new System.Drawing.Point(602, 14);
             this.dateTimePicker1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(119, 23);
@@ -83,7 +74,7 @@
             // button1
             // 
             this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.Location = new System.Drawing.Point(790, 14);
+            this.button1.Location = new System.Drawing.Point(920, 14);
             this.button1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(47, 23);
@@ -97,7 +88,7 @@
             this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.AutoSize = true;
             this.label2.BackColor = System.Drawing.SystemColors.Control;
-            this.label2.Location = new System.Drawing.Point(601, 19);
+            this.label2.Location = new System.Drawing.Point(731, 19);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(70, 14);
             this.label2.TabIndex = 23;
@@ -108,7 +99,7 @@
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.SystemColors.Control;
-            this.label1.Location = new System.Drawing.Point(406, 20);
+            this.label1.Location = new System.Drawing.Point(536, 20);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(70, 14);
             this.label1.TabIndex = 21;
@@ -119,7 +110,7 @@
             this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label3.AutoSize = true;
             this.label3.BackColor = System.Drawing.SystemColors.Control;
-            this.label3.Location = new System.Drawing.Point(78, 18);
+            this.label3.Location = new System.Drawing.Point(208, 18);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(70, 14);
             this.label3.TabIndex = 25;
@@ -130,7 +121,7 @@
             this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label5.AutoSize = true;
             this.label5.BackColor = System.Drawing.SystemColors.Control;
-            this.label5.Location = new System.Drawing.Point(406, 20);
+            this.label5.Location = new System.Drawing.Point(536, 20);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(70, 14);
             this.label5.TabIndex = 21;
@@ -141,7 +132,7 @@
             this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label6.AutoSize = true;
             this.label6.BackColor = System.Drawing.SystemColors.Control;
-            this.label6.Location = new System.Drawing.Point(601, 19);
+            this.label6.Location = new System.Drawing.Point(731, 19);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(70, 14);
             this.label6.TabIndex = 23;
@@ -150,7 +141,7 @@
             // button2
             // 
             this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button2.Location = new System.Drawing.Point(790, 14);
+            this.button2.Location = new System.Drawing.Point(920, 14);
             this.button2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(47, 23);
@@ -162,7 +153,7 @@
             // dateTimePicker3
             // 
             this.dateTimePicker3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.dateTimePicker3.Location = new System.Drawing.Point(472, 14);
+            this.dateTimePicker3.Location = new System.Drawing.Point(602, 14);
             this.dateTimePicker3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dateTimePicker3.Name = "dateTimePicker3";
             this.dateTimePicker3.Size = new System.Drawing.Size(119, 23);
@@ -171,7 +162,7 @@
             // dateTimePicker4
             // 
             this.dateTimePicker4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.dateTimePicker4.Location = new System.Drawing.Point(667, 14);
+            this.dateTimePicker4.Location = new System.Drawing.Point(797, 14);
             this.dateTimePicker4.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dateTimePicker4.Name = "dateTimePicker4";
             this.dateTimePicker4.Size = new System.Drawing.Size(118, 23);
@@ -182,7 +173,7 @@
             this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label8.AutoSize = true;
             this.label8.BackColor = System.Drawing.SystemColors.Control;
-            this.label8.Location = new System.Drawing.Point(261, 18);
+            this.label8.Location = new System.Drawing.Point(391, 18);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(42, 14);
             this.label8.TabIndex = 27;
@@ -236,17 +227,6 @@
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView1.BackgroundColor = System.Drawing.Color.White;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.ID,
-            this.product,
-            this.color,
-            this.size,
-            this.num,
-            this.code,
-            this.type,
-            this.customer,
-            this.time,
-            this.status});
             this.dataGridView1.Location = new System.Drawing.Point(0, 64);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
@@ -255,81 +235,13 @@
             this.dataGridView1.RowTemplate.DefaultCellStyle.SelectionForeColor = System.Drawing.Color.Black;
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(849, 434);
+            this.dataGridView1.Size = new System.Drawing.Size(979, 482);
             this.dataGridView1.TabIndex = 29;
-            // 
-            // ID
-            // 
-            this.ID.HeaderText = "ID";
-            this.ID.Name = "ID";
-            this.ID.ReadOnly = true;
-            this.ID.Width = 60;
-            // 
-            // product
-            // 
-            this.product.HeaderText = "商品";
-            this.product.Name = "product";
-            this.product.ReadOnly = true;
-            this.product.Width = 160;
-            // 
-            // color
-            // 
-            this.color.HeaderText = "颜色";
-            this.color.Name = "color";
-            this.color.ReadOnly = true;
-            this.color.Width = 60;
-            // 
-            // size
-            // 
-            this.size.HeaderText = "尺码";
-            this.size.Name = "size";
-            this.size.ReadOnly = true;
-            this.size.Width = 60;
-            // 
-            // num
-            // 
-            this.num.HeaderText = "数量";
-            this.num.Name = "num";
-            this.num.ReadOnly = true;
-            this.num.Width = 80;
-            // 
-            // code
-            // 
-            this.code.HeaderText = "单据编号";
-            this.code.Name = "code";
-            this.code.ReadOnly = true;
-            this.code.Width = 160;
-            // 
-            // type
-            // 
-            this.type.HeaderText = "操作类型";
-            this.type.Name = "type";
-            this.type.ReadOnly = true;
-            // 
-            // customer
-            // 
-            this.customer.HeaderText = "往来单位";
-            this.customer.Name = "customer";
-            this.customer.ReadOnly = true;
-            // 
-            // time
-            // 
-            this.time.HeaderText = "时间";
-            this.time.Name = "time";
-            this.time.ReadOnly = true;
-            this.time.Width = 180;
-            // 
-            // status
-            // 
-            this.status.HeaderText = "状态";
-            this.status.Name = "status";
-            this.status.ReadOnly = true;
-            this.status.Visible = false;
             // 
             // textBox_product
             // 
             this.textBox_product.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox_product.Location = new System.Drawing.Point(300, 14);
+            this.textBox_product.Location = new System.Drawing.Point(430, 14);
             this.textBox_product.Name = "textBox_product";
             this.textBox_product.Size = new System.Drawing.Size(100, 23);
             this.textBox_product.TabIndex = 30;
@@ -337,16 +249,28 @@
             // textBox_customer
             // 
             this.textBox_customer.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox_customer.Location = new System.Drawing.Point(146, 14);
+            this.textBox_customer.Location = new System.Drawing.Point(276, 14);
             this.textBox_customer.Name = "textBox_customer";
             this.textBox_customer.Size = new System.Drawing.Size(100, 23);
             this.textBox_customer.TabIndex = 31;
             // 
-            // QueryDetailForm
+            // label_notice
+            // 
+            this.label_notice.AutoSize = true;
+            this.label_notice.ForeColor = System.Drawing.Color.Red;
+            this.label_notice.Location = new System.Drawing.Point(12, 17);
+            this.label_notice.Name = "label_notice";
+            this.label_notice.Size = new System.Drawing.Size(168, 14);
+            this.label_notice.TabIndex = 54;
+            this.label_notice.Text = "数据有更新, 请重新统计!";
+            this.label_notice.Visible = false;
+            // 
+            // QueryProductDetailForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(849, 498);
+            this.ClientSize = new System.Drawing.Size(979, 546);
+            this.Controls.Add(this.label_notice);
             this.Controls.Add(this.textBox_customer);
             this.Controls.Add(this.textBox_product);
             this.Controls.Add(this.dataGridView1);
@@ -364,7 +288,7 @@
             this.Controls.Add(this.label1);
             this.Font = new System.Drawing.Font("宋体", 10F);
             this.HideOnClose = true;
-            this.Name = "QueryDetailForm";
+            this.Name = "QueryProductDetailForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "明细列表";
             this.Load += new System.EventHandler(this.QueryProductDetailForm_Load);
@@ -385,8 +309,8 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.DateTimePicker dateTimePicker3;
-        private System.Windows.Forms.DateTimePicker dateTimePicker4;
+        protected System.Windows.Forms.DateTimePicker dateTimePicker3;
+        protected System.Windows.Forms.DateTimePicker dateTimePicker4;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
@@ -394,18 +318,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
-        private MyDataGridView dataGridView1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn product;
-        private System.Windows.Forms.DataGridViewTextBoxColumn color;
-        private System.Windows.Forms.DataGridViewTextBoxColumn size;
-        private System.Windows.Forms.DataGridViewTextBoxColumn num;
-        private System.Windows.Forms.DataGridViewTextBoxColumn code;
-        private System.Windows.Forms.DataGridViewTextBoxColumn type;
-        private System.Windows.Forms.DataGridViewTextBoxColumn customer;
-        private System.Windows.Forms.DataGridViewTextBoxColumn time;
-        private System.Windows.Forms.DataGridViewTextBoxColumn status;
-        private System.Windows.Forms.TextBox textBox_product;
-        private System.Windows.Forms.TextBox textBox_customer;
+        protected MyDataGridView dataGridView1;
+        protected System.Windows.Forms.TextBox textBox_product;
+        protected System.Windows.Forms.TextBox textBox_customer;
+        private System.Windows.Forms.Label label_notice;
     }
 }

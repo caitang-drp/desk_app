@@ -20,7 +20,7 @@ namespace LocalERP.WinForm
             InitializeComponent();
         }
 
-        private void QueryProductDetailForm_Load(object sender, EventArgs e)
+        protected void QueryProductDetailForm_Load(object sender, EventArgs e)
         {
             DateTime dateTime = DateTime.Now;
             this.dateTimePicker3.Value = dateTime.AddMonths(-1);

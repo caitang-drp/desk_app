@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dataGridView1 = new LocalERP.WinForm.MyDataGridView();
             this.check = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -126,7 +126,7 @@
             this.sellTime.HeaderText = "时间";
             this.sellTime.Name = "sellTime";
             this.sellTime.ReadOnly = true;
-            this.sellTime.Width = 180;
+            this.sellTime.Width = 120;
             // 
             // type
             // 
@@ -143,8 +143,8 @@
             // 
             // realTotal
             // 
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.realTotal.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.realTotal.DefaultCellStyle = dataGridViewCellStyle1;
             this.realTotal.HeaderText = "金额/元";
             this.realTotal.Name = "realTotal";
             this.realTotal.ReadOnly = true;
@@ -238,6 +238,7 @@
             this.button_search.TabIndex = 24;
             this.button_search.Text = "查询";
             this.button_search.UseVisualStyleBackColor = true;
+            this.button_search.Visible = false;
             this.button_search.Click += new System.EventHandler(this.button1_Click);
             // 
             // label7

@@ -13,64 +13,86 @@ using LocalERP.DataAccess.Utility;
 
 namespace LocalERP.WinForm
 {
-    public partial class QueryProductStainlessDetailForm : MyDockContent
+    public partial class QueryProductStainlessDetailForm : QueryProductDetailForm
     {
-        public QueryProductStainlessDetailForm()
+        /*public QueryProductStainlessDetailForm():base()
         {
-            InitializeComponent();
+        }*/
+
+        protected override void initDataGridView()
+        {
+            
+            DataGridViewTextBoxColumn serial = new DataGridViewTextBoxColumn();
+            DataGridViewTextBoxColumn name = new DataGridViewTextBoxColumn();
+
+            DataGridViewTextBoxColumn type = new DataGridViewTextBoxColumn();
+            DataGridViewTextBoxColumn time = new DataGridViewTextBoxColumn();
+
+            DataGridViewTextBoxColumn num = new DataGridViewTextBoxColumn();
+            DataGridViewTextBoxColumn unit = new DataGridViewTextBoxColumn();
+            DataGridViewTextBoxColumn price = new DataGridViewTextBoxColumn();
+
+            DataGridViewTextBoxColumn customer = new DataGridViewTextBoxColumn();
+
+            serial.HeaderText = "货号";
+            serial.Name = "serial";
+            serial.Width = 70;
+
+            name.HeaderText = "货品名称";
+            name.Name = "name";
+            name.Width = 100;
+
+            type.HeaderText = "类型";
+            type.Name = "type";
+            type.Width = 80;
+
+            time.HeaderText = "时间";
+            time.Name = "time";
+            time.Width = 80;
+
+            num.HeaderText = "数量";
+            num.Name = "num";
+            num.Width = 60;
+
+            unit.HeaderText = "单位";
+            unit.Name = "unit";
+            unit.Width = 70;
+
+            customer.HeaderText = "往来单位";
+            customer.Name = "customer";
+            customer.Width = 100;
+
+            price.HeaderText = "单价/元";
+            price.Name = "price";
+            price.Width = 140;
+
+            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] 
+                { serial, name, type, time, num, unit, customer });
         }
 
-        private void QueryProductDetailForm_Load(object sender, EventArgs e)
-        {
-            DateTime dateTime = DateTime.Now;
-            this.dateTimePicker3.Value = dateTime.AddMonths(-1);
-
-            initList();
-        }
-
-        private void initList()
-        {
-            DataTable dataTable = ProductClothesCirculationSKURecordDao.getInstance().FindList(
-                this.dateTimePicker3.Value, this.dateTimePicker4.Value.AddDays(1), 0, 
-                this.textBox_product.Text, -1, this.textBox_customer.Text, -1);
+        protected override void initList()
+        {   
+            DataTable dataTable = ProductStainlessCirculationRecordDao.getInstance().FindList(
+                            this.dateTimePicker3.Value, this.dateTimePicker4.Value.AddDays(1), 0,
+                            this.textBox_product.Text, -1, this.textBox_customer.Text, -1);
             this.dataGridView1.Rows.Clear();
             foreach (DataRow dr in dataTable.Rows)
             {
                 int index = this.dataGridView1.Rows.Add();
-                this.dataGridView1.Rows[index].Cells["ID"].Value = dr["ProductCirculationSKURecord.ID"];
-                this.dataGridView1.Rows[index].Cells["product"].Value = dr["Product.Name"];
-                this.dataGridView1.Rows[index].Cells["color"].Value = dr["colorName"];
-                this.dataGridView1.Rows[index].Cells["size"].Value = dr["sizeName"];
-                int num = (int)dr["num"] * (int)dr["flowType"];
-                this.dataGridView1.Rows[index].Cells["num"].Value = num;
-                this.dataGridView1.Rows[index].Cells["code"].Value = dr["code"];
+
+                this.dataGridView1.Rows[index].Cells["serial"].Value = dr["serial"];
+                this.dataGridView1.Rows[index].Cells["name"].Value = dr["ProductStainless.name"];
+
                 int type = (int)(dr["type"]);
                 this.dataGridView1.Rows[index].Cells["type"].Value = ProductCirculation.CirculationTypeConfs[type - 1].name;
-                this.dataGridView1.Rows[index].Cells["customer"].Value = dr["circulation.name"];
-                this.dataGridView1.Rows[index].Cells["time"].Value = dr["circulationTime"];
-                /*this.dataGridView1.Rows[index].Cells["status"].Value = ProductCirculation.circulationStatusContext[(int)(dr["status"]) - 1];*/
+
+                this.dataGridView1.Rows[index].Cells["time"].Value = ((DateTime)dr["circulationTime"]).ToShortDateString();
+                int num = (int)dr["totalNum"];// *(int)dr["flowType"];
+                this.dataGridView1.Rows[index].Cells["num"].Value = num;
+                this.dataGridView1.Rows[index].Cells["unit"].Value = dr["unit"];
+
+                this.dataGridView1.Rows[index].Cells["customer"].Value = dr["circulation.name"];  
             }
-        }
-
-        /// <summary>
-        /// event
-        /// </summary>
-
-        public override void refresh()
-        {
-            this.initList();
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            initList();
-        }
-
-        private void dataGridView1_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
-        {
-            e.Handled = true;
-            e.PaintBackground(e.CellBounds, true);
-            e.PaintContent(e.CellBounds);
         }
     }
 }

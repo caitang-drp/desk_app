@@ -95,7 +95,7 @@ namespace LocalERP.WinForm
                         this.dataGridView1.Rows[index].Cells["customer"].Value = dr["name"];
 
 
-                    this.dataGridView1.Rows[index].Cells["sellTime"].Value = dr["circulationTime"];                    
+                    this.dataGridView1.Rows[index].Cells["sellTime"].Value = ((DateTime)dr["circulationTime"]).ToShortDateString();                    
                 }
             }
             catch(Exception ex) {
