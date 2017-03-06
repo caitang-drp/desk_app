@@ -93,6 +93,18 @@ namespace LocalERP.DataAccess.DataDAO
             return DbHelperAccess.executeQuery(commandText.ToString());
         }
 
+        public DataTable FindList(Category parent, string name)
+        {
+
+            StringBuilder commandText = new StringBuilder("select * from PayReceipt, Customer, CustomerCategory where PayReceipt.customer_id = Customer.ID and Customer.parent = CustomerCategory.ID");
+            if (parent != null)
+                commandText.AppendFormat("  and CustomerCategory.lft>={0} and CustomerCategory.rgt<={1}", parent.Left, parent.Right);
+
+            if (!string.IsNullOrEmpty(name))
+                commandText.AppendFormat(" and CustomerCategory.name like '%{0}%'", name);
+            return DbHelperAccess.executeQuery(commandText.ToString());
+        }
+
         public int getMaxCode(string code)
         {
             string commandText = string.Format("select max(serial) from PayReceipt where serial like '{0}-{1}-%'", code, DateTime.Now.ToString("yyyyMMdd"));

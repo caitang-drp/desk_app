@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Data;
+using System.Windows.Forms;
 
 namespace LocalERP.DataAccess.DataDAO
 {
@@ -138,6 +139,49 @@ namespace LocalERP.DataAccess.DataDAO
             }
 
             return categorys;
+        }
+
+        public void initTreeView(string tableName, TreeView tv)
+        {
+            tv.Nodes.Clear();
+            List<Category> categorys = CategoryDao.getInstance().FindByParentId(tableName, -1);
+            foreach (Category category in categorys)
+            {
+                tv.Nodes.Add(this.getNodeById(tableName, category.Id));
+            }
+            tv.ExpandAll();
+
+            if (tv.Nodes.Count > 0 && tv.Nodes[0].IsSelected == false)
+                tv.SelectedNode = tv.Nodes[0];
+        }
+
+        private TreeNode getNodeById(string tableName, int id)
+        {
+
+            Category category = CategoryDao.getInstance().FindById(tableName, id);
+
+            List<Category> childrenCategory = CategoryDao.getInstance().FindByParentId(tableName, category.Id);
+            TreeNode[] childrenNode = null;
+            if (childrenCategory != null && childrenCategory.Count > 0)
+            {
+                childrenNode = new TreeNode[childrenCategory.Count];
+                for (int i = 0; i < childrenNode.Length; i++)
+                    childrenNode[i] = getNodeById(tableName, childrenCategory[i].Id);
+            }
+
+            TreeNode node = null;
+            if (childrenNode != null)
+            {
+                node = new TreeNode(category.Name, childrenNode);
+                node.Name = category.Id.ToString();
+            }
+            else
+            {
+                node = new TreeNode(category.Name);
+                node.Name = category.Id.ToString();
+
+            }
+            return node;
         }
         
     }

@@ -130,6 +130,7 @@ namespace LocalERP.DataAccess.Data
 
         public static string[] circulationStatusContext = new string[] {"未审核","undefined","undefined", "已审核" };
 
+        //必须跟收付一致
         public enum CirculationType
         {
             purchase = 1, purchaseBack = 2, sell = 3, sellBack = 4, libOverflow = 5, libLoss = 6, easy=7
@@ -142,11 +143,11 @@ namespace LocalERP.DataAccess.Data
                 case CirculationType.purchase:
                     return "采购入库";
                 case CirculationType.purchaseBack:
-                    return "采购退库";
+                    return "采购退货";
                 case CirculationType.sell:
                     return "销售出库";
                 case CirculationType.sellBack:
-                    return "销售退库";
+                    return "销售退货";
                 case CirculationType.libLoss:
                     return "盘点报损";
                 case CirculationType.libOverflow:

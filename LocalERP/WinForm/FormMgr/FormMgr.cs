@@ -164,6 +164,20 @@ namespace LocalERP.WinForm
         protected StatisticProductForm productStatisticForm = null;
         public abstract StatisticProductForm getProductStatisticForm();
 
+        //customer detail form
+        private QueryCashDetailForm queryCashDetailForm = null;
+        public virtual QueryCashDetailForm getQueryCashDetailForm()
+        {
+            if (queryCashDetailForm == null || queryCashDetailForm.IsDisposed)
+            {
+                queryCashDetailForm = new QueryCashDetailForm(this.mainForm, DataUtility.QUERY_CASH_DETAIL);
+                queryCashDetailForm.initVersions(getVersions(), UpdateType.CustomerCategoryUpdate, 
+                    UpdateType.CustomerUpdate, UpdateType.PayReceiptFinishUpdate, UpdateType.PurchaseFinishUpdate, UpdateType.SellFinishUpdate);
+                appendEvent(queryCashDetailForm);
+            }
+            return queryCashDetailForm;
+        }
+
         /******************** data setting********************************/
         //product category item form
         protected CategoryItemForm productCIForm = null;

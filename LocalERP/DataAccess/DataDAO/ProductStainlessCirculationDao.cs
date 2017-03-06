@@ -73,6 +73,17 @@ namespace LocalERP.DataAccess.DataDAO
             }
         }
 
+        public DataTable FindList(Category parent, string name)
+        {
+            StringBuilder commandText = new StringBuilder("select * from ProductStainlessCirculation, Customer, CustomerCategory where ProductStainlessCirculation.customerID = Customer.ID and Customer.parent = CustomerCategory.ID");
+            if (parent != null)
+                commandText.AppendFormat("  and CustomerCategory.lft>={0} and CustomerCategory.rgt<={1}", parent.Left, parent.Right);
+
+            if (!string.IsNullOrEmpty(name))
+                commandText.AppendFormat(" and Customer.name like '%{0}%'", name);
+            return DbHelperAccess.executeQuery(commandText.ToString());
+        }
+
         //stone：需要看看会不会读错表
 
         // 只需要一个简单的查询语句，反正数据量很少，自己处理就是了

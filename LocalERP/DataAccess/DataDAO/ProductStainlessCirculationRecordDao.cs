@@ -92,6 +92,33 @@ namespace LocalERP.DataAccess.DataDAO
             return records;
         }
 
+        public DataTable FindList(DateTime startTime, DateTime endTime, int type, string product, int productID, string customer, int customerID)
+        {
+            StringBuilder commandText = new StringBuilder();
+            string temp = "select ProductStainlessCirculationRecord.*, ProductStainlessCirculation.code, ProductStainlessCirculation.circulationTime, ProductStainlessCirculation.status, ProductStainlessCirculation.type, ProductStainlessCirculation.flowType, ProductStainless.serial, ProductStainless.name, Customer.name"
+                 + " from ProductStainlessCirculationRecord, (select * from ProductStainlessCirculation left join Customer on Customer.ID = ProductStainlessCirculation.customerID ) circulation, ProductStainless"
+                 + " where ProductStainlessCirculationRecord.circulationID = ProductStainlessCirculation.ID"
+                 + " and ProductStainlessCirculationRecord.productID = ProductStainless.ID"
+                 + " and ProductStainlessCirculation.circulationTime between #{0}# and #{1}# and status = 4";
+
+            commandText.Append(string.Format(temp, startTime.ToString("yyyy-MM-dd"), endTime.ToString("yyyy-MM-dd")));
+            if (type > 0)
+                commandText.Append(string.Format(" and ProductStainlessCirculation.type between {0} and {1}", type, type + 1));
+
+            if (productID > 0)
+                commandText.Append(string.Format(" and ProductStainless.ID={0}", productID));
+            else if (!string.IsNullOrEmpty(product))
+                commandText.Append(string.Format(" and ProductStainless.name like '%{0}%'", product));
+
+            if (customerID > 0)
+                commandText.Append(string.Format(" and Customer.ID={0}", customerID));
+            else if (!string.IsNullOrEmpty(customer))
+                commandText.Append(string.Format(" and Customer.name like '%{0}%'", customer));
+
+            commandText.Append(" order by ProductStainlessCirculationRecord.ID desc");
+            return DbHelperAccess.executeQuery(commandText.ToString());
+        }
+
         public int FindCount(int productID)
         {
             string commandText = string.Format("select count(*) from ProductStainlessCirculationRecord where ProductStainlessCirculationRecord.productID = {0}", productID);

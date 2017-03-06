@@ -367,6 +367,7 @@ namespace LocalERP.WinForm
             return list;
         }
 
+        
         /// <summary>
         /// for event
         /// </summary>
@@ -454,6 +455,7 @@ namespace LocalERP.WinForm
 
             cirDao.UpdateStatus(circulationID, 4);
 
+            //PayReceiptDao.getInstance().Insert(payReceipt, out payReceiptID);
 
             ////////////////////////////////////////////////////////////////////////
             // œ»º∆À„¿˚»Û

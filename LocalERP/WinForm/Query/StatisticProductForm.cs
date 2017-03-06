@@ -85,21 +85,6 @@ namespace LocalERP.WinForm
             this.comboBox2.DisplayMember = "Value";
         }
 
-        public void initColumns(int typeIndex)
-        {
-            DataGridViewColumn[] columns = new DataGridViewColumn[columnNames[typeIndex].Length];
-            for (int i = 0; i < columnNames[typeIndex].Length; i++)
-            {
-                columns[i] = new DataGridViewTextBoxColumn();
-                columns[i].HeaderText = columnTexts[typeIndex][i];
-                columns[i].Name = columnNames[typeIndex][i];
-                columns[i].ReadOnly = true;
-                columns[i].Width = columnLengths[typeIndex][i];
-            }
-            this.dataGridView1.Columns.Clear();
-            this.dataGridView1.Columns.AddRange(columns);
-        }
-
         private void backgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
             statisticTypeEnum type = (statisticTypeEnum)this.comboBox1.SelectedValue;
@@ -223,7 +208,10 @@ namespace LocalERP.WinForm
 
         private void button_search_Click(object sender, EventArgs e)
         {
-            this.initColumns((int)(this.comboBox1.SelectedValue));
+            ControlUtility.initColumns(this.dataGridView1, 
+                columnNames[(int)(this.comboBox1.SelectedValue)],
+                columnTexts[(int)(this.comboBox1.SelectedValue)],
+                columnLengths[(int)(this.comboBox1.SelectedValue)]);
             backgroundWorker.RunWorkerAsync();
             this.invokeBeginLoadNotify();
         }
