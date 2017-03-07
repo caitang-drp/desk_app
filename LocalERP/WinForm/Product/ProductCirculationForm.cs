@@ -11,6 +11,7 @@ using LocalERP.UiDataProxy;
 using LocalERP.DataAccess.Utility;
 using LocalERP.WinForm.Utility;
 using System.IO;
+using gregn6Lib;
 
 namespace LocalERP.WinForm
 {
@@ -30,6 +31,18 @@ namespace LocalERP.WinForm
         protected bool recordChanged = false;
 
         private ProductCirculationDao cirDao;
+
+		//定义Grid++Report报表主对象
+		private GridppReport Report = new GridppReport();
+        // 明细报表的列
+		private IGRField product;
+		private IGRField cnt_one_piece;
+		private IGRField pieces;
+		private IGRField unit;
+		private IGRField cnt;
+		private IGRField price;
+		private IGRField sum_price;
+
         public ProductCirculationForm(CirculationTypeConf c, ProductCirculationDao cirDao)
         {
             InitializeComponent();
@@ -50,7 +63,6 @@ namespace LocalERP.WinForm
             this.cirDao = cirDao;
 
             initDatagridview(this.dataGridView1);
-
         }
 
         private void ProductCirculationForm_Load(object sender, EventArgs e)
@@ -473,16 +485,179 @@ namespace LocalERP.WinForm
             
         }
 
+        private string get_cus_type(ProductCirculation sell)
+        {
+            string cus_type = "客户";
+
+            // 采购
+            if (sell.Type == 1 || sell.Type == 2)
+            {
+                cus_type = "供应商";
+            }
+            // 销售
+            else if (sell.Type == 2 || sell.Type == 3)
+            {
+                cus_type = "客户";
+            }
+
+            return cus_type;
+        }
+
+        private void fill_records(List<ProductStainlessCirculationRecord> records)
+        {
+            // 处理 明细
+            foreach (ProductStainlessCirculationRecord record in records)
+            {
+                Report.DetailGrid.Recordset.Append();
+
+                if (record.QuantityPerPiece > 0 && record.Pieces > 0)
+                {
+                    cnt_one_piece.AsInteger = record.QuantityPerPiece;
+                    pieces.AsInteger = record.Pieces;
+                }
+
+                product.AsString = record.ProductName;
+                cnt.AsInteger = record.TotalNum;
+                unit.AsString = record.Unit;
+                price.AsFloat = record.Price;
+                sum_price.AsFloat = record.TotalPrice;
+
+                Report.DetailGrid.Recordset.Post();
+            }
+        }
+
+        private void load_with_customer(ProductCirculation sell, List<ProductStainlessCirculationRecord> records)
+        {
+            // 获取供应商的信息
+            Customer customer = CustomerDao.getInstance().FindByID(sell.CustomerID);
+            string customer_tel = customer.Tel;
+            string customer_addr = customer.Address;
+            string contract = "电话：" + customer_tel;
+
+            // (用户，供应商)
+            Report.ControlByName("customer").AsStaticBox.Text = get_cus_type(sell) + "：" + sell.CustomerName;
+
+            // (日期)
+            Report.ControlByName("date").AsStaticBox.Text = sell.CirculationTime.ToString("yyyy年MM月dd日");
+
+            // 右(单号)
+            Report.ControlByName("serial").AsStaticBox.Text = "NO." + sell.Code;
+
+            // 备注
+            Report.ControlByName("comment_text").AsStaticBox.Text = sell.Comment;
+
+            fill_records(records);
+        }
+
+        private void load_without_customer(ProductCirculation sell, List<ProductStainlessCirculationRecord> records)
+        {
+            // (日期)
+            Report.ControlByName("date").AsStaticBox.Text = sell.CirculationTime.ToString("yyyy年MM月dd日");
+
+            // 右(单号)
+            Report.ControlByName("serial").AsStaticBox.Text = "NO." + sell.Code;
+
+            // 备注
+            Report.ControlByName("comment_text").AsStaticBox.Text = sell.Comment;
+
+            // 处理 明细
+            fill_records(records);
+        }
+
+        public bool get_stainless_records(out List<ProductStainlessCirculationRecord> records)
+        {
+            records = new List<ProductStainlessCirculationRecord>();
+
+            int number = this.dataGridView1.RowCount;
+
+            double price, totalPrice;
+            int quantityPerPiece, pieces, num;
+            bool isQuantityNull = false, isPiecesNull = false;
+            string unit;
+            bool isInputCorrect = true;
+
+            foreach (DataGridViewRow row in this.dataGridView1.Rows)
+            {
+                object productID = null;
+
+                if (ValidateUtility.getLookupValue(row.Cells["product"], out productID) == false 
+                    || ValidateUtility.getInt(row.Cells["quantityPerPiece"], false, true, out quantityPerPiece, out isQuantityNull) == false
+                    || ValidateUtility.getInt(row.Cells["pieces"], false, true, out pieces, out isPiecesNull) == false
+                    || ValidateUtility.getInt(row.Cells["num"], true, true, out num) == false
+                    || ValidateUtility.getString(row.Cells["unit"], false, out unit) == false
+                    || ValidateUtility.getDouble(row.Cells["price"], out price) == false
+                    || ValidateUtility.getDouble(row.Cells["totalPrice"], out totalPrice) == false)
+                    return false;
+                ProductStainlessCirculationRecord record = new ProductStainlessCirculationRecord();
+
+                LookupArg arg = ((row.Cells["product"] as DataGridViewLookupCell).EditedValue as LookupArg);
+                record.ProductID = (int)arg.Value;
+                record.ProductName = arg.Text;
+                
+                record.QuantityPerPiece = quantityPerPiece;
+                record.QuantityNull = isQuantityNull;
+
+                record.Pieces = pieces;
+                record.PiecesNull = isPiecesNull;
+
+                record.TotalNum = num;
+                record.Unit = unit;
+                record.Price = price;
+                record.TotalPrice = totalPrice;
+                
+                records.Add(record);
+            }
+
+            return isInputCorrect;
+        }
+
+
+		//在C#中一次填入一条记录不能成功，只能使用一次将记录全部填充完的方式
+		private void ReportFetchRecord()
+		{
+            ProductCirculation sell;
+            List<ProductStainlessCirculationRecord> records;
+            this.getCirculation(out sell);
+            get_stainless_records(out records);
+
+            if (sell.CustomerID == -1)
+            {
+                load_without_customer(sell, records);
+            }
+            else
+            {
+                load_with_customer(sell, records);
+            }
+		}
+
+		private void ReportInitialize()
+		{
+			//在此记录下每个字段的接口指针
+			product = Report.FieldByName("product");
+			cnt_one_piece = Report.FieldByName("cnt_one_piece");
+			pieces = Report.FieldByName("pieces");
+			unit = Report.FieldByName("unit");
+			cnt = Report.FieldByName("cnt");
+			price = Report.FieldByName("price");
+			sum_price = Report.FieldByName("sum_price");
+		}
 
         private void toolStripButton_print_Click(object sender, EventArgs e)
         {
+            // 载入报表模板数据
+            string report_template_path = Application.StartupPath + "..\\..\\..\\grid++\\circulation_report.grf";
+            Report.LoadFromFile(report_template_path);
+            // 连接报表事件
+            Report.Initialize += new _IGridppReportEvents_InitializeEventHandler(ReportInitialize);
+            Report.FetchRecord += new _IGridppReportEvents_FetchRecordEventHandler(ReportFetchRecord);
+            // 打印预览
+            Report.PrintPreview(true);
+
+            /*
             //MessageBox.Show("系统暂未开放打印功能.", "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            ProductCirculation sell;
-            List<ProductCirculationRecord> records;
-            this.getCirculation(out sell);
-            this.getRecords(out records);
             ProductSellReportForm form = new ProductSellReportForm(sell, records);
             form.ShowDialog();
+            */
         }
 
         private DialogResult affirmQuit() {
