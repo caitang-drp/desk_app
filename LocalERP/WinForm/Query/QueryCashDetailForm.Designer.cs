@@ -105,9 +105,9 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(3, 8);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(70, 14);
+            this.label3.Size = new System.Drawing.Size(98, 14);
             this.label3.TabIndex = 42;
-            this.label3.Text = "明细信息:";
+            this.label3.Text = "收付明细信息:";
             // 
             // dataGridView1
             // 
@@ -188,7 +188,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "QueryCashDetailForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "收付明细查询";
+            this.Text = "收付明细";
             this.Load += new System.EventHandler(this.Form2_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel1.PerformLayout();

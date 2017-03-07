@@ -290,7 +290,7 @@
             this.HideOnClose = true;
             this.Name = "QueryProductDetailForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "明细列表";
+            this.Text = "进销明细";
             this.Load += new System.EventHandler(this.QueryProductDetailForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);

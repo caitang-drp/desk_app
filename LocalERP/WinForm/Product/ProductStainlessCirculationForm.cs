@@ -77,7 +77,7 @@ namespace LocalERP.WinForm
             price.Name = "price";
             price.Width = 140;
 
-            totalPrice.HeaderText = "总价/元";
+            totalPrice.HeaderText = "小计/元";
             totalPrice.Name = "totalPrice";
 
             dgv.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] { ID, check, product, quantityPerPiece, pieces, num, unit, price, totalPrice });

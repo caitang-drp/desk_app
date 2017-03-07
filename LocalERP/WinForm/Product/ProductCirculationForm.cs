@@ -83,6 +83,8 @@ namespace LocalERP.WinForm
             openMode = mode;
             circulationID = id;
             initCirculation();
+
+            this.lookupText1.Focus();
         }
 
         /// <summary>
@@ -237,19 +239,13 @@ namespace LocalERP.WinForm
             if (enable == false)
             {
                 cell.ReadOnly = true;
-                //cell.Style.ForeColor = System.Drawing.SystemColors.ControlDark;
                 cell.Style.BackColor = System.Drawing.SystemColors.Control;
                 cell.Style.SelectionBackColor = System.Drawing.SystemColors.Control;
-                //cell.Style.SelectionForeColor = System.Drawing.SystemColors.ControlDark;
             }
             else {
                 cell.ReadOnly = false;
-
                 cell.Style.BackColor = Color.White;
-                //cell.Style.ForeColor = Color.Black;
-
                 cell.Style.SelectionBackColor = Color.White;
-                //cell.Style.SelectionForeColor = Color.Black;
             }
         }
 
@@ -404,8 +400,6 @@ namespace LocalERP.WinForm
 
                 openMode = 1;
                 this.initCirculation();
-
-
             }
             catch (Exception ex)
             {
@@ -415,7 +409,6 @@ namespace LocalERP.WinForm
             }
 
             //so important: if edit ,it should be refresh also, because edit will del exist item and add new item
-
             this.invokeUpdateNotify(conf.notifyType);
         }
 
@@ -430,22 +423,20 @@ namespace LocalERP.WinForm
 
             ProductCirculation sell;
             this.getCirculation(out sell);
-
-            /*
-            if(flowType == -1)
-                foreach (ProductCirculationRecord record in records) {
-                    foreach (ProductClothesCirculationSKURecord skuRecord in record.SkuRecords) { 
-                        int leftNum = ProductSKUDao.getInstance().FindNumByID(skuRecord.ProductSKUID);
-                        if (skuRecord.Num > leftNum)
-                        {
-                            MessageBox.Show(string.Format("{0} ({1}) 库存不足, 审核失败!", record.ProductName, skuRecord.ProductSKU.getName()), "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            this.Enabled = true;
-                            return;
-                        }
+          
+            if(conf.productDirection == -1)
+                foreach (ProductCirculationRecord record in records)
+                {
+                    int leftNum = cirDao.getProductDao().FindNumByID(record.ProductID);
+                    if (record.TotalNum > leftNum)
+                    {
+                        MessageBox.Show(string.Format("{0} 库存不足,数量为{1},审核失败!", record.ProductName, leftNum), "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        this.Enabled = true;
+                        return;
                     }
                 }
-            */
 
+            //这个地方需要事务处理
             foreach (ProductCirculationRecord record in records)
             {
                 int leftNum = cirDao.getProductDao().FindNumByID(record.ProductID);
@@ -454,9 +445,9 @@ namespace LocalERP.WinForm
             }
 
             cirDao.UpdateStatus(circulationID, 4);
-
-            //PayReceiptDao.getInstance().Insert(payReceipt, out payReceiptID);
-
+            CustomerDao.getInstance().update_arrear(sell.CustomerID, conf.arrearsDirection * Convert.ToDouble(this.textBox_accumulative.Text));
+            //
+            
             ////////////////////////////////////////////////////////////////////////
             // 先计算利润
             SellProfit sell_profit_obj = new SellProfit();

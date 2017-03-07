@@ -29,7 +29,7 @@ namespace LocalERP.CrystalReport {
                 // Do nothing
             }
         }
-        
+        /*
         public override bool NewGenerator {
             get {
                 return true;
@@ -46,7 +46,7 @@ namespace LocalERP.CrystalReport {
             set {
                 // Do nothing
             }
-        }
+        }*/
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]

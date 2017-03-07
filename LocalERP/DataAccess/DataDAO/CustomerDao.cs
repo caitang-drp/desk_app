@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Data;
+using LocalERP.DataAccess.Utility;
 
 namespace LocalERP.DataAccess.DataDAO
 {
@@ -67,17 +68,13 @@ namespace LocalERP.DataAccess.DataDAO
         // 更新用户的收款，也就是我们欠供应商的钱
         public void update_receipt(int customer_id, double now)
         {
-            Customer customer = FindByID(customer_id);
-            customer.receipt = now;
-            Update(customer);
         }
 
-        // 更新用户的欠款
-        public void update_arrear(int customer_id, double now)
+        //目前只用到arrears，表示我方的欠款
+        public int update_arrear(int customer_id, double now)
         {
-            Customer customer = FindByID(customer_id);
-            customer.arrear = now;
-            Update(customer);
+            string commandText = string.Format("update Customer set arrear={0} where ID={1}", now, customer_id);
+            return DbHelperAccess.executeNonQuery(commandText);
         }
 
         public Customer FindByID(int ID)
@@ -96,23 +93,9 @@ namespace LocalERP.DataAccess.DataDAO
                 customer.Phone = dr["phone"] as string;
                 customer.Address = dr["address"] as string;
 
-                try
-                {
-                    customer.arrear = (double)dr["arrear"];
-                }
-                catch
-                {
-                    customer.arrear = 0.0;
-                }
-
-                try
-                {
-                    customer.receipt = (double)dr["receipt"];
-                }
-                catch
-                {
-                    customer.receipt = 0.0;
-                }
+                double arrear, receipt;
+                ValidateUtility.getDouble(dr, "arrear", out arrear);
+                customer.arrear = arrear;
 
                 return customer;
             }

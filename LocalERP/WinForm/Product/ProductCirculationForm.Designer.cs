@@ -120,7 +120,7 @@ namespace LocalERP.WinForm
             this.dateTime_sellTime.Margin = new System.Windows.Forms.Padding(2);
             this.dateTime_sellTime.Name = "dateTime_sellTime";
             this.dateTime_sellTime.Size = new System.Drawing.Size(150, 23);
-            this.dateTime_sellTime.TabIndex = 15;
+            this.dateTime_sellTime.TabIndex = 23;
             this.dateTime_sellTime.ValueChanged += new System.EventHandler(this.Controls_TextChanged);
             // 
             // dataGridView2
@@ -200,7 +200,7 @@ namespace LocalERP.WinForm
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.dataGridView1.Size = new System.Drawing.Size(792, 186);
-            this.dataGridView1.TabIndex = 5;
+            this.dataGridView1.TabIndex = 33;
             this.dataGridView1.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.dataGridView1_EditingControlShowing);
             // 
             // textBox_comment
@@ -209,7 +209,7 @@ namespace LocalERP.WinForm
             this.textBox_comment.Margin = new System.Windows.Forms.Padding(2);
             this.textBox_comment.Name = "textBox_comment";
             this.textBox_comment.Size = new System.Drawing.Size(154, 23);
-            this.textBox_comment.TabIndex = 18;
+            this.textBox_comment.TabIndex = 22;
             this.textBox_comment.TextChanged += new System.EventHandler(this.Controls_TextChanged);
             // 
             // textBox_serial
@@ -262,7 +262,7 @@ namespace LocalERP.WinForm
             this.textBox_realTotal.Location = new System.Drawing.Point(408, 9);
             this.textBox_realTotal.Name = "textBox_realTotal";
             this.textBox_realTotal.Size = new System.Drawing.Size(97, 23);
-            this.textBox_realTotal.TabIndex = 54;
+            this.textBox_realTotal.TabIndex = 41;
             this.textBox_realTotal.TextChanged += new System.EventHandler(this.Controls_TextChanged);
             // 
             // textBox_cutoff
@@ -272,7 +272,7 @@ namespace LocalERP.WinForm
             this.textBox_cutoff.Location = new System.Drawing.Point(135, 9);
             this.textBox_cutoff.Name = "textBox_cutoff";
             this.textBox_cutoff.Size = new System.Drawing.Size(97, 23);
-            this.textBox_cutoff.TabIndex = 61;
+            this.textBox_cutoff.TabIndex = 40;
             this.textBox_cutoff.Text = "100";
             this.textBox_cutoff.TextChanged += new System.EventHandler(this.Controls_TextChanged);
             // 
@@ -283,7 +283,7 @@ namespace LocalERP.WinForm
             this.textBox_thisPayed.Location = new System.Drawing.Point(135, 44);
             this.textBox_thisPayed.Name = "textBox_thisPayed";
             this.textBox_thisPayed.Size = new System.Drawing.Size(97, 23);
-            this.textBox_thisPayed.TabIndex = 53;
+            this.textBox_thisPayed.TabIndex = 42;
             this.textBox_thisPayed.TextChanged += new System.EventHandler(this.Controls_TextChanged);
             // 
             // textBox_previousArrears
@@ -294,7 +294,7 @@ namespace LocalERP.WinForm
             this.textBox_previousArrears.Location = new System.Drawing.Point(408, 45);
             this.textBox_previousArrears.Name = "textBox_previousArrears";
             this.textBox_previousArrears.Size = new System.Drawing.Size(98, 23);
-            this.textBox_previousArrears.TabIndex = 65;
+            this.textBox_previousArrears.TabIndex = 43;
             // 
             // label5
             // 
@@ -392,7 +392,7 @@ namespace LocalERP.WinForm
             this.textBox_operator.Margin = new System.Windows.Forms.Padding(2);
             this.textBox_operator.Name = "textBox_operator";
             this.textBox_operator.Size = new System.Drawing.Size(153, 23);
-            this.textBox_operator.TabIndex = 52;
+            this.textBox_operator.TabIndex = 24;
             this.textBox_operator.TextChanged += new System.EventHandler(this.Controls_TextChanged);
             // 
             // lookupText1
@@ -404,7 +404,7 @@ namespace LocalERP.WinForm
             this.lookupText1.Name = "lookupText1";
             this.lookupText1.SelectButtonBackGround = global::LocalERP.Properties.Resources.user16;
             this.lookupText1.Size = new System.Drawing.Size(153, 24);
-            this.lookupText1.TabIndex = 50;
+            this.lookupText1.TabIndex = 21;
             this.lookupText1.Text_Lookup = "单击选择...";
             this.lookupText1.Value_Lookup = null;
             this.lookupText1.valueSetted += new LocalERP.WinForm.LookupText.ValueSetted(this.lookupText1_valueSetted);
@@ -416,7 +416,7 @@ namespace LocalERP.WinForm
             this.button_del.Location = new System.Drawing.Point(147, 179);
             this.button_del.Name = "button_del";
             this.button_del.Size = new System.Drawing.Size(60, 24);
-            this.button_del.TabIndex = 40;
+            this.button_del.TabIndex = 32;
             this.button_del.Text = "删除";
             this.button_del.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.button_del.UseVisualStyleBackColor = true;
@@ -430,7 +430,7 @@ namespace LocalERP.WinForm
             this.button_add.Location = new System.Drawing.Point(88, 179);
             this.button_add.Name = "button_add";
             this.button_add.Size = new System.Drawing.Size(60, 24);
-            this.button_add.TabIndex = 39;
+            this.button_add.TabIndex = 31;
             this.button_add.Text = "添加";
             this.button_add.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.button_add.UseVisualStyleBackColor = true;
@@ -449,7 +449,7 @@ namespace LocalERP.WinForm
             this.toolStrip2.Location = new System.Drawing.Point(0, 0);
             this.toolStrip2.Name = "toolStrip2";
             this.toolStrip2.Size = new System.Drawing.Size(832, 37);
-            this.toolStrip2.TabIndex = 17;
+            this.toolStrip2.TabIndex = 10;
             this.toolStrip2.Text = "toolStrip2";
             // 
             // toolStripButton_save
@@ -605,7 +605,7 @@ namespace LocalERP.WinForm
             this.textBox_accumulative.Location = new System.Drawing.Point(667, 44);
             this.textBox_accumulative.Name = "textBox_accumulative";
             this.textBox_accumulative.Size = new System.Drawing.Size(97, 23);
-            this.textBox_accumulative.TabIndex = 60;
+            this.textBox_accumulative.TabIndex = 44;
             // 
             // label13
             // 

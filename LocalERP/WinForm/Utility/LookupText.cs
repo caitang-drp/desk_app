@@ -112,9 +112,9 @@ namespace LocalERP.WinForm
 
             this.LookupArg = arg;
             this.Text_Lookup = arg.Text;
-            
+            /*
             if (valueSetted != null)
-                this.valueSetted.Invoke(this, arg);
+                this.valueSetted.Invoke(this, arg);*/
         }
 
 		#endregion

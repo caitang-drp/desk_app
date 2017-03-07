@@ -236,5 +236,19 @@ namespace LocalERP.DataAccess.Utility
                 return true;
             }
         }
+
+        public static bool getDouble(DataRow dr, string name, out double result)
+        {
+            object drValue = dr[name];
+            if (drValue != null && !string.IsNullOrEmpty(drValue.ToString()))
+            {
+                return double.TryParse(drValue.ToString(), out result);
+            }
+            else
+            {
+                result = 0;
+                return true;
+            }
+        }
     }
 }

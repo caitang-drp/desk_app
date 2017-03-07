@@ -6,6 +6,9 @@ using System.Data;
 using LocalERP.DataAccess.DataDAO;
 using LocalERP.DataAccess.Data;
 using LocalERP.WinForm;
+using LocalERP.WinForm.Utility;
+using System.Drawing;
+using LocalERP.DataAccess.Utility;
 
 namespace LocalERP.UiDataProxy
 {
@@ -23,67 +26,16 @@ namespace LocalERP.UiDataProxy
         public override void initColumns(DataGridView dgv)
         {
             DataGridViewCheckBoxColumn check = new DataGridViewCheckBoxColumn();
-            DataGridViewTextBoxColumn ID = new DataGridViewTextBoxColumn();
-            DataGridViewTextBoxColumn name = new DataGridViewTextBoxColumn();
-            DataGridViewTextBoxColumn category = new DataGridViewTextBoxColumn();
-            DataGridViewTextBoxColumn tel = new DataGridViewTextBoxColumn();
-            DataGridViewTextBoxColumn phone = new DataGridViewTextBoxColumn();
-            DataGridViewTextBoxColumn address = new DataGridViewTextBoxColumn();
-            DataGridViewTextBoxColumn comment = new DataGridViewTextBoxColumn();
-
             check.HeaderText = "选择";
             check.Name = "check";
-            check.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            check.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             check.Width = 60;
-            // 
-            // ID
-            // 
-            ID.HeaderText = "ID";
-            ID.Name = "ID";
-            ID.ReadOnly = true;
-            ID.Width = 40;
-            // 
-            // name
-            // 
-            name.HeaderText = "名称";
-            name.Name = "name";
-            name.ReadOnly = true;
-            // 
-            // category
-            // 
-            category.HeaderText = "类别";
-            category.Name = "category";
-            category.ReadOnly = true;
-            category.Width = 90;
-            // 
-            // tel
-            // 
-            tel.HeaderText = "电话";
-            tel.Name = "tel";
-            tel.ReadOnly = true;
-            tel.Width = 80;
-            // 
-            // phone
-            // 
-            phone.HeaderText = "手机";
-            phone.Name = "phone";
-            phone.Width = 100;
-            // 
-            // address
-            // 
-            address.HeaderText = "地址";
-            address.Name = "address";
-            address.Width = 100;
-            // 
-            // comment
-            // 
-            comment.HeaderText = "备注";
-            comment.Name = "comment";
-            comment.ReadOnly = true;
 
-            dgv.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-                check, ID, name, category, tel, phone, address, comment});
+            string[] columnTexts = new string[] { "ID", "名称", "类别", "手机","我方欠款" };
+            string[] columnNames = new string[] { "ID", "name", "category", "phone", "arrear" };
+            int[] columnLengths = new int[] { 80, 120, 100, 100, 140 };
+
+            ControlUtility.initColumns(dgv, columnNames, columnTexts, columnLengths);
+            dgv.Columns.Insert(0, check);
         }
 
         public override void initTree(TreeView tv)
@@ -166,10 +118,23 @@ namespace LocalERP.UiDataProxy
                 dataGridView1.Rows[index].Cells["ID"].Value = dr["Customer.ID"];
                 dataGridView1.Rows[index].Cells["name"].Value = dr["Customer.name"];
                 dataGridView1.Rows[index].Cells["category"].Value = dr["CustomerCategory.name"];
-                dataGridView1.Rows[index].Cells["tel"].Value = dr["tel"];
                 dataGridView1.Rows[index].Cells["phone"].Value = dr["phone"];
-                dataGridView1.Rows[index].Cells["address"].Value = dr["address"];
-                dataGridView1.Rows[index].Cells["comment"].Value = dr["comment"];
+                double arrear = 0;
+                bool temp;
+                ValidateUtility.getDouble(dr, "arrear", out arrear, out temp);
+                if (arrear > 0)
+                {
+                    dataGridView1.Rows[index].Cells["arrear"].Style.ForeColor = Color.Green;
+                    dataGridView1.Rows[index].Cells["arrear"].Style.SelectionForeColor = Color.Green;
+                    dataGridView1.Rows[index].Cells["arrear"].Value = string.Format("+{0:0.00}", arrear);
+                }
+                else if (arrear < 0)
+                {
+                    dataGridView1.Rows[index].Cells["arrear"].Style.ForeColor = Color.Red;
+                    dataGridView1.Rows[index].Cells["arrear"].Style.SelectionForeColor = Color.Red;
+                    dataGridView1.Rows[index].Cells["arrear"].Value = string.Format("{0:0.00}", arrear);
+                }else
+                    dataGridView1.Rows[index].Cells["arrear"].Value = string.Format("{0:0.00}", arrear);
             }
         }
 

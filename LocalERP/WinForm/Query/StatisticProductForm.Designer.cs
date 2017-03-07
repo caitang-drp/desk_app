@@ -204,7 +204,7 @@
             this.label_notice.Text = "数据有更新, 请重新统计!";
             this.label_notice.Visible = false;
             // 
-            // ProductStatisticForm
+            // StatisticProductForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -225,9 +225,9 @@
             this.Font = new System.Drawing.Font("宋体", 10F);
             this.HideOnClose = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "ProductStatisticForm";
+            this.Name = "StatisticProductForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "统计报表";
+            this.Text = "进销统计";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
