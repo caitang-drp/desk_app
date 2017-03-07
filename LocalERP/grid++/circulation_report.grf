@@ -31,11 +31,13 @@
 				},
 				{
 					"Name":"price",
-					"Type":"Float"
+					"Type":"Float",
+					"Format":"0.##"
 				},
 				{
 					"Name":"sum_price",
-					"Type":"Float"
+					"Type":"Float",
+					"Format":"0.##"
 				},
 				{
 					"Name":"comment",
@@ -173,17 +175,19 @@
 						{
 							"Type":"SummaryBox",
 							"Name":"SummaryBox1",
-							"Left":8.99583,
-							"Width":2.01083,
+							"Left":8.81062,
+							"Width":1.98438,
 							"Height":0.608542,
+							"TextAlign":"MiddleCenter",
 							"DataField":"cnt"
 						},
 						{
 							"Type":"SummaryBox",
 							"Name":"SummaryBox2",
-							"Left":13.8113,
-							"Width":1.98438,
+							"Left":13.5996,
+							"Width":2.01083,
 							"Height":0.608542,
+							"TextAlign":"MiddleCenter",
 							"DataField":"sum_price"
 						},
 						{
@@ -218,8 +222,7 @@
 							"Left":1.40229,
 							"Width":13.9965,
 							"Height":0.608542,
-							"EndEllipsis":true,
-							"Text":"StaticBox4"
+							"EndEllipsis":true
 						}
 					]
 				}
@@ -229,7 +232,7 @@
 	"ReportHeader":[
 		{
 			"Name":"ReportHeader1",
-			"Height":1.32292,
+			"Height":1.40229,
 			"Control":[
 				{
 					"Type":"StaticBox",
@@ -244,8 +247,7 @@
 						"Bold":true,
 						"Charset":134
 					},
-					"EndEllipsis":true,
-					"Text":"客户：你哥"
+					"EndEllipsis":true
 				},
 				{
 					"Type":"StaticBox",
@@ -259,15 +261,14 @@
 						"Size":120000,
 						"Bold":true,
 						"Charset":134
-					},
-					"Text":"2017年03月07日"
+					}
 				},
 				{
 					"Type":"StaticBox",
 					"Name":"serial",
-					"Left":12.409,
+					"Left":10.0013,
 					"Top":0.79375,
-					"Width":3.59833,
+					"Width":5.60917,
 					"Height":0.608542,
 					"Font":{
 						"Name":"宋体",
@@ -275,7 +276,8 @@
 						"Bold":true,
 						"Charset":134
 					},
-					"Text":"NO.xxxxxsfsdf"
+					"EndEllipsis":true,
+					"TextAlign":"MiddleRight"
 				}
 			],
 			"RepeatOnPage":true
