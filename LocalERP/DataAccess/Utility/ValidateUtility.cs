@@ -11,57 +11,106 @@ namespace LocalERP.DataAccess.Utility
     public static class ValidateUtility
     {
         /************** textbox ******************/
-        public static bool getDouble(TextBox textBox, ErrorProvider errorProvider, bool required, out double result)
+        public static bool getDouble(TextBox textBox, ErrorProvider errorProvider, bool required, bool positive, out double result)
         {
             result = 0;
             string temp = textBox.Text.ToString();
-            if (required == true && (string.IsNullOrEmpty(temp) || !double.TryParse(temp, out result))
-                || required == false && !string.IsNullOrEmpty(temp) && !double.TryParse(temp, out result))
+            ///
+            if (double.TryParse(temp, out result))
             {
-                errorProvider.SetError(textBox, "请输入正确的数字!");
-                return false;
+                if (positive == true && result < 0)
+                {
+                    errorProvider.SetError(textBox, "请输入正数!");
+                    return false;
+                }
+                else
+                {
+                    errorProvider.SetError(textBox, string.Empty);
+                    return true;
+                }
             }
             else
             {
-                errorProvider.SetError(textBox, string.Empty);
-                return true;
-            }
-            
-        }
-
-        public static bool getPrice(TextBox textBox, ErrorProvider errorProvider, bool required, out double result)
-        {
-            result = 0;
-            string temp = textBox.Text.ToString();
-            if (required == true && (string.IsNullOrEmpty(temp) || !double.TryParse(temp, out result))
-                || required == false && !string.IsNullOrEmpty(temp) && !double.TryParse(temp, out result))
-            {
-                errorProvider.SetError(textBox, "请输入正确的数字!");
-                return false;
-            }
-            else
-            {
-                result = double.Parse(result.ToString("0.00"));
-                errorProvider.SetError(textBox, string.Empty);
-                return true;
+                if (required == false && string.IsNullOrEmpty(temp))
+                {
+                    errorProvider.SetError(textBox, string.Empty);
+                    return true;
+                }
+                else
+                {
+                    errorProvider.SetError(textBox, "请输入数字!");
+                    return false;
+                }
             }
 
         }
 
-        public static bool getInt(TextBox textBox, ErrorProvider errorProvider, bool required, out int result)
+        public static bool getPrice(TextBox textBox, ErrorProvider errorProvider, bool required, bool positive, out double result)
         {
             result = 0;
             string temp = textBox.Text.ToString();
-            if (required == true && (string.IsNullOrEmpty(temp) || !int.TryParse(temp, out result))
-                || required == false && !string.IsNullOrEmpty(temp) && !int.TryParse(temp, out result))
+            ///
+            if (double.TryParse(temp, out result))
             {
-                errorProvider.SetError(textBox, "请输入正确的整数!");
-                return false;
+                if (positive == true && result < 0)
+                {
+                    errorProvider.SetError(textBox, "请输入正数!");
+                    return false;
+                }
+                else
+                {
+                    result = double.Parse(result.ToString("0.00"));
+                    errorProvider.SetError(textBox, string.Empty);
+                    return true;
+                }
             }
             else
             {
-                errorProvider.SetError(textBox, string.Empty);
-                return true;
+                if (required == false && string.IsNullOrEmpty(temp))
+                {
+                    result = double.Parse(result.ToString("0.00"));
+                    errorProvider.SetError(textBox, string.Empty);
+                    return true;
+                }
+                else
+                {
+                    errorProvider.SetError(textBox, "请输入数字!");
+                    return false;
+                }
+            }
+
+        }
+
+        public static bool getInt(TextBox textBox, ErrorProvider errorProvider, bool required, bool positive, out int result)
+        {
+            result = 0;
+            string temp = textBox.Text.ToString();
+            ///
+            if (int.TryParse(temp, out result))
+            {
+                if (positive == true && result < 0)
+                {
+                    errorProvider.SetError(textBox, "请输入正数!");
+                    return false;
+                }
+                else
+                {
+                    errorProvider.SetError(textBox, string.Empty);
+                    return true;
+                }
+            }
+            else
+            {
+                if (required == false && string.IsNullOrEmpty(temp))
+                {
+                    errorProvider.SetError(textBox, string.Empty);
+                    return true;
+                }
+                else
+                {
+                    errorProvider.SetError(textBox, "请输入整数!");
+                    return false;
+                }
             }
 
         }

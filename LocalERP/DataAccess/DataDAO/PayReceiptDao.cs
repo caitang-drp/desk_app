@@ -41,8 +41,8 @@ namespace LocalERP.DataAccess.DataDAO
 
         public void Update(PayReceipt info)
         {
-            string commandText = string.Format("update PayReceipt set serial='{0}', bill_time='{1}', comment='{2}', customer_id={3}, bill_type={4}, handle_people='{5}', previousArrears={6}, amount={7} where ID={8}",
-                info.serial, info.bill_time, info.comment, info.customer_id, (int)info.bill_type, info.handle_people, info.previousArrears, info.amount, info.id);
+            string commandText = string.Format("update PayReceipt set serial='{0}', bill_time='{1}', comment='{2}', customer_id={3}, bill_type={4}, handle_people='{5}', previousArrears={6}, amount={7}, status={8} where ID={9}",
+                info.serial, info.bill_time, info.comment, info.customer_id, (int)info.bill_type, info.handle_people, info.previousArrears, info.amount, info.status, info.id);
 
             DbHelperAccess.executeNonQuery(commandText);
         }
@@ -102,6 +102,19 @@ namespace LocalERP.DataAccess.DataDAO
 
             if (!string.IsNullOrEmpty(name))
                 commandText.AppendFormat(" and CustomerCategory.name like '%{0}%'", name);
+            return DbHelperAccess.executeQuery(commandText.ToString());
+        }
+
+        public DataTable FindList(DateTime startTime, DateTime endTime, int status, string customerName)
+        {
+            StringBuilder commandText = null;
+            commandText = new StringBuilder(string.Format("select PayReceipt.* from PayReceipt where bill_time between #{0}# and #{1}# ", startTime.ToString("yyyy-MM-dd"), endTime.ToString("yyyy-MM-dd")));
+            if (status > 0)
+                commandText.Append(string.Format(" and status = {0}", status));
+            if (!string.IsNullOrEmpty(customerName))
+                commandText.Append(string.Format(" and Customer.name like '%{0}%'", customerName));
+
+            commandText.Append(string.Format(" order by PayReceipt.ID desc"));
             return DbHelperAccess.executeQuery(commandText.ToString());
         }
 

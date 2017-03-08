@@ -325,11 +325,11 @@ namespace LocalERP.WinForm
             // 
             // textBox_thisPayed
             // 
+            this.errorProvider1.SetIconPadding(this.textBox_thisPayed, 20);
             this.textBox_thisPayed.Location = new System.Drawing.Point(405, 167);
             this.textBox_thisPayed.Name = "textBox_thisPayed";
             this.textBox_thisPayed.Size = new System.Drawing.Size(150, 23);
             this.textBox_thisPayed.TabIndex = 53;
-            this.textBox_thisPayed.TextChanged += new System.EventHandler(this.textBox_thisPayed_TextChanged);
             this.textBox_thisPayed.TextChanged += new System.EventHandler(this.Controls_TextChanged);
             // 
             // label6
@@ -377,7 +377,6 @@ namespace LocalERP.WinForm
             this.textBox_previousArrears.Name = "textBox_previousArrears";
             this.textBox_previousArrears.Size = new System.Drawing.Size(133, 23);
             this.textBox_previousArrears.TabIndex = 65;
-            this.textBox_previousArrears.TextChanged += new System.EventHandler(this.textBox_previousArrears_TextChanged);
             // 
             // label17
             // 

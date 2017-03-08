@@ -10,6 +10,7 @@ using LocalERP.DataAccess.DataDAO;
 using LocalERP.DataAccess.Data;
 using System.Collections;
 using LocalERP.DataAccess.Utility;
+using LocalERP.WinForm.Utility;
 
 namespace LocalERP.WinForm
 {
@@ -48,11 +49,11 @@ namespace LocalERP.WinForm
 
             time.HeaderText = "时间";
             time.Name = "time";
-            time.Width = 80;
+            time.Width = 160;
 
             num.HeaderText = "数量";
             num.Name = "num";
-            num.Width = 60;
+            num.Width = 100;
 
             unit.HeaderText = "单位";
             unit.Name = "unit";
@@ -86,9 +87,14 @@ namespace LocalERP.WinForm
                 int type = (int)(dr["type"]);
                 this.dataGridView1.Rows[index].Cells["type"].Value = ProductCirculation.CirculationTypeConfs[type - 1].name;
 
-                this.dataGridView1.Rows[index].Cells["time"].Value = ((DateTime)dr["circulationTime"]).ToShortDateString();
+                this.dataGridView1.Rows[index].Cells["time"].Value = dr["circulationTime"];
+
                 int num = (int)dr["totalNum"];// *(int)dr["flowType"];
-                this.dataGridView1.Rows[index].Cells["num"].Value = num;
+                if (type == 1 || type == 4 || type == 5)
+                    ControlUtility.setCellWithColor(dataGridView1.Rows[index].Cells["num"], Color.Red, string.Format("+{0}", num));
+                else if (type == 2 || type == 3 || type == 6 || type ==7)
+                    ControlUtility.setCellWithColor(dataGridView1.Rows[index].Cells["num"], Color.Green, string.Format("-{0}", num));
+
                 this.dataGridView1.Rows[index].Cells["unit"].Value = dr["unit"];
 
                 this.dataGridView1.Rows[index].Cells["customer"].Value = dr["circulation.name"];  

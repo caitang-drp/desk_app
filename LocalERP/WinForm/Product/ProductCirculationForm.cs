@@ -56,7 +56,7 @@ namespace LocalERP.WinForm
             this.label_title.Text = this.Text;
             this.label2.Text = conf.business+"时间:";
             this.label_customer.Text = conf.customer;
-            this.label_thisPayed.Text = conf.productDirection == 1 ? "我方本次付款(-):" : "我方本次收款(+):";
+            this.label_thisPayed.Text = conf.productDirection == 1 ? "我方本次付款:" : "我方本次收款:";
             this.label_arrears.Text =  conf.arrearsDirection==1? "我方以上欠款:":"对方以上欠款:";
             this.label1_accumulative.Text = conf.arrearsDirection == 1 ? "我方累计欠款:" : "对方累计欠款:";
 
@@ -346,10 +346,10 @@ namespace LocalERP.WinForm
             double total, cutoff, realTotal, previousArrears, thisPayed;
 
             if (ValidateUtility.getPrice(this.dataGridView2[1, 0], true, out total)
-                && ValidateUtility.getDouble(this.textBox_cutoff, this.errorProvider1, false, out cutoff)
-                && ValidateUtility.getPrice(this.textBox_realTotal, this.errorProvider1, true, out realTotal)
-                && ValidateUtility.getPrice(this.textBox_previousArrears, this.errorProvider1, false, out previousArrears)
-                && ValidateUtility.getPrice(this.textBox_thisPayed, this.errorProvider1, false, out thisPayed))
+                && ValidateUtility.getDouble(this.textBox_cutoff, this.errorProvider1, false, true, out cutoff)
+                && ValidateUtility.getPrice(this.textBox_realTotal, this.errorProvider1, true, true, out realTotal)
+                && ValidateUtility.getPrice(this.textBox_previousArrears, this.errorProvider1, false, false, out previousArrears)
+                && ValidateUtility.getPrice(this.textBox_thisPayed, this.errorProvider1, false, true, out thisPayed))
             {
                 circulation.Total = total;
                 circulation.RealTotal = realTotal;
@@ -806,8 +806,11 @@ namespace LocalERP.WinForm
             double.TryParse(this.textBox_previousArrears.Text, out arrear);
             double.TryParse(this.textBox_thisPayed.Text, out pay);
             double.TryParse(this.textBox_realTotal.Text, out realTotal);
-            double accumulative = conf.arrearsDirection * arrear + conf.productDirection * realTotal - conf.arrearsDirection * pay;
-            this.textBox_accumulative.Text = (conf.arrearsDirection * accumulative).ToString();
+            double temp1 = conf.arrearsDirection * arrear;
+            temp1 = temp1 + conf.productDirection * realTotal;
+            temp1 = temp1 - conf.arrearsDirection * pay;
+            temp1 = temp1 * conf.arrearsDirection;
+            this.textBox_accumulative.Text = temp1.ToString("N2");
         }
     }
 }

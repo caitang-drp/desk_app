@@ -52,21 +52,21 @@ namespace LocalERP.UiDataProxy
             serial.HeaderText = "货号";
             serial.Name = "serial";
             serial.ReadOnly = true;
-            serial.Width = 100;
+            serial.Width = 60;
             // 
             // name
             // 
             name.HeaderText = "货品名称";
             name.Name = "name";
             name.ReadOnly = true;
-            name.Width = 160;
+            name.Width = 140;
             // 
             // category
             // 
             category.HeaderText = "类别";
             category.Name = "category";
             category.ReadOnly = true;
-            category.Width = 90;
+            category.Width = 60;
             // 
             // comment
             // 
@@ -91,9 +91,10 @@ namespace LocalERP.UiDataProxy
                 serial,
                 name,
                 category,
+                libNum,
                 pricePurchase,
-                priceSell,
-                libNum});
+                priceSell
+                });
         }
 
         public override void initTree(TreeView tv)

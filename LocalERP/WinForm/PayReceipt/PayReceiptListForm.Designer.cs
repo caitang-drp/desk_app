@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dataGridView1 = new LocalERP.WinForm.MyDataGridView();
             this.button1 = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
@@ -35,7 +36,6 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.button_search = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.dateTimePicker3 = new System.Windows.Forms.DateTimePicker();
@@ -55,16 +55,15 @@
             this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.textBox_customer = new System.Windows.Forms.TextBox();
-            this.button2 = new System.Windows.Forms.Button();
             this.check = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.bill_type = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sellTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.type = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.typeValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.serial = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.bill_time = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.custom = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.comment = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.realTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.status = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.customer = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.panel1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -83,13 +82,13 @@
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.check,
             this.ID,
-            this.bill_type,
+            this.name,
+            this.sellTime,
+            this.type,
             this.typeValue,
-            this.serial,
-            this.bill_time,
-            this.custom,
-            this.amount,
-            this.comment});
+            this.realTotal,
+            this.status,
+            this.customer});
             this.dataGridView1.Location = new System.Drawing.Point(-1, 91);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersVisible = false;
@@ -119,88 +118,66 @@
             this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.AutoSize = true;
             this.label2.BackColor = System.Drawing.SystemColors.Control;
-            this.label2.Location = new System.Drawing.Point(638, 19);
+            this.label2.Location = new System.Drawing.Point(624, 19);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(70, 14);
             this.label2.TabIndex = 23;
             this.label2.Text = "结束时间:";
-            this.label2.Visible = false;
             // 
             // label1
             // 
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.SystemColors.Control;
-            this.label1.Location = new System.Drawing.Point(443, 20);
+            this.label1.Location = new System.Drawing.Point(429, 20);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(70, 14);
             this.label1.TabIndex = 21;
             this.label1.Text = "开始时间:";
-            this.label1.Visible = false;
             // 
             // label3
             // 
             this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label3.AutoSize = true;
             this.label3.BackColor = System.Drawing.SystemColors.Control;
-            this.label3.Location = new System.Drawing.Point(283, 20);
+            this.label3.Location = new System.Drawing.Point(269, 20);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(70, 14);
             this.label3.TabIndex = 25;
             this.label3.Text = "售单状态:";
-            this.label3.Visible = false;
             // 
             // label5
             // 
             this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label5.AutoSize = true;
             this.label5.BackColor = System.Drawing.SystemColors.Control;
-            this.label5.Enabled = false;
-            this.label5.Location = new System.Drawing.Point(443, 20);
+            this.label5.Location = new System.Drawing.Point(429, 20);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(70, 14);
             this.label5.TabIndex = 21;
             this.label5.Text = "开始时间:";
-            this.label5.Visible = false;
             // 
             // label6
             // 
             this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label6.AutoSize = true;
             this.label6.BackColor = System.Drawing.SystemColors.Control;
-            this.label6.Enabled = false;
-            this.label6.Location = new System.Drawing.Point(638, 19);
+            this.label6.Location = new System.Drawing.Point(624, 19);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(70, 14);
             this.label6.TabIndex = 23;
             this.label6.Text = "结束时间:";
-            this.label6.Visible = false;
-            // 
-            // button_search
-            // 
-            this.button_search.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button_search.Location = new System.Drawing.Point(827, 14);
-            this.button_search.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.button_search.Name = "button_search";
-            this.button_search.Size = new System.Drawing.Size(47, 23);
-            this.button_search.TabIndex = 24;
-            this.button_search.Text = "查询";
-            this.button_search.UseVisualStyleBackColor = true;
-            this.button_search.Visible = false;
-            this.button_search.Click += new System.EventHandler(this.button1_Click);
             // 
             // label7
             // 
             this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label7.AutoSize = true;
             this.label7.BackColor = System.Drawing.SystemColors.Control;
-            this.label7.Enabled = false;
-            this.label7.Location = new System.Drawing.Point(283, 20);
+            this.label7.Location = new System.Drawing.Point(269, 20);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(70, 14);
             this.label7.TabIndex = 25;
             this.label7.Text = "单据状态:";
-            this.label7.Visible = false;
             // 
             // comboBox1
             // 
@@ -208,43 +185,42 @@
             this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox1.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(349, 16);
+            this.comboBox1.Location = new System.Drawing.Point(335, 16);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(86, 21);
             this.comboBox1.TabIndex = 26;
-            this.comboBox1.Visible = false;
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.button1_Click);
             // 
             // dateTimePicker3
             // 
             this.dateTimePicker3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.dateTimePicker3.Location = new System.Drawing.Point(509, 14);
+            this.dateTimePicker3.Location = new System.Drawing.Point(495, 14);
             this.dateTimePicker3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dateTimePicker3.Name = "dateTimePicker3";
             this.dateTimePicker3.Size = new System.Drawing.Size(119, 23);
             this.dateTimePicker3.TabIndex = 20;
-            this.dateTimePicker3.Visible = false;
+            this.dateTimePicker3.ValueChanged += new System.EventHandler(this.button1_Click);
             // 
             // dateTimePicker4
             // 
             this.dateTimePicker4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.dateTimePicker4.Location = new System.Drawing.Point(704, 14);
+            this.dateTimePicker4.Location = new System.Drawing.Point(690, 14);
             this.dateTimePicker4.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dateTimePicker4.Name = "dateTimePicker4";
             this.dateTimePicker4.Size = new System.Drawing.Size(118, 23);
             this.dateTimePicker4.TabIndex = 22;
-            this.dateTimePicker4.Visible = false;
+            this.dateTimePicker4.ValueChanged += new System.EventHandler(this.button1_Click);
             // 
             // label8
             // 
             this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label8.AutoSize = true;
             this.label8.BackColor = System.Drawing.SystemColors.Control;
-            this.label8.Location = new System.Drawing.Point(107, 20);
+            this.label8.Location = new System.Drawing.Point(93, 20);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(70, 14);
             this.label8.TabIndex = 27;
             this.label8.Text = "往来单位:";
-            this.label8.Visible = false;
             // 
             // panel1
             // 
@@ -281,7 +257,6 @@
             this.toolStripButton_selectAll.Name = "toolStripButton_selectAll";
             this.toolStripButton_selectAll.Size = new System.Drawing.Size(83, 22);
             this.toolStripButton_selectAll.Text = "全部选中";
-            this.toolStripButton_selectAll.Visible = false;
             this.toolStripButton_selectAll.Click += new System.EventHandler(this.toolStripButton_selectAll_Click);
             // 
             // toolStripButton_cancelAll
@@ -291,7 +266,6 @@
             this.toolStripButton_cancelAll.Name = "toolStripButton_cancelAll";
             this.toolStripButton_cancelAll.Size = new System.Drawing.Size(83, 22);
             this.toolStripButton_cancelAll.Text = "全部取消";
-            this.toolStripButton_cancelAll.Visible = false;
             this.toolStripButton_cancelAll.Click += new System.EventHandler(this.toolStripButton_cancelAll_Click);
             // 
             // toolStripButton3
@@ -301,7 +275,6 @@
             this.toolStripButton3.Name = "toolStripButton3";
             this.toolStripButton3.Size = new System.Drawing.Size(83, 22);
             this.toolStripButton3.Text = "编辑单据";
-            this.toolStripButton3.Visible = false;
             this.toolStripButton3.Click += new System.EventHandler(this.toolStripButton3_Click);
             // 
             // toolStripButton2
@@ -312,7 +285,6 @@
             this.toolStripButton2.Size = new System.Drawing.Size(83, 22);
             this.toolStripButton2.Text = "删除单据";
             this.toolStripButton2.ToolTipText = "批量删除";
-            this.toolStripButton2.Visible = false;
             this.toolStripButton2.Click += new System.EventHandler(this.toolStripButton2_Click);
             // 
             // dataGridViewTextBoxColumn1
@@ -364,23 +336,11 @@
             // textBox_customer
             // 
             this.textBox_customer.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox_customer.Location = new System.Drawing.Point(177, 16);
+            this.textBox_customer.Location = new System.Drawing.Point(163, 16);
             this.textBox_customer.Name = "textBox_customer";
             this.textBox_customer.Size = new System.Drawing.Size(100, 23);
             this.textBox_customer.TabIndex = 30;
-            this.textBox_customer.Visible = false;
-            // 
-            // button2
-            // 
-            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button2.Location = new System.Drawing.Point(12, 19);
-            this.button2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(47, 23);
-            this.button2.TabIndex = 31;
-            this.button2.Text = "刷新";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.textBox_customer.TextChanged += new System.EventHandler(this.button1_Click);
             // 
             // check
             // 
@@ -393,57 +353,61 @@
             this.ID.HeaderText = "ID";
             this.ID.Name = "ID";
             this.ID.ReadOnly = true;
+            this.ID.Width = 80;
             // 
-            // bill_type
+            // name
             // 
-            this.bill_type.HeaderText = "类型";
-            this.bill_type.Name = "bill_type";
-            this.bill_type.ReadOnly = true;
+            this.name.HeaderText = "编号";
+            this.name.Name = "name";
+            this.name.ReadOnly = true;
+            this.name.Width = 200;
+            // 
+            // sellTime
+            // 
+            this.sellTime.HeaderText = "时间";
+            this.sellTime.Name = "sellTime";
+            this.sellTime.ReadOnly = true;
+            this.sellTime.Width = 120;
+            // 
+            // type
+            // 
+            this.type.HeaderText = "类型";
+            this.type.Name = "type";
+            this.type.ReadOnly = true;
             // 
             // typeValue
             // 
             this.typeValue.HeaderText = "类型值";
             this.typeValue.Name = "typeValue";
+            this.typeValue.ReadOnly = true;
             this.typeValue.Visible = false;
             // 
-            // serial
+            // realTotal
             // 
-            this.serial.HeaderText = "单据编号";
-            this.serial.Name = "serial";
-            this.serial.ReadOnly = true;
-            this.serial.Width = 200;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.realTotal.DefaultCellStyle = dataGridViewCellStyle1;
+            this.realTotal.HeaderText = "总价合计/元";
+            this.realTotal.Name = "realTotal";
+            this.realTotal.ReadOnly = true;
+            this.realTotal.Width = 110;
             // 
-            // bill_time
+            // status
             // 
-            this.bill_time.HeaderText = "日期";
-            this.bill_time.Name = "bill_time";
-            this.bill_time.ReadOnly = true;
+            this.status.HeaderText = "状态";
+            this.status.Name = "status";
+            this.status.ReadOnly = true;
             // 
-            // custom
+            // customer
             // 
-            this.custom.HeaderText = "往来单位";
-            this.custom.Name = "custom";
-            this.custom.ReadOnly = true;
+            this.customer.HeaderText = "往来单位";
+            this.customer.Name = "customer";
+            this.customer.ReadOnly = true;
             // 
-            // amount
-            // 
-            this.amount.HeaderText = "金额";
-            this.amount.Name = "amount";
-            this.amount.ReadOnly = true;
-            // 
-            // comment
-            // 
-            this.comment.HeaderText = "备注";
-            this.comment.Name = "comment";
-            this.comment.ReadOnly = true;
-            // 
-            // PayReceiptListForm
+            // ProductCirculationListForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(886, 498);
-            this.Controls.Add(this.dataGridView1);
-            this.Controls.Add(this.button2);
             this.Controls.Add(this.textBox_customer);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.dateTimePicker4);
@@ -451,19 +415,19 @@
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.button_search);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label1);
+            this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("宋体", 10F);
             this.HideOnClose = true;
-            this.Name = "PayReceiptListForm";
+            this.Name = "ProductCirculationListForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "单据列表";
-            this.Load += new System.EventHandler(this.ProductCirculationListForm_Load);
+            this.Load += new System.EventHandler(this.PayReceiptListForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
@@ -485,7 +449,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Button button_search;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.DateTimePicker dateTimePicker3;
@@ -503,15 +466,14 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
         private System.Windows.Forms.ToolStripButton toolStripButton_cancelAll;
         private System.Windows.Forms.TextBox textBox_customer;
-        private System.Windows.Forms.Button button2;
         private System.Windows.Forms.DataGridViewCheckBoxColumn check;
         private System.Windows.Forms.DataGridViewTextBoxColumn ID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn bill_type;
+        private System.Windows.Forms.DataGridViewTextBoxColumn name;
+        private System.Windows.Forms.DataGridViewTextBoxColumn sellTime;
+        private System.Windows.Forms.DataGridViewTextBoxColumn type;
         private System.Windows.Forms.DataGridViewTextBoxColumn typeValue;
-        private System.Windows.Forms.DataGridViewTextBoxColumn serial;
-        private System.Windows.Forms.DataGridViewTextBoxColumn bill_time;
-        private System.Windows.Forms.DataGridViewTextBoxColumn custom;
-        private System.Windows.Forms.DataGridViewTextBoxColumn amount;
-        private System.Windows.Forms.DataGridViewTextBoxColumn comment;
+        private System.Windows.Forms.DataGridViewTextBoxColumn realTotal;
+        private System.Windows.Forms.DataGridViewTextBoxColumn status;
+        private System.Windows.Forms.DataGridViewTextBoxColumn customer;
     }
 }

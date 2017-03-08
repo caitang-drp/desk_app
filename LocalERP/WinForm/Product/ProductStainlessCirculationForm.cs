@@ -173,7 +173,7 @@ namespace LocalERP.WinForm
                     {
                         ProductStainless product = ProductStainlessDao.getInstance().FindByID(productID);
                         //stone ¡Ÿ ±πÿ±’
-                        //control.EditingControlDataGridView.Rows[control.EditingControlRowIndex].Cells["quantityPerPiece"].Value = product.QuantityPerPiece;
+                        control.EditingControlDataGridView.Rows[control.EditingControlRowIndex].Cells["quantityPerPiece"].Value = product.QuantityPerPiece;
                         control.EditingControlDataGridView.Rows[control.EditingControlRowIndex].Cells["unit"].Value = product.Unit;
                         if(conf.productDirection == 1)
                             control.EditingControlDataGridView.Rows[control.EditingControlRowIndex].Cells["price"].Value = product.PricePurchase;

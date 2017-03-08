@@ -11,6 +11,7 @@ using LocalERP.DataAccess.Data;
 using LocalERP.UiDataProxy;
 using LocalERP.DataAccess.DataDAO;
 using LocalERP.WinForm.Utility;
+using LocalERP.DataAccess.Utility;
 
 namespace LocalERP.WinForm
 {
@@ -57,7 +58,7 @@ namespace LocalERP.WinForm
 
         public override void refresh()
         {
-            CategoryDao.getInstance().initTreeView("CustomerCategory", this.treeView1);
+            this.label_notice.Visible = true;
         }
 
         private void backgroundWorker_DoWork(object sender, DoWorkEventArgs e)
@@ -81,8 +82,16 @@ namespace LocalERP.WinForm
                 int index = dataGridView1.Rows.Add();
                 dataGridView1.Rows[index].Cells["customer"].Value = dr["Customer.name"];
                 dataGridView1.Rows[index].Cells["time"].Value = dr["bill_time"];// ((DateTime)dr["bill_time"]).ToShortDateString();
-                dataGridView1.Rows[index].Cells["type"].Value = dr["bill_type"];
-                dataGridView1.Rows[index].Cells["sum"].Value = dr["amount"];
+                int type = (int)(dr["bill_type"]);
+                dataGridView1.Rows[index].Cells["type"].Value = PayReceipt.PayReceiptTypeConfs[type - 1].name; //dr["bill_type"];
+                
+                double sum=0;
+                
+                ValidateUtility.getDouble(dr, "amount", out sum);
+                if(type==1 || type == 4)
+                    ControlUtility.setCellWithColor(dataGridView1.Rows[index].Cells["sum"], Color.Green, string.Format("-{0:0.00}", sum));
+                else if (type == 2 || type==3)
+                    ControlUtility.setCellWithColor(dataGridView1.Rows[index].Cells["sum"], Color.Red, string.Format("+{0:0.00}", sum));
             }
 
             foreach (DataRow dr in dataTable2.Rows)
@@ -90,13 +99,29 @@ namespace LocalERP.WinForm
                 int index = dataGridView1.Rows.Add();
                 dataGridView1.Rows[index].Cells["customer"].Value = dr["Customer.name"];
                 dataGridView1.Rows[index].Cells["time"].Value = dr["circulationTime"];
-                dataGridView1.Rows[index].Cells["type"].Value = dr["type"];
-                dataGridView1.Rows[index].Cells["sum"].Value = dr["thisPayed"];
+                int type = (int)(dr["type"]);
+                dataGridView1.Rows[index].Cells["type"].Value = PayReceipt.PayReceiptTypeConfs[type - 1].name; //dr["bill_type"];
+                
+                double sum = 0;
+                ValidateUtility.getDouble(dr, "thisPayed", out sum);
+                if (type == 1 || type == 4)
+                    ControlUtility.setCellWithColor(dataGridView1.Rows[index].Cells["sum"], Color.Green, string.Format("-{0:0.00}", sum));
+                else if (type == 2 || type == 3)
+                    ControlUtility.setCellWithColor(dataGridView1.Rows[index].Cells["sum"], Color.Red, string.Format("+{0:0.00}", sum));
             }
 
             this.dataGridView1.Sort(dataGridView1.Columns["time"], ListSortDirection.Descending);
 
             this.invokeEndLoadNotify();
+        }
+
+        private void button_add_Click(object sender, EventArgs e)
+        {
+            if (this.treeView1.Nodes.Count > 0 && treeView1.SelectedNode != null && treeView1.Nodes[0].IsSelected == false)
+                this.treeView1.SelectedNode = this.treeView1.Nodes[0];
+            else
+                treeView1_AfterSelect(null, null);
+            this.label_notice.Visible = false;
         }
     }
 }

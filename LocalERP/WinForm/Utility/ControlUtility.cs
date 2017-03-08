@@ -5,6 +5,7 @@ using System.Windows.Forms;
 using LocalERP.WinForm;
 using LocalERP.WinForm.Utility;
 using System.Data;
+using System.Drawing;
 
 namespace LocalERP.WinForm.Utility
 {
@@ -23,6 +24,12 @@ namespace LocalERP.WinForm.Utility
             }
             dgv.Columns.Clear();
             dgv.Columns.AddRange(columns);
+        }
+
+        public static void setCellWithColor(DataGridViewCell cell, Color color, string text) {
+            cell.Style.ForeColor = color;
+            cell.Style.SelectionForeColor = color;
+            cell.Value = text;
         }
     }
 }

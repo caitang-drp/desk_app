@@ -76,7 +76,8 @@ namespace LocalERP.DataAccess.Data
         public PayReceipt.BillType type;
         public UpdateType notifyType;
         public UpdateType finishNotifyType;
-        public int flowType;
+        //如何表示债务
+        public int arrearDirection;
 
         public string name;
         public string code;
@@ -89,7 +90,7 @@ namespace LocalERP.DataAccess.Data
             this.notifyType = notifyType;
             this.finishNotifyType = finishNotifyType;
 
-            this.flowType = flowType;
+            this.arrearDirection = flowType;
 
             this.name = name;
             this.code = code;

@@ -93,7 +93,7 @@ namespace LocalERP.WinForm
         {
             if (payReceiptListForm == null || payReceiptListForm.IsDisposed)
             {
-                payReceiptListForm = new PayReceiptListForm(mainForm, 2, "单据列表");
+                payReceiptListForm = new PayReceiptListForm(mainForm);
                 appendEvent(payReceiptListForm);
             }
             return payReceiptListForm;

@@ -24,7 +24,7 @@ namespace LocalERP.WinForm
         protected UpdateType notifyType;
         protected UpdateType finishNotifyType;
 
-        private int flowType;
+        private int arrearDirection;
         private string code;
 
         private PayReceipt payReceipt = null;
@@ -42,7 +42,7 @@ namespace LocalERP.WinForm
             this.notifyType = conf.notifyType;
             this.finishNotifyType = conf.finishNotifyType;
 
-            this.flowType = conf.flowType;
+            this.arrearDirection = conf.arrearDirection;
 
             this.Text = conf.name + "单";
             this.label_title.Text = this.Text;
@@ -57,6 +57,10 @@ namespace LocalERP.WinForm
         {
             this.lookupText1.LookupForm = FormSingletonFactory.getInstance().getCustomerCIForm_Select();
             this.lookupText1.valueSetted += new LookupText.ValueSetted(lookupText1_valueSetted);
+
+            this.textBox_previousArrears.TextChanged += new EventHandler(setAccumulative);
+            this.textBox_thisPayed.TextChanged += new EventHandler(setAccumulative);
+
             initPayReceipt();
         }
 
@@ -69,15 +73,11 @@ namespace LocalERP.WinForm
             initPayReceipt();
         }
 
-
         public override void refresh()
         {
             //not reasonal
             (this.lookupText1.LookupForm as CategoryItemForm).initTree();
         }
-
-        private bool previousArrearNeedChanged = true;
-        private bool thisPayedNeedChanged = true;
 
         /// <summary>
         /// for init circulation
@@ -122,6 +122,8 @@ namespace LocalERP.WinForm
             this.textBox_thisPayed.Text = payReceipt.amount.ToString();
 
             openMode = payReceipt.status;
+
+            this.resetNeedSave(false);
             this.switchMode(payReceipt.status);
         }
         //end init
@@ -194,7 +196,7 @@ namespace LocalERP.WinForm
             payReceipt.previousArrears = Convert.ToDouble(this.textBox_previousArrears.Text);
             
             double pay;
-            if (ValidateUtility.getDouble(this.textBox_thisPayed, this.errorProvider1, true, out pay) == false)
+            if (ValidateUtility.getDouble(this.textBox_thisPayed, this.errorProvider1, true, true, out pay) == false)
                 return false;
             payReceipt.amount = pay;
 
@@ -248,32 +250,22 @@ namespace LocalERP.WinForm
 
         //审核
         private void toolStripButton_finish_Click(object sender, EventArgs e)
-        {/*
-            if (MessageBox.Show("审核后，将修改库存数量，且该单据不能修改或删除，是否审核？", "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) != DialogResult.OK)
+        {
+            PayReceipt payReceipt;
+            bool isCorrect = getPayReceipt(out payReceipt);
+
+            if (isCorrect == false)
                 return;
-
-            List<ProductCirculationRecord> records;
-            this.getRecords(out records);
-
-            ProductCirculation sell;
-            this.getCirculation(out sell);
-
-            foreach (ProductCirculationRecord record in records)
-            {
-                int leftNum = cirDao.getProductDao().FindNumByID(record.ProductID);
-                int newLeftNum = leftNum + flowType * record.TotalNum;
-                cirDao.getProductDao().UpdateNum(record.ProductID, newLeftNum);
-            }
-
-            cirDao.UpdateStatus(circulationID, 4);
- 
+            
+            payReceipt.status = 4;
+            PayReceiptDao.getInstance().Update(payReceipt);
+            CustomerDao.getInstance().update_arrear(payReceipt.customer_id, this.arrearDirection * Convert.ToDouble(this.textBox_accumulative.Text));
             MessageBox.Show("审核成功!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             openMode = 4;
             this.switchMode(4);
 
             this.invokeUpdateNotify(this.finishNotifyType);
-            */
         }
 
 
@@ -324,12 +316,13 @@ namespace LocalERP.WinForm
             needSave = value;
         }
 
-        private void setAccumulative() {
+        private void setAccumulative(object sender, EventArgs e)
+        {
             double arrear, pay;
             double.TryParse(this.textBox_previousArrears.Text, out arrear);
             double.TryParse(this.textBox_thisPayed.Text, out pay);
             double accumulative = arrear - pay;
-            this.textBox_accumulative.Text = accumulative.ToString();
+            this.textBox_accumulative.Text = accumulative.ToString("N2");
         }
 
         private void Controls_TextChanged(object sender, EventArgs e)
@@ -340,32 +333,8 @@ namespace LocalERP.WinForm
         private void lookupText1_valueSetted(object sender, LookupArg arg)
         {
             Customer customer = CustomerDao.getInstance().FindByID((int)arg.Value);
-            this.textBox_previousArrears.Text = customer.arrear.ToString();
+            this.textBox_previousArrears.Text = (customer.arrear*arrearDirection).ToString();
             resetNeedSave(true);
-        }
-
-        private void textBox_previousArrears_TextChanged(object sender, EventArgs e)
-        {
-            this.previousArrearNeedChanged = false;
-
-            if (this.thisPayedNeedChanged == true)
-            {
-                this.setAccumulative();
-            }
-
-            this.previousArrearNeedChanged = true;
-        }
-
-        private void textBox_thisPayed_TextChanged(object sender, EventArgs e)
-        {
-            this.thisPayedNeedChanged = false;
-
-            if (this.previousArrearNeedChanged == true)
-            {
-                this.setAccumulative();
-            }
-
-            this.thisPayedNeedChanged = true;
         }
     }
 }

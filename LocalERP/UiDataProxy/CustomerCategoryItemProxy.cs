@@ -30,9 +30,9 @@ namespace LocalERP.UiDataProxy
             check.Name = "check";
             check.Width = 60;
 
-            string[] columnTexts = new string[] { "ID", "名称", "类别", "手机","我方欠款" };
-            string[] columnNames = new string[] { "ID", "name", "category", "phone", "arrear" };
-            int[] columnLengths = new int[] { 80, 120, 100, 100, 140 };
+            string[] columnTexts = new string[] { "ID", "名称", "类别","我方欠款/元","对方欠款/元" };
+            string[] columnNames = new string[] { "ID", "name", "category", "myArrear", "hisArrear" };
+            int[] columnLengths = new int[] { 80, 120, 80, 120, 120 };
 
             ControlUtility.initColumns(dgv, columnNames, columnTexts, columnLengths);
             dgv.Columns.Insert(0, check);
@@ -118,23 +118,21 @@ namespace LocalERP.UiDataProxy
                 dataGridView1.Rows[index].Cells["ID"].Value = dr["Customer.ID"];
                 dataGridView1.Rows[index].Cells["name"].Value = dr["Customer.name"];
                 dataGridView1.Rows[index].Cells["category"].Value = dr["CustomerCategory.name"];
-                dataGridView1.Rows[index].Cells["phone"].Value = dr["phone"];
                 double arrear = 0;
                 bool temp;
                 ValidateUtility.getDouble(dr, "arrear", out arrear, out temp);
                 if (arrear > 0)
                 {
-                    dataGridView1.Rows[index].Cells["arrear"].Style.ForeColor = Color.Green;
-                    dataGridView1.Rows[index].Cells["arrear"].Style.SelectionForeColor = Color.Green;
-                    dataGridView1.Rows[index].Cells["arrear"].Value = string.Format("+{0:0.00}", arrear);
+                    dataGridView1.Rows[index].Cells["myArrear"].Style.ForeColor = Color.Green;
+                    dataGridView1.Rows[index].Cells["myArrear"].Style.SelectionForeColor = Color.Green;
+                    dataGridView1.Rows[index].Cells["myArrear"].Value = string.Format("{0:0.00}", arrear);
                 }
                 else if (arrear < 0)
                 {
-                    dataGridView1.Rows[index].Cells["arrear"].Style.ForeColor = Color.Red;
-                    dataGridView1.Rows[index].Cells["arrear"].Style.SelectionForeColor = Color.Red;
-                    dataGridView1.Rows[index].Cells["arrear"].Value = string.Format("{0:0.00}", arrear);
-                }else
-                    dataGridView1.Rows[index].Cells["arrear"].Value = string.Format("{0:0.00}", arrear);
+                    dataGridView1.Rows[index].Cells["hisArrear"].Style.ForeColor = Color.Red;
+                    dataGridView1.Rows[index].Cells["hisArrear"].Style.SelectionForeColor = Color.Red;
+                    dataGridView1.Rows[index].Cells["hisArrear"].Value = string.Format("{0:0.00}", -arrear);
+                }
             }
         }
 

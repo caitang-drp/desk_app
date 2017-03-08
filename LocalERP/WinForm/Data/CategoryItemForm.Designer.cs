@@ -288,6 +288,7 @@
             this.button_search.Text = "查询";
             this.button_search.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.button_search.UseVisualStyleBackColor = true;
+            this.button_search.Visible = false;
             this.button_search.Click += new System.EventHandler(this.button_search_Click);
             // 
             // CategoryItemForm

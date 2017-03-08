@@ -40,6 +40,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.textBox_search = new System.Windows.Forms.TextBox();
             this.button_add = new System.Windows.Forms.Button();
+            this.label_notice = new System.Windows.Forms.Label();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
@@ -167,17 +168,30 @@
             this.button_add.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.button_add.Location = new System.Drawing.Point(675, 17);
             this.button_add.Name = "button_add";
-            this.button_add.Size = new System.Drawing.Size(70, 26);
+            this.button_add.Size = new System.Drawing.Size(62, 26);
             this.button_add.TabIndex = 40;
             this.button_add.Text = "查询";
             this.button_add.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.button_add.UseVisualStyleBackColor = true;
+            this.button_add.Click += new System.EventHandler(this.button_add_Click);
+            // 
+            // label_notice
+            // 
+            this.label_notice.AutoSize = true;
+            this.label_notice.ForeColor = System.Drawing.Color.Red;
+            this.label_notice.Location = new System.Drawing.Point(12, 23);
+            this.label_notice.Name = "label_notice";
+            this.label_notice.Size = new System.Drawing.Size(168, 14);
+            this.label_notice.TabIndex = 55;
+            this.label_notice.Text = "数据有更新, 请重新查询!";
+            this.label_notice.Visible = false;
             // 
             // QueryCashDetailForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(759, 501);
+            this.Controls.Add(this.label_notice);
             this.Controls.Add(this.button_add);
             this.Controls.Add(this.textBox_search);
             this.Controls.Add(this.label1);
@@ -220,5 +234,6 @@
         private System.Windows.Forms.Button button_add;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label_notice;
     }
 }

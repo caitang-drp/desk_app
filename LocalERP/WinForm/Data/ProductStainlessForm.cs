@@ -111,9 +111,9 @@ namespace LocalERP.WinForm
             int quantityPerPiece, categoryID;
 
             if (ValidateUtility.getName(this.textBox_name, this.errorProvider1, out name) && 
-                ValidateUtility.getPrice(this.textBox_purchasePrice, this.errorProvider1, false, out price_purchase) && 
-                ValidateUtility.getPrice(this.textBox_sellPrice, this.errorProvider1, false, out price_sell) && 
-                ValidateUtility.getInt(this.textBox_quantityPerPiece, this.errorProvider1, false, out quantityPerPiece) &&
+                ValidateUtility.getPrice(this.textBox_purchasePrice, this.errorProvider1, false, true, out price_purchase) && 
+                ValidateUtility.getPrice(this.textBox_sellPrice, this.errorProvider1, false,true,  out price_sell) && 
+                ValidateUtility.getInt(this.textBox_quantityPerPiece, this.errorProvider1, false, true, out quantityPerPiece) &&
                 this.getCategoryID(out categoryID))
             {
                 product = new ProductStainless(this.textBox_serial.Text, name, categoryID, price_purchase, price_sell, this.comboBox_unit.Text, quantityPerPiece, this.textBox_comment.Text);
