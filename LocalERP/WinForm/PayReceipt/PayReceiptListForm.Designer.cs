@@ -57,13 +57,13 @@
             this.textBox_customer = new System.Windows.Forms.TextBox();
             this.check = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.sellTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.code = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.customer = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.time = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.type = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.typeValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.realTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sum = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.status = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.customer = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.panel1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -82,13 +82,13 @@
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.check,
             this.ID,
-            this.name,
-            this.sellTime,
+            this.code,
+            this.customer,
+            this.time,
             this.type,
             this.typeValue,
-            this.realTotal,
-            this.status,
-            this.customer});
+            this.sum,
+            this.status});
             this.dataGridView1.Location = new System.Drawing.Point(-1, 91);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersVisible = false;
@@ -355,19 +355,25 @@
             this.ID.ReadOnly = true;
             this.ID.Width = 80;
             // 
-            // name
+            // code
             // 
-            this.name.HeaderText = "编号";
-            this.name.Name = "name";
-            this.name.ReadOnly = true;
-            this.name.Width = 200;
+            this.code.HeaderText = "编号";
+            this.code.Name = "code";
+            this.code.ReadOnly = true;
+            this.code.Width = 160;
             // 
-            // sellTime
+            // customer
             // 
-            this.sellTime.HeaderText = "时间";
-            this.sellTime.Name = "sellTime";
-            this.sellTime.ReadOnly = true;
-            this.sellTime.Width = 120;
+            this.customer.HeaderText = "往来单位";
+            this.customer.Name = "customer";
+            this.customer.ReadOnly = true;
+            // 
+            // time
+            // 
+            this.time.HeaderText = "时间";
+            this.time.Name = "time";
+            this.time.ReadOnly = true;
+            this.time.Width = 160;
             // 
             // type
             // 
@@ -382,14 +388,14 @@
             this.typeValue.ReadOnly = true;
             this.typeValue.Visible = false;
             // 
-            // realTotal
+            // sum
             // 
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.realTotal.DefaultCellStyle = dataGridViewCellStyle1;
-            this.realTotal.HeaderText = "总价合计/元";
-            this.realTotal.Name = "realTotal";
-            this.realTotal.ReadOnly = true;
-            this.realTotal.Width = 110;
+            this.sum.DefaultCellStyle = dataGridViewCellStyle1;
+            this.sum.HeaderText = "金额/元";
+            this.sum.Name = "sum";
+            this.sum.ReadOnly = true;
+            this.sum.Width = 110;
             // 
             // status
             // 
@@ -397,13 +403,7 @@
             this.status.Name = "status";
             this.status.ReadOnly = true;
             // 
-            // customer
-            // 
-            this.customer.HeaderText = "往来单位";
-            this.customer.Name = "customer";
-            this.customer.ReadOnly = true;
-            // 
-            // ProductCirculationListForm
+            // PayReceiptListForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -424,7 +424,7 @@
             this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("宋体", 10F);
             this.HideOnClose = true;
-            this.Name = "ProductCirculationListForm";
+            this.Name = "PayReceiptListForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "单据列表";
             this.Load += new System.EventHandler(this.PayReceiptListForm_Load);
@@ -468,12 +468,12 @@
         private System.Windows.Forms.TextBox textBox_customer;
         private System.Windows.Forms.DataGridViewCheckBoxColumn check;
         private System.Windows.Forms.DataGridViewTextBoxColumn ID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn name;
-        private System.Windows.Forms.DataGridViewTextBoxColumn sellTime;
+        private System.Windows.Forms.DataGridViewTextBoxColumn code;
+        private System.Windows.Forms.DataGridViewTextBoxColumn customer;
+        private System.Windows.Forms.DataGridViewTextBoxColumn time;
         private System.Windows.Forms.DataGridViewTextBoxColumn type;
         private System.Windows.Forms.DataGridViewTextBoxColumn typeValue;
-        private System.Windows.Forms.DataGridViewTextBoxColumn realTotal;
+        private System.Windows.Forms.DataGridViewTextBoxColumn sum;
         private System.Windows.Forms.DataGridViewTextBoxColumn status;
-        private System.Windows.Forms.DataGridViewTextBoxColumn customer;
     }
 }

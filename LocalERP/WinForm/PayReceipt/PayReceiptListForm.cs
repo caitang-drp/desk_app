@@ -58,12 +58,18 @@ namespace LocalERP.WinForm
                 {
                     int index = this.dataGridView1.Rows.Add();
                     this.dataGridView1.Rows[index].Cells["ID"].Value = dr["ID"];
-                    this.dataGridView1.Rows[index].Cells["name"].Value = dr["serial"];
+                    this.dataGridView1.Rows[index].Cells["code"].Value = dr["serial"];
+                    this.dataGridView1.Rows[index].Cells["customer"].Value = dr["name"];
                     int type = (int)(dr["bill_type"]);
                     this.dataGridView1.Rows[index].Cells["type"].Value = PayReceipt.PayReceiptTypeConfs[type - 1].name;
                     this.dataGridView1.Rows[index].Cells["typeValue"].Value = type;
 
-                    //this.dataGridView1.Rows[index].Cells["realTotal"].Value = double.Parse(dr["realTotal"].ToString()).ToString("0.00");
+                    double sum = 0;
+                    ValidateUtility.getDouble(dr, "amount", out sum);
+                    if (type == 1 || type == 4)
+                        ControlUtility.setCellWithColor(dataGridView1.Rows[index].Cells["sum"], Color.Green, string.Format("-{0:0.00}", sum));
+                    else if (type == 2 || type == 3)
+                        ControlUtility.setCellWithColor(dataGridView1.Rows[index].Cells["sum"], Color.Red, string.Format("+{0:0.00}", sum));
 
                     int status = (int)(dr["status"]);
                     if (status == 1)
@@ -71,13 +77,13 @@ namespace LocalERP.WinForm
                     else
                         ControlUtility.setCellWithColor(this.dataGridView1.Rows[index].Cells["status"], Color.Black, PayReceipt.statusContext[status - 1]);
 
+                    this.dataGridView1.Rows[index].Cells["time"].Value = dr["bill_time"];
 
-                    this.dataGridView1.Rows[index].Cells["bill_time"].Value = dr["bill_time"];
                 }
             }
             catch (Exception ex)
             {
-                //MessageBox.Show("查询错误, 请输入正确的条件.", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("查询错误, 请输入正确的条件.", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
@@ -92,11 +98,11 @@ namespace LocalERP.WinForm
 
         //del
         private void toolStripButton2_Click(object sender, EventArgs e)
-        {/*
+        {
             List<int> list = this.dataGridView1.getSelectIDs("ID", "check");
             if (list == null || list.Count <= 0)
             {
-                MessageBox.Show("请选择单据", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("请选择款单", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
             StringBuilder ids = new StringBuilder();
@@ -105,71 +111,69 @@ namespace LocalERP.WinForm
                 ids.Append(list[ii]);
                 ids.Append(" ");
             }
-            if (MessageBox.Show(string.Format("是否删除流水号为{0}的单据?", ids.ToString()), "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
+            if (MessageBox.Show(string.Format("是否删除流水号为{0}的款单?", ids.ToString()), "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
             {
                 for (int i = 0; i < list.Count; i++)
                 {
-                    if (cirDao.FindByID(list[i]).Status > 1) {
-                        MessageBox.Show(string.Format("ID为{0}的单据已经审核, 无法删除!", list[i]), "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    if (PayReceiptDao.getInstance().FindByID(list[i]).status > 1) {
+                        MessageBox.Show(string.Format("ID为{0}的款单已经审核, 无法删除!", list[i]), "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         initList();
                         return;
                     }
-                    cirDao.DeleteByID(list[i]);
+                    PayReceiptDao.getInstance().Delete(list[i]);
                 }
                 initList();
-                MessageBox.Show("删除单据成功!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }*/
+                MessageBox.Show("删除款单成功!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
 
         //edit
         private void toolStripButton3_Click(object sender, EventArgs e)
-        {/*
-            List<int> list = this.dataGridView1.getSelectIDs("ID", "check");
-            if (list == null || list.Count <= 0)
+        {
+            List<DataGridViewRow> rows = this.dataGridView1.getCheckRows("check");
+            if (rows == null || rows.Count <= 0)
             {
-                MessageBox.Show("请选择单据!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("请选择款单!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
-            mainForm.setForm(DataUtility.PURCHASE, 1, list[0]);*/
+            editPayReceipt(rows[0]);   
         }
 
         //
         private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {/*
+        {
             if (this.dataGridView1.SelectedRows == null || this.dataGridView1.SelectedRows.Count <= 0)
             {
-                MessageBox.Show("请选择任务!");
+                MessageBox.Show("请选择款单!");
                 return;
             }
-            int typeValue = (int)this.dataGridView1.SelectedRows[0].Cells["typeValue"].Value;
+            editPayReceipt(this.dataGridView1.SelectedRows[0]);
+        }
+
+        private void editPayReceipt(DataGridViewRow row) {
+            int typeValue = (int)row.Cells["typeValue"].Value;
+            int id = (int)row.Cells["ID"].Value;
             string formString = "";
-            switch (typeValue) { 
-                case (int)ProductCirculation.CirculationType.purchase:
-                    formString = DataUtility.PURCHASE;
+            switch (typeValue)
+            {
+                case (int)PayReceipt.BillType.BuyPay:
+                    formString = DataUtility.CASH_PAY;
                     break;
-                case (int)ProductCirculation.CirculationType.purchaseBack:
-                    formString = DataUtility.PURCHASE_BACK;
+                case (int)PayReceipt.BillType.BuyRefund:
+                    formString = DataUtility.CASH_PAY_REFUND;
                     break;
-                case (int)ProductCirculation.CirculationType.easy:
-                    formString = DataUtility.EASY;
+                case (int)PayReceipt.BillType.SellReceipt:
+                    formString = DataUtility.CASH_RECEIPT;
                     break;
-                case (int)ProductCirculation.CirculationType.sell:
-                    formString = DataUtility.SELL;
-                    break;
-                case (int)ProductCirculation.CirculationType.sellBack:
-                    formString = DataUtility.SELL_BACK;
-                    break;
-                case (int)ProductCirculation.CirculationType.libOverflow:
-                    formString = DataUtility.LIB_OVERFLOW;
-                    break;
-                case (int)ProductCirculation.CirculationType.libLoss:
-                    formString = DataUtility.LIB_LOSS;
+                case (int)PayReceipt.BillType.SellRefund:
+                    formString = DataUtility.CASH_RECEIPT_REFUND;
                     break;
                 default:
                     break;
 
             }
-            mainForm.setForm(formString, 1, (int)this.dataGridView1.SelectedRows[0].Cells["ID"].Value);*/
+            mainForm.setForm(formString, 1, id);
+
         }
 
         private void button1_Click(object sender, EventArgs e)

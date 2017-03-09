@@ -146,13 +146,13 @@ namespace LocalERP.WinForm
         //edit
         private void toolStripButton3_Click(object sender, EventArgs e)
         {
-            List<int> list = this.dataGridView1.getSelectIDs("ID", "check");
-            if (list == null || list.Count <= 0)
+            List<DataGridViewRow> rows = this.dataGridView1.getCheckRows("check");
+            if (rows == null || rows.Count <= 0)
             {
-                MessageBox.Show("请选择单据!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("请选择货单!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
-            mainForm.setForm(DataUtility.PURCHASE, 1, list[0]);
+            editCirculation(rows[0]);            
         }
 
         //
@@ -160,12 +160,19 @@ namespace LocalERP.WinForm
         {
             if (this.dataGridView1.SelectedRows == null || this.dataGridView1.SelectedRows.Count <= 0)
             {
-                MessageBox.Show("请选择任务!");
+                MessageBox.Show("请选择货单!");
                 return;
             }
-            int typeValue = (int)this.dataGridView1.SelectedRows[0].Cells["typeValue"].Value;
+            editCirculation(this.dataGridView1.SelectedRows[0]);
+        }
+
+        private void editCirculation(DataGridViewRow row) {
+            int typeValue = (int)row.Cells["typeValue"].Value;
+            int id = (int)row.Cells["ID"].Value;
+
             string formString = "";
-            switch (typeValue) { 
+            switch (typeValue)
+            {
                 case (int)ProductCirculation.CirculationType.purchase:
                     formString = DataUtility.PURCHASE;
                     break;
@@ -191,7 +198,7 @@ namespace LocalERP.WinForm
                     break;
 
             }
-            mainForm.setForm(formString, 1, (int)this.dataGridView1.SelectedRows[0].Cells["ID"].Value);
+            mainForm.setForm(formString, 1, id);
         }
 
         private void button1_Click(object sender, EventArgs e)

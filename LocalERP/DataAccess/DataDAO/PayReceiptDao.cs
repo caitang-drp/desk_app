@@ -108,11 +108,11 @@ namespace LocalERP.DataAccess.DataDAO
         public DataTable FindList(DateTime startTime, DateTime endTime, int status, string customerName)
         {
             StringBuilder commandText = null;
-            commandText = new StringBuilder(string.Format("select PayReceipt.* from PayReceipt where bill_time between #{0}# and #{1}# ", startTime.ToString("yyyy-MM-dd"), endTime.ToString("yyyy-MM-dd")));
+            commandText = new StringBuilder(string.Format("select PayReceipt.*, name from PayReceipt, Customer where PayReceipt.customer_id = Customer.ID and bill_time between #{0}# and #{1}# ", startTime.ToString("yyyy-MM-dd"), endTime.ToString("yyyy-MM-dd")));
             if (status > 0)
                 commandText.Append(string.Format(" and status = {0}", status));
             if (!string.IsNullOrEmpty(customerName))
-                commandText.Append(string.Format(" and Customer.name like '%{0}%'", customerName));
+                commandText.Append(string.Format(" and name like '%{0}%'", customerName));
 
             commandText.Append(string.Format(" order by PayReceipt.ID desc"));
             return DbHelperAccess.executeQuery(commandText.ToString());
