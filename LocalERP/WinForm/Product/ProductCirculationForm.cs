@@ -652,12 +652,6 @@ namespace LocalERP.WinForm
             Report.FetchRecord += new _IGridppReportEvents_FetchRecordEventHandler(ReportFetchRecord);
             // 打印预览
             Report.PrintPreview(true);
-
-            /*
-            //MessageBox.Show("系统暂未开放打印功能.", "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            ProductSellReportForm form = new ProductSellReportForm(sell, records);
-            form.ShowDialog();
-            */
         }
 
         private DialogResult affirmQuit() {

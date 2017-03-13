@@ -7,10 +7,23 @@
 		"Charset":134
 	},
 	"Printer":{
+		"Size":256,
+		"Width":14,
+		"Height":24,
+		"Oriention":"Landscape",
+		"LeftMargin":1.5,
+		"TopMargin":1.5,
+		"RightMargin":1.5,
+		"BottomMargin":1.5,
+		"PrintOffsetSaveToLocal":true
 	},
 	"DetailGrid":{
+		"AppendBlankRow":true,
 		"Recordset":{
 			"Field":[
+				{
+					"Name":"serial"
+				},
 				{
 					"Name":"product"
 				},
@@ -47,43 +60,51 @@
 		},
 		"Column":[
 			{
-				"Name":"product",
-				"Width":4.36563
-			},
-			{
-				"Name":"cnt_once_piece",
+				"Name":"serial",
 				"Width":1.69333
 			},
 			{
+				"Name":"product",
+				"Width":4.57729
+			},
+			{
+				"Name":"cnt_one_piece",
+				"Width":2.38125
+			},
+			{
 				"Name":"pieces",
-				"Width":1.32292
+				"Width":1.79917
 			},
 			{
 				"Name":"unit",
-				"Width":1.19063
+				"Width":1.79917
 			},
 			{
 				"Name":"cnt",
-				"Width":2.19604
+				"Width":2.40771
 			},
 			{
 				"Name":"price",
-				"Width":2.59292
+				"Width":2.77813
 			},
 			{
 				"Name":"sum_price",
-				"Width":2.2225
+				"Width":3.54542
 			}
 		],
 		"ColumnContent":{
 			"Height":0.608542,
 			"ColumnContentCell":[
 				{
+					"Column":"serial",
+					"DataField":"serial"
+				},
+				{
 					"Column":"product",
 					"DataField":"product"
 				},
 				{
-					"Column":"cnt_once_piece",
+					"Column":"cnt_one_piece",
 					"TextAlign":"MiddleCenter",
 					"DataField":"cnt_one_piece"
 				},
@@ -120,13 +141,19 @@
 			"ColumnTitleCell":[
 				{
 					"GroupTitle":false,
+					"Column":"serial",
+					"TextAlign":"MiddleCenter",
+					"Text":"serial"
+				},
+				{
+					"GroupTitle":false,
 					"Column":"product",
 					"TextAlign":"MiddleCenter",
 					"Text":"产品"
 				},
 				{
 					"GroupTitle":false,
-					"Column":"cnt_once_piece",
+					"Column":"cnt_one_piece",
 					"TextAlign":"MiddleCenter",
 					"Text":"每件数量"
 				},
@@ -158,7 +185,7 @@
 					"GroupTitle":false,
 					"Column":"sum_price",
 					"TextAlign":"MiddleCenter",
-					"Text":"金额"
+					"Text":"小计"
 				}
 			]
 		},
@@ -170,13 +197,13 @@
 					"Height":0
 				},
 				"GroupFooter":{
-					"Height":0.635,
+					"Height":0.608542,
 					"Control":[
 						{
 							"Type":"SummaryBox",
 							"Name":"SummaryBox1",
-							"Left":8.81062,
-							"Width":1.98438,
+							"Left":7.59354,
+							"Width":2.01083,
 							"Height":0.608542,
 							"TextAlign":"MiddleCenter",
 							"DataField":"cnt"
@@ -184,8 +211,8 @@
 						{
 							"Type":"SummaryBox",
 							"Name":"SummaryBox2",
-							"Left":13.5996,
-							"Width":2.01083,
+							"Left":11.8004,
+							"Width":3.20146,
 							"Height":0.608542,
 							"TextAlign":"MiddleCenter",
 							"DataField":"sum_price"
@@ -193,7 +220,7 @@
 						{
 							"Type":"StaticBox",
 							"Name":"StaticBox3",
-							"Width":1.00542,
+							"Width":1.19063,
 							"Height":0.608542,
 							"Text":"小计"
 						}
@@ -220,7 +247,7 @@
 							"Type":"StaticBox",
 							"Name":"comment_text",
 							"Left":1.40229,
-							"Width":13.9965,
+							"Width":17.4096,
 							"Height":0.608542,
 							"EndEllipsis":true
 						}
@@ -232,19 +259,19 @@
 	"ReportHeader":[
 		{
 			"Name":"ReportHeader1",
-			"Height":1.40229,
+			"Height":2.40771,
 			"Control":[
 				{
 					"Type":"StaticBox",
 					"Name":"customer",
 					"Left":0.211667,
-					"Top":0.79375,
+					"Top":1.5875,
 					"Width":4.78896,
 					"Height":0.608542,
 					"Font":{
 						"Name":"宋体",
 						"Size":120000,
-						"Bold":true,
+						"Weight":400,
 						"Charset":134
 					},
 					"EndEllipsis":true
@@ -252,32 +279,48 @@
 				{
 					"Type":"StaticBox",
 					"Name":"date",
-					"Left":6.00604,
-					"Top":0.79375,
+					"Left":7.80521,
+					"Top":1.5875,
 					"Width":3.38667,
 					"Height":0.608542,
 					"Font":{
 						"Name":"宋体",
 						"Size":120000,
-						"Bold":true,
+						"Weight":400,
 						"Charset":134
 					}
 				},
 				{
 					"Type":"StaticBox",
 					"Name":"serial",
-					"Left":10.0013,
-					"Top":0.79375,
-					"Width":5.60917,
+					"Left":14.605,
+					"Top":1.5875,
+					"Width":5.79438,
 					"Height":0.608542,
 					"Font":{
 						"Name":"宋体",
 						"Size":120000,
-						"Bold":true,
+						"Weight":400,
 						"Charset":134
 					},
 					"EndEllipsis":true,
 					"TextAlign":"MiddleRight"
+				},
+				{
+					"Type":"StaticBox",
+					"Name":"StaticBox4",
+					"Left":7.40833,
+					"Top":0.396875,
+					"Width":6.40292,
+					"Height":1.00542,
+					"Font":{
+						"Name":"宋体",
+						"Size":217500,
+						"Bold":true,
+						"Charset":134
+					},
+					"TextAlign":"MiddleCenter",
+					"Text":"XX公司销售出货单"
 				}
 			],
 			"RepeatOnPage":true
@@ -286,22 +329,23 @@
 	"ReportFooter":[
 		{
 			"Name":"ReportFooter1",
-			"Height":2.40771,
+			"Height":1.5875,
 			"Control":[
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox2",
-					"Left":0.211667,
-					"Top":0.396875,
-					"Width":15.1871,
-					"Height":0.396875,
-					"Text":"制单：管理员                          审核：                    领货人：     "
+					"Left":0.291042,
+					"Top":0.105833,
+					"Width":18.6002,
+					"Height":0.582083,
+					"Text":"制单：管理员                             审核：                                领货人：     "
 				},
 				{
 					"Type":"MemoBox",
 					"Name":"MemoBox3",
-					"Top":1.40229,
-					"Width":6.00604,
+					"Left":0.291042,
+					"Top":0.899583,
+					"Width":11.1919,
 					"Height":0.608542,
 					"Text":"打印时间：[#SystemVar(CurrentDateTime):yyyy年MM月dd日#]"
 				},
@@ -309,9 +353,9 @@
 					"Type":"MemoBox",
 					"Name":"MemoBox2",
 					"Anchor":"[Top|Right]",
-					"Left":12.991,
-					"Top":1.40229,
-					"Width":2.61938,
+					"Left":17.6742,
+					"Top":0.899583,
+					"Width":5.3975,
 					"Height":0.608542,
 					"Text":"第[#SystemVar(PageNumber)#]页 共[#SystemVar(PageCount)#]页"
 				}
