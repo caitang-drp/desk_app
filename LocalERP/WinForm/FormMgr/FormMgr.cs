@@ -147,6 +147,30 @@ namespace LocalERP.WinForm
             return sellRefundBillForm;
         }
 
+        // 其他付款单
+        private PayReceiptForm otherPayBillForm = null;
+        public PayReceiptForm getOtherPayBillForm()
+        {
+            if (otherPayBillForm == null || otherPayBillForm.IsDisposed)
+            {
+                otherPayBillForm = new PayReceiptForm(PayReceipt.PayReceiptTypeConf_OtherPay);
+                appendEvent(otherPayBillForm);
+            }
+            return otherPayBillForm;
+        }
+
+        // 其他收款单
+        private PayReceiptForm otherReceiptBillForm = null;
+        public PayReceiptForm getOtherReceiptBillForm()
+        {
+            if (otherReceiptBillForm == null || otherReceiptBillForm.IsDisposed)
+            {
+                otherReceiptBillForm = new PayReceiptForm(PayReceipt.PayReceiptTypeConf_OtherReceipt);
+                appendEvent(otherReceiptBillForm);
+            }
+            return otherReceiptBillForm;
+        }
+
         /**************** query statistic ***************************/
         //product lib query form
         protected QueryLibForm queryLibForm = null;

@@ -259,13 +259,13 @@
 	"ReportHeader":[
 		{
 			"Name":"ReportHeader1",
-			"Height":2.40771,
+			"Height":3.41313,
 			"Control":[
 				{
 					"Type":"StaticBox",
 					"Name":"customer",
 					"Left":0.211667,
-					"Top":1.5875,
+					"Top":2.59292,
 					"Width":4.78896,
 					"Height":0.608542,
 					"Font":{
@@ -279,9 +279,9 @@
 				{
 					"Type":"StaticBox",
 					"Name":"date",
-					"Left":7.80521,
-					"Top":1.5875,
-					"Width":3.38667,
+					"Left":8.38729,
+					"Top":2.59292,
+					"Width":3.41313,
 					"Height":0.608542,
 					"Font":{
 						"Name":"宋体",
@@ -293,8 +293,8 @@
 				{
 					"Type":"StaticBox",
 					"Name":"serial",
-					"Left":14.605,
-					"Top":1.5875,
+					"Left":15.0019,
+					"Top":2.59292,
 					"Width":5.79438,
 					"Height":0.608542,
 					"Font":{
@@ -308,19 +308,36 @@
 				},
 				{
 					"Type":"StaticBox",
-					"Name":"StaticBox4",
-					"Left":7.40833,
+					"Name":"title",
+					"Left":7.01146,
 					"Top":0.396875,
-					"Width":6.40292,
+					"Width":7.19667,
 					"Height":1.00542,
 					"Font":{
-						"Name":"宋体",
+						"Name":"华文楷体",
 						"Size":217500,
 						"Bold":true,
+						"Underline":true,
 						"Charset":134
 					},
 					"TextAlign":"MiddleCenter",
 					"Text":"XX公司销售出货单"
+				},
+				{
+					"Type":"FieldBox",
+					"Name":"contract",
+					"Left":4.60375,
+					"Top":1.40229,
+					"Width":4.78896,
+					"Height":1.00542
+				},
+				{
+					"Type":"FieldBox",
+					"Name":"info",
+					"Left":10.3981,
+					"Top":1.40229,
+					"Width":8.59896,
+					"Height":1.00542
 				}
 			],
 			"RepeatOnPage":true

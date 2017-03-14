@@ -10,31 +10,7 @@ namespace LocalERP.DataAccess.Data
     {
         // 应收应付，(采购付款， 采购退点， 销售收款， 销售退点)
         //重新排序
-        public enum BillType { BuyPay=1, BuyRefund=2, SellReceipt=3, SellRefund=4};
-        /*
-        public string get_bill_type_name(int y)
-        {
-            string ans = "未知";
-            BillType x = (BillType)y;
-
-            switch (x)
-            {
-                case BillType.SellReceipt:
-                    ans = "销售收款";
-                    break;
-                case BillType.SellRefund:
-                    ans = "销售退点";
-                    break;
-                case BillType.BuyPay:
-                    ans = "采购付款";
-                    break;
-                case BillType.BuyRefund:
-                    ans = "采购退点";
-                    break;
-            }
-
-            return ans;
-        }*/
+        public enum BillType { BuyPay=1, BuyRefund=2, SellReceipt=3, SellRefund=4, OtherPay = 5, OtherReceipt=6};
 
         // 数据表的唯一id
         public int id;
@@ -61,10 +37,12 @@ namespace LocalERP.DataAccess.Data
         public static string[] statusContext = new string[] { "未审核", "undefined", "undefined", "已审核" };
 
         //用于控制PayReceipt窗口的具体类型
-        public static PayReceiptTypeConf PayReceiptTypeConf_BuyPay = new PayReceiptTypeConf(PayReceipt.BillType.BuyPay, UpdateType.PayReceiptUpdate, UpdateType.PayReceiptFinishUpdate, 1, "采购付款", "CGYF", "供 应 商:", "付款");
+        public static PayReceiptTypeConf PayReceiptTypeConf_BuyPay = new PayReceiptTypeConf(PayReceipt.BillType.BuyPay, UpdateType.PayReceiptUpdate, UpdateType.PayReceiptFinishUpdate, 1, "采购付款", "CGFK", "供 应 商:", "付款");
         public static PayReceiptTypeConf PayReceiptTypeConf_BuyRefund = new PayReceiptTypeConf(PayReceipt.BillType.BuyRefund, UpdateType.PayReceiptUpdate, UpdateType.PayReceiptFinishUpdate, -1, "采购退点", "CGTD", "供 应 商:", "退点");
-        public static PayReceiptTypeConf PayReceiptTypeConf_SellReceipt = new PayReceiptTypeConf(PayReceipt.BillType.SellReceipt, UpdateType.PayReceiptUpdate, UpdateType.PayReceiptFinishUpdate, -1, "销售收款", "XSYS", "客    户:", "收款");
+        public static PayReceiptTypeConf PayReceiptTypeConf_SellReceipt = new PayReceiptTypeConf(PayReceipt.BillType.SellReceipt, UpdateType.PayReceiptUpdate, UpdateType.PayReceiptFinishUpdate, -1, "销售收款", "XSSK", "客    户:", "收款");
         public static PayReceiptTypeConf PayReceiptTypeConf_SellRefund = new PayReceiptTypeConf(PayReceipt.BillType.SellRefund, UpdateType.PayReceiptUpdate, UpdateType.PayReceiptFinishUpdate, 1, "销售退点", "XSTD", "客    户:", "退点");
+        public static PayReceiptTypeConf PayReceiptTypeConf_OtherPay = new PayReceiptTypeConf(PayReceipt.BillType.OtherPay, UpdateType.PayReceiptUpdate, UpdateType.PayReceiptFinishUpdate, 1, "其他付款", "QTFK", "往来单位", "付款");
+        public static PayReceiptTypeConf PayReceiptTypeConf_OtherReceipt = new PayReceiptTypeConf(PayReceipt.BillType.OtherReceipt, UpdateType.PayReceiptUpdate, UpdateType.PayReceiptFinishUpdate, -1, "其他收款", "QTSK", "往来单位", "收款");
         
         //这里要按照type值的顺序
         public static PayReceiptTypeConf[] PayReceiptTypeConfs = new PayReceiptTypeConf[] { PayReceiptTypeConf_BuyPay, PayReceiptTypeConf_BuyRefund, PayReceiptTypeConf_SellReceipt, PayReceiptTypeConf_SellRefund };

@@ -101,7 +101,14 @@ namespace LocalERP.WinForm
                     FormSingletonFactory.getInstance().getSellRefundBillForm().Show(this.dockPanel1);
                     FormSingletonFactory.getInstance().getSellRefundBillForm().reload(openMode, ID);
                     break;
-
+                case DataUtility.CASH_OTHER_PAY:
+                    FormSingletonFactory.getInstance().getOtherPayBillForm().Show(this.dockPanel1);
+                    FormSingletonFactory.getInstance().getOtherPayBillForm().reload(openMode, ID);
+                    break;
+                case DataUtility.CASH_OTHER_RECEIPT:
+                    FormSingletonFactory.getInstance().getOtherReceiptBillForm().Show(this.dockPanel1);
+                    FormSingletonFactory.getInstance().getOtherReceiptBillForm().reload(openMode, ID);
+                    break;
                 case DataUtility.STATISTIC_PROFIT:
                     FormSingletonFactory.getInstance().getQuerySellProfitForm().Show(this.dockPanel1);
                     FormSingletonFactory.getInstance().getQuerySellProfitForm().refresh();
@@ -250,6 +257,11 @@ namespace LocalERP.WinForm
         private void toolStripButton_statistic_Click(object sender, EventArgs e)
         {
             this.setForm(DataUtility.STATISTIC_PRODUCT);
+        }
+
+        public void companyInfo_Click(object sender, EventArgs e) { 
+            ReportInfoForm form = new ReportInfoForm();
+            form.ShowDialog();
         }
     }
 }
