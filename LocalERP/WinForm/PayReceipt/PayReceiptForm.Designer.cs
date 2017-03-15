@@ -41,6 +41,7 @@ namespace LocalERP.WinForm
             this.label4 = new System.Windows.Forms.Label();
             this.label_status = new System.Windows.Forms.Label();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.textBox_thisPayed = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label_customer = new System.Windows.Forms.Label();
@@ -58,7 +59,6 @@ namespace LocalERP.WinForm
             this.toolStripButton_finish = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton_print = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
-            this.textBox_thisPayed = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
@@ -66,16 +66,19 @@ namespace LocalERP.WinForm
             this.textBox_previousArrears = new System.Windows.Forms.TextBox();
             this.label17 = new System.Windows.Forms.Label();
             this.textBox_accumulative = new System.Windows.Forms.TextBox();
+            this.panel_history = new System.Windows.Forms.Panel();
+            this.label_tip = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sellDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sellDataSetBindingSource)).BeginInit();
             this.toolStrip2.SuspendLayout();
+            this.panel_history.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(15, 205);
+            this.label1.Location = new System.Drawing.Point(15, 202);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(70, 14);
             this.label1.TabIndex = 0;
@@ -103,11 +106,11 @@ namespace LocalERP.WinForm
             // 
             this.textBox_comment.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox_comment.Location = new System.Drawing.Point(18, 232);
+            this.textBox_comment.Location = new System.Drawing.Point(18, 221);
             this.textBox_comment.Margin = new System.Windows.Forms.Padding(2);
             this.textBox_comment.Multiline = true;
             this.textBox_comment.Name = "textBox_comment";
-            this.textBox_comment.Size = new System.Drawing.Size(885, 218);
+            this.textBox_comment.Size = new System.Drawing.Size(885, 229);
             this.textBox_comment.TabIndex = 18;
             this.textBox_comment.TextChanged += new System.EventHandler(this.Controls_TextChanged);
             // 
@@ -133,7 +136,7 @@ namespace LocalERP.WinForm
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(15, 107);
+            this.label4.Location = new System.Drawing.Point(25, 108);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(70, 14);
             this.label4.TabIndex = 21;
@@ -144,7 +147,7 @@ namespace LocalERP.WinForm
             this.label_status.AutoSize = true;
             this.label_status.Font = new System.Drawing.Font("宋体", 10F);
             this.label_status.ForeColor = System.Drawing.Color.Red;
-            this.label_status.Location = new System.Drawing.Point(85, 107);
+            this.label_status.Location = new System.Drawing.Point(95, 108);
             this.label_status.Name = "label_status";
             this.label_status.Size = new System.Drawing.Size(35, 14);
             this.label_status.TabIndex = 22;
@@ -154,11 +157,20 @@ namespace LocalERP.WinForm
             // 
             this.errorProvider1.ContainerControl = this;
             // 
+            // textBox_thisPayed
+            // 
+            this.errorProvider1.SetIconPadding(this.textBox_thisPayed, 20);
+            this.textBox_thisPayed.Location = new System.Drawing.Point(98, 136);
+            this.textBox_thisPayed.Name = "textBox_thisPayed";
+            this.textBox_thisPayed.Size = new System.Drawing.Size(134, 23);
+            this.textBox_thisPayed.TabIndex = 53;
+            this.textBox_thisPayed.TextChanged += new System.EventHandler(this.Controls_TextChanged);
+            // 
             // label5
             // 
             this.label5.AutoSize = true;
             this.label5.ForeColor = System.Drawing.Color.Red;
-            this.label5.Location = new System.Drawing.Point(319, 107);
+            this.label5.Location = new System.Drawing.Point(320, 107);
             this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(14, 14);
@@ -169,7 +181,7 @@ namespace LocalERP.WinForm
             // 
             this.label9.AutoSize = true;
             this.label9.ForeColor = System.Drawing.Color.Red;
-            this.label9.Location = new System.Drawing.Point(638, 107);
+            this.label9.Location = new System.Drawing.Point(639, 107);
             this.label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(14, 14);
@@ -198,7 +210,7 @@ namespace LocalERP.WinForm
             // label_operator
             // 
             this.label_operator.AutoSize = true;
-            this.label_operator.Location = new System.Drawing.Point(651, 138);
+            this.label_operator.Location = new System.Drawing.Point(651, 140);
             this.label_operator.Name = "label_operator";
             this.label_operator.Size = new System.Drawing.Size(70, 14);
             this.label_operator.TabIndex = 45;
@@ -207,7 +219,7 @@ namespace LocalERP.WinForm
             // label_thisPayed
             // 
             this.label_thisPayed.AutoSize = true;
-            this.label_thisPayed.Location = new System.Drawing.Point(332, 171);
+            this.label_thisPayed.Location = new System.Drawing.Point(25, 140);
             this.label_thisPayed.Name = "label_thisPayed";
             this.label_thisPayed.Size = new System.Drawing.Size(70, 14);
             this.label_thisPayed.TabIndex = 49;
@@ -217,7 +229,7 @@ namespace LocalERP.WinForm
             // 
             this.label12.AutoSize = true;
             this.label12.ForeColor = System.Drawing.Color.Black;
-            this.label12.Location = new System.Drawing.Point(651, 171);
+            this.label12.Location = new System.Drawing.Point(328, 12);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(70, 14);
             this.label12.TabIndex = 46;
@@ -227,7 +239,7 @@ namespace LocalERP.WinForm
             // 
             this.label_title.AutoSize = true;
             this.label_title.Font = new System.Drawing.Font("宋体", 16F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))));
-            this.label_title.Location = new System.Drawing.Point(367, 52);
+            this.label_title.Location = new System.Drawing.Point(327, 52);
             this.label_title.Name = "label_title";
             this.label_title.Size = new System.Drawing.Size(125, 22);
             this.label_title.TabIndex = 51;
@@ -235,7 +247,7 @@ namespace LocalERP.WinForm
             // 
             // textBox_operator
             // 
-            this.textBox_operator.Location = new System.Drawing.Point(724, 134);
+            this.textBox_operator.Location = new System.Drawing.Point(724, 136);
             this.textBox_operator.Margin = new System.Windows.Forms.Padding(2);
             this.textBox_operator.Name = "textBox_operator";
             this.textBox_operator.Size = new System.Drawing.Size(153, 23);
@@ -311,6 +323,7 @@ namespace LocalERP.WinForm
             this.toolStripButton_print.Size = new System.Drawing.Size(39, 34);
             this.toolStripButton_print.Text = "打印";
             this.toolStripButton_print.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.toolStripButton_print.Visible = false;
             this.toolStripButton_print.Click += new System.EventHandler(this.toolStripButton_print_Click);
             // 
             // toolStripButton1
@@ -323,19 +336,10 @@ namespace LocalERP.WinForm
             this.toolStripButton1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton_cancel_Click);
             // 
-            // textBox_thisPayed
-            // 
-            this.errorProvider1.SetIconPadding(this.textBox_thisPayed, 20);
-            this.textBox_thisPayed.Location = new System.Drawing.Point(405, 167);
-            this.textBox_thisPayed.Name = "textBox_thisPayed";
-            this.textBox_thisPayed.Size = new System.Drawing.Size(150, 23);
-            this.textBox_thisPayed.TabIndex = 53;
-            this.textBox_thisPayed.TextChanged += new System.EventHandler(this.Controls_TextChanged);
-            // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(559, 170);
+            this.label6.Location = new System.Drawing.Point(238, 139);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(21, 14);
             this.label6.TabIndex = 55;
@@ -344,7 +348,7 @@ namespace LocalERP.WinForm
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(880, 170);
+            this.label7.Location = new System.Drawing.Point(558, 11);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(21, 14);
             this.label7.TabIndex = 56;
@@ -354,7 +358,7 @@ namespace LocalERP.WinForm
             // 
             this.label18.AutoSize = true;
             this.label18.ForeColor = System.Drawing.Color.Red;
-            this.label18.Location = new System.Drawing.Point(319, 171);
+            this.label18.Location = new System.Drawing.Point(13, 140);
             this.label18.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(14, 14);
@@ -364,7 +368,7 @@ namespace LocalERP.WinForm
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(227, 170);
+            this.label16.Location = new System.Drawing.Point(237, 12);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(21, 14);
             this.label16.TabIndex = 66;
@@ -373,15 +377,15 @@ namespace LocalERP.WinForm
             // textBox_previousArrears
             // 
             this.textBox_previousArrears.Enabled = false;
-            this.textBox_previousArrears.Location = new System.Drawing.Point(88, 167);
+            this.textBox_previousArrears.Location = new System.Drawing.Point(82, 9);
             this.textBox_previousArrears.Name = "textBox_previousArrears";
-            this.textBox_previousArrears.Size = new System.Drawing.Size(133, 23);
+            this.textBox_previousArrears.Size = new System.Drawing.Size(150, 23);
             this.textBox_previousArrears.TabIndex = 65;
             // 
             // label17
             // 
             this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(15, 170);
+            this.label17.Location = new System.Drawing.Point(9, 12);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(70, 14);
             this.label17.TabIndex = 64;
@@ -390,10 +394,33 @@ namespace LocalERP.WinForm
             // textBox_accumulative
             // 
             this.textBox_accumulative.Enabled = false;
-            this.textBox_accumulative.Location = new System.Drawing.Point(723, 167);
+            this.textBox_accumulative.Location = new System.Drawing.Point(400, 7);
             this.textBox_accumulative.Name = "textBox_accumulative";
             this.textBox_accumulative.Size = new System.Drawing.Size(154, 23);
             this.textBox_accumulative.TabIndex = 60;
+            // 
+            // panel_history
+            // 
+            this.panel_history.Controls.Add(this.label16);
+            this.panel_history.Controls.Add(this.textBox_previousArrears);
+            this.panel_history.Controls.Add(this.label17);
+            this.panel_history.Controls.Add(this.label12);
+            this.panel_history.Controls.Add(this.textBox_accumulative);
+            this.panel_history.Controls.Add(this.label7);
+            this.panel_history.Location = new System.Drawing.Point(323, 162);
+            this.panel_history.Name = "panel_history";
+            this.panel_history.Size = new System.Drawing.Size(603, 42);
+            this.panel_history.TabIndex = 68;
+            // 
+            // label_tip
+            // 
+            this.label_tip.AutoSize = true;
+            this.label_tip.ForeColor = System.Drawing.Color.Red;
+            this.label_tip.Location = new System.Drawing.Point(466, 60);
+            this.label_tip.Name = "label_tip";
+            this.label_tip.Size = new System.Drawing.Size(147, 14);
+            this.label_tip.TabIndex = 69;
+            this.label_tip.Text = "* 该单将自动核销账务";
             // 
             // PayReceiptForm
             // 
@@ -401,19 +428,15 @@ namespace LocalERP.WinForm
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(926, 523);
+            this.Controls.Add(this.label_tip);
             this.Controls.Add(this.label18);
-            this.Controls.Add(this.label16);
             this.Controls.Add(this.textBox_operator);
-            this.Controls.Add(this.textBox_previousArrears);
             this.Controls.Add(this.label_title);
-            this.Controls.Add(this.label17);
             this.Controls.Add(this.lookupText1);
             this.Controls.Add(this.label_operator);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.label_customer);
-            this.Controls.Add(this.textBox_accumulative);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.label7);
             this.Controls.Add(this.label_status);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label4);
@@ -422,11 +445,11 @@ namespace LocalERP.WinForm
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label_thisPayed);
             this.Controls.Add(this.textBox_comment);
-            this.Controls.Add(this.label12);
             this.Controls.Add(this.toolStrip2);
             this.Controls.Add(this.dateTime_time);
             this.Controls.Add(this.label_date);
             this.Controls.Add(this.label1);
+            this.Controls.Add(this.panel_history);
             this.Font = new System.Drawing.Font("宋体", 10F);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "PayReceiptForm";
@@ -438,6 +461,8 @@ namespace LocalERP.WinForm
             ((System.ComponentModel.ISupportInitialize)(this.sellDataSetBindingSource)).EndInit();
             this.toolStrip2.ResumeLayout(false);
             this.toolStrip2.PerformLayout();
+            this.panel_history.ResumeLayout(false);
+            this.panel_history.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -479,6 +504,8 @@ namespace LocalERP.WinForm
         private System.Windows.Forms.TextBox textBox_previousArrears;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Label label18;
+        protected System.Windows.Forms.Panel panel_history;
+        protected System.Windows.Forms.Label label_tip;
         
        
     }

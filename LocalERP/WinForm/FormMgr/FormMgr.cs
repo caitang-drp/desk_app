@@ -153,7 +153,7 @@ namespace LocalERP.WinForm
         {
             if (otherPayBillForm == null || otherPayBillForm.IsDisposed)
             {
-                otherPayBillForm = new PayReceiptForm(PayReceipt.PayReceiptTypeConf_OtherPay);
+                otherPayBillForm = new PayReceiptOtherForm(PayReceipt.PayReceiptTypeConf_OtherPay);
                 appendEvent(otherPayBillForm);
             }
             return otherPayBillForm;
@@ -165,7 +165,7 @@ namespace LocalERP.WinForm
         {
             if (otherReceiptBillForm == null || otherReceiptBillForm.IsDisposed)
             {
-                otherReceiptBillForm = new PayReceiptForm(PayReceipt.PayReceiptTypeConf_OtherReceipt);
+                otherReceiptBillForm = new PayReceiptOtherForm(PayReceipt.PayReceiptTypeConf_OtherReceipt);
                 appendEvent(otherReceiptBillForm);
             }
             return otherReceiptBillForm;

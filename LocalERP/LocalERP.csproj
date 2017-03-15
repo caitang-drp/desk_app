@@ -188,6 +188,9 @@
     <Compile Include="WinForm\PayReceipt\PayReceiptListForm.Designer.cs">
       <DependentUpon>PayReceiptListForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="WinForm\PayReceipt\PayReceiptOtherForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="WinForm\Product\ProductStainlessCirculationForm.cs">
       <SubType>Form</SubType>
     </Compile>

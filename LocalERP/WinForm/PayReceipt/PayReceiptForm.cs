@@ -128,7 +128,7 @@ namespace LocalERP.WinForm
         }
         //end init
 
-        private void switchMode(int mode) {
+        protected void switchMode(int mode) {
             switch(mode){
                 case 0:
                     this.label_status.Text = "ÐÂÔö";
@@ -209,7 +209,7 @@ namespace LocalERP.WinForm
         /// for event
         /// </summary>
         ///
-        protected void toolStripButton_save_Click(object sender, EventArgs e)
+        protected virtual void toolStripButton_save_Click(object sender, EventArgs e)
         {
             PayReceipt payReceipt;
             bool isCorrect = getPayReceipt(out payReceipt);
@@ -249,7 +249,7 @@ namespace LocalERP.WinForm
         }
 
         //ÉóºË
-        private void toolStripButton_finish_Click(object sender, EventArgs e)
+        protected virtual void toolStripButton_finish_Click(object sender, EventArgs e)
         {
             PayReceipt payReceipt;
             bool isCorrect = getPayReceipt(out payReceipt);

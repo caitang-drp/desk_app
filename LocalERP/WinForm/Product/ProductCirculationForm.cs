@@ -485,24 +485,6 @@ namespace LocalERP.WinForm
             
         }
 
-        private string get_cus_type(ProductCirculation sell)
-        {
-            string cus_type = "客户";
-
-            // 采购
-            if (sell.Type == 1 || sell.Type == 2)
-            {
-                cus_type = "供应商";
-            }
-            // 销售
-            else if (sell.Type == 2 || sell.Type == 3)
-            {
-                cus_type = "客户";
-            }
-
-            return cus_type;
-        }
-
         private void fill_records(List<ProductStainlessCirculationRecord> records)
         {
             // 处理 明细
@@ -534,14 +516,20 @@ namespace LocalERP.WinForm
             string customer_addr = customer.Address;
             string contract = "电话：" + customer_tel;
 
+            DataTable dt = ConfDao.getInstance().GetAll();
+            Report.ControlByName("title").AsStaticBox.Text = ConfDao.getInstance().Get(3).ToString() + conf.name + "单";
+
+            Report.ControlByName("info").AsStaticBox.Text = string.Format("地    址 : {0}\n银行账号 : {1}\n其他信息 : {2}", dt.Rows[2]["conf"], dt.Rows[7]["conf"], dt.Rows[8]["conf"]);
+            Report.ControlByName("contract").AsStaticBox.Text = string.Format("联 系 人 : {0}\n电话号码 : {1}\n手机号码 : {2}", dt.Rows[4]["conf"], dt.Rows[5]["conf"], dt.Rows[6]["conf"]); 
+
             // (用户，供应商)
-            Report.ControlByName("customer").AsStaticBox.Text = get_cus_type(sell) + "：" + sell.CustomerName;
+            Report.ControlByName("customer").AsStaticBox.Text = conf.customer + sell.CustomerName;
 
             // (日期)
-            Report.ControlByName("date").AsStaticBox.Text = sell.CirculationTime.ToString("yyyy年MM月dd日");
+            Report.ControlByName("date").AsStaticBox.Text = conf.business +"时间: " + sell.CirculationTime.ToString("yyyy年MM月dd日");
 
             // 右(单号)
-            Report.ControlByName("serial").AsStaticBox.Text = "NO." + sell.Code;
+            Report.ControlByName("serial").AsStaticBox.Text = "单号: NO." + sell.Code;
 
             // 备注
             Report.ControlByName("comment_text").AsStaticBox.Text = sell.Comment;

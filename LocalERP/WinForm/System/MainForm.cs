@@ -11,6 +11,7 @@ using System.IO;
 using LocalERP.DataAccess.Data;
 using LocalERP.UiDataProxy;
 using System.Reflection;
+using LocalERP.DataAccess.DataDAO;
 
 namespace LocalERP.WinForm
 {
@@ -24,6 +25,8 @@ namespace LocalERP.WinForm
         private void MainForm_Load(object sender, EventArgs e)
         {
             loadingForm = new LoadingForm();
+
+            this.Text = ConfDao.getInstance().Get(3).ToString();
 
             NavigationUC navigation = new NavigationUC(this);
             navigation.Dock = DockStyle.Fill;

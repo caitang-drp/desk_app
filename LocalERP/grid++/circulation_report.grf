@@ -234,7 +234,7 @@
 					"Height":0
 				},
 				"GroupFooter":{
-					"Height":0.79375,
+					"Height":0.608542,
 					"Control":[
 						{
 							"Type":"StaticBox",
@@ -265,13 +265,13 @@
 					"Type":"StaticBox",
 					"Name":"customer",
 					"Left":0.211667,
-					"Top":2.59292,
+					"Top":2.80458,
 					"Width":4.78896,
 					"Height":0.608542,
 					"Font":{
 						"Name":"宋体",
-						"Size":120000,
-						"Weight":400,
+						"Size":105000,
+						"Bold":true,
 						"Charset":134
 					},
 					"EndEllipsis":true
@@ -279,14 +279,14 @@
 				{
 					"Type":"StaticBox",
 					"Name":"date",
-					"Left":8.38729,
-					"Top":2.59292,
-					"Width":3.41313,
+					"Left":7.40833,
+					"Top":2.80458,
+					"Width":6.40292,
 					"Height":0.608542,
 					"Font":{
 						"Name":"宋体",
-						"Size":120000,
-						"Weight":400,
+						"Size":105000,
+						"Bold":true,
 						"Charset":134
 					}
 				},
@@ -294,13 +294,13 @@
 					"Type":"StaticBox",
 					"Name":"serial",
 					"Left":15.0019,
-					"Top":2.59292,
+					"Top":2.80458,
 					"Width":5.79438,
 					"Height":0.608542,
 					"Font":{
 						"Name":"宋体",
-						"Size":120000,
-						"Weight":400,
+						"Size":105000,
+						"Bold":true,
 						"Charset":134
 					},
 					"EndEllipsis":true,
@@ -309,9 +309,7 @@
 				{
 					"Type":"StaticBox",
 					"Name":"title",
-					"Left":7.01146,
-					"Top":0.396875,
-					"Width":7.19667,
+					"Width":21.0079,
 					"Height":1.00542,
 					"Font":{
 						"Name":"华文楷体",
@@ -324,20 +322,22 @@
 					"Text":"XX公司销售出货单"
 				},
 				{
-					"Type":"FieldBox",
+					"Type":"StaticBox",
 					"Name":"contract",
-					"Left":4.60375,
-					"Top":1.40229,
-					"Width":4.78896,
-					"Height":1.00542
+					"Left":11.8004,
+					"Top":1.00542,
+					"Width":8.99583,
+					"Height":1.40229,
+					"ParagraphSpacing":4
 				},
 				{
-					"Type":"FieldBox",
+					"Type":"StaticBox",
 					"Name":"info",
-					"Left":10.3981,
-					"Top":1.40229,
-					"Width":8.59896,
-					"Height":1.00542
+					"Left":1.5875,
+					"Top":1.00542,
+					"Width":9.81604,
+					"Height":1.40229,
+					"ParagraphSpacing":4
 				}
 			],
 			"RepeatOnPage":true
