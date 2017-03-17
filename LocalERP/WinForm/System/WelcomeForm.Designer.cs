@@ -522,7 +522,7 @@
             this.linkLabel27.TabIndex = 55;
             this.linkLabel27.TabStop = true;
             this.linkLabel27.Text = "公司信息";
-            this.linkLabel27.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel27_LinkClicked);
+            this.linkLabel27.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel_LinkClicked);
             // 
             // WelcomeForm
             // 

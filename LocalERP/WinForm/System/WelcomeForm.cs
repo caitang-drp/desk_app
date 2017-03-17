@@ -26,10 +26,5 @@ namespace LocalERP.WinForm
             LinkLabel linkLabel = sender as LinkLabel;
             mainForm.setForm(linkLabel.Text);
         }
-
-        private void linkLabel27_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            mainForm.companyInfo_Click(sender, e);
-        }
     }
 }

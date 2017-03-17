@@ -88,9 +88,9 @@ namespace LocalERP.WinForm
                 double sum=0;
                 
                 ValidateUtility.getDouble(dr, "amount", out sum);
-                if(type==1 || type == 4)
+                if(type==1 || type == 4 || type==5)
                     ControlUtility.setCellWithColor(dataGridView1.Rows[index].Cells["sum"], Color.Green, string.Format("-{0:0.00}", sum));
-                else if (type == 2 || type==3)
+                else if (type == 2 || type==3 || type==6)
                     ControlUtility.setCellWithColor(dataGridView1.Rows[index].Cells["sum"], Color.Red, string.Format("+{0:0.00}", sum));
             }
 
@@ -117,6 +117,9 @@ namespace LocalERP.WinForm
 
         private void button_add_Click(object sender, EventArgs e)
         {
+            //click相当于刷新，类别有可能变化，所以重新加载
+            CategoryDao.getInstance().initTreeView("CustomerCategory", this.treeView1);
+
             if (this.treeView1.Nodes.Count > 0 && treeView1.SelectedNode != null && treeView1.Nodes[0].IsSelected == false)
                 this.treeView1.SelectedNode = this.treeView1.Nodes[0];
             else

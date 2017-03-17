@@ -148,6 +148,10 @@ namespace LocalERP.WinForm
                 case DataUtility.DATA_PRODUCT:
                     FormSingletonFactory.getInstance().getProductCIForm().Show(this.dockPanel1);
                     break;
+                case DataUtility.DATA_COMPANY:
+                    ReportInfoForm form = new ReportInfoForm();
+                    form.ShowDialog();
+                    break;
                 default:
                     break;
             }
@@ -260,11 +264,6 @@ namespace LocalERP.WinForm
         private void toolStripButton_statistic_Click(object sender, EventArgs e)
         {
             this.setForm(DataUtility.STATISTIC_PRODUCT);
-        }
-
-        public void companyInfo_Click(object sender, EventArgs e) { 
-            ReportInfoForm form = new ReportInfoForm();
-            form.ShowDialog();
         }
     }
 }

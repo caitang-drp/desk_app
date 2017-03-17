@@ -346,7 +346,7 @@
 	"ReportFooter":[
 		{
 			"Name":"ReportFooter1",
-			"Height":1.5875,
+			"Height":1.40229,
 			"Control":[
 				{
 					"Type":"StaticBox",
@@ -361,7 +361,7 @@
 					"Type":"MemoBox",
 					"Name":"MemoBox3",
 					"Left":0.291042,
-					"Top":0.899583,
+					"Top":0.79375,
 					"Width":11.1919,
 					"Height":0.608542,
 					"Text":"打印时间：[#SystemVar(CurrentDateTime):yyyy年MM月dd日#]"
@@ -371,7 +371,7 @@
 					"Name":"MemoBox2",
 					"Anchor":"[Top|Right]",
 					"Left":17.6742,
-					"Top":0.899583,
+					"Top":0.79375,
 					"Width":5.3975,
 					"Height":0.608542,
 					"Text":"第[#SystemVar(PageNumber)#]页 共[#SystemVar(PageCount)#]页"

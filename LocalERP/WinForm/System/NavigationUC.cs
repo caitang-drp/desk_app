@@ -49,7 +49,7 @@ namespace LocalERP.WinForm
 
             //tree4
             TreeView treeView_data = this.getTreeView(
-                new string[] { DataUtility.DATA_PRODUCT, DataUtility.DATA_CUSTOMER/*, DataUtility.ACCOUNT_INPUT, DataUtility.ACCOUNT_OPEN*/ });
+                new string[] { DataUtility.DATA_PRODUCT, DataUtility.DATA_CUSTOMER, DataUtility.DATA_COMPANY/*, DataUtility.ACCOUNT_INPUT, DataUtility.ACCOUNT_OPEN*/ });
             this.xPanderPanel_data.Controls.Add(treeView_data);
 
         }

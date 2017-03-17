@@ -45,7 +45,7 @@ namespace LocalERP.DataAccess.Data
         public static PayReceiptTypeConf PayReceiptTypeConf_OtherReceipt = new PayReceiptTypeConf(PayReceipt.BillType.OtherReceipt, UpdateType.PayReceiptUpdate, UpdateType.PayReceiptFinishUpdate, -1, "其他收款", "QTSK", "往来单位", "收款");
         
         //这里要按照type值的顺序
-        public static PayReceiptTypeConf[] PayReceiptTypeConfs = new PayReceiptTypeConf[] { PayReceiptTypeConf_BuyPay, PayReceiptTypeConf_BuyRefund, PayReceiptTypeConf_SellReceipt, PayReceiptTypeConf_SellRefund };
+        public static PayReceiptTypeConf[] PayReceiptTypeConfs = new PayReceiptTypeConf[] { PayReceiptTypeConf_BuyPay, PayReceiptTypeConf_BuyRefund, PayReceiptTypeConf_SellReceipt, PayReceiptTypeConf_SellRefund, PayReceiptTypeConf_OtherPay, PayReceiptTypeConf_OtherReceipt};
 
     }
 

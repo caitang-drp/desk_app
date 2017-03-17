@@ -48,6 +48,7 @@
             this.label6 = new System.Windows.Forms.Label();
             this.textBox_other = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
             this.toolStrip2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
@@ -55,7 +56,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(13, 61);
+            this.label1.Location = new System.Drawing.Point(16, 85);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(70, 14);
@@ -66,7 +67,7 @@
             // 
             this.textBox_company.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox_company.Location = new System.Drawing.Point(86, 58);
+            this.textBox_company.Location = new System.Drawing.Point(89, 82);
             this.textBox_company.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.textBox_company.Name = "textBox_company";
             this.textBox_company.Size = new System.Drawing.Size(362, 23);
@@ -113,7 +114,7 @@
             // 
             this.textBox_address.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox_address.Location = new System.Drawing.Point(86, 94);
+            this.textBox_address.Location = new System.Drawing.Point(89, 118);
             this.textBox_address.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.textBox_address.Name = "textBox_address";
             this.textBox_address.Size = new System.Drawing.Size(362, 23);
@@ -122,7 +123,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(13, 97);
+            this.label2.Location = new System.Drawing.Point(16, 121);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(70, 14);
@@ -133,7 +134,7 @@
             // 
             this.textBox_contact.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox_contact.Location = new System.Drawing.Point(86, 131);
+            this.textBox_contact.Location = new System.Drawing.Point(89, 155);
             this.textBox_contact.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.textBox_contact.Name = "textBox_contact";
             this.textBox_contact.Size = new System.Drawing.Size(362, 23);
@@ -142,7 +143,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(15, 134);
+            this.label3.Location = new System.Drawing.Point(18, 158);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(70, 14);
@@ -153,7 +154,7 @@
             // 
             this.textBox_bank.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox_bank.Location = new System.Drawing.Point(86, 243);
+            this.textBox_bank.Location = new System.Drawing.Point(89, 267);
             this.textBox_bank.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.textBox_bank.Name = "textBox_bank";
             this.textBox_bank.Size = new System.Drawing.Size(362, 23);
@@ -162,18 +163,18 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(15, 246);
+            this.label4.Location = new System.Drawing.Point(18, 270);
             this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(70, 14);
             this.label4.TabIndex = 39;
-            this.label4.Text = "银行信息:";
+            this.label4.Text = "银行账号:";
             // 
             // textBox_phone
             // 
             this.textBox_phone.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox_phone.Location = new System.Drawing.Point(86, 206);
+            this.textBox_phone.Location = new System.Drawing.Point(89, 230);
             this.textBox_phone.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.textBox_phone.Name = "textBox_phone";
             this.textBox_phone.Size = new System.Drawing.Size(362, 23);
@@ -182,7 +183,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(13, 209);
+            this.label5.Location = new System.Drawing.Point(16, 233);
             this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(70, 14);
@@ -193,7 +194,7 @@
             // 
             this.textBox_mobile.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox_mobile.Location = new System.Drawing.Point(86, 170);
+            this.textBox_mobile.Location = new System.Drawing.Point(89, 194);
             this.textBox_mobile.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.textBox_mobile.Name = "textBox_mobile";
             this.textBox_mobile.Size = new System.Drawing.Size(362, 23);
@@ -202,7 +203,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(13, 173);
+            this.label6.Location = new System.Drawing.Point(16, 197);
             this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(70, 14);
@@ -213,7 +214,7 @@
             // 
             this.textBox_other.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox_other.Location = new System.Drawing.Point(86, 280);
+            this.textBox_other.Location = new System.Drawing.Point(89, 304);
             this.textBox_other.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.textBox_other.Name = "textBox_other";
             this.textBox_other.Size = new System.Drawing.Size(362, 23);
@@ -222,19 +223,30 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(15, 283);
+            this.label7.Location = new System.Drawing.Point(18, 307);
             this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(70, 14);
             this.label7.TabIndex = 41;
-            this.label7.Text = "备    注:";
+            this.label7.Text = "其他信息:";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.ForeColor = System.Drawing.Color.Red;
+            this.label8.Location = new System.Drawing.Point(17, 53);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(175, 14);
+            this.label8.TabIndex = 43;
+            this.label8.Text = "*这些信息在打印表里显示!";
             // 
             // ReportInfoForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(469, 326);
+            this.ClientSize = new System.Drawing.Size(469, 343);
+            this.Controls.Add(this.label8);
             this.Controls.Add(this.textBox_other);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.textBox_bank);
@@ -285,5 +297,6 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox textBox_other;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label8;
     }
 }

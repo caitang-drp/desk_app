@@ -66,9 +66,9 @@ namespace LocalERP.WinForm
 
                     double sum = 0;
                     ValidateUtility.getDouble(dr, "amount", out sum);
-                    if (type == 1 || type == 4)
+                    if (type == 1 || type == 4 || type == 5)
                         ControlUtility.setCellWithColor(dataGridView1.Rows[index].Cells["sum"], Color.Green, string.Format("-{0:0.00}", sum));
-                    else if (type == 2 || type == 3)
+                    else if (type == 2 || type == 3 || type==6)
                         ControlUtility.setCellWithColor(dataGridView1.Rows[index].Cells["sum"], Color.Red, string.Format("+{0:0.00}", sum));
 
                     int status = (int)(dr["status"]);
@@ -167,6 +167,12 @@ namespace LocalERP.WinForm
                     break;
                 case (int)PayReceipt.BillType.SellRefund:
                     formString = DataUtility.CASH_RECEIPT_REFUND;
+                    break;
+                case (int)PayReceipt.BillType.OtherPay:
+                    formString = DataUtility.CASH_OTHER_PAY;
+                    break;
+                case (int)PayReceipt.BillType.OtherReceipt:
+                    formString = DataUtility.CASH_OTHER_RECEIPT;
                     break;
                 default:
                     break;

@@ -322,7 +322,7 @@ namespace LocalERP.WinForm
             double.TryParse(this.textBox_previousArrears.Text, out arrear);
             double.TryParse(this.textBox_thisPayed.Text, out pay);
             double accumulative = arrear - pay;
-            this.textBox_accumulative.Text = accumulative.ToString("N2");
+            this.textBox_accumulative.Text = accumulative.ToString("0.00");//("N2");
         }
 
         private void Controls_TextChanged(object sender, EventArgs e)

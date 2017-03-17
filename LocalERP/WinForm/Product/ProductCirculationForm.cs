@@ -599,7 +599,6 @@ namespace LocalERP.WinForm
             return isInputCorrect;
         }
 
-
 		//在C#中一次填入一条记录不能成功，只能使用一次将记录全部填充完的方式
 		private void ReportFetchRecord()
 		{
@@ -792,7 +791,7 @@ namespace LocalERP.WinForm
             temp1 = temp1 + conf.productDirection * realTotal;
             temp1 = temp1 - conf.arrearsDirection * pay;
             temp1 = temp1 * conf.arrearsDirection;
-            this.textBox_accumulative.Text = temp1.ToString("N2");
+            this.textBox_accumulative.Text = temp1.ToString("0.00");
         }
     }
 }
