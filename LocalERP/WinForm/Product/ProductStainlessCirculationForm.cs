@@ -274,5 +274,14 @@ namespace LocalERP.WinForm
             return isInputCorrect;
         }
 
+        protected override void updateProductNumCost(ProductCirculationRecord record)
+        {
+            ProductStainlessDao stainlessDao = cirDao.getProductDao() as ProductStainlessDao;
+            ProductStainless stainless = stainlessDao.FindByID(record.ProductID);
+            stainless.Num = stainless.Num + conf.productDirection * record.TotalNum;
+            stainless.SumCost = stainless.SumCost + conf.productDirection * record.TotalPrice;
+            stainlessDao.Update(stainless);
+        }
+
     }
 }

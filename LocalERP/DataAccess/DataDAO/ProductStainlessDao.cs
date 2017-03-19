@@ -38,8 +38,8 @@ namespace LocalERP.DataAccess.DataDAO
         public bool Update(ProductStainless info) {
             try
             {
-                string commandText = string.Format("update ProductStainless set serial='{0}', name='{1}', comment='{2}', parent={3}, pricePurchase={4}, priceSell={5}, unit='{6}', quantityPerPiece={7} where ID={8}",
-                    info.Serial, info.Name, info.Comment, info.CategoryID, info.PricePurchase, info.PriceSell, info.Unit, info.QuantityPerPiece, info.ID);
+                string commandText = string.Format("update ProductStainless set serial='{0}', name='{1}', comment='{2}', parent={3}, pricePurchase={4}, sumCost = {5}, priceSell={6}, unit='{7}', quantityPerPiece={8} where ID={9}",
+                    info.Serial, info.Name, info.Comment, info.CategoryID, info.PricePurchase, info.SumCost, info.PriceSell, info.Unit, info.QuantityPerPiece, info.ID);
 
                 DbHelperAccess.executeNonQuery(commandText);
                 return true;
@@ -101,12 +101,15 @@ namespace LocalERP.DataAccess.DataDAO
 
                 product.Comment = dr["comment"] as string;
 
-                double pricePurchase, priceSell;
+                double pricePurchase, priceSell, sumCost;
                 double.TryParse(dr["pricePurchase"].ToString(), out pricePurchase);
                 product.PricePurchase = pricePurchase;
 
                 double.TryParse(dr["priceSell"].ToString(), out priceSell);
                 product.PriceSell = priceSell;
+
+                double.TryParse(dr["sumCost"].ToString(), out sumCost);
+                product.SumCost = sumCost;
 
                 return product;
             }

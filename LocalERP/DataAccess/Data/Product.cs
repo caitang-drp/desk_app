@@ -62,6 +62,14 @@ namespace LocalERP.DataAccess.Data
             set { pricePurchase = value; }
         }
 
+        private double sumCost;
+
+        public double SumCost
+        {
+            get { return sumCost; }
+            set { sumCost = value; }
+        }
+
         private double priceSell;
 
         public double PriceSell

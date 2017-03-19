@@ -30,7 +30,7 @@ namespace LocalERP.WinForm
         protected bool needSave = false;
         protected bool recordChanged = false;
 
-        private ProductCirculationDao cirDao;
+        protected ProductCirculationDao cirDao;
 
 		//定义Grid++Report报表主对象
 		private GridppReport Report = new GridppReport();
@@ -424,6 +424,9 @@ namespace LocalERP.WinForm
             this.invokeUpdateNotify(conf.notifyType);
         }
 
+        protected virtual void updateProductNumCost(ProductCirculationRecord record) { 
+        }
+
         //审核
         private void toolStripButton_finish_Click(object sender, EventArgs e)
         {
@@ -451,9 +454,8 @@ namespace LocalERP.WinForm
             //这个地方需要事务处理
             foreach (ProductCirculationRecord record in records)
             {
-                int leftNum = cirDao.getProductDao().FindNumByID(record.ProductID);
-                int newLeftNum = leftNum + conf.productDirection * record.TotalNum;
-                cirDao.getProductDao().UpdateNum(record.ProductID, newLeftNum);
+                //更新产品的成本总价和数量，以计算产品的成本
+                this.updateProductNumCost(record);
             }
 
             cirDao.UpdateStatus(circulationID, 4);
@@ -462,17 +464,17 @@ namespace LocalERP.WinForm
             
             ////////////////////////////////////////////////////////////////////////
             // 先计算利润
-            SellProfit sell_profit_obj = new SellProfit();
-            sell_profit_obj.update_sell_profit();
+            //SellProfit sell_profit_obj = new SellProfit();
+            //sell_profit_obj.update_sell_profit();
 
             // 使用“移动加权平均法”，只有采购才需要重新计算
             // http://blog.sina.com.cn/s/blog_552cccd7010002rt.html
-            if (this.conf.type == ProductCirculation.CirculationTypeConf_Purchase.type)
+            /*if (this.conf.type == ProductCirculation.CirculationTypeConf_Purchase.type)
             {
                 // 重新计算产品的平均成本，并更新到数据库
                 ProductStainless product_stainless_obj = new ProductStainless();
                 product_stainless_obj.recal_product_stainless_purchase_price();
-            }
+            }*/
             ////////////////////////////////////////////////////////////////////////
 
 
