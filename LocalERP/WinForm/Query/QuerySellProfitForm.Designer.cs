@@ -28,8 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.button1 = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -61,26 +59,12 @@
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.button3 = new System.Windows.Forms.Button();
             this.label_notice = new System.Windows.Forms.Label();
+            this.textBox_customer = new System.Windows.Forms.TextBox();
+            this.textBox_product = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
-            // 
-            // dateTimePicker2
-            // 
-            this.dateTimePicker2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.dateTimePicker2.Location = new System.Drawing.Point(872, 26);
-            this.dateTimePicker2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.dateTimePicker2.Name = "dateTimePicker2";
-            this.dateTimePicker2.Size = new System.Drawing.Size(118, 23);
-            this.dateTimePicker2.TabIndex = 22;
-            // 
-            // dateTimePicker1
-            // 
-            this.dateTimePicker1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.dateTimePicker1.Location = new System.Drawing.Point(677, 26);
-            this.dateTimePicker1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(119, 23);
-            this.dateTimePicker1.TabIndex = 20;
             // 
             // button1
             // 
@@ -153,7 +137,7 @@
             // start_time
             // 
             this.start_time.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.start_time.Location = new System.Drawing.Point(677, 26);
+            this.start_time.Location = new System.Drawing.Point(680, 27);
             this.start_time.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.start_time.Name = "start_time";
             this.start_time.Size = new System.Drawing.Size(119, 23);
@@ -162,7 +146,7 @@
             // end_time
             // 
             this.end_time.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.end_time.Location = new System.Drawing.Point(872, 26);
+            this.end_time.Location = new System.Drawing.Point(871, 26);
             this.end_time.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.end_time.Name = "end_time";
             this.end_time.Size = new System.Drawing.Size(118, 23);
@@ -245,7 +229,7 @@
             this.serial.HeaderText = "单号";
             this.serial.Name = "serial";
             this.serial.ReadOnly = true;
-            this.serial.Width = 110;
+            this.serial.Width = 140;
             // 
             // sell_time
             // 
@@ -311,14 +295,14 @@
             // 
             // profit
             // 
-            this.profit.HeaderText = "利润";
+            this.profit.HeaderText = "毛利润/元";
             this.profit.Name = "profit";
             this.profit.ReadOnly = true;
-            this.profit.Width = 60;
+            this.profit.Width = 80;
             // 
             // profit_margin
             // 
-            this.profit_margin.HeaderText = "利润率/%";
+            this.profit_margin.HeaderText = "毛利润率/%";
             this.profit_margin.Name = "profit_margin";
             this.profit_margin.ReadOnly = true;
             // 
@@ -327,7 +311,7 @@
             this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label8.AutoSize = true;
             this.label8.BackColor = System.Drawing.SystemColors.Control;
-            this.label8.Location = new System.Drawing.Point(419, 32);
+            this.label8.Location = new System.Drawing.Point(424, 32);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(70, 14);
             this.label8.TabIndex = 32;
@@ -339,7 +323,7 @@
             this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox1.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(489, 28);
+            this.comboBox1.Location = new System.Drawing.Point(494, 28);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(102, 21);
             this.comboBox1.TabIndex = 48;
@@ -361,27 +345,67 @@
             // 
             this.label_notice.AutoSize = true;
             this.label_notice.ForeColor = System.Drawing.Color.Red;
-            this.label_notice.Location = new System.Drawing.Point(22, 33);
+            this.label_notice.Location = new System.Drawing.Point(12, 67);
             this.label_notice.Name = "label_notice";
             this.label_notice.Size = new System.Drawing.Size(168, 14);
             this.label_notice.TabIndex = 54;
             this.label_notice.Text = "数据有更新, 请重新统计!";
             this.label_notice.Visible = false;
             // 
+            // textBox_customer
+            // 
+            this.textBox_customer.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox_customer.Location = new System.Drawing.Point(159, 27);
+            this.textBox_customer.Name = "textBox_customer";
+            this.textBox_customer.Size = new System.Drawing.Size(100, 23);
+            this.textBox_customer.TabIndex = 60;
+            // 
+            // textBox_product
+            // 
+            this.textBox_product.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox_product.Location = new System.Drawing.Point(313, 27);
+            this.textBox_product.Name = "textBox_product";
+            this.textBox_product.Size = new System.Drawing.Size(100, 23);
+            this.textBox_product.TabIndex = 59;
+            // 
+            // label3
+            // 
+            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label3.AutoSize = true;
+            this.label3.BackColor = System.Drawing.SystemColors.Control;
+            this.label3.Location = new System.Drawing.Point(274, 31);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(42, 14);
+            this.label3.TabIndex = 58;
+            this.label3.Text = "商品:";
+            // 
+            // label4
+            // 
+            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label4.AutoSize = true;
+            this.label4.BackColor = System.Drawing.SystemColors.Control;
+            this.label4.Location = new System.Drawing.Point(91, 31);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(70, 14);
+            this.label4.TabIndex = 57;
+            this.label4.Text = "往来单位:";
+            // 
             // QuerySellProfitForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1070, 527);
+            this.Controls.Add(this.textBox_customer);
+            this.Controls.Add(this.textBox_product);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.label_notice);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.end_time);
-            this.Controls.Add(this.dateTimePicker2);
             this.Controls.Add(this.start_time);
-            this.Controls.Add(this.dateTimePicker1);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label6);
@@ -402,8 +426,6 @@
 
         #endregion
 
-        private System.Windows.Forms.DateTimePicker dateTimePicker2;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
@@ -422,6 +444,7 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Label label_notice;
         private System.Windows.Forms.DataGridViewTextBoxColumn serial;
         private System.Windows.Forms.DataGridViewTextBoxColumn sell_time;
         private System.Windows.Forms.DataGridViewTextBoxColumn customer;
@@ -434,6 +457,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn sum_cost;
         private System.Windows.Forms.DataGridViewTextBoxColumn profit;
         private System.Windows.Forms.DataGridViewTextBoxColumn profit_margin;
-        private System.Windows.Forms.Label label_notice;
+        protected System.Windows.Forms.TextBox textBox_customer;
+        protected System.Windows.Forms.TextBox textBox_product;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
     }
 }

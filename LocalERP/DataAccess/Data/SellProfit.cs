@@ -16,9 +16,14 @@ namespace LocalERP.DataAccess.Data
         public double profit;
         public double profit_margin;
         public string serial;
+        
+        //这些字段在数据库表可以不用，但是类里可以有，以方便使用
+        public int customerID;
         public string customer;
-        //应该为ID，要不然产品属性改变了，这里无法随着改变
+
+        public int productID;
         public string product;
+
         public string unit;
         public string oper;
         public DateTime sell_time;
@@ -84,19 +89,16 @@ namespace LocalERP.DataAccess.Data
             {
                 this.serial = cir.Code;
                 this.sell_time = cir.CirculationTime;
-                this.customer = cir.CustomerName;
                 this.oper = cir.Oper;
             }
+            //这种情况应该不会发生
             else {
                 this.serial = "";
                 this.sell_time = new DateTime();
-                this.customer = "";
+                //this.customer = "";
                 this.oper = "";
             }
-
-            this.product = record.ProductName;// product.Name;
-            this.unit = record.Unit;// product.Unit;
-
+            this.unit = record.Unit;
 
             int sell_cnt = record.TotalNum;
             this.cnt = sell_cnt;
@@ -124,84 +126,6 @@ namespace LocalERP.DataAccess.Data
             }
 
             this.record_id = record.ID;
-        }
-
-        // 过滤已经计算过的
-        private List<ProductCirculationRecord> filter_done_record(List<ProductCirculationRecord> ls, List<SellProfit> done_profit_ls)
-        {
-            List<ProductCirculationRecord> undo_ls = new List<ProductCirculationRecord>();
-
-            foreach (ProductCirculationRecord one in ls)
-            {
-                bool ok = false;
-                foreach (SellProfit done in done_profit_ls)
-                {
-                    if (done.record_id == one.ID)
-                    {
-                        ok = true;
-                        break;
-                    }
-                }
-
-                if (!ok)
-                {
-                    undo_ls.Add(one);
-                }
-            }
-
-            return undo_ls;
-        }
-
-        private void initUndoListRecord(
-            List<ProductCirculation> ls,
-            List<SellProfit> done_profit_ls)
-        {
-            // 获取审核通过的销售单的明细
-            List<ProductCirculationRecord> reviewed_sell_record_ls =
-                ProductStainlessCirculationRecordDao.getInstance().get_sell_records(ls);
-            // 销售退货明细
-            List<ProductCirculationRecord> reviewed_sell_back_record_ls =
-                ProductStainlessCirculationRecordDao.getInstance().get_sell_back_records(ls);
-
-            // 过滤已经计算过的
-            List<ProductCirculationRecord> reviewed_undo_sell_record = filter_done_record(reviewed_sell_record_ls, done_profit_ls);
-            List<ProductCirculationRecord> reviewed_undo_sell_back_record = filter_done_record(reviewed_sell_back_record_ls, done_profit_ls);
-
-            // 所有的明细
-            List<ProductCirculationRecord> record_ls = reviewed_undo_sell_record;
-            record_ls.AddRange(reviewed_undo_sell_back_record);
-            // 按照ID排序
-            record_ls.Sort(delegate(ProductCirculationRecord x, ProductCirculationRecord y)
-            {
-                return x.ID.CompareTo(y.ID);
-            });
-
-
-            foreach (ProductCirculationRecord record in record_ls)
-            {
-                ProductCirculation cir = find_circulation_with_id(record.CirculationID, ls);
-
-                // 销售退货
-                if (cir.Type == 4)
-                {
-                    // 设置数量为负数
-                    record.TotalNum = -record.TotalNum;
-                }
-
-                double product_purchase_average_price = ProductStainlessDao.getInstance().find_purchase_price_by_id(record.ProductID);
-                SellProfit one = new SellProfit(cir, record, product_purchase_average_price);
-
-                // 存储
-                SellProfitDao.getInstance().Insert(one);
-            }
-        }
-
-        public void update_sell_profit()
-        {
-            // 获取审核通过的订单
-            List<ProductCirculation> reviewed_all_bill = ProductStainlessCirculationDao.getInstance().get_reviewed_bill();
-            List<SellProfit> done_profit_ls = SellProfitDao.getInstance().FindList();
-            initUndoListRecord(reviewed_all_bill, done_profit_ls);
         }
     }
 }

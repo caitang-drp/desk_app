@@ -24,8 +24,8 @@ namespace LocalERP.DataAccess.DataDAO
         {
             try
             {
-                string commandText = string.Format("insert into SellProfit(serial, sell_time, customer, product, unit, cnt, price, sum_price, cost, profit, profit_margin, oper, sum_cost, record_id) values('{0}', '{1}', '{2}', '{3}', '{4}', {5}, {6}, {7}, {8}, {9}, {10}, '{11}', {12}, {13})", 
-                    one.serial, one.sell_time, one.customer, one.product, one.unit, one.cnt, one.price, one.sum_price, one.cost, one.profit, one.profit_margin, one.oper, one.sum_cost, one.record_id);
+                string commandText = string.Format("insert into SellProfit(cnt, price, sum_price, cost, profit, profit_margin, sum_cost, record_id) values({0}, {1}, {2}, {3}, {4}, {5}, {6}, {7})", 
+                    one.cnt, one.price, one.sum_price, one.cost, one.profit, one.profit_margin, one.sum_cost, one.record_id);
                 return DbHelperAccess.executeNonQuery(commandText);
             }
             catch (Exception ex)
@@ -49,8 +49,7 @@ namespace LocalERP.DataAccess.DataDAO
 
             foreach (SellProfit one in ls)
             {
-                ProductCirculationRecord record = ProductStainlessCirculationRecordDao.getInstance().find_record_by_id(one.record_id);
-                int product_id = record.ProductID;
+                int product_id = one.productID;
 
                 if (!d.ContainsKey(product_id))
                 {
@@ -63,21 +62,41 @@ namespace LocalERP.DataAccess.DataDAO
             return d;
         }
 
-        public List<SellProfit> FindList()
+        public List<SellProfit> FindList(DateTime startTime, DateTime endTime, string product, string customer)
         {
-            string commandText = string.Format("select * from SellProfit");
-            DataTable data = DbHelperAccess.executeQuery(commandText);
+            StringBuilder commandText = new StringBuilder();
+            //查找的字段名可以都使用<原始表名>.<字段>，至于结果，可以参考access查找出来的记
+            string temp = "select SellProfit.*, ProductStainlessCirculationRecord.unit, ProductStainlessCirculation.code, ProductStainlessCirculation.circulationTime, ProductStainless.serial, ProductStainless.name, ProductStainless.ID, Customer.name, Customer.ID"
+                 + " from SellProfit, ProductStainlessCirculationRecord, (select * from ProductStainlessCirculation left join Customer on Customer.ID = ProductStainlessCirculation.customerID ) circulation, ProductStainless"
+                 + " where SellProfit.record_id = ProductStainlessCirculationRecord.ID and"
+                 + " ProductStainlessCirculationRecord.circulationID = ProductStainlessCirculation.ID"
+                 + " and ProductStainlessCirculationRecord.productID = ProductStainless.ID"
+                 + " and ProductStainlessCirculation.circulationTime between #{0}# and #{1}#";
+
+            commandText.Append(string.Format(temp, startTime.ToString("yyyy-MM-dd"), endTime.ToString("yyyy-MM-dd")));
+
+            if (!string.IsNullOrEmpty(product))
+                commandText.Append(string.Format(" and ProductStainless.name like '%{0}%'", product));
+
+            else if (!string.IsNullOrEmpty(customer))
+                commandText.Append(string.Format(" and Customer.name like '%{0}%'", customer));
+
+            commandText.Append(" order by SellProfit.ID desc");
+
+            DataTable data = DbHelperAccess.executeQuery(commandText.ToString());
 
             List<SellProfit> ls = new List<SellProfit>();
             foreach (DataRow dr in data.Rows)
             { 
                 SellProfit sell = new SellProfit(); 
                 if (dr != null) {
-                    sell.ID = (int)dr["ID"];
-                    sell.serial = dr["serial"] as string;
-                    sell.sell_time = (DateTime)dr["sell_time"];
-                    sell.customer = dr["customer"] as string;
-                    sell.product = dr["product"] as string;
+                    sell.ID = (int)dr["SellProfit.ID"];
+                    sell.serial = dr["code"] as string;
+                    sell.sell_time = (DateTime)dr["circulationTime"];
+                    sell.customerID = (int)dr["Customer.ID"];
+                    sell.customer = dr["circulation.name"] as string;
+                    sell.productID = (int)dr["ProductStainless.ID"];
+                    sell.product = dr["ProductStainless.name"] as string;
                     sell.unit = dr["unit"] as string;
                     sell.cnt = (int)dr["cnt"];
                     sell.price = (double)dr["price"];
@@ -85,7 +104,6 @@ namespace LocalERP.DataAccess.DataDAO
                     sell.cost = (double)dr["cost"];
                     sell.profit = (double)dr["profit"];
                     sell.profit_margin = (double)dr["profit_margin"];
-                    sell.oper = dr["oper"] as string;
                     sell.sum_cost = (double)dr["sum_cost"];
                     sell.record_id = (int)dr["record_id"];
 

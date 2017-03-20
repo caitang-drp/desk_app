@@ -69,60 +69,11 @@ namespace LocalERP.WinForm
             statistic_record.profit += one.profit;
         }
 
-
-
-        // 只需要 日期
-        private DateTime get_date(DateTime x)
-        {
-            return new DateTime(x.Year, x.Month, x.Day);
-        }
-
-        // 比较日期
-        private bool if_in_time_range(DateTime start, DateTime end, DateTime x)
-        {
-            start = get_date(start);
-            end = get_date(end);
-            x = get_date(x);
-
-            // 错误的时间范围
-            if (DateTime.Compare(start, end) > 0)
-            {
-                return false;
-            }
-
-            if (DateTime.Compare(start, x) <= 0 && DateTime.Compare(x, end) <= 0)
-            {
-                return true;
-            }
-
-            return false;
-        }
-
-        private bool if_ok(DateTime t)
-        {
-            DateTime start = start_time.Value;
-            DateTime end = end_time.Value;
-
-            if (!if_in_time_range(start, end, t))
-            {
-                return false;
-            }
-
-            return true;
-        }
-
         private void initDoneListRecord(List<SellProfit> done_ls)
         {
             foreach (SellProfit one in done_ls)
             {
-                // 过滤条件
-                if (!if_ok(one.sell_time))
-                {
-                    continue;
-                }
-
                 int index = this.dataGridView1.Rows.Add();
-
                 sellprofit_to_grid(one, index);
             }
         }
@@ -130,6 +81,7 @@ namespace LocalERP.WinForm
         private void initRecordStatisticLine()
         {
             int index = this.dataGridView1.Rows.Add();
+
             this.dataGridView1.Rows[index].Cells["serial"].Value = "合计";
             this.dataGridView1.Rows[index].Cells["sell_cnt"].Value = statistic_record.cnt;
             this.dataGridView1.Rows[index].Cells["sell_sum_price"].Value = statistic_record.sum_price;
@@ -142,11 +94,30 @@ namespace LocalERP.WinForm
             }
 
             this.dataGridView1.Rows[index].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+
+            //Font oldFont = this.dataGridView1.Rows[index].DefaultCellStyle.Font;
+            //this.dataGridView1.Rows[index].DefaultCellStyle.Font = new Font(oldFont.FontFamily.Name, oldFont.Size, FontStyle.Bold);
         }
 
+
+        private void initListRecord()
+        {
+            statistic_record = new SellProfit();
+            this.dataGridView1.Rows.Clear();
+
+            List<SellProfit> done_profit_ls = SellProfitDao.getInstance().FindList(this.start_time.Value, this.end_time.Value.AddDays(1), this.textBox_product.Text, this.textBox_customer.Text);
+
+            initDoneListRecord(done_profit_ls);
+
+            initRecordStatisticLine();
+        }
+
+        /// <summary>
+        /// 按产品统计
+        /// </summary>
         private void do_init_product_list()
         {
-            List<SellProfit> done_profit_ls = SellProfitDao.getInstance().FindList();
+            List<SellProfit> done_profit_ls = SellProfitDao.getInstance().FindList(this.start_time.Value, this.end_time.Value.AddDays(1), this.textBox_product.Text, this.textBox_customer.Text);
             SellProfit sell_profit_obj = new SellProfit();
             
             // 根据商品进行分组
@@ -160,6 +131,8 @@ namespace LocalERP.WinForm
                 foreach (SellProfit sell in sell_profit_ls)
                 {
                     merge.product = sell.product;
+                    merge.unit = sell.unit;
+
                     merge.cnt += sell.cnt;
                     merge.sum_price += sell.sum_price;
                     merge.sum_cost += sell.sum_cost;
@@ -177,12 +150,8 @@ namespace LocalERP.WinForm
         private void initProductStatisticLine()
         {
             int index = this.dataGridView1.Rows.Add();
-            index = this.dataGridView1.Rows.Add();
-            index = this.dataGridView1.Rows.Add();
-            index = this.dataGridView1.Rows.Add();
-            index = this.dataGridView1.Rows.Add();
 
-            this.dataGridView1.Rows[index].Cells["product"].Value = statistic_record.ID.ToString();
+            this.dataGridView1.Rows[index].Cells["product"].Value = "合计";
             this.dataGridView1.Rows[index].Cells["sell_cnt"].Value = statistic_record.cnt;
             this.dataGridView1.Rows[index].Cells["sell_sum_price"].Value = statistic_record.sum_price;
             this.dataGridView1.Rows[index].Cells["sum_cost"].Value = statistic_record.sum_cost;
@@ -205,18 +174,6 @@ namespace LocalERP.WinForm
             do_init_product_list();
 
             initProductStatisticLine();
-        }
-
-        private void initListRecord()
-        {
-            statistic_record = new SellProfit();
-            this.dataGridView1.Rows.Clear();
-
-            List<SellProfit> done_profit_ls = SellProfitDao.getInstance().FindList();
-
-            initDoneListRecord(done_profit_ls);
-
-            initRecordStatisticLine();
         }
 
         private void chg_visible(bool x)

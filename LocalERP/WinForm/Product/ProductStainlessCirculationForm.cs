@@ -242,8 +242,9 @@ namespace LocalERP.WinForm
             foreach (DataGridViewRow row in this.dataGridView1.Rows)
             {
                 object productID = null;
-
+                int ID = 0;
                 if (ValidateUtility.getLookupValue(row.Cells["product"], out productID) == false 
+                    || ValidateUtility.getInt(row.Cells["ID"], false, true, out ID) == false
                     || ValidateUtility.getInt(row.Cells["quantityPerPiece"], false, true, out quantityPerPiece, out isQuantityNull) == false
                     || ValidateUtility.getInt(row.Cells["pieces"], false, true, out pieces, out isPiecesNull) == false
                     || ValidateUtility.getInt(row.Cells["num"], true, true, out num) == false
@@ -256,7 +257,9 @@ namespace LocalERP.WinForm
                 LookupArg arg = ((row.Cells["product"] as DataGridViewLookupCell).EditedValue as LookupArg);
                 record.ProductID = (int)arg.Value;
                 record.ProductName = arg.Text;
-                
+
+                record.ID = ID;
+
                 record.QuantityPerPiece = quantityPerPiece;
                 record.QuantityNull = isQuantityNull;
 
