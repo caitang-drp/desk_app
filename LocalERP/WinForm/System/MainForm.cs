@@ -114,9 +114,7 @@ namespace LocalERP.WinForm
                     break;
                 case DataUtility.STATISTIC_PROFIT:
                     FormSingletonFactory.getInstance().getQuerySellProfitForm().Show(this.dockPanel1);
-                    FormSingletonFactory.getInstance().getQuerySellProfitForm().refresh();
                     break;
-
                 case DataUtility.LIB_LIST:
                     FormSingletonFactory.getInstance().getProductLibListForm().Show(this.dockPanel1);
                     break;

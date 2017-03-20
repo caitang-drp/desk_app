@@ -33,13 +33,14 @@ namespace LocalERP.UiDataProxy
             DataGridViewTextBoxColumn category = new DataGridViewTextBoxColumn();
             DataGridViewTextBoxColumn pricePurchase = new DataGridViewTextBoxColumn();
             DataGridViewTextBoxColumn priceSell = new DataGridViewTextBoxColumn();
+            DataGridViewTextBoxColumn priceCost = new DataGridViewTextBoxColumn();
             DataGridViewTextBoxColumn libNum = new DataGridViewTextBoxColumn();
 
             check.HeaderText = "选择";
             check.Name = "check";
             check.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             check.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            check.Width = 70;
+            check.Width = 60;
             // 
             // ID
             // 
@@ -47,12 +48,13 @@ namespace LocalERP.UiDataProxy
             ID.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
             ID.Name = "ID";
             ID.ReadOnly = true;
+            ID.Visible = false;
             ID.Width = 40;
 
             serial.HeaderText = "货号";
             serial.Name = "serial";
             serial.ReadOnly = true;
-            serial.Width = 60;
+            serial.Width = 55;
             // 
             // name
             // 
@@ -70,15 +72,20 @@ namespace LocalERP.UiDataProxy
             // 
             // comment
             // 
-            pricePurchase.HeaderText = "采购价格/元";
+            pricePurchase.HeaderText = "采购价/元";
             pricePurchase.Name = "pricePurchase";
             pricePurchase.ReadOnly = true;
-            pricePurchase.Width = 115;
+            pricePurchase.Width = 105;
 
-            priceSell.HeaderText = "销售价格/元";
+            priceSell.HeaderText = "销售价/元";
             priceSell.Name = "priceSell";
             priceSell.ReadOnly = true;
-            priceSell.Width = 115;
+            priceSell.Width = 105;
+
+            priceCost.HeaderText = "成本价/元";
+            priceCost.Name = "priceCost";
+            priceCost.ReadOnly = true;
+            priceCost.Width = 105;
 
             libNum.HeaderText = "库存数量";
             libNum.Name = "libNum";
@@ -93,7 +100,8 @@ namespace LocalERP.UiDataProxy
                 category,
                 libNum,
                 pricePurchase,
-                priceSell
+                priceSell,
+                priceCost
                 });
         }
 
@@ -175,8 +183,10 @@ namespace LocalERP.UiDataProxy
                 dataGridView1.Rows[index].Cells["name"].Value = dr["ProductStainless.name"];
                 dataGridView1.Rows[index].Cells["category"].Value = dr["ProductStainlessCategory.name"];
                 dataGridView1.Rows[index].Cells["pricePurchase"].Value = dr["pricePurchase"];
+                dataGridView1.Rows[index].Cells["priceCost"].Value = dr["priceCost"];
                 dataGridView1.Rows[index].Cells["priceSell"].Value = dr["priceSell"];
                 dataGridView1.Rows[index].Cells["libNum"].Value = dr["num"];
+
             }
         }
 

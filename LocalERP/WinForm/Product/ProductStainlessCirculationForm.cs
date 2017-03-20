@@ -274,13 +274,28 @@ namespace LocalERP.WinForm
             return isInputCorrect;
         }
 
-        protected override void updateProductNumCost(ProductCirculationRecord record)
+        protected override void updateCostAndProfit(ProductCirculation cir, ProductCirculationRecord record)
         {
+            /*********更新数量和成本总价**********/
             ProductStainlessDao stainlessDao = cirDao.getProductDao() as ProductStainlessDao;
             ProductStainless stainless = stainlessDao.FindByID(record.ProductID);
+            
+            //这三种情况，需要更新成本价
+            if (conf.type == ProductCirculation.CirculationType.purchase || conf.type == ProductCirculation.CirculationType.purchaseBack || conf.type == ProductCirculation.CirculationType.sellBack){
+                double totalCost = stainless.PriceCost * stainless.Num + conf.productDirection * record.Price * record.TotalNum;
+                double cost = totalCost / (stainless.Num + conf.productDirection * record.TotalNum);
+                stainless.PriceCost = double.Parse(cost.ToString("0.00"));
+            }
+
             stainless.Num = stainless.Num + conf.productDirection * record.TotalNum;
-            stainless.SumCost = stainless.SumCost + conf.productDirection * record.TotalPrice;
             stainlessDao.Update(stainless);
+
+
+            /*************增加利润表记录**********/
+            if (conf.type == ProductCirculation.CirculationType.sell) {
+                SellProfit profit = new SellProfit(cir, record, stainless.PriceCost);
+                SellProfitDao.getInstance().Insert(profit);
+            }
         }
 
     }

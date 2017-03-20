@@ -42,7 +42,7 @@ namespace LocalERP.WinForm
         private void sellprofit_to_grid(SellProfit one, int index)
         {
             this.dataGridView1.Rows[index].Cells["serial"].Value = one.serial;
-            this.dataGridView1.Rows[index].Cells["sell_time"].Value = one.sell_time;
+            this.dataGridView1.Rows[index].Cells["sell_time"].Value = one.sell_time.ToShortDateString();
             this.dataGridView1.Rows[index].Cells["customer"].Value = one.customer;
             this.dataGridView1.Rows[index].Cells["product"].Value = one.product;
             this.dataGridView1.Rows[index].Cells["unit"].Value = one.unit;
@@ -52,23 +52,13 @@ namespace LocalERP.WinForm
             this.dataGridView1.Rows[index].Cells["cost"].Value = one.cost;
             this.dataGridView1.Rows[index].Cells["profit"].Value = one.profit;
             this.dataGridView1.Rows[index].Cells["profit_margin"].Value = one.profit_margin;
-            this.dataGridView1.Rows[index].Cells["ope"].Value = one.oper;
             this.dataGridView1.Rows[index].Cells["sum_cost"].Value = one.sum_cost;
-
-            //this.dataGridView1.Rows[index].Cells["sell_cnt"].Style.BackColor = Color.Yellow;
-            this.dataGridView1.Rows[index].Cells["sell_price"].Style.BackColor = Color.Yellow;
-            this.dataGridView1.Rows[index].Cells["sell_sum_price"].Style.BackColor = Color.Yellow;
-            this.dataGridView1.Rows[index].Cells["cost"].Style.BackColor = Color.YellowGreen;
-            this.dataGridView1.Rows[index].Cells["sum_cost"].Style.BackColor = Color.YellowGreen;
 
             this.dataGridView1.Rows[index].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             // 设置亏损，显示为红色
             if (Convert.ToDouble(this.dataGridView1.Rows[index].Cells["profit"].Value) <= 0.0000)
             {
                 this.dataGridView1.Rows[index].DefaultCellStyle.ForeColor = Color.Red;
-                //this.dataGridView1.Rows[index].DefaultCellStyle.BackColor = Color.Red;
-                //this.dataGridView1.Rows[index].DefaultCellStyle.ForeColor = Color.Red;
-                //this.dataGridView1.Rows[index].Cells["profit_margin"].Style.BackColor = Color.Red;
             }
 
             // 记录统计信息
@@ -140,12 +130,7 @@ namespace LocalERP.WinForm
         private void initRecordStatisticLine()
         {
             int index = this.dataGridView1.Rows.Add();
-            index = this.dataGridView1.Rows.Add();
-            index = this.dataGridView1.Rows.Add();
-            index = this.dataGridView1.Rows.Add();
-            index = this.dataGridView1.Rows.Add();
-
-            this.dataGridView1.Rows[index].Cells["serial"].Value = statistic_record.ID.ToString();
+            this.dataGridView1.Rows[index].Cells["serial"].Value = "合计";
             this.dataGridView1.Rows[index].Cells["sell_cnt"].Value = statistic_record.cnt;
             this.dataGridView1.Rows[index].Cells["sell_sum_price"].Value = statistic_record.sum_price;
             this.dataGridView1.Rows[index].Cells["sum_cost"].Value = statistic_record.sum_cost;
@@ -241,7 +226,6 @@ namespace LocalERP.WinForm
             customer.Visible = x;
             sell_price.Visible = x;
             cost.Visible = x;
-            ope.Visible = x;
         }
 
         private void initList()
@@ -266,12 +250,13 @@ namespace LocalERP.WinForm
 
         public override void refresh()
         {
-            this.initList();
+            this.label_notice.Visible = true;
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             initList();
+            this.label_notice.Visible = false;
         }
 
         private void dataGridView1_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)

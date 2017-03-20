@@ -39,6 +39,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.textBox_sellPrice = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
             this.toolStripButton_save = new System.Windows.Forms.ToolStripButton();
@@ -54,13 +55,16 @@
             this.label11 = new System.Windows.Forms.Label();
             this.textBox_quantityPerPiece = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
-            this.textBox_sellPrice = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
             this.textBox_serial = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
             this.comboBox_unit = new System.Windows.Forms.ComboBox();
+            this.label17 = new System.Windows.Forms.Label();
+            this.textBox_cost = new System.Windows.Forms.TextBox();
+            this.label18 = new System.Windows.Forms.Label();
+            this.label19 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.toolStrip2.SuspendLayout();
             this.SuspendLayout();
@@ -104,10 +108,10 @@
             // 
             // textBox_comment
             // 
-            this.textBox_comment.Location = new System.Drawing.Point(311, 159);
+            this.textBox_comment.Location = new System.Drawing.Point(329, 159);
             this.textBox_comment.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.textBox_comment.Name = "textBox_comment";
-            this.textBox_comment.Size = new System.Drawing.Size(148, 23);
+            this.textBox_comment.Size = new System.Drawing.Size(130, 23);
             this.textBox_comment.TabIndex = 11;
             // 
             // label6
@@ -144,6 +148,15 @@
             // errorProvider1
             // 
             this.errorProvider1.ContainerControl = this;
+            // 
+            // textBox_sellPrice
+            // 
+            this.errorProvider1.SetIconPadding(this.textBox_sellPrice, 20);
+            this.textBox_sellPrice.Location = new System.Drawing.Point(87, 193);
+            this.textBox_sellPrice.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.textBox_sellPrice.Name = "textBox_sellPrice";
+            this.textBox_sellPrice.Size = new System.Drawing.Size(114, 23);
+            this.textBox_sellPrice.TabIndex = 50;
             // 
             // label5
             // 
@@ -203,7 +216,7 @@
             // 
             this.label8.AutoSize = true;
             this.label8.Enabled = false;
-            this.label8.Location = new System.Drawing.Point(262, 200);
+            this.label8.Location = new System.Drawing.Point(264, 262);
             this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(42, 14);
@@ -214,7 +227,7 @@
             // 
             this.radioButton1.AutoSize = true;
             this.radioButton1.Enabled = false;
-            this.radioButton1.Location = new System.Drawing.Point(357, 198);
+            this.radioButton1.Location = new System.Drawing.Point(359, 260);
             this.radioButton1.Name = "radioButton1";
             this.radioButton1.Size = new System.Drawing.Size(39, 18);
             this.radioButton1.TabIndex = 38;
@@ -226,7 +239,7 @@
             // 
             this.radioButton2.AutoSize = true;
             this.radioButton2.Enabled = false;
-            this.radioButton2.Location = new System.Drawing.Point(312, 198);
+            this.radioButton2.Location = new System.Drawing.Point(314, 260);
             this.radioButton2.Name = "radioButton2";
             this.radioButton2.Size = new System.Drawing.Size(39, 18);
             this.radioButton2.TabIndex = 39;
@@ -238,7 +251,7 @@
             // 
             this.comboBox2.Enabled = false;
             this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(311, 267);
+            this.comboBox2.Location = new System.Drawing.Point(314, 273);
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(148, 21);
             this.comboBox2.TabIndex = 42;
@@ -248,7 +261,7 @@
             // 
             this.label9.AutoSize = true;
             this.label9.Enabled = false;
-            this.label9.Location = new System.Drawing.Point(262, 270);
+            this.label9.Location = new System.Drawing.Point(265, 276);
             this.label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(42, 14);
@@ -261,10 +274,10 @@
             this.comboBoxTree_category.AbsoluteChildrenSelectableOnly = false;
             this.comboBoxTree_category.BranchSeparator = null;
             this.comboBoxTree_category.Imagelist = null;
-            this.comboBoxTree_category.Location = new System.Drawing.Point(312, 89);
+            this.comboBoxTree_category.Location = new System.Drawing.Point(329, 89);
             this.comboBoxTree_category.Name = "comboBoxTree_category";
             this.comboBoxTree_category.SelectedNode = null;
-            this.comboBoxTree_category.Size = new System.Drawing.Size(149, 24);
+            this.comboBoxTree_category.Size = new System.Drawing.Size(132, 24);
             this.comboBoxTree_category.TabIndex = 43;
             // 
             // label10
@@ -281,7 +294,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(20, 270);
+            this.label11.Location = new System.Drawing.Point(262, 232);
             this.label11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(42, 14);
@@ -290,30 +303,21 @@
             // 
             // textBox_quantityPerPiece
             // 
-            this.textBox_quantityPerPiece.Location = new System.Drawing.Point(87, 231);
+            this.textBox_quantityPerPiece.Location = new System.Drawing.Point(329, 193);
             this.textBox_quantityPerPiece.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.textBox_quantityPerPiece.Name = "textBox_quantityPerPiece";
-            this.textBox_quantityPerPiece.Size = new System.Drawing.Size(114, 23);
+            this.textBox_quantityPerPiece.Size = new System.Drawing.Size(130, 23);
             this.textBox_quantityPerPiece.TabIndex = 46;
             // 
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(20, 236);
+            this.label12.Location = new System.Drawing.Point(262, 198);
             this.label12.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(70, 14);
             this.label12.TabIndex = 45;
             this.label12.Text = "每件数量:";
-            // 
-            // textBox_sellPrice
-            // 
-            this.errorProvider1.SetIconPadding(this.textBox_sellPrice, 20);
-            this.textBox_sellPrice.Location = new System.Drawing.Point(87, 193);
-            this.textBox_sellPrice.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.textBox_sellPrice.Name = "textBox_sellPrice";
-            this.textBox_sellPrice.Size = new System.Drawing.Size(114, 23);
-            this.textBox_sellPrice.TabIndex = 50;
             // 
             // label13
             // 
@@ -369,17 +373,62 @@
             this.comboBox_unit.Items.AddRange(new object[] {
             "个",
             "盒"});
-            this.comboBox_unit.Location = new System.Drawing.Point(87, 267);
+            this.comboBox_unit.Location = new System.Drawing.Point(329, 229);
             this.comboBox_unit.Name = "comboBox_unit";
-            this.comboBox_unit.Size = new System.Drawing.Size(114, 21);
+            this.comboBox_unit.Size = new System.Drawing.Size(132, 21);
             this.comboBox_unit.TabIndex = 56;
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(204, 232);
+            this.label17.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(21, 14);
+            this.label17.TabIndex = 59;
+            this.label17.Text = "元";
+            // 
+            // textBox_cost
+            // 
+            this.textBox_cost.Enabled = false;
+            this.errorProvider1.SetIconPadding(this.textBox_cost, 20);
+            this.textBox_cost.Location = new System.Drawing.Point(87, 227);
+            this.textBox_cost.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.textBox_cost.Name = "textBox_cost";
+            this.textBox_cost.Size = new System.Drawing.Size(114, 23);
+            this.textBox_cost.TabIndex = 58;
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(20, 232);
+            this.label18.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(56, 14);
+            this.label18.TabIndex = 57;
+            this.label18.Text = "成本价:";
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.ForeColor = System.Drawing.Color.Red;
+            this.label19.Location = new System.Drawing.Point(20, 262);
+            this.label19.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(154, 14);
+            this.label19.TabIndex = 60;
+            this.label19.Text = "*成本价为系统自动计算";
             // 
             // ProductStainlessForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(490, 314);
+            this.ClientSize = new System.Drawing.Size(490, 293);
+            this.Controls.Add(this.label19);
+            this.Controls.Add(this.label17);
+            this.Controls.Add(this.textBox_cost);
+            this.Controls.Add(this.label18);
             this.Controls.Add(this.comboBox_unit);
             this.Controls.Add(this.label16);
             this.Controls.Add(this.label15);
@@ -455,5 +504,9 @@
         private System.Windows.Forms.ComboBox comboBox_unit;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.TextBox textBox_cost;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.Label label19;
     }
 }

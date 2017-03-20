@@ -23,7 +23,6 @@ namespace LocalERP.DataAccess.Data
         {
             this.quantityPerPiece = quantityPerPiece;
         }
-
         // 重新计算商品的平均成本价格
         public void recal_product_stainless_purchase_price()
         {

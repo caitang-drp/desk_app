@@ -55,6 +55,7 @@ namespace LocalERP.WinForm
 
             this.textBox_purchasePrice.Text = product.PricePurchase.ToString();
             this.textBox_sellPrice.Text = product.PriceSell.ToString();
+            this.textBox_cost.Text = product.PriceCost.ToString();
 
             this.textBox_quantityPerPiece.Text = product.QuantityPerPiece.ToString();
             this.comboBox_unit.Text = product.Unit;
@@ -72,6 +73,7 @@ namespace LocalERP.WinForm
 
             this.textBox_purchasePrice.Text = null;
             this.textBox_sellPrice.Text = null;
+            this.textBox_cost.Text = null;
 
             this.textBox_quantityPerPiece.Text = null;
             this.comboBox_unit.Text = null;

@@ -176,8 +176,7 @@ namespace LocalERP.WinForm
             if (querySellProfitForm == null || querySellProfitForm.IsDisposed)
             {
                 querySellProfitForm = new QuerySellProfitForm();
-                querySellProfitForm.initVersions(getVersions(),
-                    UpdateType.PurchaseFinishUpdate, UpdateType.SellFinishUpdate, UpdateType.LibFinishUpdate, UpdateType.ProductUpdate, UpdateType.CustomerUpdate);
+                querySellProfitForm.initVersions(getVersions(), UpdateType.SellFinishUpdate, UpdateType.ProductUpdate, UpdateType.CustomerUpdate);
 
                 appendEvent(querySellProfitForm);
             }
@@ -203,7 +202,7 @@ namespace LocalERP.WinForm
             {
                 productCIForm = new CategoryItemForm(1, new ProductStainlessCategoryItemProxy(), DataUtility.DATA_PRODUCT, this.mainForm);
                 productCIForm.initVersions(this.getVersions(),
-                    UpdateType.ProductUpdate, UpdateType.ProductCategoryUpdate, UpdateType.CustomerUpdate, UpdateType.CustomerCategoryUpdate);
+                    UpdateType.ProductUpdate, UpdateType.ProductCategoryUpdate, UpdateType.PurchaseFinishUpdate, UpdateType.SellFinishUpdate, UpdateType.LibFinishUpdate);
                 appendEvent(productCIForm);
             }
             return productCIForm;
@@ -213,7 +212,7 @@ namespace LocalERP.WinForm
         {
             CategoryItemForm productCIForm_select = new CategoryItemForm(0, new ProductStainlessCategoryItemProxy(), DataUtility.DATA_PRODUCT, this.mainForm);
             productCIForm_select.initVersions(getVersions(),
-                UpdateType.ProductUpdate, UpdateType.ProductCategoryUpdate, UpdateType.CustomerUpdate, UpdateType.CustomerCategoryUpdate);
+                UpdateType.ProductUpdate, UpdateType.ProductCategoryUpdate, UpdateType.PurchaseFinishUpdate, UpdateType.SellFinishUpdate, UpdateType.LibFinishUpdate);
                     
             appendEvent(productCIForm_select);
             return productCIForm_select;

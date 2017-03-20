@@ -299,5 +299,22 @@ namespace LocalERP.DataAccess.Utility
                 return true;
             }
         }
+
+        public static bool getPrice(DataRow dr, string name, bool required, out double result)
+        {
+            result = 0;
+            string temp = dr[name].ToString();
+            if (required == true && (string.IsNullOrEmpty(temp) || !double.TryParse(temp, out result))
+                || required == false && !string.IsNullOrEmpty(temp) && !double.TryParse(temp, out result))
+            {
+                return false;
+            }
+            else
+            {
+                result = double.Parse(result.ToString("0.00"));
+                return true;
+            }
+
+        }
     }
 }

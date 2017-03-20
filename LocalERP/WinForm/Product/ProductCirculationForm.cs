@@ -424,7 +424,7 @@ namespace LocalERP.WinForm
             this.invokeUpdateNotify(conf.notifyType);
         }
 
-        protected virtual void updateProductNumCost(ProductCirculationRecord record) { 
+        protected virtual void updateCostAndProfit(ProductCirculation cir, ProductCirculationRecord record) { 
         }
 
         //审核
@@ -454,12 +454,13 @@ namespace LocalERP.WinForm
             //这个地方需要事务处理
             foreach (ProductCirculationRecord record in records)
             {
-                //更新产品的成本总价和数量，以计算产品的成本
-                this.updateProductNumCost(record);
+                //更新产品的成本总价和数量，新增利润
+                this.updateCostAndProfit(sell, record);
             }
-
+            
             cirDao.UpdateStatus(circulationID, 4);
             CustomerDao.getInstance().update_arrear(sell.CustomerID, conf.arrearsDirection * Convert.ToDouble(this.textBox_accumulative.Text));
+            
             //
             
             ////////////////////////////////////////////////////////////////////////

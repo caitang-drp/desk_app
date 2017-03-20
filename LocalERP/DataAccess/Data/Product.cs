@@ -62,12 +62,12 @@ namespace LocalERP.DataAccess.Data
             set { pricePurchase = value; }
         }
 
-        private double sumCost;
+        private double priceCost;
 
-        public double SumCost
+        public double PriceCost
         {
-            get { return sumCost; }
-            set { sumCost = value; }
+            get { return priceCost; }
+            set { priceCost = value; }
         }
 
         private double priceSell;
@@ -100,10 +100,12 @@ namespace LocalERP.DataAccess.Data
             this.categoryID = categoryID;
             this.pricePurchase = pricePurchase;
             this.priceSell = priceSell;
+            this.priceCost = pricePurchase;
             this.unit = unit;
             this.comment = comment;
         }
 
         public Product() { }
+
     }
 }

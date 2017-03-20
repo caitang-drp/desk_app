@@ -17,11 +17,23 @@ namespace LocalERP.DataAccess.Data
         public double profit_margin;
         public string serial;
         public string customer;
+        //应该为ID，要不然产品属性改变了，这里无法随着改变
         public string product;
         public string unit;
         public string oper;
         public DateTime sell_time;
         public int record_id;
+
+        public SellProfit() { }
+
+        public SellProfit(
+           ProductCirculation cir,
+           ProductCirculationRecord record,
+           double average_price) {
+
+               this.format_sellprofit(cir, record, average_price);
+
+        }
 
         private double double_n(double x, int n)
         {
@@ -63,60 +75,55 @@ namespace LocalERP.DataAccess.Data
             return null;
         }
 
-        private SellProfit format_sellprofit(
+        private void format_sellprofit(
             ProductCirculation cir,
             ProductCirculationRecord record,
             double average_price)
         {
-            ProductStainless product = ProductStainlessDao.getInstance().FindByID(record.ProductID);
-            SellProfit one = new SellProfit();
-
             if (cir != null)
             {
-                one.serial = cir.Code;
-                one.sell_time = cir.CirculationTime;
-                one.customer = cir.CustomerName;
-                one.oper = cir.Oper;
+                this.serial = cir.Code;
+                this.sell_time = cir.CirculationTime;
+                this.customer = cir.CustomerName;
+                this.oper = cir.Oper;
             }
             else {
-                one.serial = "";
-                one.sell_time = new DateTime();
-                one.customer = "";
-                one.oper = "";
+                this.serial = "";
+                this.sell_time = new DateTime();
+                this.customer = "";
+                this.oper = "";
             }
 
-            one.product = product.Name;
-            one.unit = product.Unit;
+            this.product = record.ProductName;// product.Name;
+            this.unit = record.Unit;// product.Unit;
 
 
             int sell_cnt = record.TotalNum;
-            one.cnt = sell_cnt;
-            one.price = (double)record.Price;
+            this.cnt = sell_cnt;
+            this.price = (double)record.Price;
 
             double sum_price = record.Price * sell_cnt;
             if (cir == null)
             {
                 sum_price = record.TotalPrice;
             }
-            one.sum_price = sum_price;
+            this.sum_price = sum_price;
 
-            one.cost = double_n(average_price, 1);
+            this.cost = double_n(average_price, 1);
 
             double sum_cost = double_n(average_price, 1) * sell_cnt;
-            one.sum_cost = sum_cost;
+            this.sum_cost = sum_cost;
 
             List<double> profit = get_profit(sum_cost, sum_price);
-            one.profit = profit[0];
+            this.profit = profit[0];
 
-            one.profit_margin = profit[1];
-            if (sell_cnt < 0 && one.profit_margin > 0)
+            this.profit_margin = profit[1];
+            if (sell_cnt < 0 && this.profit_margin > 0)
             {
-                one.profit_margin = -one.profit_margin;
+                this.profit_margin = -this.profit_margin;
             }
 
-            one.record_id = record.ID;
-
-            return one;
+            this.record_id = record.ID;
         }
 
         // 过滤已经计算过的
@@ -182,7 +189,7 @@ namespace LocalERP.DataAccess.Data
                 }
 
                 double product_purchase_average_price = ProductStainlessDao.getInstance().find_purchase_price_by_id(record.ProductID);
-                SellProfit one =  format_sellprofit(cir, record, product_purchase_average_price);
+                SellProfit one = new SellProfit(cir, record, product_purchase_average_price);
 
                 // 存储
                 SellProfitDao.getInstance().Insert(one);
