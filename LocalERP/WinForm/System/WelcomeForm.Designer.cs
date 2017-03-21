@@ -63,6 +63,7 @@
             this.linkLabel25 = new System.Windows.Forms.LinkLabel();
             this.linkLabel26 = new System.Windows.Forms.LinkLabel();
             this.linkLabel27 = new System.Windows.Forms.LinkLabel();
+            this.linkLabel28 = new System.Windows.Forms.LinkLabel();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -207,7 +208,7 @@
             this.linkLabel10.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Bold);
             this.linkLabel10.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
             this.linkLabel10.LinkColor = System.Drawing.Color.Green;
-            this.linkLabel10.Location = new System.Drawing.Point(653, 423);
+            this.linkLabel10.Location = new System.Drawing.Point(732, 423);
             this.linkLabel10.Name = "linkLabel10";
             this.linkLabel10.Size = new System.Drawing.Size(67, 14);
             this.linkLabel10.TabIndex = 34;
@@ -442,7 +443,7 @@
             this.linkLabel22.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Bold);
             this.linkLabel22.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
             this.linkLabel22.LinkColor = System.Drawing.Color.Green;
-            this.linkLabel22.Location = new System.Drawing.Point(574, 423);
+            this.linkLabel22.Location = new System.Drawing.Point(653, 423);
             this.linkLabel22.Name = "linkLabel22";
             this.linkLabel22.Size = new System.Drawing.Size(67, 14);
             this.linkLabel22.TabIndex = 51;
@@ -472,7 +473,7 @@
             this.linkLabel24.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Bold);
             this.linkLabel24.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
             this.linkLabel24.LinkColor = System.Drawing.Color.Green;
-            this.linkLabel24.Location = new System.Drawing.Point(495, 423);
+            this.linkLabel24.Location = new System.Drawing.Point(574, 423);
             this.linkLabel24.Name = "linkLabel24";
             this.linkLabel24.Size = new System.Drawing.Size(67, 14);
             this.linkLabel24.TabIndex = 52;
@@ -524,12 +525,27 @@
             this.linkLabel27.Text = "公司信息";
             this.linkLabel27.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel_LinkClicked);
             // 
+            // linkLabel28
+            // 
+            this.linkLabel28.AutoSize = true;
+            this.linkLabel28.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Bold);
+            this.linkLabel28.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
+            this.linkLabel28.LinkColor = System.Drawing.Color.Green;
+            this.linkLabel28.Location = new System.Drawing.Point(497, 423);
+            this.linkLabel28.Name = "linkLabel28";
+            this.linkLabel28.Size = new System.Drawing.Size(67, 14);
+            this.linkLabel28.TabIndex = 56;
+            this.linkLabel28.TabStop = true;
+            this.linkLabel28.Text = "财务统计";
+            this.linkLabel28.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel28_LinkClicked);
+            // 
             // WelcomeForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(856, 569);
+            this.Controls.Add(this.linkLabel28);
             this.Controls.Add(this.linkLabel27);
             this.Controls.Add(this.linkLabel25);
             this.Controls.Add(this.linkLabel26);
@@ -616,6 +632,7 @@
         private System.Windows.Forms.LinkLabel linkLabel25;
         private System.Windows.Forms.LinkLabel linkLabel26;
         private System.Windows.Forms.LinkLabel linkLabel27;
+        private System.Windows.Forms.LinkLabel linkLabel28;
 
 
 

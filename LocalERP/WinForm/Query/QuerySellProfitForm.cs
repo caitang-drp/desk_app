@@ -94,9 +94,7 @@ namespace LocalERP.WinForm
             }
 
             this.dataGridView1.Rows[index].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-
-            //Font oldFont = this.dataGridView1.Rows[index].DefaultCellStyle.Font;
-            //this.dataGridView1.Rows[index].DefaultCellStyle.Font = new Font(oldFont.FontFamily.Name, oldFont.Size, FontStyle.Bold);
+            this.dataGridView1.Rows[index].DefaultCellStyle.Font = new Font("ËÎÌו", 10F, FontStyle.Bold);
         }
 
 
@@ -163,6 +161,7 @@ namespace LocalERP.WinForm
             }
 
             this.dataGridView1.Rows[index].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            this.dataGridView1.Rows[index].DefaultCellStyle.Font = new Font("ËÎÌו", 10F, FontStyle.Bold);
         }
 
         private void initListProduct()

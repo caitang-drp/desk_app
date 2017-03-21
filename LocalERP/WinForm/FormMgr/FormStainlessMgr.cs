@@ -183,6 +183,18 @@ namespace LocalERP.WinForm
             return querySellProfitForm;
         }
 
+        public override StatisticCashForm getStatisticCashForm()
+        {
+            if (statisticCashForm == null || statisticCashForm.IsDisposed)
+            {
+                statisticCashForm = new StatisticCashForm(mainForm, "test");
+                statisticCashForm.initVersions(getVersions(),
+                    UpdateType.PurchaseFinishUpdate, UpdateType.SellFinishUpdate, UpdateType.LibFinishUpdate, UpdateType.ProductUpdate, UpdateType.CustomerUpdate);
+                appendEvent(statisticCashForm);
+            }
+            return statisticCashForm;
+        }
+
         public override StatisticProductForm getProductStatisticForm()
         {
             if (productStatisticForm == null || productStatisticForm.IsDisposed)

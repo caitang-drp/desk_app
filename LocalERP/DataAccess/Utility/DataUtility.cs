@@ -37,6 +37,7 @@ namespace LocalERP.DataAccess.Utility
         public const String QUERY_PRODUCT_DETAIL = "进销明细";
         public const String QUERY_CASH_DETAIL = "收付明细";
         public const String STATISTIC_PRODUCT = "进销统计";
+        public const String STATISTIC_CASH = "财务统计";
         public const String STATISTIC_DEBT = "应收应付";
         public const String STATISTIC_PROFIT = "销售利润";
         //经营统计

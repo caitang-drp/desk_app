@@ -139,7 +139,9 @@ namespace LocalERP.WinForm
                 case DataUtility.STATISTIC_PRODUCT:
                     FormSingletonFactory.getInstance().getProductStatisticForm().Show(this.dockPanel1);
                     break;
-
+                case DataUtility.STATISTIC_CASH:
+                    FormSingletonFactory.getInstance().getStatisticCashForm().Show(this.dockPanel1);
+                    break;
                 case DataUtility.DATA_CUSTOMER:
                     FormSingletonFactory.getInstance().getCustomerCIForm().Show(this.dockPanel1);
                     break;

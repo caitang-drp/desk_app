@@ -184,6 +184,10 @@ namespace LocalERP.WinForm
         protected QuerySellProfitForm querySellProfitForm = null;
         public abstract QuerySellProfitForm getQuerySellProfitForm();
 
+        //cash statistic form
+        protected StatisticCashForm statisticCashForm = null;
+        public abstract StatisticCashForm getStatisticCashForm();
+
         //product statistic form
         protected StatisticProductForm productStatisticForm = null;
         public abstract StatisticProductForm getProductStatisticForm();

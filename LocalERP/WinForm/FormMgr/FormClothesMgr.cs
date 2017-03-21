@@ -167,6 +167,11 @@ namespace LocalERP.WinForm
             return querySellProfitForm;
         }
 
+        public override StatisticCashForm getStatisticCashForm()
+        {
+            return null;
+        }
+
         public override StatisticProductForm getProductStatisticForm()
         {
             if (productStatisticForm == null || productStatisticForm.IsDisposed)
