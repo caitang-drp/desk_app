@@ -537,7 +537,7 @@
             this.linkLabel28.TabIndex = 56;
             this.linkLabel28.TabStop = true;
             this.linkLabel28.Text = "财务统计";
-            this.linkLabel28.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel28_LinkClicked);
+            this.linkLabel28.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel_LinkClicked);
             // 
             // WelcomeForm
             // 
