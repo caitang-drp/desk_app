@@ -70,7 +70,7 @@ namespace LocalERP.WinForm
 
             dataTable1 = PayReceiptDao.getInstance().FindList(parent, this.textBox_search.Text);
             //这个地方需要再改成ProductCirculationDao
-            dataTable2 = ProductStainlessCirculationDao.getInstance().FindList(parent, this.textBox_search.Text, true);
+            dataTable2 = ProductStainlessCirculationDao.getInstance().FindList(parent, this.textBox_search.Text, true, true);
         }
 
         private void backgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)

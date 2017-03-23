@@ -20,6 +20,9 @@ namespace LocalERP.WinForm
         private DataTable payReceiptDT;
         private DataTable circulationDT;
 
+
+        double sumPayed, sumFreight;
+
         public StatisticCashForm(Form parentForm, string title)
             : base()
         {
@@ -42,24 +45,34 @@ namespace LocalERP.WinForm
         private void backgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
             payReceiptDT = PayReceiptDao.getInstance().FindList(null, null);
-            circulationDT = ProductStainlessCirculationDao.getInstance().FindList(null, null, true);
+            circulationDT = ProductStainlessCirculationDao.getInstance().FindList(null, null, false, true);
+
+            sumPayed = 0;
+            sumFreight = 0;
+
+            foreach (DataRow dr in circulationDT.Rows) { 
+                double payed, freight;
+                double.TryParse(dr["thisPayed"].ToString(), out payed);
+                double.TryParse(dr["freight"].ToString(), out freight);
+                sumPayed += payed;
+                sumFreight += freight;
+            }
+
         }
 
         private void backgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            foreach (DataRow dr in payReceiptDT.Rows)
-            {
-
-            }
-
-            foreach (DataRow dr in circulationDT.Rows)
-            {
-            }
-           
+            this.label_pay.Text = string.Format("采购支出:      {0}元", sumPayed);
+            this.label_freight.Text = string.Format("运费支出:      {0}元", sumFreight);
+            this.label_paySum.Text = string.Format("合计:      {0}元", sumFreight + sumPayed);
+            
+            this.invokeEndLoadNotify();
         }
 
         private void button_add_Click(object sender, EventArgs e)
         {
+            this.backgroundWorker.RunWorkerAsync();
+            this.invokeBeginLoadNotify();
         }
     }
 }

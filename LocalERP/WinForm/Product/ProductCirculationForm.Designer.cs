@@ -53,6 +53,7 @@ namespace LocalERP.WinForm
             this.textBox_cutoff = new System.Windows.Forms.TextBox();
             this.textBox_thisPayed = new System.Windows.Forms.TextBox();
             this.textBox_previousArrears = new System.Windows.Forms.TextBox();
+            this.textBox_freight = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
@@ -76,6 +77,8 @@ namespace LocalERP.WinForm
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.panel_pay = new System.Windows.Forms.Panel();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
             this.label_arrears = new System.Windows.Forms.Label();
@@ -296,6 +299,16 @@ namespace LocalERP.WinForm
             this.textBox_previousArrears.Size = new System.Drawing.Size(98, 23);
             this.textBox_previousArrears.TabIndex = 43;
             // 
+            // textBox_freight
+            // 
+            this.textBox_freight.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.errorProvider1.SetIconPadding(this.textBox_freight, 20);
+            this.textBox_freight.Location = new System.Drawing.Point(667, 9);
+            this.textBox_freight.Name = "textBox_freight";
+            this.textBox_freight.Size = new System.Drawing.Size(97, 23);
+            this.textBox_freight.TabIndex = 68;
+            this.textBox_freight.TextChanged += new System.EventHandler(this.Controls_TextChanged);
+            // 
             // label5
             // 
             this.label5.AutoSize = true;
@@ -359,6 +372,7 @@ namespace LocalERP.WinForm
             // 
             this.label_thisPayed.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label_thisPayed.AutoSize = true;
+            this.label_thisPayed.ForeColor = System.Drawing.Color.Red;
             this.label_thisPayed.Location = new System.Drawing.Point(14, 48);
             this.label_thisPayed.Name = "label_thisPayed";
             this.label_thisPayed.Size = new System.Drawing.Size(119, 14);
@@ -526,6 +540,9 @@ namespace LocalERP.WinForm
             // panel_pay
             // 
             this.panel_pay.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.panel_pay.Controls.Add(this.label12);
+            this.panel_pay.Controls.Add(this.textBox_freight);
+            this.panel_pay.Controls.Add(this.label15);
             this.panel_pay.Controls.Add(this.label18);
             this.panel_pay.Controls.Add(this.label16);
             this.panel_pay.Controls.Add(this.textBox_previousArrears);
@@ -546,6 +563,27 @@ namespace LocalERP.WinForm
             this.panel_pay.Name = "panel_pay";
             this.panel_pay.Size = new System.Drawing.Size(800, 92);
             this.panel_pay.TabIndex = 58;
+            // 
+            // label12
+            // 
+            this.label12.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(767, 13);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(21, 14);
+            this.label12.TabIndex = 70;
+            this.label12.Text = "元";
+            // 
+            // label15
+            // 
+            this.label15.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label15.AutoSize = true;
+            this.label15.ForeColor = System.Drawing.Color.Black;
+            this.label15.Location = new System.Drawing.Point(566, 13);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(98, 14);
+            this.label15.TabIndex = 69;
+            this.label15.Text = "我方支付运费:";
             // 
             // label18
             // 
@@ -748,6 +786,9 @@ namespace LocalERP.WinForm
         protected System.Windows.Forms.Label label1_tip;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.Panel panel_basic;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.TextBox textBox_freight;
+        private System.Windows.Forms.Label label15;
         
        
     }

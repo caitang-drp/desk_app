@@ -56,7 +56,7 @@ namespace LocalERP.WinForm
             this.label_title.Text = this.Text;
             this.label2.Text = conf.business+"时间:";
             this.label_customer.Text = conf.customer;
-            this.label_thisPayed.Text = conf.productDirection == 1 ? "我方本次付款:" : "我方本次收款:";
+            this.label_thisPayed.Text = conf.productDirection == 1 ? "我方本次付款(-):" : "我方本次收款(+):";
             this.label_arrears.Text =  conf.arrearsDirection==1? "我方以上欠款:":"对方以上欠款:";
             this.label1_accumulative.Text = conf.arrearsDirection == 1 ? "我方累计欠款:" : "对方累计欠款:";
 
@@ -131,6 +131,7 @@ namespace LocalERP.WinForm
                 this.textBox_previousArrears.Text = null;
                 this.textBox_thisPayed.Text = null;
                 this.textBox_accumulative.Text = null;
+                this.textBox_freight.Text = null;
 
                 this.resetNeedSave(false);
                 this.recordChanged = false;
@@ -159,6 +160,7 @@ namespace LocalERP.WinForm
                 this.textBox_previousArrears.Text = circulation.PreviousArrears.ToString();
 
             this.textBox_thisPayed.Text = circulation.ThisPayed.ToString();
+            this.textBox_freight.Text = circulation.Freight.ToString();
             
             this.backgroundWorker.RunWorkerAsync(circulation.ID);
             this.invokeBeginLoadNotify();
@@ -343,18 +345,20 @@ namespace LocalERP.WinForm
 
             circulation.CustomerName = this.lookupText1.Text_Lookup;
 
-            double total, cutoff, realTotal, previousArrears, thisPayed;
+            double total, cutoff, realTotal, previousArrears, thisPayed, freight;
 
             if (ValidateUtility.getPrice(this.dataGridView2[1, 0], true, out total)
                 && ValidateUtility.getDouble(this.textBox_cutoff, this.errorProvider1, false, true, out cutoff)
                 && ValidateUtility.getPrice(this.textBox_realTotal, this.errorProvider1, true, true, out realTotal)
                 && ValidateUtility.getPrice(this.textBox_previousArrears, this.errorProvider1, false, false, out previousArrears)
-                && ValidateUtility.getPrice(this.textBox_thisPayed, this.errorProvider1, false, true, out thisPayed))
+                && ValidateUtility.getPrice(this.textBox_thisPayed, this.errorProvider1, false, true, out thisPayed)
+                && ValidateUtility.getPrice(this.textBox_freight, this.errorProvider1, false, true, out freight))
             {
                 circulation.Total = total;
                 circulation.RealTotal = realTotal;
                 circulation.PreviousArrears = previousArrears;
                 circulation.ThisPayed = thisPayed;
+                circulation.Freight = freight;
             }
             else
                 return false;
@@ -773,9 +777,8 @@ namespace LocalERP.WinForm
             double.TryParse(this.textBox_previousArrears.Text, out arrear);
             double.TryParse(this.textBox_thisPayed.Text, out pay);
             double.TryParse(this.textBox_realTotal.Text, out realTotal);
-            double temp1 = conf.arrearsDirection * arrear;
-            temp1 = temp1 + conf.productDirection * realTotal;
-            temp1 = temp1 - conf.arrearsDirection * pay;
+            //             先统一用原始数据来表示           新货款刚好跟货款方向一样            付款方向刚好跟货物方向一样
+            double temp1 = conf.arrearsDirection * arrear + conf.productDirection * realTotal - conf.productDirection * pay;
             temp1 = temp1 * conf.arrearsDirection;
             this.textBox_accumulative.Text = temp1.ToString("0.00");
         }

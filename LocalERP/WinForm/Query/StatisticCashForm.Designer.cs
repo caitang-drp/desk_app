@@ -47,6 +47,9 @@
             this.label12 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label_sellBack = new System.Windows.Forms.Label();
+            this.label_freight = new System.Windows.Forms.Label();
             this.label21 = new System.Windows.Forms.Label();
             this.label_otherPay = new System.Windows.Forms.Label();
             this.label_paySum = new System.Windows.Forms.Label();
@@ -78,7 +81,7 @@
             // 
             // statusStrip1
             // 
-            this.statusStrip1.Location = new System.Drawing.Point(0, 507);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 609);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 16, 0);
             this.statusStrip1.Size = new System.Drawing.Size(759, 22);
@@ -93,7 +96,7 @@
             this.label_notice.Name = "label_notice";
             this.label_notice.Size = new System.Drawing.Size(168, 14);
             this.label_notice.TabIndex = 55;
-            this.label_notice.Text = "数据有更新, 请重新查询!";
+            this.label_notice.Text = "数据有更新, 请重新统计!";
             this.label_notice.Visible = false;
             // 
             // label1
@@ -165,7 +168,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(283, 96);
+            this.label9.Location = new System.Drawing.Point(285, 69);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(70, 14);
             this.label9.TabIndex = 65;
@@ -223,15 +226,18 @@
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.pictureBox1);
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Location = new System.Drawing.Point(50, 295);
+            this.groupBox1.Location = new System.Drawing.Point(50, 349);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(545, 204);
+            this.groupBox1.Size = new System.Drawing.Size(545, 210);
             this.groupBox1.TabIndex = 70;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "资产负债表";
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.label13);
+            this.groupBox2.Controls.Add(this.label_sellBack);
+            this.groupBox2.Controls.Add(this.label_freight);
             this.groupBox2.Controls.Add(this.label21);
             this.groupBox2.Controls.Add(this.label_otherPay);
             this.groupBox2.Controls.Add(this.label_paySum);
@@ -247,16 +253,43 @@
             this.groupBox2.Controls.Add(this.label20);
             this.groupBox2.Location = new System.Drawing.Point(50, 56);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(545, 207);
+            this.groupBox2.Size = new System.Drawing.Size(545, 259);
             this.groupBox2.TabIndex = 71;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "收支统计表";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(18, 95);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(98, 14);
+            this.label13.TabIndex = 74;
+            this.label13.Text = "采购退货收入:";
+            // 
+            // label_sellBack
+            // 
+            this.label_sellBack.AutoSize = true;
+            this.label_sellBack.Location = new System.Drawing.Point(285, 95);
+            this.label_sellBack.Name = "label_sellBack";
+            this.label_sellBack.Size = new System.Drawing.Size(98, 14);
+            this.label_sellBack.TabIndex = 73;
+            this.label_sellBack.Text = "销售退货支出:";
+            // 
+            // label_freight
+            // 
+            this.label_freight.AutoSize = true;
+            this.label_freight.Location = new System.Drawing.Point(285, 121);
+            this.label_freight.Name = "label_freight";
+            this.label_freight.Size = new System.Drawing.Size(70, 14);
+            this.label_freight.TabIndex = 72;
+            this.label_freight.Text = "运费支出:";
             // 
             // label21
             // 
             this.label21.AutoSize = true;
             this.label21.ForeColor = System.Drawing.Color.Red;
-            this.label21.Location = new System.Drawing.Point(18, 172);
+            this.label21.Location = new System.Drawing.Point(18, 216);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(70, 14);
             this.label21.TabIndex = 71;
@@ -265,7 +298,7 @@
             // label_otherPay
             // 
             this.label_otherPay.AutoSize = true;
-            this.label_otherPay.Location = new System.Drawing.Point(285, 96);
+            this.label_otherPay.Location = new System.Drawing.Point(285, 147);
             this.label_otherPay.Name = "label_otherPay";
             this.label_otherPay.Size = new System.Drawing.Size(70, 14);
             this.label_otherPay.TabIndex = 70;
@@ -275,7 +308,7 @@
             // 
             this.label_paySum.AutoSize = true;
             this.label_paySum.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Bold);
-            this.label_paySum.Location = new System.Drawing.Point(303, 138);
+            this.label_paySum.Location = new System.Drawing.Point(309, 183);
             this.label_paySum.Name = "label_paySum";
             this.label_paySum.Size = new System.Drawing.Size(52, 14);
             this.label_paySum.TabIndex = 69;
@@ -284,7 +317,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(283, 113);
+            this.label8.Location = new System.Drawing.Point(283, 158);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(238, 14);
             this.label8.TabIndex = 68;
@@ -322,7 +355,7 @@
             // 
             this.label15.AutoSize = true;
             this.label15.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Bold);
-            this.label15.Location = new System.Drawing.Point(36, 138);
+            this.label15.Location = new System.Drawing.Point(36, 183);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(52, 14);
             this.label15.TabIndex = 62;
@@ -331,7 +364,7 @@
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(16, 113);
+            this.label16.Location = new System.Drawing.Point(16, 158);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(238, 14);
             this.label16.TabIndex = 61;
@@ -340,7 +373,7 @@
             // label18
             // 
             this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(18, 96);
+            this.label18.Location = new System.Drawing.Point(18, 121);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(70, 14);
             this.label18.TabIndex = 59;
@@ -376,18 +409,21 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(513, 11);
+            this.button1.Image = global::LocalERP.Properties.Resources.search_16px;
+            this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button1.Location = new System.Drawing.Point(479, 13);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(61, 28);
+            this.button1.Size = new System.Drawing.Size(95, 28);
             this.button1.TabIndex = 72;
-            this.button1.Text = "刷新";
+            this.button1.Text = "  开始统计";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button_add_Click);
             // 
             // StatisticCashForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(759, 529);
+            this.ClientSize = new System.Drawing.Size(759, 631);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
@@ -453,5 +489,8 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label_otherPay;
         private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.Label label_sellBack;
+        private System.Windows.Forms.Label label_freight;
+        private System.Windows.Forms.Label label13;
     }
 }

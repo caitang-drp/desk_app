@@ -28,8 +28,8 @@ namespace LocalERP.DataAccess.DataDAO
             ProductCirculationID = 0;
             try
             {
-                string commandText = string.Format("insert into {0}(code, circulationTime, comment, status, customerID, type, flowType, total, realTotal, previousArrears, thisPayed, operator) values('{1}','{2}', '{3}', '{4}', {5}, {6}, {7}, {8}, {9},{10},{11},'{12}')",
-                    tableName, info.Code, info.CirculationTime, info.Comment, info.Status, info.CustomerID <= 0 ? "null" : info.CustomerID.ToString(), info.Type, info.FlowType, info.Total, info.RealTotal, info.PreviousArrears, info.ThisPayed, info.Oper);
+                string commandText = string.Format("insert into {0}(code, circulationTime, comment, status, customerID, type, flowType, total, realTotal, previousArrears, thisPayed, freight, operator) values('{1}','{2}', '{3}', '{4}', {5}, {6}, {7}, {8}, {9},{10},{11},{12},'{13}')",
+                    tableName, info.Code, info.CirculationTime, info.Comment, info.Status, info.CustomerID <= 0 ? "null" : info.CustomerID.ToString(), info.Type, info.FlowType, info.Total, info.RealTotal, info.PreviousArrears, info.ThisPayed, info.Freight, info.Oper);
                 DbHelperAccess.executeNonQuery(commandText);
                 ProductCirculationID = DbHelperAccess.executeLastID("ID", tableName);
                 return true;
@@ -51,8 +51,8 @@ namespace LocalERP.DataAccess.DataDAO
 
         public void UpdateBaiscInfo(ProductCirculation info)
         {
-            string commandText = string.Format("update {0} set code='{1}', circulationTime='{2}', comment='{3}', customerID={4}, total={5}, realTotal={6}, previousArrears={7}, thisPayed ={8}, operator='{9}' where ID={10}",
-                tableName, info.Code, info.CirculationTime, info.Comment, info.CustomerID <= 0 ? "null" : info.CustomerID.ToString(), info.Total, info.RealTotal, info.PreviousArrears, info.ThisPayed, info.Oper, info.ID);
+            string commandText = string.Format("update {0} set code='{1}', circulationTime='{2}', comment='{3}', customerID={4}, total={5}, realTotal={6}, previousArrears={7}, thisPayed ={8}, freight={9}, operator='{10}' where ID={11}",
+                tableName, info.Code, info.CirculationTime, info.Comment, info.CustomerID <= 0 ? "null" : info.CustomerID.ToString(), info.Total, info.RealTotal, info.PreviousArrears, info.ThisPayed, info.Freight, info.Oper, info.ID);
 
             DbHelperAccess.executeNonQuery(commandText);
         }
@@ -94,7 +94,7 @@ namespace LocalERP.DataAccess.DataDAO
                 
                 circulation.Oper = dr["operator"] as string;
 
-                double total, realTotal, previousArrears, thisPayed;
+                double total, realTotal, previousArrears, thisPayed, freight;
 
                 if (double.TryParse(dr["total"].ToString(), out total))
                     circulation.Total = total;
@@ -104,6 +104,8 @@ namespace LocalERP.DataAccess.DataDAO
                     circulation.PreviousArrears = previousArrears;
                 if (double.TryParse(dr["thisPayed"].ToString(), out thisPayed))
                     circulation.ThisPayed = thisPayed;
+                if (double.TryParse(dr["freight"].ToString(), out freight))
+                    circulation.Freight = freight;
                 //not reasonal
                 if(customerID > 0)
                     circulation.CustomerName = CustomerDao.getInstance().FindByID(circulation.CustomerID).Name;

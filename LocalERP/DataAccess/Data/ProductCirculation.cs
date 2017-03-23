@@ -95,6 +95,14 @@ namespace LocalERP.DataAccess.Data
             set { thisPayed = value; }
         }
 
+        private double freight;
+
+        public double Freight
+        {
+            get { return freight; }
+            set { freight = value; }
+        }
+
         private string oper;
 
         public string Oper
