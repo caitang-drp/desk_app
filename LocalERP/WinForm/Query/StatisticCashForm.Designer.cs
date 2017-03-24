@@ -35,7 +35,7 @@
             this.label_notice = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.label2 = new System.Windows.Forms.Label();
+            this.label_lib = new System.Windows.Forms.Label();
             this.label_needReceipt = new System.Windows.Forms.Label();
             this.label_sumCash1 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -118,14 +118,14 @@
             this.pictureBox1.TabIndex = 57;
             this.pictureBox1.TabStop = false;
             // 
-            // label2
+            // label_lib
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(18, 69);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(70, 14);
-            this.label2.TabIndex = 58;
-            this.label2.Text = "库存成本:";
+            this.label_lib.AutoSize = true;
+            this.label_lib.Location = new System.Drawing.Point(18, 69);
+            this.label_lib.Name = "label_lib";
+            this.label_lib.Size = new System.Drawing.Size(70, 14);
+            this.label_lib.TabIndex = 58;
+            this.label_lib.Text = "库存成本:";
             // 
             // label_needReceipt
             // 
@@ -223,7 +223,7 @@
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.label_sumCash1);
             this.groupBox1.Controls.Add(this.label_needReceipt);
-            this.groupBox1.Controls.Add(this.label2);
+            this.groupBox1.Controls.Add(this.label_lib);
             this.groupBox1.Controls.Add(this.pictureBox1);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Location = new System.Drawing.Point(50, 349);
@@ -463,7 +463,7 @@
         private System.Windows.Forms.Label label_notice;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label_lib;
         private System.Windows.Forms.Label label_needReceipt;
         private System.Windows.Forms.Label label_sumCash1;
         private System.Windows.Forms.Label label5;

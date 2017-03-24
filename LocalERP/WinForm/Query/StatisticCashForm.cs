@@ -20,11 +20,13 @@ namespace LocalERP.WinForm
         private DataTable payReceiptDT;
         private DataTable circulationDT;
 
+        private DataTable productDT;
         private DataTable customerDT;
 
         double receipt, purchaseBack, otherReceipt;
         double payed, sellBack, freights, otherPay;
 
+        double lib;
         double needPay, needReceipt;
 
         public StatisticCashForm(Form parentForm, string title)
@@ -76,6 +78,21 @@ namespace LocalERP.WinForm
                 freights += freight;
             }
 
+            lib = 0;
+            productDT = ProductStainlessDao.getInstance().FindList(null, null);
+            foreach (DataRow dr in productDT.Rows) {
+                double price;
+                int num;
+                bool positive;
+
+                ValidateUtility.getInt(dr, "num", out num, out positive);
+                ValidateUtility.getDouble(dr, "priceCost", out price);
+                if (price <= 0)
+                    ValidateUtility.getDouble(dr, "pricePurchase", out price);
+
+                lib = lib + price * num;
+            }
+
             needPay = needReceipt = 0;
             customerDT = CustomerDao.getInstance().FindList(null, null);
 
@@ -106,9 +123,11 @@ namespace LocalERP.WinForm
 
             this.label_sumCash.Text = string.Format("结存金额:{0,10}元", sumReceipt - sumPay);
 
+
+            this.label_lib.Text = string.Format("库存成本:{0,10}元", lib);
             this.label_needReceipt.Text = string.Format("应收货款:{0,10}元", needReceipt);
             this.label_sumCash1.Text = string.Format("结存金额:{0,10}元", sumReceipt - sumPay);
-            this.label_assets.Text = string.Format("合计:{0,9}元", needReceipt + sumReceipt - sumPay);
+            this.label_assets.Text = string.Format("合计:{0,9}元", needReceipt + sumReceipt - sumPay + lib);
 
             this.label_needPay.Text = string.Format("应付货款:{0,10}元", needPay);
             this.label_debt.Text = string.Format("合计:{0,9}元", needPay);

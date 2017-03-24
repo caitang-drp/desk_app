@@ -175,10 +175,10 @@ namespace LocalERP.WinForm
                         //stone 临时关闭
                         control.EditingControlDataGridView.Rows[control.EditingControlRowIndex].Cells["quantityPerPiece"].Value = product.QuantityPerPiece;
                         control.EditingControlDataGridView.Rows[control.EditingControlRowIndex].Cells["unit"].Value = product.Unit;
-                        if(conf.productDirection == 1)
-                            control.EditingControlDataGridView.Rows[control.EditingControlRowIndex].Cells["price"].Value = product.PricePurchase;
-                        else
+                        if(conf.type == ProductCirculation.CirculationType.sell || conf.type == ProductCirculation.CirculationType.sellBack)
                             control.EditingControlDataGridView.Rows[control.EditingControlRowIndex].Cells["price"].Value = product.PriceSell;
+                        else
+                            control.EditingControlDataGridView.Rows[control.EditingControlRowIndex].Cells["price"].Value = product.PricePurchase;
                     }
                 }
                 //not reasonal
@@ -282,12 +282,17 @@ namespace LocalERP.WinForm
             /*********更新数量和成本总价**********/
             ProductStainlessDao stainlessDao = cirDao.getProductDao() as ProductStainlessDao;
             ProductStainless stainless = stainlessDao.FindByID(record.ProductID);
-            
+
+            int leftNum = stainless.Num + conf.productDirection * record.TotalNum;
+
             //这三种情况，需要更新成本价
             if (conf.type == ProductCirculation.CirculationType.purchase || conf.type == ProductCirculation.CirculationType.purchaseBack || conf.type == ProductCirculation.CirculationType.sellBack){
                 double totalCost = stainless.PriceCost * stainless.Num + conf.productDirection * record.Price * record.TotalNum;
-                double cost = totalCost / (stainless.Num + conf.productDirection * record.TotalNum);
-                stainless.PriceCost = double.Parse(cost.ToString("0.00"));
+                if (leftNum != 0)
+                {
+                    double cost = totalCost / leftNum;
+                    stainless.PriceCost = double.Parse(cost.ToString("0.00"));
+                }
             }
 
             stainless.Num = stainless.Num + conf.productDirection * record.TotalNum;

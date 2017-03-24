@@ -420,7 +420,7 @@ namespace LocalERP.WinForm
             this.label_tip.Name = "label_tip";
             this.label_tip.Size = new System.Drawing.Size(147, 14);
             this.label_tip.TabIndex = 69;
-            this.label_tip.Text = "* 该单将自动核销账务";
+            this.label_tip.Text = "* 该单将自动核销债务";
             // 
             // PayReceiptForm
             // 
