@@ -56,9 +56,9 @@ namespace LocalERP.WinForm
             this.label_title.Text = this.Text;
             this.label2.Text = conf.business+"时间:";
             this.label_customer.Text = conf.customer;
-            this.label_thisPayed.Text = conf.productDirection == 1 ? "我方本次付款(-):" : "我方本次收款(+):";
-            this.label_arrears.Text =  conf.arrearsDirection==1? "我方以上欠款:":"对方以上欠款:";
-            this.label1_accumulative.Text = conf.arrearsDirection == 1 ? "我方累计欠款:" : "对方累计欠款:";
+            this.label_thisPayed.Text = conf.productDirection == 1 ? "本单已付:" : "本单已收:";
+            this.label_arrears.Text =  conf.arrearsDirection==1? "以上欠款(应付):":"以上欠款(应收):";
+            this.label1_accumulative.Text = conf.arrearsDirection == 1 ? "累计欠款(应付):" : "累计欠款(应收):";
 
             this.cirDao = cirDao;
 

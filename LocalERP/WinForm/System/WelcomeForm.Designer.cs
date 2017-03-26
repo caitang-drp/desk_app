@@ -238,12 +238,12 @@
             this.linkLabel12.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Bold);
             this.linkLabel12.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
             this.linkLabel12.LinkColor = System.Drawing.Color.Green;
-            this.linkLabel12.Location = new System.Drawing.Point(241, 423);
+            this.linkLabel12.Location = new System.Drawing.Point(234, 423);
             this.linkLabel12.Name = "linkLabel12";
-            this.linkLabel12.Size = new System.Drawing.Size(67, 14);
+            this.linkLabel12.Size = new System.Drawing.Size(82, 14);
             this.linkLabel12.TabIndex = 35;
             this.linkLabel12.TabStop = true;
-            this.linkLabel12.Text = "进销明细";
+            this.linkLabel12.Text = "进销存明细";
             this.linkLabel12.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel_LinkClicked);
             // 
             // linkLabel13
@@ -464,7 +464,7 @@
             this.linkLabel23.Size = new System.Drawing.Size(67, 14);
             this.linkLabel23.TabIndex = 50;
             this.linkLabel23.TabStop = true;
-            this.linkLabel23.Text = "收付明细";
+            this.linkLabel23.Text = "往来对账";
             this.linkLabel23.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel_LinkClicked);
             // 
             // linkLabel24

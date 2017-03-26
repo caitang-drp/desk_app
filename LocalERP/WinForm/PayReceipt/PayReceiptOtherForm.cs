@@ -20,6 +20,10 @@ namespace LocalERP.WinForm
         {
             this.panel_history.Visible = false;
             this.label_tip.Text = "*该单不会自动核销债务,如需核销,请采用采购或销售收付款单";
+
+            this.label9.Visible = false;
+            this.label_customer.Visible = false;
+            this.lookupText1.Visible = false;
         }
 
         //审核

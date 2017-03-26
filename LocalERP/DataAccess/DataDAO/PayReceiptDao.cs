@@ -47,11 +47,41 @@ namespace LocalERP.DataAccess.DataDAO
             DbHelperAccess.executeNonQuery(commandText);
         }
 
+        private PayReceipt formatPayReceipt(DataRow dr) {
+            PayReceipt payReceipt = new PayReceipt();
+            if (dr != null)
+            {
+                payReceipt.id = (int)dr["ID"];
+                payReceipt.serial = dr["serial"] as string;
+                payReceipt.bill_time = (DateTime)dr["bill_time"];
+                payReceipt.comment = dr["comment"] as string;
+                payReceipt.status = (int)dr["status"];
+                payReceipt.bill_type = (PayReceipt.BillType)dr["bill_type"];
+
+                int customerID = 0;
+                if (int.TryParse(dr["customer_id"].ToString(), out customerID))
+                    payReceipt.customer_id = customerID;
+
+                payReceipt.handle_people = dr["handle_people"] as string;
+
+                double previousArrears, amount;
+                if (double.TryParse(dr["previousArrears"].ToString(), out previousArrears))
+                    payReceipt.previousArrears = previousArrears;
+                if (double.TryParse(dr["amount"].ToString(), out amount))
+                    payReceipt.amount = amount;
+
+                payReceipt.customerName = dr["name"] as string;
+                return payReceipt;
+            }
+            return null;
+        }
+
         public PayReceipt FindByID(int ID)
         {
             string commandText = string.Format("select * from PayReceipt where ID={0}", ID);
             DataRow dr = DbHelperAccess.executeQueryGetOneRow(commandText);
             PayReceipt payReceipt = new PayReceipt();
+            //迟一些要把这个合并到formatPayReceipt函数里，主要考虑到字段名可能有差别
             if (dr != null)
             {
                 payReceipt.id = (int)dr["ID"];
@@ -116,6 +146,24 @@ namespace LocalERP.DataAccess.DataDAO
 
             commandText.Append(string.Format(" order by PayReceipt.ID desc"));
             return DbHelperAccess.executeQuery(commandText.ToString());
+        }
+
+        
+        public List<PayReceipt> FindPayReceiptList(Category parent, string name)
+        {
+            //要注意，这个语句会筛选掉没有Customer信息的
+            StringBuilder commandText = new StringBuilder("select PayReceipt.*, Customer.name from PayReceipt, Customer, CustomerCategory where PayReceipt.customer_id = Customer.ID and Customer.parent = CustomerCategory.ID");
+            if (parent != null)
+                commandText.AppendFormat("  and CustomerCategory.lft>={0} and CustomerCategory.rgt<={1}", parent.Left, parent.Right);
+
+            if (!string.IsNullOrEmpty(name))
+                commandText.AppendFormat(" and CustomerCategory.name like '%{0}%'", name);
+            DataTable dt = DbHelperAccess.executeQuery(commandText.ToString());
+            List<PayReceipt> list = new List<PayReceipt>();
+            foreach (DataRow pr in dt.Rows) { 
+                list.Add(this.formatPayReceipt(pr));
+            }
+            return list;
         }
 
         public int getMaxCode(string code)

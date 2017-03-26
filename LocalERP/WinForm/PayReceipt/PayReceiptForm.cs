@@ -187,7 +187,7 @@ namespace LocalERP.WinForm
                 return false;
             payReceipt.serial = name;
 
-            if (ValidateUtility.getLookupValueID(this.lookupText1, this.errorProvider1, out payReceipt.customer_id) == false)
+            if (this.lookupText1.Visible == true && ValidateUtility.getLookupValueID(this.lookupText1, this.errorProvider1, out payReceipt.customer_id) == false)
                 return false;
 
             payReceipt.bill_time = this.dateTime_time.Value;

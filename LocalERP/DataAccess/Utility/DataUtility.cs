@@ -34,8 +34,8 @@ namespace LocalERP.DataAccess.Utility
         public const String LIB_LOSS = "盘点报损";
 
         public const String QUERY_LIB = "库存查询";
-        public const String QUERY_PRODUCT_DETAIL = "进销明细";
-        public const String QUERY_CASH_DETAIL = "收付明细";
+        public const String QUERY_PRODUCT_DETAIL = "进销存明细";
+        public const String QUERY_CASH_DETAIL = "往来对账";
         public const String STATISTIC_PRODUCT = "进销统计";
         public const String STATISTIC_CASH = "财务统计";
         public const String STATISTIC_DEBT = "应收应付";
