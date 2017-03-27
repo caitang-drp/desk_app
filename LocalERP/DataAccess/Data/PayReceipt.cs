@@ -31,6 +31,7 @@ namespace LocalERP.DataAccess.Data
         public double previousArrears;
         // 金额
         public double amount;
+        public double thisPayed;
         // 经手人
         public string handle_people;
         // 表单类型

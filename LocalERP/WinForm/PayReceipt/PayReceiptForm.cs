@@ -35,6 +35,11 @@ namespace LocalERP.WinForm
 
             this.conf = conf;
 
+            if (conf.type == PayReceipt.BillType.BuyPay || conf.type == PayReceipt.BillType.SellReceipt)
+                this.panel_sum.Visible = false;
+            else if (conf.type == PayReceipt.BillType.BuyRefund || conf.type == PayReceipt.BillType.SellRefund)
+                this.label_pay_need.Visible = false;
+
             this.Text = conf.name + "单";
             this.label_title.Text = this.Text;
             this.label_customer.Text = conf.customer;
@@ -92,6 +97,7 @@ namespace LocalERP.WinForm
                 this.dateTime_time.Value = DateTime.Now;
                 this.textBox_operator.Text = null;
 
+                this.textBox_sum.Text = null;
                 this.textBox_previousArrears.Text = null;
                 this.textBox_thisPayed.Text = null;
                 this.textBox_accumulative.Text = null;
@@ -108,12 +114,16 @@ namespace LocalERP.WinForm
             this.textBox_serial.Text = payReceipt.serial;
             this.dateTime_time.Value = payReceipt.bill_time;
             this.textBox_comment.Text = payReceipt.comment;
+
+            this.textBox_sum.Text = payReceipt.amount.ToString();
+
             this.lookupText1.LookupArg = new LookupArg(payReceipt.customer_id, payReceipt.customerName);
             this.lookupText1.Text_Lookup = payReceipt.customerName;
             this.textBox_operator.Text = payReceipt.handle_people;
 
             //如果是未审核状态，以前欠款应该如何生成？
-            this.textBox_previousArrears.Text = payReceipt.previousArrears.ToString();
+            if(payReceipt.status > 1)
+                this.textBox_previousArrears.Text = payReceipt.previousArrears.ToString();
             this.textBox_thisPayed.Text = payReceipt.amount.ToString();
 
             openMode = payReceipt.status;
@@ -187,15 +197,19 @@ namespace LocalERP.WinForm
 
             payReceipt.bill_time = this.dateTime_time.Value;
             payReceipt.handle_people = textBox_operator.Text;
-
-            payReceipt.previousArrears = Convert.ToDouble(this.textBox_previousArrears.Text);
             
-            double pay;
-            if (ValidateUtility.getDouble(this.textBox_thisPayed, this.errorProvider1, true, true, out pay) == false)
+            double sum=0, pay, previousArrears;
+            if ((this.panel_sum.Visible == false || ValidateUtility.getDouble(this.textBox_sum, this.errorProvider1, true, true, out sum))
+                //如果是退点，本单付款就不是必填，否则为必填
+                && (this.label_pay_need.Visible == true && ValidateUtility.getDouble(this.textBox_thisPayed, this.errorProvider1, true, true, out pay) || this.label_pay_need.Visible == false && ValidateUtility.getDouble(this.textBox_thisPayed, this.errorProvider1, false, true, out pay))
+                && ValidateUtility.getDouble(this.textBox_previousArrears, this.errorProvider1, false, false, out previousArrears))
+            {
+                payReceipt.amount = sum;
+                payReceipt.previousArrears = previousArrears;
+                payReceipt.thisPayed = pay;
+            }
+            else
                 return false;
-            payReceipt.amount = pay;
-
-            payReceipt.comment = textBox_comment.Text;
 
             return true;
         }

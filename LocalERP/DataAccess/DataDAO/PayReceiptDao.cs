@@ -20,8 +20,8 @@ namespace LocalERP.DataAccess.DataDAO
         {
             try
             {
-                string commandText = string.Format("insert into PayReceipt(serial, bill_time, comment, customer_id, bill_type, handle_people, previousArrears, amount, status, cashDirection, arrearDirection) values('{0}', '{1}', '{2}', {3}, {4}, '{5}', {6}, {7}, {8}, {9}, {10})", 
-                    info.serial, info.bill_time, info.comment, (int)info.customer_id, (int)info.bill_type, info.handle_people, info.previousArrears, info.amount, info.status, info.cashDirection, info.arrearDirection);
+                string commandText = string.Format("insert into PayReceipt(serial, bill_time, comment, customer_id, bill_type, handle_people, previousArrears, amount, status, cashDirection, arrearDirection, thisPayed) values('{0}', '{1}', '{2}', {3}, {4}, '{5}', {6}, {7}, {8}, {9}, {10}, {11})", 
+                    info.serial, info.bill_time, info.comment, (int)info.customer_id, (int)info.bill_type, info.handle_people, info.previousArrears, info.amount, info.status, info.cashDirection, info.arrearDirection, info.thisPayed);
                 DbHelperAccess.executeNonQuery(commandText);
                 id = DbHelperAccess.executeLastID("ID", "PayReceipt");
                 return true;
@@ -42,8 +42,8 @@ namespace LocalERP.DataAccess.DataDAO
         //没有加入cashDirection和arrearDirection
         public void Update(PayReceipt info)
         {
-            string commandText = string.Format("update PayReceipt set serial='{0}', bill_time='{1}', comment='{2}', customer_id={3}, bill_type={4}, handle_people='{5}', previousArrears={6}, amount={7}, status={8} where ID={9}",
-                info.serial, info.bill_time, info.comment, info.customer_id, (int)info.bill_type, info.handle_people, info.previousArrears, info.amount, info.status, info.id);
+            string commandText = string.Format("update PayReceipt set serial='{0}', bill_time='{1}', comment='{2}', customer_id={3}, bill_type={4}, handle_people='{5}', previousArrears={6}, amount={7}, status={8}, thisPayed={9} where ID={10}",
+                info.serial, info.bill_time, info.comment, info.customer_id, (int)info.bill_type, info.handle_people, info.previousArrears, info.amount, info.status, info.thisPayed, info.id);
 
             DbHelperAccess.executeNonQuery(commandText);
         }
@@ -65,11 +65,13 @@ namespace LocalERP.DataAccess.DataDAO
 
                 payReceipt.handle_people = dr["handle_people"] as string;
 
-                double previousArrears, amount;
+                double previousArrears, amount, thisPayed;
                 if (double.TryParse(dr["previousArrears"].ToString(), out previousArrears))
                     payReceipt.previousArrears = previousArrears;
                 if (double.TryParse(dr["amount"].ToString(), out amount))
                     payReceipt.amount = amount;
+                if (double.TryParse(dr["thisPayed"].ToString(), out thisPayed))
+                    payReceipt.thisPayed = thisPayed;
 
                 payReceipt.cashDirection = (int)dr["cashDirection"];
                 payReceipt.arrearDirection = (int)dr["arrearDirection"];

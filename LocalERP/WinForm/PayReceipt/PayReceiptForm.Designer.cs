@@ -62,7 +62,7 @@ namespace LocalERP.WinForm
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.label18 = new System.Windows.Forms.Label();
+            this.label_pay_need = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
             this.textBox_previousArrears = new System.Windows.Forms.TextBox();
             this.label_arrears = new System.Windows.Forms.Label();
@@ -72,14 +72,14 @@ namespace LocalERP.WinForm
             this.label2 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label_needPayed = new System.Windows.Forms.Label();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.panel_sum = new System.Windows.Forms.Panel();
             this.panel_customer = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sellDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sellDataSetBindingSource)).BeginInit();
             this.toolStrip2.SuspendLayout();
             this.panel_history.SuspendLayout();
-            this.panel1.SuspendLayout();
+            this.panel_sum.SuspendLayout();
             this.panel_customer.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -181,6 +181,7 @@ namespace LocalERP.WinForm
             this.textBox_sum.Name = "textBox_sum";
             this.textBox_sum.Size = new System.Drawing.Size(117, 23);
             this.textBox_sum.TabIndex = 71;
+            this.textBox_sum.TextChanged += new System.EventHandler(this.Controls_TextChanged);
             // 
             // label5
             // 
@@ -372,14 +373,14 @@ namespace LocalERP.WinForm
             // 
             // label18
             // 
-            this.label18.AutoSize = true;
-            this.label18.ForeColor = System.Drawing.Color.Red;
-            this.label18.Location = new System.Drawing.Point(22, 172);
-            this.label18.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(14, 14);
-            this.label18.TabIndex = 67;
-            this.label18.Text = "*";
+            this.label_pay_need.AutoSize = true;
+            this.label_pay_need.ForeColor = System.Drawing.Color.Red;
+            this.label_pay_need.Location = new System.Drawing.Point(22, 172);
+            this.label_pay_need.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label_pay_need.Name = "label18";
+            this.label_pay_need.Size = new System.Drawing.Size(14, 14);
+            this.label_pay_need.TabIndex = 67;
+            this.label_pay_need.Text = "*";
             // 
             // label16
             // 
@@ -467,16 +468,16 @@ namespace LocalERP.WinForm
             this.label_needPayed.TabIndex = 70;
             this.label_needPayed.Text = "本单应收:";
             // 
-            // panel1
+            // panel_sum
             // 
-            this.panel1.Controls.Add(this.label2);
-            this.panel1.Controls.Add(this.label8);
-            this.panel1.Controls.Add(this.textBox_sum);
-            this.panel1.Controls.Add(this.label_needPayed);
-            this.panel1.Location = new System.Drawing.Point(10, 126);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(255, 37);
-            this.panel1.TabIndex = 74;
+            this.panel_sum.Controls.Add(this.label2);
+            this.panel_sum.Controls.Add(this.label8);
+            this.panel_sum.Controls.Add(this.textBox_sum);
+            this.panel_sum.Controls.Add(this.label_needPayed);
+            this.panel_sum.Location = new System.Drawing.Point(10, 126);
+            this.panel_sum.Name = "panel_sum";
+            this.panel_sum.Size = new System.Drawing.Size(255, 37);
+            this.panel_sum.TabIndex = 74;
             // 
             // panel_customer
             // 
@@ -495,9 +496,9 @@ namespace LocalERP.WinForm
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(926, 523);
             this.Controls.Add(this.panel_customer);
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.panel_sum);
             this.Controls.Add(this.label_tip);
-            this.Controls.Add(this.label18);
+            this.Controls.Add(this.label_pay_need);
             this.Controls.Add(this.textBox_operator);
             this.Controls.Add(this.label_title);
             this.Controls.Add(this.label_operator);
@@ -528,8 +529,8 @@ namespace LocalERP.WinForm
             this.toolStrip2.PerformLayout();
             this.panel_history.ResumeLayout(false);
             this.panel_history.PerformLayout();
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
+            this.panel_sum.ResumeLayout(false);
+            this.panel_sum.PerformLayout();
             this.panel_customer.ResumeLayout(false);
             this.panel_customer.PerformLayout();
             this.ResumeLayout(false);
@@ -572,15 +573,15 @@ namespace LocalERP.WinForm
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.TextBox textBox_previousArrears;
         private System.Windows.Forms.Label label_arrears;
-        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.Label label_pay_need;
         protected System.Windows.Forms.Panel panel_history;
         protected System.Windows.Forms.Label label_tip;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TextBox textBox_sum;
         private System.Windows.Forms.Label label_needPayed;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Panel panel_customer;
+        protected System.Windows.Forms.Panel panel_sum;
+        protected System.Windows.Forms.Panel panel_customer;
         
        
     }
