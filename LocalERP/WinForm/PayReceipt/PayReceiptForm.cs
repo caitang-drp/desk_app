@@ -20,13 +20,8 @@ namespace LocalERP.WinForm
         //status          | 1:apply      | 2:pending  | 3:pending | 4:finish  
         protected int openMode = 0;
         protected int payReceiptID = 0;
-        protected PayReceipt.BillType type;
-        protected UpdateType notifyType;
-        protected UpdateType finishNotifyType;
 
-        private int arrearDirection;
-        private string code;
-
+        protected PayReceiptTypeConf conf;
         private PayReceipt payReceipt = null;
         
         protected bool needSave = false;
@@ -38,19 +33,18 @@ namespace LocalERP.WinForm
             openMode = 0;
             payReceiptID = 0;
 
-            this.type = conf.type;
-            this.notifyType = conf.notifyType;
-            this.finishNotifyType = conf.finishNotifyType;
-
-            this.arrearDirection = conf.arrearDirection;
+            this.conf = conf;
 
             this.Text = conf.name + "单";
             this.label_title.Text = this.Text;
-            this.code = conf.code;
             this.label_customer.Text = conf.customer;
 
             this.label_date.Text = conf.business + "时间:";
-            this.label_thisPayed.Text = conf.business + "金额:";
+
+
+            this.label_thisPayed.Text = conf.cashDirection == -1 ? "本单已付:" : "本单已收:";
+            this.label_arrears.Text = conf.arrearDirection == 1 ? "以上欠款(应付):" : "以上欠款(应收):";
+            this.label_accumulative.Text = conf.arrearDirection == 1 ? "累计欠款(应付):" : "累计欠款(应收):";
         }
 
         private void PayReceiptForm_Load(object sender, EventArgs e)
@@ -58,6 +52,7 @@ namespace LocalERP.WinForm
             this.lookupText1.LookupForm = FormSingletonFactory.getInstance().getCustomerCIForm_Select();
             this.lookupText1.valueSetted += new LookupText.ValueSetted(lookupText1_valueSetted);
 
+            this.textBox_sum.TextChanged += new EventHandler(setAccumulative);
             this.textBox_previousArrears.TextChanged += new EventHandler(setAccumulative);
             this.textBox_thisPayed.TextChanged += new EventHandler(setAccumulative);
 
@@ -90,8 +85,8 @@ namespace LocalERP.WinForm
             if (openMode == 0)
             {
                 switchMode(openMode);
-                int max = PayReceiptDao.getInstance().getMaxCode(code);
-                this.textBox_serial.Text = string.Format("{0}-{1}-{2:0000}", code, DateTime.Now.ToString("yyyyMMdd"), max+1);
+                int max = PayReceiptDao.getInstance().getMaxCode(conf.serial);
+                this.textBox_serial.Text = string.Format("{0}-{1}-{2:0000}", conf.serial, DateTime.Now.ToString("yyyyMMdd"), max+1);
                 this.lookupText1.LookupArg = null;
                 this.lookupText1.Text_Lookup = null;
                 this.dateTime_time.Value = DateTime.Now;
@@ -180,7 +175,7 @@ namespace LocalERP.WinForm
         {
             payReceipt = new PayReceipt();
             payReceipt.id = this.payReceiptID;
-            payReceipt.bill_type = this.type;
+            payReceipt.bill_type = conf.type;
 
             string name;
             if (ValidateUtility.getName(this.textBox_serial, this.errorProvider1, out name) == false)
@@ -245,7 +240,7 @@ namespace LocalERP.WinForm
 
             //so important: if edit ,it should be refresh also, because edit will del exist item and add new item
 
-            this.invokeUpdateNotify(notifyType);
+            this.invokeUpdateNotify(conf.notifyType);
         }
 
         //审核
@@ -259,13 +254,13 @@ namespace LocalERP.WinForm
             
             payReceipt.status = 4;
             PayReceiptDao.getInstance().Update(payReceipt);
-            CustomerDao.getInstance().update_arrear(payReceipt.customer_id, this.arrearDirection * Convert.ToDouble(this.textBox_accumulative.Text));
+            CustomerDao.getInstance().update_arrear(payReceipt.customer_id, conf.arrearDirection * Convert.ToDouble(this.textBox_accumulative.Text));
             MessageBox.Show("审核成功!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             openMode = 4;
             this.switchMode(4);
 
-            this.invokeUpdateNotify(this.finishNotifyType);
+            this.invokeUpdateNotify(conf.finishNotifyType);
         }
 
 
@@ -318,10 +313,12 @@ namespace LocalERP.WinForm
 
         private void setAccumulative(object sender, EventArgs e)
         {
-            double arrear, pay;
+            double arrear, pay, sum;
             double.TryParse(this.textBox_previousArrears.Text, out arrear);
             double.TryParse(this.textBox_thisPayed.Text, out pay);
-            double accumulative = arrear - pay;
+            double.TryParse(this.textBox_sum.Text, out sum);
+
+            double accumulative = (conf.arrearDirection * arrear - conf.cashDirection * sum + conf.cashDirection * pay) * conf.arrearDirection;
             this.textBox_accumulative.Text = accumulative.ToString("0.00");//("N2");
         }
 
@@ -333,7 +330,7 @@ namespace LocalERP.WinForm
         private void lookupText1_valueSetted(object sender, LookupArg arg)
         {
             Customer customer = CustomerDao.getInstance().FindByID((int)arg.Value);
-            this.textBox_previousArrears.Text = (customer.arrear*arrearDirection).ToString();
+            this.textBox_previousArrears.Text = (customer.arrear*conf.arrearDirection).ToString();
             resetNeedSave(true);
         }
     }

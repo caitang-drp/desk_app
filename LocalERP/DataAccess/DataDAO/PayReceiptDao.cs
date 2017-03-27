@@ -20,8 +20,8 @@ namespace LocalERP.DataAccess.DataDAO
         {
             try
             {
-                string commandText = string.Format("insert into PayReceipt(serial, bill_time, comment, customer_id, bill_type, handle_people, previousArrears, amount, status) values('{0}', '{1}', '{2}', {3}, {4}, '{5}', {6}, {7}, {8})", 
-                    info.serial, info.bill_time, info.comment, (int)info.customer_id, (int)info.bill_type, info.handle_people, info.previousArrears, info.amount, info.status);
+                string commandText = string.Format("insert into PayReceipt(serial, bill_time, comment, customer_id, bill_type, handle_people, previousArrears, amount, status, cashDirection, arrearDirection) values('{0}', '{1}', '{2}', {3}, {4}, '{5}', {6}, {7}, {8}, {9}, {10})", 
+                    info.serial, info.bill_time, info.comment, (int)info.customer_id, (int)info.bill_type, info.handle_people, info.previousArrears, info.amount, info.status, info.cashDirection, info.arrearDirection);
                 DbHelperAccess.executeNonQuery(commandText);
                 id = DbHelperAccess.executeLastID("ID", "PayReceipt");
                 return true;
@@ -39,6 +39,7 @@ namespace LocalERP.DataAccess.DataDAO
             return DbHelperAccess.executeNonQuery(commandText);
         }
 
+        //没有加入cashDirection和arrearDirection
         public void Update(PayReceipt info)
         {
             string commandText = string.Format("update PayReceipt set serial='{0}', bill_time='{1}', comment='{2}', customer_id={3}, bill_type={4}, handle_people='{5}', previousArrears={6}, amount={7}, status={8} where ID={9}",
@@ -70,6 +71,9 @@ namespace LocalERP.DataAccess.DataDAO
                 if (double.TryParse(dr["amount"].ToString(), out amount))
                     payReceipt.amount = amount;
 
+                payReceipt.cashDirection = (int)dr["cashDirection"];
+                payReceipt.arrearDirection = (int)dr["arrearDirection"];
+
                 payReceipt.customerName = dr["name"] as string;
                 return payReceipt;
             }
@@ -78,61 +82,16 @@ namespace LocalERP.DataAccess.DataDAO
 
         public PayReceipt FindByID(int ID)
         {
-            string commandText = string.Format("select * from PayReceipt where ID={0}", ID);
+            string commandText = string.Format("select PayReceipt.*, Customer.name from PayReceipt left join Customer on PayReceipt.customer_id = Customer.ID where ID={0}", ID);
             DataRow dr = DbHelperAccess.executeQueryGetOneRow(commandText);
-            PayReceipt payReceipt = new PayReceipt();
-            //迟一些要把这个合并到formatPayReceipt函数里，主要考虑到字段名可能有差别
-            if (dr != null)
-            {
-                payReceipt.id = (int)dr["ID"];
-                payReceipt.serial = dr["serial"] as string;
-                payReceipt.bill_time = (DateTime)dr["bill_time"];
-                payReceipt.comment = dr["comment"] as string;
-                payReceipt.status = (int)dr["status"];
-                payReceipt.bill_type = (PayReceipt.BillType)dr["bill_type"];
-
-                int customerID = 0;
-                if (int.TryParse(dr["customer_id"].ToString(), out customerID))
-                    payReceipt.customer_id = customerID;
-
-                payReceipt.handle_people = dr["handle_people"] as string;
-
-                double previousArrears, amount;
-                if (double.TryParse(dr["previousArrears"].ToString(), out previousArrears))
-                    payReceipt.previousArrears = previousArrears;
-                if (double.TryParse(dr["amount"].ToString(), out amount))
-                    payReceipt.amount = amount;
-                //not reasonal
-                if (customerID > 0)
-                    payReceipt.customerName = CustomerDao.getInstance().FindByID(customerID).Name;
-                return payReceipt;
-            }
-            return null;
-
+            //要测试字段是否正确
+            return formatPayReceipt(dr);
         }
 
         public int Delete(int id)
         {
             string commandText = string.Format("delete from PayReceipt where ID={0}", id);
             return DbHelperAccess.executeNonQuery(commandText);
-        }
-
-        public DataTable FindList()
-        {
-            StringBuilder commandText = new StringBuilder("select * from PayReceipt");
-            return DbHelperAccess.executeQuery(commandText.ToString());
-        }
-
-        public DataTable FindList(Category parent, string name)
-        {
-
-            StringBuilder commandText = new StringBuilder("select * from PayReceipt, Customer, CustomerCategory where PayReceipt.customer_id = Customer.ID and Customer.parent = CustomerCategory.ID");
-            if (parent != null)
-                commandText.AppendFormat("  and CustomerCategory.lft>={0} and CustomerCategory.rgt<={1}", parent.Left, parent.Right);
-
-            if (!string.IsNullOrEmpty(name))
-                commandText.AppendFormat(" and CustomerCategory.name like '%{0}%'", name);
-            return DbHelperAccess.executeQuery(commandText.ToString());
         }
 
         public DataTable FindList(DateTime startTime, DateTime endTime, int status, string customerName)

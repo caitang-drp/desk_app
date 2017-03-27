@@ -43,7 +43,7 @@ namespace LocalERP.WinForm
             openMode = 4;
             this.switchMode(4);
 
-            this.invokeUpdateNotify(this.finishNotifyType);
+            this.invokeUpdateNotify(conf.finishNotifyType);
         }
     }
 }

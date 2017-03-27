@@ -17,7 +17,7 @@ namespace LocalERP.WinForm
 {
     public partial class StatisticCashForm : MyDockContent
     {
-        private DataTable payReceiptDT;
+        //private DataTable payReceiptDT;
         private DataTable circulationDT;
 
         private DataTable productDT;
@@ -53,7 +53,7 @@ namespace LocalERP.WinForm
             receipt = purchaseBack = otherReceipt = 0;
             payed = sellBack = freights = otherPay = 0;
 
-            payReceiptDT = PayReceiptDao.getInstance().FindList(null, null);
+            //payReceiptDT = PayReceiptDao.getInstance().FindList(null, null);
             circulationDT = ProductStainlessCirculationDao.getInstance().FindList(null, null, false, true);
 
             payed = 0;
