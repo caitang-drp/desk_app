@@ -478,7 +478,7 @@ namespace LocalERP.WinForm
             
         }
 
-        private void fill_records(List<ProductStainlessCirculationRecord> records)
+        private void fill_records(List<ProductCirculationRecord> records)
         {
             // 处理 明细
             foreach (ProductStainlessCirculationRecord record in records)
@@ -501,7 +501,7 @@ namespace LocalERP.WinForm
             }
         }
 
-        private void load_with_customer(ProductCirculation sell, List<ProductStainlessCirculationRecord> records)
+        private void load_with_customer(ProductCirculation sell, List<ProductCirculationRecord> records)
         {
             // 获取供应商的信息
             Customer customer = CustomerDao.getInstance().FindByID(sell.CustomerID);
@@ -530,7 +530,7 @@ namespace LocalERP.WinForm
             fill_records(records);
         }
 
-        private void load_without_customer(ProductCirculation sell, List<ProductStainlessCirculationRecord> records)
+        private void load_without_customer(ProductCirculation sell, List<ProductCirculationRecord> records)
         {
             // (日期)
             Report.ControlByName("date").AsStaticBox.Text = sell.CirculationTime.ToString("yyyy年MM月dd日");
@@ -545,6 +545,7 @@ namespace LocalERP.WinForm
             fill_records(records);
         }
 
+        /*
         public bool get_stainless_records(out List<ProductStainlessCirculationRecord> records)
         {
             records = new List<ProductStainlessCirculationRecord>();
@@ -590,15 +591,15 @@ namespace LocalERP.WinForm
             }
 
             return isInputCorrect;
-        }
+        }*/
 
 		//在C#中一次填入一条记录不能成功，只能使用一次将记录全部填充完的方式
 		private void ReportFetchRecord()
 		{
             ProductCirculation sell;
-            List<ProductStainlessCirculationRecord> records;
+            List<ProductCirculationRecord> records;
             this.getCirculation(out sell);
-            get_stainless_records(out records);
+            this.getRecords(out records);
 
             if (sell.CustomerID == -1)
             {
@@ -659,8 +660,9 @@ namespace LocalERP.WinForm
             this.dataGridView1.Rows.Add();
             
             DataGridViewRow row = this.dataGridView1.Rows[this.dataGridView1.Rows.Count - 1];
+            //这里不合理,在initDatagridview那里也有设置
             this.setCellEnable(row.Cells["totalPrice"], false);
-            //this.setCellEnable(row.Cells["num"], false);
+            this.setCellEnable(row.Cells["serial"], false);
             
             //setSubTotalPrice(row.Index);
             //setTotalPrice();

@@ -31,6 +31,7 @@ namespace LocalERP.WinForm
             DataGridViewCheckBoxColumn check = new DataGridViewCheckBoxColumn();
             DataGridViewLookupColumn product = new DataGridViewLookupColumn();
 
+            DataGridViewTextBoxColumn serial = new DataGridViewTextBoxColumn();
             DataGridViewTextBoxColumn quantityPerPiece = new DataGridViewTextBoxColumn();
             DataGridViewTextBoxColumn pieces = new DataGridViewTextBoxColumn();
 
@@ -57,6 +58,10 @@ namespace LocalERP.WinForm
             product.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             product.Width = 140;
 
+            serial.HeaderText = "货号";
+            serial.Name = "serial";
+            serial.Width = 80;
+
             quantityPerPiece.HeaderText = "每件数量";
             quantityPerPiece.Name = "quantityPerPiece";
             quantityPerPiece.Width = 90;
@@ -80,7 +85,7 @@ namespace LocalERP.WinForm
             totalPrice.HeaderText = "小计/元";
             totalPrice.Name = "totalPrice";
 
-            dgv.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] { ID, check, product, quantityPerPiece, pieces, num, unit, price, totalPrice });
+            dgv.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] { ID, check, product, serial, quantityPerPiece, pieces, num, unit, price, totalPrice });
 
             //2017-02-28:这个地方再次出现bug，自己写的控件就是蛋疼
 
@@ -104,6 +109,7 @@ namespace LocalERP.WinForm
                     setCellEnable(row.Cells["price"], false);
                 }
                 setCellEnable(row.Cells["totalPrice"], false);
+                setCellEnable(row.Cells["serial"], false);
             }
 
             this.dataGridView1.Columns["check"].Visible = !elementReadonly;
@@ -121,6 +127,7 @@ namespace LocalERP.WinForm
             ProductStainlessCirculationRecord record = rec as ProductStainlessCirculationRecord;
             row.Cells["ID"].Value = record.ID;
             row.Cells["product"].Value = new LookupArg(record.ProductID, record.ProductName);
+            row.Cells["serial"].Value = record.Serial;
             row.Cells["quantityPerPiece"].Value = record.QuantityNull?null:record.QuantityPerPiece.ToString();
             row.Cells["pieces"].Value = record.PiecesNull?null:record.Pieces.ToString();
             row.Cells["num"].Value = record.TotalNum;
@@ -173,6 +180,7 @@ namespace LocalERP.WinForm
                     {
                         ProductStainless product = ProductStainlessDao.getInstance().FindByID(productID);
                         //stone 临时关闭
+                        control.EditingControlDataGridView.Rows[control.EditingControlRowIndex].Cells["serial"].Value = product.Serial;
                         control.EditingControlDataGridView.Rows[control.EditingControlRowIndex].Cells["quantityPerPiece"].Value = product.QuantityPerPiece;
                         control.EditingControlDataGridView.Rows[control.EditingControlRowIndex].Cells["unit"].Value = product.Unit;
                         if(conf.type == ProductCirculation.CirculationType.sell || conf.type == ProductCirculation.CirculationType.sellBack)
@@ -260,6 +268,10 @@ namespace LocalERP.WinForm
 
                 record.ID = ID;
 
+                string serial;
+                ValidateUtility.getString(row.Cells["serial"], false, out serial);
+                record.Serial = serial;
+                
                 record.QuantityPerPiece = quantityPerPiece;
                 record.QuantityNull = isQuantityNull;
 
