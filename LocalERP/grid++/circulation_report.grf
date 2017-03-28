@@ -77,7 +77,7 @@
 			},
 			{
 				"Name":"unit",
-				"Width":1.79917
+				"Width":1.71979
 			},
 			{
 				"Name":"cnt",
@@ -143,7 +143,7 @@
 					"GroupTitle":false,
 					"Column":"serial",
 					"TextAlign":"MiddleCenter",
-					"Text":"serial"
+					"Text":"货号"
 				},
 				{
 					"GroupTitle":false,
@@ -202,8 +202,8 @@
 						{
 							"Type":"SummaryBox",
 							"Name":"SummaryBox1",
-							"Left":7.59354,
-							"Width":2.01083,
+							"Left":12.409,
+							"Width":1.98438,
 							"Height":0.608542,
 							"TextAlign":"MiddleCenter",
 							"DataField":"cnt"
@@ -211,7 +211,7 @@
 						{
 							"Type":"SummaryBox",
 							"Name":"SummaryBox2",
-							"Left":11.8004,
+							"Left":17.5948,
 							"Width":3.20146,
 							"Height":0.608542,
 							"TextAlign":"MiddleCenter",
@@ -220,9 +220,28 @@
 						{
 							"Type":"StaticBox",
 							"Name":"StaticBox3",
+							"Left":5.3975,
 							"Width":1.19063,
 							"Height":0.608542,
-							"Text":"小计"
+							"Text":"合计"
+						},
+						{
+							"Type":"Line",
+							"Name":"Line1",
+							"Left":12.1444,
+							"Height":0.608542
+						},
+						{
+							"Type":"Line",
+							"Name":"Line2",
+							"Left":14.5521,
+							"Height":0.608542
+						},
+						{
+							"Type":"Line",
+							"Name":"Line3",
+							"Left":17.3302,
+							"Height":0.608542
 						}
 					]
 				}
@@ -370,7 +389,7 @@
 					"Type":"MemoBox",
 					"Name":"MemoBox2",
 					"Anchor":"[Top|Right]",
-					"Left":17.6742,
+					"Left":17.6477,
 					"Top":0.79375,
 					"Width":5.3975,
 					"Height":0.608542,

@@ -46,7 +46,8 @@ namespace LocalERP.WinForm
 
             this.label_date.Text = conf.business + "时间:";
 
-
+            if (conf.type == PayReceipt.BillType.BuyRefund || conf.type == PayReceipt.BillType.SellRefund)
+                this.label_needPayed.Text = conf.cashDirection == -1 ? "退点金额(应付)" : "退点金额(应收)";
             this.label_thisPayed.Text = conf.cashDirection == -1 ? "本单已付:" : "本单已收:";
             this.label_arrears.Text = conf.arrearDirection == 1 ? "以上欠款(应付):" : "以上欠款(应收):";
             this.label_accumulative.Text = conf.arrearDirection == 1 ? "累计欠款(应付):" : "累计欠款(应收):";
@@ -114,17 +115,18 @@ namespace LocalERP.WinForm
             this.textBox_serial.Text = payReceipt.serial;
             this.dateTime_time.Value = payReceipt.bill_time;
             this.textBox_comment.Text = payReceipt.comment;
+            this.textBox_operator.Text = payReceipt.handle_people;
 
             this.textBox_sum.Text = payReceipt.amount.ToString();
 
             this.lookupText1.LookupArg = new LookupArg(payReceipt.customer_id, payReceipt.customerName);
             this.lookupText1.Text_Lookup = payReceipt.customerName;
-            this.textBox_operator.Text = payReceipt.handle_people;
 
             //如果是未审核状态，以前欠款应该如何生成？
             if(payReceipt.status > 1)
                 this.textBox_previousArrears.Text = payReceipt.previousArrears.ToString();
-            this.textBox_thisPayed.Text = payReceipt.amount.ToString();
+
+            this.textBox_thisPayed.Text = payReceipt.thisPayed.ToString();
 
             openMode = payReceipt.status;
 
@@ -180,12 +182,16 @@ namespace LocalERP.WinForm
         /// <summary>
         /// for get value from controls
         /// </summary>
-
+        //没有获取status
         protected bool getPayReceipt(out PayReceipt payReceipt)
         {
             payReceipt = new PayReceipt();
             payReceipt.id = this.payReceiptID;
             payReceipt.bill_type = conf.type;
+            payReceipt.bill_time = this.dateTime_time.Value;
+            payReceipt.handle_people = textBox_operator.Text;
+            payReceipt.cashDirection = conf.cashDirection;
+            payReceipt.arrearDirection = conf.arrearDirection;
 
             string name;
             if (ValidateUtility.getName(this.textBox_serial, this.errorProvider1, out name) == false)
@@ -194,9 +200,6 @@ namespace LocalERP.WinForm
 
             if (this.lookupText1.Visible == true && ValidateUtility.getLookupValueID(this.lookupText1, this.errorProvider1, out payReceipt.customer_id) == false)
                 return false;
-
-            payReceipt.bill_time = this.dateTime_time.Value;
-            payReceipt.handle_people = textBox_operator.Text;
             
             double sum=0, pay, previousArrears;
             if ((this.panel_sum.Visible == false || ValidateUtility.getDouble(this.textBox_sum, this.errorProvider1, true, true, out sum))
@@ -278,18 +281,10 @@ namespace LocalERP.WinForm
         }
 
 
-        private void toolStripButton_print_Click(object sender, EventArgs e)
-        {
-            //MessageBox.Show("系统暂未开放打印功能.", "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            PayReceipt sell;
-            List<ProductCirculationRecord> records;
-            this.getPayReceipt(out sell);
-            //ProductSellReportForm form = new ProductSellReportForm(sell, records);
-            //form.ShowDialog();
-        }
+        private void toolStripButton_print_Click(object sender, EventArgs e){}
 
         private DialogResult affirmQuit() {
-            return MessageBox.Show("单据尚未保存，是否放弃保存？", "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+            return MessageBox.Show(string.Format("{0}单据尚未保存，是否放弃保存？", conf.name), "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
         }
 
         private void toolStripButton_cancel_Click(object sender, EventArgs e)

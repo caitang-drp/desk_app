@@ -231,12 +231,10 @@ namespace LocalERP.WinForm
         private CategoryItemForm customerCIForm_select = null;
         public virtual CategoryItemForm getCustomerCIForm_Select()
         {
-            if (customerCIForm_select == null || customerCIForm_select.IsDisposed)
-            {
-                customerCIForm_select = new CategoryItemForm(0, new CustomerCategoryItemProxy(), DataUtility.DATA_CUSTOMER, this.mainForm);
-                customerCIForm_select.initVersions(getVersions(), UpdateType.CustomerCategoryUpdate, UpdateType.CustomerUpdate);
-                appendEvent(customerCIForm_select);
-            }
+            customerCIForm_select = new CategoryItemForm(0, new CustomerCategoryItemProxy(), DataUtility.DATA_CUSTOMER, this.mainForm);
+            customerCIForm_select.initVersions(getVersions(), UpdateType.CustomerCategoryUpdate, UpdateType.CustomerUpdate);
+            appendEvent(customerCIForm_select);
+            
             return customerCIForm_select;
         }
 

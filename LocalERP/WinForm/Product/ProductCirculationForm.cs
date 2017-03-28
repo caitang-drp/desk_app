@@ -35,6 +35,7 @@ namespace LocalERP.WinForm
 		//定义Grid++Report报表主对象
 		private GridppReport Report = new GridppReport();
         // 明细报表的列
+        private IGRField serial;
 		private IGRField product;
 		private IGRField cnt_one_piece;
 		private IGRField pieces;
@@ -57,6 +58,7 @@ namespace LocalERP.WinForm
             this.label2.Text = conf.business+"时间:";
             this.label_customer.Text = conf.customer;
 
+            this.label_sum.Text = conf.productDirection == 1 ? "本单实计应付:" : "本单实计应收:";
             this.label_thisPayed.Text = conf.productDirection == 1 ? "本单已付:" : "本单已收:";
             this.label_arrears.Text =  conf.arrearsDirection==1? "以上欠款(应付):":"以上欠款(应收):";
             this.label1_accumulative.Text = conf.arrearsDirection == 1 ? "累计欠款(应付):" : "累计欠款(应收):";
@@ -488,7 +490,7 @@ namespace LocalERP.WinForm
                     cnt_one_piece.AsInteger = record.QuantityPerPiece;
                     pieces.AsInteger = record.Pieces;
                 }
-
+                serial.AsString = record.Serial;
                 product.AsString = record.ProductName;
                 cnt.AsInteger = record.TotalNum;
                 unit.AsString = record.Unit;
@@ -611,6 +613,7 @@ namespace LocalERP.WinForm
 		private void ReportInitialize()
 		{
 			//在此记录下每个字段的接口指针
+            serial = Report.FieldByName("serial");
 			product = Report.FieldByName("product");
 			cnt_one_piece = Report.FieldByName("cnt_one_piece");
 			pieces = Report.FieldByName("pieces");
@@ -633,7 +636,7 @@ namespace LocalERP.WinForm
         }
 
         private DialogResult affirmQuit() {
-            return MessageBox.Show("单据尚未保存，是否放弃保存？", "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+            return MessageBox.Show(string.Format("{0}单据尚未保存，是否放弃保存？", conf.name), "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
         }
 
         private void toolStripButton_cancel_Click(object sender, EventArgs e)

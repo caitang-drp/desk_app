@@ -39,11 +39,11 @@ namespace LocalERP.DataAccess.DataDAO
             return DbHelperAccess.executeNonQuery(commandText);
         }
 
-        //没有加入cashDirection和arrearDirection
+        //没有加入cashDirection和arrearDirection, status
         public void Update(PayReceipt info)
         {
-            string commandText = string.Format("update PayReceipt set serial='{0}', bill_time='{1}', comment='{2}', customer_id={3}, bill_type={4}, handle_people='{5}', previousArrears={6}, amount={7}, status={8}, thisPayed={9} where ID={10}",
-                info.serial, info.bill_time, info.comment, info.customer_id, (int)info.bill_type, info.handle_people, info.previousArrears, info.amount, info.status, info.thisPayed, info.id);
+            string commandText = string.Format("update PayReceipt set serial='{0}', bill_time='{1}', comment='{2}', customer_id={3}, bill_type={4}, handle_people='{5}', previousArrears={6}, amount={7}, thisPayed={8} where ID={9}",
+                info.serial, info.bill_time, info.comment, info.customer_id, (int)info.bill_type, info.handle_people, info.previousArrears, info.amount, info.thisPayed, info.id);
 
             DbHelperAccess.executeNonQuery(commandText);
         }
@@ -84,7 +84,7 @@ namespace LocalERP.DataAccess.DataDAO
 
         public PayReceipt FindByID(int ID)
         {
-            string commandText = string.Format("select PayReceipt.*, Customer.name from PayReceipt left join Customer on PayReceipt.customer_id = Customer.ID where ID={0}", ID);
+            string commandText = string.Format("select PayReceipt.*, Customer.name from PayReceipt left join Customer on PayReceipt.customer_id = Customer.ID where PayReceipt.ID={0}", ID);
             DataRow dr = DbHelperAccess.executeQueryGetOneRow(commandText);
             //要测试字段是否正确
             return formatPayReceipt(dr);

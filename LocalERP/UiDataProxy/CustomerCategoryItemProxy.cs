@@ -30,7 +30,7 @@ namespace LocalERP.UiDataProxy
             check.Name = "check";
             check.Width = 60;
 
-            string[] columnTexts = new string[] { "ID", "名称", "类别","我方欠款/元","对方欠款/元" };
+            string[] columnTexts = new string[] { "ID", "名称", "类别", "我方欠款/元\r(应付)", "对方欠款/元\r(应收)" };
             string[] columnNames = new string[] { "ID", "name", "category", "myArrear", "hisArrear" };
             int[] columnLengths = new int[] { 80, 120, 80, 120, 120 };
 

@@ -9,6 +9,7 @@ using LocalERP.DataAccess.Data;
 using LocalERP.DataAccess.DataDAO;
 using System.IO;
 using LocalERP.WinForm;
+using LocalERP.WinForm.Utility;
 
 namespace LocalERP.UiDataProxy
 {
@@ -25,7 +26,7 @@ namespace LocalERP.UiDataProxy
         }
 
         public override void initColumns(DataGridView dgv)
-        {
+        {/*
             DataGridViewCheckBoxColumn check = new DataGridViewCheckBoxColumn();
             DataGridViewTextBoxColumn ID = new DataGridViewTextBoxColumn();
             DataGridViewTextBoxColumn serial = new DataGridViewTextBoxColumn();
@@ -91,18 +92,25 @@ namespace LocalERP.UiDataProxy
             libNum.Name = "libNum";
             libNum.ReadOnly = true;
             libNum.Width = 90;
+            */
 
-            dgv.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-                check,
-                ID,
-                serial,
-                name,
-                category,
-                libNum,
-                pricePurchase,
-                priceSell,
-                priceCost
-                });
+            DataGridViewCheckBoxColumn check = new DataGridViewCheckBoxColumn();
+            check.HeaderText = "选择";
+            check.Name = "check";
+            check.Width = 60;
+
+            DataGridViewTextBoxColumn ID = new DataGridViewTextBoxColumn();
+            ID.HeaderText = "ID";
+            ID.Name = "ID";
+            ID.Visible = false;
+
+            string[] columnTexts = new string[] { "货号", "名称", "类别", "采购价\r/元", "销售价\r/元", "成本价\r/元", "库存数量" };
+            string[] columnNames = new string[] { "serial", "name", "category", "pricePurchase","priceSell","priceCost","libNum" };
+            int[] columnLengths = new int[] { 70, 120, 65, 80, 80, 80,120 };
+
+            ControlUtility.initColumns(dgv, columnNames, columnTexts, columnLengths);
+            dgv.Columns.Insert(0, check);
+            dgv.Columns.Insert(0, ID);
         }
 
         public override void initTree(TreeView tv)

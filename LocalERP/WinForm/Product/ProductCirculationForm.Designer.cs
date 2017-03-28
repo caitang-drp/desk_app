@@ -87,7 +87,7 @@ namespace LocalERP.WinForm
             this.label11 = new System.Windows.Forms.Label();
             this.textBox_accumulative = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
+            this.label_sum = new System.Windows.Forms.Label();
             this.label1_tip = new System.Windows.Forms.Label();
             this.panel_basic = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
@@ -374,7 +374,7 @@ namespace LocalERP.WinForm
             this.label_thisPayed.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label_thisPayed.AutoSize = true;
             this.label_thisPayed.ForeColor = System.Drawing.Color.Red;
-            this.label_thisPayed.Location = new System.Drawing.Point(25, 48);
+            this.label_thisPayed.Location = new System.Drawing.Point(29, 48);
             this.label_thisPayed.Name = "label_thisPayed";
             this.label_thisPayed.Size = new System.Drawing.Size(70, 14);
             this.label_thisPayed.TabIndex = 49;
@@ -554,7 +554,7 @@ namespace LocalERP.WinForm
             this.panel_pay.Controls.Add(this.textBox_cutoff);
             this.panel_pay.Controls.Add(this.textBox_accumulative);
             this.panel_pay.Controls.Add(this.label13);
-            this.panel_pay.Controls.Add(this.label14);
+            this.panel_pay.Controls.Add(this.label_sum);
             this.panel_pay.Controls.Add(this.label7);
             this.panel_pay.Controls.Add(this.label6);
             this.panel_pay.Controls.Add(this.textBox_realTotal);
@@ -668,16 +668,16 @@ namespace LocalERP.WinForm
             this.label13.TabIndex = 59;
             this.label13.Text = "整单折扣:";
             // 
-            // label14
+            // label_sum
             // 
-            this.label14.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.label14.AutoSize = true;
-            this.label14.ForeColor = System.Drawing.Color.Black;
-            this.label14.Location = new System.Drawing.Point(269, 13);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(98, 14);
-            this.label14.TabIndex = 58;
-            this.label14.Text = "本单实计应付:";
+            this.label_sum.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label_sum.AutoSize = true;
+            this.label_sum.ForeColor = System.Drawing.Color.Black;
+            this.label_sum.Location = new System.Drawing.Point(269, 13);
+            this.label_sum.Name = "label_sum";
+            this.label_sum.Size = new System.Drawing.Size(98, 14);
+            this.label_sum.TabIndex = 58;
+            this.label_sum.Text = "本单实计应付:";
             // 
             // label1_tip
             // 
@@ -792,7 +792,7 @@ namespace LocalERP.WinForm
         private System.Windows.Forms.TextBox textBox_cutoff;
         private System.Windows.Forms.TextBox textBox_accumulative;
         private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label label_sum;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.TextBox textBox_previousArrears;
         private System.Windows.Forms.Label label_arrears;

@@ -64,12 +64,12 @@ namespace LocalERP.WinForm
                     this.dataGridView1.Rows[index].Cells["type"].Value = PayReceipt.PayReceiptTypeConfs[type - 1].name;
                     this.dataGridView1.Rows[index].Cells["typeValue"].Value = type;
 
-                    double sum = 0;
-                    ValidateUtility.getDouble(dr, "amount", out sum);
+                    double pay = 0;
+                    ValidateUtility.getDouble(dr, "thisPayed", out pay);
                     if (type == 1 || type == 4 || type == 5)
-                        ControlUtility.setCellWithColor(dataGridView1.Rows[index].Cells["sum"], Color.Green, string.Format("-{0:0.00}", sum));
+                        ControlUtility.setCellWithColor(dataGridView1.Rows[index].Cells["sum"], Color.Green, string.Format("-{0:0.00}", pay));
                     else if (type == 2 || type == 3 || type==6)
-                        ControlUtility.setCellWithColor(dataGridView1.Rows[index].Cells["sum"], Color.Red, string.Format("+{0:0.00}", sum));
+                        ControlUtility.setCellWithColor(dataGridView1.Rows[index].Cells["sum"], Color.Red, string.Format("+{0:0.00}", pay));
 
                     int status = (int)(dr["status"]);
                     if (status == 1)

@@ -23,6 +23,8 @@ namespace LocalERP.WinForm
 
             this.panel_customer.Visible = false;
             this.panel_sum.Visible = false;
+
+            this.panel1.Location = new Point(this.panel1.Location.X, this.panel_sum.Location.Y);
         }
 
         //…Û∫À

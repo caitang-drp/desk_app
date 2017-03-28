@@ -392,7 +392,7 @@
             // 
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
             this.sum.DefaultCellStyle = dataGridViewCellStyle1;
-            this.sum.HeaderText = "金额/元";
+            this.sum.HeaderText = "已付已收/元";
             this.sum.Name = "sum";
             this.sum.ReadOnly = true;
             this.sum.Width = 110;

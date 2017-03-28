@@ -53,6 +53,7 @@ namespace LocalERP.DataAccess.DataDAO
                 double.TryParse(dr["price"].ToString(), out price);
                 record.Price = price;
 
+                record.Serial = dr["serial"].ToString();
                 record.ProductID = (int)dr["ProductStainless.ID"];
                 record.ProductName = dr["name"].ToString();
 
