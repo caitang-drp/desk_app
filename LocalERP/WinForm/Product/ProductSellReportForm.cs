@@ -78,8 +78,8 @@ namespace LocalERP.WinForm
             beizhu.Text = "备注：" + sell.Comment;
             // 标题
             TextObject ti = sellCR.ReportDefinition.ReportObjects["Text6"] as TextObject;
-            string title = new ProductCirculation().get_circulation_type_string((ProductCirculation.CirculationType)this.sell.Type) + "单";
-            ti.Text = title;
+            //string title = new ProductCirculation().get_circulation_type_string((ProductCirculation.CirculationType)this.sell.Type) + "单";
+            ti.Text = "title";
 
             sellCR.SetDataSource(sellDS);
 
@@ -116,8 +116,8 @@ namespace LocalERP.WinForm
             beizhu.Text = "备注：" + sell.Comment;
             // 标题
             TextObject ti = sellCR.ReportDefinition.ReportObjects["Text6"] as TextObject;
-            string title = new ProductCirculation().get_circulation_type_string((ProductCirculation.CirculationType)this.sell.Type) + "单";
-            ti.Text = title;
+            //string title = new ProductCirculation().get_circulation_type_string((ProductCirculation.CirculationType)this.sell.Type) + "单";
+            ti.Text = "title";
 
             sellCR.SetDataSource(sellDS);
 

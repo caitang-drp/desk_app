@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Data.SqlClient;
 using System.Data;
+using LocalERP.DataAccess.Utility;
 
 namespace LocalERP.DataAccess.DataDAO
 {
@@ -28,8 +29,8 @@ namespace LocalERP.DataAccess.DataDAO
             ProductCirculationID = 0;
             try
             {
-                string commandText = string.Format("insert into {0}(code, circulationTime, comment, status, customerID, type, flowType, total, realTotal, previousArrears, thisPayed, freight, operator) values('{1}','{2}', '{3}', '{4}', {5}, {6}, {7}, {8}, {9},{10},{11},{12},'{13}')",
-                    tableName, info.Code, info.CirculationTime, info.Comment, info.Status, info.CustomerID <= 0 ? "null" : info.CustomerID.ToString(), info.Type, info.FlowType, info.Total, info.RealTotal, info.PreviousArrears, info.ThisPayed, info.Freight, info.Oper);
+                string commandText = string.Format("insert into {0}(code, circulationTime, comment, status, customerID, type, flowType, arrearDirection, total, realTotal, previousArrears, thisPayed, freight, operator) values('{1}','{2}', '{3}', '{4}', {5}, {6}, {7}, {8}, {9}, {10},{11},{12},{13},'{14}')",
+                    tableName, info.Code, info.CirculationTime, info.Comment, info.Status, info.CustomerID <= 0 ? "null" : info.CustomerID.ToString(), info.Type, info.FlowType, info.ArrearDirection, info.Total, info.RealTotal, info.PreviousArrears, info.ThisPayed, info.Freight, info.Oper);
                 DbHelperAccess.executeNonQuery(commandText);
                 ProductCirculationID = DbHelperAccess.executeLastID("ID", tableName);
                 return true;
@@ -77,7 +78,7 @@ namespace LocalERP.DataAccess.DataDAO
 
         public ProductCirculation FindByID(int ID)
         {
-            string commandText = string.Format("select * from {0} where ID={1}", tableName, ID);
+            string commandText = string.Format("select {0}.*, Customer.name from {0} left join Customer on Customer.ID = {0}.customerID where {0}.ID={1}", tableName, ID);
             DataRow dr = DbHelperAccess.executeQueryGetOneRow(commandText);
             ProductCirculation circulation = new ProductCirculation(); 
             if (dr != null) {
@@ -87,7 +88,10 @@ namespace LocalERP.DataAccess.DataDAO
                 circulation.Comment = dr["comment"] as string;
                 circulation.Status = (int)dr["status"];
                 circulation.Type = (int)dr["type"];
-                
+
+                circulation.FlowType = (int)dr["flowType"];
+                circulation.ArrearDirection = (int)dr["arrearDirection"];
+
                 int customerID = 0;
                 if(int.TryParse(dr["customerID"].ToString(), out customerID))
                     circulation.CustomerID = customerID;
@@ -106,9 +110,8 @@ namespace LocalERP.DataAccess.DataDAO
                     circulation.ThisPayed = thisPayed;
                 if (double.TryParse(dr["freight"].ToString(), out freight))
                     circulation.Freight = freight;
-                //not reasonal
-                if(customerID > 0)
-                    circulation.CustomerName = CustomerDao.getInstance().FindByID(circulation.CustomerID).Name;
+
+                circulation.CustomerName = dr["name"] as string;
                 return circulation;
             }
             return null;

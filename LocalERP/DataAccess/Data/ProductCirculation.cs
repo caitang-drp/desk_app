@@ -126,6 +126,14 @@ namespace LocalERP.DataAccess.Data
             set { flowType = value; }
         }
 
+        private int arrearDirection;
+
+        public int ArrearDirection
+        {
+            get { return arrearDirection; }
+            set { arrearDirection = value; }
+        }
+
         public ProductCirculation(int id, string name, DateTime sellTime, string comment, int customerID) {
             this.id = id;
             this.code = name;
@@ -142,29 +150,6 @@ namespace LocalERP.DataAccess.Data
         public enum CirculationType
         {
             purchase = 1, purchaseBack = 2, sell = 3, sellBack = 4, libOverflow = 5, libLoss = 6, easy=7
-        }
-
-        public string get_circulation_type_string(CirculationType x)
-        {
-            switch (x)
-            {
-                case CirculationType.purchase:
-                    return "采购入库";
-                case CirculationType.purchaseBack:
-                    return "采购退货";
-                case CirculationType.sell:
-                    return "销售出库";
-                case CirculationType.sellBack:
-                    return "销售退货";
-                case CirculationType.libLoss:
-                    return "盘点报损";
-                case CirculationType.libOverflow:
-                    return "盘点报溢";
-                case CirculationType.easy:
-                    return "易耗品领用";
-            }
-
-            return "未知";
         }
 
         public int get_circulation_type_value(CirculationType x)

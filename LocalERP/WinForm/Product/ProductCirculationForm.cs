@@ -328,6 +328,7 @@ namespace LocalERP.WinForm
             circulation.ID = circulationID;
             circulation.Type = (int)conf.type;
             circulation.FlowType = conf.productDirection;
+            circulation.ArrearDirection = conf.arrearsDirection;
 
             string name;
             if (ValidateUtility.getName(this.textBox_serial, this.errorProvider1, out name) == false)

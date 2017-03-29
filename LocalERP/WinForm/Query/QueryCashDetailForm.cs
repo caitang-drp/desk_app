@@ -100,9 +100,9 @@ namespace LocalERP.WinForm
                     thisReceipted = pr.thisPayed.ToString();
                 
                 if (pr.arrearDirection == 1)
-                    accPay = (pr.previousArrears - pr.thisPayed).ToString();
+                    accPay = ((pr.arrearDirection * pr.previousArrears - pr.cashDirection * (pr.amount - pr.thisPayed)) * pr.arrearDirection).ToString();
                 else
-                    accReceipt = (pr.previousArrears - pr.thisPayed).ToString();
+                    accReceipt = ((pr.arrearDirection * pr.previousArrears - pr.cashDirection * (pr.amount - pr.thisPayed)) * pr.arrearDirection).ToString();
 
                 if (pr.bill_type == PayReceipt.BillType.BuyRefund)
                     needReceipt = pr.amount.ToString();

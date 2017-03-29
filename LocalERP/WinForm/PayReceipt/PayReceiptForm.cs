@@ -174,6 +174,7 @@ namespace LocalERP.WinForm
             this.lookupText1.Enabled = basicInfo;
             this.textBox_operator.Enabled = basicInfo;
 
+            this.textBox_sum.Enabled = basicInfo;
             this.textBox_thisPayed.Enabled = basicInfo;
 
             this.textBox_comment.Enabled = basicInfo;
