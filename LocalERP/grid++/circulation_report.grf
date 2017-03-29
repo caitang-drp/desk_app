@@ -185,7 +185,7 @@
 					"GroupTitle":false,
 					"Column":"sum_price",
 					"TextAlign":"MiddleCenter",
-					"Text":"小计"
+					"Text":"小计/元"
 				}
 			]
 		},
@@ -220,10 +220,10 @@
 						{
 							"Type":"StaticBox",
 							"Name":"StaticBox3",
-							"Left":5.3975,
-							"Width":1.19063,
+							"Left":4.78896,
+							"Width":1.79917,
 							"Height":0.608542,
-							"Text":"合计"
+							"Text":"本页合计"
 						},
 						{
 							"Type":"Line",
@@ -258,17 +258,33 @@
 						{
 							"Type":"StaticBox",
 							"Name":"comment_title",
-							"Width":1.00542,
+							"Width":2.01083,
 							"Height":0.608542,
-							"Text":"备注："
+							"Text":"本单总价："
 						},
 						{
 							"Type":"StaticBox",
-							"Name":"comment_text",
-							"Left":1.40229,
-							"Width":17.4096,
+							"Name":"total",
+							"Left":2.19604,
+							"Width":4.60375,
 							"Height":0.608542,
 							"EndEllipsis":true
+						},
+						{
+							"Type":"StaticBox",
+							"Name":"realTotal",
+							"Left":10.2129,
+							"Width":3.83646,
+							"Height":0.608542,
+							"EndEllipsis":true
+						},
+						{
+							"Type":"StaticBox",
+							"Name":"StaticBox5",
+							"Left":7.24958,
+							"Width":2.75167,
+							"Height":0.608542,
+							"Text":"本单实计总价："
 						}
 					]
 				}

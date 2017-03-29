@@ -30,6 +30,15 @@
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dataGridView1 = new LocalERP.WinForm.MyDataGridView();
+            this.check = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.code = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.customer = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.time = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.type = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.typeValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sum = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.status = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.button1 = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -55,15 +64,6 @@
             this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.textBox_customer = new System.Windows.Forms.TextBox();
-            this.check = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.code = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.customer = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.time = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.type = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.typeValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.sum = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.status = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.panel1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -99,6 +99,67 @@
             this.dataGridView1.Size = new System.Drawing.Size(886, 407);
             this.dataGridView1.TabIndex = 5;
             this.dataGridView1.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellDoubleClick);
+            // 
+            // check
+            // 
+            this.check.HeaderText = "选择";
+            this.check.Name = "check";
+            this.check.Width = 60;
+            // 
+            // ID
+            // 
+            this.ID.HeaderText = "ID";
+            this.ID.Name = "ID";
+            this.ID.ReadOnly = true;
+            this.ID.Width = 80;
+            // 
+            // code
+            // 
+            this.code.HeaderText = "编号";
+            this.code.Name = "code";
+            this.code.ReadOnly = true;
+            this.code.Width = 160;
+            // 
+            // customer
+            // 
+            this.customer.HeaderText = "往来单位";
+            this.customer.Name = "customer";
+            this.customer.ReadOnly = true;
+            // 
+            // time
+            // 
+            this.time.HeaderText = "时间";
+            this.time.Name = "time";
+            this.time.ReadOnly = true;
+            this.time.Width = 160;
+            // 
+            // type
+            // 
+            this.type.HeaderText = "类型";
+            this.type.Name = "type";
+            this.type.ReadOnly = true;
+            // 
+            // typeValue
+            // 
+            this.typeValue.HeaderText = "类型值";
+            this.typeValue.Name = "typeValue";
+            this.typeValue.ReadOnly = true;
+            this.typeValue.Visible = false;
+            // 
+            // sum
+            // 
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.sum.DefaultCellStyle = dataGridViewCellStyle1;
+            this.sum.HeaderText = "已付已收/元";
+            this.sum.Name = "sum";
+            this.sum.ReadOnly = true;
+            this.sum.Width = 110;
+            // 
+            // status
+            // 
+            this.status.HeaderText = "状态";
+            this.status.Name = "status";
+            this.status.ReadOnly = true;
             // 
             // button1
             // 
@@ -342,67 +403,6 @@
             this.textBox_customer.TabIndex = 30;
             this.textBox_customer.TextChanged += new System.EventHandler(this.button1_Click);
             // 
-            // check
-            // 
-            this.check.HeaderText = "选择";
-            this.check.Name = "check";
-            this.check.Width = 60;
-            // 
-            // ID
-            // 
-            this.ID.HeaderText = "ID";
-            this.ID.Name = "ID";
-            this.ID.ReadOnly = true;
-            this.ID.Width = 80;
-            // 
-            // code
-            // 
-            this.code.HeaderText = "编号";
-            this.code.Name = "code";
-            this.code.ReadOnly = true;
-            this.code.Width = 160;
-            // 
-            // customer
-            // 
-            this.customer.HeaderText = "往来单位";
-            this.customer.Name = "customer";
-            this.customer.ReadOnly = true;
-            // 
-            // time
-            // 
-            this.time.HeaderText = "时间";
-            this.time.Name = "time";
-            this.time.ReadOnly = true;
-            this.time.Width = 160;
-            // 
-            // type
-            // 
-            this.type.HeaderText = "类型";
-            this.type.Name = "type";
-            this.type.ReadOnly = true;
-            // 
-            // typeValue
-            // 
-            this.typeValue.HeaderText = "类型值";
-            this.typeValue.Name = "typeValue";
-            this.typeValue.ReadOnly = true;
-            this.typeValue.Visible = false;
-            // 
-            // sum
-            // 
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.sum.DefaultCellStyle = dataGridViewCellStyle1;
-            this.sum.HeaderText = "已付已收/元";
-            this.sum.Name = "sum";
-            this.sum.ReadOnly = true;
-            this.sum.Width = 110;
-            // 
-            // status
-            // 
-            this.status.HeaderText = "状态";
-            this.status.Name = "status";
-            this.status.ReadOnly = true;
-            // 
             // PayReceiptListForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
@@ -426,7 +426,7 @@
             this.HideOnClose = true;
             this.Name = "PayReceiptListForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "单据列表";
+            this.Text = "收付单据列表";
             this.Load += new System.EventHandler(this.PayReceiptListForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.panel1.ResumeLayout(false);

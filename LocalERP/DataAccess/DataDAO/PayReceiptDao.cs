@@ -42,8 +42,8 @@ namespace LocalERP.DataAccess.DataDAO
         //没有加入cashDirection和arrearDirection, status
         public void Update(PayReceipt info)
         {
-            string commandText = string.Format("update PayReceipt set serial='{0}', bill_time='{1}', comment='{2}', customer_id={3}, bill_type={4}, handle_people='{5}', previousArrears={6}, amount={7}, thisPayed={8} where ID={9}",
-                info.serial, info.bill_time, info.comment, info.customer_id, (int)info.bill_type, info.handle_people, info.previousArrears, info.amount, info.thisPayed, info.id);
+            string commandText = string.Format("update PayReceipt set serial='{0}', bill_time='{1}', comment='{2}', customer_id={3}, bill_type={4}, handle_people='{5}', previousArrears={6}, amount={7}, thisPayed={8}, status={9} where ID={10}",
+                info.serial, info.bill_time, info.comment, info.customer_id, (int)info.bill_type, info.handle_people, info.previousArrears, info.amount, info.thisPayed, info.status, info.id);
 
             DbHelperAccess.executeNonQuery(commandText);
         }

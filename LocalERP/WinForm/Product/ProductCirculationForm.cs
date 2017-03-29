@@ -53,6 +53,9 @@ namespace LocalERP.WinForm
 
             this.conf = c;
 
+            if ((int)conf.type > 4)
+                this.toolStripButton_print.Visible = false;    
+
             this.Text = conf.name + "单";
             this.label_title.Text = this.Text;
             this.label2.Text = conf.business+"时间:";
@@ -525,7 +528,8 @@ namespace LocalERP.WinForm
             Report.ControlByName("serial").AsStaticBox.Text = "单号: NO." + sell.Code;
 
             // 备注
-            Report.ControlByName("comment_text").AsStaticBox.Text = sell.Comment;
+            Report.ControlByName("total").AsStaticBox.Text = string.Format("{0}元", sell.Total);
+            Report.ControlByName("realTotal").AsStaticBox.Text = string.Format("{0}元", sell.RealTotal);
 
             fill_records(records);
         }
@@ -544,54 +548,6 @@ namespace LocalERP.WinForm
             // 处理 明细
             fill_records(records);
         }
-
-        /*
-        public bool get_stainless_records(out List<ProductStainlessCirculationRecord> records)
-        {
-            records = new List<ProductStainlessCirculationRecord>();
-
-            int number = this.dataGridView1.RowCount;
-
-            double price, totalPrice;
-            int quantityPerPiece, pieces, num;
-            bool isQuantityNull = false, isPiecesNull = false;
-            string unit;
-            bool isInputCorrect = true;
-
-            foreach (DataGridViewRow row in this.dataGridView1.Rows)
-            {
-                object productID = null;
-
-                if (ValidateUtility.getLookupValue(row.Cells["product"], out productID) == false 
-                    || ValidateUtility.getInt(row.Cells["quantityPerPiece"], false, true, out quantityPerPiece, out isQuantityNull) == false
-                    || ValidateUtility.getInt(row.Cells["pieces"], false, true, out pieces, out isPiecesNull) == false
-                    || ValidateUtility.getInt(row.Cells["num"], true, true, out num) == false
-                    || ValidateUtility.getString(row.Cells["unit"], false, out unit) == false
-                    || ValidateUtility.getDouble(row.Cells["price"], out price) == false
-                    || ValidateUtility.getDouble(row.Cells["totalPrice"], out totalPrice) == false)
-                    return false;
-                ProductStainlessCirculationRecord record = new ProductStainlessCirculationRecord();
-
-                LookupArg arg = ((row.Cells["product"] as DataGridViewLookupCell).EditedValue as LookupArg);
-                record.ProductID = (int)arg.Value;
-                record.ProductName = arg.Text;
-                
-                record.QuantityPerPiece = quantityPerPiece;
-                record.QuantityNull = isQuantityNull;
-
-                record.Pieces = pieces;
-                record.PiecesNull = isPiecesNull;
-
-                record.TotalNum = num;
-                record.Unit = unit;
-                record.Price = price;
-                record.TotalPrice = totalPrice;
-                
-                records.Add(record);
-            }
-
-            return isInputCorrect;
-        }*/
 
 		//在C#中一次填入一条记录不能成功，只能使用一次将记录全部填充完的方式
 		private void ReportFetchRecord()

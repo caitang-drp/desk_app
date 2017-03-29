@@ -94,6 +94,8 @@ namespace LocalERP.WinForm
             if (payReceiptListForm == null || payReceiptListForm.IsDisposed)
             {
                 payReceiptListForm = new PayReceiptListForm(mainForm);
+                payReceiptListForm.initVersions(getVersions(),
+                    UpdateType.PayReceiptUpdate, UpdateType.PayReceiptFinishUpdate, UpdateType.CustomerUpdate);
                 appendEvent(payReceiptListForm);
             }
             return payReceiptListForm;

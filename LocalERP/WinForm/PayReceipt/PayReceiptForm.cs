@@ -47,7 +47,7 @@ namespace LocalERP.WinForm
             this.label_date.Text = conf.business + "时间:";
 
             if (conf.type == PayReceipt.BillType.BuyRefund || conf.type == PayReceipt.BillType.SellRefund)
-                this.label_needPayed.Text = conf.cashDirection == -1 ? "退点金额(应付)" : "退点金额(应收)";
+                this.label_needPayed.Text = conf.cashDirection == -1 ? "退点金额(应付):" : "退点金额(应收):";
             this.label_thisPayed.Text = conf.cashDirection == -1 ? "本单已付:" : "本单已收:";
             this.label_arrears.Text = conf.arrearDirection == 1 ? "以上欠款(应付):" : "以上欠款(应收):";
             this.label_accumulative.Text = conf.arrearDirection == 1 ? "累计欠款(应付):" : "累计欠款(应收):";
@@ -224,6 +224,7 @@ namespace LocalERP.WinForm
         protected virtual void toolStripButton_save_Click(object sender, EventArgs e)
         {
             PayReceipt payReceipt;
+            //get的时候没有status
             bool isCorrect = getPayReceipt(out payReceipt);
 
             if (isCorrect == false)
@@ -239,6 +240,7 @@ namespace LocalERP.WinForm
                 }
                 else if (openMode == 1)
                 {
+                    payReceipt.status = 1;
                     PayReceiptDao.getInstance().Update(payReceipt);
                     MessageBox.Show(string.Format("保存{0}成功!", this.Text), "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }

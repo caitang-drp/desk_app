@@ -92,7 +92,25 @@ namespace LocalERP.WinForm
             foreach (PayReceipt pr in payReceiptList)
             {
                 int index = dataGridView1.Rows.Add();
-                formatRow(dataGridView1.Rows[index], pr.customerName, pr.bill_time, pr.serial, PayReceipt.PayReceiptTypeConfs[(int)pr.bill_type - 1].name, "-", pr.amount.ToString(), pr.previousArrears.ToString(), "-", "-", "-");
+                string needPay = "-", thisPayed = "-", accPay = "-", needReceipt = "-", thisReceipted = "-", accReceipt = "-";
+
+                if (pr.cashDirection == -1)
+                    thisPayed = pr.thisPayed.ToString();
+                else
+                    thisReceipted = pr.thisPayed.ToString();
+                
+                if (pr.arrearDirection == 1)
+                    accPay = (pr.previousArrears - pr.thisPayed).ToString();
+                else
+                    accReceipt = (pr.previousArrears - pr.thisPayed).ToString();
+
+                if (pr.bill_type == PayReceipt.BillType.BuyRefund)
+                    needReceipt = pr.amount.ToString();
+
+                if (pr.bill_type == PayReceipt.BillType.SellRefund)
+                    needPay = pr.amount.ToString();
+                
+                formatRow(dataGridView1.Rows[index], pr.customerName, pr.bill_time, pr.serial, PayReceipt.PayReceiptTypeConfs[(int)pr.bill_type - 1].name, needPay, thisPayed, accPay, needReceipt, thisReceipted, accReceipt);
             }
             /*
             foreach (DataRow dr in dataTable2.Rows)
