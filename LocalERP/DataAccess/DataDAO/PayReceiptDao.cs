@@ -21,7 +21,7 @@ namespace LocalERP.DataAccess.DataDAO
             try
             {
                 string commandText = string.Format("insert into PayReceipt(serial, bill_time, comment, customer_id, bill_type, handle_people, previousArrears, amount, status, cashDirection, arrearDirection, thisPayed) values('{0}', '{1}', '{2}', {3}, {4}, '{5}', {6}, {7}, {8}, {9}, {10}, {11})", 
-                    info.serial, info.bill_time, info.comment, (int)info.customer_id, (int)info.bill_type, info.handle_people, info.previousArrears, info.amount, info.status, info.cashDirection, info.arrearDirection, info.thisPayed);
+                    info.serial, info.bill_time, info.comment,  info.customer_id <= 0 ? "null" : info.customer_id.ToString(), (int)info.bill_type, info.handle_people, info.previousArrears, info.amount, info.status, info.cashDirection, info.arrearDirection, info.thisPayed);
                 DbHelperAccess.executeNonQuery(commandText);
                 id = DbHelperAccess.executeLastID("ID", "PayReceipt");
                 return true;
@@ -43,7 +43,7 @@ namespace LocalERP.DataAccess.DataDAO
         public void Update(PayReceipt info)
         {
             string commandText = string.Format("update PayReceipt set serial='{0}', bill_time='{1}', comment='{2}', customer_id={3}, bill_type={4}, handle_people='{5}', previousArrears={6}, amount={7}, thisPayed={8}, status={9} where ID={10}",
-                info.serial, info.bill_time, info.comment, info.customer_id, (int)info.bill_type, info.handle_people, info.previousArrears, info.amount, info.thisPayed, info.status, info.id);
+                info.serial, info.bill_time, info.comment,  info.customer_id <= 0 ? "null" : info.customer_id.ToString(), (int)info.bill_type, info.handle_people, info.previousArrears, info.amount, info.thisPayed, info.status, info.id);
 
             DbHelperAccess.executeNonQuery(commandText);
         }
@@ -109,16 +109,15 @@ namespace LocalERP.DataAccess.DataDAO
             return DbHelperAccess.executeQuery(commandText.ToString());
         }
 
-        
-        public List<PayReceipt> FindPayReceiptList(Category parent, string name)
+
+        public List<PayReceipt> FindPayReceiptList(DateTime startTime, DateTime endTime, string name)
         {
             //要注意，这个语句会筛选掉没有Customer信息的
-            StringBuilder commandText = new StringBuilder("select PayReceipt.*, Customer.name from PayReceipt, Customer, CustomerCategory where PayReceipt.customer_id = Customer.ID and Customer.parent = CustomerCategory.ID");
-            if (parent != null)
-                commandText.AppendFormat("  and CustomerCategory.lft>={0} and CustomerCategory.rgt<={1}", parent.Left, parent.Right);
-
+            StringBuilder commandText = new StringBuilder(string.Format("select PayReceipt.*, Customer.name from PayReceipt left join Customer on PayReceipt.customer_id = Customer.ID where PayReceipt.bill_time between #{0}# and #{1}# and status = 4", startTime.ToString("yyyy-MM-dd"), endTime.ToString("yyyy-MM-dd")));
+           
             if (!string.IsNullOrEmpty(name))
-                commandText.AppendFormat(" and CustomerCategory.name like '%{0}%'", name);
+                commandText.AppendFormat(" and Customer.name like '%{0}%'", name);
+
             DataTable dt = DbHelperAccess.executeQuery(commandText.ToString());
             List<PayReceipt> list = new List<PayReceipt>();
             foreach (DataRow pr in dt.Rows) { 

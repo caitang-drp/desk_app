@@ -35,14 +35,21 @@ namespace LocalERP.WinForm
 
         private void Form2_Load(object sender, EventArgs e)
         {
-            //categoryItemProxy.initColumns(this.dataGridView1);
-
-            string[] columnTexts = new string[] { "往来单位", "时间", "业务单号", "业务类型", "本单应付", "本单已付", "累计欠款\r(应付)", "本单应收", "本单已收", "累计欠款\r(应收)" };
+/*            string[] columnTexts = new string[] { "往来单位", "时间", "业务单号", "业务类型", "本单应付", "本单已付", "累计欠款\r(应付)", "本单应收", "本单已收", "累计欠款\r(应收)" };
             string[] columnNames = new string[] { "customer", "time", "serial", "type", "needPay", "thisPayed", "accNeedPay", "needReceipt", "thisReceipted", "accNeedReceipt"};
             int [] columnLengths = new int[] { 90, 120, 120, 90,     90, 90, 90,    90, 90, 90};
+            */
+
+            string[] columnTexts = new string[] { "往来单位", "时间", "业务单号", "业务类型", "本单应付/已付", "本单应收/已收", "累计欠款\r(应付)", "累计欠款\r(应收)" };
+            string[] columnNames = new string[] { "customer", "time", "serial", "type", "needPay", "needReceipt", "accNeedPay", "accNeedReceipt" };
+            int[] columnLengths = new int[] { 90, 120, 120, 90, 130, 130, 90, 90 };
 
             ControlUtility.initColumns(this.dataGridView1, columnNames, columnTexts, columnLengths);
-            CategoryDao.getInstance().initTreeView("CustomerCategory", this.treeView1);
+            //CategoryDao.getInstance().initTreeView("CustomerCategory", this.treeView1);
+
+            DateTime dateTime = DateTime.Now;
+            this.dateTimePicker_start.Value = dateTime.AddMonths(-1);
+            this.backgroundWorker.RunWorkerAsync();
         }
 
         private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
@@ -63,26 +70,26 @@ namespace LocalERP.WinForm
 
         private void backgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
-            int parentId = (int)e.Argument;
+            /*int parentId = (int)e.Argument;
             Category parent = null;
             if(parentId > 0)
                 parent = CategoryDao.getInstance().FindById("CustomerCategory", parentId);
-
-            payReceiptList = PayReceiptDao.getInstance().FindPayReceiptList(parent, this.textBox_search.Text);
+            */
+            payReceiptList = PayReceiptDao.getInstance().FindPayReceiptList(this.dateTimePicker_start.Value, this.dateTimePicker_end.Value.AddDays(1), this.textBox_search.Text);
             //这个地方需要再改成ProductCirculationDao
             //dataTable2 = ProductStainlessCirculationDao.getInstance().FindList(parent, this.textBox_search.Text, true, true);
         }
 
-        private void formatRow(DataGridViewRow row, string customer, DateTime time, string serial, string type, string needPay, string thisPayed, string accNeedPay, string needReceipt, string thisPeceipted, string accNeedReceipt) {
+        private void formatRow(DataGridViewRow row, string customer, DateTime time, string serial, string type, string needPay, string thisPayed, string accNeedPay, string needReceipt, string thisReceipted, string accNeedReceipt) {
             row.Cells["customer"].Value = customer;
             row.Cells["time"].Value = time;
             row.Cells["serial"].Value = serial;
             row.Cells["type"].Value = type;
-            row.Cells["needPay"].Value = needPay;
-            row.Cells["thisPayed"].Value = thisPayed;
+            row.Cells["needPay"].Value = string.IsNullOrEmpty(needPay) && string.IsNullOrEmpty(thisPayed)?"":string.Format("{0,8}/{1}", needPay, thisPayed);
+            //row.Cells["thisPayed"].Value = thisPayed;
             row.Cells["accNeedPay"].Value = accNeedPay;
-            row.Cells["needReceipt"].Value = needReceipt;
-            row.Cells["thisReceipted"].Value = thisPeceipted;
+            row.Cells["needReceipt"].Value = string.IsNullOrEmpty(needReceipt)&&string.IsNullOrEmpty(thisReceipted)?"": string.Format("{0,8}/{1}", needReceipt, thisReceipted);
+            //row.Cells["thisReceipted"].Value = thisPeceipted;
             row.Cells["accNeedReceipt"].Value = accNeedReceipt;
         }
 
@@ -92,14 +99,15 @@ namespace LocalERP.WinForm
             foreach (PayReceipt pr in payReceiptList)
             {
                 int index = dataGridView1.Rows.Add();
-                string needPay = "-", thisPayed = "-", accPay = "-", needReceipt = "-", thisReceipted = "-", accReceipt = "-";
+                string needPay, thisPayed, accPay, needReceipt, thisReceipted, accReceipt;
+                needPay = thisPayed = accPay = needReceipt = thisReceipted = accReceipt = "";
 
                 if (pr.cashDirection == -1)
                     thisPayed = pr.thisPayed.ToString();
                 else
                     thisReceipted = pr.thisPayed.ToString();
                 
-                if (pr.arrearDirection == 1)
+                if (pr.arrearDirection == 1 && pr.bill_type!= PayReceipt.BillType.BuyRefund && pr.bill_type!= PayReceipt.BillType.SellRefund)
                     accPay = ((pr.arrearDirection * pr.previousArrears - pr.cashDirection * (pr.amount - pr.thisPayed)) * pr.arrearDirection).ToString();
                 else
                     accReceipt = ((pr.arrearDirection * pr.previousArrears - pr.cashDirection * (pr.amount - pr.thisPayed)) * pr.arrearDirection).ToString();
@@ -136,13 +144,15 @@ namespace LocalERP.WinForm
 
         private void button_add_Click(object sender, EventArgs e)
         {
+            /*
             //click相当于刷新，类别有可能变化，所以重新加载
             CategoryDao.getInstance().initTreeView("CustomerCategory", this.treeView1);
 
             if (this.treeView1.Nodes.Count > 0 && treeView1.SelectedNode != null && treeView1.Nodes[0].IsSelected == false)
                 this.treeView1.SelectedNode = this.treeView1.Nodes[0];
             else
-                treeView1_AfterSelect(null, null);
+                treeView1_AfterSelect(null, null);*/
+            this.backgroundWorker.RunWorkerAsync();
             this.label_notice.Visible = false;
         }
     }
