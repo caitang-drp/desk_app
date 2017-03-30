@@ -76,12 +76,10 @@ namespace LocalERP.DataAccess.DataDAO
             return DbHelperAccess.executeQuery(commandText.ToString());
         }
 
-        public ProductCirculation FindByID(int ID)
-        {
-            string commandText = string.Format("select {0}.*, Customer.name from {0} left join Customer on Customer.ID = {0}.customerID where {0}.ID={1}", tableName, ID);
-            DataRow dr = DbHelperAccess.executeQueryGetOneRow(commandText);
-            ProductCirculation circulation = new ProductCirculation(); 
-            if (dr != null) {
+        private ProductCirculation formatProductCirculation(DataRow dr) {
+            ProductCirculation circulation = new ProductCirculation();
+            if (dr != null)
+            {
                 circulation.ID = (int)dr["ID"];
                 circulation.Code = dr["code"] as string;
                 circulation.CirculationTime = (DateTime)dr["circulationTime"];
@@ -93,9 +91,9 @@ namespace LocalERP.DataAccess.DataDAO
                 circulation.ArrearDirection = (int)dr["arrearDirection"];
 
                 int customerID = 0;
-                if(int.TryParse(dr["customerID"].ToString(), out customerID))
+                if (int.TryParse(dr["customerID"].ToString(), out customerID))
                     circulation.CustomerID = customerID;
-                
+
                 circulation.Oper = dr["operator"] as string;
 
                 double total, realTotal, previousArrears, thisPayed, freight;
@@ -115,7 +113,35 @@ namespace LocalERP.DataAccess.DataDAO
                 return circulation;
             }
             return null;
-            
+        }
+
+        public ProductCirculation FindByID(int ID)
+        {
+            string commandText = string.Format("select {0}.*, Customer.name from {0} left join Customer on Customer.ID = {0}.customerID where {0}.ID={1}", tableName, ID);
+            DataRow dr = DbHelperAccess.executeQueryGetOneRow(commandText);
+            return this.formatProductCirculation(dr);
+        }
+
+        public List<ProductCirculation> FindProductCirculationList(int typeStart, int typeEnd, DateTime startTime, DateTime endTime, int status, string name)
+        {
+            //要注意，这个语句会筛选掉没有Customer信息的
+            StringBuilder commandText = new StringBuilder(string.Format("select {0}.*, Customer.name from {0} left join Customer on {0}.customerID = Customer.ID where 1=1 ", tableName));
+            if(typeStart > 0 && typeEnd >0 && typeStart <= typeEnd)
+                commandText.Append(string.Format(" and type between {0} and {1}", typeStart, typeEnd));
+            if(startTime!=null && endTime!=null)
+                commandText.Append(string.Format(" and circulationTime between #{0}# and #{1}# ", startTime.ToString("yyyy-MM-dd"), endTime.ToString("yyyy-MM-dd")));
+            if (status > 0)
+                commandText.Append(string.Format(" and status = {0}", status));
+            if (!string.IsNullOrEmpty(name))
+                commandText.AppendFormat(" and Customer.name like '%{0}%'", name);
+
+            DataTable dt = DbHelperAccess.executeQuery(commandText.ToString());
+            List<ProductCirculation> list = new List<ProductCirculation>();
+            foreach (DataRow pr in dt.Rows)
+            {
+                list.Add(this.formatProductCirculation(pr));
+            }
+            return list;
         }
 
         public int getMaxCode(string code)

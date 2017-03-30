@@ -20,7 +20,7 @@ namespace LocalERP.WinForm
         private string searchName = null;
 
         private List<PayReceipt> payReceiptList;
-        private DataTable dataTable2;
+        private List<ProductCirculation> productCirculationList;
 
         public QueryCashDetailForm(Form parentForm, string title)
             : base()
@@ -42,7 +42,7 @@ namespace LocalERP.WinForm
 
             string[] columnTexts = new string[] { "往来单位", "时间", "业务单号", "业务类型", "本单应付/已付", "本单应收/已收", "累计欠款\r(应付)", "累计欠款\r(应收)" };
             string[] columnNames = new string[] { "customer", "time", "serial", "type", "needPay", "needReceipt", "accNeedPay", "accNeedReceipt" };
-            int[] columnLengths = new int[] { 90, 120, 120, 90, 130, 130, 90, 90 };
+            int[] columnLengths = new int[] { 100, 140, 140, 90, 125, 125, 90, 90 };
 
             ControlUtility.initColumns(this.dataGridView1, columnNames, columnTexts, columnLengths);
             //CategoryDao.getInstance().initTreeView("CustomerCategory", this.treeView1);
@@ -50,8 +50,9 @@ namespace LocalERP.WinForm
             DateTime dateTime = DateTime.Now;
             this.dateTimePicker_start.Value = dateTime.AddMonths(-1);
             this.backgroundWorker.RunWorkerAsync();
+            this.invokeBeginLoadNotify();
         }
-
+        /*
         private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
         {
             int parent = -1;
@@ -61,7 +62,7 @@ namespace LocalERP.WinForm
             searchName = null;
             this.backgroundWorker.RunWorkerAsync(parent);
             this.invokeBeginLoadNotify();
-        }
+        }*/
 
         public override void refresh()
         {
@@ -77,7 +78,7 @@ namespace LocalERP.WinForm
             */
             payReceiptList = PayReceiptDao.getInstance().FindPayReceiptList(this.dateTimePicker_start.Value, this.dateTimePicker_end.Value.AddDays(1), this.textBox_search.Text);
             //这个地方需要再改成ProductCirculationDao
-            //dataTable2 = ProductStainlessCirculationDao.getInstance().FindList(parent, this.textBox_search.Text, true, true);
+            productCirculationList = ProductStainlessCirculationDao.getInstance().FindProductCirculationList(1, 4, this.dateTimePicker_start.Value, this.dateTimePicker_end.Value.AddDays(1), 4, this.textBox_search.Text);
         }
 
         private void formatRow(DataGridViewRow row, string customer, DateTime time, string serial, string type, string needPay, string thisPayed, string accNeedPay, string needReceipt, string thisReceipted, string accNeedReceipt) {
@@ -102,16 +103,22 @@ namespace LocalERP.WinForm
                 string needPay, thisPayed, accPay, needReceipt, thisReceipted, accReceipt;
                 needPay = thisPayed = accPay = needReceipt = thisReceipted = accReceipt = "";
 
+                //处理this
                 if (pr.cashDirection == -1)
                     thisPayed = pr.thisPayed.ToString();
                 else
                     thisReceipted = pr.thisPayed.ToString();
                 
-                if (pr.arrearDirection == 1 && pr.bill_type!= PayReceipt.BillType.BuyRefund && pr.bill_type!= PayReceipt.BillType.SellRefund)
+                //处理acc
+                if (pr.arrearDirection == 1)
                     accPay = ((pr.arrearDirection * pr.previousArrears - pr.cashDirection * (pr.amount - pr.thisPayed)) * pr.arrearDirection).ToString();
                 else
                     accReceipt = ((pr.arrearDirection * pr.previousArrears - pr.cashDirection * (pr.amount - pr.thisPayed)) * pr.arrearDirection).ToString();
 
+                if (pr.bill_type == PayReceipt.BillType.OtherPay || pr.bill_type == PayReceipt.BillType.OtherReceipt)
+                    accPay = accReceipt = "";
+
+                //处理need
                 if (pr.bill_type == PayReceipt.BillType.BuyRefund)
                     needReceipt = pr.amount.ToString();
 
@@ -120,25 +127,34 @@ namespace LocalERP.WinForm
                 
                 formatRow(dataGridView1.Rows[index], pr.customerName, pr.bill_time, pr.serial, PayReceipt.PayReceiptTypeConfs[(int)pr.bill_type - 1].name, needPay, thisPayed, accPay, needReceipt, thisReceipted, accReceipt);
             }
-            /*
-            foreach (DataRow dr in dataTable2.Rows)
+
+            foreach (ProductCirculation cir in this.productCirculationList)
             {
                 int index = dataGridView1.Rows.Add();
-                dataGridView1.Rows[index].Cells["customer"].Value = dr["Customer.name"];
-                dataGridView1.Rows[index].Cells["time"].Value = dr["circulationTime"];
-                int type = (int)(dr["type"]);
-                dataGridView1.Rows[index].Cells["type"].Value = PayReceipt.PayReceiptTypeConfs[type - 1].name; //dr["bill_type"];
-                
-                double sum = 0;
-                ValidateUtility.getDouble(dr, "thisPayed", out sum);
-                if (type == 1 || type == 4)
-                    ControlUtility.setCellWithColor(dataGridView1.Rows[index].Cells["sum"], Color.Green, string.Format("-{0:0.00}", sum));
-                else if (type == 2 || type == 3)
-                    ControlUtility.setCellWithColor(dataGridView1.Rows[index].Cells["sum"], Color.Red, string.Format("+{0:0.00}", sum));
-            }*/
+                string needPay, thisPayed, accPay, needReceipt, thisReceipted, accReceipt;
+                needPay = thisPayed = accPay = needReceipt = thisReceipted = accReceipt = "";
 
+                //处理this, need
+                if (cir.FlowType == 1)
+                {
+                    thisPayed = cir.ThisPayed.ToString();
+                    needPay = cir.RealTotal.ToString();
+                }
+                else
+                {
+                    thisReceipted = cir.ThisPayed.ToString();
+                    needReceipt = cir.RealTotal.ToString();
+                }
+                //处理acc
+                if (cir.ArrearDirection == 1)
+                    accPay = ((cir.ArrearDirection * cir.PreviousArrears + cir.FlowType * (cir.RealTotal - cir.ThisPayed)) * cir.ArrearDirection).ToString();
+                else
+                    accReceipt = ((cir.ArrearDirection * cir.PreviousArrears + cir.FlowType * (cir.RealTotal - cir.ThisPayed)) * cir.ArrearDirection).ToString();
+
+
+                formatRow(dataGridView1.Rows[index], cir.CustomerName, cir.CirculationTime, cir.Code, ProductCirculation.CirculationTypeConfs[(int)cir.Type - 1].name, needPay, thisPayed, accPay, needReceipt, thisReceipted, accReceipt);
+            }
             this.dataGridView1.Sort(dataGridView1.Columns["time"], ListSortDirection.Descending);
-
             this.invokeEndLoadNotify();
         }
 
@@ -153,6 +169,7 @@ namespace LocalERP.WinForm
             else
                 treeView1_AfterSelect(null, null);*/
             this.backgroundWorker.RunWorkerAsync();
+            this.invokeBeginLoadNotify();
             this.label_notice.Visible = false;
         }
     }

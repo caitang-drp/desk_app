@@ -464,7 +464,7 @@
             this.linkLabel23.Size = new System.Drawing.Size(67, 14);
             this.linkLabel23.TabIndex = 50;
             this.linkLabel23.TabStop = true;
-            this.linkLabel23.Text = "往来对账";
+            this.linkLabel23.Text = "收付明细";
             this.linkLabel23.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel_LinkClicked);
             // 
             // linkLabel24

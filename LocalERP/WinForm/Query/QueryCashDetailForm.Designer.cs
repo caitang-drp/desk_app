@@ -40,9 +40,7 @@
             this.dataGridView1 = new LocalERP.WinForm.MyDataGridView();
             this.label3 = new System.Windows.Forms.Label();
             this.dateTimePicker_end = new System.Windows.Forms.DateTimePicker();
-            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
             this.dateTimePicker_start = new System.Windows.Forms.DateTimePicker();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.label6 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -65,7 +63,7 @@
             this.treeView1.Size = new System.Drawing.Size(94, 13);
             this.treeView1.TabIndex = 0;
             this.treeView1.Visible = false;
-            this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
+            //this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
             // 
             // imageList1
             // 
@@ -162,38 +160,20 @@
             // dateTimePicker_end
             // 
             this.dateTimePicker_end.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.dateTimePicker_end.Location = new System.Drawing.Point(632, 20);
+            this.dateTimePicker_end.Location = new System.Drawing.Point(636, 20);
             this.dateTimePicker_end.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dateTimePicker_end.Name = "dateTimePicker_end";
             this.dateTimePicker_end.Size = new System.Drawing.Size(118, 23);
             this.dateTimePicker_end.TabIndex = 61;
             // 
-            // dateTimePicker2
-            // 
-            this.dateTimePicker2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.dateTimePicker2.Location = new System.Drawing.Point(632, 20);
-            this.dateTimePicker2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.dateTimePicker2.Name = "dateTimePicker2";
-            this.dateTimePicker2.Size = new System.Drawing.Size(118, 23);
-            this.dateTimePicker2.TabIndex = 60;
-            // 
             // dateTimePicker_start
             // 
             this.dateTimePicker_start.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.dateTimePicker_start.Location = new System.Drawing.Point(437, 20);
+            this.dateTimePicker_start.Location = new System.Drawing.Point(440, 20);
             this.dateTimePicker_start.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dateTimePicker_start.Name = "dateTimePicker_start";
             this.dateTimePicker_start.Size = new System.Drawing.Size(119, 23);
             this.dateTimePicker_start.TabIndex = 56;
-            // 
-            // dateTimePicker1
-            // 
-            this.dateTimePicker1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.dateTimePicker1.Location = new System.Drawing.Point(437, 20);
-            this.dateTimePicker1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(119, 23);
-            this.dateTimePicker1.TabIndex = 57;
             // 
             // label6
             // 
@@ -245,9 +225,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(835, 501);
             this.Controls.Add(this.dateTimePicker_end);
-            this.Controls.Add(this.dateTimePicker2);
             this.Controls.Add(this.dateTimePicker_start);
-            this.Controls.Add(this.dateTimePicker1);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label5);
@@ -292,9 +270,7 @@
         private MyDataGridView dataGridView1;
         private System.Windows.Forms.Label label3;
         protected System.Windows.Forms.DateTimePicker dateTimePicker_end;
-        private System.Windows.Forms.DateTimePicker dateTimePicker2;
         protected System.Windows.Forms.DateTimePicker dateTimePicker_start;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label5;

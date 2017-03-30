@@ -73,6 +73,7 @@ namespace LocalERP.DataAccess.DataDAO
             }
         }
 
+        /*
         public DataTable FindList(Category parent, string name, bool thisPayed, bool finish)
         {
             StringBuilder commandText = new StringBuilder("select * from ProductStainlessCirculation, Customer, CustomerCategory where ProductStainlessCirculation.customerID = Customer.ID and Customer.parent = CustomerCategory.ID");
@@ -86,6 +87,6 @@ namespace LocalERP.DataAccess.DataDAO
             if (!string.IsNullOrEmpty(name))
                 commandText.AppendFormat(" and Customer.name like '%{0}%'", name);
             return DbHelperAccess.executeQuery(commandText.ToString());
-        }
+        }*/
     }
 }

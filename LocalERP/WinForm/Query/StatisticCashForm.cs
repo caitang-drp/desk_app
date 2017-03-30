@@ -54,7 +54,7 @@ namespace LocalERP.WinForm
             payed = sellBack = freights = otherPay = 0;
 
             //payReceiptDT = PayReceiptDao.getInstance().FindList(null, null);
-            circulationDT = ProductStainlessCirculationDao.getInstance().FindList(null, null, false, true);
+            //circulationDT = ProductStainlessCirculationDao.getInstance().FindList(null, null, false, true);
 
             payed = 0;
             freights = 0;
