@@ -17,8 +17,8 @@ namespace LocalERP.WinForm
 {
     public partial class StatisticCashForm : MyDockContent
     {
-        //private DataTable payReceiptDT;
-        private DataTable circulationDT;
+        private List<PayReceipt> payReceiptList;
+        private List<ProductCirculation> circulationList;
 
         private DataTable productDT;
         private DataTable customerDT;
@@ -53,29 +53,49 @@ namespace LocalERP.WinForm
             receipt = purchaseBack = otherReceipt = 0;
             payed = sellBack = freights = otherPay = 0;
 
-            //payReceiptDT = PayReceiptDao.getInstance().FindList(null, null);
-            //circulationDT = ProductStainlessCirculationDao.getInstance().FindList(null, null, false, true);
+            payReceiptList = PayReceiptDao.getInstance().FindPayReceiptList(null, null, 4, null);
+            circulationList = ProductStainlessCirculationDao.getInstance().FindProductCirculationList(1, 4, null, null, 4, null);
 
-            payed = 0;
-            freights = 0;
-
-            foreach (DataRow dr in circulationDT.Rows) { 
-                double pay, freight;
-                ValidateUtility.getDouble(dr, "thisPayed", out pay);
-                ValidateUtility.getDouble(dr, "freight", out freight);
+            foreach (ProductCirculation cir in circulationList) { 
                 
-                int type = 1;
-                int.TryParse(dr["type"].ToString(), out type);
+                int type = cir.Type;
                 if (type == 1)
-                    payed += pay;
+                    payed += cir.ThisPayed;
                 else if (type == 2)
-                    purchaseBack += pay;
+                    purchaseBack += cir.ThisPayed;
                 else if (type == 3)
-                    receipt += pay;
+                    receipt += cir.ThisPayed;
                 else if (type == 4)
-                    sellBack += pay;
+                    sellBack += cir.ThisPayed;
 
-                freights += freight;
+                freights += cir.Freight;
+            }
+
+            foreach (PayReceipt pr in payReceiptList) {
+                PayReceipt.BillType type = pr.bill_type;
+                switch (type)
+                {
+                    case PayReceipt.BillType.BuyPay:
+                        payed += pr.thisPayed;
+                        break;
+                    case PayReceipt.BillType.BuyRefund:
+                        purchaseBack += pr.thisPayed;
+                        break;
+                    case PayReceipt.BillType.SellReceipt:
+                        receipt += pr.thisPayed;
+                        break;
+                    case PayReceipt.BillType.SellRefund:
+                        sellBack += pr.thisPayed;
+                        break;
+                    case PayReceipt.BillType.OtherPay:
+                        otherPay += pr.thisPayed;
+                        break;
+                    case PayReceipt.BillType.OtherReceipt:
+                        otherReceipt += pr.thisPayed;
+                        break;
+                    default:
+                        break;
+                }
             }
 
             lib = 0;
@@ -116,17 +136,17 @@ namespace LocalERP.WinForm
 
             this.label_pay.Text = string.Format("采购支出:{0,10}元", payed);
             this.label_sellBack.Text = string.Format("销售退货支出:{0,6}元", sellBack);
-            this.label_freight.Text = string.Format("运费支出:{0,10}元", freights);
-            this.label_otherPay.Text = string.Format("其他支出:{0,10}元", otherPay);
+            //this.label_freight.Text = string.Format("运费支出:{0,10}元", freights);
+            this.label_otherPay.Text = string.Format("其他支出:{0,10}元", otherPay + freights);
             double sumPay = payed + freights + sellBack + otherPay;
             this.label_paySum.Text = string.Format("合计:{0,9}元", sumPay);
 
-            this.label_sumCash.Text = string.Format("结存金额:{0,10}元", sumReceipt - sumPay);
+            this.label_sumCash.Text = string.Format("收支结存:{0,10}元", sumReceipt - sumPay);
 
 
             this.label_lib.Text = string.Format("库存成本:{0,10}元", lib);
             this.label_needReceipt.Text = string.Format("应收货款:{0,10}元", needReceipt);
-            this.label_sumCash1.Text = string.Format("结存金额:{0,10}元", sumReceipt - sumPay);
+            this.label_sumCash1.Text = string.Format("收支结存:{0,10}元", sumReceipt - sumPay);
             this.label_assets.Text = string.Format("合计:{0,9}元", needReceipt + sumReceipt - sumPay + lib);
 
             this.label_needPay.Text = string.Format("应付货款:{0,10}元", needPay);

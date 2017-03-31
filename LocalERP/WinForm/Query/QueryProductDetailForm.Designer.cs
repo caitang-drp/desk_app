@@ -50,6 +50,7 @@
             this.textBox_product = new System.Windows.Forms.TextBox();
             this.textBox_customer = new System.Windows.Forms.TextBox();
             this.label_notice = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -227,7 +228,7 @@
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView1.BackgroundColor = System.Drawing.Color.White;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(0, 64);
+            this.dataGridView1.Location = new System.Drawing.Point(0, 86);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowHeadersVisible = false;
@@ -235,7 +236,7 @@
             this.dataGridView1.RowTemplate.DefaultCellStyle.SelectionForeColor = System.Drawing.Color.Black;
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(979, 482);
+            this.dataGridView1.Size = new System.Drawing.Size(979, 460);
             this.dataGridView1.TabIndex = 29;
             // 
             // textBox_product
@@ -265,11 +266,21 @@
             this.label_notice.Text = "数据有更新, 请重新统计!";
             this.label_notice.Visible = false;
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(7, 65);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(112, 14);
+            this.label4.TabIndex = 55;
+            this.label4.Text = "进销存明细信息:";
+            // 
             // QueryProductDetailForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(979, 546);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.label_notice);
             this.Controls.Add(this.textBox_customer);
             this.Controls.Add(this.textBox_product);
@@ -322,5 +333,6 @@
         protected System.Windows.Forms.TextBox textBox_product;
         protected System.Windows.Forms.TextBox textBox_customer;
         private System.Windows.Forms.Label label_notice;
+        private System.Windows.Forms.Label label4;
     }
 }

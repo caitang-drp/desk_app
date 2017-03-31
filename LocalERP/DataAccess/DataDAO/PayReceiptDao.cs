@@ -109,12 +109,16 @@ namespace LocalERP.DataAccess.DataDAO
             return DbHelperAccess.executeQuery(commandText.ToString());
         }
 
-
-        public List<PayReceipt> FindPayReceiptList(DateTime startTime, DateTime endTime, string name)
+        //DateTime? 相当于Nullable<DateTime>，调用时必须增加.value
+        public List<PayReceipt> FindPayReceiptList(DateTime? startTime, DateTime? endTime, int status, string name)
         {
             //要注意，这个语句会筛选掉没有Customer信息的
-            StringBuilder commandText = new StringBuilder(string.Format("select PayReceipt.*, Customer.name from PayReceipt left join Customer on PayReceipt.customer_id = Customer.ID where PayReceipt.bill_time between #{0}# and #{1}# and status = 4", startTime.ToString("yyyy-MM-dd"), endTime.ToString("yyyy-MM-dd")));
-           
+            StringBuilder commandText = new StringBuilder("select PayReceipt.*, Customer.name from PayReceipt left join Customer on PayReceipt.customer_id = Customer.ID where 1=1 ");
+            
+            if (startTime != null && endTime != null)
+                commandText.Append(string.Format(" and PayReceipt.bill_time between #{0}# and #{1}# ", startTime.Value.ToString("yyyy-MM-dd"), endTime.Value.ToString("yyyy-MM-dd")));
+            if (status > 0)
+                commandText.Append(string.Format(" and status = {0}", status));
             if (!string.IsNullOrEmpty(name))
                 commandText.AppendFormat(" and Customer.name like '%{0}%'", name);
 

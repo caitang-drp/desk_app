@@ -49,7 +49,6 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.label_purchaseBack = new System.Windows.Forms.Label();
             this.label_sellBack = new System.Windows.Forms.Label();
-            this.label_freight = new System.Windows.Forms.Label();
             this.label_sumCash = new System.Windows.Forms.Label();
             this.label_otherPay = new System.Windows.Forms.Label();
             this.label_paySum = new System.Windows.Forms.Label();
@@ -237,7 +236,6 @@
             // 
             this.groupBox2.Controls.Add(this.label_purchaseBack);
             this.groupBox2.Controls.Add(this.label_sellBack);
-            this.groupBox2.Controls.Add(this.label_freight);
             this.groupBox2.Controls.Add(this.label_sumCash);
             this.groupBox2.Controls.Add(this.label_otherPay);
             this.groupBox2.Controls.Add(this.label_paySum);
@@ -261,7 +259,7 @@
             // label_purchaseBack
             // 
             this.label_purchaseBack.AutoSize = true;
-            this.label_purchaseBack.Location = new System.Drawing.Point(18, 95);
+            this.label_purchaseBack.Location = new System.Drawing.Point(18, 97);
             this.label_purchaseBack.Name = "label_purchaseBack";
             this.label_purchaseBack.Size = new System.Drawing.Size(98, 14);
             this.label_purchaseBack.TabIndex = 74;
@@ -270,20 +268,11 @@
             // label_sellBack
             // 
             this.label_sellBack.AutoSize = true;
-            this.label_sellBack.Location = new System.Drawing.Point(285, 95);
+            this.label_sellBack.Location = new System.Drawing.Point(285, 97);
             this.label_sellBack.Name = "label_sellBack";
             this.label_sellBack.Size = new System.Drawing.Size(98, 14);
             this.label_sellBack.TabIndex = 73;
             this.label_sellBack.Text = "销售退货支出:";
-            // 
-            // label_freight
-            // 
-            this.label_freight.AutoSize = true;
-            this.label_freight.Location = new System.Drawing.Point(285, 121);
-            this.label_freight.Name = "label_freight";
-            this.label_freight.Size = new System.Drawing.Size(70, 14);
-            this.label_freight.TabIndex = 72;
-            this.label_freight.Text = "运费支出:";
             // 
             // label_sumCash
             // 
@@ -298,7 +287,7 @@
             // label_otherPay
             // 
             this.label_otherPay.AutoSize = true;
-            this.label_otherPay.Location = new System.Drawing.Point(285, 147);
+            this.label_otherPay.Location = new System.Drawing.Point(286, 125);
             this.label_otherPay.Name = "label_otherPay";
             this.label_otherPay.Size = new System.Drawing.Size(70, 14);
             this.label_otherPay.TabIndex = 70;
@@ -308,7 +297,7 @@
             // 
             this.label_paySum.AutoSize = true;
             this.label_paySum.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Bold);
-            this.label_paySum.Location = new System.Drawing.Point(310, 183);
+            this.label_paySum.Location = new System.Drawing.Point(310, 181);
             this.label_paySum.Name = "label_paySum";
             this.label_paySum.Size = new System.Drawing.Size(45, 14);
             this.label_paySum.TabIndex = 69;
@@ -317,7 +306,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(283, 158);
+            this.label8.Location = new System.Drawing.Point(283, 156);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(238, 14);
             this.label8.TabIndex = 68;
@@ -355,7 +344,7 @@
             // 
             this.label_sumReceipt.AutoSize = true;
             this.label_sumReceipt.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Bold);
-            this.label_sumReceipt.Location = new System.Drawing.Point(43, 183);
+            this.label_sumReceipt.Location = new System.Drawing.Point(43, 181);
             this.label_sumReceipt.Name = "label_sumReceipt";
             this.label_sumReceipt.Size = new System.Drawing.Size(45, 14);
             this.label_sumReceipt.TabIndex = 62;
@@ -364,7 +353,7 @@
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(16, 158);
+            this.label16.Location = new System.Drawing.Point(16, 156);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(238, 14);
             this.label16.TabIndex = 61;
@@ -373,7 +362,7 @@
             // label_otherReceipt
             // 
             this.label_otherReceipt.AutoSize = true;
-            this.label_otherReceipt.Location = new System.Drawing.Point(18, 121);
+            this.label_otherReceipt.Location = new System.Drawing.Point(18, 125);
             this.label_otherReceipt.Name = "label_otherReceipt";
             this.label_otherReceipt.Size = new System.Drawing.Size(70, 14);
             this.label_otherReceipt.TabIndex = 59;
@@ -490,7 +479,6 @@
         private System.Windows.Forms.Label label_otherPay;
         private System.Windows.Forms.Label label_sumCash;
         private System.Windows.Forms.Label label_sellBack;
-        private System.Windows.Forms.Label label_freight;
         private System.Windows.Forms.Label label_purchaseBack;
     }
 }

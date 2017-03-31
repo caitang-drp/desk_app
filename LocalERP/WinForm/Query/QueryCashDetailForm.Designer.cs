@@ -63,7 +63,6 @@
             this.treeView1.Size = new System.Drawing.Size(94, 13);
             this.treeView1.TabIndex = 0;
             this.treeView1.Visible = false;
-            //this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
             // 
             // imageList1
             // 
@@ -155,7 +154,7 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(98, 14);
             this.label3.TabIndex = 42;
-            this.label3.Text = "收付明细信息:";
+            this.label3.Text = "对账明细信息:";
             // 
             // dateTimePicker_end
             // 
@@ -243,7 +242,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "QueryCashDetailForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "收付明细";
+            this.Text = "对账明细";
             this.Load += new System.EventHandler(this.Form2_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
