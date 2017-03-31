@@ -51,7 +51,7 @@ namespace LocalERP.DataAccess.Data
         //      price       售价 
         // output:
         //      {利润，利润率%}
-        public List<double> get_profit(double cost, double price)
+        /*public List<double> get_profit(double cost, double price)
         {
             List<double> ret = new List<double>();
 
@@ -65,7 +65,7 @@ namespace LocalERP.DataAccess.Data
             ret.Add(profit);
             ret.Add(profit_margin);
             return ret;
-        }
+        }*/
 
         private ProductCirculation find_circulation_with_id(int ID, List<ProductCirculation> ls)
         {
@@ -85,47 +85,29 @@ namespace LocalERP.DataAccess.Data
             ProductCirculationRecord record,
             double average_price)
         {
-            if (cir != null)
-            {
-                this.serial = cir.Code;
-                this.sell_time = cir.CirculationTime;
-                this.oper = cir.Oper;
-            }
-            //这种情况应该不会发生
-            else {
-                this.serial = "";
-                this.sell_time = new DateTime();
-                //this.customer = "";
-                this.oper = "";
-            }
+            this.record_id = record.ID;
+            this.serial = cir.Code;
+            this.sell_time = cir.CirculationTime;
+            this.oper = cir.Oper;
             this.unit = record.Unit;
 
-            int sell_cnt = record.TotalNum;
-            this.cnt = sell_cnt;
-            this.price = (double)record.Price;
+            //如果整单打折的话，要计算出折扣
+            double cutoff = cir.Total == 0?1:cir.RealTotal / cir.Total;
 
-            double sum_price = record.Price * sell_cnt;
-            if (cir == null)
-            {
-                sum_price = record.TotalPrice;
-            }
-            this.sum_price = sum_price;
+            this.cnt = record.TotalNum;
+            this.price = record.Price * cutoff;
+            this.sum_price = record.TotalPrice * cutoff;
+            this.cost = average_price;
 
-            this.cost = double_n(average_price, 1);
+            this.sum_cost = average_price * this.cnt;
 
-            double sum_cost = double_n(average_price, 1) * sell_cnt;
-            this.sum_cost = sum_cost;
+            this.profit = this.sum_price - this.sum_cost;
+            this.profit_margin = this.profit / this.sum_cost * 100;
 
-            List<double> profit = get_profit(sum_cost, sum_price);
-            this.profit = profit[0];
-
-            this.profit_margin = profit[1];
-            if (sell_cnt < 0 && this.profit_margin > 0)
-            {
+            if (cir.Type == 4) {
+                this.profit = -this.profit;
                 this.profit_margin = -this.profit_margin;
             }
-
-            this.record_id = record.ID;
         }
     }
 }

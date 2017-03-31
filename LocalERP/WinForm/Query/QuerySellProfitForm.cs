@@ -137,8 +137,9 @@ namespace LocalERP.WinForm
                     merge.profit += sell.profit;
                 }
 
-                List<double> profit = sell_profit_obj.get_profit(merge.sum_cost, merge.sum_price);
-                merge.profit_margin = profit[1];
+                //List<double> profit = sell_profit_obj.get_profit(merge.sum_cost, merge.sum_price);
+                //这个地方没有考虑退货
+                merge.profit_margin = (merge.sum_price - merge.sum_cost) / merge.sum_cost * 100;
 
                 int index = this.dataGridView1.Rows.Add();
                 sellprofit_to_grid(merge, index);

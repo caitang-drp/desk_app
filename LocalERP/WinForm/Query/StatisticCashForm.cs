@@ -41,6 +41,7 @@ namespace LocalERP.WinForm
 
         private void Form2_Load(object sender, EventArgs e)
         {
+            //backgroundWorker_DoWork(null, null);
         }
 
         public override void refresh()
@@ -107,9 +108,9 @@ namespace LocalERP.WinForm
 
                 ValidateUtility.getInt(dr, "num", out num, out positive);
                 ValidateUtility.getDouble(dr, "priceCost", out price);
-                if (price <= 0)
+                /*if (price <= 0)
                     ValidateUtility.getDouble(dr, "pricePurchase", out price);
-
+                */
                 lib = lib + price * num;
             }
 
@@ -147,7 +148,7 @@ namespace LocalERP.WinForm
             this.label_lib.Text = string.Format("库存成本:{0,10}元", lib);
             this.label_needReceipt.Text = string.Format("应收货款:{0,10}元", needReceipt);
             this.label_sumCash1.Text = string.Format("收支结存:{0,10}元", sumReceipt - sumPay);
-            this.label_assets.Text = string.Format("合计:{0,9}元", needReceipt + sumReceipt - sumPay + lib);
+            this.label_assets.Text = string.Format("合计:{0,9:0.00}元", needReceipt + sumReceipt - sumPay + lib);
 
             this.label_needPay.Text = string.Format("应付货款:{0,10}元", needPay);
             this.label_debt.Text = string.Format("合计:{0,9}元", needPay);

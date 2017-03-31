@@ -189,7 +189,7 @@ namespace LocalERP.WinForm
             {
                 statisticCashForm = new StatisticCashForm(mainForm, "test");
                 statisticCashForm.initVersions(getVersions(),
-                    UpdateType.PurchaseFinishUpdate, UpdateType.SellFinishUpdate, UpdateType.LibFinishUpdate, UpdateType.ProductUpdate, UpdateType.CustomerUpdate);
+                    UpdateType.PurchaseFinishUpdate, UpdateType.SellFinishUpdate, UpdateType.LibFinishUpdate, UpdateType.PayReceiptFinishUpdate, UpdateType.ProductUpdate, UpdateType.CustomerUpdate);
                 appendEvent(statisticCashForm);
             }
             return statisticCashForm;
