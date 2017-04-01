@@ -181,6 +181,7 @@
             this.label1.Size = new System.Drawing.Size(70, 14);
             this.label1.TabIndex = 51;
             this.label1.Text = "统计类型:";
+            this.label1.Visible = false;
             // 
             // comboBox2
             // 
@@ -192,6 +193,7 @@
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(102, 21);
             this.comboBox2.TabIndex = 52;
+            this.comboBox2.Visible = false;
             // 
             // label_notice
             // 

@@ -176,7 +176,7 @@ namespace LocalERP.WinForm
             if (querySellProfitForm == null || querySellProfitForm.IsDisposed)
             {
                 querySellProfitForm = new QuerySellProfitForm();
-                querySellProfitForm.initVersions(getVersions(), UpdateType.SellFinishUpdate, UpdateType.ProductUpdate, UpdateType.CustomerUpdate);
+                querySellProfitForm.initVersions(getVersions(), UpdateType.SellFinishUpdate, UpdateType.PurchaseFinishUpdate, UpdateType.ProductUpdate, UpdateType.CustomerUpdate);
 
                 appendEvent(querySellProfitForm);
             }

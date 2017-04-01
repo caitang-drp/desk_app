@@ -24,6 +24,8 @@ namespace LocalERP.DataAccess.Data
         public int productID;
         public string product;
 
+        public int type;
+
         public string unit;
         public string oper;
         public DateTime sell_time;
@@ -40,46 +42,6 @@ namespace LocalERP.DataAccess.Data
 
         }
 
-        private double double_n(double x, int n)
-        {
-            return Convert.ToDouble(decimal.Round(decimal.Parse(x.ToString()), n).ToString());
-        }
-
-        // 计算利润和利润率
-        // input: 
-        //      cost        成本
-        //      price       售价 
-        // output:
-        //      {利润，利润率%}
-        /*public List<double> get_profit(double cost, double price)
-        {
-            List<double> ret = new List<double>();
-
-            double profit = price - cost;
-            profit = double_n(profit, 1);
-
-            // 利润率，如果利润为负，利润率应该也是负数的
-            double profit_margin = profit / Math.Abs(price) * 100.0;
-            profit_margin = double_n(profit_margin, 2);
-
-            ret.Add(profit);
-            ret.Add(profit_margin);
-            return ret;
-        }*/
-
-        private ProductCirculation find_circulation_with_id(int ID, List<ProductCirculation> ls)
-        {
-            foreach (ProductCirculation cir in ls)
-            {
-                if (ID == cir.ID)
-                {
-                    return cir;
-                }
-            }
-
-            return null;
-        }
-
         private void format_sellprofit(
             ProductCirculation cir,
             ProductCirculationRecord record,
@@ -94,20 +56,20 @@ namespace LocalERP.DataAccess.Data
             //如果整单打折的话，要计算出折扣
             double cutoff = cir.Total == 0?1:cir.RealTotal / cir.Total;
 
-            this.cnt = record.TotalNum;
-            this.price = record.Price * cutoff;
-            this.sum_price = record.TotalPrice * cutoff;
-            this.cost = average_price;
+            this.cnt = record.TotalNum * cir.FlowType;
+            this.price = double.Parse((record.Price * cutoff).ToString("0.00"));
+            this.sum_price = double.Parse((-cir.FlowType * record.TotalPrice * cutoff).ToString("0.00"));
+            this.cost = double.Parse(average_price.ToString("0.00"));
 
-            this.sum_cost = average_price * this.cnt;
+            this.sum_cost = double.Parse((average_price * this.cnt).ToString("0.00"));
 
-            this.profit = this.sum_price - this.sum_cost;
-            this.profit_margin = this.profit / this.sum_cost * 100;
-
+            this.profit = Math.Round(this.sum_price + this.sum_cost, 2);
+            this.profit_margin = Math.Round(this.profit / Math.Abs(this.sum_cost) * 100, 2);
+            /*
             if (cir.Type == 4) {
                 this.profit = -this.profit;
                 this.profit_margin = -this.profit_margin;
-            }
+            }*/
         }
     }
 }

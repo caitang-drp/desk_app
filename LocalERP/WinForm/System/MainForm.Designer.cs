@@ -323,17 +323,17 @@
             this.toolStripButton_queryLib.Image = global::LocalERP.Properties.Resources.statistic;
             this.toolStripButton_queryLib.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton_queryLib.Name = "toolStripButton_queryLib";
-            this.toolStripButton_queryLib.Size = new System.Drawing.Size(99, 36);
-            this.toolStripButton_queryLib.Text = "库存查询";
+            this.toolStripButton_queryLib.Size = new System.Drawing.Size(113, 36);
+            this.toolStripButton_queryLib.Text = "进销存明细";
             this.toolStripButton_queryLib.Click += new System.EventHandler(this.toolStripButton_queryLib_Click);
             // 
             // toolStripButton_statistic
             // 
-            this.toolStripButton_statistic.Image = global::LocalERP.Properties.Resources.statistic1;
+            this.toolStripButton_statistic.Image = global::LocalERP.Properties.Resources.orderEdit32;
             this.toolStripButton_statistic.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton_statistic.Name = "toolStripButton_statistic";
             this.toolStripButton_statistic.Size = new System.Drawing.Size(99, 36);
-            this.toolStripButton_statistic.Text = "进销统计";
+            this.toolStripButton_statistic.Text = "对账明细";
             this.toolStripButton_statistic.Click += new System.EventHandler(this.toolStripButton_statistic_Click);
             // 
             // toolStripButton_close

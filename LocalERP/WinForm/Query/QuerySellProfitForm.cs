@@ -25,7 +25,7 @@ namespace LocalERP.WinForm
 
             ArrayList typeList = new ArrayList();
             typeList.Add(new DictionaryEntry(1, "按明细"));
-            typeList.Add(new DictionaryEntry(2, "按销售商品"));
+            typeList.Add(new DictionaryEntry(2, "按商品"));
             this.comboBox1.DataSource = typeList;
             this.comboBox1.ValueMember = "Key";
             this.comboBox1.DisplayMember = "Value";
@@ -39,20 +39,27 @@ namespace LocalERP.WinForm
             initList();
         }
 
+        /// <summary>
+        /// 按明细
+        /// </summary>
+        /// <param name="one"></param>
+        /// <param name="index"></param>
         private void sellprofit_to_grid(SellProfit one, int index)
         {
             this.dataGridView1.Rows[index].Cells["serial"].Value = one.serial;
             this.dataGridView1.Rows[index].Cells["sell_time"].Value = one.sell_time.ToShortDateString();
             this.dataGridView1.Rows[index].Cells["customer"].Value = one.customer;
+            this.dataGridView1.Rows[index].Cells["type"].Value = ProductCirculation.CirculationTypeConfs[one.type-1].name;
             this.dataGridView1.Rows[index].Cells["product"].Value = one.product;
             this.dataGridView1.Rows[index].Cells["unit"].Value = one.unit;
-            this.dataGridView1.Rows[index].Cells["sell_cnt"].Value = one.cnt;
+            this.dataGridView1.Rows[index].Cells["sell_cnt"].Value = one.cnt.ToString("+#;-#;0");
             this.dataGridView1.Rows[index].Cells["sell_price"].Value = one.price;
-            this.dataGridView1.Rows[index].Cells["sell_sum_price"].Value = one.sum_price;
-            this.dataGridView1.Rows[index].Cells["cost"].Value = one.cost;
+            this.dataGridView1.Rows[index].Cells["sell_sum_price"].Value = one.sum_price.ToString("+0.00;-0.00;0");
+            //cost在数据库的小数位数不限制，但是显示出来只保留到分
+            this.dataGridView1.Rows[index].Cells["cost"].Value = one.cost.ToString("0.00");
             this.dataGridView1.Rows[index].Cells["profit"].Value = one.profit;
             this.dataGridView1.Rows[index].Cells["profit_margin"].Value = one.profit_margin;
-            this.dataGridView1.Rows[index].Cells["sum_cost"].Value = one.sum_cost;
+            this.dataGridView1.Rows[index].Cells["sum_cost"].Value = one.sum_cost.ToString("+0.00;-0.00;0");
 
             this.dataGridView1.Rows[index].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             // 设置亏损，显示为红色
@@ -69,7 +76,7 @@ namespace LocalERP.WinForm
             statistic_record.profit += one.profit;
         }
 
-        private void initDoneListRecord(List<SellProfit> done_ls)
+        private void initRecords(List<SellProfit> done_ls)
         {
             foreach (SellProfit one in done_ls)
             {
@@ -83,12 +90,12 @@ namespace LocalERP.WinForm
             int index = this.dataGridView1.Rows.Add();
 
             this.dataGridView1.Rows[index].Cells["serial"].Value = "合计";
-            this.dataGridView1.Rows[index].Cells["sell_cnt"].Value = statistic_record.cnt;
-            this.dataGridView1.Rows[index].Cells["sell_sum_price"].Value = statistic_record.sum_price;
-            this.dataGridView1.Rows[index].Cells["sum_cost"].Value = statistic_record.sum_cost;
-            this.dataGridView1.Rows[index].Cells["profit"].Value = statistic_record.profit;
+            this.dataGridView1.Rows[index].Cells["sell_cnt"].Value = statistic_record.cnt.ToString("+#;-#;0");
+            this.dataGridView1.Rows[index].Cells["sell_sum_price"].Value = statistic_record.sum_price.ToString("+0.00;-0.00;0");
+            this.dataGridView1.Rows[index].Cells["sum_cost"].Value = statistic_record.sum_cost.ToString("+0.00;-0.00;0");
+            this.dataGridView1.Rows[index].Cells["profit"].Value = statistic_record.profit.ToString("+0.00;-0.00;0");
 
-            if (statistic_record.profit <= 0.0000)
+            if (statistic_record.profit <= 0.00)
             {
                 this.dataGridView1.Rows[index].DefaultCellStyle.ForeColor = Color.Red;
             }
@@ -105,7 +112,7 @@ namespace LocalERP.WinForm
 
             List<SellProfit> done_profit_ls = SellProfitDao.getInstance().FindList(this.start_time.Value, this.end_time.Value.AddDays(1), this.textBox_product.Text, this.textBox_customer.Text);
 
-            initDoneListRecord(done_profit_ls);
+            initRecords(done_profit_ls);
 
             initRecordStatisticLine();
         }
@@ -113,7 +120,7 @@ namespace LocalERP.WinForm
         /// <summary>
         /// 按产品统计
         /// </summary>
-        private void do_init_product_list()
+        private void initProducts()
         {
             List<SellProfit> done_profit_ls = SellProfitDao.getInstance().FindList(this.start_time.Value, this.end_time.Value.AddDays(1), this.textBox_product.Text, this.textBox_customer.Text);
             SellProfit sell_profit_obj = new SellProfit();
@@ -128,6 +135,7 @@ namespace LocalERP.WinForm
                 SellProfit merge = new SellProfit();
                 foreach (SellProfit sell in sell_profit_ls)
                 {
+                    merge.type = sell.type;
                     merge.product = sell.product;
                     merge.unit = sell.unit;
 
@@ -151,12 +159,12 @@ namespace LocalERP.WinForm
             int index = this.dataGridView1.Rows.Add();
 
             this.dataGridView1.Rows[index].Cells["product"].Value = "合计";
-            this.dataGridView1.Rows[index].Cells["sell_cnt"].Value = statistic_record.cnt;
-            this.dataGridView1.Rows[index].Cells["sell_sum_price"].Value = statistic_record.sum_price;
-            this.dataGridView1.Rows[index].Cells["sum_cost"].Value = statistic_record.sum_cost;
-            this.dataGridView1.Rows[index].Cells["profit"].Value = statistic_record.profit;
+            this.dataGridView1.Rows[index].Cells["sell_cnt"].Value = statistic_record.cnt.ToString("+#;-#;0");
+            this.dataGridView1.Rows[index].Cells["sell_sum_price"].Value = statistic_record.sum_price.ToString("+0.00;-0.00;0");
+            this.dataGridView1.Rows[index].Cells["sum_cost"].Value = statistic_record.sum_cost.ToString("+0.00;-0.00;0");
+            this.dataGridView1.Rows[index].Cells["profit"].Value = statistic_record.profit.ToString("+0.00;-0.00;0");
 
-            if (statistic_record.profit <= 0.0000)
+            if (statistic_record.profit <= 0)
             {
                 this.dataGridView1.Rows[index].DefaultCellStyle.ForeColor = Color.Red;
             }
@@ -171,8 +179,7 @@ namespace LocalERP.WinForm
             this.dataGridView1.Rows.Clear();
 
             // 使用已经计算好的SellProfit表来统计就可以了
-            do_init_product_list();
-
+            initProducts();
             initProductStatisticLine();
         }
 

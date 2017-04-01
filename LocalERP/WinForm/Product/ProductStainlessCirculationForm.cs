@@ -297,8 +297,10 @@ namespace LocalERP.WinForm
 
             int leftNum = stainless.Num + conf.productDirection * record.TotalNum;
 
-            //只有采购（包括退货）才需要更新成本价，通过成本价重新计算来抵冲收付的差额。销售（包括退货）通过利润的计算来抵消收付的差额
-            if (conf.type == ProductCirculation.CirculationType.purchase || conf.type == ProductCirculation.CirculationType.purchaseBack){
+            //只有采购入货才需要更新成本价，通过成本价重新计算来抵冲收付的差额
+            //销售、销售退货、采购退货通过利润的计算来抵消收付的差额
+            //采购退货之所以不重新计算成本价，是因为如果退货价格很高的话，可能导致成本价为负数
+            if (conf.type == ProductCirculation.CirculationType.purchase){
                 double totalCost = stainless.PriceCost * stainless.Num + conf.productDirection * record.Price * record.TotalNum;
                 if (leftNum != 0)
                 {
@@ -312,7 +314,8 @@ namespace LocalERP.WinForm
 
 
             /*************增加利润表记录**********/
-            if (conf.type == ProductCirculation.CirculationType.sell || conf.type == ProductCirculation.CirculationType.sellBack) {
+            if (conf.type == ProductCirculation.CirculationType.sell || conf.type == ProductCirculation.CirculationType.sellBack || conf.type == ProductCirculation.CirculationType.purchaseBack)
+            {
                 SellProfit profit = new SellProfit(cir, record, stainless.PriceCost);
                 SellProfitDao.getInstance().Insert(profit);
             }

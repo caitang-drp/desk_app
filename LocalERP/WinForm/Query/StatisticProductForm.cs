@@ -37,7 +37,7 @@ namespace LocalERP.WinForm
             this.initControls();
             this.initConfArray();
 
-            this.label_title.Text = string.Format("统计类型:{0,-12}统计方式:{0,-12}统计时间:{0,-12}", "");
+            this.label_title.Text = string.Format("统计方式:{0,-12}统计时间:{0,-12}", "");
         }
 
         private void initConfArray(){
@@ -46,17 +46,17 @@ namespace LocalERP.WinForm
             columnTexts = new string[5][];
             columnLengths = new int[5][];
 
-            columnTexts[0] = new string[]{"货号", "货品名称", "总数量", "总金额"};
-            columnNames[0] = new string[] { "serial", "product", "staticNum", "sum"};
-            columnLengths[0] = new int[] {80, 240, 100, 100};
+            columnTexts[0] = new string[] { "货号", "货品名称", "采购数量/金额", "采购退货数量/金额", "销售数量/金额", "销售退货数量/金额" };
+            columnNames[0] = new string[] { "serial", "product", "purchase", "purchaseBack", "sell", "sellBack" };
+            columnLengths[0] = new int[] {80, 120, 140, 160, 140, 160};
 
-            columnTexts[1] = new string[] { "ID", "来往单位", "总数量", "总金额" };
-            columnNames[1] = new string[] { "ID", "name", "num", "sum" };
-            columnLengths[1] = new int[] { 80, 200, 100, 100 };
+            columnTexts[1] = new string[] { "ID", "来往单位", "采购数量/金额", "采购退货数量/金额", "销售数量/金额", "销售退货数量/金额" };
+            columnNames[1] = new string[] { "ID", "name", "purchase", "purchaseBack", "sell", "sellBack" };
+            columnLengths[1] = new int[] { 80, 100, 140, 160, 140, 160 };
 
-            columnTexts[2] = new string[] { "月份", "时间段", "总数量", "总金额" };
-            columnNames[2] = new string[] { "month", "timeSpan", "num", "sum" };
-            columnLengths[2] = new int[] { 100, 220, 100, 100 };
+            columnTexts[2] = new string[] { "月份", "时间段", "采购数量/金额", "采购退货数量/金额", "销售数量/金额", "销售退货数量/金额" };
+            columnNames[2] = new string[] { "month", "timeSpan", "purchase", "purchaseBack", "sell", "sellBack" };
+            columnLengths[2] = new int[] { 100, 160, 140, 160, 140, 160 };
 
             columnTexts[3] = new string[] { "ID", "类别", "总数量", "金额" };
             columnNames[3] = new string[] { "ID", "type", "num", "price" };
@@ -88,8 +88,8 @@ namespace LocalERP.WinForm
         private void backgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
             statisticTypeEnum type = (statisticTypeEnum)this.comboBox1.SelectedValue;
-            this.label_title.Text = string.Format("统计类型:{0,-12}统计方式:{1,-12}统计时间:{2}至{3}",
-                this.comboBox2.Text, this.comboBox1.Text, this.dateTimePicker3.Value.ToShortDateString(), this.dateTimePicker4.Value.ToShortDateString());
+            this.label_title.Text = string.Format("统计方式:{0,-12}统计时间:{1}至{2}",
+                this.comboBox1.Text, this.dateTimePicker3.Value.ToShortDateString(), this.dateTimePicker4.Value.ToShortDateString());
             switch (type)
             {
                 case statisticTypeEnum.product:
@@ -132,17 +132,28 @@ namespace LocalERP.WinForm
 
         protected virtual void statisticCustomer() {
             itemsTable = CustomerDao.getInstance().FindListForStatistic(null);
-            itemsTable.Columns.Add("num");
-            itemsTable.Columns.Add("sum");
+            itemsTable.Columns.Add("purchase");
+            itemsTable.Columns.Add("purchaseBack");
+            itemsTable.Columns.Add("sell");
+            itemsTable.Columns.Add("sellBack");
             
             foreach(DataRow dr in itemsTable.Rows){
                 
                 int customerID = (int)dr["ID"];
                 int totalNum = 0;
                 double sum;
-                this.getSum(this.dateTimePicker3.Value, this.dateTimePicker4.Value,(int)this.comboBox2.SelectedValue, 0, customerID, out totalNum, out sum);
-                dr["num"] = totalNum;
-                dr["sum"] = sum;
+                this.getSum(this.dateTimePicker3.Value, this.dateTimePicker4.Value,1, 0, customerID, out totalNum, out sum);
+                dr["purchase"] = totalNum == 0 && sum == 0 ? "" : string.Format("{0}/{1:0.00}", totalNum, sum);
+
+                this.getSum(this.dateTimePicker3.Value, this.dateTimePicker4.Value, 2, 0, customerID, out totalNum, out sum);
+                dr["purchaseBack"] = totalNum == 0 && sum==0?"":string.Format("{0}/{1:0.00}", totalNum, sum);
+
+                this.getSum(this.dateTimePicker3.Value, this.dateTimePicker4.Value, 3, 0, customerID, out totalNum, out sum);
+                dr["sell"] = totalNum == 0 && sum == 0 ? "" : string.Format("{0}/{1:0.00}", totalNum, sum);
+
+                this.getSum(this.dateTimePicker3.Value, this.dateTimePicker4.Value, 4, 0, customerID, out totalNum, out sum);
+                dr["sellBack"] = totalNum == 0 && sum == 0 ? "" : string.Format("{0}/{1:0.00}", totalNum, sum);
+
             }  
         }
 
@@ -151,27 +162,53 @@ namespace LocalERP.WinForm
             itemsTable = new DataTable();
             itemsTable.Columns.Add("month");
             itemsTable.Columns.Add("timeSpan");
-            itemsTable.Columns.Add("num");
-            itemsTable.Columns.Add("sum");
+            itemsTable.Columns.Add("purchase");
+            itemsTable.Columns.Add("purchaseBack");
+            itemsTable.Columns.Add("sell");
+            itemsTable.Columns.Add("sellBack");
 
             DateTime startDate = this.dateTimePicker3.Value;
             DateTime currentDate = (new DateTime(this.dateTimePicker3.Value.Year, this.dateTimePicker3.Value.Month, 1)).AddMonths(1).AddDays(-1);
+
+            string purchase, purchaseBack, sell, sellBack;
 
             int totalNum;
             double sum;
 
             while (currentDate < this.dateTimePicker4.Value) {
 
-                this.getSum(startDate, currentDate, (int)this.comboBox2.SelectedValue, 0, 0, out totalNum, out sum);
-                itemsTable.Rows.Add(startDate.ToString("yyyy年MM月"), startDate.ToShortDateString() + "至" + currentDate.ToShortDateString(), totalNum, sum);
+                this.getSum(startDate, currentDate, 1, 0, 0, out totalNum, out sum);
+                purchase = totalNum == 0 && sum == 0 ? "" : string.Format("{0}/{1:0.00}", totalNum, sum);
+
+                this.getSum(startDate, currentDate, 2, 0, 0, out totalNum, out sum);
+                purchaseBack = totalNum == 0 && sum == 0 ? "" : string.Format("{0}/{1:0.00}", totalNum, sum);
+
+                this.getSum(startDate, currentDate, 3, 0, 0, out totalNum, out sum);
+                sell = totalNum == 0 && sum == 0 ? "" : string.Format("{0}/{1:0.00}", totalNum, sum);
+
+                this.getSum(startDate, currentDate, 4, 0, 0, out totalNum, out sum);
+                sellBack = totalNum == 0 && sum == 0 ? "" : string.Format("{0}/{1:0.00}", totalNum, sum);
+
+                itemsTable.Rows.Add(startDate.ToString("yyyy年MM月"), startDate.ToShortDateString() + "至" + currentDate.ToShortDateString(), purchase, purchaseBack, sell, sellBack);
                 
                 startDate = currentDate.AddDays(1);
                 currentDate = (new DateTime(currentDate.Year, currentDate.Month, 1)).AddMonths(2).AddDays(-1);
             }
             if (startDate <= this.dateTimePicker4.Value)
             {
-                this.getSum(startDate, this.dateTimePicker4.Value, (int)this.comboBox2.SelectedValue, 0, 0, out totalNum, out sum);
-                itemsTable.Rows.Add(startDate.ToString("yyyy年MM月"), startDate.ToShortDateString() + "至" + this.dateTimePicker4.Value.ToShortDateString(), totalNum, sum);
+                this.getSum(startDate, this.dateTimePicker4.Value, 1, 0, 0, out totalNum, out sum);
+                purchase = totalNum == 0 && sum == 0 ? "" : string.Format("{0}/{1:0.00}", totalNum, sum);
+
+                this.getSum(startDate, this.dateTimePicker4.Value, 2, 0, 0, out totalNum, out sum);
+                purchaseBack = totalNum == 0 && sum == 0 ? "" : string.Format("{0}/{1:0.00}", totalNum, sum);
+
+                this.getSum(startDate, this.dateTimePicker4.Value, 3, 0, 0, out totalNum, out sum);
+                sell = totalNum == 0 && sum == 0 ? "" : string.Format("{0}/{1:0.00}", totalNum, sum);
+
+                this.getSum(startDate, this.dateTimePicker4.Value, 4, 0, 0, out totalNum, out sum);
+                sellBack = totalNum == 0 && sum == 0 ? "" : string.Format("{0}/{1:0.00}", totalNum, sum);
+
+                itemsTable.Rows.Add(startDate.ToString("yyyy年MM月"), startDate.ToShortDateString() + "至" + this.dateTimePicker4.Value.ToShortDateString(), purchase, purchaseBack, sell, sellBack);
             }
         }
 
@@ -188,7 +225,7 @@ namespace LocalERP.WinForm
             this.dataGridView1.Rows.Clear();
             foreach (DataRow dr in itemsTable.Rows)
             {
-                this.dataGridView1.Rows.Add(dr["ID"], dr["name"], dr["num"], dr["sum"]);
+                this.dataGridView1.Rows.Add(dr["ID"], dr["name"], dr["purchase"], dr["purchaseBack"], dr["sell"], dr["sellBack"]);
             }
         }
 
@@ -197,7 +234,7 @@ namespace LocalERP.WinForm
             this.dataGridView1.Rows.Clear();
             foreach (DataRow dr in itemsTable.Rows)
             {
-                this.dataGridView1.Rows.Add(dr["month"], dr["timeSpan"], dr["num"], dr["sum"]);
+                this.dataGridView1.Rows.Add(dr["month"], dr["timeSpan"], dr["purchase"], dr["purchaseBack"], dr["sell"], dr["sellBack"]);
             }
         }
 

@@ -20,8 +20,10 @@ namespace LocalERP.WinForm
         protected override void statisticProduct()
         {
             itemsTable = ProductStainlessDao.getInstance().FindList(null, null);
-            itemsTable.Columns.Add("staticNum");
-            itemsTable.Columns.Add("sum");
+            itemsTable.Columns.Add("purchase");
+            itemsTable.Columns.Add("purchaseBack");
+            itemsTable.Columns.Add("sell");
+            itemsTable.Columns.Add("sellBack");
 
             foreach (DataRow dr in itemsTable.Rows)
             {
@@ -29,10 +31,17 @@ namespace LocalERP.WinForm
                 double sum = 0;
                 int productID = (int)dr["ProductStainless.ID"];
 
-                this.getSum(this.dateTimePicker3.Value, this.dateTimePicker4.Value, (int)this.comboBox2.SelectedValue, productID, 0, out totalNum, out sum);
+                this.getSum(this.dateTimePicker3.Value, this.dateTimePicker4.Value, 1, productID, 0, out totalNum, out sum);
+                dr["purchase"] = totalNum == 0 && sum == 0 ? "" : string.Format("{0}/{1:0.00}", totalNum, sum);
 
-                dr["staticNum"] = totalNum;
-                dr["sum"] = sum;
+                this.getSum(this.dateTimePicker3.Value, this.dateTimePicker4.Value, 2, productID, 0, out totalNum, out sum);
+                dr["purchaseBack"] = totalNum == 0 && sum == 0 ? "" : string.Format("{0}/{1:0.00}", totalNum, sum);
+
+                this.getSum(this.dateTimePicker3.Value, this.dateTimePicker4.Value, 3, productID, 0, out totalNum, out sum);
+                dr["sell"] = totalNum == 0 && sum == 0 ? "" : string.Format("{0}/{1:0.00}", totalNum, sum);
+
+                this.getSum(this.dateTimePicker3.Value, this.dateTimePicker4.Value, 4, productID, 0, out totalNum, out sum);
+                dr["sellBack"] = totalNum == 0 && sum == 0 ? "" : string.Format("{0}/{1:0.00}", totalNum, sum);
             }
         }
 
@@ -41,7 +50,7 @@ namespace LocalERP.WinForm
             this.dataGridView1.Rows.Clear();
             foreach (DataRow dr in itemsTable.Rows)
             {
-                this.dataGridView1.Rows.Add(dr["serial"], dr["ProductStainless.name"], dr["staticNum"], dr["sum"]);
+                this.dataGridView1.Rows.Add(dr["serial"], dr["ProductStainless.name"], dr["purchase"], dr["purchaseBack"], dr["sell"], dr["sellBack"]);
             }
         }
 

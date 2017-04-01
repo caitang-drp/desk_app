@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.button1 = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -47,6 +46,7 @@
             this.serial = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.sell_time = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.customer = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.type = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.product = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.unit = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.sell_cnt = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -64,13 +64,16 @@
             this.textBox_product = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
             // 
             this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.Location = new System.Drawing.Point(995, 26);
+            this.button1.Location = new System.Drawing.Point(995, 16);
             this.button1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(47, 23);
@@ -84,7 +87,7 @@
             this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.AutoSize = true;
             this.label2.BackColor = System.Drawing.SystemColors.Control;
-            this.label2.Location = new System.Drawing.Point(806, 31);
+            this.label2.Location = new System.Drawing.Point(806, 21);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(70, 14);
             this.label2.TabIndex = 23;
@@ -95,7 +98,7 @@
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.SystemColors.Control;
-            this.label1.Location = new System.Drawing.Point(611, 32);
+            this.label1.Location = new System.Drawing.Point(611, 22);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(70, 14);
             this.label1.TabIndex = 21;
@@ -106,7 +109,7 @@
             this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label5.AutoSize = true;
             this.label5.BackColor = System.Drawing.SystemColors.Control;
-            this.label5.Location = new System.Drawing.Point(611, 32);
+            this.label5.Location = new System.Drawing.Point(611, 22);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(70, 14);
             this.label5.TabIndex = 21;
@@ -117,7 +120,7 @@
             this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label6.AutoSize = true;
             this.label6.BackColor = System.Drawing.SystemColors.Control;
-            this.label6.Location = new System.Drawing.Point(806, 31);
+            this.label6.Location = new System.Drawing.Point(806, 21);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(70, 14);
             this.label6.TabIndex = 23;
@@ -126,7 +129,7 @@
             // button2
             // 
             this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button2.Location = new System.Drawing.Point(995, 26);
+            this.button2.Location = new System.Drawing.Point(995, 16);
             this.button2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(47, 23);
@@ -138,7 +141,7 @@
             // start_time
             // 
             this.start_time.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.start_time.Location = new System.Drawing.Point(680, 27);
+            this.start_time.Location = new System.Drawing.Point(680, 17);
             this.start_time.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.start_time.Name = "start_time";
             this.start_time.Size = new System.Drawing.Size(119, 23);
@@ -147,7 +150,7 @@
             // end_time
             // 
             this.end_time.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.end_time.Location = new System.Drawing.Point(871, 26);
+            this.end_time.Location = new System.Drawing.Point(871, 16);
             this.end_time.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.end_time.Name = "end_time";
             this.end_time.Size = new System.Drawing.Size(118, 23);
@@ -205,6 +208,7 @@
             this.serial,
             this.sell_time,
             this.customer,
+            this.type,
             this.product,
             this.unit,
             this.sell_cnt,
@@ -218,7 +222,6 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowHeadersVisible = false;
-            this.dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView1.RowTemplate.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(251)))), ((int)(((byte)(200)))), ((int)(((byte)(79)))));
             this.dataGridView1.RowTemplate.DefaultCellStyle.SelectionForeColor = System.Drawing.Color.Black;
             this.dataGridView1.RowTemplate.Height = 23;
@@ -235,10 +238,10 @@
             // 
             // sell_time
             // 
-            this.sell_time.HeaderText = "销售日期";
+            this.sell_time.HeaderText = "日期";
             this.sell_time.Name = "sell_time";
             this.sell_time.ReadOnly = true;
-            this.sell_time.Width = 90;
+            this.sell_time.Width = 75;
             // 
             // customer
             // 
@@ -246,6 +249,13 @@
             this.customer.Name = "customer";
             this.customer.ReadOnly = true;
             this.customer.Width = 80;
+            // 
+            // type
+            // 
+            this.type.HeaderText = "类型";
+            this.type.Name = "type";
+            this.type.ReadOnly = true;
+            this.type.Width = 75;
             // 
             // product
             // 
@@ -262,24 +272,24 @@
             // 
             // sell_cnt
             // 
-            this.sell_cnt.HeaderText = "销售数量";
+            this.sell_cnt.HeaderText = "数量";
             this.sell_cnt.Name = "sell_cnt";
             this.sell_cnt.ReadOnly = true;
             this.sell_cnt.Width = 60;
             // 
             // sell_price
             // 
-            this.sell_price.HeaderText = "销售单价/元";
+            this.sell_price.HeaderText = "单价/元";
             this.sell_price.Name = "sell_price";
             this.sell_price.ReadOnly = true;
-            this.sell_price.Width = 90;
+            this.sell_price.Width = 80;
             // 
             // sell_sum_price
             // 
-            this.sell_sum_price.HeaderText = "销售金额/元";
+            this.sell_sum_price.HeaderText = "金额/元";
             this.sell_sum_price.Name = "sell_sum_price";
             this.sell_sum_price.ReadOnly = true;
-            this.sell_sum_price.Width = 90;
+            this.sell_sum_price.Width = 80;
             // 
             // cost
             // 
@@ -313,7 +323,7 @@
             this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label8.AutoSize = true;
             this.label8.BackColor = System.Drawing.SystemColors.Control;
-            this.label8.Location = new System.Drawing.Point(424, 32);
+            this.label8.Location = new System.Drawing.Point(424, 22);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(70, 14);
             this.label8.TabIndex = 32;
@@ -325,7 +335,7 @@
             this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox1.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(494, 28);
+            this.comboBox1.Location = new System.Drawing.Point(494, 18);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(102, 21);
             this.comboBox1.TabIndex = 48;
@@ -347,7 +357,7 @@
             // 
             this.label_notice.AutoSize = true;
             this.label_notice.ForeColor = System.Drawing.Color.Red;
-            this.label_notice.Location = new System.Drawing.Point(12, 67);
+            this.label_notice.Location = new System.Drawing.Point(12, 58);
             this.label_notice.Name = "label_notice";
             this.label_notice.Size = new System.Drawing.Size(168, 14);
             this.label_notice.TabIndex = 54;
@@ -357,7 +367,7 @@
             // textBox_customer
             // 
             this.textBox_customer.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox_customer.Location = new System.Drawing.Point(159, 27);
+            this.textBox_customer.Location = new System.Drawing.Point(159, 17);
             this.textBox_customer.Name = "textBox_customer";
             this.textBox_customer.Size = new System.Drawing.Size(100, 23);
             this.textBox_customer.TabIndex = 60;
@@ -365,7 +375,7 @@
             // textBox_product
             // 
             this.textBox_product.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox_product.Location = new System.Drawing.Point(313, 27);
+            this.textBox_product.Location = new System.Drawing.Point(313, 17);
             this.textBox_product.Name = "textBox_product";
             this.textBox_product.Size = new System.Drawing.Size(100, 23);
             this.textBox_product.TabIndex = 59;
@@ -375,7 +385,7 @@
             this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label3.AutoSize = true;
             this.label3.BackColor = System.Drawing.SystemColors.Control;
-            this.label3.Location = new System.Drawing.Point(274, 31);
+            this.label3.Location = new System.Drawing.Point(274, 21);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(42, 14);
             this.label3.TabIndex = 58;
@@ -386,17 +396,50 @@
             this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label4.AutoSize = true;
             this.label4.BackColor = System.Drawing.SystemColors.Control;
-            this.label4.Location = new System.Drawing.Point(91, 31);
+            this.label4.Location = new System.Drawing.Point(91, 21);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(70, 14);
             this.label4.TabIndex = 57;
             this.label4.Text = "往来单位:";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.ForeColor = System.Drawing.Color.Black;
+            this.label7.Location = new System.Drawing.Point(498, 58);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(364, 14);
+            this.label7.TabIndex = 61;
+            this.label7.Text = "所有销售出库、销售退货、采购退货业务纳入利润计算中!";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.ForeColor = System.Drawing.Color.Black;
+            this.label9.Location = new System.Drawing.Point(892, 58);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(168, 14);
+            this.label9.TabIndex = 62;
+            this.label9.Text = "表示亏损，黑色表示盈利!";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.ForeColor = System.Drawing.Color.Red;
+            this.label10.Location = new System.Drawing.Point(858, 57);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(35, 14);
+            this.label10.TabIndex = 63;
+            this.label10.Text = "红色";
             // 
             // QuerySellProfitForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1070, 527);
+            this.Controls.Add(this.label10);
+            this.Controls.Add(this.label9);
+            this.Controls.Add(this.label7);
             this.Controls.Add(this.textBox_customer);
             this.Controls.Add(this.textBox_product);
             this.Controls.Add(this.label3);
@@ -418,7 +461,7 @@
             this.HideOnClose = true;
             this.Name = "QuerySellProfitForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "销售利润";
+            this.Text = "利润计算";
             this.Load += new System.EventHandler(this.ProductSellForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
@@ -447,9 +490,14 @@
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Label label_notice;
+        protected System.Windows.Forms.TextBox textBox_customer;
+        protected System.Windows.Forms.TextBox textBox_product;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.DataGridViewTextBoxColumn serial;
         private System.Windows.Forms.DataGridViewTextBoxColumn sell_time;
         private System.Windows.Forms.DataGridViewTextBoxColumn customer;
+        private System.Windows.Forms.DataGridViewTextBoxColumn type;
         private System.Windows.Forms.DataGridViewTextBoxColumn product;
         private System.Windows.Forms.DataGridViewTextBoxColumn unit;
         private System.Windows.Forms.DataGridViewTextBoxColumn sell_cnt;
@@ -459,9 +507,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn sum_cost;
         private System.Windows.Forms.DataGridViewTextBoxColumn profit;
         private System.Windows.Forms.DataGridViewTextBoxColumn profit_margin;
-        protected System.Windows.Forms.TextBox textBox_customer;
-        protected System.Windows.Forms.TextBox textBox_product;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label10;
     }
 }

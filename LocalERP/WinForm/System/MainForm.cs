@@ -253,7 +253,7 @@ namespace LocalERP.WinForm
 
         private void toolStripButton_queryLib_Click(object sender, EventArgs e)
         {
-            this.setForm(DataUtility.QUERY_LIB);
+            this.setForm(DataUtility.QUERY_PRODUCT_DETAIL);
         }
 
         private void toolStripButton_close_Click(object sender, EventArgs e)
@@ -263,7 +263,7 @@ namespace LocalERP.WinForm
 
         private void toolStripButton_statistic_Click(object sender, EventArgs e)
         {
-            this.setForm(DataUtility.STATISTIC_PRODUCT);
+            this.setForm(DataUtility.QUERY_CASH_DETAIL);
         }
     }
 }

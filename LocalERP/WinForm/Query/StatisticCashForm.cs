@@ -129,29 +129,32 @@ namespace LocalERP.WinForm
 
         private void backgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            this.label_receipt.Text = string.Format("销售收入:{0,10}元", receipt);
-            this.label_purchaseBack.Text = string.Format("采购退货收入:{0,6}元", purchaseBack);
-            this.label_otherReceipt.Text = string.Format("其他收入:{0,10}元", otherReceipt);
+            this.label_receipt.Text = string.Format("销售收入:{0,10:0.00}元", receipt);
+            this.label_purchaseBack.Text = string.Format("采购退货收入:{0,6:0.00}元", purchaseBack);
+            this.label_otherReceipt.Text = string.Format("其他收入:{0,10:0.00}元", otherReceipt);
             double sumReceipt = receipt + purchaseBack + otherReceipt;
-            this.label_sumReceipt.Text = string.Format("合计:{0,9}元", sumReceipt);
+            this.label_sumReceipt.Text = string.Format("合计:{0,9:0.00}元", sumReceipt);
 
-            this.label_pay.Text = string.Format("采购支出:{0,10}元", payed);
-            this.label_sellBack.Text = string.Format("销售退货支出:{0,6}元", sellBack);
+            this.label_pay.Text = string.Format("采购支出:{0,10:0.00}元", payed);
+            this.label_sellBack.Text = string.Format("销售退货支出:{0,6:0.00}元", sellBack);
             //this.label_freight.Text = string.Format("运费支出:{0,10}元", freights);
-            this.label_otherPay.Text = string.Format("其他支出:{0,10}元", otherPay + freights);
+            this.label_otherPay.Text = string.Format("其他支出:{0,10:0.00}元", otherPay + freights);
             double sumPay = payed + freights + sellBack + otherPay;
-            this.label_paySum.Text = string.Format("合计:{0,9}元", sumPay);
+            this.label_paySum.Text = string.Format("合计:{0,9:0.00}元", sumPay);
 
-            this.label_sumCash.Text = string.Format("收支结存:{0,10}元", sumReceipt - sumPay);
+            this.label_sumCash.Text = string.Format("收支结存:{0,10:0.00}元", sumReceipt - sumPay);
 
 
-            this.label_lib.Text = string.Format("库存成本:{0,10}元", lib);
-            this.label_needReceipt.Text = string.Format("应收货款:{0,10}元", needReceipt);
-            this.label_sumCash1.Text = string.Format("收支结存:{0,10}元", sumReceipt - sumPay);
-            this.label_assets.Text = string.Format("合计:{0,9:0.00}元", needReceipt + sumReceipt - sumPay + lib);
+            this.label_lib.Text = string.Format("库存成本:{0,10:0.00}元", lib);
+            this.label_needReceipt.Text = string.Format("应收货款:{0,10:0.00}元", needReceipt);
+            this.label_sumCash1.Text = string.Format("收支结存:{0,10:0.00}元", sumReceipt - sumPay);
+            double assets = needReceipt + sumReceipt - sumPay + lib;
+            this.label_assets.Text = string.Format("合计:{0,9:0.00}元", assets);
 
-            this.label_needPay.Text = string.Format("应付货款:{0,10}元", needPay);
-            this.label_debt.Text = string.Format("合计:{0,9}元", needPay);
+            this.label_needPay.Text = string.Format("应付货款:{0,10:0.00}元", needPay);
+            this.label_debt.Text = string.Format("合计:{0,9:0.00}元", needPay);
+
+            this.label_pureLib.Text = string.Format("净资产:{0,10:0.00}元", assets - needPay);
 
             this.invokeEndLoadNotify();
         }

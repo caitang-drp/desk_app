@@ -88,7 +88,7 @@ namespace LocalERP.DataAccess.DataDAO
 
             commandText.Append(string.Format(temp, startTime.ToString("yyyy-MM-dd"), endTime.ToString("yyyy-MM-dd")));
             if (type > 0)
-                commandText.Append(string.Format(" and ProductStainlessCirculation.type between {0} and {1}", type, type + 1));
+                commandText.Append(string.Format(" and ProductStainlessCirculation.type= {0}", type));
 
             if (productID > 0)
                 commandText.Append(string.Format(" and ProductStainless.ID={0}", productID));

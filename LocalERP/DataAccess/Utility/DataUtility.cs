@@ -39,7 +39,7 @@ namespace LocalERP.DataAccess.Utility
         public const String STATISTIC_PRODUCT = "进销统计";
         public const String STATISTIC_CASH = "财务统计";
         public const String STATISTIC_DEBT = "应收应付";
-        public const String STATISTIC_PROFIT = "销售利润";
+        public const String STATISTIC_PROFIT = "利润计算";
         //经营统计
 
         public const String DATA_SETTING = "数据设置";

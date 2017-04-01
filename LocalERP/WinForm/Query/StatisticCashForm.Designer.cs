@@ -63,6 +63,7 @@
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.label20 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
+            this.label_pureLib = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -213,6 +214,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.label_pureLib);
             this.groupBox1.Controls.Add(this.label_debt);
             this.groupBox1.Controls.Add(this.label12);
             this.groupBox1.Controls.Add(this.label_needPay);
@@ -227,7 +229,7 @@
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Location = new System.Drawing.Point(50, 349);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(545, 216);
+            this.groupBox1.Size = new System.Drawing.Size(545, 236);
             this.groupBox1.TabIndex = 70;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "资产负债表";
@@ -408,6 +410,15 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button_add_Click);
             // 
+            // label_pureLib
+            // 
+            this.label_pureLib.AutoSize = true;
+            this.label_pureLib.Location = new System.Drawing.Point(18, 200);
+            this.label_pureLib.Name = "label_pureLib";
+            this.label_pureLib.Size = new System.Drawing.Size(56, 14);
+            this.label_pureLib.TabIndex = 70;
+            this.label_pureLib.Text = "净资产:";
+            // 
             // StatisticCashForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
@@ -480,5 +491,6 @@
         private System.Windows.Forms.Label label_sumCash;
         private System.Windows.Forms.Label label_sellBack;
         private System.Windows.Forms.Label label_purchaseBack;
+        private System.Windows.Forms.Label label_pureLib;
     }
 }

@@ -66,7 +66,7 @@ namespace LocalERP.DataAccess.DataDAO
         {
             StringBuilder commandText = new StringBuilder();
             //查找的字段名可以都使用<原始表名>.<字段>，至于结果，可以参考access查找出来的记
-            string temp = "select SellProfit.*, ProductStainlessCirculationRecord.unit, ProductStainlessCirculation.code, ProductStainlessCirculation.circulationTime, ProductStainless.serial, ProductStainless.name, ProductStainless.ID, Customer.name, Customer.ID"
+            string temp = "select SellProfit.*, ProductStainlessCirculationRecord.unit, ProductStainlessCirculation.code, ProductStainlessCirculation.type, ProductStainlessCirculation.circulationTime, ProductStainless.serial, ProductStainless.name, ProductStainless.ID, Customer.name, Customer.ID"
                  + " from SellProfit, ProductStainlessCirculationRecord, (select * from ProductStainlessCirculation left join Customer on Customer.ID = ProductStainlessCirculation.customerID ) circulation, ProductStainless"
                  + " where SellProfit.record_id = ProductStainlessCirculationRecord.ID and"
                  + " ProductStainlessCirculationRecord.circulationID = ProductStainlessCirculation.ID"
@@ -92,6 +92,7 @@ namespace LocalERP.DataAccess.DataDAO
                 if (dr != null) {
                     sell.ID = (int)dr["SellProfit.ID"];
                     sell.serial = dr["code"] as string;
+                    sell.type = (int)dr["type"];
                     sell.sell_time = (DateTime)dr["circulationTime"];
                     sell.customerID = (int)dr["Customer.ID"];
                     sell.customer = dr["circulation.name"] as string;

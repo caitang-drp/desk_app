@@ -478,7 +478,7 @@
             this.linkLabel24.Size = new System.Drawing.Size(67, 14);
             this.linkLabel24.TabIndex = 52;
             this.linkLabel24.TabStop = true;
-            this.linkLabel24.Text = "销售利润";
+            this.linkLabel24.Text = "利润计算";
             this.linkLabel24.VisitedLinkColor = System.Drawing.Color.RoyalBlue;
             this.linkLabel24.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel_LinkClicked);
             // 
