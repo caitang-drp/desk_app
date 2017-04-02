@@ -93,7 +93,8 @@ namespace LocalERP.WinForm
         /// <param name="e"></param>
 
         private bool getCategoryID(out int categoryID) { 
-            if(this.comboBoxTree_category.SelectedNode == null)
+
+            if(string.IsNullOrEmpty(this.comboBoxTree_category.Text) || this.comboBoxTree_category.SelectedNode == null)
             {
                 this.errorProvider1.SetError(this.comboBoxTree_category, "请选择类别!");
                 categoryID = 1;
@@ -113,8 +114,8 @@ namespace LocalERP.WinForm
             int quantityPerPiece, categoryID;
 
             if (ValidateUtility.getName(this.textBox_name, this.errorProvider1, out name) && 
-                ValidateUtility.getPrice(this.textBox_purchasePrice, this.errorProvider1, false, true, out price_purchase) && 
-                ValidateUtility.getPrice(this.textBox_sellPrice, this.errorProvider1, false,true,  out price_sell) && 
+                ValidateUtility.getDouble(this.textBox_purchasePrice, this.errorProvider1, true, true, out price_purchase) && 
+                ValidateUtility.getDouble(this.textBox_sellPrice, this.errorProvider1, true,true,  out price_sell) && 
                 ValidateUtility.getInt(this.textBox_quantityPerPiece, this.errorProvider1, false, true, out quantityPerPiece) &&
                 this.getCategoryID(out categoryID))
             {
@@ -142,13 +143,13 @@ namespace LocalERP.WinForm
 
             if (openMode == 0) {
                 ProductStainlessDao.getInstance().Insert(product);
-                MessageBox.Show("保存货品成功,在相应的类别目录下可以找到该商品!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("保存货品成功,在相应的类别目录下可以找到该货品!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else if (openMode == 1) {
                 product.ID = productID;
                 bool basicResult = ProductStainlessDao.getInstance().Update(product);
                 if(basicResult)
-                    MessageBox.Show("修改商品成功!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("修改货品成功!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             this.invokeUpdateNotify(UpdateType.ProductUpdate);
             this.Close();

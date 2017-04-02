@@ -76,7 +76,7 @@ namespace LocalERP.WinForm
             if(parentId > 0)
                 parent = CategoryDao.getInstance().FindById("CustomerCategory", parentId);
             */
-            payReceiptList = PayReceiptDao.getInstance().FindPayReceiptList(this.dateTimePicker_start.Value, this.dateTimePicker_end.Value.AddDays(1), 4, this.textBox_search.Text);
+            payReceiptList = PayReceiptDao.getInstance().FindPayReceiptList(this.dateTimePicker_start.Value, this.dateTimePicker_end.Value.AddDays(1), 4, this.textBox_search.Text, 1);
             //这个地方需要再改成ProductCirculationDao
             productCirculationList = ProductStainlessCirculationDao.getInstance().FindProductCirculationList(1, 4, this.dateTimePicker_start.Value, this.dateTimePicker_end.Value.AddDays(1), 4, this.textBox_search.Text);
         }
@@ -109,6 +109,9 @@ namespace LocalERP.WinForm
                     thisPayed = pr.thisPayed.ToString();
                 else
                     thisReceipted = pr.thisPayed.ToString();
+
+                if (pr.bill_type == PayReceipt.BillType.ChangeArrear)
+                    thisPayed = thisReceipted = "";
                 
                 //处理acc
                 if (pr.arrearDirection == 1)
@@ -120,10 +123,10 @@ namespace LocalERP.WinForm
                     accPay = accReceipt = "";
 
                 //处理need
-                if (pr.bill_type == PayReceipt.BillType.BuyRefund)
+                if (pr.bill_type == PayReceipt.BillType.BuyRefund || pr.bill_type == PayReceipt.BillType.ChangeArrear && pr.cashDirection == 1)
                     needReceipt = pr.amount.ToString();
 
-                if (pr.bill_type == PayReceipt.BillType.SellRefund)
+                if (pr.bill_type == PayReceipt.BillType.SellRefund || pr.bill_type == PayReceipt.BillType.ChangeArrear && pr.cashDirection == -1)
                     needPay = pr.amount.ToString();
                 
                 formatRow(dataGridView1.Rows[index], pr.customerName, pr.bill_time, pr.serial, PayReceipt.PayReceiptTypeConfs[(int)pr.bill_type - 1].name, needPay, thisPayed, accPay, needReceipt, thisReceipted, accReceipt, pr.comment);

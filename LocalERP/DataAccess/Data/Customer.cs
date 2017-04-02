@@ -65,7 +65,7 @@ namespace LocalERP.DataAccess.Data
         // ÊÕ¿î
         public double receipt;
 
-        public Customer(string name, string comment, string tel, string phone, string address, int parent)
+        public Customer(string name, string comment, string tel, string phone, string address, int parent, double arrear)
         {
             this.name = name;
             this.comment = comment;
@@ -73,6 +73,7 @@ namespace LocalERP.DataAccess.Data
             this.phone = phone;
             this.address = address;
             this.parent = parent;
+            this.arrear = arrear;
         }
         public Customer() { }
     }

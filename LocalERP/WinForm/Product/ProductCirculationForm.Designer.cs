@@ -706,7 +706,7 @@ namespace LocalERP.WinForm
             this.panel_basic.Controls.Add(this.label1);
             this.panel_basic.Location = new System.Drawing.Point(10, 96);
             this.panel_basic.Name = "panel_basic";
-            this.panel_basic.Size = new System.Drawing.Size(788, 83);
+            this.panel_basic.Size = new System.Drawing.Size(805, 83);
             this.panel_basic.TabIndex = 60;
             // 
             // ProductCirculationForm

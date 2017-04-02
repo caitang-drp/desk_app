@@ -25,7 +25,7 @@ namespace LocalERP.WinForm
 
             ArrayList typeList = new ArrayList();
             typeList.Add(new DictionaryEntry(1, "按明细"));
-            typeList.Add(new DictionaryEntry(2, "按商品"));
+            typeList.Add(new DictionaryEntry(2, "按货品"));
             this.comboBox1.DataSource = typeList;
             this.comboBox1.ValueMember = "Key";
             this.comboBox1.DisplayMember = "Value";
@@ -125,7 +125,7 @@ namespace LocalERP.WinForm
             List<SellProfit> done_profit_ls = SellProfitDao.getInstance().FindList(this.start_time.Value, this.end_time.Value.AddDays(1), this.textBox_product.Text, this.textBox_customer.Text);
             SellProfit sell_profit_obj = new SellProfit();
             
-            // 根据商品进行分组
+            // 根据货品进行分组
             Dictionary<int, List<SellProfit>> group = SellProfitDao.getInstance().group_by_product_id(done_profit_ls);
             foreach (KeyValuePair<int, List<SellProfit>> one in group)
             {

@@ -123,7 +123,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(112, 14);
             this.label1.TabIndex = 7;
-            this.label1.Text = "请输入商品名称:";
+            this.label1.Text = "请输入货品名称:";
             // 
             // textBox_search
             // 

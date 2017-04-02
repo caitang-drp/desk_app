@@ -257,7 +257,7 @@
             this.linkLabel13.Size = new System.Drawing.Size(67, 14);
             this.linkLabel13.TabIndex = 38;
             this.linkLabel13.TabStop = true;
-            this.linkLabel13.Text = "商品信息";
+            this.linkLabel13.Text = "货品信息";
             this.linkLabel13.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel_LinkClicked);
             // 
             // linkLabel15

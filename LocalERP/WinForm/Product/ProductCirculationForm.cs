@@ -429,7 +429,7 @@ namespace LocalERP.WinForm
             {
                 if (openMode == 0)
                     ProductStainlessCirculationDao.getInstance().DeleteByID(circulationID);
-                MessageBox.Show("保存有误,可能是往来单位或商品属性被修改过,请重新编辑!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("保存有误,可能是往来单位或货品属性被修改过,请重新编辑!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
 
             //so important: if edit ,it should be refresh also, because edit will del exist item and add new item

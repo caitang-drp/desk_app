@@ -20,8 +20,8 @@ namespace LocalERP.DataAccess.DataDAO
         {
             try
             {
-                string commandText = string.Format("insert into PayReceipt(serial, bill_time, comment, customer_id, bill_type, handle_people, previousArrears, amount, status, cashDirection, arrearDirection, thisPayed) values('{0}', '{1}', '{2}', {3}, {4}, '{5}', {6}, {7}, {8}, {9}, {10}, {11})", 
-                    info.serial, info.bill_time, info.comment,  info.customer_id <= 0 ? "null" : info.customer_id.ToString(), (int)info.bill_type, info.handle_people, info.previousArrears, info.amount, info.status, info.cashDirection, info.arrearDirection, info.thisPayed);
+                string commandText = string.Format("insert into PayReceipt(serial, bill_time, comment, customer_id, bill_type, handle_people, previousArrears, amount, status, cashDirection, arrearDirection, thisPayed, hide) values('{0}', '{1}', '{2}', {3}, {4}, '{5}', {6}, {7}, {8}, {9}, {10}, {11}, {12})", 
+                    info.serial, info.bill_time, info.comment,  info.customer_id <= 0 ? "null" : info.customer_id.ToString(), (int)info.bill_type, info.handle_people, info.previousArrears, info.amount, info.status, info.cashDirection, info.arrearDirection, info.thisPayed, info.hide);
                 DbHelperAccess.executeNonQuery(commandText);
                 id = DbHelperAccess.executeLastID("ID", "PayReceipt");
                 return true;
@@ -39,7 +39,7 @@ namespace LocalERP.DataAccess.DataDAO
             return DbHelperAccess.executeNonQuery(commandText);
         }
 
-        //没有加入cashDirection和arrearDirection, status
+        //没有加入cashDirection和arrearDirection, status, hide
         public void Update(PayReceipt info)
         {
             string commandText = string.Format("update PayReceipt set serial='{0}', bill_time='{1}', comment='{2}', customer_id={3}, bill_type={4}, handle_people='{5}', previousArrears={6}, amount={7}, thisPayed={8}, status={9} where ID={10}",
@@ -77,6 +77,9 @@ namespace LocalERP.DataAccess.DataDAO
                 payReceipt.arrearDirection = (int)dr["arrearDirection"];
 
                 payReceipt.customerName = dr["name"] as string;
+
+                payReceipt.hide = (int)dr["hide"];
+
                 return payReceipt;
             }
             return null;
@@ -96,6 +99,13 @@ namespace LocalERP.DataAccess.DataDAO
             return DbHelperAccess.executeNonQuery(commandText);
         }
 
+        public int DeleteAll()
+        {
+            string commandText = string.Format("delete from PayReceipt");
+            return DbHelperAccess.executeNonQuery(commandText);
+        }
+        
+        /*
         public DataTable FindList(DateTime startTime, DateTime endTime, int status, string customerName)
         {
             StringBuilder commandText = null;
@@ -107,10 +117,10 @@ namespace LocalERP.DataAccess.DataDAO
 
             commandText.Append(string.Format(" order by PayReceipt.ID desc"));
             return DbHelperAccess.executeQuery(commandText.ToString());
-        }
+        }*/
 
         //DateTime? 相当于Nullable<DateTime>，调用时必须增加.value
-        public List<PayReceipt> FindPayReceiptList(DateTime? startTime, DateTime? endTime, int status, string name)
+        public List<PayReceipt> FindPayReceiptList(DateTime? startTime, DateTime? endTime, int status, string name, int hide)
         {
             //要注意，这个语句会筛选掉没有Customer信息的
             StringBuilder commandText = new StringBuilder("select PayReceipt.*, Customer.name from PayReceipt left join Customer on PayReceipt.customer_id = Customer.ID where 1=1 ");
@@ -119,6 +129,8 @@ namespace LocalERP.DataAccess.DataDAO
                 commandText.Append(string.Format(" and PayReceipt.bill_time between #{0}# and #{1}# ", startTime.Value.ToString("yyyy-MM-dd"), endTime.Value.ToString("yyyy-MM-dd")));
             if (status > 0)
                 commandText.Append(string.Format(" and status = {0}", status));
+            //hide = 0，只显示不隐藏的，hide=1，显示所有
+            commandText.Append(string.Format(" and hide <= {0}", hide));
             if (!string.IsNullOrEmpty(name))
                 commandText.AppendFormat(" and Customer.name like '%{0}%'", name);
 

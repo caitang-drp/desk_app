@@ -71,6 +71,7 @@
             this.toolStripButton_statistic = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton_close = new System.Windows.Forms.ToolStripButton();
             this.mySplitter1 = new LocalERP.WinForm.Utility.MySplitter(this.components);
+            this.全部数据清空ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -160,10 +161,11 @@
             // 
             this.备份ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.导出数据文件ToolStripMenuItem,
-            this.导入数据文件ToolStripMenuItem});
+            this.导入数据文件ToolStripMenuItem,
+            this.全部数据清空ToolStripMenuItem});
             this.备份ToolStripMenuItem.Name = "备份ToolStripMenuItem";
             this.备份ToolStripMenuItem.Size = new System.Drawing.Size(47, 20);
-            this.备份ToolStripMenuItem.Text = "备份";
+            this.备份ToolStripMenuItem.Text = "数据";
             // 
             // 导出数据文件ToolStripMenuItem
             // 
@@ -207,13 +209,13 @@
             // 
             this.帮助文档ToolStripMenuItem.Enabled = false;
             this.帮助文档ToolStripMenuItem.Name = "帮助文档ToolStripMenuItem";
-            this.帮助文档ToolStripMenuItem.Size = new System.Drawing.Size(130, 22);
+            this.帮助文档ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.帮助文档ToolStripMenuItem.Text = "帮助文档";
             // 
             // 关于软件ToolStripMenuItem
             // 
             this.关于软件ToolStripMenuItem.Name = "关于软件ToolStripMenuItem";
-            this.关于软件ToolStripMenuItem.Size = new System.Drawing.Size(130, 22);
+            this.关于软件ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.关于软件ToolStripMenuItem.Text = "关于软件";
             this.关于软件ToolStripMenuItem.Click += new System.EventHandler(this.关于软件ToolStripMenuItem_Click);
             // 
@@ -357,6 +359,13 @@
             this.mySplitter1.TabIndex = 16;
             this.mySplitter1.TabStop = false;
             // 
+            // 全部数据清空ToolStripMenuItem
+            // 
+            this.全部数据清空ToolStripMenuItem.Name = "全部数据清空ToolStripMenuItem";
+            this.全部数据清空ToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
+            this.全部数据清空ToolStripMenuItem.Text = "全部数据清空";
+            this.全部数据清空ToolStripMenuItem.Click += new System.EventHandler(this.全部数据清空ToolStripMenuItem_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
@@ -417,6 +426,7 @@
         private System.Windows.Forms.ToolStripButton toolStripButton_purchase;
         private System.Windows.Forms.ToolStripButton toolStripButton_queryLib;
         private System.Windows.Forms.ToolStripButton toolStripButton_statistic;
+        private System.Windows.Forms.ToolStripMenuItem 全部数据清空ToolStripMenuItem;
 
     }
 }

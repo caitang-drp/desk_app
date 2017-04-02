@@ -148,7 +148,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(368, 16);
             this.label1.TabIndex = 43;
-            this.label1.Text = "该商品没有颜色或尺码选项，请在商品属性中添加.";
+            this.label1.Text = "该货品没有颜色或尺码选项，请在货品属性中添加.";
             this.label1.Visible = false;
             // 
             // ProductClothesInputNumForm

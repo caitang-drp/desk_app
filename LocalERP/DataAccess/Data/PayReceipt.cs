@@ -10,7 +10,7 @@ namespace LocalERP.DataAccess.Data
     {
         // 应收应付，(采购付款， 采购退点， 销售收款， 销售退点)
         //重新排序
-        public enum BillType { BuyPay=1, BuyRefund=2, SellReceipt=3, SellRefund=4, OtherPay = 5, OtherReceipt=6};
+        public enum BillType { BuyPay=1, BuyRefund=2, SellReceipt=3, SellRefund=4, OtherPay = 5, OtherReceipt=6, ChangeArrear=7};
 
         // 数据表的唯一id
         public int id;
@@ -38,6 +38,7 @@ namespace LocalERP.DataAccess.Data
         public BillType bill_type;
 
         public int status;
+        public int hide;
 
         public static string[] statusContext = new string[] { "未审核", "undefined", "undefined", "已审核" };
 
@@ -48,9 +49,10 @@ namespace LocalERP.DataAccess.Data
         public static PayReceiptTypeConf PayReceiptTypeConf_SellRefund = new PayReceiptTypeConf(PayReceipt.BillType.SellRefund, UpdateType.PayReceiptUpdate, UpdateType.PayReceiptFinishUpdate, -1, -1, "销售退点", "XSTD", "客    户:", "退点");
         public static PayReceiptTypeConf PayReceiptTypeConf_OtherPay = new PayReceiptTypeConf(PayReceipt.BillType.OtherPay, UpdateType.PayReceiptUpdate, UpdateType.PayReceiptFinishUpdate, 1, -1,"其他付款", "QTFK", "往来单位", "付款");
         public static PayReceiptTypeConf PayReceiptTypeConf_OtherReceipt = new PayReceiptTypeConf(PayReceipt.BillType.OtherReceipt, UpdateType.PayReceiptUpdate, UpdateType.PayReceiptFinishUpdate,-1, 1, "其他收款", "QTSK", "往来单位", "收款");
+        public static PayReceiptTypeConf PayReceiptTypeConf_ChangeArrear = new PayReceiptTypeConf(PayReceipt.BillType.ChangeArrear, UpdateType.PayReceiptUpdate, UpdateType.PayReceiptFinishUpdate, 0, 0, "欠款调整", "QKTZ", "", "");
         
         //这里要按照type值的顺序
-        public static PayReceiptTypeConf[] PayReceiptTypeConfs = new PayReceiptTypeConf[] { PayReceiptTypeConf_BuyPay, PayReceiptTypeConf_BuyRefund, PayReceiptTypeConf_SellReceipt, PayReceiptTypeConf_SellRefund, PayReceiptTypeConf_OtherPay, PayReceiptTypeConf_OtherReceipt};
+        public static PayReceiptTypeConf[] PayReceiptTypeConfs = new PayReceiptTypeConf[] { PayReceiptTypeConf_BuyPay, PayReceiptTypeConf_BuyRefund, PayReceiptTypeConf_SellReceipt, PayReceiptTypeConf_SellRefund, PayReceiptTypeConf_OtherPay, PayReceiptTypeConf_OtherReceipt, PayReceiptTypeConf_ChangeArrear};
 
     }
 

@@ -22,8 +22,8 @@ namespace LocalERP.DataAccess.DataDAO
         {
             try
             {
-                string commandText = string.Format("insert into Customer(name, comment, tel, phone, address, parent) values('{0}', '{1}', '{2}', '{3}', '{4}', {5})",
-                    info.Name, info.Comment, info.Tel, info.Phone, info.Address, info.Parent);
+                string commandText = string.Format("insert into Customer(name, comment, tel, phone, address, parent, arrear) values('{0}', '{1}', '{2}', '{3}', '{4}', {5}, {6})",
+                    info.Name, info.Comment, info.Tel, info.Phone, info.Address, info.Parent, info.arrear);
                 return DbHelperAccess.executeNonQuery(commandText);
             }
             catch (Exception ex)
@@ -100,6 +100,11 @@ namespace LocalERP.DataAccess.DataDAO
                 return customer;
             }
             return null;
+        }
+
+        public void ClearAllArrear() {
+            string commandText = string.Format("update Customer set arrear=0");
+            DbHelperAccess.executeNonQuery(commandText);
         }
 
     }

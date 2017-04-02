@@ -8,6 +8,7 @@ using System.Windows.Forms;
 using LocalERP.DataAccess.DataDAO;
 using LocalERP.DataAccess.Data;
 using LocalERP.UiDataProxy;
+using LocalERP.DataAccess.Utility;
 
 namespace LocalERP.WinForm
 {
@@ -47,6 +48,7 @@ namespace LocalERP.WinForm
             this.textBox_tel.Text = customer.Tel;
             this.textBox_phone.Text = customer.Phone;
             this.textBox_address.Text = customer.Address;
+            this.textBox_arrear.Text = customer.arrear.ToString();
 
             this.comboBoxTree1.setSelectNode(customer.Parent.ToString());
         }
@@ -59,6 +61,7 @@ namespace LocalERP.WinForm
             this.textBox_tel.Text = "";
             this.textBox_phone.Text = "";
             this.textBox_address.Text = "";
+            this.textBox_arrear.Text = "";
 
             this.comboBoxTree1.setSelectNode(null);
         }
@@ -73,7 +76,7 @@ namespace LocalERP.WinForm
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-
+        /*
         private bool getName(out string name) {
             if (string.IsNullOrEmpty(this.textBox_name.Text))
             {
@@ -87,11 +90,11 @@ namespace LocalERP.WinForm
                 name = this.textBox_name.Text;
                 return true;
             }
-        }
+        }*/
 
         private bool getCategoryID(out int categoryID)
         {
-            if (this.comboBoxTree1.SelectedNode == null)
+            if (string.IsNullOrEmpty(this.comboBoxTree1.Text) || this.comboBoxTree1.SelectedNode == null)
             {
                 this.errorProvider1.SetError(this.comboBoxTree1, "请选择类型!");
                 categoryID = 1;
@@ -108,13 +111,16 @@ namespace LocalERP.WinForm
         private bool getCustomer(out Customer customer) {
             string name;
             int categoryID;
-            bool isNameCorrect = this.getName(out name);
-            bool isCategoryCorrect = this.getCategoryID(out categoryID);
+            double arrear;
 
-            if ( isNameCorrect && isCategoryCorrect)
+            bool isNameCorrect = ValidateUtility.getName(this.textBox_name, this.errorProvider1, out name);
+            bool isCategoryCorrect = this.getCategoryID(out categoryID);
+            bool isArrearCorrent = ValidateUtility.getDouble(this.textBox_arrear, this.errorProvider1, false, false, out arrear);
+            
+            if ( isNameCorrect && isCategoryCorrect && isArrearCorrent)
             {
                 customer = new Customer(name, this.textBox_comment.Text, this.textBox_tel.Text, 
-                    this.textBox_phone.Text, this.textBox_address.Text, categoryID);
+                    this.textBox_phone.Text, this.textBox_address.Text, categoryID, arrear);
                 customer.ID = customerID;
                 return true;
             }
@@ -136,16 +142,46 @@ namespace LocalERP.WinForm
             if (this.getCustomer(out customer) == false)
                 return;
 
+            double arrearDif = 0;
+
             if (openMode == 0) {
                 CustomerDao.getInstance().Insert(customer);
+                if (customer.arrear != 0)
+                    generatePayReceipt(customer.arrear, 0, customer.ID);
                 MessageBox.Show("保存来往单位成功!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);    
+
             }
             else if (openMode == 1) {
+                double previousArrear = CustomerDao.getInstance().FindByID(this.customerID).arrear;
                 CustomerDao.getInstance().Update(customer);
+                if (customer.arrear != previousArrear)
+                    generatePayReceipt(customer.arrear - previousArrear, previousArrear, this.customerID);
+
                 MessageBox.Show("修改来往单位成功!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             this.invokeUpdateNotify(UpdateType.CustomerUpdate);
             this.Close();
+        }
+
+        private void generatePayReceipt(double arrearDif, double previousArrear, int customerID) {
+            PayReceipt payReceipt = new PayReceipt();
+            payReceipt.bill_type = PayReceipt.BillType.ChangeArrear;
+            payReceipt.bill_time = DateTime.Now;
+            payReceipt.cashDirection = arrearDif > 0 ? -1 : 1;
+            payReceipt.arrearDirection = previousArrear + arrearDif > 0 ? 1 : -1;
+
+            int max = PayReceiptDao.getInstance().getMaxCode("QKTZ");
+            payReceipt.serial = string.Format("{0}-{1}-{2:0000}", "QKTZ", DateTime.Now.ToString("yyyyMMdd"), max + 1);
+
+            payReceipt.customer_id = customerID;
+
+            payReceipt.amount = Math.Abs(arrearDif);
+            //previousArrear用的是正数表示
+            payReceipt.previousArrears = Math.Round(previousArrear * payReceipt.arrearDirection, 2);
+
+            payReceipt.status = 4;
+            payReceipt.comment = "修改欠款数据时自动生成";
+            PayReceiptDao.getInstance().Insert(payReceipt, out payReceipt.id);
         }
 
         private void toolStripButton4_Click(object sender, EventArgs e)

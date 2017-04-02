@@ -209,6 +209,7 @@ namespace LocalERP.WinForm
                 && ValidateUtility.getDouble(this.textBox_previousArrears, this.errorProvider1, false, false, out previousArrears))
             {
                 payReceipt.amount = sum;
+                //欠款用的是呈现给用户看得，一般为正数
                 payReceipt.previousArrears = previousArrears;
                 payReceipt.thisPayed = pay;
             }
@@ -266,6 +267,9 @@ namespace LocalERP.WinForm
         //审核
         protected virtual void toolStripButton_finish_Click(object sender, EventArgs e)
         {
+            if (MessageBox.Show("审核后，将修改相关帐务信息，且该单据不能修改或删除，是否审核？", "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) != DialogResult.OK)
+                return;
+
             PayReceipt payReceipt;
             bool isCorrect = getPayReceipt(out payReceipt);
 

@@ -177,7 +177,7 @@
             this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.Name = "CharactorForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "商品属性信息管理";
+            this.Text = "货品属性信息管理";
             this.Load += new System.EventHandler(this.CharactorForm_Load);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.CharactorForm_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();

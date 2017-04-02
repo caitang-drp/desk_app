@@ -54,7 +54,7 @@ namespace LocalERP.WinForm
             receipt = purchaseBack = otherReceipt = 0;
             payed = sellBack = freights = otherPay = 0;
 
-            payReceiptList = PayReceiptDao.getInstance().FindPayReceiptList(null, null, 4, null);
+            payReceiptList = PayReceiptDao.getInstance().FindPayReceiptList(null, null, 4, null, 1);
             circulationList = ProductStainlessCirculationDao.getInstance().FindProductCirculationList(1, 4, null, null, 4, null);
 
             foreach (ProductCirculation cir in circulationList) { 
@@ -108,9 +108,10 @@ namespace LocalERP.WinForm
 
                 ValidateUtility.getInt(dr, "num", out num, out positive);
                 ValidateUtility.getDouble(dr, "priceCost", out price);
-                /*if (price <= 0)
+                //这里如果直接取ProductStainless就不需要判断
+                if (price <= 0)
                     ValidateUtility.getDouble(dr, "pricePurchase", out price);
-                */
+                
                 lib = lib + price * num;
             }
 

@@ -358,7 +358,7 @@ namespace LocalERP.WinForm
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(230, 11);
+            this.label6.Location = new System.Drawing.Point(225, 11);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(21, 14);
             this.label6.TabIndex = 55;
@@ -367,7 +367,7 @@ namespace LocalERP.WinForm
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(598, 11);
+            this.label7.Location = new System.Drawing.Point(596, 11);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(21, 14);
             this.label7.TabIndex = 56;
@@ -387,7 +387,7 @@ namespace LocalERP.WinForm
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(286, 12);
+            this.label16.Location = new System.Drawing.Point(284, 12);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(21, 14);
             this.label16.TabIndex = 66;
@@ -428,7 +428,7 @@ namespace LocalERP.WinForm
             this.panel_history.Controls.Add(this.label7);
             this.panel_history.Location = new System.Drawing.Point(283, 165);
             this.panel_history.Name = "panel_history";
-            this.panel_history.Size = new System.Drawing.Size(631, 42);
+            this.panel_history.Size = new System.Drawing.Size(643, 42);
             this.panel_history.TabIndex = 68;
             // 
             // label_tip
@@ -455,7 +455,7 @@ namespace LocalERP.WinForm
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(230, 12);
+            this.label8.Location = new System.Drawing.Point(225, 12);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(21, 14);
             this.label8.TabIndex = 72;
@@ -478,7 +478,7 @@ namespace LocalERP.WinForm
             this.panel_sum.Controls.Add(this.label_needPayed);
             this.panel_sum.Location = new System.Drawing.Point(15, 126);
             this.panel_sum.Name = "panel_sum";
-            this.panel_sum.Size = new System.Drawing.Size(255, 37);
+            this.panel_sum.Size = new System.Drawing.Size(273, 37);
             this.panel_sum.TabIndex = 74;
             // 
             // panel_customer
@@ -488,7 +488,7 @@ namespace LocalERP.WinForm
             this.panel_customer.Controls.Add(this.label_customer);
             this.panel_customer.Location = new System.Drawing.Point(656, 97);
             this.panel_customer.Name = "panel_customer";
-            this.panel_customer.Size = new System.Drawing.Size(228, 37);
+            this.panel_customer.Size = new System.Drawing.Size(258, 37);
             this.panel_customer.TabIndex = 75;
             // 
             // panel1
@@ -499,7 +499,7 @@ namespace LocalERP.WinForm
             this.panel1.Controls.Add(this.label_thisPayed);
             this.panel1.Location = new System.Drawing.Point(15, 164);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(255, 37);
+            this.panel1.Size = new System.Drawing.Size(273, 37);
             this.panel1.TabIndex = 76;
             // 
             // PayReceiptForm

@@ -166,5 +166,10 @@ namespace LocalERP.DataAccess.DataDAO
             return DbHelperAccess.executeNonQuery(commandText);
         }
 
+        public int DeleteAll()
+        {
+            string commandText = string.Format("delete from {0}", tableName);
+            return DbHelperAccess.executeNonQuery(commandText);
+        }
     }
 }

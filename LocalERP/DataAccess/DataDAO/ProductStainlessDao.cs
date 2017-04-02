@@ -22,7 +22,7 @@ namespace LocalERP.DataAccess.DataDAO
             try
             {
                 string commandText = string.Format(
-                    "insert into ProductStainless(serial, name, comment, parent, pricePurchase, priceSell, unit, quantityPerPiece) values('{0}', '{1}', '{2}', {3}, {4}, {5}, {6}, '{7}', {8})",
+                    "insert into ProductStainless(serial, name, comment, parent, pricePurchase, priceCost, priceSell, unit, quantityPerPiece) values('{0}', '{1}', '{2}', {3}, {4}, {5}, {6}, '{7}', {8})",
                     info.Serial, info.Name, info.Comment, info.CategoryID, info.PricePurchase, info.PriceCost, info.PriceSell, info.Unit, info.QuantityPerPiece);
                 DbHelperAccess.executeNonQuery(commandText);
                 int productID = DbHelperAccess.executeLastID("ID", "ProductStainless");
@@ -163,6 +163,12 @@ namespace LocalERP.DataAccess.DataDAO
                 purchase_price, id);
 
             return DbHelperAccess.executeNonQuery(commandText);
+        }
+
+        public void ClearAllNumAndCost()
+        {
+            string commandText = string.Format("update ProductStainless set num=0,  priceCost = pricePurchase");
+            DbHelperAccess.executeNonQuery(commandText);
         }
     }
 }

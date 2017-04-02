@@ -37,6 +37,10 @@ namespace LocalERP.WinForm
             InitializeComponent();
 
             this.openMode = openMode;
+            if (this.openMode == 0)
+                this.label_tip.Text = "Ë«»÷¼´¿ÉÑ¡ÖÐ" + title;
+            else
+                this.label_tip.Text = "Ë«»÷¼´¿É±à¼­" + title;
 
             this.categoryItemProxy = proxy;
             this.Text = title;

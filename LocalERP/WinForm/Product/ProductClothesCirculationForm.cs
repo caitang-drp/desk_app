@@ -137,7 +137,7 @@ namespace LocalERP.WinForm
                     ProductClothesCirculationRecord compare = records[j];
                     if (compare.ProductID == record.ProductID && i != j)
                     {
-                        MessageBox.Show(string.Format("商品{0}有多条记录,请在同一记录里输入该商品的所有数量!", compare.ProductName), "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MessageBox.Show(string.Format("货品{0}有多条记录,请在同一记录里输入该货品的所有数量!", compare.ProductName), "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         return;
                     }
                 }

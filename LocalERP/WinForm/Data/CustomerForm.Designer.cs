@@ -50,6 +50,11 @@
             this.label10 = new System.Windows.Forms.Label();
             this.comboBoxTree1 = new Verlinea.ComboBoxTree.ComboBoxTree();
             this.label9 = new System.Windows.Forms.Label();
+            this.textBox_arrear = new System.Windows.Forms.TextBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
             this.toolStrip2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
@@ -118,7 +123,7 @@
             this.toolStripButton4});
             this.toolStrip2.Location = new System.Drawing.Point(0, 0);
             this.toolStrip2.Name = "toolStrip2";
-            this.toolStrip2.Size = new System.Drawing.Size(402, 37);
+            this.toolStrip2.Size = new System.Drawing.Size(406, 37);
             this.toolStrip2.TabIndex = 29;
             this.toolStrip2.Text = "toolStrip2";
             // 
@@ -246,12 +251,65 @@
             this.label9.TabIndex = 45;
             this.label9.Text = "类别:";
             // 
+            // textBox_arrear
+            // 
+            this.errorProvider1.SetIconPadding(this.textBox_arrear, 20);
+            this.textBox_arrear.Location = new System.Drawing.Point(86, 268);
+            this.textBox_arrear.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.textBox_arrear.Name = "textBox_arrear";
+            this.textBox_arrear.Size = new System.Drawing.Size(261, 23);
+            this.textBox_arrear.TabIndex = 49;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(20, 271);
+            this.label11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(42, 14);
+            this.label11.TabIndex = 48;
+            this.label11.Text = "欠款:";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.ForeColor = System.Drawing.Color.Red;
+            this.label12.Location = new System.Drawing.Point(20, 304);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(357, 14);
+            this.label12.TabIndex = 50;
+            this.label12.Text = "“欠款”为正数时表示“应付”，负数时表示“应收”。";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.ForeColor = System.Drawing.Color.Red;
+            this.label13.Location = new System.Drawing.Point(20, 328);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(385, 14);
+            this.label13.TabIndex = 51;
+            this.label13.Text = "重设欠款时，自动生成调整记录，在“对账明细”可以查到。";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(350, 272);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(21, 14);
+            this.label14.TabIndex = 52;
+            this.label14.Text = "元";
+            // 
             // CustomerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(402, 271);
+            this.ClientSize = new System.Drawing.Size(406, 362);
+            this.Controls.Add(this.label14);
+            this.Controls.Add(this.label13);
+            this.Controls.Add(this.label12);
+            this.Controls.Add(this.textBox_arrear);
+            this.Controls.Add(this.label11);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.comboBoxTree1);
             this.Controls.Add(this.label9);
@@ -274,7 +332,7 @@
             this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.Name = "CustomerForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "客户详细信息";
+            this.Text = "往来单位详细信息";
             this.toolStrip2.ResumeLayout(false);
             this.toolStrip2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
@@ -305,5 +363,10 @@
         private System.Windows.Forms.Label label10;
         private Verlinea.ComboBoxTree.ComboBoxTree comboBoxTree1;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.TextBox textBox_arrear;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label label14;
     }
 }

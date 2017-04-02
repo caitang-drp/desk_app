@@ -30,6 +30,15 @@
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dataGridView1 = new LocalERP.WinForm.MyDataGridView();
+            this.check = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sellTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.type = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.typeValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.realTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.status = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.customer = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.button1 = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -55,15 +64,7 @@
             this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.textBox_customer = new System.Windows.Forms.TextBox();
-            this.check = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.sellTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.type = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.typeValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.realTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.status = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.customer = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.label_tip = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.panel1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -99,6 +100,67 @@
             this.dataGridView1.Size = new System.Drawing.Size(886, 407);
             this.dataGridView1.TabIndex = 5;
             this.dataGridView1.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellDoubleClick);
+            // 
+            // check
+            // 
+            this.check.HeaderText = "选择";
+            this.check.Name = "check";
+            this.check.Width = 60;
+            // 
+            // ID
+            // 
+            this.ID.HeaderText = "ID";
+            this.ID.Name = "ID";
+            this.ID.ReadOnly = true;
+            this.ID.Width = 80;
+            // 
+            // name
+            // 
+            this.name.HeaderText = "编号";
+            this.name.Name = "name";
+            this.name.ReadOnly = true;
+            this.name.Width = 200;
+            // 
+            // sellTime
+            // 
+            this.sellTime.HeaderText = "时间";
+            this.sellTime.Name = "sellTime";
+            this.sellTime.ReadOnly = true;
+            this.sellTime.Width = 120;
+            // 
+            // type
+            // 
+            this.type.HeaderText = "类型";
+            this.type.Name = "type";
+            this.type.ReadOnly = true;
+            // 
+            // typeValue
+            // 
+            this.typeValue.HeaderText = "类型值";
+            this.typeValue.Name = "typeValue";
+            this.typeValue.ReadOnly = true;
+            this.typeValue.Visible = false;
+            // 
+            // realTotal
+            // 
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.realTotal.DefaultCellStyle = dataGridViewCellStyle1;
+            this.realTotal.HeaderText = "总价合计/元";
+            this.realTotal.Name = "realTotal";
+            this.realTotal.ReadOnly = true;
+            this.realTotal.Width = 110;
+            // 
+            // status
+            // 
+            this.status.HeaderText = "状态";
+            this.status.Name = "status";
+            this.status.ReadOnly = true;
+            // 
+            // customer
+            // 
+            this.customer.HeaderText = "往来单位";
+            this.customer.Name = "customer";
+            this.customer.ReadOnly = true;
             // 
             // button1
             // 
@@ -342,72 +404,22 @@
             this.textBox_customer.TabIndex = 30;
             this.textBox_customer.TextChanged += new System.EventHandler(this.button1_Click);
             // 
-            // check
+            // label_tip
             // 
-            this.check.HeaderText = "选择";
-            this.check.Name = "check";
-            this.check.Width = 60;
-            // 
-            // ID
-            // 
-            this.ID.HeaderText = "ID";
-            this.ID.Name = "ID";
-            this.ID.ReadOnly = true;
-            this.ID.Width = 80;
-            // 
-            // name
-            // 
-            this.name.HeaderText = "编号";
-            this.name.Name = "name";
-            this.name.ReadOnly = true;
-            this.name.Width = 200;
-            // 
-            // sellTime
-            // 
-            this.sellTime.HeaderText = "时间";
-            this.sellTime.Name = "sellTime";
-            this.sellTime.ReadOnly = true;
-            this.sellTime.Width = 120;
-            // 
-            // type
-            // 
-            this.type.HeaderText = "类型";
-            this.type.Name = "type";
-            this.type.ReadOnly = true;
-            // 
-            // typeValue
-            // 
-            this.typeValue.HeaderText = "类型值";
-            this.typeValue.Name = "typeValue";
-            this.typeValue.ReadOnly = true;
-            this.typeValue.Visible = false;
-            // 
-            // realTotal
-            // 
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.realTotal.DefaultCellStyle = dataGridViewCellStyle1;
-            this.realTotal.HeaderText = "总价合计/元";
-            this.realTotal.Name = "realTotal";
-            this.realTotal.ReadOnly = true;
-            this.realTotal.Width = 110;
-            // 
-            // status
-            // 
-            this.status.HeaderText = "状态";
-            this.status.Name = "status";
-            this.status.ReadOnly = true;
-            // 
-            // customer
-            // 
-            this.customer.HeaderText = "往来单位";
-            this.customer.Name = "customer";
-            this.customer.ReadOnly = true;
+            this.label_tip.AutoSize = true;
+            this.label_tip.BackColor = System.Drawing.Color.Transparent;
+            this.label_tip.Location = new System.Drawing.Point(3, 46);
+            this.label_tip.Name = "label_tip";
+            this.label_tip.Size = new System.Drawing.Size(119, 14);
+            this.label_tip.TabIndex = 42;
+            this.label_tip.Text = "双击即可编辑单据";
             // 
             // ProductCirculationListForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(886, 498);
+            this.Controls.Add(this.label_tip);
             this.Controls.Add(this.textBox_customer);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.dateTimePicker4);
@@ -475,5 +487,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn realTotal;
         private System.Windows.Forms.DataGridViewTextBoxColumn status;
         private System.Windows.Forms.DataGridViewTextBoxColumn customer;
+        private System.Windows.Forms.Label label_tip;
     }
 }

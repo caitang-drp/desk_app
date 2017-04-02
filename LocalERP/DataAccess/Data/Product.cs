@@ -66,7 +66,13 @@ namespace LocalERP.DataAccess.Data
 
         public double PriceCost
         {
-            get { return priceCost; }
+            get
+            {
+                if (priceCost <= 0)
+                    return PricePurchase;
+                else
+                    return priceCost;
+            }
             set { priceCost = value; }
         }
 

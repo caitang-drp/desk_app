@@ -34,14 +34,14 @@ namespace LocalERP.UiDataProxy
             // 
             // ID
             // 
-            ID.HeaderText = "商品ID";
+            ID.HeaderText = "货品ID";
             ID.Name = "ID";
             ID.ReadOnly = true;
             ID.Width = 60;
             // 
             // name
             // 
-            name.HeaderText = "商品名称";
+            name.HeaderText = "货品名称";
             name.Name = "name";
             name.ReadOnly = true;
             name.Width = 140;

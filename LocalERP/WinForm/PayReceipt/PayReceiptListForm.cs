@@ -52,7 +52,7 @@ namespace LocalERP.WinForm
         {
             try
             {
-                DataTable dataTable = PayReceiptDao.getInstance().FindList(this.dateTimePicker3.Value, this.dateTimePicker4.Value.AddDays(1), (int)(comboBox1.SelectedValue), textBox_customer.Text.Trim());
+                /*DataTable dataTable = PayReceiptDao.getInstance().FindList(this.dateTimePicker3.Value, this.dateTimePicker4.Value.AddDays(1), (int)(comboBox1.SelectedValue), textBox_customer.Text.Trim());
                 this.dataGridView1.Rows.Clear();
                 foreach (DataRow dr in dataTable.Rows)
                 {
@@ -61,6 +61,7 @@ namespace LocalERP.WinForm
                     this.dataGridView1.Rows[index].Cells["code"].Value = dr["serial"];
                     this.dataGridView1.Rows[index].Cells["customer"].Value = dr["name"];
                     int type = (int)(dr["bill_type"]);
+
                     this.dataGridView1.Rows[index].Cells["type"].Value = PayReceipt.PayReceiptTypeConfs[type - 1].name;
                     this.dataGridView1.Rows[index].Cells["typeValue"].Value = type;
 
@@ -68,7 +69,7 @@ namespace LocalERP.WinForm
                     ValidateUtility.getDouble(dr, "thisPayed", out pay);
                     if (type == 1 || type == 4 || type == 5)
                         ControlUtility.setCellWithColor(dataGridView1.Rows[index].Cells["sum"], Color.Green, string.Format("-{0:0.00}", pay));
-                    else if (type == 2 || type == 3 || type==6)
+                    else if (type == 2 || type == 3 || type == 6)
                         ControlUtility.setCellWithColor(dataGridView1.Rows[index].Cells["sum"], Color.Red, string.Format("+{0:0.00}", pay));
 
                     int status = (int)(dr["status"]);
@@ -78,6 +79,35 @@ namespace LocalERP.WinForm
                         ControlUtility.setCellWithColor(this.dataGridView1.Rows[index].Cells["status"], Color.Black, PayReceipt.statusContext[status - 1]);
 
                     this.dataGridView1.Rows[index].Cells["time"].Value = dr["bill_time"];
+
+                }*/
+
+                List<PayReceipt> prList = PayReceiptDao.getInstance().FindPayReceiptList(this.dateTimePicker3.Value, this.dateTimePicker4.Value.AddDays(1), (int)(comboBox1.SelectedValue), textBox_customer.Text.Trim(), 0);
+                this.dataGridView1.Rows.Clear();
+                foreach (PayReceipt pr in prList)
+                {
+                    int index = this.dataGridView1.Rows.Add();
+                    this.dataGridView1.Rows[index].Cells["ID"].Value = pr.id;
+                    this.dataGridView1.Rows[index].Cells["code"].Value = pr.serial;
+                    this.dataGridView1.Rows[index].Cells["customer"].Value = pr.customerName;
+                    int type = (int)pr.bill_type;
+
+                    this.dataGridView1.Rows[index].Cells["type"].Value = PayReceipt.PayReceiptTypeConfs[type - 1].name;
+                    this.dataGridView1.Rows[index].Cells["typeValue"].Value = type;
+
+                    double pay = pr.thisPayed;
+                    if (type == 1 || type == 4 || type == 5)
+                        ControlUtility.setCellWithColor(dataGridView1.Rows[index].Cells["sum"], Color.Green, string.Format("-{0:0.00}", pay));
+                    else if (type == 2 || type == 3 || type == 6)
+                        ControlUtility.setCellWithColor(dataGridView1.Rows[index].Cells["sum"], Color.Red, string.Format("+{0:0.00}", pay));
+
+                    int status = pr.status;
+                    if (status == 1)
+                        ControlUtility.setCellWithColor(this.dataGridView1.Rows[index].Cells["status"], Color.Red, PayReceipt.statusContext[status - 1]);
+                    else
+                        ControlUtility.setCellWithColor(this.dataGridView1.Rows[index].Cells["status"], Color.Black, PayReceipt.statusContext[status - 1]);
+
+                    this.dataGridView1.Rows[index].Cells["time"].Value = pr.bill_time.ToString();
 
                 }
             }

@@ -17,7 +17,7 @@ namespace LocalERP.WinForm
 {
     public partial class StatisticProductForm : MyDockContent
     {
-        protected string[] statisticTypeContext = new string[] { "按商品", "按来往单位", "按月份", "按类别", "按品牌" };
+        protected string[] statisticTypeContext = new string[] { "按货品", "按来往单位", "按月份", "按类别", "按品牌" };
         protected enum statisticTypeEnum { product = 0, customer = 1, month = 2, type = 3, brand = 4 };
         protected string[][] columnNames, columnTexts;
         protected int[][] columnLengths;

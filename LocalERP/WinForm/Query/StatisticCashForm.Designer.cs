@@ -46,6 +46,7 @@
             this.label_debt = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label_pureLib = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.label_purchaseBack = new System.Windows.Forms.Label();
             this.label_sellBack = new System.Windows.Forms.Label();
@@ -63,7 +64,6 @@
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.label20 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
-            this.label_pureLib = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -233,6 +233,15 @@
             this.groupBox1.TabIndex = 70;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "资产负债表";
+            // 
+            // label_pureLib
+            // 
+            this.label_pureLib.AutoSize = true;
+            this.label_pureLib.Location = new System.Drawing.Point(32, 200);
+            this.label_pureLib.Name = "label_pureLib";
+            this.label_pureLib.Size = new System.Drawing.Size(56, 14);
+            this.label_pureLib.TabIndex = 70;
+            this.label_pureLib.Text = "净资产:";
             // 
             // groupBox2
             // 
@@ -409,15 +418,6 @@
             this.button1.Text = "  开始统计";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button_add_Click);
-            // 
-            // label_pureLib
-            // 
-            this.label_pureLib.AutoSize = true;
-            this.label_pureLib.Location = new System.Drawing.Point(18, 200);
-            this.label_pureLib.Name = "label_pureLib";
-            this.label_pureLib.Size = new System.Drawing.Size(56, 14);
-            this.label_pureLib.TabIndex = 70;
-            this.label_pureLib.Text = "净资产:";
             // 
             // StatisticCashForm
             // 

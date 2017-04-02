@@ -33,7 +33,7 @@ namespace LocalERP.WinForm
             this.panel1.Controls.Add(navigation);
 
             getWelcomeForm().Show(this.dockPanel1);
-            this.toolStripStatusLabel1.Text = "当前日期: " + DateTime.Now.ToShortDateString();
+            this.toolStripStatusLabel1.Text = "飞翔企业管理软件   当前日期: " + DateTime.Now.ToShortDateString();
 
             FormSingletonFactory.getInstance().MainForm = this;
 
@@ -264,6 +264,28 @@ namespace LocalERP.WinForm
         private void toolStripButton_statistic_Click(object sender, EventArgs e)
         {
             this.setForm(DataUtility.QUERY_CASH_DETAIL);
+        }
+
+        private void 全部数据清空ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show("数据将全部被清除,建议先备份数据文件后再清除,是否备份?", "提示", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
+            if (result == DialogResult.Yes)
+            {
+                导出数据文件ToolStripMenuItem_Click(null, null);
+            }
+            else if(result == DialogResult.No){
+                if (MessageBox.Show("现有数据将全部被清除,是否继续?", "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) != DialogResult.OK)
+                    return;
+                else {
+                    CustomerDao.getInstance().ClearAllArrear();
+                    PayReceiptDao.getInstance().DeleteAll();
+                    ProductStainlessCirculationDao.getInstance().DeleteAll();
+                    SellProfitDao.getInstance().DeleteAll();
+                    ProductStainlessDao.getInstance().ClearAllNumAndCost();
+                    MessageBox.Show("删除清空数据成功，系统将自动关闭，请重新启动软件!", "提示", MessageBoxButtons.OK);
+                    this.Close();
+                }
+            }
         }
     }
 }

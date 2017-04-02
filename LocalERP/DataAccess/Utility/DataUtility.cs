@@ -44,7 +44,7 @@ namespace LocalERP.DataAccess.Utility
 
         public const String DATA_SETTING = "数据设置";
         public const String DATA_CUSTOMER = "往来单位";
-        public const String DATA_PRODUCT = "商品信息";
+        public const String DATA_PRODUCT = "货品信息";
         public const String DATA_COMPANY = "公司信息";
         public const String ACCOUNT_INPUT = "期初库存录入";
         public const String ACCOUNT_OPEN = "期初开账";

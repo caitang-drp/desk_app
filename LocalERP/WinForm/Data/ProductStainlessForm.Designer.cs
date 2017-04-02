@@ -40,6 +40,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.textBox_sellPrice = new System.Windows.Forms.TextBox();
+            this.textBox_cost = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
             this.toolStripButton_save = new System.Windows.Forms.ToolStripButton();
@@ -62,9 +63,10 @@
             this.label16 = new System.Windows.Forms.Label();
             this.comboBox_unit = new System.Windows.Forms.ComboBox();
             this.label17 = new System.Windows.Forms.Label();
-            this.textBox_cost = new System.Windows.Forms.TextBox();
             this.label18 = new System.Windows.Forms.Label();
             this.label19 = new System.Windows.Forms.Label();
+            this.label20 = new System.Windows.Forms.Label();
+            this.label21 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.toolStrip2.SuspendLayout();
             this.SuspendLayout();
@@ -157,6 +159,16 @@
             this.textBox_sellPrice.Name = "textBox_sellPrice";
             this.textBox_sellPrice.Size = new System.Drawing.Size(114, 23);
             this.textBox_sellPrice.TabIndex = 50;
+            // 
+            // textBox_cost
+            // 
+            this.textBox_cost.Enabled = false;
+            this.errorProvider1.SetIconPadding(this.textBox_cost, 20);
+            this.textBox_cost.Location = new System.Drawing.Point(87, 227);
+            this.textBox_cost.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.textBox_cost.Name = "textBox_cost";
+            this.textBox_cost.Size = new System.Drawing.Size(114, 23);
+            this.textBox_cost.TabIndex = 58;
             // 
             // label5
             // 
@@ -388,16 +400,6 @@
             this.label17.TabIndex = 59;
             this.label17.Text = "元";
             // 
-            // textBox_cost
-            // 
-            this.textBox_cost.Enabled = false;
-            this.errorProvider1.SetIconPadding(this.textBox_cost, 20);
-            this.textBox_cost.Location = new System.Drawing.Point(87, 227);
-            this.textBox_cost.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.textBox_cost.Name = "textBox_cost";
-            this.textBox_cost.Size = new System.Drawing.Size(114, 23);
-            this.textBox_cost.TabIndex = 58;
-            // 
             // label18
             // 
             this.label18.AutoSize = true;
@@ -419,12 +421,36 @@
             this.label19.TabIndex = 60;
             this.label19.Text = "*成本价为系统自动计算";
             // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.ForeColor = System.Drawing.Color.Red;
+            this.label20.Location = new System.Drawing.Point(8, 164);
+            this.label20.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(14, 14);
+            this.label20.TabIndex = 61;
+            this.label20.Text = "*";
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.ForeColor = System.Drawing.Color.Red;
+            this.label21.Location = new System.Drawing.Point(8, 198);
+            this.label21.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(14, 14);
+            this.label21.TabIndex = 62;
+            this.label21.Text = "*";
+            // 
             // ProductStainlessForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(490, 293);
+            this.Controls.Add(this.label21);
+            this.Controls.Add(this.label20);
             this.Controls.Add(this.label19);
             this.Controls.Add(this.label17);
             this.Controls.Add(this.textBox_cost);
@@ -508,5 +534,7 @@
         private System.Windows.Forms.TextBox textBox_cost;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.Label label20;
     }
 }

@@ -56,7 +56,7 @@ namespace LocalERP.WinForm
 
         private void initProduct()
         {
-            this.label4.Text = "编辑商品, ID:" + productID;
+            this.label4.Text = "编辑货品, ID:" + productID;
 
             Product product = ProductClothesDao.getInstance().FindByID(productID);
             this.textBox_name.Text = product.Name;
@@ -191,7 +191,7 @@ namespace LocalERP.WinForm
 
             if (openMode == 0) {
                 ProductClothesDao.getInstance().Insert(product, this.pickValue_color.getListRight(), this.pickValue_size.getListRight());
-                MessageBox.Show("保存商品成功,在相应的类别目录下可以找到该商品!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("保存货品成功,在相应的类别目录下可以找到该货品!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else if (openMode == 1) {
                 product.ID = productID;
@@ -200,9 +200,9 @@ namespace LocalERP.WinForm
                 if (attributeChanged)
                     basicAttr = ProductClothesDao.getInstance().UpdateAttributes(productID, product, this.pickValue_color.getListRight(), this.pickValue_size.getListRight());
                 if(basicResult && basicAttr)
-                    MessageBox.Show("修改商品成功!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("修改货品成功!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 else
-                    MessageBox.Show("该商品已被单据引用，无法修改颜色和尺码等属性!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("该货品已被单据引用，无法修改颜色和尺码等属性!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             this.attributeChanged = false;
             this.invokeUpdateNotify(UpdateType.ProductUpdate);

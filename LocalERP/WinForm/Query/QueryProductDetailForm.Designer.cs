@@ -178,7 +178,7 @@
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(42, 14);
             this.label8.TabIndex = 27;
-            this.label8.Text = "商品:";
+            this.label8.Text = "货品:";
             // 
             // dataGridViewTextBoxColumn1
             // 

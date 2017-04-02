@@ -42,6 +42,12 @@ namespace LocalERP.DataAccess.DataDAO
             }
         }
 
+        public int DeleteAll()
+        {
+            string commandText = string.Format("delete from SellProfit");
+            return DbHelperAccess.executeNonQuery(commandText);
+        }
+
         // 把SellProfit列表，按照产品id分组
         public Dictionary<int, List<SellProfit>> group_by_product_id(List<SellProfit> ls)
         {

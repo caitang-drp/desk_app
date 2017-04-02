@@ -17,7 +17,7 @@ namespace LocalERP.UiDataProxy
         {
             this.CategoryName = "Product";
             this.CategoryTableName = "ProductCategory";
-            this.ItemName = "商品";
+            this.ItemName = "货品";
             this.UpdateType_Category = UpdateType.ProductCategoryUpdate;
             this.UpdateType_Item = UpdateType.ProductUpdate;
         }
@@ -45,7 +45,7 @@ namespace LocalERP.UiDataProxy
             // 
             // name
             // 
-            name.HeaderText = "商品名称";
+            name.HeaderText = "货品名称";
             name.Name = "name";
             name.ReadOnly = true;
             name.Width = 240;
