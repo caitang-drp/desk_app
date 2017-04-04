@@ -15,6 +15,8 @@ namespace LocalERP.WinForm
         public LoginForm()
         {
             InitializeComponent();
+
+            this.label_name.Text = ConfDao.getInstance().Get(3);
         }
 
         /// <summary>

@@ -20,7 +20,7 @@ namespace LocalERP
             
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            /*
+            
             if (AuthUtility.checkSN() == false) {
                 SignForm signForm = new SignForm();
                 signForm.ShowDialog();
@@ -31,7 +31,7 @@ namespace LocalERP
             LoginForm loginForm = new LoginForm();
             loginForm.ShowDialog();
             if (loginForm.DialogResult == DialogResult.OK)
-                */Application.Run(new MainForm());
+                Application.Run(new MainForm());
             
         }
     }
