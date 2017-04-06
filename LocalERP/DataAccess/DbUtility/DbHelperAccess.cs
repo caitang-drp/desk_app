@@ -9,8 +9,8 @@ namespace LocalERP.DataAccess
 {
     class DbHelperAccess
     {
-        //public static readonly string CONN_STRING = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source="+Application.StartupPath+"\\ERP.mdb;Persist Security Info=True";   //正式发布时数量库路径，放在bin目录下
-        public static readonly string CONN_STRING = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + Application.StartupPath + "..\\..\\..\\ERP.mdb;Persist Security Info=True";   //调试时数据库路径，防止放在bin目录下被清空
+        public static readonly string CONN_STRING = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source="+Application.StartupPath+"\\ERP.mdb;Persist Security Info=True";   //正式发布时数量库路径，放在bin目录下
+        //public static readonly string CONN_STRING = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + Application.StartupPath + "..\\..\\..\\ERP.mdb;Persist Security Info=True";   //调试时数据库路径，防止放在bin目录下被清空
 
 
         /// <summary>

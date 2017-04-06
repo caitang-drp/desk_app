@@ -26,25 +26,35 @@ namespace LocalERP.DataAccess.Utility
 
         public static string getCPU()
         {
-            string temp = "";
+            string cpuStr = "", hdStr="", macStr="";
+            char[] cpu_chars, hd_chars, mac_chars;
 
-            //ªÒ»°CPU–Ú¡–∫≈
             ManagementClass mcCpu = new ManagementClass("win32_Processor");
             ManagementObjectCollection mocCpu = mcCpu.GetInstances();
             foreach (ManagementObject m in mocCpu)
             {
-                temp += m["ProcessorId"].ToString();
+                cpuStr += m["ProcessorId"].ToString();
             }
+            cpu_chars = cpuStr.ToCharArray();
 
-            char[] source_chars = temp.ToCharArray();
-
-            char[] source_chars_new = new char[6];
-            for (int i = 0; i < 3; i++)
+            ManagementClass mcHD = new ManagementClass("win32_logicaldisk");
+            ManagementObjectCollection mocHD = mcHD.GetInstances();
+            foreach (ManagementObject m in mocHD)
             {
-                source_chars_new[i] = source_chars[i];
-                source_chars_new[5 - i] = source_chars[source_chars.Length - 1 - i];
+                hdStr += m["VolumeSerialNumber"].ToString();
+                break;
             }
-            return new string(source_chars_new);
+            hd_chars = hdStr.ToCharArray();
+
+            char[] result_chars = new char[6];
+            result_chars[0] = cpu_chars[cpu_chars.Length - 1];
+            result_chars[1] = cpu_chars[cpu_chars.Length - 2];
+            result_chars[2] = cpu_chars[cpu_chars.Length - 3];
+            result_chars[3] = hd_chars[hd_chars.Length - 1];
+            result_chars[4] = hd_chars[hd_chars.Length - 2];
+            result_chars[5] = hd_chars[hd_chars.Length - 3];
+            return new string(result_chars).ToUpper();
+
         }
 
         private static string getSN()

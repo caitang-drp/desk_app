@@ -8,9 +8,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("LocalERP")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("huangfan")]
+[assembly: AssemblyCompany("flySoft")]
 [assembly: AssemblyProduct("LocalERP")]
-[assembly: AssemblyCopyright("版权所有 (C) huangfan 2014")]
+[assembly: AssemblyCopyright("版权所有 (C) flySoft 2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

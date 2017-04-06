@@ -33,7 +33,7 @@ namespace LocalERP.WinForm
             this.panel1.Controls.Add(navigation);
 
             getWelcomeForm().Show(this.dockPanel1);
-            this.toolStripStatusLabel1.Text = "飞翔企业管理软件   当前日期: " + DateTime.Now.ToShortDateString();
+            this.toolStripStatusLabel1.Text = "飞翔进销存管理软件(flySoft) copyright (c) 2017. 当前日期: " + DateTime.Now.ToShortDateString();
 
             FormSingletonFactory.getInstance().MainForm = this;
 

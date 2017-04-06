@@ -584,7 +584,8 @@ namespace LocalERP.WinForm
         private void toolStripButton_print_Click(object sender, EventArgs e)
         {
             // 载入报表模板数据
-            string report_template_path = Application.StartupPath + "..\\..\\..\\grid++\\circulation_report.grf";
+            //string report_template_path = Application.StartupPath + "..\\..\\..\\grid++\\circulation_report.grf";
+            string report_template_path = Application.StartupPath + "\\circulation_report.grf";
             Report.LoadFromFile(report_template_path);
             // 连接报表事件
             Report.Initialize += new _IGridppReportEvents_InitializeEventHandler(ReportInitialize);
