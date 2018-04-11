@@ -285,3 +285,6 @@ OutlookBar/obj/
 WinFormsUI/bin/
 WinFormsUI/obj/
 
+*.mdb
+/readme.txt
+
