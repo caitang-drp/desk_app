@@ -284,6 +284,7 @@ OutlookBar/bin/
 OutlookBar/obj/
 WinFormsUI/bin/
 WinFormsUI/obj/
+Authorization/
 
 *.mdb
 /readme.txt
