@@ -22,11 +22,13 @@ namespace LocalERP.WinForm
         protected int payReceiptID = 0;
 
         protected PayReceiptTypeConf conf;
-        private PayReceipt payReceipt = null;
+        protected PayReceipt payReceipt = null;
         
         protected bool needSave = false;
 
-        public PayReceiptForm(PayReceiptTypeConf conf)
+        protected ProductCirculationDao cirDao;
+
+        public PayReceiptForm(PayReceiptTypeConf conf, ProductCirculationDao cd)
         {
             InitializeComponent();
 
@@ -51,6 +53,8 @@ namespace LocalERP.WinForm
             this.label_thisPayed.Text = conf.cashDirection == -1 ? "本单已付:" : "本单已收:";
             this.label_arrears.Text = conf.arrearDirection == 1 ? "以上欠款(应付):" : "以上欠款(应收):";
             this.label_accumulative.Text = conf.arrearDirection == 1 ? "累计欠款(应付):" : "累计欠款(应收):";
+
+            this.cirDao = cd;
         }
 
         private void PayReceiptForm_Load(object sender, EventArgs e)
@@ -139,11 +143,11 @@ namespace LocalERP.WinForm
             switch(mode){
                 case 0:
                     this.label_status.Text = "新增";
-                    this.initControlsEnable(true, false, false, true);
+                    this.initControlsEnable(true, false, false, false, true);
                     break;
                 case 1:
                     this.label_status.Text = PayReceipt.statusContext[0];
-                    this.initControlsEnable(false, true, false, true);
+                    this.initControlsEnable(false, true, false, false, true);
                     break;
                 /*case 2:
                     this.label_status.Text = ProductCirculation.circulationStatusContext[1];
@@ -155,7 +159,7 @@ namespace LocalERP.WinForm
                     break;*/
                 case 4:
                     this.label_status.Text = ProductCirculation.circulationStatusContext[3];
-                    this.initControlsEnable(false, false, false, false);
+                    this.initControlsEnable(false, false, true, false, false);
                     break;
                 default:
                     break;
@@ -163,14 +167,16 @@ namespace LocalERP.WinForm
         }
 
 
-        private void initControlsEnable(bool save, bool finish, bool print, bool basicInfo)
+        private void initControlsEnable(bool save, bool finish, bool finishCancel, bool print, bool basicInfo)
         {
             this.toolStripButton_save.Enabled = save;
             this.toolStripButton_finish.Enabled = finish;
+            this.toolStripButton_finishCancel.Enabled = finishCancel;
+
             this.toolStripButton_print.Enabled = print;
 
             this.textBox_serial.Enabled = basicInfo;
-            this.dateTime_time.Enabled = basicInfo;
+            //this.dateTime_time.Enabled = basicInfo;
             this.lookupText1.Enabled = basicInfo;
             this.textBox_operator.Enabled = basicInfo;
 
@@ -225,6 +231,9 @@ namespace LocalERP.WinForm
         ///
         protected virtual void toolStripButton_save_Click(object sender, EventArgs e)
         {
+            //2018-3-30：防止其他窗口有更新
+            this.refreshArrears();
+
             PayReceipt payReceipt;
             //get的时候没有status
             bool isCorrect = getPayReceipt(out payReceipt);
@@ -267,18 +276,29 @@ namespace LocalERP.WinForm
         //审核
         protected virtual void toolStripButton_finish_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("审核后，将修改相关帐务信息，且该单据不能修改或删除，是否审核？", "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) != DialogResult.OK)
+            if (MessageBox.Show("审核后，将修改相关债务信息，是否审核？", "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) != DialogResult.OK)
                 return;
 
+            //2017-11-20
+            this.refreshArrears();
+
+            //要重新get一下，因为债务有可能更新。
             PayReceipt payReceipt;
             bool isCorrect = getPayReceipt(out payReceipt);
 
             if (isCorrect == false)
                 return;
-            
+
+            payReceipt.bill_time = DateTime.Now;
+            this.dateTime_time.Value = payReceipt.bill_time;
+            //重置了dateTime控件后，neeSave会变为true，但是由于是系统自动更新时间，所以不需要用户保存！耦合度太高了
+            this.needSave = false;
+
             payReceipt.status = 4;
             PayReceiptDao.getInstance().Update(payReceipt);
             CustomerDao.getInstance().update_arrear(payReceipt.customer_id, conf.arrearDirection * Convert.ToDouble(this.textBox_accumulative.Text));
+            this.initPayReceipt();
+
             MessageBox.Show("审核成功!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             openMode = 4;
@@ -287,6 +307,39 @@ namespace LocalERP.WinForm
             this.invokeUpdateNotify(conf.finishNotifyType);
         }
 
+        //弃核
+        protected virtual void toolStripButton_finishCancel_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("是否弃核，退回到未审核状态？", "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) != DialogResult.OK)
+                return;
+
+            PayReceipt maxPr = PayReceiptDao.getInstance().FindLastestByCustomerID(this.payReceipt.customer_id);
+            if (maxPr!=null && !maxPr.serial.Equals(this.payReceipt.serial))
+            {
+                MessageBox.Show(string.Format("弃核失败，在此单之后存在已审核的单据，请先弃核{0}", maxPr.serial), "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            ProductCirculation pc = cirDao.FindLastestByCustomerID(this.payReceipt.customer_id);
+            if (pc!=null && pc.CirculationTime > payReceipt.bill_time)
+            {
+                MessageBox.Show(string.Format("弃核失败，在此单之后存在已审核的单据，请先弃核{0}", pc.Code), "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            double arrear;
+            double.TryParse(this.textBox_previousArrears.Text, out arrear);
+
+            CustomerDao.getInstance().update_arrear(this.payReceipt.customer_id, this.conf.arrearDirection * arrear);
+            PayReceiptDao.getInstance().UpdateStatus(this.payReceipt.id, 1);
+
+            MessageBox.Show("弃核成功!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            openMode = 1;
+            this.switchMode(1);
+
+            this.invokeUpdateNotify(this.conf.finishNotifyType);
+        }
 
         private void toolStripButton_print_Click(object sender, EventArgs e){}
 
@@ -348,6 +401,20 @@ namespace LocalERP.WinForm
             Customer customer = CustomerDao.getInstance().FindByID((int)arg.Value);
             this.textBox_previousArrears.Text = (customer.arrear*conf.arrearDirection).ToString();
             resetNeedSave(true);
+        }
+
+        //2017-11-20为了防止有多个窗口打开，同时审核出现的问题
+        private void refreshArrears()
+        {
+            if (!string.IsNullOrEmpty(this.lookupText1.Text_Lookup))
+            {
+                int cID = 0;
+                int.TryParse(this.lookupText1.LookupArg.Value.ToString(), out cID);
+                Customer customer = CustomerDao.getInstance().FindByID(cID);
+                this.textBox_previousArrears.Text = (customer.arrear * conf.arrearDirection).ToString();
+            }
+            else
+                this.textBox_previousArrears.Text = "";
         }
     }
 }

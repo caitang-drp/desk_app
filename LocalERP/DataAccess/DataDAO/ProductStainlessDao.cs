@@ -25,7 +25,7 @@ namespace LocalERP.DataAccess.DataDAO
                     "insert into ProductStainless(serial, name, comment, parent, pricePurchase, priceCost, priceSell, unit, quantityPerPiece) values('{0}', '{1}', '{2}', {3}, {4}, {5}, {6}, '{7}', {8})",
                     info.Serial, info.Name, info.Comment, info.CategoryID, info.PricePurchase, info.PriceCost, info.PriceSell, info.Unit, info.QuantityPerPiece);
                 DbHelperAccess.executeNonQuery(commandText);
-                int productID = DbHelperAccess.executeLastID("ID", "ProductStainless");
+                int productID = DbHelperAccess.executeMax("ID", "ProductStainless");
                 return productID;
             }
             catch (Exception ex)
@@ -57,6 +57,9 @@ namespace LocalERP.DataAccess.DataDAO
 
             if (!string.IsNullOrEmpty(name))
                 commandText.AppendFormat(" and ( ProductStainless.name like '%{0}%' or ProductStainless.serial like '%{0}%')", name);
+
+            commandText.Append(" order by ProductStainless.ID");
+            
             return DbHelperAccess.executeQuery(commandText.ToString());
         }
 

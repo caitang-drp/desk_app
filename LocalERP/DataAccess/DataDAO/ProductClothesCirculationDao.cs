@@ -26,7 +26,7 @@ namespace LocalERP.DataAccess.DataDAO
                 string commandText = string.Format("insert into ProductCirculation(code, circulationTime, comment, status, customerID, type, flowType, operator) values('{0}', '{1}', '{2}', '{3}', {4}, {5}, {6}, '{7}')",
                     info.Code, info.CirculationTime, info.Comment, info.Status, info.CustomerID <= 0 ? "null" : info.CustomerID.ToString(), info.Type, info.FlowType, info.Oper);
                 DbHelperAccess.executeNonQuery(commandText);
-                ProductCirculationID = DbHelperAccess.executeLastID("ID", "ProductCirculation");
+                ProductCirculationID = DbHelperAccess.executeMax("ID", "ProductCirculation");
                 this.insertRecords(ProductCirculationID, records);
                 return true;
             }

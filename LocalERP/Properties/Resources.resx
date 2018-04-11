@@ -124,9 +124,6 @@
   <data name="cancel16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\images\16pix\cancel16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="add32" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\images\32pix\fuzzy\27186.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="save16_1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\images\16pix\add16-1.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -196,14 +193,26 @@
   <data name="cancel" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\images\16pix\cancel.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="search.16px" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\images\16pix\search.16px.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="orderDel32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\images\32pix\cute\del32.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="exit32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\images\32pix\cute\1097638.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="512968" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\images\16pix\512968.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="selectall" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\images\16pix\selectall.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="apply16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\images\16pix\apply16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="tree-node-edit.16px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\images\16pix\tree-node-edit.16px.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="38095" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\images\16pix\38095.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="statistic1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\images\32pix\cute\statistic1.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -229,8 +238,8 @@
   <data name="add16.2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\images\16pix\add16.2.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="orderDel32" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\images\32pix\cute\del32.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="add32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\images\32pix\fuzzy\27186.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="up16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\images\16pix\up16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -238,13 +247,16 @@
   <data name="manu" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\images\welcome\manu.jpg;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="selectall" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\images\16pix\selectall.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="cash" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\images\welcome\cash.jpg;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="orderEdit32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\images\32pix\cute\edit32.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="cash" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\images\welcome\cash.jpg;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="search.16px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\images\16pix\search.16px.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="del161" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\images\16pix\del16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

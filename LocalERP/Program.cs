@@ -20,7 +20,8 @@ namespace LocalERP
             
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            
+
+            /*AuthUtility.checkSN()获取数据库sn号，然后进行验证*/
             if (AuthUtility.checkSN() == false) {
                 SignForm signForm = new SignForm();
                 signForm.ShowDialog();

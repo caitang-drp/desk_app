@@ -55,7 +55,7 @@ namespace LocalERP.WinForm
             this.backgroundWorker.RunWorkerAsync(parent);
             this.invokeBeginLoadNotify();
         }
-
+        /*
         private void toolStripButton_addType_Click(object sender, EventArgs e)
         {
             Category parent = null;
@@ -65,7 +65,7 @@ namespace LocalERP.WinForm
             CategoryForm form = new CategoryForm(this.categoryItemProxy.CategoryTableName, 0, -1, parent);
             form.modifiedComplete += new CategoryForm.ModifiedComplete(refresh);
             form.ShowDialog(this);
-        }
+        }*/
 
         private void toolStripButton_add_Click(object sender, EventArgs e)
         {

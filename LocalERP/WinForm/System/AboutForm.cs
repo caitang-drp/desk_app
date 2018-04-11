@@ -7,6 +7,7 @@ using System.Text;
 using System.Windows.Forms;
 using LocalERP.DataAccess.DataDAO;
 using LocalERP.DataAccess.Data;
+using LocalERP.DataAccess.Utility;
 
 namespace LocalERP.WinForm
 {
@@ -15,6 +16,9 @@ namespace LocalERP.WinForm
         public AboutForm()
         {
             InitializeComponent();
+
+            this.label1.Text = ConfUtility.GetProductName();
+            this.label2.Text = ConfUtility.GetSoftName();
         }
     }
 }

@@ -4,15 +4,12 @@ using System.Text;
 using System.Data.OleDb;
 using System.Data;
 using System.Windows.Forms;
+using LocalERP.DataAccess.Utility;
 
 namespace LocalERP.DataAccess
 {
     class DbHelperAccess
     {
-        public static readonly string CONN_STRING = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source="+Application.StartupPath+"\\ERP.mdb;Persist Security Info=True";   //正式发布时数量库路径，放在bin目录下
-        //public static readonly string CONN_STRING = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + Application.StartupPath + "..\\..\\..\\ERP.mdb;Persist Security Info=True";   //调试时数据库路径，防止放在bin目录下被清空
-
-
         /// <summary>
         /// 根据传来的请求sql执行添加、修改和删除操作
         /// </summary>
@@ -21,7 +18,7 @@ namespace LocalERP.DataAccess
         public static int executeNonQuery(string sql)
         {
             int iResult = 0;  //影响的行数
-            OleDbConnection conn = new OleDbConnection(CONN_STRING);
+            OleDbConnection conn = new OleDbConnection(ConfUtility.CONN_STRING);
             try
             {
                 conn.Open();
@@ -41,11 +38,11 @@ namespace LocalERP.DataAccess
             return iResult;
         }
 
-        public static int executeLastID(string ID, string table) {
+        public static int executeMax(string property, string table) {
             int IDvalue = 0;
-            OleDbConnection conn = new OleDbConnection(CONN_STRING);
+            OleDbConnection conn = new OleDbConnection(ConfUtility.CONN_STRING);
             conn.Open();
-            OleDbCommand cmdGetId = new OleDbCommand(string.Format("SELECT max({0}) from {1}", ID, table), conn);
+            OleDbCommand cmdGetId = new OleDbCommand(string.Format("SELECT max({0}) from {1}", property, table), conn);
             IDvalue = (int)cmdGetId.ExecuteScalar();
             conn.Close();
             return IDvalue;
@@ -55,7 +52,7 @@ namespace LocalERP.DataAccess
         public static int executeQueryNum(string sql)
         {
             int IDvalue = 0;
-            OleDbConnection conn = new OleDbConnection(CONN_STRING);
+            OleDbConnection conn = new OleDbConnection(ConfUtility.CONN_STRING);
             conn.Open();
             OleDbCommand cmdGetId = new OleDbCommand(sql, conn);
             IDvalue = (int)cmdGetId.ExecuteScalar();
@@ -66,7 +63,7 @@ namespace LocalERP.DataAccess
 
         public static DataTable executeQuery(string sql)
         {
-            OleDbConnection conn = new OleDbConnection(CONN_STRING);
+            OleDbConnection conn = new OleDbConnection(ConfUtility.CONN_STRING);
             OleDbDataAdapter dataAdapter = new OleDbDataAdapter();
             dataAdapter.SelectCommand = new OleDbCommand(sql, conn);
             OleDbCommandBuilder custCB = new OleDbCommandBuilder(dataAdapter);
@@ -84,7 +81,7 @@ namespace LocalERP.DataAccess
 
         public static DataRow executeQueryGetOneRow(string sql)
         {
-            OleDbConnection conn = new OleDbConnection(CONN_STRING);
+            OleDbConnection conn = new OleDbConnection(ConfUtility.CONN_STRING);
             OleDbDataAdapter dataAdapter = new OleDbDataAdapter();
             dataAdapter.SelectCommand = new OleDbCommand(sql, conn);
             OleDbCommandBuilder custCB = new OleDbCommandBuilder(dataAdapter);

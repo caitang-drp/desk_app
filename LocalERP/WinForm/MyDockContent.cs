@@ -56,6 +56,7 @@ namespace LocalERP.WinForm
             }
         }
 
+        //更新form本身的version，主要用在categoryItemForm里
         protected void refreshVersion(UpdateType type) {
             //reference to FormMgr is high coupling
             if (this.versionDic.ContainsKey(type))

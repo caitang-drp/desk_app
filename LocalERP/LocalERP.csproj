@@ -139,8 +139,10 @@
     <Compile Include="DataAccess\Data\ProductStainlessCirculationRecord.cs" />
     <Compile Include="DataAccess\DbUtility\DbHelperAccess.cs" />
     <Compile Include="DataAccess\Utility\AuthUtility.cs" />
-    <Compile Include="DataAccess\Utility\DataUtility.cs" />
+    <Compile Include="DataAccess\Utility\LabelUtility.cs" />
     <Compile Include="DataAccess\Utility\ValidateUtility.cs" />
+    <Compile Include="DataAccess\Utility\DataUtility.cs" />
+    <Compile Include="DataAccess\Utility\ConfUtility.cs" />
     <Compile Include="UiDataProxy\CustomerCategoryItemProxy.cs" />
     <Compile Include="UiDataProxy\ProductCategoryItemProxy.cs" />
     <Compile Include="UiDataProxy\QueryLibProxy.cs" />
@@ -197,22 +199,22 @@
     <Compile Include="WinForm\Product\ProductClothesCirculationForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="WinForm\Query\QuerySellProfitForm.cs">
+    <Compile Include="WinForm\Product\Query\QuerySellProfitForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="WinForm\Query\QuerySellProfitForm.Designer.cs">
+    <Compile Include="WinForm\Product\Query\QuerySellProfitForm.Designer.cs">
       <DependentUpon>QuerySellProfitForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="WinForm\Query\QueryProductDetailForm.cs">
+    <Compile Include="WinForm\Product\Query\QueryProductDetailForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="WinForm\Query\QueryProductDetailForm.Designer.cs">
+    <Compile Include="WinForm\Product\Query\QueryProductDetailForm.Designer.cs">
       <DependentUpon>QueryProductDetailForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="WinForm\Query\QueryLibForm.cs">
+    <Compile Include="WinForm\Product\Query\QueryLibForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="WinForm\Query\QueryLibForm.Designer.cs">
+    <Compile Include="WinForm\Product\Query\QueryLibForm.Designer.cs">
       <DependentUpon>QueryLibForm.cs</DependentUpon>
     </Compile>
     <Compile Include="WinForm\Product\ProductSellReportForm.cs">
@@ -239,34 +241,34 @@
     <Compile Include="WinForm\Product\ProductCirculationListForm.Designer.cs">
       <DependentUpon>ProductCirculationListForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="WinForm\Query\StatisticProductForm.cs">
+    <Compile Include="WinForm\Product\Query\StatisticProductForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="WinForm\Query\StatisticProductForm.Designer.cs">
+    <Compile Include="WinForm\Product\Query\StatisticProductForm.Designer.cs">
       <DependentUpon>StatisticProductForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="WinForm\Query\QueryProductClothesDetailForm.cs">
+    <Compile Include="WinForm\Product\Query\QueryProductClothesDetailForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="WinForm\Query\QueryProductClothesDetailForm.Designer.cs">
+    <Compile Include="WinForm\Product\Query\QueryProductClothesDetailForm.Designer.cs">
       <DependentUpon>QueryProductClothesDetailForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="WinForm\Query\QueryProductStainlessDetailForm.cs">
+    <Compile Include="WinForm\Product\Query\QueryProductStainlessDetailForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="WinForm\Query\StatisticProductStainlessForm.cs">
+    <Compile Include="WinForm\Product\Query\StatisticProductStainlessForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="WinForm\Query\QueryCashDetailForm.cs">
+    <Compile Include="WinForm\Product\Query\QueryCashDetailForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="WinForm\Query\QueryCashDetailForm.Designer.cs">
+    <Compile Include="WinForm\Product\Query\QueryCashDetailForm.Designer.cs">
       <DependentUpon>QueryCashDetailForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="WinForm\Query\StatisticCashForm.cs">
+    <Compile Include="WinForm\Product\Query\StatisticCashForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="WinForm\Query\StatisticCashForm.Designer.cs">
+    <Compile Include="WinForm\Product\Query\StatisticCashForm.Designer.cs">
       <DependentUpon>StatisticCashForm.cs</DependentUpon>
     </Compile>
     <Compile Include="WinForm\System\LoadingForm.cs">
@@ -333,10 +335,26 @@
     <Compile Include="WinForm\System\ReportInfoForm.Designer.cs">
       <DependentUpon>ReportInfoForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="WinForm\Product\LetterSettingForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WinForm\Product\LetterSettingForm.Designer.cs">
+      <DependentUpon>LetterSettingForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WinForm\System\CirSettingForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WinForm\System\CirSettingForm.Designer.cs">
+      <DependentUpon>CirSettingForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="WinForm\Utility\ComboBoxTree.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="WinForm\Utility\DataGridViewCalendarColumn.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="WinForm\Utility\DataGridViewComboEditBoxColumn.cs" />
+    <Compile Include="WinForm\Utility\DataGridViewMoneyTextBoxColumn.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="WinForm\Utility\MSplitContainer.cs">
@@ -413,15 +431,15 @@
       <DependentUpon>PayReceiptListForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForm\Query\QuerySellProfitForm.resx">
+    <EmbeddedResource Include="WinForm\Product\Query\QuerySellProfitForm.resx">
       <DependentUpon>QuerySellProfitForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForm\Query\QueryProductDetailForm.resx">
+    <EmbeddedResource Include="WinForm\Product\Query\QueryProductDetailForm.resx">
       <DependentUpon>QueryProductDetailForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForm\Query\QueryLibForm.resx">
+    <EmbeddedResource Include="WinForm\Product\Query\QueryLibForm.resx">
       <DependentUpon>QueryLibForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -441,19 +459,19 @@
       <DependentUpon>ProductCirculationListForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForm\Query\StatisticProductForm.resx">
+    <EmbeddedResource Include="WinForm\Product\Query\StatisticProductForm.resx">
       <DependentUpon>StatisticProductForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForm\Query\QueryProductClothesDetailForm.resx">
+    <EmbeddedResource Include="WinForm\Product\Query\QueryProductClothesDetailForm.resx">
       <DependentUpon>QueryProductClothesDetailForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForm\Query\QueryCashDetailForm.resx">
+    <EmbeddedResource Include="WinForm\Product\Query\QueryCashDetailForm.resx">
       <DependentUpon>QueryCashDetailForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForm\Query\StatisticCashForm.resx">
+    <EmbeddedResource Include="WinForm\Product\Query\StatisticCashForm.resx">
       <DependentUpon>StatisticCashForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -495,6 +513,14 @@
     </EmbeddedResource>
     <EmbeddedResource Include="WinForm\System\ReportInfoForm.resx">
       <DependentUpon>ReportInfoForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForm\Product\LetterSettingForm.resx">
+      <DependentUpon>LetterSettingForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForm\System\CirSettingForm.resx">
+      <DependentUpon>CirSettingForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForm\Utility\ComboBoxTree.resx">
@@ -553,6 +579,9 @@
     </Compile>
     <Compile Include="WinForm\FormMgr\FormStainlessMgr.cs" />
     <Compile Include="WinForm\Utility\ControlUtility.cs" />
+    <Compile Include="WinForm\Utility\DataGridViewComboBoxEditColumn.cs">
+      <SubType>Component</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\OutlookBar\BSE.Windows.Forms.csproj">
@@ -631,6 +660,9 @@
     <None Include="images\16pix\add16.2.png" />
     <None Include="images\welcome\manu.jpg" />
     <None Include="images\welcome\cash.jpg" />
+    <None Include="images\16pix\tree-node-edit.16px.png" />
+    <None Include="images\16pix\38095.png" />
+    <None Include="images\16pix\512968.png" />
     <Content Include="start.ico" />
     <None Include="images\32pix\cute\arrival.png" />
     <None Include="images\32pix\cute\del32.png" />

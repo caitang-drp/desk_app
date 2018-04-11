@@ -63,15 +63,26 @@ namespace LocalERP.WinForm
             return manufactureListForm;
         }
 
-        public override ProductCirculationForm  getEasyForm()
+        public override ProductCirculationForm  getManuCostForm()
         {
-            if (easyForm == null || easyForm.IsDisposed)
+            if (manuCostForm == null || manuCostForm.IsDisposed)
             {
-                easyForm = new ProductStainlessCirculationForm(ProductCirculation.CirculationTypeConf_Easy, ProductStainlessCirculationDao.getInstance());
-                appendEvent(easyForm);
-                easyForm.hideSomeControls();
+                manuCostForm = new ProductStainlessCirculationForm(ProductCirculation.CirculationTypeConf_ManuCost, ProductStainlessCirculationDao.getInstance());
+                appendEvent(manuCostForm);
+                manuCostForm.hideSomeControls();
             }
-            return easyForm;
+            return manuCostForm;
+        }
+
+        public override ProductCirculationForm getManuInForm()
+        {
+            if (manuInForm == null || manuInForm.IsDisposed)
+            {
+                manuInForm = new ProductStainlessCirculationForm(ProductCirculation.CirculationTypeConf_ManuIn, ProductStainlessCirculationDao.getInstance());
+                appendEvent(manuInForm);
+                manuInForm.hideSomeControls();
+            }
+            return manuInForm;
         }
 
         /****************** sell ****************/
@@ -212,7 +223,7 @@ namespace LocalERP.WinForm
         {
             if (productCIForm == null || productCIForm.IsDisposed)
             {
-                productCIForm = new CategoryItemForm(1, new ProductStainlessCategoryItemProxy(), DataUtility.DATA_PRODUCT, this.mainForm);
+                productCIForm = new CategoryItemForm(1, new ProductStainlessCategoryItemProxy(), LabelUtility.DATA_PRODUCT, this.mainForm);
                 productCIForm.initVersions(this.getVersions(),
                     UpdateType.ProductUpdate, UpdateType.ProductCategoryUpdate, UpdateType.PurchaseFinishUpdate, UpdateType.SellFinishUpdate, UpdateType.LibFinishUpdate);
                 appendEvent(productCIForm);
@@ -222,7 +233,7 @@ namespace LocalERP.WinForm
 
         public override CategoryItemForm getProductCIForm_select()
         {
-            CategoryItemForm productCIForm_select = new CategoryItemForm(0, new ProductStainlessCategoryItemProxy(), DataUtility.DATA_PRODUCT, this.mainForm);
+            CategoryItemForm productCIForm_select = new CategoryItemForm(0, new ProductStainlessCategoryItemProxy(), LabelUtility.DATA_PRODUCT, this.mainForm);
             productCIForm_select.initVersions(getVersions(),
                 UpdateType.ProductUpdate, UpdateType.ProductCategoryUpdate, UpdateType.PurchaseFinishUpdate, UpdateType.SellFinishUpdate, UpdateType.LibFinishUpdate);
                     

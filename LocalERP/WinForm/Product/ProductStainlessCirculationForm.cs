@@ -37,9 +37,10 @@ namespace LocalERP.WinForm
 
             DataGridViewTextBoxColumn num = new DataGridViewTextBoxColumn();
             DataGridViewTextBoxColumn unit = new DataGridViewTextBoxColumn();
-            DataGridViewTextBoxColumn price = new DataGridViewTextBoxColumn();
+            DataGridViewComboBoxEditColumn price = new DataGridViewComboBoxEditColumn();
 
             DataGridViewTextBoxColumn totalPrice = new DataGridViewTextBoxColumn();
+            DataGridViewTextBoxColumn comment = new DataGridViewTextBoxColumn();
 
             ID.HeaderText = "ID";
             ID.Name = "ID";
@@ -85,7 +86,11 @@ namespace LocalERP.WinForm
             totalPrice.HeaderText = "小计/元";
             totalPrice.Name = "totalPrice";
 
-            dgv.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] { ID, check, product, serial, quantityPerPiece, pieces, num, unit, price, totalPrice });
+            comment.HeaderText = "备注";
+            comment.Name = "comment";
+            comment.Width = 100;
+
+            dgv.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] { ID, check, product, serial, quantityPerPiece, pieces, num, unit, price, totalPrice, comment });
 
             //2017-02-28:这个地方再次出现bug，自己写的控件就是蛋疼
 
@@ -99,15 +104,14 @@ namespace LocalERP.WinForm
         {
             foreach (DataGridViewRow row in this.dataGridView1.Rows)
             {
-                if (elementReadonly == true)
-                {
-                    setCellEnable(row.Cells["product"], false);
-                    setCellEnable(row.Cells["quantityPerPiece"], false);
-                    setCellEnable(row.Cells["pieces"], false);
-                    setCellEnable(row.Cells["num"], false);
-                    setCellEnable(row.Cells["unit"], false);
-                    setCellEnable(row.Cells["price"], false);
-                }
+                setCellEnable(row.Cells["product"], !elementReadonly);
+                setCellEnable(row.Cells["quantityPerPiece"], !elementReadonly);
+                setCellEnable(row.Cells["pieces"], !elementReadonly);
+                setCellEnable(row.Cells["num"], !elementReadonly);
+                setCellEnable(row.Cells["unit"], !elementReadonly);
+                setCellEnable(row.Cells["price"], !elementReadonly);
+                setCellEnable(row.Cells["comment"], !elementReadonly);
+                
                 setCellEnable(row.Cells["totalPrice"], false);
                 setCellEnable(row.Cells["serial"], false);
             }
@@ -132,8 +136,9 @@ namespace LocalERP.WinForm
             row.Cells["pieces"].Value = record.PiecesNull?null:record.Pieces.ToString();
             row.Cells["num"].Value = record.TotalNum;
             row.Cells["unit"].Value = record.Unit;
-            row.Cells["price"].Value = record.Price;
+            row.Cells["price"].Value = record.Price.ToString();
             row.Cells["totalPrice"].Value = record.TotalPrice;
+            row.Cells["comment"].Value = record.Comment;
         }
 
         //for event: caculate total price
@@ -143,6 +148,31 @@ namespace LocalERP.WinForm
             {
                 e.CellStyle.BackColor = Color.FromName("window");
                 DataGridViewTextBoxEditingControl editingControl = e.Control as DataGridViewTextBoxEditingControl;
+
+                editingControl.TextChanged -= new EventHandler(editingControl_TextChanged);
+                editingControl.TextChanged += new EventHandler(editingControl_TextChanged);
+                
+            }
+            else if (e.Control.GetType().Equals(typeof(DataGridViewComboBoxEditEditingControl)))//cell为price时
+            {
+                e.CellStyle.BackColor = Color.FromName("window");
+
+                DataGridViewComboBoxEditEditingControl editingControl = e.Control as DataGridViewComboBoxEditEditingControl;
+                editingControl.Items.Clear();
+                int productID = 0, customerID = 0;
+
+                DataGridViewLookupCell cell = editingControl.EditingControlDataGridView.Rows[editingControl.EditingControlRowIndex].Cells["product"] as DataGridViewLookupCell;
+                if (cell.Value != null && !string.IsNullOrEmpty((cell.Value as LookupArg).ArgName))
+                    productID = (int)(cell.Value as LookupArg).Value;
+                if (this.lookupText1.LookupArg != null)
+                    int.TryParse(this.lookupText1.LookupArg.Value.ToString(), out customerID);
+
+                if (productID != 0 && customerID != 0)
+                {
+                    List<string> prices = ProductStainlessCirculationRecordDao.getInstance().FindPriceList((int)conf.type, productID, customerID);
+                    //items是放在column里
+                    editingControl.Items.AddRange(prices.ToArray());
+                }
 
                 editingControl.TextChanged -= new EventHandler(editingControl_TextChanged);
                 editingControl.TextChanged += new EventHandler(editingControl_TextChanged);
@@ -183,10 +213,11 @@ namespace LocalERP.WinForm
                         control.EditingControlDataGridView.Rows[control.EditingControlRowIndex].Cells["serial"].Value = product.Serial;
                         control.EditingControlDataGridView.Rows[control.EditingControlRowIndex].Cells["quantityPerPiece"].Value = product.QuantityPerPiece;
                         control.EditingControlDataGridView.Rows[control.EditingControlRowIndex].Cells["unit"].Value = product.Unit;
-                        if(conf.type == ProductCirculation.CirculationType.sell || conf.type == ProductCirculation.CirculationType.sellBack)
-                            control.EditingControlDataGridView.Rows[control.EditingControlRowIndex].Cells["price"].Value = product.PriceSell;
+                        if (conf.type == ProductCirculation.CirculationType.sell || conf.type == ProductCirculation.CirculationType.sellBack)
+                            //这里要加个.ToString()，可能自定义Cell的value类型不大一样
+                            control.EditingControlDataGridView.Rows[control.EditingControlRowIndex].Cells["price"].Value = product.PriceSell.ToString();
                         else
-                            control.EditingControlDataGridView.Rows[control.EditingControlRowIndex].Cells["price"].Value = product.PricePurchase;
+                            control.EditingControlDataGridView.Rows[control.EditingControlRowIndex].Cells["price"].Value = product.PricePurchase.ToString();
                     }
                 }
                 //not reasonal
@@ -206,6 +237,7 @@ namespace LocalERP.WinForm
 
         protected override void editingControl_TextChanged(object sender, EventArgs e)
         {
+            //如果sender为price的，control为空，没有影响
             DataGridViewTextBoxEditingControl control = (sender as DataGridViewTextBoxEditingControl);
             DataGridView dgv = this.dataGridView1;
             DataGridViewCell cell = dgv.CurrentCell;
@@ -244,7 +276,7 @@ namespace LocalERP.WinForm
             double price, totalPrice;
             int quantityPerPiece, pieces, num;
             bool isQuantityNull = false, isPiecesNull = false;
-            string unit;
+            string unit, comment;
             bool isInputCorrect = true;
 
             foreach (DataGridViewRow row in this.dataGridView1.Rows)
@@ -258,7 +290,8 @@ namespace LocalERP.WinForm
                     || ValidateUtility.getInt(row.Cells["num"], true, true, out num) == false
                     || ValidateUtility.getString(row.Cells["unit"], false, out unit) == false
                     || ValidateUtility.getDouble(row.Cells["price"], out price) == false
-                    || ValidateUtility.getDouble(row.Cells["totalPrice"], out totalPrice) == false)
+                    || ValidateUtility.getDouble(row.Cells["totalPrice"], out totalPrice) == false
+                    || ValidateUtility.getString(row.Cells["comment"], false, out comment) == false)
                     return false;
                 ProductStainlessCirculationRecord record = new ProductStainlessCirculationRecord();
 
@@ -282,7 +315,8 @@ namespace LocalERP.WinForm
                 record.Unit = unit;
                 record.Price = price;
                 record.TotalPrice = totalPrice;
-                
+                record.Comment = comment;
+
                 records.Add(record);
             }
 
@@ -319,6 +353,17 @@ namespace LocalERP.WinForm
                 SellProfit profit = new SellProfit(cir, record, stainless.PriceCost);
                 SellProfitDao.getInstance().Insert(profit);
             }
+        }
+
+        //弃核
+        protected override void cancelUpdateCostAndProfit(ProductCirculation cir, ProductCirculationRecord record)
+        {
+            /*********更新数量**********/
+            ProductStainlessDao stainlessDao = cirDao.getProductDao() as ProductStainlessDao;
+            ProductStainless stainless = stainlessDao.FindByID(record.ProductID);
+
+            stainless.Num = stainless.Num - conf.productDirection * record.TotalNum;
+            stainlessDao.Update(stainless);
         }
 
     }

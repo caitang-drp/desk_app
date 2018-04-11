@@ -53,6 +53,10 @@ namespace LocalERP.UiDataProxy
         }
 
         public abstract void initColumns(DataGridView dgv);
+
+        //added by 2018-03-23
+        public virtual void hideSomeColumns(DataGridView dgv) { }
+
         public abstract void initTree(TreeView tv);
         //public abstract void initItems(DataGridView dgv, int parentId);
         public abstract DataTable getRecordsTable(int parentId, string name);

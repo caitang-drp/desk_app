@@ -30,9 +30,10 @@ namespace LocalERP.WinForm
             List<int> listID = new List<int>();
             foreach (DataGridViewRow row in this.Rows)
             {
-                DataGridViewCheckBoxCell cell = row.Cells[checkColumnName] as DataGridViewCheckBoxCell;
+                DataGridViewCheckBoxCell checkCell = row.Cells[checkColumnName] as DataGridViewCheckBoxCell;
                 //commented by stone: this is not very reasonable
-                if ((bool)cell.EditedFormattedValue == true)
+                //commented by stone: 2018-3-13 add 'cell.Value!=null'
+                if ((bool)checkCell.EditedFormattedValue == true && row.Cells[idColumnName].Value != null)
                     //if (cell.Value != null && Convert.ToInt32(cell.Value) == 1)
                     listID.Add((int)row.Cells[idColumnName].Value);
             }

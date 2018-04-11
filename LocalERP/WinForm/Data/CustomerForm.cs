@@ -142,12 +142,13 @@ namespace LocalERP.WinForm
             if (this.getCustomer(out customer) == false)
                 return;
 
-            double arrearDif = 0;
+            //double arrearDif = 0;
 
             if (openMode == 0) {
-                CustomerDao.getInstance().Insert(customer);
-                if (customer.arrear != 0)
-                    generatePayReceipt(customer.arrear, 0, customer.ID);
+                int customerId;
+                bool insertResult = CustomerDao.getInstance().Insert(customer, out customerId);
+                if (customer.arrear != 0 && insertResult == true)
+                    generatePayReceipt(customer.arrear, 0, customerId);
                 MessageBox.Show("保存来往单位成功!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);    
 
             }

@@ -56,6 +56,23 @@ namespace LocalERP.DataAccess.Data
             set { totalNum = value; }
         }
 
+        //从Stainless那里搬过来
+        private int pieces;
+
+        public int Pieces
+        {
+            get { return pieces; }
+            set { pieces = value; }
+        }
+
+        private bool piecesNull = false;
+
+        public bool PiecesNull
+        {
+            get { return piecesNull; }
+            set { piecesNull = value; }
+        }
+
         private int circulationID;
 
         public int CirculationID
@@ -78,6 +95,15 @@ namespace LocalERP.DataAccess.Data
         {
             get { return totalPrice; }
             set { totalPrice = value; }
-        }     
+        }
+
+        private string comment;
+
+        public string Comment
+        {
+            get { return comment; }
+            set { comment = value; }
+        }
+
     }
 }

@@ -8,13 +8,13 @@ namespace LocalERP.WinForm.Utility
     /// <summary>
     /// 日期选择DataGridViewColumn
     /// </summary>
-    public class DataGridViewCalendarColumn : DataGridViewColumn
+    public class DataGridViewComboBoxEditColumn : DataGridViewColumn
     {
         /// <summary>
         /// 初始化
         /// </summary>
-        public DataGridViewCalendarColumn()
-            : base(new DataGridViewCalendarCell())
+        public DataGridViewComboBoxEditColumn()
+            : base(new DataGridViewComboBoxEditCell())
         {
         }
 
@@ -31,9 +31,9 @@ namespace LocalERP.WinForm.Utility
             {
                 // Ensure that the cell used for the template is a CalendarCell.
                 if (value != null &&
-                    !value.GetType().IsAssignableFrom(typeof(DataGridViewCalendarCell)))
+                    !value.GetType().IsAssignableFrom(typeof(DataGridViewComboBoxEditCell)))
                 {
-                    throw new InvalidCastException("Must be a CalendarCell");
+                    throw new InvalidCastException("Must be a DataGridViewComboBoxEditCell");
                 }
                 base.CellTemplate = value;
             }
@@ -42,12 +42,12 @@ namespace LocalERP.WinForm.Utility
     /// <summary>
     /// 日期选择DataGridViewTextBoxCell
     /// </summary>
-    public class DataGridViewCalendarCell : DataGridViewTextBoxCell
+    public class DataGridViewComboBoxEditCell : DataGridViewTextBoxCell
     {
         /// <summary>
         /// 初始化
         /// </summary>
-        public DataGridViewCalendarCell()
+        public DataGridViewComboBoxEditCell()
             : base()
         {
             // Use the short date format.
@@ -66,9 +66,10 @@ namespace LocalERP.WinForm.Utility
             // Set the value of the editing control to the current cell value.
             base.InitializeEditingControl(rowIndex, initialFormattedValue,
                 dataGridViewCellStyle);
-            DataGridViewCalendarEditingControl ctl =
-                DataGridView.EditingControl as DataGridViewCalendarEditingControl;
-            ctl.Value = (DateTime)this.Value;
+            DataGridViewComboBoxEditEditingControl ctl =
+                DataGridView.EditingControl as DataGridViewComboBoxEditEditingControl;
+            //DataGridViewTextBoxCell没有Text，它的Value为object类型的，但是它还有一个ValueType，要标明是什么类型的(String)
+            ctl.EditingControlFormattedValue = this.Value;
         }
 
         /// <summary>
@@ -79,7 +80,7 @@ namespace LocalERP.WinForm.Utility
             get
             {
                 // Return the type of the editing contol that CalendarCell uses.
-                return typeof(DataGridViewCalendarEditingControl);
+                return typeof(DataGridViewComboBoxEditEditingControl);
             }
         }
 
@@ -90,8 +91,7 @@ namespace LocalERP.WinForm.Utility
         {
             get
             {
-                // Return the type of the value that CalendarCell contains.
-                return typeof(DateTime);
+                return typeof(object);
             }
         }
 
@@ -103,7 +103,7 @@ namespace LocalERP.WinForm.Utility
             get
             {
                 // Use the current date and time as the default value.
-                return DateTime.Now;
+                return "";
             }
         }
     }
@@ -111,7 +111,7 @@ namespace LocalERP.WinForm.Utility
     /// <summary>
     /// DateTimePicker单元格控件
     /// </summary>
-    public class DataGridViewCalendarEditingControl : DateTimePicker, IDataGridViewEditingControl
+    public class DataGridViewComboBoxEditEditingControl : ComboBox, IDataGridViewEditingControl
     {
         DataGridView dataGridView;
         private bool valueChanged = false;
@@ -120,9 +120,10 @@ namespace LocalERP.WinForm.Utility
         /// <summary>
         /// 初始化
         /// </summary>
-        public DataGridViewCalendarEditingControl()
+        public DataGridViewComboBoxEditEditingControl()
         {
-            this.Format = DateTimePickerFormat.Short;
+            //stone
+            //this.Format = DateTimePickerFormat.Short;
         }
 
 
@@ -133,14 +134,15 @@ namespace LocalERP.WinForm.Utility
         {
             get
             {
-                return this.Value.ToShortDateString();
+                return this.Text;//.ToShortDateString();
             }
             set
             {
-                if (value is String)
-                {
-                    this.Value = DateTime.Parse((String)value);
-                }
+                //if (value is String)
+                //{
+                //comboBox只有Text，没有Value
+                this.Text = (string)value;
+                //}
             }
         }
 
@@ -163,8 +165,8 @@ namespace LocalERP.WinForm.Utility
             DataGridViewCellStyle dataGridViewCellStyle)
         {
             this.Font = dataGridViewCellStyle.Font;
-            this.CalendarForeColor = dataGridViewCellStyle.ForeColor;
-            this.CalendarMonthBackground = dataGridViewCellStyle.BackColor;
+            this.ForeColor = dataGridViewCellStyle.ForeColor;
+            this.BackColor = dataGridViewCellStyle.BackColor;
         }
 
         /// <summary>
@@ -269,17 +271,20 @@ namespace LocalERP.WinForm.Utility
             }
         }
 
-        /// <summary>
-        /// 重写数据变化方法
-        /// </summary>
-        /// <param name="eventargs"></param>
-        protected override void OnValueChanged(EventArgs eventargs)
+        //这个一定要，要不然editingControl的值无法赋给cell
+        //这是手工输入
+        protected override void OnTextUpdate(EventArgs e)
         {
-            // Notify the DataGridView that the contents of the cell
-            // have changed.
             valueChanged = true;
             this.EditingControlDataGridView.NotifyCurrentCellDirty(true);
-            base.OnValueChanged(eventargs);
+            base.OnTextUpdate(e);
+        }
+        //这是选择
+        protected override void OnSelectedValueChanged(EventArgs e)
+        {
+            valueChanged = true;
+            this.EditingControlDataGridView.NotifyCurrentCellDirty(true);
+            base.OnSelectedValueChanged(e);
         }
     }
 }

@@ -64,6 +64,7 @@
             this.linkLabel26 = new System.Windows.Forms.LinkLabel();
             this.linkLabel27 = new System.Windows.Forms.LinkLabel();
             this.linkLabel28 = new System.Windows.Forms.LinkLabel();
+            this.linkLabel29 = new System.Windows.Forms.LinkLabel();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -122,7 +123,7 @@
             this.linkLabel4.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Bold);
             this.linkLabel4.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
             this.linkLabel4.LinkColor = System.Drawing.Color.Green;
-            this.linkLabel4.Location = new System.Drawing.Point(227, 216);
+            this.linkLabel4.Location = new System.Drawing.Point(227, 206);
             this.linkLabel4.Name = "linkLabel4";
             this.linkLabel4.Size = new System.Drawing.Size(97, 14);
             this.linkLabel4.TabIndex = 26;
@@ -136,7 +137,7 @@
             this.linkLabel5.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Bold);
             this.linkLabel5.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
             this.linkLabel5.LinkColor = System.Drawing.Color.Green;
-            this.linkLabel5.Location = new System.Drawing.Point(417, 216);
+            this.linkLabel5.Location = new System.Drawing.Point(417, 206);
             this.linkLabel5.Name = "linkLabel5";
             this.linkLabel5.Size = new System.Drawing.Size(67, 14);
             this.linkLabel5.TabIndex = 29;
@@ -151,7 +152,7 @@
             this.linkLabel6.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Bold);
             this.linkLabel6.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
             this.linkLabel6.LinkColor = System.Drawing.Color.Green;
-            this.linkLabel6.Location = new System.Drawing.Point(337, 216);
+            this.linkLabel6.Location = new System.Drawing.Point(337, 206);
             this.linkLabel6.Name = "linkLabel6";
             this.linkLabel6.Size = new System.Drawing.Size(67, 14);
             this.linkLabel6.TabIndex = 27;
@@ -165,7 +166,7 @@
             this.linkLabel7.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Bold);
             this.linkLabel7.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
             this.linkLabel7.LinkColor = System.Drawing.Color.Green;
-            this.linkLabel7.Location = new System.Drawing.Point(227, 354);
+            this.linkLabel7.Location = new System.Drawing.Point(227, 342);
             this.linkLabel7.Name = "linkLabel7";
             this.linkLabel7.Size = new System.Drawing.Size(97, 14);
             this.linkLabel7.TabIndex = 30;
@@ -179,7 +180,7 @@
             this.linkLabel8.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Bold);
             this.linkLabel8.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
             this.linkLabel8.LinkColor = System.Drawing.Color.Green;
-            this.linkLabel8.Location = new System.Drawing.Point(417, 354);
+            this.linkLabel8.Location = new System.Drawing.Point(417, 342);
             this.linkLabel8.Name = "linkLabel8";
             this.linkLabel8.Size = new System.Drawing.Size(67, 14);
             this.linkLabel8.TabIndex = 33;
@@ -194,7 +195,7 @@
             this.linkLabel9.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Bold);
             this.linkLabel9.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
             this.linkLabel9.LinkColor = System.Drawing.Color.Green;
-            this.linkLabel9.Location = new System.Drawing.Point(337, 354);
+            this.linkLabel9.Location = new System.Drawing.Point(337, 342);
             this.linkLabel9.Name = "linkLabel9";
             this.linkLabel9.Size = new System.Drawing.Size(67, 14);
             this.linkLabel9.TabIndex = 31;
@@ -208,7 +209,7 @@
             this.linkLabel10.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Bold);
             this.linkLabel10.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
             this.linkLabel10.LinkColor = System.Drawing.Color.Green;
-            this.linkLabel10.Location = new System.Drawing.Point(732, 423);
+            this.linkLabel10.Location = new System.Drawing.Point(653, 410);
             this.linkLabel10.Name = "linkLabel10";
             this.linkLabel10.Size = new System.Drawing.Size(67, 14);
             this.linkLabel10.TabIndex = 34;
@@ -223,7 +224,7 @@
             this.linkLabel11.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Bold);
             this.linkLabel11.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
             this.linkLabel11.LinkColor = System.Drawing.Color.Green;
-            this.linkLabel11.Location = new System.Drawing.Point(337, 423);
+            this.linkLabel11.Location = new System.Drawing.Point(337, 410);
             this.linkLabel11.Name = "linkLabel11";
             this.linkLabel11.Size = new System.Drawing.Size(67, 14);
             this.linkLabel11.TabIndex = 37;
@@ -238,7 +239,7 @@
             this.linkLabel12.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Bold);
             this.linkLabel12.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
             this.linkLabel12.LinkColor = System.Drawing.Color.Green;
-            this.linkLabel12.Location = new System.Drawing.Point(234, 423);
+            this.linkLabel12.Location = new System.Drawing.Point(234, 410);
             this.linkLabel12.Name = "linkLabel12";
             this.linkLabel12.Size = new System.Drawing.Size(82, 14);
             this.linkLabel12.TabIndex = 35;
@@ -252,7 +253,7 @@
             this.linkLabel13.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Bold);
             this.linkLabel13.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
             this.linkLabel13.LinkColor = System.Drawing.Color.Green;
-            this.linkLabel13.Location = new System.Drawing.Point(242, 492);
+            this.linkLabel13.Location = new System.Drawing.Point(242, 478);
             this.linkLabel13.Name = "linkLabel13";
             this.linkLabel13.Size = new System.Drawing.Size(67, 14);
             this.linkLabel13.TabIndex = 38;
@@ -266,7 +267,7 @@
             this.linkLabel15.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Bold);
             this.linkLabel15.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
             this.linkLabel15.LinkColor = System.Drawing.Color.Green;
-            this.linkLabel15.Location = new System.Drawing.Point(337, 492);
+            this.linkLabel15.Location = new System.Drawing.Point(337, 478);
             this.linkLabel15.Name = "linkLabel15";
             this.linkLabel15.Size = new System.Drawing.Size(67, 14);
             this.linkLabel15.TabIndex = 39;
@@ -277,7 +278,7 @@
             // pictureBox6
             // 
             this.pictureBox6.Image = global::LocalERP.Properties.Resources.manu;
-            this.pictureBox6.Location = new System.Drawing.Point(91, 135);
+            this.pictureBox6.Location = new System.Drawing.Point(91, 130);
             this.pictureBox6.Name = "pictureBox6";
             this.pictureBox6.Size = new System.Drawing.Size(753, 39);
             this.pictureBox6.TabIndex = 41;
@@ -286,7 +287,7 @@
             // pictureBox5
             // 
             this.pictureBox5.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox5.Image")));
-            this.pictureBox5.Location = new System.Drawing.Point(91, 480);
+            this.pictureBox5.Location = new System.Drawing.Point(91, 466);
             this.pictureBox5.Name = "pictureBox5";
             this.pictureBox5.Size = new System.Drawing.Size(753, 39);
             this.pictureBox5.TabIndex = 40;
@@ -295,7 +296,7 @@
             // pictureBox3
             // 
             this.pictureBox3.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox3.Image")));
-            this.pictureBox3.Location = new System.Drawing.Point(91, 411);
+            this.pictureBox3.Location = new System.Drawing.Point(91, 398);
             this.pictureBox3.Name = "pictureBox3";
             this.pictureBox3.Size = new System.Drawing.Size(753, 39);
             this.pictureBox3.TabIndex = 36;
@@ -304,7 +305,7 @@
             // pictureBox2
             // 
             this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
-            this.pictureBox2.Location = new System.Drawing.Point(91, 342);
+            this.pictureBox2.Location = new System.Drawing.Point(91, 330);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(753, 39);
             this.pictureBox2.TabIndex = 32;
@@ -313,7 +314,7 @@
             // pictureBox1
             // 
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(91, 204);
+            this.pictureBox1.Location = new System.Drawing.Point(91, 194);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(753, 39);
             this.pictureBox1.TabIndex = 28;
@@ -331,7 +332,7 @@
             // pictureBox7
             // 
             this.pictureBox7.Image = global::LocalERP.Properties.Resources.cash;
-            this.pictureBox7.Location = new System.Drawing.Point(91, 273);
+            this.pictureBox7.Location = new System.Drawing.Point(91, 262);
             this.pictureBox7.Name = "pictureBox7";
             this.pictureBox7.Size = new System.Drawing.Size(753, 39);
             this.pictureBox7.TabIndex = 42;
@@ -343,7 +344,7 @@
             this.linkLabel14.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Bold);
             this.linkLabel14.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
             this.linkLabel14.LinkColor = System.Drawing.Color.Green;
-            this.linkLabel14.Location = new System.Drawing.Point(228, 147);
+            this.linkLabel14.Location = new System.Drawing.Point(228, 142);
             this.linkLabel14.Name = "linkLabel14";
             this.linkLabel14.Size = new System.Drawing.Size(97, 14);
             this.linkLabel14.TabIndex = 43;
@@ -357,12 +358,12 @@
             this.linkLabel17.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Bold);
             this.linkLabel17.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
             this.linkLabel17.LinkColor = System.Drawing.Color.Green;
-            this.linkLabel17.Location = new System.Drawing.Point(337, 147);
+            this.linkLabel17.Location = new System.Drawing.Point(337, 142);
             this.linkLabel17.Name = "linkLabel17";
-            this.linkLabel17.Size = new System.Drawing.Size(82, 14);
+            this.linkLabel17.Size = new System.Drawing.Size(67, 14);
             this.linkLabel17.TabIndex = 44;
             this.linkLabel17.TabStop = true;
-            this.linkLabel17.Text = "易耗品领用";
+            this.linkLabel17.Text = "生产消耗";
             this.linkLabel17.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel_LinkClicked);
             // 
             // linkLabel16
@@ -371,7 +372,7 @@
             this.linkLabel16.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Bold);
             this.linkLabel16.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
             this.linkLabel16.LinkColor = System.Drawing.Color.Green;
-            this.linkLabel16.Location = new System.Drawing.Point(227, 285);
+            this.linkLabel16.Location = new System.Drawing.Point(227, 274);
             this.linkLabel16.Name = "linkLabel16";
             this.linkLabel16.Size = new System.Drawing.Size(97, 14);
             this.linkLabel16.TabIndex = 45;
@@ -385,7 +386,7 @@
             this.linkLabel18.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Bold);
             this.linkLabel18.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
             this.linkLabel18.LinkColor = System.Drawing.Color.Green;
-            this.linkLabel18.Location = new System.Drawing.Point(416, 285);
+            this.linkLabel18.Location = new System.Drawing.Point(416, 274);
             this.linkLabel18.Name = "linkLabel18";
             this.linkLabel18.Size = new System.Drawing.Size(67, 14);
             this.linkLabel18.TabIndex = 47;
@@ -400,7 +401,7 @@
             this.linkLabel19.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Bold);
             this.linkLabel19.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
             this.linkLabel19.LinkColor = System.Drawing.Color.Green;
-            this.linkLabel19.Location = new System.Drawing.Point(337, 285);
+            this.linkLabel19.Location = new System.Drawing.Point(337, 274);
             this.linkLabel19.Name = "linkLabel19";
             this.linkLabel19.Size = new System.Drawing.Size(67, 14);
             this.linkLabel19.TabIndex = 46;
@@ -414,7 +415,7 @@
             this.linkLabel20.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Bold);
             this.linkLabel20.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
             this.linkLabel20.LinkColor = System.Drawing.Color.Green;
-            this.linkLabel20.Location = new System.Drawing.Point(574, 285);
+            this.linkLabel20.Location = new System.Drawing.Point(574, 274);
             this.linkLabel20.Name = "linkLabel20";
             this.linkLabel20.Size = new System.Drawing.Size(67, 14);
             this.linkLabel20.TabIndex = 49;
@@ -429,7 +430,7 @@
             this.linkLabel21.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Bold);
             this.linkLabel21.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
             this.linkLabel21.LinkColor = System.Drawing.Color.Green;
-            this.linkLabel21.Location = new System.Drawing.Point(495, 285);
+            this.linkLabel21.Location = new System.Drawing.Point(495, 274);
             this.linkLabel21.Name = "linkLabel21";
             this.linkLabel21.Size = new System.Drawing.Size(67, 14);
             this.linkLabel21.TabIndex = 48;
@@ -443,7 +444,7 @@
             this.linkLabel22.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Bold);
             this.linkLabel22.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
             this.linkLabel22.LinkColor = System.Drawing.Color.Green;
-            this.linkLabel22.Location = new System.Drawing.Point(653, 423);
+            this.linkLabel22.Location = new System.Drawing.Point(574, 410);
             this.linkLabel22.Name = "linkLabel22";
             this.linkLabel22.Size = new System.Drawing.Size(67, 14);
             this.linkLabel22.TabIndex = 51;
@@ -459,7 +460,7 @@
             this.linkLabel23.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Bold);
             this.linkLabel23.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
             this.linkLabel23.LinkColor = System.Drawing.Color.Green;
-            this.linkLabel23.Location = new System.Drawing.Point(417, 423);
+            this.linkLabel23.Location = new System.Drawing.Point(417, 410);
             this.linkLabel23.Name = "linkLabel23";
             this.linkLabel23.Size = new System.Drawing.Size(67, 14);
             this.linkLabel23.TabIndex = 50;
@@ -473,12 +474,13 @@
             this.linkLabel24.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Bold);
             this.linkLabel24.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
             this.linkLabel24.LinkColor = System.Drawing.Color.Green;
-            this.linkLabel24.Location = new System.Drawing.Point(574, 423);
+            this.linkLabel24.Location = new System.Drawing.Point(732, 410);
             this.linkLabel24.Name = "linkLabel24";
             this.linkLabel24.Size = new System.Drawing.Size(67, 14);
             this.linkLabel24.TabIndex = 52;
             this.linkLabel24.TabStop = true;
             this.linkLabel24.Text = "利润计算";
+            this.linkLabel24.Visible = false;
             this.linkLabel24.VisitedLinkColor = System.Drawing.Color.RoyalBlue;
             this.linkLabel24.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel_LinkClicked);
             // 
@@ -488,7 +490,7 @@
             this.linkLabel25.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Bold);
             this.linkLabel25.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
             this.linkLabel25.LinkColor = System.Drawing.Color.Green;
-            this.linkLabel25.Location = new System.Drawing.Point(732, 285);
+            this.linkLabel25.Location = new System.Drawing.Point(732, 274);
             this.linkLabel25.Name = "linkLabel25";
             this.linkLabel25.Size = new System.Drawing.Size(67, 14);
             this.linkLabel25.TabIndex = 54;
@@ -503,7 +505,7 @@
             this.linkLabel26.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Bold);
             this.linkLabel26.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
             this.linkLabel26.LinkColor = System.Drawing.Color.Green;
-            this.linkLabel26.Location = new System.Drawing.Point(653, 285);
+            this.linkLabel26.Location = new System.Drawing.Point(653, 274);
             this.linkLabel26.Name = "linkLabel26";
             this.linkLabel26.Size = new System.Drawing.Size(67, 14);
             this.linkLabel26.TabIndex = 53;
@@ -517,7 +519,7 @@
             this.linkLabel27.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Bold);
             this.linkLabel27.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
             this.linkLabel27.LinkColor = System.Drawing.Color.Green;
-            this.linkLabel27.Location = new System.Drawing.Point(416, 492);
+            this.linkLabel27.Location = new System.Drawing.Point(416, 478);
             this.linkLabel27.Name = "linkLabel27";
             this.linkLabel27.Size = new System.Drawing.Size(67, 14);
             this.linkLabel27.TabIndex = 55;
@@ -531,7 +533,7 @@
             this.linkLabel28.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Bold);
             this.linkLabel28.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
             this.linkLabel28.LinkColor = System.Drawing.Color.Green;
-            this.linkLabel28.Location = new System.Drawing.Point(497, 423);
+            this.linkLabel28.Location = new System.Drawing.Point(497, 410);
             this.linkLabel28.Name = "linkLabel28";
             this.linkLabel28.Size = new System.Drawing.Size(67, 14);
             this.linkLabel28.TabIndex = 56;
@@ -539,12 +541,27 @@
             this.linkLabel28.Text = "财务统计";
             this.linkLabel28.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel_LinkClicked);
             // 
+            // linkLabel29
+            // 
+            this.linkLabel29.AutoSize = true;
+            this.linkLabel29.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Bold);
+            this.linkLabel29.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
+            this.linkLabel29.LinkColor = System.Drawing.Color.Green;
+            this.linkLabel29.Location = new System.Drawing.Point(417, 142);
+            this.linkLabel29.Name = "linkLabel29";
+            this.linkLabel29.Size = new System.Drawing.Size(67, 14);
+            this.linkLabel29.TabIndex = 57;
+            this.linkLabel29.TabStop = true;
+            this.linkLabel29.Text = "生产入库";
+            this.linkLabel29.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel_LinkClicked);
+            // 
             // WelcomeForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(856, 569);
+            this.Controls.Add(this.linkLabel29);
             this.Controls.Add(this.linkLabel28);
             this.Controls.Add(this.linkLabel27);
             this.Controls.Add(this.linkLabel25);
@@ -633,6 +650,7 @@
         private System.Windows.Forms.LinkLabel linkLabel26;
         private System.Windows.Forms.LinkLabel linkLabel27;
         private System.Windows.Forms.LinkLabel linkLabel28;
+        private System.Windows.Forms.LinkLabel linkLabel29;
 
 
 

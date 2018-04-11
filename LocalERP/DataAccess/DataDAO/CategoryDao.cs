@@ -46,7 +46,7 @@ namespace LocalERP.DataAccess.DataDAO
                     tableName, info.Name, parentId, point+1, point+2);
                 DbHelperAccess.executeNonQuery(commandText);
 
-                int categoryID = DbHelperAccess.executeLastID("ID", tableName);
+                int categoryID = DbHelperAccess.executeMax("ID", tableName);
 
                 return categoryID;
             }
@@ -60,6 +60,73 @@ namespace LocalERP.DataAccess.DataDAO
         {
             string commandText = string.Format("update {0} set name='{1}' where ID={2}",tableName, name, ID);
             return DbHelperAccess.executeNonQuery(commandText);
+        }
+
+        public bool UpdateParent(string tableName, Category node, Category preParent, Category newParent) {
+            if (preParent == null && newParent == null || preParent!=null && newParent!=null && preParent.Id == newParent.Id)
+                return false;
+
+            string commandText = string.Format("update {0} set parent={1} where ID={2}", tableName, newParent==null?"null":newParent.Id.ToString(), node.Id);
+            DbHelperAccess.executeNonQuery(commandText);
+
+            int newParentRight = 0;
+            int nodeSpan = node.Right - node.Left + 1;
+            if (newParent != null)
+            {
+                newParentRight = newParent.Right;
+
+                //先腾出位置，包括newParent的right，也包括node
+                commandText = string.Format("update {0} set {0}.lft={0}.lft+{1} where lft>={2}", tableName, nodeSpan, newParentRight);
+                DbHelperAccess.executeNonQuery(commandText);
+
+                commandText = string.Format("update {0} set {0}.rgt={0}.rgt+{1} where rgt>={2}", tableName, nodeSpan, newParentRight);
+                DbHelperAccess.executeNonQuery(commandText);
+            }
+            else {
+                int maxRight = DbHelperAccess.executeMax("rgt", tableName);
+                newParentRight = maxRight + 1;
+            }
+
+            //刷新下node1
+            node = this.FindById(tableName, node.Id);
+            //node的left从newParentRight开始
+            int offset = newParentRight - node.Left;
+            //更新下node2
+            commandText = string.Format("update {0} set {0}.rgt={0}.rgt+{1}, {0}.lft={0}.lft+{1} where lft>={2} and lft<={3}", tableName, offset, node.Left, node.Right);
+            DbHelperAccess.executeNonQuery(commandText);
+
+            //用node1来判断，右边的才需要删除位置
+            commandText = string.Format("update {0} set {0}.lft={0}.lft-{1} where lft>{2}", tableName, nodeSpan, node.Right);
+            DbHelperAccess.executeNonQuery(commandText);
+
+            commandText = string.Format("update {0} set {0}.rgt={0}.rgt-{1} where rgt>{2}", tableName, nodeSpan, node.Right);
+            DbHelperAccess.executeNonQuery(commandText);
+
+            return true;
+
+        }
+
+        //仅限于同级相邻两个节点，而且node比preNode大
+        public bool nodeUp(string tableName, Category node, Category preNode) {
+            //先把node挪开，要不等下会重叠
+            int maxRight = DbHelperAccess.executeMax("rgt", tableName);
+            maxRight++;
+            int offset = maxRight - node.Left;
+            string commandText = string.Format("update {0} set {0}.rgt={0}.rgt+{1}, {0}.lft={0}.lft+{1} where lft>={2} and lft<={3}", tableName, offset, node.Left, node.Right);
+            DbHelperAccess.executeNonQuery(commandText);
+
+
+            //把preNode移过去新位置
+            int span = node.Right - node.Left + 1;
+            commandText = string.Format("update {0} set {0}.rgt={0}.rgt+{1}, {0}.lft={0}.lft+{1} where lft>={2} and lft<={3}", tableName, span, preNode.Left, preNode.Right);
+            DbHelperAccess.executeNonQuery(commandText);
+
+            node = this.FindById(tableName, node.Id);
+            span = preNode.Right - preNode.Left + 1 + offset;
+            commandText = string.Format("update {0} set {0}.rgt={0}.rgt-{1}, {0}.lft={0}.lft-{1} where lft>={2} and lft<={3}", tableName, span, node.Left, node.Right);
+            DbHelperAccess.executeNonQuery(commandText);
+
+            return true;
         }
 
         //
@@ -105,9 +172,8 @@ namespace LocalERP.DataAccess.DataDAO
                 Category category = new Category();
                 category.Id = (int)dr["ID"];
                 category.Name = dr["name"] as string;
-                string parent = dr["parent"] as string;
-                if (parent != null && parent != "")
-                    category.Parent = int.Parse(parent);
+                try { category.Parent = (int)dr["parent"]; }
+                catch { }
                 category.Left = (int)dr["lft"];
                 category.Right = (int)dr["rgt"];
                 return category;
@@ -121,7 +187,7 @@ namespace LocalERP.DataAccess.DataDAO
             string idString = "="+ID.ToString();
             if (ID < 0)
                 idString = " is null";
-            string commandText = string.Format("select * from {0} where parent{1}",tableName, idString);
+            string commandText = string.Format("select * from {0} where parent{1} order by lft",tableName, idString);
             DataTable dt = DbHelperAccess.executeQuery(commandText);
             
             List<Category> categorys = new List<Category>();

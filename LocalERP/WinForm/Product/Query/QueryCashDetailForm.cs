@@ -83,7 +83,8 @@ namespace LocalERP.WinForm
 
         private void formatRow(DataGridViewRow row, string customer, DateTime time, string serial, string type, string needPay, string thisPayed, string accNeedPay, string needReceipt, string thisReceipted, string accNeedReceipt, string comment) {
             row.Cells["customer"].Value = customer;
-            row.Cells["time"].Value = time;
+            if(time != DateTime.MinValue)
+                row.Cells["time"].Value = time;
             row.Cells["serial"].Value = serial;
             row.Cells["type"].Value = type;
             row.Cells["needPay"].Value = string.IsNullOrEmpty(needPay) && string.IsNullOrEmpty(thisPayed)?"":string.Format("{0,8}/{1}", needPay, thisPayed);
@@ -98,6 +99,7 @@ namespace LocalERP.WinForm
         private void backgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             dataGridView1.Rows.Clear();
+            double sum_needPay = 0, sum_thisPayed = 0, sum_needReceipt = 0, sum_thisReceipted = 0;
             foreach (PayReceipt pr in payReceiptList)
             {
                 int index = dataGridView1.Rows.Add();
@@ -106,28 +108,48 @@ namespace LocalERP.WinForm
 
                 //处理this
                 if (pr.cashDirection == -1)
+                {
                     thisPayed = pr.thisPayed.ToString();
+                    sum_thisPayed += pr.thisPayed;
+                }
                 else
+                {
                     thisReceipted = pr.thisPayed.ToString();
+                    sum_thisReceipted += pr.thisPayed;
+                }
 
                 if (pr.bill_type == PayReceipt.BillType.ChangeArrear)
                     thisPayed = thisReceipted = "";
                 
                 //处理acc
                 if (pr.arrearDirection == 1)
-                    accPay = ((pr.arrearDirection * pr.previousArrears - pr.cashDirection * (pr.amount - pr.thisPayed)) * pr.arrearDirection).ToString();
+                {
+                    double tempAccPay = (pr.arrearDirection * pr.previousArrears - pr.cashDirection * (pr.amount - pr.thisPayed)) * pr.arrearDirection;
+                    accPay = tempAccPay.ToString();
+                    //sum_accPay += tempAccPay;
+                }
                 else
-                    accReceipt = ((pr.arrearDirection * pr.previousArrears - pr.cashDirection * (pr.amount - pr.thisPayed)) * pr.arrearDirection).ToString();
+                {
+                    double tempAccReceipt = (pr.arrearDirection * pr.previousArrears - pr.cashDirection * (pr.amount - pr.thisPayed)) * pr.arrearDirection;
+                    accReceipt = tempAccReceipt.ToString();
+                    //sum_accReceipt += tempAccReceipt;
+                }
 
                 if (pr.bill_type == PayReceipt.BillType.OtherPay || pr.bill_type == PayReceipt.BillType.OtherReceipt)
                     accPay = accReceipt = "";
 
                 //处理need
                 if (pr.bill_type == PayReceipt.BillType.BuyRefund || pr.bill_type == PayReceipt.BillType.ChangeArrear && pr.cashDirection == 1)
+                {
                     needReceipt = pr.amount.ToString();
+                    sum_needReceipt += pr.amount;
+                }
 
                 if (pr.bill_type == PayReceipt.BillType.SellRefund || pr.bill_type == PayReceipt.BillType.ChangeArrear && pr.cashDirection == -1)
+                {
                     needPay = pr.amount.ToString();
+                    sum_needPay += pr.amount;
+                }
                 
                 formatRow(dataGridView1.Rows[index], pr.customerName, pr.bill_time, pr.serial, PayReceipt.PayReceiptTypeConfs[(int)pr.bill_type - 1].name, needPay, thisPayed, accPay, needReceipt, thisReceipted, accReceipt, pr.comment);
             }
@@ -143,17 +165,31 @@ namespace LocalERP.WinForm
                 {
                     thisPayed = cir.ThisPayed.ToString();
                     needPay = cir.RealTotal.ToString();
+
+                    sum_thisPayed += cir.ThisPayed;
+                    sum_needPay += cir.RealTotal;
                 }
                 else
                 {
                     thisReceipted = cir.ThisPayed.ToString();
                     needReceipt = cir.RealTotal.ToString();
+
+                    sum_thisReceipted += cir.ThisPayed;
+                    sum_needReceipt += cir.RealTotal;
                 }
                 //处理acc
                 if (cir.ArrearDirection == 1)
-                    accPay = ((cir.ArrearDirection * cir.PreviousArrears + cir.FlowType * (cir.RealTotal - cir.ThisPayed)) * cir.ArrearDirection).ToString();
+                {
+                    double tempAccPay = (cir.ArrearDirection * cir.PreviousArrears + cir.FlowType * (cir.RealTotal - cir.ThisPayed)) * cir.ArrearDirection;
+                    accPay = tempAccPay.ToString();
+                    //sum_accPay += tempAccPay;
+                }
                 else
-                    accReceipt = ((cir.ArrearDirection * cir.PreviousArrears + cir.FlowType * (cir.RealTotal - cir.ThisPayed)) * cir.ArrearDirection).ToString();
+                {
+                    double tempAccReceipt = (cir.ArrearDirection * cir.PreviousArrears + cir.FlowType * (cir.RealTotal - cir.ThisPayed)) * cir.ArrearDirection;
+                    accReceipt = tempAccReceipt.ToString();
+                    //sum_accReceipt += tempAccReceipt;
+                }
 
 
                 formatRow(dataGridView1.Rows[index], cir.CustomerName, cir.CirculationTime, cir.Code, ProductCirculation.CirculationTypeConfs[(int)cir.Type - 1].name, needPay, thisPayed, accPay, needReceipt, thisReceipted, accReceipt, cir.Comment+"(货单自动生成)");
@@ -161,10 +197,16 @@ namespace LocalERP.WinForm
                 //判断是否有运费
                 if (cir.Freight > 0) {
                     index = dataGridView1.Rows.Add();
-                    formatRow(dataGridView1.Rows[index], "", cir.CirculationTime, cir.Code, DataUtility.CASH_OTHER_PAY, "", cir.Freight.ToString(), "", "", "", "", "运费(货单自动生成)");
+                    formatRow(dataGridView1.Rows[index], "", cir.CirculationTime, cir.Code, LabelUtility.CASH_OTHER_PAY, "", cir.Freight.ToString(), "", "", "", "", "运费(货单自动生成)");
                 }
             }
             this.dataGridView1.Sort(dataGridView1.Columns["time"], ListSortDirection.Descending);
+            
+            int sumIndex = dataGridView1.Rows.Add();
+            this.dataGridView1.Rows[sumIndex].DefaultCellStyle.ForeColor = Color.Red;
+            this.dataGridView1.Rows[sumIndex].DefaultCellStyle.Font = new Font("宋体", 10F, FontStyle.Bold);
+            formatRow(dataGridView1.Rows[sumIndex], "合计", DateTime.MinValue, null, null, sum_needPay.ToString(), sum_thisPayed.ToString(), null, sum_needReceipt.ToString(), sum_thisReceipted.ToString(), null, null);
+
             this.invokeEndLoadNotify();
         }
 

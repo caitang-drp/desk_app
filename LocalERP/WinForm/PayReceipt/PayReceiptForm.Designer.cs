@@ -58,6 +58,7 @@ namespace LocalERP.WinForm
             this.toolStripButton_save = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton_approval = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton_finish = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton_finishCancel = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton_print = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.label6 = new System.Windows.Forms.Label();
@@ -97,7 +98,7 @@ namespace LocalERP.WinForm
             // label_date
             // 
             this.label_date.AutoSize = true;
-            this.label_date.Location = new System.Drawing.Point(359, 140);
+            this.label_date.Location = new System.Drawing.Point(348, 140);
             this.label_date.Name = "label_date";
             this.label_date.Size = new System.Drawing.Size(70, 14);
             this.label_date.TabIndex = 2;
@@ -105,10 +106,13 @@ namespace LocalERP.WinForm
             // 
             // dateTime_time
             // 
-            this.dateTime_time.Location = new System.Drawing.Point(431, 135);
+            this.dateTime_time.CustomFormat = "yyyy-MM-dd HH:mm:ss";
+            this.dateTime_time.Enabled = false;
+            this.dateTime_time.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dateTime_time.Location = new System.Drawing.Point(420, 135);
             this.dateTime_time.Margin = new System.Windows.Forms.Padding(2);
             this.dateTime_time.Name = "dateTime_time";
-            this.dateTime_time.Size = new System.Drawing.Size(133, 23);
+            this.dateTime_time.Size = new System.Drawing.Size(178, 23);
             this.dateTime_time.TabIndex = 15;
             this.dateTime_time.ValueChanged += new System.EventHandler(this.Controls_TextChanged);
             // 
@@ -126,10 +130,10 @@ namespace LocalERP.WinForm
             // 
             // textBox_serial
             // 
-            this.textBox_serial.Location = new System.Drawing.Point(431, 102);
+            this.textBox_serial.Location = new System.Drawing.Point(420, 102);
             this.textBox_serial.Margin = new System.Windows.Forms.Padding(2);
             this.textBox_serial.Name = "textBox_serial";
-            this.textBox_serial.Size = new System.Drawing.Size(133, 23);
+            this.textBox_serial.Size = new System.Drawing.Size(178, 23);
             this.textBox_serial.TabIndex = 20;
             this.textBox_serial.TextChanged += new System.EventHandler(this.Controls_TextChanged);
             this.textBox_serial.Validating += new System.ComponentModel.CancelEventHandler(this.textBox_serial_Validating);
@@ -137,7 +141,7 @@ namespace LocalERP.WinForm
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(359, 107);
+            this.label3.Location = new System.Drawing.Point(348, 107);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(70, 14);
             this.label3.TabIndex = 19;
@@ -189,7 +193,7 @@ namespace LocalERP.WinForm
             // 
             this.label5.AutoSize = true;
             this.label5.ForeColor = System.Drawing.Color.Red;
-            this.label5.Location = new System.Drawing.Point(347, 107);
+            this.label5.Location = new System.Drawing.Point(336, 107);
             this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(14, 14);
@@ -229,7 +233,7 @@ namespace LocalERP.WinForm
             // label_operator
             // 
             this.label_operator.AutoSize = true;
-            this.label_operator.Location = new System.Drawing.Point(672, 140);
+            this.label_operator.Location = new System.Drawing.Point(679, 140);
             this.label_operator.Name = "label_operator";
             this.label_operator.Size = new System.Drawing.Size(70, 14);
             this.label_operator.TabIndex = 45;
@@ -248,7 +252,7 @@ namespace LocalERP.WinForm
             // 
             this.label_accumulative.AutoSize = true;
             this.label_accumulative.ForeColor = System.Drawing.Color.Black;
-            this.label_accumulative.Location = new System.Drawing.Point(347, 11);
+            this.label_accumulative.Location = new System.Drawing.Point(354, 13);
             this.label_accumulative.Name = "label_accumulative";
             this.label_accumulative.Size = new System.Drawing.Size(112, 14);
             this.label_accumulative.TabIndex = 46;
@@ -266,7 +270,7 @@ namespace LocalERP.WinForm
             // 
             // textBox_operator
             // 
-            this.textBox_operator.Location = new System.Drawing.Point(743, 137);
+            this.textBox_operator.Location = new System.Drawing.Point(750, 137);
             this.textBox_operator.Margin = new System.Windows.Forms.Padding(2);
             this.textBox_operator.Name = "textBox_operator";
             this.textBox_operator.Size = new System.Drawing.Size(134, 23);
@@ -295,6 +299,7 @@ namespace LocalERP.WinForm
             this.toolStripButton_save,
             this.toolStripButton_approval,
             this.toolStripButton_finish,
+            this.toolStripButton_finishCancel,
             this.toolStripButton_print,
             this.toolStripButton1});
             this.toolStrip2.Location = new System.Drawing.Point(0, 0);
@@ -334,6 +339,16 @@ namespace LocalERP.WinForm
             this.toolStripButton_finish.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.toolStripButton_finish.Click += new System.EventHandler(this.toolStripButton_finish_Click);
             // 
+            // toolStripButton_finishCancel
+            // 
+            this.toolStripButton_finishCancel.Image = global::LocalERP.Properties.Resources.del16;
+            this.toolStripButton_finishCancel.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton_finishCancel.Name = "toolStripButton_finishCancel";
+            this.toolStripButton_finishCancel.Size = new System.Drawing.Size(39, 34);
+            this.toolStripButton_finishCancel.Text = "弃核";
+            this.toolStripButton_finishCancel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.toolStripButton_finishCancel.Click += new System.EventHandler(this.toolStripButton_finishCancel_Click);
+            // 
             // toolStripButton_print
             // 
             this.toolStripButton_print.Image = global::LocalERP.Properties.Resources.print16;
@@ -367,7 +382,7 @@ namespace LocalERP.WinForm
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(596, 11);
+            this.label7.Location = new System.Drawing.Point(603, 13);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(21, 14);
             this.label7.TabIndex = 56;
@@ -387,7 +402,7 @@ namespace LocalERP.WinForm
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(284, 12);
+            this.label16.Location = new System.Drawing.Point(320, 12);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(21, 14);
             this.label16.TabIndex = 66;
@@ -396,15 +411,15 @@ namespace LocalERP.WinForm
             // textBox_previousArrears
             // 
             this.textBox_previousArrears.Enabled = false;
-            this.textBox_previousArrears.Location = new System.Drawing.Point(148, 9);
+            this.textBox_previousArrears.Location = new System.Drawing.Point(137, 9);
             this.textBox_previousArrears.Name = "textBox_previousArrears";
-            this.textBox_previousArrears.Size = new System.Drawing.Size(133, 23);
+            this.textBox_previousArrears.Size = new System.Drawing.Size(178, 23);
             this.textBox_previousArrears.TabIndex = 65;
             // 
             // label_arrears
             // 
             this.label_arrears.AutoSize = true;
-            this.label_arrears.Location = new System.Drawing.Point(34, 11);
+            this.label_arrears.Location = new System.Drawing.Point(23, 11);
             this.label_arrears.Name = "label_arrears";
             this.label_arrears.Size = new System.Drawing.Size(112, 14);
             this.label_arrears.TabIndex = 64;
@@ -413,7 +428,7 @@ namespace LocalERP.WinForm
             // textBox_accumulative
             // 
             this.textBox_accumulative.Enabled = false;
-            this.textBox_accumulative.Location = new System.Drawing.Point(460, 7);
+            this.textBox_accumulative.Location = new System.Drawing.Point(467, 9);
             this.textBox_accumulative.Name = "textBox_accumulative";
             this.textBox_accumulative.Size = new System.Drawing.Size(134, 23);
             this.textBox_accumulative.TabIndex = 60;
@@ -486,7 +501,7 @@ namespace LocalERP.WinForm
             this.panel_customer.Controls.Add(this.lookupText1);
             this.panel_customer.Controls.Add(this.label9);
             this.panel_customer.Controls.Add(this.label_customer);
-            this.panel_customer.Location = new System.Drawing.Point(656, 97);
+            this.panel_customer.Location = new System.Drawing.Point(663, 97);
             this.panel_customer.Name = "panel_customer";
             this.panel_customer.Size = new System.Drawing.Size(258, 37);
             this.panel_customer.TabIndex = 75;
@@ -595,6 +610,7 @@ namespace LocalERP.WinForm
         protected System.Windows.Forms.Panel panel_sum;
         protected System.Windows.Forms.Panel panel_customer;
         protected System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.ToolStripButton toolStripButton_finishCancel;
         
        
     }

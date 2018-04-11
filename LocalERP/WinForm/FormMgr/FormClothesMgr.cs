@@ -52,7 +52,12 @@ namespace LocalERP.WinForm
             throw new Exception("The method or operation is not implemented.");
         }
 
-        public override ProductCirculationForm getEasyForm()
+        public override ProductCirculationForm getManuCostForm()
+        {
+            throw new Exception("The method or operation is not implemented.");
+        }
+
+        public override ProductCirculationForm getManuInForm()
         {
             throw new Exception("The method or operation is not implemented.");
         }
@@ -189,7 +194,7 @@ namespace LocalERP.WinForm
         {
             if (productCIForm == null || productCIForm.IsDisposed)
             {
-                productCIForm = new CategoryItemForm(1, new ProductStainlessCategoryItemProxy(), DataUtility.DATA_PRODUCT, this.mainForm);
+                productCIForm = new CategoryItemForm(1, new ProductStainlessCategoryItemProxy(), LabelUtility.DATA_PRODUCT, this.mainForm);
                 productCIForm.initVersions(getVersions(),
                     UpdateType.ProductUpdate, UpdateType.ProductCategoryUpdate, UpdateType.CustomerUpdate, UpdateType.CustomerCategoryUpdate);
                 appendEvent(productCIForm);
@@ -199,7 +204,7 @@ namespace LocalERP.WinForm
 
         public override CategoryItemForm getProductCIForm_select()
         {
-            CategoryItemForm productCIForm_select = new CategoryItemForm(0, new ProductStainlessCategoryItemProxy(), DataUtility.DATA_PRODUCT, this.mainForm);
+            CategoryItemForm productCIForm_select = new CategoryItemForm(0, new ProductStainlessCategoryItemProxy(), LabelUtility.DATA_PRODUCT, this.mainForm);
             productCIForm_select.initVersions(getVersions(),
                 UpdateType.ProductUpdate, UpdateType.ProductCategoryUpdate, UpdateType.CustomerUpdate, UpdateType.CustomerCategoryUpdate);
 

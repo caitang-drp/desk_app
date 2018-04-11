@@ -37,10 +37,6 @@ namespace LocalERP.WinForm
             InitializeComponent();
 
             this.openMode = openMode;
-            if (this.openMode == 0)
-                this.label_tip.Text = "双击即可选中" + title;
-            else
-                this.label_tip.Text = "双击即可编辑" + title;
 
             this.categoryItemProxy = proxy;
             this.Text = title;
@@ -50,6 +46,15 @@ namespace LocalERP.WinForm
 
             categoryItemProxy.initColumns(this.dataGridView1);
             categoryItemProxy.initTree(this.treeView1);
+
+            if (this.openMode == 0)
+            {
+                this.label_tip.Text = "双击即可选中" + title;
+                categoryItemProxy.hideSomeColumns(this.dataGridView1);
+            }
+            else
+                this.label_tip.Text = "双击即可编辑" + title;
+
         }
 
         private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
@@ -177,7 +182,63 @@ namespace LocalERP.WinForm
                 CategoryDao.getInstance().UpdateName(CategoryItemProxy.CategoryTableName, int.Parse(e.Node.Name), text);
 
             this.invokeUpdateNotify(this.categoryItemProxy.UpdateType_Category);
+            //刷新本身的窗口？
             this.refreshVersion(this.categoryItemProxy.UpdateType_Category);
+        }
+
+
+        private void toolStripButton_editType_Click(object sender, EventArgs e)
+        {
+            if (treeView1.SelectedNode != null)
+            {
+
+                int id = int.Parse(treeView1.SelectedNode.Name);
+                CategoryForm form = FormSingletonFactory.getInstance().getCategoryForm(this.categoryItemProxy, 1, id);
+                form.updateNotify -= new UpdateNotify(form_updateNotify_category);
+                form.updateNotify += new UpdateNotify(form_updateNotify_category);
+                form.ShowDialog();
+            }
+            else
+                MessageBox.Show("请选择类别.", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        void form_updateNotify_category(UpdateType notifyType)
+        {
+            this.refresh();
+            this.refreshVersion(notifyType);
+        }
+
+        //上移
+        private void toolStripButton_upType_Click(object sender, EventArgs e)
+        {
+            if (treeView1.SelectedNode != null)
+            {
+                TreeNode preNode = treeView1.SelectedNode.PrevNode;
+
+                if (preNode == null) {
+                    MessageBox.Show("该类别已经达到所属类别的最顶端，如需修改所属类别，请点击修改.", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+
+                Category node = CategoryDao.getInstance().FindById(CategoryItemProxy.CategoryTableName, int.Parse(treeView1.SelectedNode.Name));
+                Category pNode = CategoryDao.getInstance().FindById(CategoryItemProxy.CategoryTableName, int.Parse(preNode.Name));
+                CategoryDao.getInstance().nodeUp(CategoryItemProxy.CategoryTableName, node, pNode);
+
+                TreeNode parent = treeView1.SelectedNode.Parent;
+                int index = treeView1.SelectedNode.Index;
+
+                if (parent == null)
+                {
+                    treeView1.Nodes.Remove(preNode);
+                    treeView1.Nodes.Insert(index, preNode);
+                }
+                else {
+                    parent.Nodes.Remove(preNode);
+                    parent.Nodes.Insert(index, preNode);
+                }
+            }
+            else
+                MessageBox.Show("请选择类别.", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void toolStripButton_delType_Click(object sender, EventArgs e)
@@ -226,6 +287,7 @@ namespace LocalERP.WinForm
             form.ShowDialog();
         }
 
+        //这个只是更新categoryItemForm，子窗口还会向外发布事件
         void form_updateNotify(UpdateType notifyType)
         {
             this.refreshList();
@@ -240,6 +302,9 @@ namespace LocalERP.WinForm
         private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0)
+                return;
+
+            if (this.dataGridView1.Rows[e.RowIndex].Cells["ID"].Value == null)
                 return;
 
             int id = (int)this.dataGridView1.Rows[e.RowIndex].Cells["ID"].Value;

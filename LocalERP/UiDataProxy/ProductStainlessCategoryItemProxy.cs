@@ -26,74 +26,7 @@ namespace LocalERP.UiDataProxy
         }
 
         public override void initColumns(DataGridView dgv)
-        {/*
-            DataGridViewCheckBoxColumn check = new DataGridViewCheckBoxColumn();
-            DataGridViewTextBoxColumn ID = new DataGridViewTextBoxColumn();
-            DataGridViewTextBoxColumn serial = new DataGridViewTextBoxColumn();
-            DataGridViewTextBoxColumn name = new DataGridViewTextBoxColumn();
-            DataGridViewTextBoxColumn category = new DataGridViewTextBoxColumn();
-            DataGridViewTextBoxColumn pricePurchase = new DataGridViewTextBoxColumn();
-            DataGridViewTextBoxColumn priceSell = new DataGridViewTextBoxColumn();
-            DataGridViewTextBoxColumn priceCost = new DataGridViewTextBoxColumn();
-            DataGridViewTextBoxColumn libNum = new DataGridViewTextBoxColumn();
-
-            check.HeaderText = "选择";
-            check.Name = "check";
-            check.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            check.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            check.Width = 60;
-            // 
-            // ID
-            // 
-            ID.HeaderText = "ID";
-            ID.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            ID.Name = "ID";
-            ID.ReadOnly = true;
-            ID.Visible = false;
-            ID.Width = 40;
-
-            serial.HeaderText = "货号";
-            serial.Name = "serial";
-            serial.ReadOnly = true;
-            serial.Width = 55;
-            // 
-            // name
-            // 
-            name.HeaderText = "货品名称";
-            name.Name = "name";
-            name.ReadOnly = true;
-            name.Width = 140;
-            // 
-            // category
-            // 
-            category.HeaderText = "类别";
-            category.Name = "category";
-            category.ReadOnly = true;
-            category.Width = 60;
-            // 
-            // comment
-            // 
-            pricePurchase.HeaderText = "采购价/元";
-            pricePurchase.Name = "pricePurchase";
-            pricePurchase.ReadOnly = true;
-            pricePurchase.Width = 105;
-
-            priceSell.HeaderText = "销售价/元";
-            priceSell.Name = "priceSell";
-            priceSell.ReadOnly = true;
-            priceSell.Width = 105;
-
-            priceCost.HeaderText = "成本价/元";
-            priceCost.Name = "priceCost";
-            priceCost.ReadOnly = true;
-            priceCost.Width = 105;
-
-            libNum.HeaderText = "库存数量";
-            libNum.Name = "libNum";
-            libNum.ReadOnly = true;
-            libNum.Width = 90;
-            */
-
+        {
             DataGridViewCheckBoxColumn check = new DataGridViewCheckBoxColumn();
             check.HeaderText = "选择";
             check.Name = "check";
@@ -111,6 +44,14 @@ namespace LocalERP.UiDataProxy
             ControlUtility.initColumns(dgv, columnNames, columnTexts, columnLengths);
             dgv.Columns.Insert(0, check);
             dgv.Columns.Insert(0, ID);
+        }
+
+        public override void hideSomeColumns(DataGridView dgv)
+        {
+            base.hideSomeColumns(dgv);
+            dgv.Columns["pricePurchase"].Visible = false;
+            //dgv.Columns["priceSell"].Visible = false;
+            dgv.Columns["priceCost"].Visible = false;
         }
 
         public override void initTree(TreeView tv)

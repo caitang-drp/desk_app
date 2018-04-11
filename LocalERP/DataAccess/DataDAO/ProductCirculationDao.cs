@@ -29,10 +29,10 @@ namespace LocalERP.DataAccess.DataDAO
             ProductCirculationID = 0;
             try
             {
-                string commandText = string.Format("insert into {0}(code, circulationTime, comment, status, customerID, type, flowType, arrearDirection, total, realTotal, previousArrears, thisPayed, freight, operator) values('{1}','{2}', '{3}', '{4}', {5}, {6}, {7}, {8}, {9}, {10},{11},{12},{13},'{14}')",
-                    tableName, info.Code, info.CirculationTime, info.Comment, info.Status, info.CustomerID <= 0 ? "null" : info.CustomerID.ToString(), info.Type, info.FlowType, info.ArrearDirection, info.Total, info.RealTotal, info.PreviousArrears, info.ThisPayed, info.Freight, info.Oper);
+                string commandText = string.Format("insert into {0}(code, circulationTime, comment, status, customerID, type, flowType, arrearDirection, total, backFreightPerPiece, realTotal, previousArrears, thisPayed, freight, operator) values('{1}','{2}', '{3}', '{4}', {5}, {6}, {7}, {8}, {9},{10},{11},{12},{13},{14},'{15}')",
+                    tableName, info.Code, info.CirculationTime, info.Comment, info.Status, info.CustomerID <= 0 ? "null" : info.CustomerID.ToString(), info.Type, info.FlowType, info.ArrearDirection, info.Total, info.BackFreightPerPiece, info.RealTotal, info.PreviousArrears, info.ThisPayed, info.Freight, info.Oper);
                 DbHelperAccess.executeNonQuery(commandText);
-                ProductCirculationID = DbHelperAccess.executeLastID("ID", tableName);
+                ProductCirculationID = DbHelperAccess.executeMax("ID", tableName);
                 return true;
             }
             catch (Exception ex)
@@ -52,8 +52,8 @@ namespace LocalERP.DataAccess.DataDAO
 
         public void UpdateBaiscInfo(ProductCirculation info)
         {
-            string commandText = string.Format("update {0} set code='{1}', circulationTime='{2}', comment='{3}', customerID={4}, total={5}, realTotal={6}, previousArrears={7}, thisPayed ={8}, freight={9}, operator='{10}' where ID={11}",
-                tableName, info.Code, info.CirculationTime, info.Comment, info.CustomerID <= 0 ? "null" : info.CustomerID.ToString(), info.Total, info.RealTotal, info.PreviousArrears, info.ThisPayed, info.Freight, info.Oper, info.ID);
+            string commandText = string.Format("update {0} set code='{1}', circulationTime='{2}', comment='{3}', customerID={4}, total={5}, backFreightPerPiece={6}, realTotal={7}, previousArrears={8}, thisPayed ={9}, freight={10}, operator='{11}' where ID={12}",
+                tableName, info.Code, info.CirculationTime, info.Comment, info.CustomerID <= 0 ? "null" : info.CustomerID.ToString(), info.Total, info.BackFreightPerPiece, info.RealTotal, info.PreviousArrears, info.ThisPayed, info.Freight, info.Oper, info.ID);
 
             DbHelperAccess.executeNonQuery(commandText);
         }
@@ -72,7 +72,7 @@ namespace LocalERP.DataAccess.DataDAO
             if (!string.IsNullOrEmpty(customerName))
                 commandText.Append(string.Format(" and Customer.name like '%{0}%'", customerName));
 
-            commandText.Append(string.Format(" order by {0}.ID desc", tableName));
+            commandText.Append(string.Format(" order by {0}.circulationTime desc", tableName));
             return DbHelperAccess.executeQuery(commandText.ToString());
         }
 
@@ -96,10 +96,12 @@ namespace LocalERP.DataAccess.DataDAO
 
                 circulation.Oper = dr["operator"] as string;
 
-                double total, realTotal, previousArrears, thisPayed, freight;
+                double total, backFreightPerPiece, realTotal, previousArrears, thisPayed, freight;
 
                 if (double.TryParse(dr["total"].ToString(), out total))
                     circulation.Total = total;
+                if (double.TryParse(dr["backFreightPerPiece"].ToString(), out backFreightPerPiece))
+                    circulation.BackFreightPerPiece = backFreightPerPiece;
                 if (double.TryParse(dr["realTotal"].ToString(), out realTotal))
                     circulation.RealTotal = realTotal;
                 if (double.TryParse(dr["previousArrears"].ToString(), out previousArrears))
@@ -108,8 +110,11 @@ namespace LocalERP.DataAccess.DataDAO
                     circulation.ThisPayed = thisPayed;
                 if (double.TryParse(dr["freight"].ToString(), out freight))
                     circulation.Freight = freight;
-
-                circulation.CustomerName = dr["name"] as string;
+                try
+                {
+                    circulation.CustomerName = dr["name"] as string;
+                }
+                catch { }
                 return circulation;
             }
             return null;
@@ -118,6 +123,14 @@ namespace LocalERP.DataAccess.DataDAO
         public ProductCirculation FindByID(int ID)
         {
             string commandText = string.Format("select {0}.*, Customer.name from {0} left join Customer on Customer.ID = {0}.customerID where {0}.ID={1}", tableName, ID);
+            DataRow dr = DbHelperAccess.executeQueryGetOneRow(commandText);
+            return this.formatProductCirculation(dr);
+        }
+
+        public ProductCirculation FindLastestByCustomerID(int customerID)
+        {
+            ////模仿FindByID，所以left join customer，其实可以不要
+            string commandText = string.Format("select * from {0} where circulationTime = (SELECT max(circulationTime) from {0} where customerID={1} and status=4)", tableName, customerID);
             DataRow dr = DbHelperAccess.executeQueryGetOneRow(commandText);
             return this.formatProductCirculation(dr);
         }
@@ -146,7 +159,7 @@ namespace LocalERP.DataAccess.DataDAO
 
         public int getMaxCode(string code)
         {
-            string commandText = string.Format("select max(code) from {0} where code like '{1}-{2}-%'", tableName, code, DateTime.Now.ToString("yyyyMMdd"));
+            string commandText = string.Format("select max(code) from {0} where code like '{1}%'", tableName, code);
             DataRow dr = DbHelperAccess.executeQueryGetOneRow(commandText);
             string result = dr[0] as string;
             if (string.IsNullOrEmpty(result))

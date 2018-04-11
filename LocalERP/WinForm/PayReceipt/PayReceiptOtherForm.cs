@@ -16,7 +16,7 @@ namespace LocalERP.WinForm
 {
     public partial class PayReceiptOtherForm : PayReceiptForm
     {
-        public PayReceiptOtherForm(PayReceiptTypeConf conf):base(conf)
+        public PayReceiptOtherForm(PayReceiptTypeConf conf):base(conf, null)
         {
             this.panel_history.Visible = false;
             this.label_tip.Text = "*该单不会自动核销债务,如需核销,请采用采购或销售收付款单";
@@ -45,6 +45,22 @@ namespace LocalERP.WinForm
             this.switchMode(4);
 
             this.invokeUpdateNotify(conf.finishNotifyType);
+        }
+
+        //弃核
+        protected override void toolStripButton_finishCancel_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("是否弃核，退回到未审核状态？", "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) != DialogResult.OK)
+                return;
+
+            PayReceiptDao.getInstance().UpdateStatus(this.payReceipt.id, 1);
+
+            MessageBox.Show("弃核成功!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            openMode = 1;
+            this.switchMode(1);
+
+            this.invokeUpdateNotify(this.conf.finishNotifyType);
         }
     }
 }

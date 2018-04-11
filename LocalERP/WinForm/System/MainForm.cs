@@ -28,12 +28,14 @@ namespace LocalERP.WinForm
 
             this.Text = ConfDao.getInstance().Get(3).ToString();
 
+            resetNegativeItem();
+
             NavigationUC navigation = new NavigationUC(this);
             navigation.Dock = DockStyle.Fill;
             this.panel1.Controls.Add(navigation);
 
             getWelcomeForm().Show(this.dockPanel1);
-            this.toolStripStatusLabel1.Text = "飞翔进销存管理软件(flySoft) copyright (c) 2017. 当前日期: " + DateTime.Now.ToShortDateString();
+            this.toolStripStatusLabel1.Text = string.Format("{0}. 当前日期: {1}", ConfUtility.GetProductNameWithCopyRight(), DateTime.Now.ToShortDateString());
 
             FormSingletonFactory.getInstance().MainForm = this;
 
@@ -53,102 +55,106 @@ namespace LocalERP.WinForm
         public void setForm(String buttonText, int openMode, int ID)
         {
             switch (buttonText) {
-                case DataUtility.PURCHASE_LIST:
+                case LabelUtility.PURCHASE_LIST:
                     FormSingletonFactory.getInstance().getProductPurchaseListForm().Show(this.dockPanel1);
                     break;
-                case DataUtility.PURCHASE:
+                case LabelUtility.PURCHASE:
                     FormSingletonFactory.getInstance().getProductPurchaseForm().Show(this.dockPanel1);
                     FormSingletonFactory.getInstance().getProductPurchaseForm().reload(openMode, ID);
                     break;
-                case DataUtility.PURCHASE_BACK:
+                case LabelUtility.PURCHASE_BACK:
                     FormSingletonFactory.getInstance().getProductPurchaseBackForm().Show(this.dockPanel1);
                     FormSingletonFactory.getInstance().getProductPurchaseBackForm().reload(openMode, ID);
                     break;
 
-                case DataUtility.MANUFACTURE_LIST:
+                case LabelUtility.MANUFACTURE_LIST:
                     FormSingletonFactory.getInstance().getManufactureListForm().Show(this.dockPanel1);
                     break;
-                case DataUtility.EASY:
-                    FormSingletonFactory.getInstance().getEasyForm().Show(this.dockPanel1);
-                    FormSingletonFactory.getInstance().getEasyForm().reload(openMode, ID);
+                case LabelUtility.MANU_COST:
+                    FormSingletonFactory.getInstance().getManuCostForm().Show(this.dockPanel1);
+                    FormSingletonFactory.getInstance().getManuCostForm().reload(openMode, ID);
+                    break;
+                case LabelUtility.MANU_IN:
+                    FormSingletonFactory.getInstance().getManuInForm().Show(this.dockPanel1);
+                    FormSingletonFactory.getInstance().getManuInForm().reload(openMode, ID);
                     break;
 
-                case DataUtility.SELL_LIST:
+                case LabelUtility.SELL_LIST:
                     FormSingletonFactory.getInstance().getProductSellListForm().Show(this.dockPanel1);
                     break;
-                case DataUtility.SELL:
+                case LabelUtility.SELL:
                     FormSingletonFactory.getInstance().getProductSellForm().Show(this.dockPanel1);
                     FormSingletonFactory.getInstance().getProductSellForm().reload(openMode, ID);
                     break;
-                case DataUtility.SELL_BACK:
+                case LabelUtility.SELL_BACK:
                     FormSingletonFactory.getInstance().getProductSellBackForm().Show(this.dockPanel1);
                     FormSingletonFactory.getInstance().getProductSellBackForm().reload(openMode, ID);
                     break;
 
-                case DataUtility.CASH_LIST:
+                case LabelUtility.CASH_LIST:
                     FormSingletonFactory.getInstance().getPayReceiptListForm().Show(this.dockPanel1);
                     break;
-                case DataUtility.CASH_PAY:
+                case LabelUtility.CASH_PAY:
                     FormSingletonFactory.getInstance().getBuyPayBillForm().Show(this.dockPanel1);
                     FormSingletonFactory.getInstance().getBuyPayBillForm().reload(openMode, ID);
                     break;
-                case DataUtility.CASH_PAY_REFUND:
+                case LabelUtility.CASH_PAY_REFUND:
                     FormSingletonFactory.getInstance().getBuyRefundBillForm().Show(this.dockPanel1);
                     FormSingletonFactory.getInstance().getBuyRefundBillForm().reload(openMode, ID);
                     break;
-                case DataUtility.CASH_RECEIPT:
+                case LabelUtility.CASH_RECEIPT:
                     FormSingletonFactory.getInstance().getSellReceiptBillForm().Show(this.dockPanel1);
                     FormSingletonFactory.getInstance().getSellReceiptBillForm().reload(openMode, ID);
                     break;
-                case DataUtility.CASH_RECEIPT_REFUND:
+                case LabelUtility.CASH_RECEIPT_REFUND:
                     FormSingletonFactory.getInstance().getSellRefundBillForm().Show(this.dockPanel1);
                     FormSingletonFactory.getInstance().getSellRefundBillForm().reload(openMode, ID);
                     break;
-                case DataUtility.CASH_OTHER_PAY:
+                case LabelUtility.CASH_OTHER_PAY:
                     FormSingletonFactory.getInstance().getOtherPayBillForm().Show(this.dockPanel1);
                     FormSingletonFactory.getInstance().getOtherPayBillForm().reload(openMode, ID);
                     break;
-                case DataUtility.CASH_OTHER_RECEIPT:
+                case LabelUtility.CASH_OTHER_RECEIPT:
                     FormSingletonFactory.getInstance().getOtherReceiptBillForm().Show(this.dockPanel1);
                     FormSingletonFactory.getInstance().getOtherReceiptBillForm().reload(openMode, ID);
                     break;
-                case DataUtility.STATISTIC_PROFIT:
+                case LabelUtility.STATISTIC_PROFIT:
                     FormSingletonFactory.getInstance().getQuerySellProfitForm().Show(this.dockPanel1);
                     break;
-                case DataUtility.LIB_LIST:
+                case LabelUtility.LIB_LIST:
                     FormSingletonFactory.getInstance().getProductLibListForm().Show(this.dockPanel1);
                     break;
-                case DataUtility.LIB_OVERFLOW:
+                case LabelUtility.LIB_OVERFLOW:
                     FormSingletonFactory.getInstance().getProductLibOverflowForm().Show(this.dockPanel1);
                     FormSingletonFactory.getInstance().getProductLibOverflowForm().reload(openMode, ID);
                     break;
-                case DataUtility.LIB_LOSS:
+                case LabelUtility.LIB_LOSS:
                     FormSingletonFactory.getInstance().getProductLibLossForm().Show(this.dockPanel1);
                     FormSingletonFactory.getInstance().getProductLibLossForm().reload(openMode, ID);
                     break;
 
-                case DataUtility.QUERY_LIB:
+                case LabelUtility.QUERY_LIB:
                     FormSingletonFactory.getInstance().getQueryLibForm().Show(this.dockPanel1);
                     break;
-                case DataUtility.QUERY_PRODUCT_DETAIL:
+                case LabelUtility.QUERY_PRODUCT_DETAIL:
                     FormSingletonFactory.getInstance().getQueryProductDetailForm().Show(this.dockPanel1);
                     break;
-                case DataUtility.QUERY_CASH_DETAIL:
+                case LabelUtility.QUERY_CASH_DETAIL:
                     FormSingletonFactory.getInstance().getQueryCashDetailForm().Show(this.dockPanel1);
                     break;
-                case DataUtility.STATISTIC_PRODUCT:
+                case LabelUtility.STATISTIC_PRODUCT:
                     FormSingletonFactory.getInstance().getProductStatisticForm().Show(this.dockPanel1);
                     break;
-                case DataUtility.STATISTIC_CASH:
+                case LabelUtility.STATISTIC_CASH:
                     FormSingletonFactory.getInstance().getStatisticCashForm().Show(this.dockPanel1);
                     break;
-                case DataUtility.DATA_CUSTOMER:
+                case LabelUtility.DATA_CUSTOMER:
                     FormSingletonFactory.getInstance().getCustomerCIForm().Show(this.dockPanel1);
                     break;
-                case DataUtility.DATA_PRODUCT:
+                case LabelUtility.DATA_PRODUCT:
                     FormSingletonFactory.getInstance().getProductCIForm().Show(this.dockPanel1);
                     break;
-                case DataUtility.DATA_COMPANY:
+                case LabelUtility.DATA_COMPANY:
                     ReportInfoForm form = new ReportInfoForm();
                     form.ShowDialog();
                     break;
@@ -176,6 +182,13 @@ namespace LocalERP.WinForm
         private void 设置登陆密码ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             PasswordForm form = new PasswordForm();
+            form.ShowDialog();
+        }
+
+
+        private void 单据设置ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            CirSettingForm form = new CirSettingForm();
             form.ShowDialog();
         }
 
@@ -243,17 +256,17 @@ namespace LocalERP.WinForm
 
         private void toolStripButton_purchase_Click(object sender, EventArgs e)
         {
-            this.setForm(DataUtility.PURCHASE);
+            this.setForm(LabelUtility.PURCHASE);
         }
 
         private void toolStripButton_sell_Click(object sender, EventArgs e)
         {
-            this.setForm(DataUtility.SELL);
+            this.setForm(LabelUtility.SELL);
         }
 
         private void toolStripButton_queryLib_Click(object sender, EventArgs e)
         {
-            this.setForm(DataUtility.QUERY_PRODUCT_DETAIL);
+            this.setForm(LabelUtility.QUERY_PRODUCT_DETAIL);
         }
 
         private void toolStripButton_close_Click(object sender, EventArgs e)
@@ -263,7 +276,7 @@ namespace LocalERP.WinForm
 
         private void toolStripButton_statistic_Click(object sender, EventArgs e)
         {
-            this.setForm(DataUtility.QUERY_CASH_DETAIL);
+            this.setForm(LabelUtility.QUERY_CASH_DETAIL);
         }
 
         private void 全部数据清空ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -287,5 +300,32 @@ namespace LocalERP.WinForm
                 }
             }
         }
+
+        private void resetNegativeItem() {
+            string negative = ConfDao.getInstance().Get(20);
+            if (!string.IsNullOrEmpty(negative) && negative == "1")
+            {
+                this.permitNegativeItem.Checked = true;
+                this.notPermitNegativeItem.Checked = false;
+            }
+            else
+            {
+                this.permitNegativeItem.Checked = false;
+                this.notPermitNegativeItem.Checked = true;
+            }
+        }
+
+        private void permitNegativeItem_Click(object sender, EventArgs e)
+        {
+            ConfDao.getInstance().Update(20, "1");
+            resetNegativeItem();
+        }
+
+        private void notPermitNegativeItem_Click(object sender, EventArgs e)
+        {
+            ConfDao.getInstance().Update(20, "0");
+            resetNegativeItem();
+        }
+
     }
 }

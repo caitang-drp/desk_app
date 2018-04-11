@@ -64,7 +64,8 @@ namespace LocalERP.DataAccess.Data
             this.sum_cost = double.Parse((average_price * this.cnt).ToString("0.00"));
 
             this.profit = Math.Round(this.sum_price + this.sum_cost, 2);
-            this.profit_margin = Math.Round(this.profit / Math.Abs(this.sum_cost) * 100, 2);
+            //2018-2-23:这里要判断是否为零
+            this.profit_margin = this.sum_cost == 0?100:Math.Round(this.profit / Math.Abs(this.sum_cost) * 100, 2);
             /*
             if (cir.Type == 4) {
                 this.profit = -this.profit;

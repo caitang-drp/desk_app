@@ -131,7 +131,7 @@ namespace LocalERP.WinForm
                     this.valueTextbox.Text = value;
                 }
                 else
-                    this.valueTextbox.Text = "µ¥»÷Ñ¡Ôñ...";
+                    this.valueTextbox.Text = "";
             }
         }
 

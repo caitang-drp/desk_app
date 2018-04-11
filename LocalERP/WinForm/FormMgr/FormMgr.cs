@@ -56,9 +56,11 @@ namespace LocalERP.WinForm
         protected ProductCirculationListForm manufactureListForm = null;
         public abstract ProductCirculationListForm getManufactureListForm();
 
-        //易耗品领用
-        protected ProductCirculationForm easyForm = null;
-        public abstract ProductCirculationForm getEasyForm();
+        protected ProductCirculationForm manuCostForm = null;
+        public abstract ProductCirculationForm getManuCostForm();
+
+        protected ProductCirculationForm manuInForm = null;
+        public abstract ProductCirculationForm getManuInForm();
 
         /***************  sell   ************************/
         //product sell list form
@@ -107,7 +109,8 @@ namespace LocalERP.WinForm
         {
             if (buyPayBillForm == null || buyPayBillForm.IsDisposed)
             {
-                buyPayBillForm = new PayReceiptForm(PayReceipt.PayReceiptTypeConf_BuyPay);
+                //等进一步改造，把全部stainless、clothesDao的调用都放在一个地方
+                buyPayBillForm = new PayReceiptForm(PayReceipt.PayReceiptTypeConf_BuyPay, ProductStainlessCirculationDao.getInstance());
                 appendEvent(buyPayBillForm);
             }
             return buyPayBillForm;
@@ -119,7 +122,7 @@ namespace LocalERP.WinForm
         {
             if (buyRefundBillForm == null || buyRefundBillForm.IsDisposed)
             {
-                buyRefundBillForm = new PayReceiptForm(PayReceipt.PayReceiptTypeConf_BuyRefund);
+                buyRefundBillForm = new PayReceiptForm(PayReceipt.PayReceiptTypeConf_BuyRefund, ProductStainlessCirculationDao.getInstance());
                 appendEvent(buyRefundBillForm);
             }
             return buyRefundBillForm;
@@ -131,7 +134,7 @@ namespace LocalERP.WinForm
         {
             if (sellReceiptBillForm == null || sellReceiptBillForm.IsDisposed)
             {
-                sellReceiptBillForm = new PayReceiptForm(PayReceipt.PayReceiptTypeConf_SellReceipt);
+                sellReceiptBillForm = new PayReceiptForm(PayReceipt.PayReceiptTypeConf_SellReceipt, ProductStainlessCirculationDao.getInstance());
                 appendEvent(sellReceiptBillForm);
             }
             return sellReceiptBillForm;
@@ -143,7 +146,7 @@ namespace LocalERP.WinForm
         {
             if (sellRefundBillForm == null || sellRefundBillForm.IsDisposed)
             {
-                sellRefundBillForm = new PayReceiptForm(PayReceipt.PayReceiptTypeConf_SellRefund);
+                sellRefundBillForm = new PayReceiptForm(PayReceipt.PayReceiptTypeConf_SellRefund, ProductStainlessCirculationDao.getInstance());
                 appendEvent(sellRefundBillForm);
             }
             return sellRefundBillForm;
@@ -200,7 +203,7 @@ namespace LocalERP.WinForm
         {
             if (queryCashDetailForm == null || queryCashDetailForm.IsDisposed)
             {
-                queryCashDetailForm = new QueryCashDetailForm(this.mainForm, DataUtility.QUERY_CASH_DETAIL);
+                queryCashDetailForm = new QueryCashDetailForm(this.mainForm, LabelUtility.QUERY_CASH_DETAIL);
                 queryCashDetailForm.initVersions(getVersions(), UpdateType.CustomerCategoryUpdate, 
                     UpdateType.CustomerUpdate, UpdateType.PayReceiptFinishUpdate, UpdateType.PurchaseFinishUpdate, UpdateType.SellFinishUpdate);
                 appendEvent(queryCashDetailForm);
@@ -223,7 +226,7 @@ namespace LocalERP.WinForm
         {
             if (customerCIForm == null || customerCIForm.IsDisposed)
             {
-                customerCIForm = new CategoryItemForm(1, new CustomerCategoryItemProxy(), DataUtility.DATA_CUSTOMER, this.mainForm);
+                customerCIForm = new CategoryItemForm(1, new CustomerCategoryItemProxy(), LabelUtility.DATA_CUSTOMER, this.mainForm);
                 customerCIForm.initVersions(getVersions(), UpdateType.CustomerCategoryUpdate, UpdateType.CustomerUpdate);
                 appendEvent(customerCIForm);
             }
@@ -233,7 +236,7 @@ namespace LocalERP.WinForm
         private CategoryItemForm customerCIForm_select = null;
         public virtual CategoryItemForm getCustomerCIForm_Select()
         {
-            customerCIForm_select = new CategoryItemForm(0, new CustomerCategoryItemProxy(), DataUtility.DATA_CUSTOMER, this.mainForm);
+            customerCIForm_select = new CategoryItemForm(0, new CustomerCategoryItemProxy(), LabelUtility.DATA_CUSTOMER, this.mainForm);
             customerCIForm_select.initVersions(getVersions(), UpdateType.CustomerCategoryUpdate, UpdateType.CustomerUpdate);
             appendEvent(customerCIForm_select);
             
@@ -247,10 +250,17 @@ namespace LocalERP.WinForm
             return customerForm;
         }
 
+        public virtual CategoryForm getCategoryForm(CategoryItemProxy proxy, int mode, int id)
+        {
+            CategoryForm categoryForm = new CategoryForm(proxy, mode, id);
+            appendEvent(categoryForm);
+            return categoryForm;
+        }
+
         /*************** general method *********************/
         protected void appendEvent(MyDockContent form)
         {
-            //发布更新
+            //发布更新，会在form里面的函数调用，每个form都新增这个事件处理函数
             form.updateNotify += new MyDockContent.UpdateNotify(updateNotify);
 
             //界面等待

@@ -7,41 +7,38 @@ using System.Text;
 using System.Windows.Forms;
 using LocalERP.DataAccess.DataDAO;
 using LocalERP.DataAccess.Data;
+using LocalERP.UiDataProxy;
 
 namespace LocalERP.WinForm
 {
-    public partial class CategoryForm : Form
+    public partial class CategoryForm : MyDockContent
     {
         //openMode 0:add   1:edit
         private int openMode = 0;
         private int categoryID = 0;
-        private Category parent = null;
+        private Category category;
 
-        private string categoryTableName;
+        private CategoryItemProxy proxy;
 
-        public delegate void ModifiedComplete();
-        public event ModifiedComplete modifiedComplete;
-
-        public CategoryForm(string categoryTableName, int mode, int id, Category parent)
+        public CategoryForm(CategoryItemProxy proxy, int mode, int id)
         {
             openMode = mode;
             categoryID = id;
-            this.parent = parent;
 
-            this.categoryTableName = categoryTableName;
+            this.proxy = proxy;
 
             InitializeComponent();
+
+            this.proxy.initTree(this.comboBoxTree1.tvTreeView);
         }
 
         private void ElementForm_Load(object sender, EventArgs e)
         {
             if (openMode == 1)
             {
-                this.label4.Text = "编辑 ID:" + categoryID;
-
-                Category category = CategoryDao.getInstance().FindById(this.categoryTableName, categoryID);
+                category = CategoryDao.getInstance().FindById(this.proxy.CategoryTableName, categoryID);
                 this.textBox_name.Text = category.Name;
-                
+                this.comboBoxTree1.setSelectNode(category.Parent.ToString());
             }
         }
 
@@ -66,27 +63,6 @@ namespace LocalERP.WinForm
             }
         }
 
-        
-
-        private bool getCategory(out Category category) {
-
-            string name;
-            bool isNameCorrect = this.getName(out name);
-           
-            if ( isNameCorrect)
-            {
-                category = new Category();
-                category.Name = name;
-                category.Id = categoryID;
-                return true;
-            }
-            else
-            {
-                category = null;
-                return false;
-            }
-        }
-
         /// <summary>
         /// event for validating
         /// </summary>
@@ -107,29 +83,42 @@ namespace LocalERP.WinForm
         /// <param name="e"></param>
         private void toolStripButton3_Click(object sender, EventArgs e)
         {
-            Category category = null;
-            if (this.getCategory(out category) == false)
-                return;
-
             if (openMode == 0) {
-                CategoryDao.getInstance().Insert(this.categoryTableName, parent, null, category);
-                if (modifiedComplete != null)
-                    modifiedComplete.Invoke();
-                MessageBox.Show("保存配件成功!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                this.Close();
             }
             else if (openMode == 1) {
-                /*ElementDao.getInstance().Update(element);
-                if (modifiedComplete != null)
-                    modifiedComplete.Invoke();
-                MessageBox.Show("修改配件成功!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                this.Close();*/
+                Category preParent = CategoryDao.getInstance().FindById(proxy.CategoryTableName, category.Parent);
+
+                Category newParent = null;
+                if(this.comboBoxTree1.SelectedNode != null)
+                    newParent = CategoryDao.getInstance().FindById(proxy.CategoryTableName, int.Parse(this.comboBoxTree1.SelectedNode.Name));
+                
+                String name = "";
+                if(this.getName(out name) == false)
+                    return;
+
+                if (newParent!=null && newParent.Left >= category.Left && newParent.Left <= category.Right)
+                {
+                    MessageBox.Show("不能选择子类别作为上级类别。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+                CategoryDao.getInstance().UpdateName(proxy.CategoryTableName, category.Id, name);
+                CategoryDao.getInstance().UpdateParent(proxy.CategoryTableName, category, preParent, newParent);
+
+                this.invokeUpdateNotify(proxy.UpdateType_Category);
+
+                MessageBox.Show("修改类别成功!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                this.Close();
             }
         }
 
         private void toolStripButton4_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.comboBoxTree1.setSelectNode("");
         }
     }
 }

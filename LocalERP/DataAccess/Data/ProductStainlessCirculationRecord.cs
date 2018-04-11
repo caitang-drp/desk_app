@@ -29,21 +29,5 @@ namespace LocalERP.DataAccess.Data
             get { return quantityNull; }
             set { quantityNull = value; }
         }
-
-        private int pieces;
-
-        public int Pieces
-        {
-            get { return pieces; }
-            set { pieces = value; }
-        }
-
-        private bool piecesNull = false;
-
-        public bool PiecesNull
-        {
-            get { return piecesNull; }
-            set { piecesNull = value; }
-        }
     }
 }

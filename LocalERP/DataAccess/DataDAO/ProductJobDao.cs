@@ -29,7 +29,7 @@ namespace LocalERP.DataAccess.DataDAO
 
                 DbHelperAccess.executeNonQuery(commandText);
 
-                int ProductJobID = DbHelperAccess.executeLastID("ID", "ProductJob");
+                int ProductJobID = DbHelperAccess.executeMax("ID", "ProductJob");
 
                 ProductJobRecordDao dao = new ProductJobRecordDao();
                 foreach (ProductJobRecord record in records){

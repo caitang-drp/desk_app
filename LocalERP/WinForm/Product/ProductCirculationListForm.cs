@@ -67,16 +67,22 @@ namespace LocalERP.WinForm
             {
                 DataTable dataTable = cirDao.FindList(circulationType, this.dateTimePicker3.Value, this.dateTimePicker4.Value.AddDays(1), (int)(comboBox1.SelectedValue), textBox_customer.Text.Trim());
                 this.dataGridView1.Rows.Clear();
+                double sum = 0;
+                int index = 0;
                 foreach (DataRow dr in dataTable.Rows)
                 {
-                    int index = this.dataGridView1.Rows.Add();
+                    index = this.dataGridView1.Rows.Add();
                     this.dataGridView1.Rows[index].Cells["ID"].Value = dr["ID"];
                     this.dataGridView1.Rows[index].Cells["name"].Value = dr["code"];
                     int type = (int)(dr["type"]);
                     this.dataGridView1.Rows[index].Cells["type"].Value = ProductCirculation.CirculationTypeConfs[type - 1].name;
                     this.dataGridView1.Rows[index].Cells["typeValue"].Value = type;
 
-                    this.dataGridView1.Rows[index].Cells["realTotal"].Value = double.Parse(dr["realTotal"].ToString()).ToString("0.00");
+                    double realTotal = double.Parse(dr["realTotal"].ToString());
+                    if (type == 2 || type == 4)
+                        realTotal = -realTotal;
+                    this.dataGridView1.Rows[index].Cells["realTotal"].Value = realTotal.ToString("0.00");
+                    sum += realTotal;
 
                     int status = (int)(dr["status"]);
                     this.dataGridView1.Rows[index].Cells["status"].Value = ProductCirculation.circulationStatusContext[status - 1];
@@ -95,10 +101,23 @@ namespace LocalERP.WinForm
                         this.dataGridView1.Rows[index].Cells["customer"].Value = dr["name"];
 
 
-                    this.dataGridView1.Rows[index].Cells["sellTime"].Value = ((DateTime)dr["circulationTime"]).ToShortDateString();                    
+                    this.dataGridView1.Rows[index].Cells["sellTime"].Value = ((DateTime)dr["circulationTime"]).ToString("yyyy-MM-dd HH:mm:ss");
                 }
+
+                if (circulationType < 3)
+                {
+                    index = this.dataGridView1.Rows.Add();
+
+                    this.dataGridView1.Rows[index].Cells["name"].Value = "合计";
+                    this.dataGridView1.Rows[index].Cells["realTotal"].Value = sum.ToString("0.00");
+                    this.dataGridView1.Rows[index].DefaultCellStyle.ForeColor = Color.Red;
+                    this.dataGridView1.Rows[index].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                    this.dataGridView1.Rows[index].DefaultCellStyle.Font = new Font("宋体", 10F, FontStyle.Bold);
+                }
+
             }
-            catch(Exception ex) {
+            catch (Exception ex)
+            {
                 //MessageBox.Show("查询错误, 请输入正确的条件.", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
@@ -167,6 +186,9 @@ namespace LocalERP.WinForm
         }
 
         private void editCirculation(DataGridViewRow row) {
+            if (row.Cells["typeValue"].Value == null)
+                return;
+
             int typeValue = (int)row.Cells["typeValue"].Value;
             int id = (int)row.Cells["ID"].Value;
 
@@ -174,25 +196,28 @@ namespace LocalERP.WinForm
             switch (typeValue)
             {
                 case (int)ProductCirculation.CirculationType.purchase:
-                    formString = DataUtility.PURCHASE;
+                    formString = LabelUtility.PURCHASE;
                     break;
                 case (int)ProductCirculation.CirculationType.purchaseBack:
-                    formString = DataUtility.PURCHASE_BACK;
+                    formString = LabelUtility.PURCHASE_BACK;
                     break;
-                case (int)ProductCirculation.CirculationType.easy:
-                    formString = DataUtility.EASY;
+                case (int)ProductCirculation.CirculationType.manuCost:
+                    formString = LabelUtility.MANU_COST;
+                    break;
+                case (int)ProductCirculation.CirculationType.manuIn:
+                    formString = LabelUtility.MANU_IN;
                     break;
                 case (int)ProductCirculation.CirculationType.sell:
-                    formString = DataUtility.SELL;
+                    formString = LabelUtility.SELL;
                     break;
                 case (int)ProductCirculation.CirculationType.sellBack:
-                    formString = DataUtility.SELL_BACK;
+                    formString = LabelUtility.SELL_BACK;
                     break;
                 case (int)ProductCirculation.CirculationType.libOverflow:
-                    formString = DataUtility.LIB_OVERFLOW;
+                    formString = LabelUtility.LIB_OVERFLOW;
                     break;
                 case (int)ProductCirculation.CirculationType.libLoss:
-                    formString = DataUtility.LIB_LOSS;
+                    formString = LabelUtility.LIB_LOSS;
                     break;
                 default:
                     break;

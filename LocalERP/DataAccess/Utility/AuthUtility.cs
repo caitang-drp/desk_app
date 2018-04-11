@@ -14,13 +14,20 @@ namespace LocalERP.DataAccess.Utility
             return checkSN(sn);
         }
 
+        //sn是数据库里存储的
         public static bool checkSN(string sn)
         {
             if (string.IsNullOrEmpty(sn))
                 return false;
 
-            if (sn.Equals(getSN()))
-                return true;
+            string[] ss = sn.Split('/');
+            
+            foreach (string s in ss)
+            {
+                if (s.Equals(getSN()))
+                    return true;
+            }
+
             return false;
         }
 

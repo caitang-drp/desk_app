@@ -45,27 +45,25 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("宋体", 10F);
-            this.label2.Location = new System.Drawing.Point(75, 123);
+            this.label2.Location = new System.Drawing.Point(17, 111);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(259, 14);
+            this.label2.Size = new System.Drawing.Size(0, 14);
             this.label2.TabIndex = 2;
-            this.label2.Text = "飞翔软件(flySoft) copyright (c) 2017";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("宋体", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label1.Location = new System.Drawing.Point(61, 45);
+            this.label1.Font = new System.Drawing.Font("楷体", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label1.Location = new System.Drawing.Point(13, 39);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(283, 29);
+            this.label1.Size = new System.Drawing.Size(0, 24);
             this.label1.TabIndex = 4;
-            this.label1.Text = "飞翔进销存管理软件";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(128, 85);
+            this.label3.Location = new System.Drawing.Point(17, 80);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(140, 14);
             this.label3.TabIndex = 5;
@@ -75,7 +73,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.Wheat;
+            this.BackColor = System.Drawing.Color.AliceBlue;
             this.ClientSize = new System.Drawing.Size(402, 177);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label1);

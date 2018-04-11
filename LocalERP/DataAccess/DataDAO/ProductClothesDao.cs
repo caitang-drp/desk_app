@@ -23,7 +23,7 @@ namespace LocalERP.DataAccess.DataDAO
             {
                 string commandText = string.Format("insert into Product(name, comment, parent, price) values('{0}', '{1}', {2}, {3})", info.Name, info.Comment, info.CategoryID, info.PricePurchase);
                 DbHelperAccess.executeNonQuery(commandText);
-                int productID = DbHelperAccess.executeLastID("ID", "Product");
+                int productID = DbHelperAccess.executeMax("ID", "Product");
                 setAttribute(productID, info, colors, sizes);
                 return productID;
             }

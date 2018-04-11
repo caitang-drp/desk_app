@@ -22,10 +22,10 @@ namespace LocalERP.DataAccess.DataDAO
         {
             try
             {
-                string commandText = string.Format("insert into ProductStainlessCirculationRecord(productID, quantityPerPiece, pieces, totalNum, unit, price, totalPrice, circulationID) values('{0}', {1}, {2}, '{3}','{4}', '{5}', '{6}', '{7}')",
-                    info.ProductID, info.QuantityNull ? "NULL" : info.QuantityPerPiece.ToString(), info.PiecesNull ? "NULL" : info.Pieces.ToString(), info.TotalNum, info.Unit, info.Price, info.TotalPrice, info.CirculationID);
+                string commandText = string.Format("insert into ProductStainlessCirculationRecord(productID, quantityPerPiece, pieces, totalNum, unit, price, totalPrice, circulationID, comment) values('{0}', {1}, {2}, '{3}','{4}', '{5}', '{6}', '{7}', '{8}')",
+                    info.ProductID, info.QuantityNull ? "NULL" : info.QuantityPerPiece.ToString(), info.PiecesNull ? "NULL" : info.Pieces.ToString(), info.TotalNum, info.Unit, info.Price, info.TotalPrice, info.CirculationID, info.Comment);
                 DbHelperAccess.executeNonQuery(commandText);
-                int recordID = DbHelperAccess.executeLastID("ID", "ProductStainlessCirculationRecord");
+                int recordID = DbHelperAccess.executeMax("ID", "ProductStainlessCirculationRecord");
                 return recordID;
             }
             catch (Exception ex)
@@ -72,6 +72,8 @@ namespace LocalERP.DataAccess.DataDAO
                 ValidateUtility.getDouble(dr, "totalPrice", out totalPrice, out tempBool);
                 record.TotalPrice = totalPrice;
 
+                record.Comment = dr["ProductStainlessCirculationRecord.comment"].ToString();
+
                 records.Add(record);
             }
             return records;
@@ -102,6 +104,37 @@ namespace LocalERP.DataAccess.DataDAO
 
             commandText.Append(" order by ProductStainlessCirculationRecord.ID desc");
             return DbHelperAccess.executeQuery(commandText.ToString());
+        }
+
+        public List<string> FindPriceList(int type, int productID, int customerID)
+        {
+            //退货的价格以进货的价格为主
+            if (type == 2 || type == 4)
+                type--;
+
+            StringBuilder commandText = new StringBuilder();
+            string temp = "select distinct(ProductStainlessCirculationRecord.price) from ProductStainlessCirculationRecord, (select * from ProductStainlessCirculation left join Customer on Customer.ID = ProductStainlessCirculation.customerID ) circulation, ProductStainless"
+                 + " where ProductStainlessCirculationRecord.circulationID = ProductStainlessCirculation.ID and ProductStainlessCirculationRecord.productID = ProductStainless.ID and status = 4";
+            commandText.Append(temp);
+            if (type > 0)
+                commandText.Append(string.Format(" and ProductStainlessCirculation.type= {0}", type));
+
+            if (productID > 0)
+                commandText.Append(string.Format(" and ProductStainless.ID={0}", productID));
+
+            if (customerID > 0)
+                commandText.Append(string.Format(" and Customer.ID={0}", customerID));
+        
+            //commandText.Append(" order by ProductStainlessCirculationRecord.ID desc");
+
+            DataTable dt = DbHelperAccess.executeQuery(commandText.ToString());
+
+            List<string> prices = new List<string>();
+            foreach (DataRow dr in dt.Rows)
+            {
+                prices.Add(dr["price"].ToString());
+            }
+            return prices;
         }
 
         public int FindCount(int productID)

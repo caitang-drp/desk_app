@@ -22,7 +22,7 @@ namespace LocalERP.DataAccess.DataDAO
             {
                 string commandText = string.Format("insert into CharactorValue(name, charactorID) values('{0}', {1})", info.Name, info.CharactorId);
                 DbHelperAccess.executeNonQuery(commandText);
-                int id = DbHelperAccess.executeLastID("ID", "CharactorValue");
+                int id = DbHelperAccess.executeMax("ID", "CharactorValue");
                 return id;
             }
             catch (Exception ex)

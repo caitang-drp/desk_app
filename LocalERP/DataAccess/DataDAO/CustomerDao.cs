@@ -18,13 +18,15 @@ namespace LocalERP.DataAccess.DataDAO
             return dao;
         }
 
-        public int Insert(Customer info)
+        public bool Insert(Customer info, out int id)
         {
             try
             {
                 string commandText = string.Format("insert into Customer(name, comment, tel, phone, address, parent, arrear) values('{0}', '{1}', '{2}', '{3}', '{4}', {5}, {6})",
                     info.Name, info.Comment, info.Tel, info.Phone, info.Address, info.Parent, info.arrear);
-                return DbHelperAccess.executeNonQuery(commandText);
+                DbHelperAccess.executeNonQuery(commandText);
+                id = DbHelperAccess.executeMax("ID", "Customer");
+                return true;
             }
             catch (Exception ex)
             {
@@ -46,6 +48,8 @@ namespace LocalERP.DataAccess.DataDAO
 
             if (!string.IsNullOrEmpty(name))
                 commandText.AppendFormat(" and Customer.name like '%{0}%'", name);
+
+            commandText.Append(" order by Customer.ID");
             return DbHelperAccess.executeQuery(commandText.ToString());
         }
 

@@ -23,7 +23,7 @@ namespace LocalERP.DataAccess.DataDAO
                 string commandText = string.Format("insert into PayReceipt(serial, bill_time, comment, customer_id, bill_type, handle_people, previousArrears, amount, status, cashDirection, arrearDirection, thisPayed, hide) values('{0}', '{1}', '{2}', {3}, {4}, '{5}', {6}, {7}, {8}, {9}, {10}, {11}, {12})", 
                     info.serial, info.bill_time, info.comment,  info.customer_id <= 0 ? "null" : info.customer_id.ToString(), (int)info.bill_type, info.handle_people, info.previousArrears, info.amount, info.status, info.cashDirection, info.arrearDirection, info.thisPayed, info.hide);
                 DbHelperAccess.executeNonQuery(commandText);
-                id = DbHelperAccess.executeLastID("ID", "PayReceipt");
+                id = DbHelperAccess.executeMax("ID", "PayReceipt");
                 return true;
             }
             catch (Exception ex)
@@ -76,8 +76,11 @@ namespace LocalERP.DataAccess.DataDAO
                 payReceipt.cashDirection = (int)dr["cashDirection"];
                 payReceipt.arrearDirection = (int)dr["arrearDirection"];
 
-                payReceipt.customerName = dr["name"] as string;
-
+                try
+                {
+                    payReceipt.customerName = dr["name"] as string;
+                }
+                catch { }
                 payReceipt.hide = (int)dr["hide"];
 
                 return payReceipt;
@@ -104,20 +107,14 @@ namespace LocalERP.DataAccess.DataDAO
             string commandText = string.Format("delete from PayReceipt");
             return DbHelperAccess.executeNonQuery(commandText);
         }
-        
-        /*
-        public DataTable FindList(DateTime startTime, DateTime endTime, int status, string customerName)
-        {
-            StringBuilder commandText = null;
-            commandText = new StringBuilder(string.Format("select PayReceipt.*, name from PayReceipt, Customer where PayReceipt.customer_id = Customer.ID and bill_time between #{0}# and #{1}# ", startTime.ToString("yyyy-MM-dd"), endTime.ToString("yyyy-MM-dd")));
-            if (status > 0)
-                commandText.Append(string.Format(" and status = {0}", status));
-            if (!string.IsNullOrEmpty(customerName))
-                commandText.Append(string.Format(" and name like '%{0}%'", customerName));
 
-            commandText.Append(string.Format(" order by PayReceipt.ID desc"));
-            return DbHelperAccess.executeQuery(commandText.ToString());
-        }*/
+        public PayReceipt FindLastestByCustomerID(int customerID)
+        {
+            ////模仿FindByID，所以left join customer，其实可以不要
+            string commandText = string.Format("select * from PayReceipt where bill_time = (SELECT max(bill_time) from PayReceipt where customer_id={0} and status=4)", customerID);
+            DataRow dr = DbHelperAccess.executeQueryGetOneRow(commandText);
+            return formatPayReceipt(dr);
+        }
 
         //DateTime? 相当于Nullable<DateTime>，调用时必须增加.value
         public List<PayReceipt> FindPayReceiptList(DateTime? startTime, DateTime? endTime, int status, string name, int hide)
@@ -133,6 +130,8 @@ namespace LocalERP.DataAccess.DataDAO
             commandText.Append(string.Format(" and hide <= {0}", hide));
             if (!string.IsNullOrEmpty(name))
                 commandText.AppendFormat(" and Customer.name like '%{0}%'", name);
+
+            commandText.Append(" order by PayReceipt.bill_time desc");
 
             DataTable dt = DbHelperAccess.executeQuery(commandText.ToString());
             List<PayReceipt> list = new List<PayReceipt>();

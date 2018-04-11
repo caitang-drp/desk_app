@@ -60,6 +60,20 @@ namespace LocalERP.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap _38095 {
+            get {
+                object obj = ResourceManager.GetObject("38095", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap _512968 {
+            get {
+                object obj = ResourceManager.GetObject("512968", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap _in {
             get {
                 object obj = ResourceManager.GetObject("in", resourceCulture);
@@ -175,6 +189,13 @@ namespace LocalERP.Properties {
         internal static System.Drawing.Bitmap del16 {
             get {
                 object obj = ResourceManager.GetObject("del16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap del161 {
+            get {
+                object obj = ResourceManager.GetObject("del161", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -315,6 +336,13 @@ namespace LocalERP.Properties {
         internal static System.Drawing.Bitmap tree_node_add_16px_1 {
             get {
                 object obj = ResourceManager.GetObject("tree-node-add.16px.1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap tree_node_edit_16px {
+            get {
+                object obj = ResourceManager.GetObject("tree-node-edit.16px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

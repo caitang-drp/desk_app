@@ -41,8 +41,8 @@
             this.button2 = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.statusStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -96,8 +96,7 @@
             this.toolStripStatusLabel1.ImageTransparentColor = System.Drawing.Color.White;
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
             this.toolStripStatusLabel1.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(209, 17);
-            this.toolStripStatusLabel1.Text = "飞翔软件(flySoft) copyright (c) 2017";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(0, 17);
             // 
             // textBox1
             // 
@@ -150,25 +149,26 @@
             this.panel1.Size = new System.Drawing.Size(379, 84);
             this.panel1.TabIndex = 9;
             // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("宋体", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label4.Location = new System.Drawing.Point(65, 16);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(253, 29);
-            this.label4.TabIndex = 0;
-            this.label4.Text = "飞翔企业管理软件";
-            // 
             // label5
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("宋体", 10F);
-            this.label5.Location = new System.Drawing.Point(149, 57);
+            this.label5.Location = new System.Drawing.Point(16, 57);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(84, 14);
             this.label5.TabIndex = 1;
             this.label5.Text = "单机版 V1.0";
+            // 
+            // label4
+            // 
+            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("宋体", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label4.Location = new System.Drawing.Point(8, 18);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(0, 29);
+            this.label4.TabIndex = 0;
             // 
             // SignForm
             // 

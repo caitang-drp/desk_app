@@ -17,6 +17,8 @@ namespace LocalERP.WinForm
         {
             InitializeComponent();
             this.textBox1.Text = AuthUtility.getCPU();
+            this.toolStripStatusLabel1.Text = ConfUtility.GetSoftName();
+            this.label4.Text = ConfUtility.GetProductName();
         }
 
         /// <summary>
@@ -25,7 +27,7 @@ namespace LocalERP.WinForm
         /// <param name="sender"></param>
         /// <param name="e"></param>
 
-        private bool checkSN()
+        private bool checkAndUpdateSN()
         {
             if (string.IsNullOrEmpty(this.textBox_ps.Text) || AuthUtility.checkSN(this.textBox_ps.Text) == false)
             {
@@ -35,14 +37,19 @@ namespace LocalERP.WinForm
             else
             {
                 this.errorProvider1.SetError(this.textBox_ps, string.Empty);
-                ConfDao.getInstance().Update(2, this.textBox_ps.Text);
+                string newSn = this.textBox_ps.Text;
+
+                string oldSn = ConfDao.getInstance().Get(2);
+                if(oldSn != null && oldSn.Trim() != "")
+                    newSn = oldSn.Trim() + "/" + newSn;
+                ConfDao.getInstance().Update(2, newSn);
                 return true;
             }
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (this.checkSN())
+            if (this.checkAndUpdateSN())
             {
                 this.DialogResult = DialogResult.OK;
             }

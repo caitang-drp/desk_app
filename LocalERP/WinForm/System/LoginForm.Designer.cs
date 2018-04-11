@@ -96,7 +96,6 @@
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
             this.toolStripStatusLabel1.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.toolStripStatusLabel1.Size = new System.Drawing.Size(269, 17);
-            this.toolStripStatusLabel1.Text = "飞翔进销存管理软件(flySoft) copyright (c) 2017";
             // 
             // textBox1
             // 

@@ -52,41 +52,15 @@ namespace LocalERP.WinForm
         {
             try
             {
-                /*DataTable dataTable = PayReceiptDao.getInstance().FindList(this.dateTimePicker3.Value, this.dateTimePicker4.Value.AddDays(1), (int)(comboBox1.SelectedValue), textBox_customer.Text.Trim());
-                this.dataGridView1.Rows.Clear();
-                foreach (DataRow dr in dataTable.Rows)
-                {
-                    int index = this.dataGridView1.Rows.Add();
-                    this.dataGridView1.Rows[index].Cells["ID"].Value = dr["ID"];
-                    this.dataGridView1.Rows[index].Cells["code"].Value = dr["serial"];
-                    this.dataGridView1.Rows[index].Cells["customer"].Value = dr["name"];
-                    int type = (int)(dr["bill_type"]);
-
-                    this.dataGridView1.Rows[index].Cells["type"].Value = PayReceipt.PayReceiptTypeConfs[type - 1].name;
-                    this.dataGridView1.Rows[index].Cells["typeValue"].Value = type;
-
-                    double pay = 0;
-                    ValidateUtility.getDouble(dr, "thisPayed", out pay);
-                    if (type == 1 || type == 4 || type == 5)
-                        ControlUtility.setCellWithColor(dataGridView1.Rows[index].Cells["sum"], Color.Green, string.Format("-{0:0.00}", pay));
-                    else if (type == 2 || type == 3 || type == 6)
-                        ControlUtility.setCellWithColor(dataGridView1.Rows[index].Cells["sum"], Color.Red, string.Format("+{0:0.00}", pay));
-
-                    int status = (int)(dr["status"]);
-                    if (status == 1)
-                        ControlUtility.setCellWithColor(this.dataGridView1.Rows[index].Cells["status"], Color.Red, PayReceipt.statusContext[status - 1]);
-                    else
-                        ControlUtility.setCellWithColor(this.dataGridView1.Rows[index].Cells["status"], Color.Black, PayReceipt.statusContext[status - 1]);
-
-                    this.dataGridView1.Rows[index].Cells["time"].Value = dr["bill_time"];
-
-                }*/
-
                 List<PayReceipt> prList = PayReceiptDao.getInstance().FindPayReceiptList(this.dateTimePicker3.Value, this.dateTimePicker4.Value.AddDays(1), (int)(comboBox1.SelectedValue), textBox_customer.Text.Trim(), 0);
                 this.dataGridView1.Rows.Clear();
+
+                int index = 0;
+                double sum = 0;
+
                 foreach (PayReceipt pr in prList)
                 {
-                    int index = this.dataGridView1.Rows.Add();
+                    index = this.dataGridView1.Rows.Add();
                     this.dataGridView1.Rows[index].Cells["ID"].Value = pr.id;
                     this.dataGridView1.Rows[index].Cells["code"].Value = pr.serial;
                     this.dataGridView1.Rows[index].Cells["customer"].Value = pr.customerName;
@@ -97,9 +71,15 @@ namespace LocalERP.WinForm
 
                     double pay = pr.thisPayed;
                     if (type == 1 || type == 4 || type == 5)
+                    {
                         ControlUtility.setCellWithColor(dataGridView1.Rows[index].Cells["sum"], Color.Green, string.Format("-{0:0.00}", pay));
+                        sum -= pay;
+                    }
                     else if (type == 2 || type == 3 || type == 6)
+                    {
                         ControlUtility.setCellWithColor(dataGridView1.Rows[index].Cells["sum"], Color.Red, string.Format("+{0:0.00}", pay));
+                        sum += pay;
+                    }
 
                     int status = pr.status;
                     if (status == 1)
@@ -107,13 +87,25 @@ namespace LocalERP.WinForm
                     else
                         ControlUtility.setCellWithColor(this.dataGridView1.Rows[index].Cells["status"], Color.Black, PayReceipt.statusContext[status - 1]);
 
-                    this.dataGridView1.Rows[index].Cells["time"].Value = pr.bill_time.ToString();
+                    this.dataGridView1.Rows[index].Cells["time"].Value = pr.bill_time.ToString("yyyy-MM-dd HH:mm:ss");
 
                 }
+
+                index = this.dataGridView1.Rows.Add();
+
+                this.dataGridView1.Rows[index].Cells["code"].Value = "合计";
+                this.dataGridView1.Rows[index].Cells["sum"].Value = sum.ToString("+0.00;-0.00;0");
+                this.dataGridView1.Rows[index].DefaultCellStyle.ForeColor = Color.Red;
+                if(sum >= 0)
+                    this.dataGridView1.Rows[index].Cells["sum"].Style.ForeColor = Color.Red;
+                else
+                    this.dataGridView1.Rows[index].Cells["sum"].Style.ForeColor = Color.Green;
+                this.dataGridView1.Rows[index].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                this.dataGridView1.Rows[index].DefaultCellStyle.Font = new Font("宋体", 10F, FontStyle.Bold);
             }
             catch (Exception ex)
             {
-                MessageBox.Show("查询错误, 请输入正确的条件.", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                //MessageBox.Show("查询错误, 请输入正确的条件.", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
@@ -187,22 +179,22 @@ namespace LocalERP.WinForm
             switch (typeValue)
             {
                 case (int)PayReceipt.BillType.BuyPay:
-                    formString = DataUtility.CASH_PAY;
+                    formString = LabelUtility.CASH_PAY;
                     break;
                 case (int)PayReceipt.BillType.BuyRefund:
-                    formString = DataUtility.CASH_PAY_REFUND;
+                    formString = LabelUtility.CASH_PAY_REFUND;
                     break;
                 case (int)PayReceipt.BillType.SellReceipt:
-                    formString = DataUtility.CASH_RECEIPT;
+                    formString = LabelUtility.CASH_RECEIPT;
                     break;
                 case (int)PayReceipt.BillType.SellRefund:
-                    formString = DataUtility.CASH_RECEIPT_REFUND;
+                    formString = LabelUtility.CASH_RECEIPT_REFUND;
                     break;
                 case (int)PayReceipt.BillType.OtherPay:
-                    formString = DataUtility.CASH_OTHER_PAY;
+                    formString = LabelUtility.CASH_OTHER_PAY;
                     break;
                 case (int)PayReceipt.BillType.OtherReceipt:
-                    formString = DataUtility.CASH_OTHER_RECEIPT;
+                    formString = LabelUtility.CASH_OTHER_RECEIPT;
                     break;
                 default:
                     break;
@@ -214,7 +206,7 @@ namespace LocalERP.WinForm
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //initList();
+            initList();
         }
 
         private void toolStripButton_selectAll_Click(object sender, EventArgs e)

@@ -39,6 +39,7 @@
             this.toolStripButton_addType_brother = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton6 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton_editType = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton_delType = new System.Windows.Forms.ToolStripButton();
             this.label_tip = new System.Windows.Forms.Label();
             this.dataGridView1 = new LocalERP.WinForm.MyDataGridView();
@@ -48,7 +49,6 @@
             this.toolStripButton_edit = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton_delItem = new System.Windows.Forms.ToolStripButton();
             this.label3 = new System.Windows.Forms.Label();
-            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.label1 = new System.Windows.Forms.Label();
             this.textBox_name = new System.Windows.Forms.TextBox();
             this.button_search = new System.Windows.Forms.Button();
@@ -78,8 +78,8 @@
             this.splitContainer1.Panel2.Controls.Add(this.label_tip);
             this.splitContainer1.Panel2.Controls.Add(this.dataGridView1);
             this.splitContainer1.Panel2.Controls.Add(this.toolStrip1);
-            this.splitContainer1.Size = new System.Drawing.Size(857, 437);
-            this.splitContainer1.SplitterDistance = 210;
+            this.splitContainer1.Size = new System.Drawing.Size(963, 574);
+            this.splitContainer1.SplitterDistance = 235;
             this.splitContainer1.SplitterWidth = 5;
             this.splitContainer1.TabIndex = 0;
             // 
@@ -94,7 +94,7 @@
             this.treeView1.Location = new System.Drawing.Point(0, 25);
             this.treeView1.Name = "treeView1";
             this.treeView1.SelectedImageIndex = 0;
-            this.treeView1.Size = new System.Drawing.Size(210, 412);
+            this.treeView1.Size = new System.Drawing.Size(235, 549);
             this.treeView1.TabIndex = 0;
             this.treeView1.AfterLabelEdit += new System.Windows.Forms.NodeLabelEditEventHandler(this.treeView1_AfterLabelEdit);
             this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
@@ -116,10 +116,11 @@
             this.toolStripButton_addType_brother,
             this.toolStripButton1,
             this.toolStripButton6,
+            this.toolStripButton_editType,
             this.toolStripButton_delType});
             this.toolStrip2.Location = new System.Drawing.Point(0, 0);
             this.toolStrip2.Name = "toolStrip2";
-            this.toolStrip2.Size = new System.Drawing.Size(210, 25);
+            this.toolStrip2.Size = new System.Drawing.Size(235, 25);
             this.toolStrip2.TabIndex = 1;
             this.toolStrip2.Text = "toolStrip2";
             // 
@@ -158,7 +159,7 @@
             this.toolStripButton1.Name = "toolStripButton1";
             this.toolStripButton1.Size = new System.Drawing.Size(23, 22);
             this.toolStripButton1.Text = "上移";
-            this.toolStripButton1.Visible = false;
+            this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton_upType_Click);
             // 
             // toolStripButton6
             // 
@@ -169,6 +170,17 @@
             this.toolStripButton6.Size = new System.Drawing.Size(23, 22);
             this.toolStripButton6.Text = "下移";
             this.toolStripButton6.Visible = false;
+            // 
+            // toolStripButton_editType
+            // 
+            this.toolStripButton_editType.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton_editType.Image = global::LocalERP.Properties.Resources.tree_node_edit_16px;
+            this.toolStripButton_editType.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton_editType.Name = "toolStripButton_editType";
+            this.toolStripButton_editType.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButton_editType.Text = "toolStripButton2";
+            this.toolStripButton_editType.ToolTipText = "修改";
+            this.toolStripButton_editType.Click += new System.EventHandler(this.toolStripButton_editType_Click);
             // 
             // toolStripButton_delType
             // 
@@ -206,7 +218,7 @@
             this.dataGridView1.RowTemplate.DefaultCellStyle.SelectionForeColor = System.Drawing.Color.Black;
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(642, 412);
+            this.dataGridView1.Size = new System.Drawing.Size(723, 549);
             this.dataGridView1.TabIndex = 4;
             this.dataGridView1.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellDoubleClick);
             // 
@@ -222,7 +234,7 @@
             this.toolStripButton_delItem});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(642, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(723, 25);
             this.toolStrip1.TabIndex = 6;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -264,25 +276,16 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(6, 46);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(189, 14);
+            this.label3.Size = new System.Drawing.Size(217, 14);
             this.label3.TabIndex = 42;
-            this.label3.Text = "选中后再点击，即可编辑类别";
-            // 
-            // statusStrip1
-            // 
-            this.statusStrip1.Location = new System.Drawing.Point(0, 479);
-            this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 16, 0);
-            this.statusStrip1.Size = new System.Drawing.Size(857, 22);
-            this.statusStrip1.TabIndex = 6;
-            this.statusStrip1.Text = "statusStrip1";
+            this.label3.Text = "选中后再点击，即可编辑类别名称";
             // 
             // label1
             // 
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("宋体", 10F);
-            this.label1.Location = new System.Drawing.Point(526, 22);
+            this.label1.Location = new System.Drawing.Point(632, 22);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(84, 14);
             this.label1.TabIndex = 7;
@@ -291,7 +294,7 @@
             // textBox_name
             // 
             this.textBox_name.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox_name.Location = new System.Drawing.Point(612, 18);
+            this.textBox_name.Location = new System.Drawing.Point(718, 18);
             this.textBox_name.Name = "textBox_name";
             this.textBox_name.Size = new System.Drawing.Size(143, 23);
             this.textBox_name.TabIndex = 8;
@@ -303,7 +306,7 @@
             this.button_search.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.button_search.Image = global::LocalERP.Properties.Resources.search_16px;
             this.button_search.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button_search.Location = new System.Drawing.Point(768, 16);
+            this.button_search.Location = new System.Drawing.Point(874, 16);
             this.button_search.Name = "button_search";
             this.button_search.Size = new System.Drawing.Size(63, 26);
             this.button_search.TabIndex = 40;
@@ -317,12 +320,11 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(857, 501);
+            this.ClientSize = new System.Drawing.Size(963, 638);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.button_search);
             this.Controls.Add(this.textBox_name);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.splitContainer1);
             this.Font = new System.Drawing.Font("宋体", 10F);
             this.HideOnClose = true;
@@ -352,14 +354,13 @@
         private System.Windows.Forms.TreeView treeView1;
         private System.Windows.Forms.ImageList imageList1;
         private MyDataGridView dataGridView1;
-/*        private System.Windows.Forms.DataGridViewCheckBoxColumn check;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn name;
-        private System.Windows.Forms.DataGridViewTextBoxColumn tel;
-        private System.Windows.Forms.DataGridViewTextBoxColumn phone;
-        private System.Windows.Forms.DataGridViewTextBoxColumn address;
-        private System.Windows.Forms.DataGridViewTextBoxColumn comment;*/
-        private System.Windows.Forms.StatusStrip statusStrip1;
+        /*        private System.Windows.Forms.DataGridViewCheckBoxColumn check;
+                private System.Windows.Forms.DataGridViewTextBoxColumn ID;
+                private System.Windows.Forms.DataGridViewTextBoxColumn name;
+                private System.Windows.Forms.DataGridViewTextBoxColumn tel;
+                private System.Windows.Forms.DataGridViewTextBoxColumn phone;
+                private System.Windows.Forms.DataGridViewTextBoxColumn address;
+                private System.Windows.Forms.DataGridViewTextBoxColumn comment;*/
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox textBox_name;
         private System.Windows.Forms.Button button_search;
@@ -377,5 +378,6 @@
         private System.Windows.Forms.ToolStripLabel toolStripLabel_manage;
         private System.Windows.Forms.Label label_tip;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.ToolStripButton toolStripButton_editType;
     }
 }

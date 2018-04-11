@@ -57,8 +57,13 @@
             this.备份ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.导出数据文件ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.导入数据文件ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.全部数据清空ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.设置ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.设置登陆密码ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.单据设置ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.允许ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.permitNegativeItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.notPermitNegativeItem = new System.Windows.Forms.ToolStripMenuItem();
             this.帮助ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.帮助文档ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.关于软件ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -71,7 +76,6 @@
             this.toolStripButton_statistic = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton_close = new System.Windows.Forms.ToolStripButton();
             this.mySplitter1 = new LocalERP.WinForm.Utility.MySplitter(this.components);
-            this.全部数据清空ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -181,10 +185,19 @@
             this.导入数据文件ToolStripMenuItem.Text = "导入数据文件";
             this.导入数据文件ToolStripMenuItem.Click += new System.EventHandler(this.导入数据文件ToolStripMenuItem_Click);
             // 
+            // 全部数据清空ToolStripMenuItem
+            // 
+            this.全部数据清空ToolStripMenuItem.Name = "全部数据清空ToolStripMenuItem";
+            this.全部数据清空ToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
+            this.全部数据清空ToolStripMenuItem.Text = "全部数据清空";
+            this.全部数据清空ToolStripMenuItem.Click += new System.EventHandler(this.全部数据清空ToolStripMenuItem_Click);
+            // 
             // 设置ToolStripMenuItem
             // 
             this.设置ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.设置登陆密码ToolStripMenuItem});
+            this.设置登陆密码ToolStripMenuItem,
+            this.单据设置ToolStripMenuItem,
+            this.允许ToolStripMenuItem});
             this.设置ToolStripMenuItem.Name = "设置ToolStripMenuItem";
             this.设置ToolStripMenuItem.Size = new System.Drawing.Size(47, 20);
             this.设置ToolStripMenuItem.Text = "设置";
@@ -192,9 +205,39 @@
             // 设置登陆密码ToolStripMenuItem
             // 
             this.设置登陆密码ToolStripMenuItem.Name = "设置登陆密码ToolStripMenuItem";
-            this.设置登陆密码ToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
-            this.设置登陆密码ToolStripMenuItem.Text = "设置登陆密码";
+            this.设置登陆密码ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.设置登陆密码ToolStripMenuItem.Text = "密码设置";
             this.设置登陆密码ToolStripMenuItem.Click += new System.EventHandler(this.设置登陆密码ToolStripMenuItem_Click);
+            // 
+            // 单据设置ToolStripMenuItem
+            // 
+            this.单据设置ToolStripMenuItem.Name = "单据设置ToolStripMenuItem";
+            this.单据设置ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.单据设置ToolStripMenuItem.Text = "单据设置";
+            this.单据设置ToolStripMenuItem.Click += new System.EventHandler(this.单据设置ToolStripMenuItem_Click);
+            // 
+            // 允许ToolStripMenuItem
+            // 
+            this.允许ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.permitNegativeItem,
+            this.notPermitNegativeItem});
+            this.允许ToolStripMenuItem.Name = "允许ToolStripMenuItem";
+            this.允许ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.允许ToolStripMenuItem.Text = "允许负库存";
+            // 
+            // permitNegativeItem
+            // 
+            this.permitNegativeItem.Name = "permitNegativeItem";
+            this.permitNegativeItem.Size = new System.Drawing.Size(152, 22);
+            this.permitNegativeItem.Text = "是";
+            this.permitNegativeItem.Click += new System.EventHandler(this.permitNegativeItem_Click);
+            // 
+            // notPermitNegativeItem
+            // 
+            this.notPermitNegativeItem.Name = "notPermitNegativeItem";
+            this.notPermitNegativeItem.Size = new System.Drawing.Size(152, 22);
+            this.notPermitNegativeItem.Text = "否";
+            this.notPermitNegativeItem.Click += new System.EventHandler(this.notPermitNegativeItem_Click);
             // 
             // 帮助ToolStripMenuItem
             // 
@@ -209,13 +252,13 @@
             // 
             this.帮助文档ToolStripMenuItem.Enabled = false;
             this.帮助文档ToolStripMenuItem.Name = "帮助文档ToolStripMenuItem";
-            this.帮助文档ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.帮助文档ToolStripMenuItem.Size = new System.Drawing.Size(130, 22);
             this.帮助文档ToolStripMenuItem.Text = "帮助文档";
             // 
             // 关于软件ToolStripMenuItem
             // 
             this.关于软件ToolStripMenuItem.Name = "关于软件ToolStripMenuItem";
-            this.关于软件ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.关于软件ToolStripMenuItem.Size = new System.Drawing.Size(130, 22);
             this.关于软件ToolStripMenuItem.Text = "关于软件";
             this.关于软件ToolStripMenuItem.Click += new System.EventHandler(this.关于软件ToolStripMenuItem_Click);
             // 
@@ -359,13 +402,6 @@
             this.mySplitter1.TabIndex = 16;
             this.mySplitter1.TabStop = false;
             // 
-            // 全部数据清空ToolStripMenuItem
-            // 
-            this.全部数据清空ToolStripMenuItem.Name = "全部数据清空ToolStripMenuItem";
-            this.全部数据清空ToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
-            this.全部数据清空ToolStripMenuItem.Text = "全部数据清空";
-            this.全部数据清空ToolStripMenuItem.Click += new System.EventHandler(this.全部数据清空ToolStripMenuItem_Click);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
@@ -427,6 +463,10 @@
         private System.Windows.Forms.ToolStripButton toolStripButton_queryLib;
         private System.Windows.Forms.ToolStripButton toolStripButton_statistic;
         private System.Windows.Forms.ToolStripMenuItem 全部数据清空ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 允许ToolStripMenuItem;
+        protected System.Windows.Forms.ToolStripMenuItem permitNegativeItem;
+        protected System.Windows.Forms.ToolStripMenuItem notPermitNegativeItem;
+        private System.Windows.Forms.ToolStripMenuItem 单据设置ToolStripMenuItem;
 
     }
 }

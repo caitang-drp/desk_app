@@ -52,6 +52,21 @@ namespace LocalERP.DataAccess.Data
             get { return phone; }
             set { phone = value; }
         }
+
+        public string Contract {
+            get
+            {
+                string temp = "";
+                if (string.IsNullOrEmpty(phone))
+                    temp = tel;
+                else if (string.IsNullOrEmpty(tel))
+                    temp = phone;
+                else
+                    temp = string.Format("{0} / {1}", tel, phone);
+                return temp;
+            }
+        }
+
         private string address;
 
         public string Address
