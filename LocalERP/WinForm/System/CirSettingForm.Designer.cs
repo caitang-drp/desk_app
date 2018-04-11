@@ -88,6 +88,7 @@
             this.toolStripButton4.Size = new System.Drawing.Size(39, 34);
             this.toolStripButton4.Text = "取消";
             this.toolStripButton4.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.toolStripButton4.Click += new System.EventHandler(this.toolStripButton4_Click);
             // 
             // errorProvider1
             // 

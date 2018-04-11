@@ -42,5 +42,10 @@ namespace LocalERP.WinForm
             MessageBox.Show("保存成功!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
             this.Close();
         }
+
+        private void toolStripButton4_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }
