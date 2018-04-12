@@ -36,8 +36,8 @@ namespace LocalERP.UiDataProxy
             set { categoryName = value; }
         }
 
+        //已经完成搬迁
         private string categoryTableName;
-
         public string CategoryTableName
         {
             get { return categoryTableName; }

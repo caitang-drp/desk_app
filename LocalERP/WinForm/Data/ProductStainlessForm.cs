@@ -61,6 +61,7 @@ namespace LocalERP.WinForm
             this.comboBox_unit.Text = product.Unit;
 
             this.textBox_comment.Text = product.Comment;
+            this.radioButton2.Checked = product.Disable;
         }
 
         private void clearProduct()
@@ -79,6 +80,7 @@ namespace LocalERP.WinForm
             this.comboBox_unit.Text = null;
             
             this.textBox_comment.Text = "";
+            this.radioButton2.Checked = false;
         }
 
         public override void refresh()
@@ -119,7 +121,7 @@ namespace LocalERP.WinForm
                 ValidateUtility.getInt(this.textBox_quantityPerPiece, this.errorProvider1, false, true, out quantityPerPiece) &&
                 this.getCategoryID(out categoryID))
             {
-                product = new ProductStainless(this.textBox_serial.Text, name, categoryID, price_purchase, price_sell, this.comboBox_unit.Text, quantityPerPiece, this.textBox_comment.Text);
+                product = new ProductStainless(this.textBox_serial.Text, name, categoryID, price_purchase, price_sell, this.comboBox_unit.Text, quantityPerPiece, this.textBox_comment.Text, this.radioButton2.Checked);
                 product.ID = productID;
                 return true;
             }

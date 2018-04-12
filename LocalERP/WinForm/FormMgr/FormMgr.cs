@@ -250,9 +250,9 @@ namespace LocalERP.WinForm
             return customerForm;
         }
 
-        public virtual CategoryForm getCategoryForm(CategoryItemProxy proxy, int mode, int id)
+        public virtual CategoryForm getCategoryForm(string categoryTableName, int mode, int id)
         {
-            CategoryForm categoryForm = new CategoryForm(proxy, mode, id);
+            CategoryForm categoryForm = new CategoryForm(categoryTableName, mode, id);
             appendEvent(categoryForm);
             return categoryForm;
         }

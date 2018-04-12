@@ -8,6 +8,8 @@ using System.Windows.Forms;
 using LocalERP.DataAccess.DataDAO;
 using LocalERP.DataAccess.Data;
 using LocalERP.UiDataProxy;
+using LocalERP.DataAccess.Utility;
+using LocalERP.WinForm.Utility;
 
 namespace LocalERP.WinForm
 {
@@ -18,25 +20,25 @@ namespace LocalERP.WinForm
         private int categoryID = 0;
         private Category category;
 
-        private CategoryItemProxy proxy;
+        private CategoryItemTypeConf conf;
 
-        public CategoryForm(CategoryItemProxy proxy, int mode, int id)
+        public CategoryForm(CategoryItemTypeConf conf, int mode, int id)
         {
             openMode = mode;
             categoryID = id;
 
-            this.proxy = proxy;
+            this.conf = conf;
 
             InitializeComponent();
 
-            this.proxy.initTree(this.comboBoxTree1.tvTreeView);
+            ControlUtility.initTree(this.comboBoxTree1.tvTreeView, conf.CategoryTableName);
         }
 
         private void ElementForm_Load(object sender, EventArgs e)
         {
             if (openMode == 1)
             {
-                category = CategoryDao.getInstance().FindById(this.proxy.CategoryTableName, categoryID);
+                category = CategoryDao.getInstance().FindById(conf.CategoryTableName, categoryID);
                 this.textBox_name.Text = category.Name;
                 this.comboBoxTree1.setSelectNode(category.Parent.ToString());
             }
@@ -86,11 +88,11 @@ namespace LocalERP.WinForm
             if (openMode == 0) {
             }
             else if (openMode == 1) {
-                Category preParent = CategoryDao.getInstance().FindById(proxy.CategoryTableName, category.Parent);
+                Category preParent = CategoryDao.getInstance().FindById(conf.CategoryTableName, category.Parent);
 
                 Category newParent = null;
                 if(this.comboBoxTree1.SelectedNode != null)
-                    newParent = CategoryDao.getInstance().FindById(proxy.CategoryTableName, int.Parse(this.comboBoxTree1.SelectedNode.Name));
+                    newParent = CategoryDao.getInstance().FindById(conf.CategoryTableName, int.Parse(this.comboBoxTree1.SelectedNode.Name));
                 
                 String name = "";
                 if(this.getName(out name) == false)
@@ -101,10 +103,10 @@ namespace LocalERP.WinForm
                     MessageBox.Show("不能选择子类别作为上级类别。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
                 }
-                CategoryDao.getInstance().UpdateName(proxy.CategoryTableName, category.Id, name);
-                CategoryDao.getInstance().UpdateParent(proxy.CategoryTableName, category, preParent, newParent);
+                CategoryDao.getInstance().UpdateName(conf.CategoryTableName, category.Id, name);
+                CategoryDao.getInstance().UpdateParent(conf.CategoryTableName, category, preParent, newParent);
 
-                this.invokeUpdateNotify(proxy.UpdateType_Category);
+                this.invokeUpdateNotify(conf.UpdateType_Category);
 
                 MessageBox.Show("修改类别成功!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.Close();

@@ -18,8 +18,8 @@ namespace LocalERP.DataAccess.Data
 
         public ProductStainless() { }
 
-        public ProductStainless(string serial, string name, int categoryID, double pricePurchase, double priceSell, string unit, int quantityPerPiece, string comment)
-            : base(serial, name, categoryID, pricePurchase, priceSell, unit, comment)
+        public ProductStainless(string serial, string name, int categoryID, double pricePurchase, double priceSell, string unit, int quantityPerPiece, string comment, bool disable)
+            : base(serial, name, categoryID, pricePurchase, priceSell, unit, comment, disable)
         {
             this.quantityPerPiece = quantityPerPiece;
         }

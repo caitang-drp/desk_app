@@ -22,8 +22,8 @@ namespace LocalERP.DataAccess.DataDAO
             try
             {
                 string commandText = string.Format(
-                    "insert into ProductStainless(serial, name, comment, parent, pricePurchase, priceCost, priceSell, unit, quantityPerPiece) values('{0}', '{1}', '{2}', {3}, {4}, {5}, {6}, '{7}', {8})",
-                    info.Serial, info.Name, info.Comment, info.CategoryID, info.PricePurchase, info.PriceCost, info.PriceSell, info.Unit, info.QuantityPerPiece);
+                    "insert into ProductStainless(serial, name, comment, parent, pricePurchase, priceCost, priceSell, unit, quantityPerPiece, disable) values('{0}', '{1}', '{2}', {3}, {4}, {5}, {6}, '{7}', {8}, {9})",
+                    info.Serial, info.Name, info.Comment, info.CategoryID, info.PricePurchase, info.PriceCost, info.PriceSell, info.Unit, info.QuantityPerPiece, info.Disable);
                 DbHelperAccess.executeNonQuery(commandText);
                 int productID = DbHelperAccess.executeMax("ID", "ProductStainless");
                 return productID;
@@ -38,8 +38,8 @@ namespace LocalERP.DataAccess.DataDAO
         public bool Update(ProductStainless info) {
             try
             {
-                string commandText = string.Format("update ProductStainless set serial='{0}', name='{1}', comment='{2}', parent={3}, pricePurchase={4}, priceCost = {5}, priceSell={6}, unit='{7}', quantityPerPiece={8}, num={9} where ID={10}",
-                    info.Serial, info.Name, info.Comment, info.CategoryID, info.PricePurchase, info.PriceCost, info.PriceSell, info.Unit, info.QuantityPerPiece, info.Num, info.ID);
+                string commandText = string.Format("update ProductStainless set serial='{0}', name='{1}', comment='{2}', parent={3}, pricePurchase={4}, priceCost = {5}, priceSell={6}, unit='{7}', quantityPerPiece={8}, num={9}, disable={10} where ID={11}",
+                    info.Serial, info.Name, info.Comment, info.CategoryID, info.PricePurchase, info.PriceCost, info.PriceSell, info.Unit, info.QuantityPerPiece, info.Num, info.Disable, info.ID);
 
                 DbHelperAccess.executeNonQuery(commandText);
                 return true;
@@ -49,7 +49,7 @@ namespace LocalERP.DataAccess.DataDAO
             }
         }
 
-        public DataTable FindList(Category parent, string name)
+        public DataTable FindList(Category parent, string name, bool notShowDisable)
         {
             StringBuilder commandText = new StringBuilder("select * from ProductStainless, ProductStainlessCategory where ProductStainless.parent=ProductStainlessCategory.ID");
             if (parent != null)
@@ -57,6 +57,8 @@ namespace LocalERP.DataAccess.DataDAO
 
             if (!string.IsNullOrEmpty(name))
                 commandText.AppendFormat(" and ( ProductStainless.name like '%{0}%' or ProductStainless.serial like '%{0}%')", name);
+            if (notShowDisable == true)
+                commandText.AppendFormat(" and ProductStainless.disable = false");
 
             commandText.Append(" order by ProductStainless.ID");
             
@@ -113,6 +115,10 @@ namespace LocalERP.DataAccess.DataDAO
 
                 double.TryParse(dr["priceCost"].ToString(), out priceCost);
                 product.PriceCost = priceCost;
+
+                bool disable;
+                bool.TryParse(dr["disable"].ToString(), out disable);
+                product.Disable = disable;
 
                 return product;
             }

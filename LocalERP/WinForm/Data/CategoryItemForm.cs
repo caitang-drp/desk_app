@@ -15,47 +15,47 @@ using System.IO;
 
 namespace LocalERP.WinForm
 {
-    public partial class CategoryItemForm : LookupAndNotifyDockContent
+    public abstract partial class CategoryItemForm : LookupAndNotifyDockContent
     {
         //openMode: 0 select mode; 1 manage mode
-        private int openMode = 0;
+        protected int openMode = 0;
         //used as parameter delivered to multi thread
         private string searchName = "";
-
-        private CategoryItemProxy categoryItemProxy;
-
-        public CategoryItemProxy CategoryItemProxy
-        {
-            get { return categoryItemProxy; }
-            set { categoryItemProxy = value; }
-        }
-
         private DataTable recordsDataTable;
 
-        public CategoryItemForm(int openMode, CategoryItemProxy proxy, string title, Form parentForm)
+        CategoryItemTypeConf conf;
+
+        public CategoryItemForm(int openMode, CategoryItemTypeConf conf, string title, Form parentForm)
         {
             InitializeComponent();
 
             this.openMode = openMode;
 
-            this.categoryItemProxy = proxy;
+            this.conf = conf;
+
             this.Text = title;
             this.toolStripLabel_manage.Text = title + "管理:";
             
             this.Owner = parentForm;
 
-            categoryItemProxy.initColumns(this.dataGridView1);
-            categoryItemProxy.initTree(this.treeView1);
+            //去掉proxy
+            this.initColumns();
+            this.initTree();
 
             if (this.openMode == 0)
             {
                 this.label_tip.Text = "双击即可选中" + title;
-                categoryItemProxy.hideSomeColumns(this.dataGridView1);
+                hideSomeColumns();
             }
             else
                 this.label_tip.Text = "双击即可编辑" + title;
 
         }
+
+        //2018-04-12:去掉proxy,迁移过来
+        protected abstract void initColumns();
+        protected abstract void initTree();
+        protected abstract void hideSomeColumns();
 
         private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
         {
@@ -69,21 +69,21 @@ namespace LocalERP.WinForm
 
         private void selectCategory(int parent) {
             searchName = this.textBox_name.Text;
-            recordsDataTable = categoryItemProxy.getRecordsTable(parent, this.searchName);
-            categoryItemProxy.initRecords(this.dataGridView1, recordsDataTable);
+            recordsDataTable = getRecordsTable(parent, this.searchName);
+            initRecords(recordsDataTable);
         }
+
+        //考虑把这两个函数合并在一起
+        protected abstract DataTable getRecordsTable(int parent, string searchName);
+        protected abstract void initRecords(DataTable dt);
 
         public override void refresh()
         {
-            categoryItemProxy.initTree(this.treeView1);
+            this.initTree();
         }
 
         public void refreshList() {
             this.treeView1_AfterSelect(null, null);
-        }
-
-        public void initTree() {
-            categoryItemProxy.initTree(this.treeView1);
         }
 
         private bool isAdd = false;
@@ -167,23 +167,23 @@ namespace LocalERP.WinForm
                 Category parent = null;
                 Category right = null;
                 if (node.Parent != null)
-                    parent = CategoryDao.getInstance().FindById(CategoryItemProxy.CategoryTableName, int.Parse(node.Parent.Name));
+                    parent = CategoryDao.getInstance().FindById(conf.CategoryTableName, int.Parse(node.Parent.Name));
                 else if(node.PrevNode !=null)
-                    right = CategoryDao.getInstance().FindById(CategoryItemProxy.CategoryTableName, int.Parse(node.PrevNode.Name));
+                    right = CategoryDao.getInstance().FindById(conf.CategoryTableName, int.Parse(node.PrevNode.Name));
                 
                 Category category = new Category();
                 category.Name = text;
-                int id = CategoryDao.getInstance().Insert(CategoryItemProxy.CategoryTableName, parent, right, category);
+                int id = CategoryDao.getInstance().Insert(conf.CategoryTableName, parent, right, category);
                 node.Name = id.ToString();
 
                 isAdd = false;
             }
             else
-                CategoryDao.getInstance().UpdateName(CategoryItemProxy.CategoryTableName, int.Parse(e.Node.Name), text);
+                CategoryDao.getInstance().UpdateName(conf.CategoryTableName, int.Parse(e.Node.Name), text);
 
-            this.invokeUpdateNotify(this.categoryItemProxy.UpdateType_Category);
-            //刷新本身的窗口？
-            this.refreshVersion(this.categoryItemProxy.UpdateType_Category);
+            this.invokeUpdateNotify(conf.UpdateType_Category);
+            //更新本身的版本
+            this.refreshVersion(conf.UpdateType_Category);
         }
 
 
@@ -193,7 +193,7 @@ namespace LocalERP.WinForm
             {
 
                 int id = int.Parse(treeView1.SelectedNode.Name);
-                CategoryForm form = FormSingletonFactory.getInstance().getCategoryForm(this.categoryItemProxy, 1, id);
+                CategoryForm form = FormSingletonFactory.getInstance().getCategoryForm(conf.CategoryTableName, 1, id);
                 form.updateNotify -= new UpdateNotify(form_updateNotify_category);
                 form.updateNotify += new UpdateNotify(form_updateNotify_category);
                 form.ShowDialog();
@@ -204,6 +204,7 @@ namespace LocalERP.WinForm
 
         void form_updateNotify_category(UpdateType notifyType)
         {
+            //刷新本身界面和版本，子窗口应该会更新版本
             this.refresh();
             this.refreshVersion(notifyType);
         }
@@ -220,9 +221,9 @@ namespace LocalERP.WinForm
                     return;
                 }
 
-                Category node = CategoryDao.getInstance().FindById(CategoryItemProxy.CategoryTableName, int.Parse(treeView1.SelectedNode.Name));
-                Category pNode = CategoryDao.getInstance().FindById(CategoryItemProxy.CategoryTableName, int.Parse(preNode.Name));
-                CategoryDao.getInstance().nodeUp(CategoryItemProxy.CategoryTableName, node, pNode);
+                Category node = CategoryDao.getInstance().FindById(conf.CategoryTableName, int.Parse(treeView1.SelectedNode.Name));
+                Category pNode = CategoryDao.getInstance().FindById(conf.CategoryTableName, int.Parse(preNode.Name));
+                CategoryDao.getInstance().nodeUp(conf.CategoryTableName, node, pNode);
 
                 TreeNode parent = treeView1.SelectedNode.Parent;
                 int index = treeView1.SelectedNode.Index;
@@ -257,19 +258,22 @@ namespace LocalERP.WinForm
                     return;
                 }
 
-                if (!CategoryDao.getInstance().DeleteDeaf(categoryItemProxy.CategoryTableName, id))
+                if (!CategoryDao.getInstance().DeleteDeaf(conf.CategoryTableName, id))
                     MessageBox.Show("无法删除,该类别被其他数据应用.", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 else
                 {
                     treeView1.SelectedNode.Remove();
-                    this.invokeUpdateNotify(this.categoryItemProxy.UpdateType_Category);
-                    this.refreshVersion(this.categoryItemProxy.UpdateType_Category);
+                    this.invokeUpdateNotify(conf.UpdateType_Category);
+                    this.refreshVersion(conf.UpdateType_Category);
                 }
             }else
                 MessageBox.Show("请选择类别.", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         /************  item  ***********************/
+        protected abstract MyDockContent getItemForm(Form owner, int openMode, int ID);
+        protected abstract void delItem(int id);
+
         private void toolStripButton_add_Click(object sender, EventArgs e)
         {
             int parent;
@@ -280,14 +284,14 @@ namespace LocalERP.WinForm
                 MessageBox.Show("请选择类别，如无类别请先增加!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
-            MyDockContent form = categoryItemProxy.getItemForm(this, 0, 0);
+            MyDockContent form = getItemForm(this, 0, 0);
             //这个地方可能还可以改进
             form.updateNotify -= new UpdateNotify(form_updateNotify);
             form.updateNotify += new UpdateNotify(form_updateNotify);
             form.ShowDialog();
         }
 
-        //这个只是更新categoryItemForm，子窗口还会向外发布事件
+        //这个只是更新categoryItemForm，子窗口还会向外发布事件(更新版本)
         void form_updateNotify(UpdateType notifyType)
         {
             this.refreshList();
@@ -313,7 +317,7 @@ namespace LocalERP.WinForm
             {
                 string name = this.dataGridView1.Rows[e.RowIndex].Cells["name"].Value.ToString();
                 LookupArg lookupArg = new LookupArg(id, name);
-                lookupArg.ArgName = this.categoryItemProxy.CategoryName;
+                lookupArg.ArgName = CategoryName;
 
                 //File.AppendAllText("e:\\debug.txt", string.Format("double click, thread:{0}\r\n", System.Threading.Thread.CurrentThread.ManagedThreadId));
 
@@ -321,7 +325,7 @@ namespace LocalERP.WinForm
                 this.invokeLookupCallback(lookupArg);
             }
             else if (openMode == 1) {
-                MyDockContent form = categoryItemProxy.getItemForm(this, 1, id);
+                MyDockContent form = getItemForm(this, 1, id);
                 form.updateNotify -= new UpdateNotify(form_updateNotify);
                 form.updateNotify += new UpdateNotify(form_updateNotify);
                 form.ShowDialog();
@@ -333,10 +337,10 @@ namespace LocalERP.WinForm
             List<int> list = this.dataGridView1.getSelectIDs("ID", "check");
             if (list == null || list.Count <= 0)
             {
-                MessageBox.Show("请选择编辑" + categoryItemProxy.ItemName, "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("请选择编辑" + ItemName, "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
-            MyDockContent form = categoryItemProxy.getItemForm(this, 1, list[0]);
+            MyDockContent form = getItemForm(this, 1, list[0]);
             form.updateNotify -= new UpdateNotify(form_updateNotify);
             form.updateNotify += new UpdateNotify(form_updateNotify);
             form.ShowDialog();
@@ -347,7 +351,7 @@ namespace LocalERP.WinForm
             List<int> list = this.dataGridView1.getSelectIDs("ID", "check");
             if (list == null || list.Count <= 0)
             {
-                MessageBox.Show("请选择删除"+categoryItemProxy.ItemName, "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("请选择删除"+ ItemName, "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
             StringBuilder ids = new StringBuilder();
@@ -356,23 +360,23 @@ namespace LocalERP.WinForm
                 ids.Append(list[ii]);
                 ids.Append(" ");
             }
-            if (MessageBox.Show(string.Format("是否删除ID为{0}的{1}?", ids.ToString(),categoryItemProxy.ItemName), "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
+            if (MessageBox.Show(string.Format("是否删除ID为{0}的{1}?", ids.ToString(), ItemName), "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
             {
                 try
                 {
                     for (int i = 0; i < list.Count; i++)
                     {
-                        categoryItemProxy.delItems(list[i]);
+                        delItems(list[i]);
                     }
-                    MessageBox.Show(string.Format("删除{0}成功!", categoryItemProxy.ItemName), "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show(string.Format("删除{0}成功!", conf.ItemName), "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 catch
                 {
-                    MessageBox.Show(string.Format("删除{0}失败，可能是其他数据引用到该{0}!", categoryItemProxy.ItemName), "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(string.Format("删除{0}失败，可能是其他数据引用到该{0}!", conf.ItemName), "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 refreshList();
-                this.invokeUpdateNotify(this.categoryItemProxy.UpdateType_Item);
-                this.refreshVersion(this.categoryItemProxy.UpdateType_Item);
+                this.invokeUpdateNotify(UpdateType_Item);
+                this.refreshVersion(UpdateType_Item);
             }
         }
         

@@ -201,6 +201,7 @@ namespace LocalERP.WinForm
                     throw new Exception();
 
                 //if(control.EditingControlDataGridView.CurrentCell.OwningColumn.Name == "product")
+                //这里为什么要判断呢?
                 if (!string.IsNullOrEmpty(arg.ArgName) && arg.ArgName == "ProductStainless")
                 {
                     int productID = (int)(arg.Value);

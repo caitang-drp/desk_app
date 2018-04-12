@@ -6,6 +6,8 @@ using LocalERP.WinForm;
 using LocalERP.WinForm.Utility;
 using System.Data;
 using System.Drawing;
+using LocalERP.DataAccess.Data;
+using LocalERP.DataAccess.DataDAO;
 
 namespace LocalERP.WinForm.Utility
 {
@@ -30,6 +32,48 @@ namespace LocalERP.WinForm.Utility
             cell.Style.ForeColor = color;
             cell.Style.SelectionForeColor = color;
             cell.Value = text;
+        }
+
+        public static void initTree(TreeView tv, string categoryTableName)
+        {
+            tv.Nodes.Clear();
+            List<Category> categorys = CategoryDao.getInstance().FindByParentId(categoryTableName, -1);
+            foreach (Category category in categorys)
+            {
+                tv.Nodes.Add(getNodeById(category.Id, categoryTableName));
+            }
+            tv.ExpandAll();
+
+            if (tv.Nodes.Count > 0 && tv.Nodes[0].IsSelected == false)
+                tv.SelectedNode = tv.Nodes[0];
+        }
+
+        private static TreeNode getNodeById(int id, string categoryTableName)
+        {
+
+            Category category = CategoryDao.getInstance().FindById(categoryTableName, id);
+
+            List<Category> childrenCategory = CategoryDao.getInstance().FindByParentId(categoryTableName, category.Id);
+            TreeNode[] childrenNode = null;
+            if (childrenCategory != null && childrenCategory.Count > 0)
+            {
+                childrenNode = new TreeNode[childrenCategory.Count];
+                for (int i = 0; i < childrenNode.Length; i++)
+                    childrenNode[i] = getNodeById(childrenCategory[i].Id, categoryTableName);
+            }
+
+            TreeNode node = null;
+            if (childrenNode != null)
+            {
+                node = new TreeNode(category.Name, childrenNode);
+                node.Name = category.Id.ToString();
+            }
+            else
+            {
+                node = new TreeNode(category.Name);
+                node.Name = category.Id.ToString();
+            }
+            return node;
         }
     }
 }

@@ -63,7 +63,7 @@ namespace LocalERP.WinForm
                 this.versionDic[type] = FormSingletonFactory.getInstance().getVersions()[type];
         }
 
-        //向外发布更新提示
+        //向外发布更新提示，外面的处理事件的方法就是更新版本
         public delegate void UpdateNotify(UpdateType notifyType);
         public event UpdateNotify updateNotify;
 

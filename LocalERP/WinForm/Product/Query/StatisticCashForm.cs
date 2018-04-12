@@ -100,7 +100,7 @@ namespace LocalERP.WinForm
             }
 
             lib = 0;
-            productDT = ProductStainlessDao.getInstance().FindList(null, null);
+            productDT = ProductStainlessDao.getInstance().FindList(null, null, true);
             foreach (DataRow dr in productDT.Rows) {
                 double price;
                 int num;

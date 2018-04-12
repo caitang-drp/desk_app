@@ -92,6 +92,14 @@ namespace LocalERP.DataAccess.Data
             set { unit = value; }
         }
 
+        private bool disable;
+
+        public bool Disable
+        {
+            get { return disable; }
+            set { disable = value; }
+        }
+
         public Product(string name, int categoryID, double price, string comment) {
             this.name = name;
             this.categoryID = categoryID;
@@ -99,7 +107,7 @@ namespace LocalERP.DataAccess.Data
             this.comment = comment;
         }
 
-        public Product(string serial, string name, int categoryID, double pricePurchase, double priceSell, string unit, string comment)
+        public Product(string serial, string name, int categoryID, double pricePurchase, double priceSell, string unit, string comment, bool disable)
         {
             this.serial = serial;
             this.name = name;
@@ -109,6 +117,7 @@ namespace LocalERP.DataAccess.Data
             this.priceCost = pricePurchase;
             this.unit = unit;
             this.comment = comment;
+            this.disable = disable;
         }
 
         public Product() { }

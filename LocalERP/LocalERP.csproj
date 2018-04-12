@@ -145,6 +145,7 @@
     <Compile Include="DataAccess\Utility\ConfUtility.cs" />
     <Compile Include="UiDataProxy\CustomerCategoryItemProxy.cs" />
     <Compile Include="UiDataProxy\ProductCategoryItemProxy.cs" />
+    <Compile Include="UiDataProxy\CategoryItemTypeConf.cs" />
     <Compile Include="UiDataProxy\QueryLibProxy.cs" />
     <Compile Include="UiDataProxy\ProxyMgr.cs" />
     <Compile Include="UiDataProxy\CategoryItemProxy.cs" />
@@ -166,6 +167,9 @@
     </Compile>
     <Compile Include="WinForm\Data\CharactorForm.Designer.cs">
       <DependentUpon>CharactorForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WinForm\Data\ProductStainlessCategoryItemForm.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="WinForm\Data\ProductStainlessForm.cs">
       <SubType>Form</SubType>

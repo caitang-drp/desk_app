@@ -351,16 +351,9 @@
         #endregion
 
         private System.Windows.Forms.SplitContainer splitContainer1;
-        private System.Windows.Forms.TreeView treeView1;
+        protected System.Windows.Forms.TreeView treeView1;
         private System.Windows.Forms.ImageList imageList1;
-        private MyDataGridView dataGridView1;
-        /*        private System.Windows.Forms.DataGridViewCheckBoxColumn check;
-                private System.Windows.Forms.DataGridViewTextBoxColumn ID;
-                private System.Windows.Forms.DataGridViewTextBoxColumn name;
-                private System.Windows.Forms.DataGridViewTextBoxColumn tel;
-                private System.Windows.Forms.DataGridViewTextBoxColumn phone;
-                private System.Windows.Forms.DataGridViewTextBoxColumn address;
-                private System.Windows.Forms.DataGridViewTextBoxColumn comment;*/
+        protected MyDataGridView dataGridView1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox textBox_name;
         private System.Windows.Forms.Button button_search;
