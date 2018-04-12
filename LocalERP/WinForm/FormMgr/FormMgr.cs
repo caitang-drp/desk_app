@@ -8,6 +8,7 @@ using LocalERP.DataAccess.Utility;
 using System.Windows.Forms;
 using System.IO;
 using LocalERP.DataAccess.DataDAO;
+using LocalERP.WinForm.Data;
 
 namespace LocalERP.WinForm
 {
@@ -226,7 +227,7 @@ namespace LocalERP.WinForm
         {
             if (customerCIForm == null || customerCIForm.IsDisposed)
             {
-                customerCIForm = new CategoryItemForm(1, new CustomerCategoryItemProxy(), LabelUtility.DATA_CUSTOMER, this.mainForm);
+                customerCIForm = new CustomerCategoryItemForm(1, CategoryItemTypeConfs.CategoryItemType_Customer, LabelUtility.DATA_CUSTOMER, this.mainForm);
                 customerCIForm.initVersions(getVersions(), UpdateType.CustomerCategoryUpdate, UpdateType.CustomerUpdate);
                 appendEvent(customerCIForm);
             }
@@ -236,7 +237,7 @@ namespace LocalERP.WinForm
         private CategoryItemForm customerCIForm_select = null;
         public virtual CategoryItemForm getCustomerCIForm_Select()
         {
-            customerCIForm_select = new CategoryItemForm(0, new CustomerCategoryItemProxy(), LabelUtility.DATA_CUSTOMER, this.mainForm);
+            customerCIForm_select = new CustomerCategoryItemForm(1, CategoryItemTypeConfs.CategoryItemType_Customer, LabelUtility.DATA_CUSTOMER, this.mainForm);
             customerCIForm_select.initVersions(getVersions(), UpdateType.CustomerCategoryUpdate, UpdateType.CustomerUpdate);
             appendEvent(customerCIForm_select);
             
@@ -252,7 +253,7 @@ namespace LocalERP.WinForm
 
         public virtual CategoryForm getCategoryForm(string categoryTableName, int mode, int id)
         {
-            CategoryForm categoryForm = new CategoryForm(categoryTableName, mode, id);
+            CategoryForm categoryForm = new CategoryForm(CategoryItemTypeConfs.CategoryItemType_ProductStainless, mode, id);
             appendEvent(categoryForm);
             return categoryForm;
         }

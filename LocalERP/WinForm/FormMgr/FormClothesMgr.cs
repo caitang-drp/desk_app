@@ -8,6 +8,7 @@ using LocalERP.DataAccess.Utility;
 using System.Windows.Forms;
 using System.IO;
 using LocalERP.DataAccess.DataDAO;
+using LocalERP.WinForm.Data;
 
 namespace LocalERP.WinForm
 {
@@ -194,7 +195,7 @@ namespace LocalERP.WinForm
         {
             if (productCIForm == null || productCIForm.IsDisposed)
             {
-                productCIForm = new CategoryItemForm(1, new ProductStainlessCategoryItemProxy(), LabelUtility.DATA_PRODUCT, this.mainForm);
+                productCIForm = new ProductStainlessCategoryItemForm(1, CategoryItemTypeConfs.CategoryItemType_ProductStainless, LabelUtility.DATA_PRODUCT, this.mainForm);
                 productCIForm.initVersions(getVersions(),
                     UpdateType.ProductUpdate, UpdateType.ProductCategoryUpdate, UpdateType.CustomerUpdate, UpdateType.CustomerCategoryUpdate);
                 appendEvent(productCIForm);
@@ -204,7 +205,7 @@ namespace LocalERP.WinForm
 
         public override CategoryItemForm getProductCIForm_select()
         {
-            CategoryItemForm productCIForm_select = new CategoryItemForm(0, new ProductStainlessCategoryItemProxy(), LabelUtility.DATA_PRODUCT, this.mainForm);
+            CategoryItemForm productCIForm_select = new ProductStainlessCategoryItemForm(0, CategoryItemTypeConfs.CategoryItemType_ProductStainless, LabelUtility.DATA_PRODUCT, this.mainForm);
             productCIForm_select.initVersions(getVersions(),
                 UpdateType.ProductUpdate, UpdateType.ProductCategoryUpdate, UpdateType.CustomerUpdate, UpdateType.CustomerCategoryUpdate);
 

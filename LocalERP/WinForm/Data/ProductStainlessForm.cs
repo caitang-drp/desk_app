@@ -26,8 +26,7 @@ namespace LocalERP.WinForm
             openMode = 0;
             productID = 0;
 
-            ProductStainlessCategoryItemProxy categoryItemProxy = new ProductStainlessCategoryItemProxy();
-            categoryItemProxy.initTree(this.comboBoxTree_category.tvTreeView);
+            ControlUtility.initTree(this.comboBoxTree_category.tvTreeView, CategoryTableName.ProductStainlessCategory);
         }
 
         public void reload(int openMode, int ID) {
@@ -85,7 +84,7 @@ namespace LocalERP.WinForm
 
         public override void refresh()
         {
-            ProxyMgr.getInstance().getProductCIProxy().initTree(this.comboBoxTree_category.tvTreeView);
+             ControlUtility.initTree(this.comboBoxTree_category.tvTreeView, CategoryTableName.ProductStainlessCategory);
         }
 
         /// <summary>

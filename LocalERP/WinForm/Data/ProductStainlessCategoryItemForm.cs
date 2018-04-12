@@ -5,11 +5,17 @@ using System.Windows.Forms;
 using System.Data;
 using LocalERP.DataAccess.DataDAO;
 using LocalERP.DataAccess.Data;
+using LocalERP.WinForm.Utility;
 
 namespace LocalERP.WinForm.Data
 {
-    class ProductStainlessCategoryItemForm : CategoryItemForm
+    public class ProductStainlessCategoryItemForm : CategoryItemForm
     {
+        public ProductStainlessCategoryItemForm(int openMode, CategoryItemTypeConf conf, string title, Form parentForm)
+            :base(openMode, conf, title, parentForm)
+        {
+        }
+
         protected override void initColumns()
         {
             DataGridViewCheckBoxColumn check = new DataGridViewCheckBoxColumn();
@@ -31,38 +37,26 @@ namespace LocalERP.WinForm.Data
             this.dataGridView1.Columns.Insert(0, ID);
         }
 
-        protected override void hideSomeColumns()
+        protected override void hideSomeColumnsForSelectMode()
         {
             dataGridView1.Columns["pricePurchase"].Visible = false;
             //dgv.Columns["priceSell"].Visible = false;
             dataGridView1.Columns["priceCost"].Visible = false;
-        }
-
-        protected override void initTree()
-        {
-            this.treeView1.Nodes.Clear();
-            List<Category> categorys = CategoryDao.getInstance().FindByParentId(this.CategoryTableName, -1);
-            foreach (Category category in categorys)
-            {
-                this.treeView1.Nodes.Add(this.getNodeById(category.Id));
-            }
-            this.treeView1.ExpandAll();
-
-            if (this.treeView1.Nodes.Count > 0 && this.treeView1.Nodes[0].IsSelected == false)
-                this.treeView1.SelectedNode = tv.Nodes[0];
+            //因为在CategoryItemForm构造函数里，已经判断openMode为0时，才调用hideSomeColumns
+            dataGridView1.Columns["disable"].Visible = false;
         }
 
         protected override DataTable getRecordsTable(int parentId, string searchName)
         {
             Category parent = null;
             if(parentId > 0)
-                parent = CategoryDao.getInstance().FindById(this.CategoryTableName, parentId);
+                parent = CategoryDao.getInstance().FindById(conf.CategoryTableName, parentId);
             
             DataTable dataTable;
             if(this.openMode == 0)
-                dataTable = this.openMode = ProductStainlessDao.getInstance().FindList(parent, name, true);
+                dataTable = ProductStainlessDao.getInstance().FindList(parent, searchName, true);
             else
-                dataTable = this.openMode = ProductStainlessDao.getInstance().FindList(parent, name, false);
+                dataTable = ProductStainlessDao.getInstance().FindList(parent, searchName, false);
             return dataTable;
         }
 

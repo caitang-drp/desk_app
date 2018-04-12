@@ -105,8 +105,7 @@ namespace LocalERP.UiDataProxy
             if(parentId > 0)
                 parent = CategoryDao.getInstance().FindById(this.CategoryTableName, parentId);
             
-            DataTable dataTable;
-            ProductStainlessDao.getInstance().FindList(parent, name);
+            DataTable dataTable = ProductStainlessDao.getInstance().FindList(parent, name, true);
             return dataTable;
         }
 

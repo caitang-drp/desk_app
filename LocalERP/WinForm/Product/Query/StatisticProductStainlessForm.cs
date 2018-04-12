@@ -19,7 +19,7 @@ namespace LocalERP.WinForm
     {
         protected override void statisticProduct()
         {
-            itemsTable = ProductStainlessDao.getInstance().FindList(null, null);
+            itemsTable = ProductStainlessDao.getInstance().FindList(null, null, true);
             itemsTable.Columns.Add("purchase");
             itemsTable.Columns.Add("purchaseBack");
             itemsTable.Columns.Add("sell");

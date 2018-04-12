@@ -23,7 +23,7 @@ namespace LocalERP.WinForm
         private string searchName = "";
         private DataTable recordsDataTable;
 
-        CategoryItemTypeConf conf;
+        protected CategoryItemTypeConf conf;
 
         public CategoryItemForm(int openMode, CategoryItemTypeConf conf, string title, Form parentForm)
         {
@@ -45,7 +45,7 @@ namespace LocalERP.WinForm
             if (this.openMode == 0)
             {
                 this.label_tip.Text = "双击即可选中" + title;
-                hideSomeColumns();
+                hideSomeColumnsForSelectMode();
             }
             else
                 this.label_tip.Text = "双击即可编辑" + title;
@@ -54,8 +54,11 @@ namespace LocalERP.WinForm
 
         //2018-04-12:去掉proxy,迁移过来
         protected abstract void initColumns();
-        protected abstract void initTree();
-        protected abstract void hideSomeColumns();
+        protected virtual void hideSomeColumnsForSelectMode(){}
+
+        public void initTree() {
+            ControlUtility.initTree(this.treeView1, conf.CategoryTableName);
+        }
 
         private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
         {
@@ -317,7 +320,7 @@ namespace LocalERP.WinForm
             {
                 string name = this.dataGridView1.Rows[e.RowIndex].Cells["name"].Value.ToString();
                 LookupArg lookupArg = new LookupArg(id, name);
-                lookupArg.ArgName = CategoryName;
+                lookupArg.ArgName = conf.CategoryName;
 
                 //File.AppendAllText("e:\\debug.txt", string.Format("double click, thread:{0}\r\n", System.Threading.Thread.CurrentThread.ManagedThreadId));
 
@@ -337,7 +340,7 @@ namespace LocalERP.WinForm
             List<int> list = this.dataGridView1.getSelectIDs("ID", "check");
             if (list == null || list.Count <= 0)
             {
-                MessageBox.Show("请选择编辑" + ItemName, "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("请选择编辑" + conf.ItemName, "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
             MyDockContent form = getItemForm(this, 1, list[0]);
@@ -351,7 +354,7 @@ namespace LocalERP.WinForm
             List<int> list = this.dataGridView1.getSelectIDs("ID", "check");
             if (list == null || list.Count <= 0)
             {
-                MessageBox.Show("请选择删除"+ ItemName, "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("请选择删除"+ conf.ItemName, "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
             StringBuilder ids = new StringBuilder();
@@ -360,13 +363,13 @@ namespace LocalERP.WinForm
                 ids.Append(list[ii]);
                 ids.Append(" ");
             }
-            if (MessageBox.Show(string.Format("是否删除ID为{0}的{1}?", ids.ToString(), ItemName), "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
+            if (MessageBox.Show(string.Format("是否删除ID为{0}的{1}?", ids.ToString(), conf.ItemName), "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
             {
                 try
                 {
                     for (int i = 0; i < list.Count; i++)
                     {
-                        delItems(list[i]);
+                        this.delItem(list[i]);
                     }
                     MessageBox.Show(string.Format("删除{0}成功!", conf.ItemName), "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
@@ -375,8 +378,8 @@ namespace LocalERP.WinForm
                     MessageBox.Show(string.Format("删除{0}失败，可能是其他数据引用到该{0}!", conf.ItemName), "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 refreshList();
-                this.invokeUpdateNotify(UpdateType_Item);
-                this.refreshVersion(UpdateType_Item);
+                this.invokeUpdateNotify(conf.UpdateType_Item);
+                this.refreshVersion(conf.UpdateType_Item);
             }
         }
         

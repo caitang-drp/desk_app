@@ -6,6 +6,16 @@ using LocalERP.DataAccess.Utility;
 
 namespace LocalERP.DataAccess.Data
 {
+    public static class CategoryTableName {
+        public const string ProductStainlessCategory = "ProductStainlessCategory";
+        public const string CustomerCategory = "CustomerCategory";
+    }
+
+    public static class CategoryItemTypeConfs {
+        public static CategoryItemTypeConf CategoryItemType_ProductStainless = new CategoryItemTypeConf(UpdateType.ProductCategoryUpdate, UpdateType.ProductUpdate, "ProductStainless", CategoryTableName.ProductStainlessCategory, "货品名称");
+        public static CategoryItemTypeConf CategoryItemType_Customer = new CategoryItemTypeConf(UpdateType.CustomerCategoryUpdate, UpdateType.CustomerUpdate, "", CategoryTableName.CustomerCategory, "往来单位");
+
+    }
 
     public class CategoryItemTypeConf {
         
@@ -25,8 +35,5 @@ namespace LocalERP.DataAccess.Data
             this.CategoryTableName = categoryTableName;
             this.ItemName = itemName;
         }
-
-        public static CategoryItemTypeConf CategoryItemType_ProductStainless = new CirculationTypeConf(UpdateType.ProductCategoryUpdate, UpdateType.ProductUpdate, "ProductStainless", "ProductStainlessCategory", "货品名称");
-
     }
 }

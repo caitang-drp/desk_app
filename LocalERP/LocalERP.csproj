@@ -177,6 +177,9 @@
     <Compile Include="WinForm\Data\ProductStainlessForm.Designer.cs">
       <DependentUpon>ProductStainlessForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="WinForm\Data\CustomerCategoryItemForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="WinForm\FormMgr\FormMgr.cs" />
     <Compile Include="WinForm\FormMgr\FormSingletonFactory.cs" />
     <Compile Include="WinForm\MyDockContent.cs">
