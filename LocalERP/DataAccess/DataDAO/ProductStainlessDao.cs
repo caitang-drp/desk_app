@@ -102,7 +102,10 @@ namespace LocalERP.DataAccess.DataDAO
 
                 product.QuantityPerPiece = (int)dr["quantityPerPiece"];
                 product.Unit = dr["unit"] as string;
-                product.Num = (int)dr["num"];
+
+                double num;
+                double.TryParse(dr["num"].ToString(), out num);
+                product.Num = num;
 
                 product.Comment = dr["comment"] as string;
 

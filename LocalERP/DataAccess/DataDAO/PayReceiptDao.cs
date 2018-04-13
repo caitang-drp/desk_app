@@ -108,10 +108,12 @@ namespace LocalERP.DataAccess.DataDAO
             return DbHelperAccess.executeNonQuery(commandText);
         }
 
-        public PayReceipt FindLastestByCustomerID(int customerID)
+        public PayReceipt FindLastestByCustomerID(int customerID, bool payNotNull)
         {
             ////模仿FindByID，所以left join customer，其实可以不要
             string commandText = string.Format("select * from PayReceipt where bill_time = (SELECT max(bill_time) from PayReceipt where customer_id={0} and status=4)", customerID);
+            if(payNotNull)
+                commandText = string.Format("select * from PayReceipt where bill_time = (SELECT max(bill_time) from PayReceipt where customer_id={0} and status=4 and thisPayed <>0)", customerID);
             DataRow dr = DbHelperAccess.executeQueryGetOneRow(commandText);
             return formatPayReceipt(dr);
         }

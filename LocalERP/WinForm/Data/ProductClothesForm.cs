@@ -33,7 +33,7 @@ namespace LocalERP.WinForm
             this.pickValue_color.selectValueChanged += new PickValue.SelectValueChanged(pickValue_color_selectValueChanged);
             this.pickValue_size.selectValueChanged += new PickValue.SelectValueChanged(pickValue_color_selectValueChanged);
 
-            ProxyMgr.getInstance().getProductCIProxy().initTree(this.comboBoxTree1.tvTreeView);
+            ControlUtility.initTree(this.comboBoxTree1.tvTreeView, CategoryTableName.ProductStainlessCategory);
         }
 
         void pickValue_color_selectValueChanged()
@@ -103,7 +103,7 @@ namespace LocalERP.WinForm
 
         public override void refresh()
         {
-            ProxyMgr.getInstance().getProductCIProxy().initTree(this.comboBoxTree1.tvTreeView);
+            ControlUtility.initTree(this.comboBoxTree1.tvTreeView, CategoryTableName.ProductStainlessCategory);
         }
 
         /// <summary>

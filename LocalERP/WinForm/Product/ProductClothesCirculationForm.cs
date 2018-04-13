@@ -111,7 +111,7 @@ namespace LocalERP.WinForm
         {
             DataGridViewRow row = this.dataGridView1.Rows[rowIndex];
             double price;
-            int num = 0;
+            double num = 0;
             ValidateUtility.getDouble(row.Cells["price"], out price);
             try
             {

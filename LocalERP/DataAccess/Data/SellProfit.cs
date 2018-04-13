@@ -8,7 +8,7 @@ namespace LocalERP.DataAccess.Data
     public class SellProfit
     {
         public int ID;
-        public int cnt;
+        public double cnt;
         public double price;
         public double sum_price;
         public double cost;

@@ -48,9 +48,9 @@ namespace LocalERP.DataAccess.Data
             set { unit = value; }
         }
 
-        private int totalNum;
+        private double totalNum;
 
-        public int TotalNum
+        public double TotalNum
         {
             get { return totalNum; }
             set { totalNum = value; }

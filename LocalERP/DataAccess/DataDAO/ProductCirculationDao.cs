@@ -29,8 +29,8 @@ namespace LocalERP.DataAccess.DataDAO
             ProductCirculationID = 0;
             try
             {
-                string commandText = string.Format("insert into {0}(code, circulationTime, comment, status, customerID, type, flowType, arrearDirection, total, backFreightPerPiece, realTotal, previousArrears, thisPayed, freight, operator) values('{1}','{2}', '{3}', '{4}', {5}, {6}, {7}, {8}, {9},{10},{11},{12},{13},{14},'{15}')",
-                    tableName, info.Code, info.CirculationTime, info.Comment, info.Status, info.CustomerID <= 0 ? "null" : info.CustomerID.ToString(), info.Type, info.FlowType, info.ArrearDirection, info.Total, info.BackFreightPerPiece, info.RealTotal, info.PreviousArrears, info.ThisPayed, info.Freight, info.Oper);
+                string commandText = string.Format("insert into {0}(code, circulationTime, comment, status, customerID, type, flowType, arrearDirection, total, backFreightPerPiece, realTotal, previousArrears, thisPayed, freight, operator, lastPayReceipt) values('{1}','{2}', '{3}', '{4}', {5}, {6}, {7}, {8}, {9},{10},{11},{12},{13},{14},'{15}', '{16}')",
+                    tableName, info.Code, info.CirculationTime, info.Comment, info.Status, info.CustomerID <= 0 ? "null" : info.CustomerID.ToString(), info.Type, info.FlowType, info.ArrearDirection, info.Total, info.BackFreightPerPiece, info.RealTotal, info.PreviousArrears, info.ThisPayed, info.Freight, info.Oper, info.LastPayReceipt);
                 DbHelperAccess.executeNonQuery(commandText);
                 ProductCirculationID = DbHelperAccess.executeMax("ID", tableName);
                 return true;
@@ -52,8 +52,8 @@ namespace LocalERP.DataAccess.DataDAO
 
         public void UpdateBaiscInfo(ProductCirculation info)
         {
-            string commandText = string.Format("update {0} set code='{1}', circulationTime='{2}', comment='{3}', customerID={4}, total={5}, backFreightPerPiece={6}, realTotal={7}, previousArrears={8}, thisPayed ={9}, freight={10}, operator='{11}' where ID={12}",
-                tableName, info.Code, info.CirculationTime, info.Comment, info.CustomerID <= 0 ? "null" : info.CustomerID.ToString(), info.Total, info.BackFreightPerPiece, info.RealTotal, info.PreviousArrears, info.ThisPayed, info.Freight, info.Oper, info.ID);
+            string commandText = string.Format("update {0} set code='{1}', circulationTime='{2}', comment='{3}', customerID={4}, total={5}, backFreightPerPiece={6}, realTotal={7}, previousArrears={8}, thisPayed ={9}, freight={10}, operator='{11}', lastPayReceipt='{12}' where ID={13}",
+                tableName, info.Code, info.CirculationTime, info.Comment, info.CustomerID <= 0 ? "null" : info.CustomerID.ToString(), info.Total, info.BackFreightPerPiece, info.RealTotal, info.PreviousArrears, info.ThisPayed, info.Freight, info.Oper, info.LastPayReceipt, info.ID);
 
             DbHelperAccess.executeNonQuery(commandText);
         }
@@ -95,6 +95,7 @@ namespace LocalERP.DataAccess.DataDAO
                     circulation.CustomerID = customerID;
 
                 circulation.Oper = dr["operator"] as string;
+                circulation.LastPayReceipt = dr["lastPayReceipt"] as string;
 
                 double total, backFreightPerPiece, realTotal, previousArrears, thisPayed, freight;
 
@@ -127,10 +128,12 @@ namespace LocalERP.DataAccess.DataDAO
             return this.formatProductCirculation(dr);
         }
 
-        public ProductCirculation FindLastestByCustomerID(int customerID)
+        public ProductCirculation FindLastestByCustomerID(int customerID, bool thisPayNotNull)
         {
             ////模仿FindByID，所以left join customer，其实可以不要
             string commandText = string.Format("select * from {0} where circulationTime = (SELECT max(circulationTime) from {0} where customerID={1} and status=4)", tableName, customerID);
+            if(thisPayNotNull)
+                commandText = string.Format("select * from {0} where circulationTime = (SELECT max(circulationTime) from {0} where customerID={1} and status=4 and thisPayed <>0 )", tableName, customerID);
             DataRow dr = DbHelperAccess.executeQueryGetOneRow(commandText);
             return this.formatProductCirculation(dr);
         }

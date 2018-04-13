@@ -8,6 +8,7 @@
 	},
 	"Printer":{
 		"Size":256,
+		"Width":24,
 		"Height":14,
 		"LeftMargin":1,
 		"TopMargin":1,
@@ -16,7 +17,6 @@
 		"PrintOffsetSaveToLocal":true
 	},
 	"DetailGrid":{
-		"AppendBlankRow":true,
 		"Recordset":{
 			"Field":[
 				{
@@ -59,11 +59,11 @@
 		"Column":[
 			{
 				"Name":"serial",
-				"Width":2.77813
+				"Width":3.57188
 			},
 			{
 				"Name":"product",
-				"Width":3.78354
+				"Width":4.60375
 			},
 			{
 				"Name":"cnt_one_piece",
@@ -83,15 +83,15 @@
 			},
 			{
 				"Name":"price",
-				"Width":1.40229
+				"Width":1.79917
 			},
 			{
 				"Name":"sum_price",
-				"Width":3.20146
+				"Width":3.59833
 			},
 			{
 				"Name":"comment",
-				"Width":2.40771
+				"Width":2.98979
 			}
 		],
 		"ColumnContent":{
@@ -215,7 +215,7 @@
 						{
 							"Type":"SummaryBox",
 							"Name":"SummaryBox2",
-							"Left":13.3879,
+							"Left":15.6104,
 							"Width":3.20146,
 							"Height":0.608542,
 							"TextAlign":"MiddleCenter",
@@ -224,7 +224,7 @@
 						{
 							"Type":"StaticBox",
 							"Name":"StaticBox3",
-							"Left":6.19125,
+							"Left":7.19667,
 							"Width":1.79917,
 							"Height":0.608542,
 							"Text":"本页合计"
@@ -232,13 +232,13 @@
 						{
 							"Type":"Line",
 							"Name":"Line3",
-							"Left":13.3085,
+							"Left":15.3194,
 							"Height":0.608542
 						},
 						{
 							"Type":"Line",
 							"Name":"Line4",
-							"Left":16.51,
+							"Left":18.9177,
 							"Height":0.608542
 						}
 					]
@@ -256,85 +256,70 @@
 						{
 							"Type":"StaticBox",
 							"Name":"realTotal",
-							"Left":7.59354,
-							"Width":2.80458,
+							"Left":3.09563,
+							"Width":3.36021,
 							"Height":0.608542,
 							"EndEllipsis":true
 						},
 						{
 							"Type":"StaticBox",
 							"Name":"StaticBox5",
-							"Left":4.92125,
-							"Width":2.67229,
+							"Left":0.291042,
+							"Width":2.80458,
 							"Height":0.608542,
 							"Text":"本单实计总价："
 						},
 						{
 							"Type":"StaticBox",
 							"Name":"label_pay",
-							"Left":10.3717,
-							"Width":1.82563,
+							"Left":8.89,
+							"Width":2.19604,
 							"Height":0.608542,
 							"Text":"本次来款："
 						},
 						{
 							"Type":"StaticBox",
 							"Name":"text_pay",
-							"Left":12.2238,
-							"Width":3.41313,
+							"Left":11.086,
+							"Width":3.38667,
 							"Height":0.608542,
 							"EndEllipsis":true
 						},
 						{
 							"Type":"StaticBox",
 							"Name":"label_arr",
-							"Left":4.94771,
+							"Left":0.3175,
 							"Top":0.582083,
-							"Width":2.64583,
+							"Width":2.80458,
 							"Height":0.608542,
 							"Text":"以上欠款："
 						},
 						{
 							"Type":"StaticBox",
 							"Name":"text_arr",
-							"Left":7.59354,
+							"Left":3.09563,
 							"Top":0.582083,
-							"Width":2.80458,
+							"Width":3.28083,
 							"Height":0.608542,
 							"EndEllipsis":true
 						},
 						{
 							"Type":"StaticBox",
 							"Name":"text_acc",
-							"Left":12.2238,
+							"Left":11.086,
 							"Top":0.608542,
-							"Width":6.58813,
+							"Width":10.504,
 							"Height":0.582083,
 							"EndEllipsis":true
 						},
 						{
 							"Type":"StaticBox",
 							"Name":"label_acc",
-							"Left":10.3717,
+							"Left":8.89,
 							"Top":0.608542,
-							"Width":1.82563,
+							"Width":2.19604,
 							"Height":0.608542,
 							"Text":"累计欠款："
-						},
-						{
-							"Type":"Line",
-							"Name":"Line5",
-							"Left":4.78896,
-							"Height":1.19063
-						},
-						{
-							"Type":"StaticBox",
-							"Name":"lastPayReceipt",
-							"Left":0.211667,
-							"Top":0.3175,
-							"Width":4.39208,
-							"Height":0.582083,
-							"EndEllipsis":true
 						}
 					]
 				}
@@ -344,13 +329,13 @@
 	"ReportHeader":[
 		{
 			"Name":"ReportHeader1",
-			"Height":3.41313,
+			"Height":2.01083,
 			"Control":[
 				{
 					"Type":"StaticBox",
 					"Name":"customer",
-					"Top":2.75167,
-					"Width":7.40833,
+					"Top":1.32292,
+					"Width":8.59896,
 					"Height":0.608542,
 					"Font":{
 						"Name":"宋体",
@@ -363,9 +348,9 @@
 				{
 					"Type":"StaticBox",
 					"Name":"date",
-					"Left":7.46125,
-					"Top":2.75167,
-					"Width":5.21229,
+					"Left":16.4042,
+					"Top":1.32292,
+					"Width":5.58271,
 					"Height":0.608542,
 					"Font":{
 						"Name":"宋体",
@@ -376,29 +361,14 @@
 				},
 				{
 					"Type":"StaticBox",
-					"Name":"serial",
-					"Left":12.7529,
-					"Top":2.75167,
-					"Width":6.24417,
-					"Height":0.608542,
-					"Font":{
-						"Name":"宋体",
-						"Size":105000,
-						"Bold":true,
-						"Charset":134
-					},
-					"EndEllipsis":true,
-					"TextAlign":"MiddleRight"
-				},
-				{
-					"Type":"StaticBox",
 					"Name":"title",
-					"Left":0.396875,
-					"Width":15.0019,
-					"Height":1.00542,
+					"Left":3.41313,
+					"Top":0.211667,
+					"Width":13.3879,
+					"Height":0.79375,
 					"Font":{
 						"Name":"华文楷体",
-						"Size":180000,
+						"Size":217500,
 						"Bold":true,
 						"Underline":true,
 						"Charset":134
@@ -410,7 +380,7 @@
 					"Type":"MemoBox",
 					"Name":"MemoBox2",
 					"Anchor":"[Top|Right]",
-					"Left":16.4571,
+					"Left":19.4469,
 					"Top":0.211667,
 					"Width":5.3975,
 					"Height":0.582083,
@@ -418,105 +388,18 @@
 				},
 				{
 					"Type":"StaticBox",
-					"Name":"address",
-					"Left":0.396875,
-					"Top":0.978958,
-					"Width":1.79917,
-					"Height":0.582083,
-					"Text":"地    址："
-				},
-				{
-					"Type":"StaticBox",
-					"Name":"addressValue",
-					"Left":2.2225,
-					"Top":1.00542,
-					"Width":6.8,
-					"Height":0.58
-				},
-				{
-					"Type":"StaticBox",
-					"Name":"tel",
-					"Left":9.31333,
-					"Top":2.11667,
-					"Width":1.79917,
-					"Height":0.582083,
-					"Text":"电话号码："
-				},
-				{
-					"Type":"StaticBox",
-					"Name":"telValue",
-					"Left":11.139,
-					"Top":2.11667,
-					"Width":6.8,
-					"Height":0.58
-				},
-				{
-					"Type":"StaticBox",
-					"Name":"phoneValue",
-					"Left":11.1125,
-					"Top":1.56104,
-					"Width":6.69,
-					"Height":0.58
-				},
-				{
-					"Type":"StaticBox",
-					"Name":"phone",
-					"Left":9.31333,
-					"Top":1.56104,
-					"Width":1.69333,
-					"Height":0.582083,
-					"Text":"手机号码："
-				},
-				{
-					"Type":"StaticBox",
-					"Name":"comment",
-					"Left":0.396875,
-					"Top":2.11667,
-					"Width":1.71979,
-					"Height":0.582083,
-					"Text":"其他信息："
-				},
-				{
-					"Type":"StaticBox",
-					"Name":"commentValue",
-					"Left":2.2225,
-					"Top":2.11667,
-					"Width":6.69,
-					"Height":0.58
-				},
-				{
-					"Type":"StaticBox",
-					"Name":"contractor",
-					"Left":9.31333,
-					"Top":0.9525,
-					"Width":1.72,
-					"Height":0.58,
-					"Text":"联 系 人："
-				},
-				{
-					"Type":"StaticBox",
-					"Name":"contractorValue",
-					"Left":11.1125,
-					"Top":0.978958,
-					"Width":6.8,
-					"Height":0.58
-				},
-				{
-					"Type":"StaticBox",
-					"Name":"bank",
-					"Left":0.396875,
-					"Top":1.56104,
-					"Width":1.71979,
-					"Height":0.582083,
-					"Text":"银行账号："
-				},
-				{
-					"Type":"StaticBox",
-					"Name":"bankValue",
-					"Left":2.2225,
-					"Top":1.56104,
-					"Width":6.69,
-					"Height":0.58
+					"Name":"customerAddr",
+					"Left":8.67833,
+					"Top":1.32292,
+					"Width":7.51417,
+					"Height":0.608542,
+					"Font":{
+						"Name":"宋体",
+						"Size":105000,
+						"Bold":true,
+						"Charset":134
+					},
+					"EndEllipsis":true
 				}
 			],
 			"RepeatOnPage":true
@@ -525,13 +408,13 @@
 	"ReportFooter":[
 		{
 			"Name":"ReportFooter1",
-			"Height":1.00542,
+			"Height":2.40771,
 			"Control":[
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox6",
 					"Left":0.264583,
-					"Top":0.0264583,
+					"Top":0.0529167,
 					"Width":17.3831,
 					"Height":0.396875,
 					"Font":{
@@ -545,28 +428,96 @@
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox7",
-					"Left":0.264583,
-					"Top":0.502708,
-					"Width":1.50813,
+					"Left":0.211667,
+					"Top":1.77271,
+					"Width":1.74625,
 					"Height":0.608542,
-					"Text":"发货人："
+					"Text":"发 货 人："
 				},
 				{
 					"Type":"StaticBox",
 					"Name":"oper",
-					"Left":1.82563,
-					"Top":0.502708,
-					"Width":2.72521,
+					"Left":2.06375,
+					"Top":1.77271,
+					"Width":8.73125,
 					"Height":0.608542
 				},
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox8",
-					"Left":9.60438,
-					"Top":0.502708,
-					"Width":1.5875,
+					"Left":11.3771,
+					"Top":1.77271,
+					"Width":3.04271,
 					"Height":0.608542,
-					"Text":"收货人："
+					"Text":"收货人（签名）："
+				},
+				{
+					"Type":"StaticBox",
+					"Name":"address",
+					"Left":0.211667,
+					"Top":0.608542,
+					"Width":1.79917,
+					"Height":0.582083,
+					"Text":"店    址："
+				},
+				{
+					"Type":"StaticBox",
+					"Name":"addressValue",
+					"Left":2.03729,
+					"Top":0.635,
+					"Width":8.75771,
+					"Height":0.58
+				},
+				{
+					"Type":"StaticBox",
+					"Name":"tel",
+					"Left":0.211667,
+					"Top":1.19063,
+					"Width":1.79917,
+					"Height":0.582083,
+					"Text":"电话号码："
+				},
+				{
+					"Type":"StaticBox",
+					"Name":"telValue",
+					"Left":2.03729,
+					"Top":1.19063,
+					"Width":8.75771,
+					"Height":0.58
+				},
+				{
+					"Type":"StaticBox",
+					"Name":"phoneValue",
+					"Left":13.1498,
+					"Top":1.19063,
+					"Width":6.69,
+					"Height":0.58
+				},
+				{
+					"Type":"StaticBox",
+					"Name":"contractorValue",
+					"Left":13.1498,
+					"Top":0.608542,
+					"Width":6.8,
+					"Height":0.58
+				},
+				{
+					"Type":"StaticBox",
+					"Name":"contractor",
+					"Left":11.3506,
+					"Top":0.608542,
+					"Width":1.72,
+					"Height":0.58,
+					"Text":"联 系 人："
+				},
+				{
+					"Type":"StaticBox",
+					"Name":"phone",
+					"Left":11.3506,
+					"Top":1.19063,
+					"Width":1.69333,
+					"Height":0.582083,
+					"Text":"手机号码："
 				}
 			],
 			"RepeatOnPage":true

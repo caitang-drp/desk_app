@@ -133,9 +133,9 @@ namespace LocalERP.WinForm
                     FormSingletonFactory.getInstance().getProductLibLossForm().reload(openMode, ID);
                     break;
 
-                case LabelUtility.QUERY_LIB:
+                /*case LabelUtility.QUERY_LIB:
                     FormSingletonFactory.getInstance().getQueryLibForm().Show(this.dockPanel1);
-                    break;
+                    break;*/
                 case LabelUtility.QUERY_PRODUCT_DETAIL:
                     FormSingletonFactory.getInstance().getQueryProductDetailForm().Show(this.dockPanel1);
                     break;

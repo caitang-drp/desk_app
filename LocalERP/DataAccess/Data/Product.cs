@@ -46,9 +46,9 @@ namespace LocalERP.DataAccess.Data
             set { comment = value; }
         }
 
-        private int num;
+        private double num;
 
-        public int Num
+        public double Num
         {
             get { return num; }
             set { num = value; }

@@ -237,7 +237,7 @@ namespace LocalERP.WinForm
         private CategoryItemForm customerCIForm_select = null;
         public virtual CategoryItemForm getCustomerCIForm_Select()
         {
-            customerCIForm_select = new CustomerCategoryItemForm(1, CategoryItemTypeConfs.CategoryItemType_Customer, LabelUtility.DATA_CUSTOMER, this.mainForm);
+            customerCIForm_select = new CustomerCategoryItemForm(0, CategoryItemTypeConfs.CategoryItemType_Customer, LabelUtility.DATA_CUSTOMER, this.mainForm);
             customerCIForm_select.initVersions(getVersions(), UpdateType.CustomerCategoryUpdate, UpdateType.CustomerUpdate);
             appendEvent(customerCIForm_select);
             

@@ -64,7 +64,7 @@ namespace LocalERP.WinForm
             this.label_customer.Text = conf.customer;
 
             this.label_sum.Text = conf.productDirection == 1 ? "本单实计应付:" : "本单实计应收:";
-            this.label_thisPayed.Text = conf.productDirection == 1 ? "本单已付:" : "本单已收:";
+            this.label_thisPayed.Text = conf.productDirection == 1 ? LabelUtility.THIS_PAY : LabelUtility.THIS_RECEIPT;
             this.label_arrears.Text =  conf.arrearsDirection==1? "以上欠款(应付):":"以上欠款(应收):";
             this.label1_accumulative.Text = conf.arrearsDirection == 1 ? "累计欠款(应付):" : "累计欠款(应收):";
 
@@ -203,13 +203,15 @@ namespace LocalERP.WinForm
             this.lookupText1.LookupArg = new LookupArg(circulation.CustomerID, circulation.CustomerName);
             this.lookupText1.Text_Lookup = circulation.CustomerName;
 
+            //serial previousArrears lastPayReceipt跟customer的变化相关
             //不合理，因为lookupText1改变会导致这个值改变
             this.textBox_serial.Text = circulation.Code;
-
             //如果未审核，欠款有可能变，所以以重置后的值为准，不用数据库里的值
             //如果已审核，使用数据库里的值
-            if (circulation.Status > 1)
+            if (circulation.Status > 1){
                 this.textBox_previousArrears.Text = circulation.PreviousArrears.ToString();
+                this.label_lastPayReceipt.Text = circulation.LastPayReceipt;
+            }
 
             this.textBox_thisPayed.Text = circulation.ThisPayed.ToString();
             this.textBox_freight.Text = circulation.Freight.ToString();
@@ -317,10 +319,9 @@ namespace LocalERP.WinForm
         protected virtual void setSubTotalPrice(int rowIndex)
         {
             DataGridViewRow row = this.dataGridView1.Rows[rowIndex];
-            double price;
-            int num=0;
+            double price, num;
             ValidateUtility.getDouble(row.Cells["price"], out price);
-            ValidateUtility.getInt(row.Cells["num"], false, true, out num);
+            ValidateUtility.getDouble(row.Cells["num"], false, true, out num);
             row.Cells["totalPrice"].Value = num * price;
         }
 
@@ -424,6 +425,7 @@ namespace LocalERP.WinForm
             circulation.CirculationTime = this.dateTime_sellTime.Value;
             circulation.Comment = this.textBox_comment.Text;
             circulation.Oper = this.textBox_operator.Text;
+            circulation.LastPayReceipt = this.label_lastPayReceipt.Text;
 
             if (dataGridView2[1, 0].Value == null || dataGridView2[1, 0].Value.ToString()=="")
                 circulation.Total = 0;
@@ -616,14 +618,14 @@ namespace LocalERP.WinForm
                 }
 
             //circulation不用重新get，因为考虑到审核过的有重新init，而且其值不能改变
-            ProductCirculation maxCir = cirDao.FindLastestByCustomerID(this.circulation.CustomerID);
+            ProductCirculation maxCir = cirDao.FindLastestByCustomerID(this.circulation.CustomerID, false);
             if (maxCir != null && !maxCir.Code.Equals(circulation.Code))
             {
                 MessageBox.Show(string.Format("弃核失败，在此单之后存在已审核的单据，请先弃核{0}", maxCir.Code), "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
-            PayReceipt payReceipt = PayReceiptDao.getInstance().FindLastestByCustomerID(circulation.CustomerID);
+            PayReceipt payReceipt = PayReceiptDao.getInstance().FindLastestByCustomerID(circulation.CustomerID, false);
             if (payReceipt !=null && circulation.CirculationTime < payReceipt.bill_time) {
                 MessageBox.Show(string.Format("弃核失败，在此单之后存在已审核的单据，请先弃核{0}", payReceipt.serial), "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
@@ -800,6 +802,8 @@ namespace LocalERP.WinForm
                 int.TryParse(this.lookupText1.LookupArg.Value.ToString(), out cID);
                 Customer customer = CustomerDao.getInstance().FindByID(cID);
                 this.textBox_previousArrears.Text = (this.conf.arrearsDirection * customer.arrear).ToString();
+
+                setLastPayReceipt(customer.ID);
             }
             else
                 this.textBox_previousArrears.Text = "";
@@ -813,24 +817,59 @@ namespace LocalERP.WinForm
 
             string serialType = ConfUtility.GetSerialType();
 
+            //add 2018-4-13如果为已审核，就不需要重新计算previousArrear、serial、lastPayReceipt
             if (arg != null)
             {
-                Customer customer = CustomerDao.getInstance().FindByID((int)arg.Value);
-                this.textBox_previousArrears.Text = (this.conf.arrearsDirection * customer.arrear).ToString();
-                //2018-3-28修复
-                if (serialType == "serialType2")
+                //新增、编辑（未审核）
+                //编辑初始化时serial是不用重新计算的，但是要判断编辑初始化比较困难，为了代码方便，一刀切，在initCirculation那里会重新设回serial
+                if (circulation == null || circulation.Status <= 1)
                 {
-                    int max = cirDao.getMaxCode(string.Format("{0}-ID{1}-{2}-", conf.code, customer.ID, DateTime.Now.ToString("yyyyMM")));
-                    this.textBox_serial.Text = string.Format("{0}-ID{1}-{2}-{3:000}", conf.code, customer.ID, DateTime.Now.ToString("yyyyMM"), max + 1);
+                    Customer customer = CustomerDao.getInstance().FindByID((int)arg.Value);
+                    this.textBox_previousArrears.Text = (this.conf.arrearsDirection * customer.arrear).ToString();
+                    //2018-3-28修复
+                    if (serialType == "serialType2")
+                    {
+                        int max = cirDao.getMaxCode(string.Format("{0}-ID{1}-{2}-", conf.code, customer.ID, DateTime.Now.ToString("yyyyMM")));
+                        this.textBox_serial.Text = string.Format("{0}-ID{1}-{2}-{3:000}", conf.code, customer.ID, DateTime.Now.ToString("yyyyMM"), max + 1);
+                    }
+
+                    if (true)
+                        setLastPayReceipt(customer.ID);
                 }
+                //编辑（已审核）不需要重新计算
             }
+            //新增初始化
             else
             {
-                this.textBox_previousArrears.Text = "";
                 this.textBox_serial.Text = "";
+                this.textBox_previousArrears.Text = "";
+                this.label_lastPayReceipt.Text = "";
             }
 
             resetNeedSave(true);
+        }
+
+        private void setLastPayReceipt(int customerId) {
+            ProductCirculation cir = cirDao.FindLastestByCustomerID(customerId, true);
+            PayReceipt payReceipt = PayReceiptDao.getInstance().FindLastestByCustomerID(customerId, true);
+            double lastPayReceipt = 0;
+            if (cir != null && payReceipt != null)
+            {
+                if (cir.CirculationTime < payReceipt.bill_time)
+                    lastPayReceipt = payReceipt.thisPayed;
+                else
+                    lastPayReceipt = cir.ThisPayed;
+            }
+            else if (cir != null && payReceipt == null)
+                lastPayReceipt = cir.ThisPayed;
+            else if (cir == null && payReceipt != null)
+                lastPayReceipt = payReceipt.thisPayed;
+
+            if (lastPayReceipt == 0)
+                label_lastPayReceipt.Text = "";
+            else
+                label_lastPayReceipt.Text = string.Format("{0}{1}元", conf.arrearsDirection == 1 ? LabelUtility.LAST_PAY : LabelUtility.LAST_RECEIPT, lastPayReceipt);
+        
         }
 
         //获取控件上的previousArrears, thisPayed, realTotal，然后计算出accumulative
@@ -876,7 +915,7 @@ namespace LocalERP.WinForm
 
                 if (cnt_one_piece != null && record.QuantityPerPiece > 0)
                 {
-                    cnt_one_piece.AsInteger = record.QuantityPerPiece;
+                    cnt_one_piece.AsFloat = record.QuantityPerPiece;
                 }
 
                 if (pieces != null && record.Pieces > 0)
@@ -887,7 +926,7 @@ namespace LocalERP.WinForm
                 serial.AsString = record.Serial;
                 product.AsString = record.ProductName;
                 if (cnt != null)
-                    cnt.AsInteger = record.TotalNum;
+                    cnt.AsFloat = record.TotalNum;
                 unit.AsString = record.Unit;
                 price.AsFloat = record.Price;
                 sum_price.AsFloat = record.TotalPrice;
@@ -946,6 +985,11 @@ namespace LocalERP.WinForm
             Report.ControlByName("realTotal").AsStaticBox.Text = string.Format("{0:0.00}元", sell.RealTotal);
             if (Report.ControlByName("text_backFreight") != null)
                 Report.ControlByName("text_backFreight").AsStaticBox.Text = string.Format("{0}件×{1}元 = {2}元", this.label_totalPieces.Text, this.textBox_backFreightPerPiece.Text, this.label_totalBackFreight.Text);
+
+            if (Report.ControlByName("lastPayReceipt") != null)
+                Report.ControlByName("lastPayReceipt").AsStaticBox.Text = this.label_lastPayReceipt.Text;
+
+            Report.ControlByName("label_pay").AsStaticBox.Text = this.label_thisPayed.Text;
 
             Report.ControlByName("text_pay").AsStaticBox.Text = string.Format("{0:0.00}元", double.Parse(this.textBox_thisPayed.Text));
             Report.ControlByName("text_arr").AsStaticBox.Text = string.Format("{0:0.00}元", double.Parse(this.textBox_previousArrears.Text));

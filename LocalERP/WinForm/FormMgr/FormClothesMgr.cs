@@ -139,7 +139,7 @@ namespace LocalERP.WinForm
         {
             if (queryLibForm == null || queryLibForm.IsDisposed)
             {
-                queryLibForm = new QueryLibForm(ProxyMgr.getInstance().getProductLibQueryProxy(), null, "ø‚¥Ê≤È—Ø");
+                queryLibForm = new QueryLibForm(CategoryItemTypeConfs.CategoryItemType_QueryLib, null, "ø‚¥Ê≤È—Ø");
                 queryLibForm.initVersions(getVersions(),
                     UpdateType.PurchaseFinishUpdate, UpdateType.SellFinishUpdate, UpdateType.LibFinishUpdate, UpdateType.ProductUpdate, UpdateType.ProductCategoryUpdate);
                 appendEvent(queryLibForm);

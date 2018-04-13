@@ -244,16 +244,16 @@ namespace LocalERP.WinForm
             DataGridViewCell cell = dgv.CurrentCell;
 
             String columnName = cell.OwningColumn.Name;
-            float quantity, pieces, num;
+            double quantity, pieces, num;
             if (columnName == "quantityPerPiece" || columnName == "pieces")
             {
-                if (float.TryParse(dgv.Rows[control.EditingControlRowIndex].Cells["pieces"].EditedFormattedValue.ToString(), out pieces)
-                    && float.TryParse(dgv.Rows[control.EditingControlRowIndex].Cells["quantityPerPiece"].EditedFormattedValue.ToString(), out quantity))
+                if (double.TryParse(dgv.Rows[control.EditingControlRowIndex].Cells["pieces"].EditedFormattedValue.ToString(), out pieces)
+                    && double.TryParse(dgv.Rows[control.EditingControlRowIndex].Cells["quantityPerPiece"].EditedFormattedValue.ToString(), out quantity))
                     dgv.Rows[control.EditingControlRowIndex].Cells["num"].Value = quantity * pieces;
             }
             else if (columnName == "num") {
-                if (float.TryParse(dgv.Rows[control.EditingControlRowIndex].Cells["num"].EditedFormattedValue.ToString(), out num)
-                    &&float.TryParse(dgv.Rows[control.EditingControlRowIndex].Cells["quantityPerPiece"].EditedFormattedValue.ToString(), out quantity) && quantity != 0)
+                if (double.TryParse(dgv.Rows[control.EditingControlRowIndex].Cells["num"].EditedFormattedValue.ToString(), out num)
+                    &&double.TryParse(dgv.Rows[control.EditingControlRowIndex].Cells["quantityPerPiece"].EditedFormattedValue.ToString(), out quantity) && quantity != 0)
                     dgv.Rows[control.EditingControlRowIndex].Cells["pieces"].Value = num / quantity;
             }
 
@@ -274,8 +274,8 @@ namespace LocalERP.WinForm
 
             int number = this.dataGridView1.RowCount;
 
-            double price, totalPrice;
-            int quantityPerPiece, pieces, num;
+            double num, price, totalPrice, quantityPerPiece;
+            int pieces;
             bool isQuantityNull = false, isPiecesNull = false;
             string unit, comment;
             bool isInputCorrect = true;
@@ -286,9 +286,9 @@ namespace LocalERP.WinForm
                 int ID = 0;
                 if (ValidateUtility.getLookupValue(row.Cells["product"], out productID) == false 
                     || ValidateUtility.getInt(row.Cells["ID"], false, true, out ID) == false
-                    || ValidateUtility.getInt(row.Cells["quantityPerPiece"], false, true, out quantityPerPiece, out isQuantityNull) == false
+                    || ValidateUtility.getDouble(row.Cells["quantityPerPiece"], false, true, out quantityPerPiece, out isQuantityNull) == false
                     || ValidateUtility.getInt(row.Cells["pieces"], false, true, out pieces, out isPiecesNull) == false
-                    || ValidateUtility.getInt(row.Cells["num"], true, true, out num) == false
+                    || ValidateUtility.getDouble(row.Cells["num"], true, true, out num) == false
                     || ValidateUtility.getString(row.Cells["unit"], false, out unit) == false
                     || ValidateUtility.getDouble(row.Cells["price"], out price) == false
                     || ValidateUtility.getDouble(row.Cells["totalPrice"], out totalPrice) == false
@@ -330,7 +330,7 @@ namespace LocalERP.WinForm
             ProductStainlessDao stainlessDao = cirDao.getProductDao() as ProductStainlessDao;
             ProductStainless stainless = stainlessDao.FindByID(record.ProductID);
 
-            int leftNum = stainless.Num + conf.productDirection * record.TotalNum;
+            double leftNum = stainless.Num + conf.productDirection * record.TotalNum;
 
             //只有采购入货才需要更新成本价，通过成本价重新计算来抵冲收付的差额
             //销售、销售退货、采购退货通过利润的计算来抵消收付的差额

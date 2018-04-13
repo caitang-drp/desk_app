@@ -8,6 +8,7 @@ using LocalERP.DataAccess.Data;
 using LocalERP.WinForm.Utility;
 using LocalERP.DataAccess.Utility;
 using System.Drawing;
+using LocalERP.UiDataProxy;
 
 namespace LocalERP.WinForm.Data
 {

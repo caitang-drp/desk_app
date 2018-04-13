@@ -67,7 +67,9 @@ namespace LocalERP.DataAccess.DataDAO
 
                 record.Unit = dr["ProductStainlessCirculationRecord.unit"].ToString();
 
-                record.TotalNum = (int)dr["totalNum"];
+                double num;
+                ValidateUtility.getDouble(dr, "totalNum", out num, out tempBool);
+                record.TotalNum = num;
 
                 ValidateUtility.getDouble(dr, "totalPrice", out totalPrice, out tempBool);
                 record.TotalPrice = totalPrice;

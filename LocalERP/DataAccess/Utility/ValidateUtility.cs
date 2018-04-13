@@ -183,6 +183,47 @@ namespace LocalERP.DataAccess.Utility
 
         }
 
+        public static bool getDouble(DataGridViewCell cell, bool required, bool positive, out double result, out bool isNull)
+        {
+            string temp = cell.EditedFormattedValue.ToString();
+            isNull = string.IsNullOrEmpty(temp) ? true : false;
+
+            return getDouble(cell, required, positive, out result);
+        }
+
+        public static bool getDouble(DataGridViewCell cell, bool required, bool positive, out double result)
+        {
+            result = 0;
+            string temp = cell.EditedFormattedValue.ToString();
+
+            if (double.TryParse(temp, out result))
+            {
+                if (positive == true && result < 0)
+                {
+                    cell.ErrorText = "请输入正数!";
+                    return false;
+                }
+                else
+                {
+                    cell.ErrorText = string.Empty;
+                    return true;
+                }
+            }
+            else
+            {
+                if (required == false && string.IsNullOrEmpty(temp))
+                {
+                    cell.ErrorText = string.Empty;
+                    return true;
+                }
+                else
+                {
+                    cell.ErrorText = "请输入数值!";
+                    return false;
+                }
+            }
+        }
+
         //commented by stone:还需增加判断是否超过int的最大值
         public static bool getInt(DataGridViewCell cell, bool required, bool positive, out int result)
         {

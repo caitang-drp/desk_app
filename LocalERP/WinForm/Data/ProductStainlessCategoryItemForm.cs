@@ -6,6 +6,7 @@ using System.Data;
 using LocalERP.DataAccess.DataDAO;
 using LocalERP.DataAccess.Data;
 using LocalERP.WinForm.Utility;
+using LocalERP.UiDataProxy;
 
 namespace LocalERP.WinForm.Data
 {

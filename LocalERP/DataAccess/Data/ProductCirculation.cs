@@ -152,6 +152,14 @@ namespace LocalERP.DataAccess.Data
             set { arrearDirection = value; }
         }
 
+        private string lastPayReceipt;
+
+        public string LastPayReceipt
+        {
+            get { return lastPayReceipt; }
+            set { lastPayReceipt = value; }
+        }
+
         public ProductCirculation(int id, string name, DateTime sellTime, string comment, int customerID) {
             this.id = id;
             this.code = name;

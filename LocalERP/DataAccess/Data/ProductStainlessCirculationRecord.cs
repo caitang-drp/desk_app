@@ -14,9 +14,9 @@ namespace LocalERP.DataAccess.Data
             set { serial = value; }
         }
 
-        private int quantityPerPiece;
+        private double quantityPerPiece;
 
-        public int QuantityPerPiece
+        public double QuantityPerPiece
         {
             get { return quantityPerPiece; }
             set { quantityPerPiece = value; }

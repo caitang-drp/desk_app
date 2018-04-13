@@ -65,6 +65,8 @@ namespace LocalERP.WinForm
             this.label_title = new System.Windows.Forms.Label();
             this.textBox_operator = new System.Windows.Forms.TextBox();
             this.panel_pay = new System.Windows.Forms.Panel();
+            this.label22 = new System.Windows.Forms.Label();
+            this.label_lastPayReceipt = new System.Windows.Forms.Label();
             this.panel_payBackFreight = new System.Windows.Forms.Panel();
             this.label_totalBackFreight = new System.Windows.Forms.Label();
             this.label21 = new System.Windows.Forms.Label();
@@ -103,6 +105,7 @@ namespace LocalERP.WinForm
             this.toolStripButton_print = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton_printLetter = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
+            this.panel_lastPayReceipt = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
@@ -113,6 +116,7 @@ namespace LocalERP.WinForm
             this.panel_payBasic.SuspendLayout();
             this.panel_basic.SuspendLayout();
             this.toolStrip2.SuspendLayout();
+            this.panel_lastPayReceipt.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -420,12 +424,30 @@ namespace LocalERP.WinForm
             // 
             this.panel_pay.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel_pay.Controls.Add(this.panel_lastPayReceipt);
             this.panel_pay.Controls.Add(this.panel_payBackFreight);
             this.panel_pay.Controls.Add(this.panel_payBasic);
             this.panel_pay.Location = new System.Drawing.Point(9, 415);
             this.panel_pay.Name = "panel_pay";
             this.panel_pay.Size = new System.Drawing.Size(870, 101);
             this.panel_pay.TabIndex = 58;
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(29, 4);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(112, 14);
+            this.label22.TabIndex = 88;
+            this.label22.Text = "上次收付款信息:";
+            // 
+            // label_lastPayReceipt
+            // 
+            this.label_lastPayReceipt.AutoSize = true;
+            this.label_lastPayReceipt.Location = new System.Drawing.Point(147, 4);
+            this.label_lastPayReceipt.Name = "label_lastPayReceipt";
+            this.label_lastPayReceipt.Size = new System.Drawing.Size(0, 14);
+            this.label_lastPayReceipt.TabIndex = 87;
             // 
             // panel_payBackFreight
             // 
@@ -865,6 +887,15 @@ namespace LocalERP.WinForm
             this.toolStripButton1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton_cancel_Click);
             // 
+            // panel_lastPayReceipt
+            // 
+            this.panel_lastPayReceipt.Controls.Add(this.label22);
+            this.panel_lastPayReceipt.Controls.Add(this.label_lastPayReceipt);
+            this.panel_lastPayReceipt.Location = new System.Drawing.Point(484, 6);
+            this.panel_lastPayReceipt.Name = "panel_lastPayReceipt";
+            this.panel_lastPayReceipt.Size = new System.Drawing.Size(364, 24);
+            this.panel_lastPayReceipt.TabIndex = 89;
+            // 
             // ProductCirculationForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
@@ -901,6 +932,8 @@ namespace LocalERP.WinForm
             this.panel_basic.PerformLayout();
             this.toolStrip2.ResumeLayout(false);
             this.toolStrip2.PerformLayout();
+            this.panel_lastPayReceipt.ResumeLayout(false);
+            this.panel_lastPayReceipt.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -975,6 +1008,9 @@ namespace LocalERP.WinForm
         private System.Windows.Forms.Label label_thisPayed;
         private System.Windows.Forms.Label label1_accumulative;
         private System.Windows.Forms.Panel panel_payBackFreight;
+        private System.Windows.Forms.Label label_lastPayReceipt;
+        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.Panel panel_lastPayReceipt;
         
        
     }

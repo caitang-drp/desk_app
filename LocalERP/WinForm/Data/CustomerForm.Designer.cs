@@ -42,6 +42,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.textBox_arrear = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.textBox_phone = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
@@ -50,7 +51,6 @@
             this.label10 = new System.Windows.Forms.Label();
             this.comboBoxTree1 = new Verlinea.ComboBoxTree.ComboBoxTree();
             this.label9 = new System.Windows.Forms.Label();
-            this.textBox_arrear = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
@@ -123,7 +123,7 @@
             this.toolStripButton4});
             this.toolStrip2.Location = new System.Drawing.Point(0, 0);
             this.toolStrip2.Name = "toolStrip2";
-            this.toolStrip2.Size = new System.Drawing.Size(406, 37);
+            this.toolStrip2.Size = new System.Drawing.Size(419, 37);
             this.toolStrip2.TabIndex = 29;
             this.toolStrip2.Text = "toolStrip2";
             // 
@@ -171,6 +171,15 @@
             // errorProvider1
             // 
             this.errorProvider1.ContainerControl = this;
+            // 
+            // textBox_arrear
+            // 
+            this.errorProvider1.SetIconPadding(this.textBox_arrear, 20);
+            this.textBox_arrear.Location = new System.Drawing.Point(86, 268);
+            this.textBox_arrear.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.textBox_arrear.Name = "textBox_arrear";
+            this.textBox_arrear.Size = new System.Drawing.Size(261, 23);
+            this.textBox_arrear.TabIndex = 49;
             // 
             // label5
             // 
@@ -251,15 +260,6 @@
             this.label9.TabIndex = 45;
             this.label9.Text = "类别:";
             // 
-            // textBox_arrear
-            // 
-            this.errorProvider1.SetIconPadding(this.textBox_arrear, 20);
-            this.textBox_arrear.Location = new System.Drawing.Point(86, 268);
-            this.textBox_arrear.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.textBox_arrear.Name = "textBox_arrear";
-            this.textBox_arrear.Size = new System.Drawing.Size(261, 23);
-            this.textBox_arrear.TabIndex = 49;
-            // 
             // label11
             // 
             this.label11.AutoSize = true;
@@ -274,11 +274,11 @@
             // 
             this.label12.AutoSize = true;
             this.label12.ForeColor = System.Drawing.Color.Red;
-            this.label12.Location = new System.Drawing.Point(20, 304);
+            this.label12.Location = new System.Drawing.Point(7, 304);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(357, 14);
+            this.label12.Size = new System.Drawing.Size(413, 14);
             this.label12.TabIndex = 50;
-            this.label12.Text = "“欠款”为正数时表示“应付”，负数时表示“应收”。";
+            this.label12.Text = "“欠款”为正数时表示“我方应付”，负数时表示“我方应收”。";
             // 
             // label13
             // 
@@ -304,7 +304,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(406, 362);
+            this.ClientSize = new System.Drawing.Size(419, 362);
             this.Controls.Add(this.label14);
             this.Controls.Add(this.label13);
             this.Controls.Add(this.label12);

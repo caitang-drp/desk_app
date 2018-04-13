@@ -50,5 +50,12 @@ namespace LocalERP.DataAccess.Utility
         public const String DATA_COMPANY = "公司信息";
         public const String ACCOUNT_INPUT = "期初库存录入";
         public const String ACCOUNT_OPEN = "期初开账";
+
+        public const string THIS_PAY = "本单已付:";
+        public const string THIS_RECEIPT = "本单已收:";
+
+        public const string LAST_PAY = "上次已付";
+        public const string LAST_RECEIPT = "上次已收";
+
     }
 }

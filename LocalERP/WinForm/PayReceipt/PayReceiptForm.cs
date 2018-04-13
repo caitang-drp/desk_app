@@ -313,14 +313,14 @@ namespace LocalERP.WinForm
             if (MessageBox.Show("是否弃核，退回到未审核状态？", "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) != DialogResult.OK)
                 return;
 
-            PayReceipt maxPr = PayReceiptDao.getInstance().FindLastestByCustomerID(this.payReceipt.customer_id);
+            PayReceipt maxPr = PayReceiptDao.getInstance().FindLastestByCustomerID(this.payReceipt.customer_id, false);
             if (maxPr!=null && !maxPr.serial.Equals(this.payReceipt.serial))
             {
                 MessageBox.Show(string.Format("弃核失败，在此单之后存在已审核的单据，请先弃核{0}", maxPr.serial), "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
-            ProductCirculation pc = cirDao.FindLastestByCustomerID(this.payReceipt.customer_id);
+            ProductCirculation pc = cirDao.FindLastestByCustomerID(this.payReceipt.customer_id, false);
             if (pc!=null && pc.CirculationTime > payReceipt.bill_time)
             {
                 MessageBox.Show(string.Format("弃核失败，在此单之后存在已审核的单据，请先弃核{0}", pc.Code), "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);

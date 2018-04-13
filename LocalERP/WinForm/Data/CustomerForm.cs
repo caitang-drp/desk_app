@@ -9,6 +9,7 @@ using LocalERP.DataAccess.DataDAO;
 using LocalERP.DataAccess.Data;
 using LocalERP.UiDataProxy;
 using LocalERP.DataAccess.Utility;
+using LocalERP.WinForm.Utility;
 
 namespace LocalERP.WinForm
 {
@@ -25,7 +26,7 @@ namespace LocalERP.WinForm
 
             InitializeComponent();
 
-            ProxyMgr.getInstance().getCustomerCIProxy().initTree(this.comboBoxTree1.tvTreeView);
+            ControlUtility.initTree(this.comboBoxTree1.tvTreeView, CategoryTableName.CustomerCategory);
         }
 
         public void reload(int mode, int id) {
@@ -68,7 +69,7 @@ namespace LocalERP.WinForm
 
         public override void refresh()
         {
-            ProxyMgr.getInstance().getCustomerCIProxy().initTree(this.comboBoxTree1.tvTreeView);
+            ControlUtility.initTree(this.comboBoxTree1.tvTreeView, CategoryTableName.CustomerCategory);
         }
 
         /// <summary>
