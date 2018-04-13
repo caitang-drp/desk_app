@@ -49,10 +49,19 @@ namespace LocalERP.WinForm
                 this.toolStripButton_printLetter.Visible = false;
             }
 
+            int close = 0;
             if (ConfUtility.GetBackFreightOpen() == "backFreightClose") {
                 this.panel_payBackFreight.Visible = false;
-                this.panel_payBasic.Location = new Point(this.panel_payBasic.Location.X, this.panel_payBasic.Location.Y - 20);
+                close++;
             }
+
+            if (ConfUtility.GetLastPayReceiptOpen() == "lastPayReceiptClose") {
+                this.panel_lastPayReceipt.Visible = false;
+                close++;
+            }
+
+            if(close == 2)
+                this.panel_payBasic.Location = new Point(this.panel_payBasic.Location.X, this.panel_payBasic.Location.Y - 20);
 
             if (ConfUtility.GetPrintLetterOpen() == "printLetterClose")
                 this.toolStripButton_printLetter.Visible = false;
@@ -833,7 +842,7 @@ namespace LocalERP.WinForm
                         this.textBox_serial.Text = string.Format("{0}-ID{1}-{2}-{3:000}", conf.code, customer.ID, DateTime.Now.ToString("yyyyMM"), max + 1);
                     }
 
-                    if (true)
+                    if (this.panel_lastPayReceipt.Visible)
                         setLastPayReceipt(customer.ID);
                 }
                 //编辑（已审核）不需要重新计算

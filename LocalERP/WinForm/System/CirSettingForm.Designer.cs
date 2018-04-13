@@ -43,6 +43,8 @@
             this.checkBox_freight = new System.Windows.Forms.CheckBox();
             this.label4 = new System.Windows.Forms.Label();
             this.checkBox_printLetter = new System.Windows.Forms.CheckBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.checkBox_lastPayReceipt = new System.Windows.Forms.CheckBox();
             this.toolStrip2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
@@ -178,12 +180,34 @@
             this.checkBox_printLetter.Text = "开启";
             this.checkBox_printLetter.UseVisualStyleBackColor = true;
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(16, 164);
+            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(98, 14);
+            this.label5.TabIndex = 53;
+            this.label5.Text = "上次收付信息:";
+            // 
+            // checkBox_lastPayReceipt
+            // 
+            this.checkBox_lastPayReceipt.AutoSize = true;
+            this.checkBox_lastPayReceipt.Location = new System.Drawing.Point(140, 164);
+            this.checkBox_lastPayReceipt.Name = "checkBox_lastPayReceipt";
+            this.checkBox_lastPayReceipt.Size = new System.Drawing.Size(54, 18);
+            this.checkBox_lastPayReceipt.TabIndex = 52;
+            this.checkBox_lastPayReceipt.Text = "开启";
+            this.checkBox_lastPayReceipt.UseVisualStyleBackColor = true;
+            // 
             // CirSettingForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(469, 167);
+            this.ClientSize = new System.Drawing.Size(469, 203);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.checkBox_lastPayReceipt);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.checkBox_printLetter);
             this.Controls.Add(this.label3);
@@ -223,5 +247,7 @@
         private System.Windows.Forms.CheckBox checkBox_backFreight;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.CheckBox checkBox_printLetter;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.CheckBox checkBox_lastPayReceipt;
     }
 }

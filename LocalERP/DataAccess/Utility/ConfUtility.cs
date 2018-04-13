@@ -75,5 +75,16 @@ namespace LocalERP.DataAccess.Utility
             }
             return "printLetterClose";
         }
+
+
+        public static string GetLastPayReceiptOpen()
+        {
+            string serialType = ConfDao.getInstance().Get(16);
+            if (!string.IsNullOrEmpty(serialType) && serialType.Equals("lastPayReceiptOpen"))
+            {
+                return "lastPayReceiptOpen";
+            }
+            return "lastPayReceiptClose";
+        }
     }
 }

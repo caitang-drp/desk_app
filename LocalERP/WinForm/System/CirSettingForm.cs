@@ -31,6 +31,10 @@ namespace LocalERP.WinForm
             string printLetter = ConfUtility.GetPrintLetterOpen();
             if (printLetter == "printLetterOpen")
                 this.checkBox_printLetter.Checked = true;
+
+            string lastPayReceipt = ConfUtility.GetLastPayReceiptOpen();
+            if (printLetter == "lastPayReceiptOpen")
+                this.checkBox_lastPayReceipt.Checked = true;
         }
 
         private void toolStripButton3_Click(object sender, EventArgs e)
@@ -38,6 +42,7 @@ namespace LocalERP.WinForm
             ConfDao.getInstance().Update(19, this.radioButton2.Checked == true?"serialType2":"serialType1");
             ConfDao.getInstance().Update(18, this.checkBox_backFreight.Checked == true ? "backFreightOpen" : "backFreightClose");
             ConfDao.getInstance().Update(17, this.checkBox_printLetter.Checked == true ? "printLetterOpen" : "printLetterClose");
+            ConfDao.getInstance().Update(16, this.checkBox_lastPayReceipt.Checked == true ? "lastPayReceiptOpen" : "lastPayReceiptClose");
 
             MessageBox.Show("保存成功!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
             this.Close();
