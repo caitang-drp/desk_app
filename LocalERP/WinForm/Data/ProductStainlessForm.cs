@@ -59,6 +59,8 @@ namespace LocalERP.WinForm
             this.textBox_quantityPerPiece.Text = product.QuantityPerPiece.ToString();
             this.comboBox_unit.Text = product.Unit;
 
+            this.textBox_libNum.Text = product.Num.ToString();
+
             this.textBox_comment.Text = product.Comment;
             this.radioButton2.Checked = product.Disable;
         }
@@ -110,18 +112,23 @@ namespace LocalERP.WinForm
         }
 
         private bool getProduct(out ProductStainless product) {
-            double price_purchase, price_sell;
+            double price_purchase, price_sell, price_cost, num, quantityPerPiece;
             string name;
-            int quantityPerPiece, categoryID;
+            int categoryID;
 
             if (ValidateUtility.getName(this.textBox_name, this.errorProvider1, out name) && 
                 ValidateUtility.getDouble(this.textBox_purchasePrice, this.errorProvider1, true, true, out price_purchase) && 
-                ValidateUtility.getDouble(this.textBox_sellPrice, this.errorProvider1, true,true,  out price_sell) && 
-                ValidateUtility.getInt(this.textBox_quantityPerPiece, this.errorProvider1, false, true, out quantityPerPiece) &&
+                ValidateUtility.getDouble(this.textBox_sellPrice, this.errorProvider1, true,true,  out price_sell) &&
+                ValidateUtility.getDouble(this.textBox_cost, this.errorProvider1, false, false, out price_cost) && 
+                ValidateUtility.getDouble(this.textBox_quantityPerPiece, this.errorProvider1, false, true, out quantityPerPiece) &&
+                ValidateUtility.getDouble(this.textBox_libNum, this.errorProvider1, false, false, out num) &&
                 this.getCategoryID(out categoryID))
             {
                 product = new ProductStainless(this.textBox_serial.Text, name, categoryID, price_purchase, price_sell, this.comboBox_unit.Text, quantityPerPiece, this.textBox_comment.Text, this.radioButton2.Checked);
                 product.ID = productID;
+                //2018-4-16ÐÞÕýbug
+                product.PriceCost = price_cost;
+                product.Num = num;
                 return true;
             }
             else

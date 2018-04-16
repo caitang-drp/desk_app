@@ -49,6 +49,10 @@
             this.textBox_pieces = new System.Windows.Forms.TextBox();
             this.textBox_comment = new System.Windows.Forms.TextBox();
             this.textBox_time = new System.Windows.Forms.TextBox();
+            this.textBox_contractor = new System.Windows.Forms.TextBox();
+            this.checkBox_contractor = new System.Windows.Forms.CheckBox();
+            this.checkBox_contractorPhone = new System.Windows.Forms.CheckBox();
+            this.textBox_contractorPhone = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -61,7 +65,7 @@
             // 
             this.textBox_timeFormat.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox_timeFormat.Location = new System.Drawing.Point(14, 237);
+            this.textBox_timeFormat.Location = new System.Drawing.Point(14, 301);
             this.textBox_timeFormat.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.textBox_timeFormat.Name = "textBox_timeFormat";
             this.textBox_timeFormat.Size = new System.Drawing.Size(111, 23);
@@ -138,7 +142,7 @@
             this.checkBox_time.Checked = true;
             this.checkBox_time.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBox_time.Enabled = false;
-            this.checkBox_time.Location = new System.Drawing.Point(14, 196);
+            this.checkBox_time.Location = new System.Drawing.Point(14, 260);
             this.checkBox_time.Name = "checkBox_time";
             this.checkBox_time.Size = new System.Drawing.Size(82, 18);
             this.checkBox_time.TabIndex = 49;
@@ -148,7 +152,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 217);
+            this.label1.Location = new System.Drawing.Point(12, 281);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(98, 14);
             this.label1.TabIndex = 50;
@@ -156,7 +160,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(16, 308);
+            this.button1.Location = new System.Drawing.Point(13, 364);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(117, 23);
             this.button1.TabIndex = 51;
@@ -166,7 +170,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(16, 276);
+            this.button2.Location = new System.Drawing.Point(13, 334);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(117, 23);
             this.button2.TabIndex = 52;
@@ -176,7 +180,7 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(259, 322);
+            this.button3.Location = new System.Drawing.Point(260, 348);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(119, 23);
             this.button3.TabIndex = 53;
@@ -186,7 +190,9 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.checkBox_contractorPhone);
             this.groupBox1.Controls.Add(this.button2);
+            this.groupBox1.Controls.Add(this.checkBox_contractor);
             this.groupBox1.Controls.Add(this.button1);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.checkBox_pieces);
@@ -198,7 +204,7 @@
             this.groupBox1.Controls.Add(this.textBox_timeFormat);
             this.groupBox1.Location = new System.Drawing.Point(11, 14);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(147, 343);
+            this.groupBox1.Size = new System.Drawing.Size(147, 411);
             this.groupBox1.TabIndex = 54;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "字段设置";
@@ -240,17 +246,59 @@
             // 
             // textBox_time
             // 
-            this.textBox_time.Location = new System.Drawing.Point(179, 209);
+            this.textBox_time.Location = new System.Drawing.Point(179, 274);
             this.textBox_time.Name = "textBox_time";
             this.textBox_time.Size = new System.Drawing.Size(268, 23);
             this.textBox_time.TabIndex = 60;
+            // 
+            // textBox_contractor
+            // 
+            this.textBox_contractor.Location = new System.Drawing.Point(179, 208);
+            this.textBox_contractor.Name = "textBox_contractor";
+            this.textBox_contractor.Size = new System.Drawing.Size(268, 23);
+            this.textBox_contractor.TabIndex = 61;
+            // 
+            // checkBox_contractor
+            // 
+            this.checkBox_contractor.AutoSize = true;
+            this.checkBox_contractor.Checked = true;
+            this.checkBox_contractor.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBox_contractor.Enabled = false;
+            this.checkBox_contractor.Location = new System.Drawing.Point(14, 195);
+            this.checkBox_contractor.Name = "checkBox_contractor";
+            this.checkBox_contractor.Size = new System.Drawing.Size(96, 18);
+            this.checkBox_contractor.TabIndex = 60;
+            this.checkBox_contractor.Text = "发货人名称";
+            this.checkBox_contractor.UseVisualStyleBackColor = true;
+            // 
+            // checkBox_contractorPhone
+            // 
+            this.checkBox_contractorPhone.AutoSize = true;
+            this.checkBox_contractorPhone.Checked = true;
+            this.checkBox_contractorPhone.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBox_contractorPhone.Enabled = false;
+            this.checkBox_contractorPhone.Location = new System.Drawing.Point(14, 227);
+            this.checkBox_contractorPhone.Name = "checkBox_contractorPhone";
+            this.checkBox_contractorPhone.Size = new System.Drawing.Size(96, 18);
+            this.checkBox_contractorPhone.TabIndex = 61;
+            this.checkBox_contractorPhone.Text = "发货人电话";
+            this.checkBox_contractorPhone.UseVisualStyleBackColor = true;
+            // 
+            // textBox_contractorPhone
+            // 
+            this.textBox_contractorPhone.Location = new System.Drawing.Point(179, 240);
+            this.textBox_contractorPhone.Name = "textBox_contractorPhone";
+            this.textBox_contractorPhone.Size = new System.Drawing.Size(268, 23);
+            this.textBox_contractorPhone.TabIndex = 62;
             // 
             // LetterSettingForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(459, 369);
+            this.ClientSize = new System.Drawing.Size(459, 437);
+            this.Controls.Add(this.textBox_contractorPhone);
+            this.Controls.Add(this.textBox_contractor);
             this.Controls.Add(this.textBox_time);
             this.Controls.Add(this.textBox_comment);
             this.Controls.Add(this.textBox_pieces);
@@ -294,5 +342,9 @@
         private System.Windows.Forms.TextBox textBox_address;
         private System.Windows.Forms.TextBox textBox_name;
         private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.TextBox textBox_contractorPhone;
+        private System.Windows.Forms.TextBox textBox_contractor;
+        private System.Windows.Forms.CheckBox checkBox_contractorPhone;
+        private System.Windows.Forms.CheckBox checkBox_contractor;
     }
 }

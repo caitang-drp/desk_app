@@ -344,7 +344,9 @@ namespace LocalERP.WinForm
                 }
             }
 
-            stainless.Num = stainless.Num + conf.productDirection * record.TotalNum;
+            //double乘以int会出现0.9999999的问题
+            stainless.Num = (double)((decimal)stainless.Num + conf.productDirection * (decimal)record.TotalNum);
+            
             stainlessDao.Update(stainless);
 
 
@@ -363,7 +365,7 @@ namespace LocalERP.WinForm
             ProductStainlessDao stainlessDao = cirDao.getProductDao() as ProductStainlessDao;
             ProductStainless stainless = stainlessDao.FindByID(record.ProductID);
 
-            stainless.Num = stainless.Num - conf.productDirection * record.TotalNum;
+            stainless.Num = (double)((decimal)stainless.Num - conf.productDirection * (decimal)record.TotalNum);
             stainlessDao.Update(stainless);
         }
 

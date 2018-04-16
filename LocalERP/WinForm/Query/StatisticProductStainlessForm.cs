@@ -27,7 +27,7 @@ namespace LocalERP.WinForm
 
             foreach (DataRow dr in itemsTable.Rows)
             {
-                int totalNum = 0;
+                double totalNum = 0;
                 double sum = 0;
                 int productID = (int)dr["ProductStainless.ID"];
 
@@ -54,19 +54,21 @@ namespace LocalERP.WinForm
             }
         }
 
-        protected override void getSum(DateTime start, DateTime end, int type, int productID, int customerID, out int totalNum, out double sum) {
+        protected override void getSum(DateTime start, DateTime end, int type, int productID, int customerID, out double totalNum, out double sum) {
             DataTable dt = ProductStainlessCirculationRecordDao.getInstance().FindList(start, end.AddDays(1).AddSeconds(-1), type, null, productID, null, customerID);
             totalNum = 0;
             sum = 0; 
             foreach (DataRow row in dt.Rows)
             {
-                int tempInt = (int)row["totalNum"];
+                double tempNum;
+                double.TryParse(row["totalNum"].ToString(), out tempNum);
+                
                 double tempDouble = 0;
                 double.TryParse(row["price"].ToString(), out tempDouble);
                 int flowType = (int)row["flowType"];
 
-                totalNum += tempInt*flowType;
-                sum += tempDouble * tempInt*flowType;
+                totalNum += tempNum*flowType;
+                sum += tempDouble * tempNum*flowType;
                 
             }
 

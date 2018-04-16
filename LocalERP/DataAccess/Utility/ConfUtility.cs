@@ -11,13 +11,14 @@ namespace LocalERP.DataAccess.Utility
     public static class ConfUtility
     {
         //mdb会自动从根目录拷贝到release下，而rpt不会，是不是设置的问题
-        //public static readonly string CONN_STRING = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source="+Application.StartupPath+"\\ERP.mdb;Persist Security Info=True";   //正式发布时数量库路径，放在bin目录下
-        public static readonly string CONN_STRING = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + Application.StartupPath + "..\\..\\..\\ERP.mdb;Persist Security Info=True";   //调试时数据库路径，防止放在bin目录下被清空
+        public static readonly string CONN_STRING = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source="+Application.StartupPath+"\\ERP.mdb;Persist Security Info=True";   //正式发布时数量库路径，放在bin目录下
+        //public static readonly string CONN_STRING = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + Application.StartupPath + "..\\..\\..\\ERP.mdb;Persist Security Info=True";   //调试时数据库路径，防止放在bin目录下被清空
 
-        //public static string cir_report_path = Application.StartupPath + "\\circulation_report.grf";
-        public static string cir_report_path = Application.StartupPath + "..\\..\\..\\grid++\\circulation_report.grf";
+        public static string cir_report_path = Application.StartupPath + "\\circulation_report.grf";
+        //public static string cir_report_path = Application.StartupPath + "..\\..\\..\\grid++\\circulation_report.grf";
 
         public static string letter_report_path = Application.StartupPath + "\\letter_report.grf";
+        //public static string letter_report_path = Application.StartupPath + "..\\..\\..\\grid++\\letter_report.grf";
 
         private const String SOFT_NAME = "飞翔企业管理软件";
         private const String PRODUCT_NAME = "飞翔进销存软件";
@@ -45,6 +46,20 @@ namespace LocalERP.DataAccess.Utility
             if (string.IsNullOrEmpty(product) || product == "0")
                 product = ConfUtility.PRODUCT_NAME;
             return product + " copyright (c) 2018";
+        }
+
+        public static string getContract() {
+            string phone = ConfDao.getInstance().Get(6).ToString();
+            string tel = ConfDao.getInstance().Get(7).ToString();
+
+            string temp = "";
+            if (string.IsNullOrEmpty(phone))
+                temp = tel;
+            else if (string.IsNullOrEmpty(tel))
+                temp = phone;
+            else
+                temp = string.Format("{0} / {1}", tel, phone);
+            return temp;
         }
 
         public static string GetSerialType() {

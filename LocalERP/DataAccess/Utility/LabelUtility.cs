@@ -54,8 +54,8 @@ namespace LocalERP.DataAccess.Utility
         public const string THIS_PAY = "本单已付:";
         public const string THIS_RECEIPT = "本单已收:";
 
-        public const string LAST_PAY = "上次已付";
-        public const string LAST_RECEIPT = "上次已收";
+        public const string LAST_PAY = "上次已付：";
+        public const string LAST_RECEIPT = "上次来款：";
 
     }
 }

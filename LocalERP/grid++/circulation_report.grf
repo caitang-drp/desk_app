@@ -256,15 +256,15 @@
 						{
 							"Type":"StaticBox",
 							"Name":"realTotal",
-							"Left":7.59354,
-							"Width":2.80458,
+							"Left":10.451,
+							"Width":3.12208,
 							"Height":0.608542,
 							"EndEllipsis":true
 						},
 						{
 							"Type":"StaticBox",
 							"Name":"StaticBox5",
-							"Left":4.92125,
+							"Left":7.77875,
 							"Width":2.67229,
 							"Height":0.608542,
 							"Text":"本单实计总价："
@@ -272,15 +272,15 @@
 						{
 							"Type":"StaticBox",
 							"Name":"label_pay",
-							"Left":10.3717,
-							"Width":1.82563,
+							"Left":13.7319,
+							"Width":1.79917,
 							"Height":0.608542,
 							"Text":"本次来款："
 						},
 						{
 							"Type":"StaticBox",
 							"Name":"text_pay",
-							"Left":12.2238,
+							"Left":15.5575,
 							"Width":3.41313,
 							"Height":0.608542,
 							"EndEllipsis":true
@@ -288,52 +288,51 @@
 						{
 							"Type":"StaticBox",
 							"Name":"label_arr",
-							"Left":4.94771,
+							"Left":0.238125,
 							"Top":0.582083,
-							"Width":2.64583,
+							"Width":1.77271,
 							"Height":0.608542,
 							"Text":"以上欠款："
 						},
 						{
 							"Type":"StaticBox",
 							"Name":"text_arr",
-							"Left":7.59354,
+							"Left":2.19604,
 							"Top":0.582083,
-							"Width":2.80458,
-							"Height":0.608542,
+							"Width":4.81542,
+							"Height":0.582083,
 							"EndEllipsis":true
 						},
 						{
 							"Type":"StaticBox",
 							"Name":"text_acc",
-							"Left":12.2238,
+							"Left":9.57792,
 							"Top":0.608542,
-							"Width":6.58813,
+							"Width":9.39271,
 							"Height":0.582083,
 							"EndEllipsis":true
 						},
 						{
 							"Type":"StaticBox",
 							"Name":"label_acc",
-							"Left":10.3717,
+							"Left":7.77875,
 							"Top":0.608542,
-							"Width":1.82563,
+							"Width":1.79917,
 							"Height":0.608542,
 							"Text":"累计欠款："
 						},
 						{
 							"Type":"Line",
 							"Name":"Line5",
-							"Left":4.78896,
+							"Left":7.48771,
 							"Height":1.19063
 						},
 						{
 							"Type":"StaticBox",
 							"Name":"lastPayReceipt",
 							"Left":0.211667,
-							"Top":0.3175,
-							"Width":4.39208,
-							"Height":0.582083,
+							"Width":6.8,
+							"Height":0.6,
 							"EndEllipsis":true
 						}
 					]
@@ -397,7 +396,7 @@
 					"Width":15.0019,
 					"Height":1.00542,
 					"Font":{
-						"Name":"华文楷体",
+						"Name":"宋体",
 						"Size":180000,
 						"Bold":true,
 						"Underline":true,

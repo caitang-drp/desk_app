@@ -8,9 +8,9 @@ namespace LocalERP.DataAccess.Data
 {
     public class ProductStainless : Product
     {
-        private int quantityPerPiece;
+        private double quantityPerPiece;
 
-        public int QuantityPerPiece
+        public double QuantityPerPiece
         {
             get { return quantityPerPiece; }
             set { quantityPerPiece = value; }
@@ -18,7 +18,7 @@ namespace LocalERP.DataAccess.Data
 
         public ProductStainless() { }
 
-        public ProductStainless(string serial, string name, int categoryID, double pricePurchase, double priceSell, string unit, int quantityPerPiece, string comment, bool disable)
+        public ProductStainless(string serial, string name, int categoryID, double pricePurchase, double priceSell, string unit, double quantityPerPiece, string comment, bool disable)
             : base(serial, name, categoryID, pricePurchase, priceSell, unit, comment, disable)
         {
             this.quantityPerPiece = quantityPerPiece;

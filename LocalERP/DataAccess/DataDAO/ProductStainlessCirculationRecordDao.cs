@@ -22,6 +22,7 @@ namespace LocalERP.DataAccess.DataDAO
         {
             try
             {
+                //注意这里：quantity不用''，而totalNum用
                 string commandText = string.Format("insert into ProductStainlessCirculationRecord(productID, quantityPerPiece, pieces, totalNum, unit, price, totalPrice, circulationID, comment) values('{0}', {1}, {2}, '{3}','{4}', '{5}', '{6}', '{7}', '{8}')",
                     info.ProductID, info.QuantityNull ? "NULL" : info.QuantityPerPiece.ToString(), info.PiecesNull ? "NULL" : info.Pieces.ToString(), info.TotalNum, info.Unit, info.Price, info.TotalPrice, info.CirculationID, info.Comment);
                 DbHelperAccess.executeNonQuery(commandText);
@@ -47,8 +48,8 @@ namespace LocalERP.DataAccess.DataDAO
                 record.CirculationID = circulationID;
                 record.ID = (int)dr["ProductStainlessCirculationRecord.ID"];
 
-                int quantityPerPiece, pieces;
-                double price, totalPrice;
+                int pieces;
+                double price, totalPrice, quantityPerPiece;
 
                 double.TryParse(dr["price"].ToString(), out price);
                 record.Price = price;
@@ -57,7 +58,7 @@ namespace LocalERP.DataAccess.DataDAO
                 record.ProductID = (int)dr["ProductStainless.ID"];
                 record.ProductName = dr["name"].ToString();
 
-                ValidateUtility.getInt(dr, "ProductStainlessCirculationRecord.quantityPerPiece", out quantityPerPiece, out tempBool);
+                ValidateUtility.getDouble(dr, "ProductStainlessCirculationRecord.quantityPerPiece", out quantityPerPiece, out tempBool);
                 record.QuantityPerPiece = quantityPerPiece;
                 record.QuantityNull = tempBool;
 

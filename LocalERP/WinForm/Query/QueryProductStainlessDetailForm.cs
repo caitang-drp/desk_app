@@ -89,7 +89,8 @@ namespace LocalERP.WinForm
 
                 this.dataGridView1.Rows[index].Cells["time"].Value = dr["circulationTime"];
 
-                int num = (int)dr["totalNum"];// *(int)dr["flowType"];
+                double num;
+                double.TryParse(dr["totalNum"].ToString(), out num);// *(int)dr["flowType"];
                 if (type == 1 || type == 4 || type == 5 || type == 8)
                     ControlUtility.setCellWithColor(dataGridView1.Rows[index].Cells["num"], Color.Red, string.Format("+{0}", num));
                 else if (type == 2 || type == 3 || type == 6 || type ==7)

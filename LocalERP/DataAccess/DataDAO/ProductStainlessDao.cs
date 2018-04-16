@@ -100,7 +100,9 @@ namespace LocalERP.DataAccess.DataDAO
                 product.Serial = dr["serial"] as string;
                 product.CategoryID = (int)dr["parent"];
 
-                product.QuantityPerPiece = (int)dr["quantityPerPiece"];
+                double quantityPerPiece;
+                double.TryParse(dr["quantityPerPiece"].ToString(), out quantityPerPiece);
+                product.QuantityPerPiece = quantityPerPiece;
                 product.Unit = dr["unit"] as string;
 
                 double num;

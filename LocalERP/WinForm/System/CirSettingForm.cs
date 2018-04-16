@@ -33,7 +33,7 @@ namespace LocalERP.WinForm
                 this.checkBox_printLetter.Checked = true;
 
             string lastPayReceipt = ConfUtility.GetLastPayReceiptOpen();
-            if (printLetter == "lastPayReceiptOpen")
+            if (lastPayReceipt == "lastPayReceiptOpen")
                 this.checkBox_lastPayReceipt.Checked = true;
         }
 

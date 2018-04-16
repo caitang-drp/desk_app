@@ -140,7 +140,7 @@ namespace LocalERP.WinForm
             foreach(DataRow dr in itemsTable.Rows){
                 
                 int customerID = (int)dr["ID"];
-                int totalNum = 0;
+                double totalNum = 0;
                 double sum;
                 this.getSum(this.dateTimePicker3.Value, this.dateTimePicker4.Value,1, 0, customerID, out totalNum, out sum);
                 dr["purchase"] = totalNum == 0 && sum == 0 ? "" : string.Format("{0}/{1:0.00}", totalNum, sum);
@@ -172,7 +172,7 @@ namespace LocalERP.WinForm
 
             string purchase, purchaseBack, sell, sellBack;
 
-            int totalNum;
+            double totalNum;
             double sum;
 
             while (currentDate < this.dateTimePicker4.Value) {
@@ -212,7 +212,7 @@ namespace LocalERP.WinForm
             }
         }
 
-        protected virtual void getSum(DateTime start, DateTime end, int type, int productID, int customerID, out int totalNum, out double sum) {
+        protected virtual void getSum(DateTime start, DateTime end, int type, int productID, int customerID, out double totalNum, out double sum) {
             totalNum = 0;
             sum = 0;
         }

@@ -8,7 +8,7 @@
 	},
 	"Printer":{
 		"Size":256,
-		"Width":18,
+		"Width":19,
 		"Height":11,
 		"LeftMargin":0,
 		"TopMargin":0,
@@ -33,8 +33,8 @@
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox_name",
-					"Left":2.19604,
-					"Top":2.80458,
+					"Left":2.59292,
+					"Top":2.40771,
 					"Width":7.80521,
 					"Height":0.79375,
 					"Font":{
@@ -48,8 +48,8 @@
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox_tel",
-					"Left":2.19604,
-					"Top":3.81,
+					"Left":2.59292,
+					"Top":3.59833,
 					"Width":7.80521,
 					"Height":0.79375,
 					"Font":{
@@ -63,7 +63,7 @@
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox_comment",
-					"Left":2.19604,
+					"Left":2.59292,
 					"Top":4.78896,
 					"Width":7.80521,
 					"Height":0.820208,
@@ -78,8 +78,8 @@
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox_time",
-					"Left":9.78958,
-					"Top":7.40833,
+					"Left":9.2075,
+					"Top":8.20208,
 					"Width":7.80521,
 					"Height":0.79375,
 					"Font":{
@@ -93,10 +93,10 @@
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox_address",
-					"Left":2.19604,
-					"Top":1.79917,
+					"Left":2.59292,
+					"Top":1.19063,
 					"Width":7.80521,
-					"Height":0.79375,
+					"Height":0.820208,
 					"Font":{
 						"Name":"宋体",
 						"Size":142500,
@@ -109,7 +109,7 @@
 					"Type":"StaticBox",
 					"Name":"StaticBox_pieces",
 					"Left":12.0121,
-					"Top":2.80458,
+					"Top":2.40771,
 					"Width":2.98979,
 					"Height":0.79375,
 					"Font":{
@@ -119,6 +119,36 @@
 						"Charset":134
 					},
 					"Text":"件数"
+				},
+				{
+					"Type":"StaticBox",
+					"Name":"StaticBox_contractor",
+					"Left":9.2075,
+					"Top":6.19125,
+					"Width":7.80521,
+					"Height":0.820208,
+					"Font":{
+						"Name":"宋体",
+						"Size":142500,
+						"Weight":400,
+						"Charset":134
+					},
+					"Text":"发货人"
+				},
+				{
+					"Type":"StaticBox",
+					"Name":"StaticBox_contractorPhone",
+					"Left":9.2075,
+					"Top":7.19667,
+					"Width":7.80521,
+					"Height":0.79375,
+					"Font":{
+						"Name":"宋体",
+						"Size":142500,
+						"Weight":400,
+						"Charset":134
+					},
+					"Text":"电话"
 				}
 			]
 		}

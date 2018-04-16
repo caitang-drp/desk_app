@@ -810,6 +810,7 @@ namespace LocalERP.WinForm
                 int cID = 0;
                 int.TryParse(this.lookupText1.LookupArg.Value.ToString(), out cID);
                 Customer customer = CustomerDao.getInstance().FindByID(cID);
+                //以上欠款就通过arrearDirection（应收应付）来表示，本单应收应付跟货物的direction相关
                 this.textBox_previousArrears.Text = (this.conf.arrearsDirection * customer.arrear).ToString();
 
                 setLastPayReceipt(customer.ID);
@@ -862,22 +863,41 @@ namespace LocalERP.WinForm
             ProductCirculation cir = cirDao.FindLastestByCustomerID(customerId, true);
             PayReceipt payReceipt = PayReceiptDao.getInstance().FindLastestByCustomerID(customerId, true);
             double lastPayReceipt = 0;
+            int cashDirection = 0;
+            DateTime dt = DateTime.Now;
+
             if (cir != null && payReceipt != null)
             {
                 if (cir.CirculationTime < payReceipt.bill_time)
+                {
                     lastPayReceipt = payReceipt.thisPayed;
+                    cashDirection = payReceipt.cashDirection;
+                    dt = payReceipt.bill_time;
+                }
                 else
+                {
                     lastPayReceipt = cir.ThisPayed;
+                    cashDirection = cir.FlowType * -1;
+                    dt = cir.CirculationTime;
+                }
             }
             else if (cir != null && payReceipt == null)
+            {
                 lastPayReceipt = cir.ThisPayed;
+                cashDirection = cir.FlowType * -1;
+                dt = cir.CirculationTime;
+            }
             else if (cir == null && payReceipt != null)
+            {
                 lastPayReceipt = payReceipt.thisPayed;
+                cashDirection = payReceipt.cashDirection;
+                dt = payReceipt.bill_time;
+            }
 
-            if (lastPayReceipt == 0)
+            if (lastPayReceipt == 0 || cashDirection == 0)
                 label_lastPayReceipt.Text = "";
             else
-                label_lastPayReceipt.Text = string.Format("{0}{1}元", conf.arrearsDirection == 1 ? LabelUtility.LAST_PAY : LabelUtility.LAST_RECEIPT, lastPayReceipt);
+                label_lastPayReceipt.Text = string.Format("{0} {1:0.00}元({2:yyyy年MM月dd日})", cashDirection == -1 ? LabelUtility.LAST_PAY : LabelUtility.LAST_RECEIPT, lastPayReceipt, dt);
         
         }
 

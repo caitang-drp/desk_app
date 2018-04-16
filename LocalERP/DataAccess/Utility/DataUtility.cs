@@ -13,6 +13,10 @@ namespace LocalERP.DataAccess.Utility
 
         public static string CmycurD(decimal num)
         {
+            bool isNegative = false;
+            if (num < 0)
+                isNegative = true;
+
             string str1 = "零壹贰叁肆伍陆柒捌玖";            //0-9所对应的汉字 
             string str2 = "万仟佰拾亿仟佰拾万仟佰拾元角分"; //数字位所对应的汉字 
             string str3 = "";    //从原num值中取出的值 
@@ -120,6 +124,9 @@ namespace LocalERP.DataAccess.Utility
             {
                 str5 = "零元整";
             }
+
+            if (isNegative)
+                str5 = "负" + str5;
             return str5;
         }
     }

@@ -32,6 +32,9 @@ namespace LocalERP.WinForm
                 this.textBox_name.Text = customer.Name;
                 this.textBox_address.Text = customer.Address;
                 this.textBox_tel.Text = customer.Contract;
+
+                this.textBox_contractor.Text = ConfDao.getInstance().Get(5);
+                this.textBox_contractorPhone.Text = ConfUtility.getContract();
             }
             this.textBox_pieces.Text = pieces;
             
@@ -67,7 +70,13 @@ namespace LocalERP.WinForm
 
             if (Report.ControlByName("StaticBox_pieces") != null)
                 Report.ControlByName("StaticBox_pieces").AsStaticBox.Text = this.textBox_pieces.Text;
-           
+
+            if (Report.ControlByName("StaticBox_contractor") != null)
+                Report.ControlByName("StaticBox_contractor").AsStaticBox.Text = this.textBox_contractor.Text;
+
+            if (Report.ControlByName("StaticBox_contractorPhone") != null)
+                Report.ControlByName("StaticBox_contractorPhone").AsStaticBox.Text = this.textBox_contractorPhone.Text;
+
             if (Report.ControlByName("StaticBox_time") != null)
                 Report.ControlByName("StaticBox_time").AsStaticBox.Text = this.textBox_time.Text;
 
