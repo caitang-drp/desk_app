@@ -133,14 +133,21 @@ namespace LocalERP.WinForm
             if (openMode == 0)
             {
                 switchMode(openMode);
-                if(ConfUtility.GetSerialType() == "serialType1" || (int)conf.type > 4){
-                    int max = cirDao.getMaxCode(string.Format("{0}-{1}-", conf.code, DateTime.Now.ToString("yyyyMMdd")));
-                    this.textBox_serial.Text = string.Format("{0}-{1}-{2:0000}", conf.code, DateTime.Now.ToString("yyyyMMdd"), max + 1);
-                }
                 this.dateTime_sellTime.Value = DateTime.Now;
                 this.textBox_comment.Text = null;
                 this.lookupText1.LookupArg = null;
                 this.lookupText1.Text_Lookup = null;
+
+                //23018-04-20
+                //重新设置company后，如果company为null（这种情况发生在原来编辑页面打开新增页面）
+                //会引发changed事件，从而修改serial，所以这段代码要放在company设定之后
+                //
+                if (ConfUtility.GetSerialType() == "serialType1" || (int)conf.type > 4)
+                {
+                    int max = cirDao.getMaxCode(string.Format("{0}-{1}-", conf.code, DateTime.Now.ToString("yyyyMMdd")));
+                    this.textBox_serial.Text = string.Format("{0}-{1}-{2:0000}", conf.code, DateTime.Now.ToString("yyyyMMdd"), max + 1);
+                }
+
                 this.textBox_operator.Text = ConfDao.getInstance().Get(5).ToString();
                 this.dataGridView1.Rows.Clear();
                 this.dataGridView2[1, 0].Value = null;
@@ -506,6 +513,14 @@ namespace LocalERP.WinForm
             if (isRecordsCorrect == false || isSellCorrect == false)
                 return;
 
+            //
+            if (this.openMode == 1 && cirDao.FindByID(circulation.ID) == null)
+            {
+                MessageBox.Show("该单据已经被删除了。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //this.Enabled = true;
+                return;
+            }
+
             try
             {
                 if (openMode == 0)
@@ -562,6 +577,14 @@ namespace LocalERP.WinForm
 
             ProductCirculation sell;
             this.getCirculation(out sell);
+
+            //2018-4-20修复的bug
+            if (cirDao.FindByID(sell.ID) == null)
+            {
+                MessageBox.Show("该单据已经被删除了。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //this.Enabled = true;
+                return;
+            }
 
             //判断是否支持负库存
             string negative = ConfDao.getInstance().Get(20);
@@ -825,12 +848,15 @@ namespace LocalERP.WinForm
             if (dataGridView1.Rows.Count > 0 && dataGridView1.Columns["totalPrice"].Visible == true)
                 dataGridView1.CurrentCell = dataGridView1.Rows[0].Cells["totalPrice"];
 
+            //有两个地方修改serial，initCirculation和company_valueChange
+            //如果有涉及到initCirculation，那么initCirculation应该放在valueChange后面
+            //valueChange也是在serialType2时才需要修改serial
             string serialType = ConfUtility.GetSerialType();
 
             //add 2018-4-13如果为已审核，就不需要重新计算previousArrear、serial、lastPayReceipt
             if (arg != null)
             {
-                //新增、编辑（未审核）
+                //新增、初始化编辑，编辑(未审核)
                 //编辑初始化时serial是不用重新计算的，但是要判断编辑初始化比较困难，为了代码方便，一刀切，在initCirculation那里会重新设回serial
                 if (circulation == null || circulation.Status <= 1)
                 {
@@ -851,7 +877,9 @@ namespace LocalERP.WinForm
             //新增初始化
             else
             {
-                this.textBox_serial.Text = "";
+                if (serialType == "serialType2")
+                    this.textBox_serial.Text = "";
+
                 this.textBox_previousArrears.Text = "";
                 this.label_lastPayReceipt.Text = "";
             }

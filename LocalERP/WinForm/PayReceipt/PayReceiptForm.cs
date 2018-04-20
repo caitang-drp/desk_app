@@ -241,6 +241,12 @@ namespace LocalERP.WinForm
             if (isCorrect == false)
                 return;
 
+            if (this.openMode == 1 && PayReceiptDao.getInstance().FindByID(payReceipt.id) == null)
+            {
+                MessageBox.Show("该单据已经被删除了。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             try
             {
                 if (openMode == 0)
@@ -285,9 +291,14 @@ namespace LocalERP.WinForm
             //要重新get一下，因为债务有可能更新。
             PayReceipt payReceipt;
             bool isCorrect = getPayReceipt(out payReceipt);
-
             if (isCorrect == false)
                 return;
+
+            if (PayReceiptDao.getInstance().FindByID(payReceipt.id) == null)
+            {
+                MessageBox.Show("该单据已经被删除了。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
 
             payReceipt.bill_time = DateTime.Now;
             this.dateTime_time.Value = payReceipt.bill_time;
