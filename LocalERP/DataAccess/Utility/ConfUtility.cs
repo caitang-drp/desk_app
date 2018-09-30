@@ -62,6 +62,16 @@ namespace LocalERP.DataAccess.Utility
             return temp;
         }
 
+        public static string GetBackupPath()
+        {
+            string path = ConfDao.getInstance().Get(13);
+            if (!string.IsNullOrEmpty(path) && !path.Equals("0") && !path.Equals("1"))
+            {
+                return path;
+            }
+            return "D:\\∑…œË»Ìº˛±∏∑›";
+        }
+
         public static string GetSerialType() {
             string serialType = ConfDao.getInstance().Get(19);
             if (!string.IsNullOrEmpty(serialType) && serialType.Equals("serialType2"))

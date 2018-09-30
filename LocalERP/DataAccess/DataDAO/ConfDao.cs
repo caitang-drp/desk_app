@@ -6,6 +6,7 @@ using System.Data;
 
 namespace LocalERP.DataAccess.DataDAO
 {
+    //1-9企业信息,10-11软件信息, 12打印封面日期格式, 13备份路径
     class ConfDao
     {
         //singleton

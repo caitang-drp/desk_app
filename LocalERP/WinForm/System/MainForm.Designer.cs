@@ -69,6 +69,7 @@
             this.关于软件ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1 = new System.Windows.Forms.Panel();
             this.dockPanel1 = new WeifenLuo.WinFormsUI.Docking.DockPanel();
+            this.备份设置ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripButton_purchase = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton_sell = new System.Windows.Forms.ToolStripButton();
@@ -197,6 +198,7 @@
             this.设置ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.设置登陆密码ToolStripMenuItem,
             this.单据设置ToolStripMenuItem,
+            this.备份设置ToolStripMenuItem,
             this.允许ToolStripMenuItem});
             this.设置ToolStripMenuItem.Name = "设置ToolStripMenuItem";
             this.设置ToolStripMenuItem.Size = new System.Drawing.Size(47, 20);
@@ -228,14 +230,14 @@
             // permitNegativeItem
             // 
             this.permitNegativeItem.Name = "permitNegativeItem";
-            this.permitNegativeItem.Size = new System.Drawing.Size(152, 22);
+            this.permitNegativeItem.Size = new System.Drawing.Size(88, 22);
             this.permitNegativeItem.Text = "是";
             this.permitNegativeItem.Click += new System.EventHandler(this.permitNegativeItem_Click);
             // 
             // notPermitNegativeItem
             // 
             this.notPermitNegativeItem.Name = "notPermitNegativeItem";
-            this.notPermitNegativeItem.Size = new System.Drawing.Size(152, 22);
+            this.notPermitNegativeItem.Size = new System.Drawing.Size(88, 22);
             this.notPermitNegativeItem.Text = "否";
             this.notPermitNegativeItem.Click += new System.EventHandler(this.notPermitNegativeItem_Click);
             // 
@@ -325,6 +327,13 @@
             dockPanelSkin1.DockPaneStripSkin = dockPaneStripSkin1;
             this.dockPanel1.Skin = dockPanelSkin1;
             this.dockPanel1.TabIndex = 18;
+            // 
+            // 备份设置ToolStripMenuItem
+            // 
+            this.备份设置ToolStripMenuItem.Name = "备份设置ToolStripMenuItem";
+            this.备份设置ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.备份设置ToolStripMenuItem.Text = "备份设置";
+            this.备份设置ToolStripMenuItem.Click += new System.EventHandler(this.备份设置ToolStripMenuItem_Click);
             // 
             // toolStrip1
             // 
@@ -423,6 +432,7 @@
             this.Text = "企业管理软件 V1.0";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.MainForm_Load);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainForm_FormClosed);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
@@ -467,6 +477,7 @@
         protected System.Windows.Forms.ToolStripMenuItem permitNegativeItem;
         protected System.Windows.Forms.ToolStripMenuItem notPermitNegativeItem;
         private System.Windows.Forms.ToolStripMenuItem 单据设置ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 备份设置ToolStripMenuItem;
 
     }
 }

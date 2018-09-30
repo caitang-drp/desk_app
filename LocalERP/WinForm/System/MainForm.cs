@@ -192,6 +192,13 @@ namespace LocalERP.WinForm
             form.ShowDialog();
         }
 
+
+        private void 备份设置ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            BackupForm form = new BackupForm();
+            form.ShowDialog();
+        }
+
         private void 关于软件ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             AboutForm form = new AboutForm();
@@ -325,6 +332,25 @@ namespace LocalERP.WinForm
         {
             ConfDao.getInstance().Update(20, "0");
             resetNegativeItem();
+        }
+
+        private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            string path = ConfUtility.GetBackupPath();
+            if (!Directory.Exists(path))//判断是否存在
+            {
+                Directory.CreateDirectory(path);//创建新路径
+            }
+            
+            path += "\\ERP_back_" + DateTime.Now.ToString("yyyy-MM-dd-hh-mm-ss") + ".mdb";
+            try
+            {
+                File.Copy(Application.StartupPath + "\\ERP.mdb", path, true);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "备份错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
     }
