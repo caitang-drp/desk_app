@@ -12,13 +12,12 @@ using LocalERP.UiDataProxy;
 using LocalERP.DataAccess.DataDAO;
 using LocalERP.WinForm.Utility;
 using LocalERP.DataAccess.Utility;
+using gregn6Lib;
 
 namespace LocalERP.WinForm
 {
     public partial class QueryCashDetailForm : MyDockContent
     {
-        private string searchName = null;
-
         private List<PayReceipt> payReceiptList;
         private List<ProductCirculation> productCirculationList;
 
@@ -35,11 +34,6 @@ namespace LocalERP.WinForm
 
         private void Form2_Load(object sender, EventArgs e)
         {
-/*            string[] columnTexts = new string[] { "往来单位", "时间", "业务单号", "业务类型", "本单应付", "本单已付", "累计欠款\r(应付)", "本单应收", "本单已收", "累计欠款\r(应收)" };
-            string[] columnNames = new string[] { "customer", "time", "serial", "type", "needPay", "thisPayed", "accNeedPay", "needReceipt", "thisReceipted", "accNeedReceipt"};
-            int [] columnLengths = new int[] { 90, 120, 120, 90,     90, 90, 90,    90, 90, 90};
-            */
-
             string[] columnTexts = new string[] { "往来单位", "时间", "业务单号", "业务类型", "本单应付/已付", "本单应收/已收", "累计欠款\r(应付)", "累计欠款\r(应收)", "备注" };
             string[] columnNames = new string[] { "customer", "time", "serial", "type", "needPay", "needReceipt", "accNeedPay", "accNeedReceipt", "comment" };
             int[] columnLengths = new int[] { 100, 140, 140, 90, 125, 125, 90, 90, 120};
@@ -223,6 +217,41 @@ namespace LocalERP.WinForm
             this.backgroundWorker.RunWorkerAsync();
             this.invokeBeginLoadNotify();
             this.label_notice.Visible = false;
+        }
+
+        private GridppReport Report = new GridppReport();
+
+        private void button_print_Click(object sender, EventArgs e)
+        {
+            // 载入报表模板数据
+            
+            string report_template_path = ConfUtility.check_report_path;
+            Report.LoadFromFile(report_template_path);
+            // 连接报表事件
+            Report.Initialize -= new _IGridppReportEvents_InitializeEventHandler(ReportInitialize);
+            Report.Initialize += new _IGridppReportEvents_InitializeEventHandler(ReportInitialize);
+            //一定要先-=，要不会重复数据
+            Report.FetchRecord -= new _IGridppReportEvents_FetchRecordEventHandler(ReportFetchRecord);
+            Report.FetchRecord += new _IGridppReportEvents_FetchRecordEventHandler(ReportFetchRecord);
+            // 打印预览
+            Report.PrintPreview(true);
+        }
+
+        private void ReportInitialize()
+        {
+        }
+
+        private void ReportFetchRecord() {
+            // 处理 明细
+            foreach (DataGridViewRow row in this.dataGridView1.Rows)
+            {
+                Report.DetailGrid.Recordset.Append();
+                Report.FieldByDBName("date").AsString = row.Cells["customer"].Value.ToString();
+                Report.FieldByDBName("type").AsString = row.Cells["type"].Value.ToString();
+                Report.FieldByDBName("total").AsString = row.Cells["needReceipt"].Value.ToString();
+                Report.FieldByDBName("accTotal").AsString = row.Cells["accNeedReceipt"].Value.ToString();
+                Report.DetailGrid.Recordset.Post();
+            }
         }
     }
 }
