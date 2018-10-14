@@ -189,6 +189,7 @@
 					"VAlign":"Middle"
 				},
 				"GroupFooter":{
+					"Height":0
 				}
 			}
 		]

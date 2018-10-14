@@ -39,7 +39,8 @@ namespace LocalERP.WinForm
             int[] columnLengths = new int[] { 100, 140, 140, 90, 125, 125, 90, 90, 120};
 
             ControlUtility.initColumns(this.dataGridView1, columnNames, columnTexts, columnLengths);
-            //CategoryDao.getInstance().initTreeView("CustomerCategory", this.treeView1);
+            
+            CategoryDao.getInstance().initTreeView("CustomerCategory", this.treeView1);
 
             DateTime dateTime = DateTime.Now;
             this.dateTimePicker_start.Value = dateTime.AddMonths(-1);
