@@ -52,7 +52,7 @@ namespace LocalERP.WinForm
         {
             try
             {
-                List<PayReceipt> prList = PayReceiptDao.getInstance().FindPayReceiptList(this.dateTimePicker3.Value, this.dateTimePicker4.Value.AddDays(1), (int)(comboBox1.SelectedValue), textBox_customer.Text.Trim(), 0);
+                List<PayReceipt> prList = PayReceiptDao.getInstance().FindPayReceiptList(this.dateTimePicker3.Value, this.dateTimePicker4.Value.AddDays(1), (int)(comboBox1.SelectedValue), textBox_customer.Text.Trim(),-1, 0);
                 this.dataGridView1.Rows.Clear();
 
                 int index = 0;

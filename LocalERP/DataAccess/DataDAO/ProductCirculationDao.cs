@@ -138,7 +138,7 @@ namespace LocalERP.DataAccess.DataDAO
             return this.formatProductCirculation(dr);
         }
 
-        public List<ProductCirculation> FindProductCirculationList(int typeStart, int typeEnd, DateTime? startTime, DateTime? endTime, int status, string name)
+        public List<ProductCirculation> FindProductCirculationList(int typeStart, int typeEnd, DateTime? startTime, DateTime? endTime, int status, string name, int parent)
         {
             //要注意，这个语句会筛选掉没有Customer信息的
             StringBuilder commandText = new StringBuilder(string.Format("select {0}.*, Customer.name from {0} left join Customer on {0}.customerID = Customer.ID where 1=1 ", tableName));
@@ -150,6 +150,9 @@ namespace LocalERP.DataAccess.DataDAO
                 commandText.Append(string.Format(" and status = {0}", status));
             if (!string.IsNullOrEmpty(name))
                 commandText.AppendFormat(" and Customer.name like '%{0}%'", name);
+
+            if (parent > 0)
+                commandText.Append(string.Format(" and Customer.ID={0}", parent));
 
             DataTable dt = DbHelperAccess.executeQuery(commandText.ToString());
             List<ProductCirculation> list = new List<ProductCirculation>();

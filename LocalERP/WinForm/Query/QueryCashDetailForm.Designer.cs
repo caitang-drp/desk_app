@@ -65,6 +65,7 @@
             this.treeView1.SelectedImageIndex = 0;
             this.treeView1.Size = new System.Drawing.Size(248, 539);
             this.treeView1.TabIndex = 0;
+            this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
             // 
             // imageList1
             // 
@@ -72,6 +73,7 @@
             this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
             this.imageList1.Images.SetKeyName(0, "folder-open.16px.png");
             this.imageList1.Images.SetKeyName(1, "folder-close.16px.1.png");
+            this.imageList1.Images.SetKeyName(2, "user16.png");
             // 
             // statusStrip1
             // 

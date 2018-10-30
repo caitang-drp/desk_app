@@ -227,12 +227,31 @@ namespace LocalERP.DataAccess.DataDAO
             Category category = CategoryDao.getInstance().FindById(tableName, id);
 
             List<Category> childrenCategory = CategoryDao.getInstance().FindByParentId(tableName, category.Id);
+            List<Customer> childrenCustomer = CustomerDao.getInstance().FindByParentId(category.Id);
+
             TreeNode[] childrenNode = null;
-            if (childrenCategory != null && childrenCategory.Count > 0)
+
+            if (childrenCategory != null && childrenCategory.Count > 0 || childrenCustomer != null && childrenCustomer.Count > 0)
             {
-                childrenNode = new TreeNode[childrenCategory.Count];
-                for (int i = 0; i < childrenNode.Length; i++)
-                    childrenNode[i] = getNodeById(tableName, childrenCategory[i].Id);
+                int countCategory = 0, countCustomer = 0;
+                if (childrenCategory != null && childrenCategory.Count > 0)
+                    countCategory = childrenCategory.Count;
+
+                if (childrenCustomer != null && childrenCustomer.Count > 0)
+                    countCustomer = childrenCustomer.Count;
+
+                childrenNode = new TreeNode[countCategory + countCustomer];
+
+                int i = 0, iCategory = 0, iCustomer = 0;
+
+                for (; iCategory < countCategory; iCategory++, i++)
+                    childrenNode[i] = getNodeById(tableName, childrenCategory[iCategory].Id);
+
+                for (; iCustomer < countCustomer; iCustomer++, i++)
+                {
+                    childrenNode[i] = new TreeNode(childrenCustomer[iCustomer].Name, 2, 2);
+                    childrenNode[i].Name = childrenCustomer[iCustomer].ID.ToString();
+                }
             }
 
             TreeNode node = null;

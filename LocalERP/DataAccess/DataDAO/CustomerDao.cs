@@ -81,10 +81,7 @@ namespace LocalERP.DataAccess.DataDAO
             return DbHelperAccess.executeNonQuery(commandText);
         }
 
-        public Customer FindByID(int ID)
-        {
-            string commandText = string.Format("select * from Customer where ID={0}", ID);
-            DataRow dr = DbHelperAccess.executeQueryGetOneRow(commandText);
+        public Customer getBeanFromDataRow(DataRow dr) {
             Customer customer = new Customer();
             if (dr != null)
             {
@@ -104,6 +101,28 @@ namespace LocalERP.DataAccess.DataDAO
                 return customer;
             }
             return null;
+        }
+
+        public Customer FindByID(int ID)
+        {
+            string commandText = string.Format("select * from Customer where ID={0}", ID);
+            DataRow dr = DbHelperAccess.executeQueryGetOneRow(commandText);
+            return getBeanFromDataRow(dr);
+        }
+
+        public List<Customer> FindByParentId(int parentId)
+        {
+            String commandText = string.Format("select * from Customer where parent = {0} order by ID", parentId);
+            DataTable dt = DbHelperAccess.executeQuery(commandText);
+
+            List<Customer> categorys = new List<Customer>();
+
+            foreach (DataRow dr in dt.Rows)
+            {
+                categorys.Add(this.getBeanFromDataRow(dr));
+            }
+
+            return categorys;
         }
 
         public void ClearAllArrear() {

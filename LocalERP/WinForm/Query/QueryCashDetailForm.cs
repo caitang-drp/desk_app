@@ -40,24 +40,28 @@ namespace LocalERP.WinForm
 
             ControlUtility.initColumns(this.dataGridView1, columnNames, columnTexts, columnLengths);
             
+            //categoryDao.initTree与ControlUtility.initTree重复了，可以删掉一个
             CategoryDao.getInstance().initTreeView("CustomerCategory", this.treeView1);
 
             DateTime dateTime = DateTime.Now;
             this.dateTimePicker_start.Value = dateTime.AddMonths(-1);
-            this.backgroundWorker.RunWorkerAsync();
-            this.invokeBeginLoadNotify();
+            //this.backgroundWorker.RunWorkerAsync();
+            //this.invokeBeginLoadNotify();
         }
-        /*
+        
         private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
         {
             int parent = -1;
             if (treeView1.SelectedNode != null)
+            {
+                if (treeView1.SelectedNode.ImageIndex != 2)
+                    return;
                 parent = int.Parse(treeView1.SelectedNode.Name);
+            }
 
-            searchName = null;
             this.backgroundWorker.RunWorkerAsync(parent);
             this.invokeBeginLoadNotify();
-        }*/
+        }
 
         public override void refresh()
         {
@@ -66,14 +70,10 @@ namespace LocalERP.WinForm
 
         private void backgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
-            /*int parentId = (int)e.Argument;
-            Category parent = null;
-            if(parentId > 0)
-                parent = CategoryDao.getInstance().FindById("CustomerCategory", parentId);
-            */
-            payReceiptList = PayReceiptDao.getInstance().FindPayReceiptList(this.dateTimePicker_start.Value, this.dateTimePicker_end.Value.AddDays(1), 4, this.textBox_search.Text, 1);
+            int parentId = (int)e.Argument;          
+            payReceiptList = PayReceiptDao.getInstance().FindPayReceiptList(this.dateTimePicker_start.Value, this.dateTimePicker_end.Value.AddDays(1), 4, this.textBox_search.Text, parentId, 1);
             //这个地方需要再改成ProductCirculationDao
-            productCirculationList = ProductStainlessCirculationDao.getInstance().FindProductCirculationList(1, 4, this.dateTimePicker_start.Value, this.dateTimePicker_end.Value.AddDays(1), 4, this.textBox_search.Text);
+            productCirculationList = ProductStainlessCirculationDao.getInstance().FindProductCirculationList(1, 4, this.dateTimePicker_start.Value, this.dateTimePicker_end.Value.AddDays(1), 4, this.textBox_search.Text, parentId);
         }
 
         private void formatRow(DataGridViewRow row, string customer, DateTime time, string serial, string type, string needPay, string thisPayed, string accNeedPay, string needReceipt, string thisReceipted, string accNeedReceipt, string comment) {

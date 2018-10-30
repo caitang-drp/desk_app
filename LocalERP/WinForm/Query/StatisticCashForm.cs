@@ -54,8 +54,8 @@ namespace LocalERP.WinForm
             receipt = purchaseBack = otherReceipt = 0;
             payed = sellBack = freights = otherPay = 0;
 
-            payReceiptList = PayReceiptDao.getInstance().FindPayReceiptList(null, null, 4, null, 1);
-            circulationList = ProductStainlessCirculationDao.getInstance().FindProductCirculationList(1, 4, null, null, 4, null);
+            payReceiptList = PayReceiptDao.getInstance().FindPayReceiptList(null, null, 4, null, -1, 1);
+            circulationList = ProductStainlessCirculationDao.getInstance().FindProductCirculationList(1, 4, null, null, 4, null, -1);
 
             foreach (ProductCirculation cir in circulationList) { 
                 
