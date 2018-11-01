@@ -14,8 +14,8 @@ namespace LocalERP.DataAccess.Utility
         //public static readonly string CONN_STRING = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source="+Application.StartupPath+"\\ERP.mdb;Persist Security Info=True";   //正式发布时数量库路径，放在bin目录下
         public static readonly string CONN_STRING = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + Application.StartupPath + "..\\..\\..\\ERP.mdb;Persist Security Info=True";   //调试时数据库路径，防止放在bin目录下被清空
 
-        public static string cir_report_path = Application.StartupPath + "\\circulation_report.grf";
-        //public static string cir_report_path = Application.StartupPath + "..\\..\\..\\grid++\\circulation_report.grf";
+        //public static string cir_report_path = Application.StartupPath + "\\circulation_report.grf";
+        public static string cir_report_path = Application.StartupPath + "..\\..\\..\\grid++\\circulation_report.grf";
 
         public static string letter_report_path = Application.StartupPath + "\\letter_report.grf";
         //public static string letter_report_path = Application.StartupPath + "..\\..\\..\\grid++\\letter_report.grf";

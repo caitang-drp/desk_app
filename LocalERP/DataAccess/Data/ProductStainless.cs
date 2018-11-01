@@ -23,5 +23,6 @@ namespace LocalERP.DataAccess.Data
         {
             this.quantityPerPiece = quantityPerPiece;
         }
+
     }
 }

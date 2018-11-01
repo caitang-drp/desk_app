@@ -121,7 +121,7 @@ namespace LocalERP.DataAccess.DataDAO
             return null;
         }
 
-        public ProductCirculation FindByID(int ID)
+        public virtual ProductCirculation FindByID(int ID)
         {
             string commandText = string.Format("select {0}.*, Customer.name from {0} left join Customer on Customer.ID = {0}.customerID where {0}.ID={1}", tableName, ID);
             DataRow dr = DbHelperAccess.executeQueryGetOneRow(commandText);
@@ -138,7 +138,7 @@ namespace LocalERP.DataAccess.DataDAO
             return this.formatProductCirculation(dr);
         }
 
-        public List<ProductCirculation> FindProductCirculationList(int typeStart, int typeEnd, DateTime? startTime, DateTime? endTime, int status, string name, int parent)
+        public virtual List<ProductCirculation> FindProductCirculationList(int typeStart, int typeEnd, DateTime? startTime, DateTime? endTime, int status, string name, int parent)
         {
             //要注意，这个语句会筛选掉没有Customer信息的
             StringBuilder commandText = new StringBuilder(string.Format("select {0}.*, Customer.name from {0} left join Customer on {0}.customerID = Customer.ID where 1=1 ", tableName));

@@ -170,6 +170,43 @@ namespace LocalERP.DataAccess.Data
 
         public ProductCirculation() { }
 
+        private List<ProductCirculationRecord> records;
+
+        public List<ProductCirculationRecord> Records
+        {
+            get { return records; }
+            set { records = value; }
+        }
+
+        public string getFixedString(string str, int length){
+            Encoding coding = Encoding.GetEncoding("gb2312");
+            int dcount = 0;
+            foreach (char ch in str.ToCharArray())
+            {
+                if (coding.GetByteCount(ch.ToString()) == 2)
+                    dcount++;
+            }
+            string w = str.PadRight(length - dcount, ' ');
+            return w;
+        }
+
+        public string getRecordsTxt()
+        {
+            StringBuilder sb = new StringBuilder();
+            int i = 0;
+            foreach (ProductCirculationRecord record in Records)
+            {
+                string name = this.getFixedString(record.ProductName, 18);
+                string line = string.Format("{0}/{1,-8}/{2,-8}", name, record.Price, record.TotalNum);
+                if (i < Records.Count - 1)
+                    sb.AppendLine(line);
+                else
+                    sb.Append(line);
+                i++;
+            }
+            return sb.ToString();
+        }
+
         public static string[] circulationStatusContext = new string[] {"Î´ÉóºË","undefined","undefined", "ÒÑÉóºË" };
 
         //±ØÐë¸úÊÕ¸¶Ò»ÖÂ

@@ -73,20 +73,22 @@ namespace LocalERP.DataAccess.DataDAO
             }
         }
 
-        /*
-        public DataTable FindList(Category parent, string name, bool thisPayed, bool finish)
+        //这个要不要考虑重构，把record都放在ProductCirculation里
+        public override List<ProductCirculation> FindProductCirculationList(int typeStart, int typeEnd, DateTime? startTime, DateTime? endTime, int status, string name, int parent)
         {
-            StringBuilder commandText = new StringBuilder("select * from ProductStainlessCirculation, Customer, CustomerCategory where ProductStainlessCirculation.customerID = Customer.ID and Customer.parent = CustomerCategory.ID");
-            if (thisPayed == true)
-                commandText.AppendFormat(" and thisPayed > 0");
-            if (finish == true)
-                commandText.AppendFormat(" and status = 4 ");
-            if (parent != null)
-                commandText.AppendFormat(" and CustomerCategory.lft>={0} and CustomerCategory.rgt<={1}", parent.Left, parent.Right);
-
-            if (!string.IsNullOrEmpty(name))
-                commandText.AppendFormat(" and Customer.name like '%{0}%'", name);
-            return DbHelperAccess.executeQuery(commandText.ToString());
-        }*/
+            List<ProductCirculation> list = base.FindProductCirculationList(typeStart, typeEnd, startTime, endTime, status, name, parent);
+            foreach (ProductCirculation cir in list)
+            {
+                cir.Records = this.getRecordDao().FindList(cir.ID);
+            }
+            return list;
+        }
+        
+        public override ProductCirculation FindByID(int ID)
+        {
+            ProductCirculation pc = base.FindByID(ID);
+            pc.Records = this.getRecordDao().FindList(ID);
+            return pc;
+        }
     }
 }

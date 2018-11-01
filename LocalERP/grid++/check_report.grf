@@ -11,9 +11,13 @@
 	},
 	"Printer":{
 		"Size":256,
-		"Width":40,
+		"Width":14,
 		"Height":21,
-		"Oriention":"Landscape"
+		"Oriention":"Landscape",
+		"LeftMargin":1.5,
+		"TopMargin":1,
+		"RightMargin":1.5,
+		"BottomMargin":1
 	},
 	"DetailGrid":{
 		"CenterView":true,
@@ -32,16 +36,10 @@
 					"Name":"product"
 				},
 				{
-					"Name":"num"
+					"Name":"needReceipt"
 				},
 				{
-					"Name":"price"
-				},
-				{
-					"Name":"total"
-				},
-				{
-					"Name":"backTotal"
+					"Name":"thisReceipt"
 				},
 				{
 					"Name":"accTotal"
@@ -51,35 +49,27 @@
 		"Column":[
 			{
 				"Name":"date",
-				"Width":1.56104
+				"Width":2.16958
 			},
 			{
 				"Name":"type",
-				"Width":1.5875
+				"Width":3.41313
 			},
 			{
 				"Name":"product",
-				"Width":1.98438
+				"Width":6.16479
 			},
 			{
-				"Name":"num",
-				"Width":2.38125
+				"Name":"needReceipt",
+				"Width":2.01083
 			},
 			{
-				"Name":"price",
-				"Width":2.38125
-			},
-			{
-				"Name":"total",
-				"Width":1.5875
-			},
-			{
-				"Name":"backTotal",
-				"Width":1.5875
+				"Name":"thisReceipt",
+				"Width":2.01083
 			},
 			{
 				"Name":"accTotal",
-				"Width":2.91042
+				"Width":2.19604
 			}
 		],
 		"ColumnContent":{
@@ -87,34 +77,50 @@
 			"ColumnContentCell":[
 				{
 					"Column":"date",
+					"LnSpacing":4,
+					"PaddingRight":2,
+					"PaddingTop":2,
+					"PaddingBottom":2,
 					"DataField":"date"
 				},
 				{
 					"Column":"type",
+					"WordWrap":true,
+					"LnSpacing":4,
+					"PaddingRight":2,
+					"PaddingTop":2,
+					"PaddingBottom":2,
+					"CanGrow":true,
 					"DataField":"type"
 				},
 				{
 					"Column":"product",
+					"WordWrap":true,
+					"LnSpacing":4,
+					"PaddingRight":2,
+					"PaddingTop":2,
+					"PaddingBottom":2,
+					"CanGrow":true,
 					"DataField":"product"
 				},
 				{
-					"Column":"num",
-					"DataField":"num"
+					"Column":"needReceipt",
+					"DataField":"needReceipt"
 				},
 				{
-					"Column":"price",
-					"DataField":"price"
-				},
-				{
-					"Column":"total",
-					"DataField":"total"
-				},
-				{
-					"Column":"backTotal",
-					"DataField":"backTotal"
+					"Column":"thisReceipt",
+					"LnSpacing":4,
+					"PaddingRight":2,
+					"PaddingTop":2,
+					"PaddingBottom":2,
+					"DataField":"thisReceipt"
 				},
 				{
 					"Column":"accTotal",
+					"LnSpacing":4,
+					"PaddingRight":2,
+					"PaddingTop":2,
+					"PaddingBottom":2,
 					"DataField":"accTotal"
 				}
 			]
@@ -124,87 +130,84 @@
 				{
 					"GroupTitle":false,
 					"Column":"date",
+					"Font":{
+						"Name":"宋体",
+						"Size":105000,
+						"Bold":true,
+						"Charset":134
+					},
 					"Text":"日期"
 				},
 				{
 					"GroupTitle":false,
 					"Column":"type",
+					"Font":{
+						"Name":"宋体",
+						"Size":105000,
+						"Bold":true,
+						"Charset":134
+					},
 					"Text":"业务类型"
 				},
 				{
 					"GroupTitle":false,
 					"Column":"product",
-					"Text":"产品名称"
+					"Font":{
+						"Name":"宋体",
+						"Size":105000,
+						"Bold":true,
+						"Charset":134
+					},
+					"CanGrow":true,
+					"Text":"明细(产品/单价/数量)"
 				},
 				{
 					"GroupTitle":false,
-					"Column":"num",
-					"Text":"数量"
+					"Column":"needReceipt",
+					"Font":{
+						"Name":"宋体",
+						"Size":105000,
+						"Bold":true,
+						"Charset":134
+					},
+					"Text":"本单应付"
 				},
 				{
 					"GroupTitle":false,
-					"Column":"price",
-					"Text":"单价"
-				},
-				{
-					"GroupTitle":false,
-					"Column":"total",
-					"Text":"合计"
-				},
-				{
-					"GroupTitle":false,
-					"Column":"backTotal",
-					"Text":"还款"
+					"Column":"thisReceipt",
+					"Font":{
+						"Name":"宋体",
+						"Size":105000,
+						"Bold":true,
+						"Charset":134
+					},
+					"Text":"本单已付"
 				},
 				{
 					"GroupTitle":false,
 					"Column":"accTotal",
+					"Font":{
+						"Name":"宋体",
+						"Size":105000,
+						"Bold":true,
+						"Charset":134
+					},
 					"Text":"累计欠款"
 				}
 			]
-		},
-		"Group":[
-			{
-				"Name":"Group1",
-				"ByFields":"date",
-				"GroupHeader":{
-					"Height":0.1,
-					"RepeatOnPage":true,
-					"OccupyColumn":true,
-					"OccupiedColumns":"date",
-					"VAlign":"Middle"
-				},
-				"GroupFooter":{
-					"Visible":false,
-					"Height":0.608542
-				}
-			},
-			{
-				"Name":"Group2",
-				"ByFields":"type",
-				"GroupHeader":{
-					"Height":0.29,
-					"OccupyColumn":true,
-					"OccupiedColumns":"type",
-					"VAlign":"Middle"
-				},
-				"GroupFooter":{
-					"Height":0
-				}
-			}
-		]
+		}
 	},
 	"ReportHeader":[
 		{
-			"Height":2.01083,
+			"Height":1.79917,
 			"Control":[
 				{
 					"Type":"StaticBox",
-					"Name":"StaticBox1",
+					"Name":"title",
 					"Center":"Horizontal",
-					"Left":6.00604,
-					"Top":0.185208,
-					"Width":3.99521,
+					"Left":2.16958,
+					"Top":0.0529167,
+					"Width":13.6525,
 					"Height":0.79375,
 					"Font":{
 						"Name":"宋体",
@@ -212,9 +215,74 @@
 						"Bold":true,
 						"Charset":134
 					},
-					"Text":"按城市统计客户"
+					"TextAlign":"MiddleCenter",
+					"Text":"客户对账单"
+				},
+				{
+					"Type":"StaticBox",
+					"Name":"customer",
+					"Left":0.396875,
+					"Top":1.00542,
+					"Width":6.79979,
+					"Height":0.608542,
+					"Font":{
+						"Name":"宋体",
+						"Size":105000,
+						"Weight":400,
+						"Charset":134
+					},
+					"Text":"客户："
+				},
+				{
+					"Type":"StaticBox",
+					"Name":"time",
+					"Left":7.59354,
+					"Top":1.00542,
+					"Width":7.19667,
+					"Height":0.608542,
+					"Font":{
+						"Name":"宋体",
+						"Size":105000,
+						"Weight":400,
+						"Charset":134
+					},
+					"Text":"时间："
+				},
+				{
+					"Type":"StaticBox",
+					"Name":"StaticBox1",
+					"Left":15.3988,
+					"Top":1.00542,
+					"Width":2.40771,
+					"Height":0.608542,
+					"Font":{
+						"Name":"宋体",
+						"Size":105000,
+						"Weight":400,
+						"Charset":134
+					},
+					"Text":"单位：元"
 				}
 			]
+		}
+	],
+	"ReportFooter":[
+		{
+			"Name":"ReportFooter1",
+			"Height":0.79375,
+			"Control":[
+				{
+					"Type":"MemoBox",
+					"Name":"MemoBox1",
+					"Left":7.19667,
+					"Top":0.211667,
+					"Width":3.59833,
+					"Height":0.396875,
+					"TextAlign":"MiddleCenter",
+					"Text":"第[#SystemVar(PageNumber)#]页 共[#SystemVar(PageCount)#]页"
+				}
+			],
+			"RepeatOnPage":true
 		}
 	]
 }

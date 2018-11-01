@@ -23,6 +23,8 @@ namespace LocalERP.WinForm.Utility
                 columns[i].Name = columnNames[i];
                 columns[i].ReadOnly = true;
                 columns[i].Width = columnLengths[i];
+                if(columnLengths[i] == 0)
+                    columns[i].Visible = false;
             }
             dgv.Columns.Clear();
             dgv.Columns.AddRange(columns);

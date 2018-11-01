@@ -95,7 +95,7 @@
             this.toolStripStatusLabel1.ImageTransparentColor = System.Drawing.Color.White;
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
             this.toolStripStatusLabel1.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(269, 17);
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(0, 17);
             // 
             // textBox1
             // 
@@ -126,6 +126,7 @@
             this.button2.TabIndex = 7;
             this.button2.Text = "关闭";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // panel1
             // 
