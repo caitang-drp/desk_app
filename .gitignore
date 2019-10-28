@@ -290,3 +290,6 @@ LocalERP/DataAccess/Utility/AuthUtility.cs
 *.mdb
 /readme.txt
 
+*.xls
+*.xlsx
+

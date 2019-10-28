@@ -224,7 +224,7 @@
 						{
 							"Type":"StaticBox",
 							"Name":"StaticBox3",
-							"Left":6.19125,
+							"Left":7.19667,
 							"Width":1.79917,
 							"Height":0.608542,
 							"Text":"本页合计"
@@ -256,84 +256,70 @@
 						{
 							"Type":"StaticBox",
 							"Name":"realTotal",
-							"Left":10.451,
-							"Width":3.12208,
+							"Left":3.09563,
+							"Width":3.36021,
 							"Height":0.608542,
 							"EndEllipsis":true
 						},
 						{
 							"Type":"StaticBox",
 							"Name":"StaticBox5",
-							"Left":7.77875,
-							"Width":2.67229,
+							"Left":0.291042,
+							"Width":2.80458,
 							"Height":0.608542,
 							"Text":"本单实计总价："
 						},
 						{
 							"Type":"StaticBox",
 							"Name":"label_pay",
-							"Left":13.7319,
-							"Width":1.79917,
+							"Left":8.89,
+							"Width":2.19604,
 							"Height":0.608542,
 							"Text":"本次来款："
 						},
 						{
 							"Type":"StaticBox",
 							"Name":"text_pay",
-							"Left":15.5575,
-							"Width":3.41313,
+							"Left":11.086,
+							"Width":7.51417,
 							"Height":0.608542,
 							"EndEllipsis":true
 						},
 						{
 							"Type":"StaticBox",
 							"Name":"label_arr",
-							"Left":0.238125,
+							"Left":0.3175,
 							"Top":0.582083,
-							"Width":1.77271,
+							"Width":2.80458,
 							"Height":0.608542,
 							"Text":"以上欠款："
 						},
 						{
 							"Type":"StaticBox",
 							"Name":"text_arr",
-							"Left":2.19604,
+							"Left":3.09563,
 							"Top":0.582083,
-							"Width":4.81542,
-							"Height":0.582083,
+							"Width":3.28083,
+							"Height":0.608542,
 							"EndEllipsis":true
 						},
 						{
 							"Type":"StaticBox",
 							"Name":"text_acc",
-							"Left":9.57792,
+							"Left":11.086,
 							"Top":0.608542,
-							"Width":9.39271,
+							"Width":7.51417,
 							"Height":0.582083,
 							"EndEllipsis":true
 						},
 						{
 							"Type":"StaticBox",
 							"Name":"label_acc",
-							"Left":7.77875,
+							"Left":8.89,
 							"Top":0.608542,
-							"Width":1.79917,
+							"Width":2.19604,
 							"Height":0.608542,
 							"Text":"累计欠款："
-						},
-						{
-							"Type":"Line",
-							"Name":"Line5",
-							"Left":7.48771,
-							"Height":1.19063
-						},
-						{
-							"Type":"StaticBox",
-							"Name":"lastPayReceipt",
-							"Left":0.211667,
-							"Width":6.8,
-							"Height":0.6,
-							"EndEllipsis":true
 						}
 					]
 				}
@@ -362,9 +348,9 @@
 				{
 					"Type":"StaticBox",
 					"Name":"date",
-					"Left":7.46125,
+					"Left":7.69938,
 					"Top":2.75167,
-					"Width":5.21229,
+					"Width":5.31813,
 					"Height":0.608542,
 					"Font":{
 						"Name":"宋体",
@@ -376,9 +362,9 @@
 				{
 					"Type":"StaticBox",
 					"Name":"serial",
-					"Left":12.7529,
+					"Left":13.044,
 					"Top":2.75167,
-					"Width":6.24417,
+					"Width":5.79438,
 					"Height":0.608542,
 					"Font":{
 						"Name":"宋体",
@@ -396,7 +382,7 @@
 					"Width":15.0019,
 					"Height":1.00542,
 					"Font":{
-						"Name":"宋体",
+						"Name":"华文楷体",
 						"Size":180000,
 						"Bold":true,
 						"Underline":true,
