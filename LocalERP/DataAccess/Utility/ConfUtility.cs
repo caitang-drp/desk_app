@@ -10,18 +10,17 @@ namespace LocalERP.DataAccess.Utility
 {
     public static class ConfUtility
     {
+        public static string debugPath = "";
+        public static string debugPathReport = "";
+
+        //public static string debugPath = "\\..\\..";
+        //public static string debugPathReport = debugPath + "\\grid++";
+
         //mdb会自动从根目录拷贝到release下，而rpt不会，是不是设置的问题
-        //public static readonly string CONN_STRING = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source="+Application.StartupPath+"\\ERP.mdb;Persist Security Info=True";   //正式发布时数量库路径，放在bin目录下
-        public static readonly string CONN_STRING = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + Application.StartupPath + "..\\..\\..\\ERP.mdb;Persist Security Info=True";   //调试时数据库路径，防止放在bin目录下被清空
-
-        //public static string cir_report_path = Application.StartupPath + "\\circulation_report.grf";
-        public static string cir_report_path = Application.StartupPath + "..\\..\\..\\grid++\\circulation_report.grf";
-
-        public static string letter_report_path = Application.StartupPath + "\\letter_report.grf";
-        //public static string letter_report_path = Application.StartupPath + "..\\..\\..\\grid++\\letter_report.grf";
-
-        //public static string check_report_path = Application.StartupPath + "\\check_report.grf";
-        public static string check_report_path = Application.StartupPath + "..\\..\\..\\grid++\\check_report.grf";
+        public static readonly string CONN_STRING = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + Application.StartupPath + debugPath + "\\ERP.mdb;Persist Security Info=True";   //正式发布时数量库路径，放在bin目录下
+        public static string cir_report_path = Application.StartupPath + debugPathReport + "\\circulation_report.grf";
+        public static string letter_report_path = Application.StartupPath + debugPathReport + "\\letter_report.grf";
+        public static string check_report_path = Application.StartupPath + debugPathReport + "\\check_report.grf";
 
         private const String SOFT_NAME = "飞翔企业管理软件";
         private const String PRODUCT_NAME = "飞翔进销存软件";
