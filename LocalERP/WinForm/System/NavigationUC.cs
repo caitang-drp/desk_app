@@ -6,6 +6,7 @@ using System.Data;
 using System.Text;
 using System.Windows.Forms;
 using LocalERP.DataAccess.Utility;
+using BSE.Windows.Forms;
 
 namespace LocalERP.WinForm
 {
@@ -22,6 +23,7 @@ namespace LocalERP.WinForm
         //navigation
         private void initNavigation()
         {
+            /*
             TreeView treeView_purchase = this.getTreeView(
                 new string[] { LabelUtility.PURCHASE_LIST, LabelUtility.PURCHASE, LabelUtility.PURCHASE_BACK });
             this.xPanderPanel_pur.Controls.Add(treeView_purchase);
@@ -43,14 +45,16 @@ namespace LocalERP.WinForm
                 new string[] { LabelUtility.CASH_LIST, LabelUtility.CASH_PAY, LabelUtility.CASH_PAY_REFUND, LabelUtility.CASH_RECEIPT, LabelUtility.CASH_RECEIPT_REFUND, LabelUtility.CASH_OTHER_PAY, LabelUtility.CASH_OTHER_RECEIPT });
             this.xPanderPanel_should_pay_receipt.Controls.Add(treeView_should_pay_receipt);
 
-            TreeView treeView_queryStatistic = this.getTreeView(
-                new string[] { /*DataUtility.QUERY_LIB,*/ LabelUtility.QUERY_PRODUCT_DETAIL, LabelUtility.STATISTIC_PRODUCT, LabelUtility.QUERY_CASH_DETAIL, LabelUtility.STATISTIC_CASH/*, LabelUtility.STATISTIC_PROFIT*/});
-            this.xPanderPanel_query.Controls.Add(treeView_queryStatistic);
 
-            //tree4
-            TreeView treeView_data = this.getTreeView(
-                new string[] { LabelUtility.DATA_PRODUCT, LabelUtility.DATA_CUSTOMER, LabelUtility.DATA_COMPANY/*, DataUtility.ACCOUNT_INPUT, DataUtility.ACCOUNT_OPEN*/ });
-            this.xPanderPanel_data.Controls.Add(treeView_data);
+            TreeView treeView_queryStatistic = this.getTreeView(
+                new string[] { LabelUtility.QUERY_PRODUCT_DETAIL, LabelUtility.STATISTIC_PRODUCT, LabelUtility.QUERY_CASH_DETAIL, LabelUtility.STATISTIC_CASH});
+            //this.xPanderPanel_query.Controls.Add(treeView_queryStatistic);
+
+            this.addPanderPanel(false, LabelUtility.DATA_SETTING, "data").Controls.Add(this.getTreeView(new string[] { LabelUtility.DATA_PRODUCT, LabelUtility.DATA_CUSTOMER, LabelUtility.DATA_COMPANY }););
+            */
+
+            this.addPanderPanel(true, LabelUtility.CONSUME_MANAGE, "consume").Controls.Add(this.getTreeView(new string[] {LabelUtility.CONSUME_LIST, LabelUtility.CONSUME_ADD }));
+            this.addPanderPanel(false, LabelUtility.CARD_MANAGE, "card").Controls.Add(this.getTreeView(new string[] { LabelUtility.CARD_LIST, LabelUtility.CARD_ADD }));
 
         }
 
@@ -77,6 +81,31 @@ namespace LocalERP.WinForm
             treeView.NodeMouseClick += new TreeNodeMouseClickEventHandler(treeView_NodeMouseClick);
 
             return treeView;
+        }
+
+        //stone: 2019-10-29
+        private XPanderPanel addPanderPanel(bool expand, string text, string name)
+        {
+            XPanderPanel xPanderPanel = new BSE.Windows.Forms.XPanderPanel();
+
+            xPanderPanel.BackColor = System.Drawing.SystemColors.Window;
+            xPanderPanel.CaptionFont = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
+            xPanderPanel.CaptionForeColor = System.Drawing.SystemColors.ControlText;
+            xPanderPanel.ColorCaptionGradientBegin = System.Drawing.Color.FromArgb(((int)(((byte)(216)))), ((int)(((byte)(232)))), ((int)(((byte)(252)))));
+            xPanderPanel.ColorCaptionGradientEnd = System.Drawing.Color.FromArgb(((int)(((byte)(140)))), ((int)(((byte)(177)))), ((int)(((byte)(230)))));
+            xPanderPanel.ColorCaptionGradientMiddle = System.Drawing.Color.FromArgb(((int)(((byte)(186)))), ((int)(((byte)(210)))), ((int)(((byte)(243)))));
+            xPanderPanel.ColorScheme = BSE.Windows.Forms.ColorScheme.Custom;
+            xPanderPanel.Expand = expand;
+            xPanderPanel.ForeColor = System.Drawing.SystemColors.ControlText;
+            xPanderPanel.Image = global::LocalERP.Properties.Resources.apply16;
+            xPanderPanel.Name = "xPanderPanel_"+name;
+            xPanderPanel.Padding = new System.Windows.Forms.Padding(12, 33, 12, 11);
+            xPanderPanel.TabIndex = 5;
+            xPanderPanel.Text = text;
+
+            this.xPanderPanelList1.Controls.Add(xPanderPanel);
+
+            return xPanderPanel;
         }
 
     }
