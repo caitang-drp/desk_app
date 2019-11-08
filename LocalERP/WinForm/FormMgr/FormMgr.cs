@@ -89,6 +89,34 @@ namespace LocalERP.WinForm
         protected ProductCirculationForm productLibLossForm = null;
         public abstract ProductCirculationForm getProductLibLossForm();
 
+        /*********** card ***********/
+        /*private CardForm cardForm = null;
+        public PayReceiptListForm getPayReceiptListForm()
+        {
+            if (payReceiptListForm == null || payReceiptListForm.IsDisposed)
+            {
+                payReceiptListForm = new PayReceiptListForm(mainForm);
+                payReceiptListForm.initVersions(getVersions(),
+                    UpdateType.PayReceiptUpdate, UpdateType.PayReceiptFinishUpdate, UpdateType.CustomerUpdate);
+                appendEvent(payReceiptListForm);
+            }
+            return payReceiptListForm;
+        }*/
+
+        // 卡片
+        private CardForm cardForm = null;
+        public CardForm getCardForm()
+        {
+            if (cardForm == null || cardForm.IsDisposed)
+            {
+                //等进一步改造，把全部stainless、clothesDao的调用都放在一个地方
+                cardForm = new CardForm(ProductCirculation.CirculationTypeConf_Purchase, ProductStainlessCirculationDao.getInstance());
+                //appendEvent(buyPayBillForm);
+            }
+            return cardForm;
+        }
+
+
         /****************cash circulation************************/
         // 应收应付，单据列表
         private PayReceiptListForm payReceiptListForm = null;

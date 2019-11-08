@@ -20,7 +20,8 @@ namespace LocalERP.WinForm
             this.mainForm = form;
             InitializeComponent();
 
-            addRow();
+            Label label = addRow(LabelUtility.CONSUME_MANAGE, new string[] {LabelUtility.CONSUME_LIST, LabelUtility.CONSUME_ADD }, 55);
+            label = addRow(LabelUtility.CARD_MANAGE, new string[] { LabelUtility.CARD_LIST, LabelUtility.CARD_ADD }, label.Location.Y + 50);
         }
 
         private void linkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -29,20 +30,40 @@ namespace LocalERP.WinForm
             mainForm.setForm(linkLabel.Text);
         }
 
-        private void addRow() {
+        private Label addRow(String type, String [] navs, int localY) {
             Label label = new System.Windows.Forms.Label();
             
             label.Font = new System.Drawing.Font("宋体", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             label.Image = global::LocalERP.Properties.Resources.Yes;
             label.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            label.Location = new System.Drawing.Point(74, 55);
+            label.Location = new System.Drawing.Point(74, localY);
             label.Name = "label1";
             label.Size = new System.Drawing.Size(100, 18);
             label.TabIndex = 58;
-            label.Text = "采购管理";
+            label.Text = type;
             label.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
 
             this.Controls.Add(label);
+
+            for (int i = 0; i<navs.Length; i++) {
+                LinkLabel linkLabel = new System.Windows.Forms.LinkLabel();
+
+                linkLabel.AutoSize = true;
+                linkLabel.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Bold);
+                linkLabel.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
+                linkLabel.LinkColor = System.Drawing.Color.Green;
+                linkLabel.Location = new System.Drawing.Point(207 + i* 110, label.Location.Y + 2);
+                linkLabel.Name = "linkLabel"+ type +i;
+                linkLabel.Size = new System.Drawing.Size(67, 14);
+                linkLabel.TabIndex = 17;
+                linkLabel.TabStop = true;
+                linkLabel.Text = navs[i];
+                linkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel_LinkClicked);
+
+                this.Controls.Add(linkLabel);
+            }
+
+            return label;
         }
     }
 }

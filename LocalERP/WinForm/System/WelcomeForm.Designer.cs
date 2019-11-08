@@ -80,12 +80,13 @@
             this.linkLabel3.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Bold);
             this.linkLabel3.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
             this.linkLabel3.LinkColor = System.Drawing.Color.Green;
-            this.linkLabel3.Location = new System.Drawing.Point(377, 57);
+            this.linkLabel3.Location = new System.Drawing.Point(418, 212);
             this.linkLabel3.Name = "linkLabel3";
             this.linkLabel3.Size = new System.Drawing.Size(67, 14);
             this.linkLabel3.TabIndex = 25;
             this.linkLabel3.TabStop = true;
             this.linkLabel3.Text = "采购退货";
+            this.linkLabel3.Visible = false;
             this.linkLabel3.VisitedLinkColor = System.Drawing.Color.RoyalBlue;
             this.linkLabel3.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel_LinkClicked);
             // 
@@ -95,12 +96,13 @@
             this.linkLabel2.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Bold);
             this.linkLabel2.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
             this.linkLabel2.LinkColor = System.Drawing.Color.Green;
-            this.linkLabel2.Location = new System.Drawing.Point(297, 57);
+            this.linkLabel2.Location = new System.Drawing.Point(338, 212);
             this.linkLabel2.Name = "linkLabel2";
             this.linkLabel2.Size = new System.Drawing.Size(67, 14);
             this.linkLabel2.TabIndex = 17;
             this.linkLabel2.TabStop = true;
             this.linkLabel2.Text = "采购入库";
+            this.linkLabel2.Visible = false;
             this.linkLabel2.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel_LinkClicked);
             // 
             // linkLabel1
@@ -109,12 +111,13 @@
             this.linkLabel1.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Bold);
             this.linkLabel1.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
             this.linkLabel1.LinkColor = System.Drawing.Color.Green;
-            this.linkLabel1.Location = new System.Drawing.Point(187, 57);
+            this.linkLabel1.Location = new System.Drawing.Point(228, 212);
             this.linkLabel1.Name = "linkLabel1";
             this.linkLabel1.Size = new System.Drawing.Size(97, 14);
             this.linkLabel1.TabIndex = 16;
             this.linkLabel1.TabStop = true;
             this.linkLabel1.Text = "采购单据列表";
+            this.linkLabel1.Visible = false;
             this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel_LinkClicked);
             // 
             // linkLabel4
@@ -129,6 +132,7 @@
             this.linkLabel4.TabIndex = 26;
             this.linkLabel4.TabStop = true;
             this.linkLabel4.Text = "销售单据列表";
+            this.linkLabel4.Visible = false;
             this.linkLabel4.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel_LinkClicked);
             // 
             // linkLabel5
@@ -143,6 +147,7 @@
             this.linkLabel5.TabIndex = 29;
             this.linkLabel5.TabStop = true;
             this.linkLabel5.Text = "销售退货";
+            this.linkLabel5.Visible = false;
             this.linkLabel5.VisitedLinkColor = System.Drawing.Color.RoyalBlue;
             this.linkLabel5.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel_LinkClicked);
             // 
@@ -158,6 +163,7 @@
             this.linkLabel6.TabIndex = 27;
             this.linkLabel6.TabStop = true;
             this.linkLabel6.Text = "销售出库";
+            this.linkLabel6.Visible = false;
             this.linkLabel6.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel_LinkClicked);
             // 
             // linkLabel7
@@ -172,6 +178,7 @@
             this.linkLabel7.TabIndex = 30;
             this.linkLabel7.TabStop = true;
             this.linkLabel7.Text = "盘点单据列表";
+            this.linkLabel7.Visible = false;
             this.linkLabel7.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel_LinkClicked);
             // 
             // linkLabel8
@@ -186,6 +193,7 @@
             this.linkLabel8.TabIndex = 33;
             this.linkLabel8.TabStop = true;
             this.linkLabel8.Text = "盘点报损";
+            this.linkLabel8.Visible = false;
             this.linkLabel8.VisitedLinkColor = System.Drawing.Color.RoyalBlue;
             this.linkLabel8.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel_LinkClicked);
             // 
@@ -201,6 +209,7 @@
             this.linkLabel9.TabIndex = 31;
             this.linkLabel9.TabStop = true;
             this.linkLabel9.Text = "盘点报溢";
+            this.linkLabel9.Visible = false;
             this.linkLabel9.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel_LinkClicked);
             // 
             // linkLabel10
@@ -230,6 +239,7 @@
             this.linkLabel11.TabIndex = 37;
             this.linkLabel11.TabStop = true;
             this.linkLabel11.Text = "进销统计";
+            this.linkLabel11.Visible = false;
             this.linkLabel11.VisitedLinkColor = System.Drawing.Color.RoyalBlue;
             this.linkLabel11.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel_LinkClicked);
             // 
@@ -245,6 +255,7 @@
             this.linkLabel12.TabIndex = 35;
             this.linkLabel12.TabStop = true;
             this.linkLabel12.Text = "进销存明细";
+            this.linkLabel12.Visible = false;
             this.linkLabel12.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel_LinkClicked);
             // 
             // linkLabel13
@@ -259,6 +270,7 @@
             this.linkLabel13.TabIndex = 38;
             this.linkLabel13.TabStop = true;
             this.linkLabel13.Text = "货品信息";
+            this.linkLabel13.Visible = false;
             this.linkLabel13.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel_LinkClicked);
             // 
             // linkLabel15
@@ -273,6 +285,7 @@
             this.linkLabel15.TabIndex = 39;
             this.linkLabel15.TabStop = true;
             this.linkLabel15.Text = "往来单位";
+            this.linkLabel15.Visible = false;
             this.linkLabel15.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel_LinkClicked);
             // 
             // pictureBox6
@@ -283,6 +296,7 @@
             this.pictureBox6.Size = new System.Drawing.Size(753, 39);
             this.pictureBox6.TabIndex = 41;
             this.pictureBox6.TabStop = false;
+            this.pictureBox6.Visible = false;
             // 
             // pictureBox5
             // 
@@ -292,6 +306,7 @@
             this.pictureBox5.Size = new System.Drawing.Size(753, 39);
             this.pictureBox5.TabIndex = 40;
             this.pictureBox5.TabStop = false;
+            this.pictureBox5.Visible = false;
             // 
             // pictureBox3
             // 
@@ -301,6 +316,7 @@
             this.pictureBox3.Size = new System.Drawing.Size(753, 39);
             this.pictureBox3.TabIndex = 36;
             this.pictureBox3.TabStop = false;
+            this.pictureBox3.Visible = false;
             // 
             // pictureBox2
             // 
@@ -310,6 +326,7 @@
             this.pictureBox2.Size = new System.Drawing.Size(753, 39);
             this.pictureBox2.TabIndex = 32;
             this.pictureBox2.TabStop = false;
+            this.pictureBox2.Visible = false;
             // 
             // pictureBox1
             // 
@@ -319,6 +336,7 @@
             this.pictureBox1.Size = new System.Drawing.Size(753, 39);
             this.pictureBox1.TabIndex = 28;
             this.pictureBox1.TabStop = false;
+            this.pictureBox1.Visible = false;
             // 
             // pictureBox4
             // 
@@ -328,6 +346,7 @@
             this.pictureBox4.Size = new System.Drawing.Size(753, 39);
             this.pictureBox4.TabIndex = 21;
             this.pictureBox4.TabStop = false;
+            this.pictureBox4.Visible = false;
             // 
             // pictureBox7
             // 
@@ -337,6 +356,7 @@
             this.pictureBox7.Size = new System.Drawing.Size(753, 39);
             this.pictureBox7.TabIndex = 42;
             this.pictureBox7.TabStop = false;
+            this.pictureBox7.Visible = false;
             // 
             // linkLabel14
             // 
@@ -350,6 +370,7 @@
             this.linkLabel14.TabIndex = 43;
             this.linkLabel14.TabStop = true;
             this.linkLabel14.Text = "生产单据列表";
+            this.linkLabel14.Visible = false;
             this.linkLabel14.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel_LinkClicked);
             // 
             // linkLabel17
@@ -364,6 +385,7 @@
             this.linkLabel17.TabIndex = 44;
             this.linkLabel17.TabStop = true;
             this.linkLabel17.Text = "生产消耗";
+            this.linkLabel17.Visible = false;
             this.linkLabel17.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel_LinkClicked);
             // 
             // linkLabel16
@@ -378,6 +400,7 @@
             this.linkLabel16.TabIndex = 45;
             this.linkLabel16.TabStop = true;
             this.linkLabel16.Text = "收付单据列表";
+            this.linkLabel16.Visible = false;
             this.linkLabel16.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel_LinkClicked);
             // 
             // linkLabel18
@@ -392,6 +415,7 @@
             this.linkLabel18.TabIndex = 47;
             this.linkLabel18.TabStop = true;
             this.linkLabel18.Text = "采购退点";
+            this.linkLabel18.Visible = false;
             this.linkLabel18.VisitedLinkColor = System.Drawing.Color.RoyalBlue;
             this.linkLabel18.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel_LinkClicked);
             // 
@@ -407,6 +431,7 @@
             this.linkLabel19.TabIndex = 46;
             this.linkLabel19.TabStop = true;
             this.linkLabel19.Text = "采购付款";
+            this.linkLabel19.Visible = false;
             this.linkLabel19.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel_LinkClicked);
             // 
             // linkLabel20
@@ -421,6 +446,7 @@
             this.linkLabel20.TabIndex = 49;
             this.linkLabel20.TabStop = true;
             this.linkLabel20.Text = "销售退点";
+            this.linkLabel20.Visible = false;
             this.linkLabel20.VisitedLinkColor = System.Drawing.Color.RoyalBlue;
             this.linkLabel20.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel_LinkClicked);
             // 
@@ -436,6 +462,7 @@
             this.linkLabel21.TabIndex = 48;
             this.linkLabel21.TabStop = true;
             this.linkLabel21.Text = "销售收款";
+            this.linkLabel21.Visible = false;
             this.linkLabel21.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel_LinkClicked);
             // 
             // linkLabel22
@@ -466,6 +493,7 @@
             this.linkLabel23.TabIndex = 50;
             this.linkLabel23.TabStop = true;
             this.linkLabel23.Text = "对账明细";
+            this.linkLabel23.Visible = false;
             this.linkLabel23.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel_LinkClicked);
             // 
             // linkLabel24
@@ -496,6 +524,7 @@
             this.linkLabel25.TabIndex = 54;
             this.linkLabel25.TabStop = true;
             this.linkLabel25.Text = "其他收款";
+            this.linkLabel25.Visible = false;
             this.linkLabel25.VisitedLinkColor = System.Drawing.Color.RoyalBlue;
             this.linkLabel25.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel_LinkClicked);
             // 
@@ -511,6 +540,7 @@
             this.linkLabel26.TabIndex = 53;
             this.linkLabel26.TabStop = true;
             this.linkLabel26.Text = "其他付款";
+            this.linkLabel26.Visible = false;
             this.linkLabel26.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel_LinkClicked);
             // 
             // linkLabel27
@@ -525,6 +555,7 @@
             this.linkLabel27.TabIndex = 55;
             this.linkLabel27.TabStop = true;
             this.linkLabel27.Text = "公司信息";
+            this.linkLabel27.Visible = false;
             this.linkLabel27.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel_LinkClicked);
             // 
             // linkLabel28
@@ -539,6 +570,7 @@
             this.linkLabel28.TabIndex = 56;
             this.linkLabel28.TabStop = true;
             this.linkLabel28.Text = "财务统计";
+            this.linkLabel28.Visible = false;
             this.linkLabel28.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel_LinkClicked);
             // 
             // linkLabel29
@@ -553,6 +585,7 @@
             this.linkLabel29.TabIndex = 57;
             this.linkLabel29.TabStop = true;
             this.linkLabel29.Text = "生产入库";
+            this.linkLabel29.Visible = false;
             this.linkLabel29.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel_LinkClicked);
             // 
             // WelcomeForm
@@ -600,7 +633,7 @@
             this.Font = new System.Drawing.Font("宋体", 10F);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "WelcomeForm";
-            this.Text = "0";
+            this.Text = "欢迎页";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();

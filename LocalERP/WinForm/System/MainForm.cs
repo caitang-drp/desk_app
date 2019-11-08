@@ -91,6 +91,10 @@ namespace LocalERP.WinForm
                     FormSingletonFactory.getInstance().getProductSellBackForm().reload(openMode, ID);
                     break;
 
+                case LabelUtility.CARD_ADD:
+                    FormSingletonFactory.getInstance().getCardForm().Show(this.dockPanel1);
+                    break;
+
                 case LabelUtility.CASH_LIST:
                     FormSingletonFactory.getInstance().getPayReceiptListForm().Show(this.dockPanel1);
                     break;
