@@ -46,7 +46,6 @@ namespace LocalERP.WinForm
             this.label5 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label_customer = new System.Windows.Forms.Label();
-            this.sellDataSet = new LocalERP.CrystalReport.SellDataSet();
             this.sellDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.label_operator = new System.Windows.Forms.Label();
             this.label_thisPayed = new System.Windows.Forms.Label();
@@ -77,7 +76,6 @@ namespace LocalERP.WinForm
             this.panel_customer = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.sellDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sellDataSetBindingSource)).BeginInit();
             this.toolStrip2.SuspendLayout();
             this.panel_history.SuspendLayout();
@@ -219,16 +217,6 @@ namespace LocalERP.WinForm
             this.label_customer.Size = new System.Drawing.Size(70, 14);
             this.label_customer.TabIndex = 41;
             this.label_customer.Text = "客    户:";
-            // 
-            // sellDataSet
-            // 
-            this.sellDataSet.DataSetName = "SellDataSet";
-            this.sellDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // sellDataSetBindingSource
-            // 
-            this.sellDataSetBindingSource.DataSource = this.sellDataSet;
-            this.sellDataSetBindingSource.Position = 0;
             // 
             // label_operator
             // 
@@ -548,7 +536,6 @@ namespace LocalERP.WinForm
             this.Text = "货款流转单";
             this.Load += new System.EventHandler(this.PayReceiptForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.sellDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.sellDataSetBindingSource)).EndInit();
             this.toolStrip2.ResumeLayout(false);
             this.toolStrip2.PerformLayout();
@@ -585,7 +572,6 @@ namespace LocalERP.WinForm
         protected System.Windows.Forms.Label label9;
         protected System.Windows.Forms.Label label_customer;
         private System.Windows.Forms.BindingSource sellDataSetBindingSource;
-        private LocalERP.CrystalReport.SellDataSet sellDataSet;
         private System.Windows.Forms.Label label_operator;
         private System.Windows.Forms.Label label_thisPayed;
         private System.Windows.Forms.Label label_accumulative;

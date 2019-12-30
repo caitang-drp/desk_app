@@ -50,8 +50,6 @@ namespace LocalERP.WinForm
         private void ProductCirculationForm_Load(object sender, EventArgs e)
         {
             this.lookupText1.LookupForm = FormSingletonFactory.getInstance().getCustomerCIForm_Select();
-            
-
             initCirculation();
         }
 
@@ -69,19 +67,31 @@ namespace LocalERP.WinForm
         }
 
         /// <summary>
-        /// for init circulation
+        /// for init card
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         /// 
-
-        //cutoff和realTotal会互相影响，加个控制防止死循环
-        private bool cutoffNeedReCaculate = true;
-        private bool realTotalNeedRecaculate = true;
-
         private void initCirculation()
         {
+            if (openMode == 0)
+            {
+                switchMode(openMode);
+                this.dateTime_cardTime.Value = DateTime.Now;
+                this.textBox_comment.Text = null;
+                this.lookupText1.LookupArg = null;
+                this.lookupText1.Text_Lookup = null;
 
+                int max = cirDao.getMaxCode(string.Format("CARD-{0}-", DateTime.Now.ToString("yyyyMMdd")));
+                this.textBox_serial.Text = string.Format("CARD-{0}-{1:0000}", DateTime.Now.ToString("yyyyMMdd"), max + 1);
+                
+                this.textBox_operator.Text = ConfDao.getInstance().Get(5).ToString();
+                this.dataGridView1.Rows.Clear();
+                this.dataGridView2[1, 0].Value = null;
+
+                this.resetNeedSave(false);
+                return;
+            }
         }
 
         //不需要实现refresh，因为窗口Actived时会自动检测
@@ -202,7 +212,59 @@ namespace LocalERP.WinForm
 
         protected bool getCirculation(out ProductCirculation circulation)
         {
-            circulation = null;
+            circulation = new ProductCirculation();
+            circulation.ID = circulationID;
+            circulation.Type = (int)conf.type;
+            circulation.FlowType = conf.productDirection;
+            circulation.ArrearDirection = conf.arrearsDirection;
+
+            string name;
+            if (ValidateUtility.getName(this.textBox_serial, this.errorProvider1, out name) == false)
+                return false;
+            circulation.Code = name;
+
+            int customerID = -1;
+            if (this.lookupText1.Visible == true && ValidateUtility.getLookupValueID(this.lookupText1, this.errorProvider1, out customerID) == false)
+                return false;
+
+            circulation.CustomerID = customerID;
+
+            //circulation.CirculationTime = this.dateTime_sellTime.Value;
+            circulation.Comment = this.textBox_comment.Text;
+            circulation.Oper = this.textBox_operator.Text;
+            //circulation.LastPayReceipt = this.label_lastPayReceipt.Text;
+
+            if (dataGridView2[1, 0].Value == null || dataGridView2[1, 0].Value.ToString() == "")
+                circulation.Total = 0;
+            else
+                circulation.Total = (double)dataGridView2[1, 0].Value;
+
+            circulation.CustomerName = this.lookupText1.Text_Lookup;
+
+            double total, backFreightPerPiece, cutoff, realTotal, previousArrears, thisPayed, freight;
+            
+            /*
+            if (ValidateUtility.getPrice(this.dataGridView2[1, 0], true, out total)
+                && ValidateUtility.getDouble(this.textBox_cutoff, this.errorProvider1, false, true, out cutoff)
+                && ValidateUtility.getPrice(this.textBox_backFreightPerPiece, this.errorProvider1, false, true, out backFreightPerPiece)
+                && ValidateUtility.getPrice(this.textBox_realTotal, this.errorProvider1, true, true, out realTotal)
+                && ValidateUtility.getPrice(this.textBox_previousArrears, this.errorProvider1, false, false, out previousArrears)
+                && ValidateUtility.getPrice(this.textBox_thisPayed, this.errorProvider1, false, true, out thisPayed)
+                && ValidateUtility.getPrice(this.textBox_freight, this.errorProvider1, false, true, out freight))
+            {
+                circulation.Total = total;
+                circulation.BackFreightPerPiece = backFreightPerPiece;
+                circulation.RealTotal = realTotal;
+                circulation.PreviousArrears = previousArrears;
+                circulation.ThisPayed = thisPayed;
+                circulation.Freight = freight;
+            }
+            else
+                return false;
+            */
+
+
+            return true;
             return true;
         }
 
@@ -401,35 +463,7 @@ namespace LocalERP.WinForm
             resetNeedSave(true);
         }
 
-        private void textBox_cutoff_TextChanged(object sender, EventArgs e)
-        {
-            this.cutoffNeedReCaculate = false;
-
-            if (this.realTotalNeedRecaculate == true)
-            {
-                /*
-                double cutoff = 100;
-                double.TryParse(this.textBox_cutoff.Text, out cutoff);
-                double realTotal = (double)this.dataGridView2[1, 0].Value * cutoff / 100;
-                this.textBox_realTotal.Text = realTotal.ToString();
-                //这里的textBox_realTotal_TextChanged是不是异步？*/
-                this.calTotalBackAndRealTotal();
-            }
-
-            this.cutoffNeedReCaculate = true;
-        }
-
-        //
-        void textBox_backFreightPerPiece_TextChanged(object sender, EventArgs e)
-        {
-            //主要是初始化backFreight时，不需要重新计算realTotal
-            if (this.realTotalNeedRecaculate == true)
-            {
-                this.cutoffNeedReCaculate = false;
-                this.calTotalBackAndRealTotal();
-                this.cutoffNeedReCaculate = true;
-            }
-        }
+       
 
         //这个函数是更新下cutoff
         private void textBox_realTotal_TextChanged(object sender, EventArgs e)

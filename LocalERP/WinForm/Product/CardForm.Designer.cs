@@ -31,14 +31,14 @@ namespace LocalERP.WinForm
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ProductCirculationForm));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CardForm));
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.dateTime_sellTime = new System.Windows.Forms.DateTimePicker();
+            this.dateTime_cardTime = new System.Windows.Forms.DateTimePicker();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -49,38 +49,34 @@ namespace LocalERP.WinForm
             this.label4 = new System.Windows.Forms.Label();
             this.label_status = new System.Windows.Forms.Label();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.textBox_realTotal = new System.Windows.Forms.TextBox();
+            this.textBox_thisPayed = new System.Windows.Forms.TextBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label_customer = new System.Windows.Forms.Label();
-            this.sellDataSet = new LocalERP.CrystalReport.SellDataSet();
             this.sellDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.label_operator = new System.Windows.Forms.Label();
             this.label_title = new System.Windows.Forms.Label();
             this.textBox_operator = new System.Windows.Forms.TextBox();
             this.label1_tip = new System.Windows.Forms.Label();
             this.panel_basic = new System.Windows.Forms.Panel();
-            this.lookupText1 = new LocalERP.WinForm.LookupText();
-            this.toolStrip2 = new System.Windows.Forms.ToolStrip();
-            this.toolStripButton_save = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton_approval = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton_finish = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton_finishCancel = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton_print = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton_printLetter = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.label_sum = new System.Windows.Forms.Label();
-            this.textBox_realTotal = new System.Windows.Forms.TextBox();
-            this.textBox_thisPayed = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.lookupText1 = new LocalERP.WinForm.LookupText();
+            this.toolStrip2 = new System.Windows.Forms.ToolStrip();
+            this.toolStripButton_save = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton_finish = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton_finishCancel = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton_print = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.sellDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sellDataSetBindingSource)).BeginInit();
             this.panel_basic.SuspendLayout();
             this.toolStrip2.SuspendLayout();
@@ -104,26 +100,26 @@ namespace LocalERP.WinForm
             this.label2.TabIndex = 2;
             this.label2.Text = "开卡日期:";
             // 
-            // dateTime_sellTime
+            // dateTime_cardTime
             // 
-            this.dateTime_sellTime.CustomFormat = "yyyy-MM-dd HH:mm:ss";
-            this.dateTime_sellTime.Enabled = false;
-            this.dateTime_sellTime.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTime_sellTime.Location = new System.Drawing.Point(372, 38);
-            this.dateTime_sellTime.Margin = new System.Windows.Forms.Padding(2);
-            this.dateTime_sellTime.Name = "dateTime_sellTime";
-            this.dateTime_sellTime.Size = new System.Drawing.Size(173, 23);
-            this.dateTime_sellTime.TabIndex = 23;
-            this.dateTime_sellTime.ValueChanged += new System.EventHandler(this.Controls_TextChanged);
+            this.dateTime_cardTime.CustomFormat = "yyyy-MM-dd HH:mm:ss";
+            this.dateTime_cardTime.Enabled = false;
+            this.dateTime_cardTime.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dateTime_cardTime.Location = new System.Drawing.Point(372, 38);
+            this.dateTime_cardTime.Margin = new System.Windows.Forms.Padding(2);
+            this.dateTime_cardTime.Name = "dateTime_cardTime";
+            this.dateTime_cardTime.Size = new System.Drawing.Size(173, 23);
+            this.dateTime_cardTime.TabIndex = 23;
+            this.dateTime_cardTime.ValueChanged += new System.EventHandler(this.Controls_TextChanged);
             // 
             // dataGridView2
             // 
             this.dataGridView2.AllowUserToAddRows = false;
             this.dataGridView2.AllowUserToDeleteRows = false;
             this.dataGridView2.AllowUserToResizeRows = false;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.PaleGreen;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.Black;
-            this.dataGridView2.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.PaleGreen;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
+            this.dataGridView2.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView2.BackgroundColor = System.Drawing.Color.Yellow;
@@ -142,9 +138,9 @@ namespace LocalERP.WinForm
             this.dataGridView2.Name = "dataGridView2";
             this.dataGridView2.ReadOnly = true;
             this.dataGridView2.RowHeadersVisible = false;
-            dataGridViewCellStyle6.BackColor = System.Drawing.Color.Yellow;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.Yellow;
-            this.dataGridView2.RowsDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.Yellow;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.Yellow;
+            this.dataGridView2.RowsDefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridView2.RowTemplate.DefaultCellStyle.BackColor = System.Drawing.Color.White;
             this.dataGridView2.RowTemplate.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.White;
             this.dataGridView2.RowTemplate.DefaultCellStyle.SelectionForeColor = System.Drawing.Color.Black;
@@ -170,9 +166,9 @@ namespace LocalERP.WinForm
             this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.AllowUserToDeleteRows = false;
             this.dataGridView1.AllowUserToResizeRows = false;
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.Color.PaleGreen;
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.Color.Black;
-            this.dataGridView1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.PaleGreen;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black;
+            this.dataGridView1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
@@ -184,10 +180,10 @@ namespace LocalERP.WinForm
             this.dataGridView1.Margin = new System.Windows.Forms.Padding(2);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersVisible = false;
-            dataGridViewCellStyle8.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.Color.Black;
-            this.dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.Black;
+            this.dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle4;
             this.dataGridView1.RowTemplate.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.White;
             this.dataGridView1.RowTemplate.DefaultCellStyle.SelectionForeColor = System.Drawing.Color.Black;
             this.dataGridView1.RowTemplate.Height = 23;
@@ -248,6 +244,33 @@ namespace LocalERP.WinForm
             // 
             this.errorProvider1.ContainerControl = this;
             // 
+            // textBox_realTotal
+            // 
+            this.textBox_realTotal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.errorProvider1.SetIconPadding(this.textBox_realTotal, 20);
+            this.textBox_realTotal.Location = new System.Drawing.Point(92, 74);
+            this.textBox_realTotal.Name = "textBox_realTotal";
+            this.textBox_realTotal.Size = new System.Drawing.Size(151, 23);
+            this.textBox_realTotal.TabIndex = 68;
+            // 
+            // textBox_thisPayed
+            // 
+            this.textBox_thisPayed.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.errorProvider1.SetIconPadding(this.textBox_thisPayed, 20);
+            this.textBox_thisPayed.Location = new System.Drawing.Point(372, 73);
+            this.textBox_thisPayed.Name = "textBox_thisPayed";
+            this.textBox_thisPayed.Size = new System.Drawing.Size(173, 23);
+            this.textBox_thisPayed.TabIndex = 69;
+            // 
+            // textBox1
+            // 
+            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.errorProvider1.SetIconPadding(this.textBox1, 20);
+            this.textBox1.Location = new System.Drawing.Point(662, 74);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(154, 23);
+            this.textBox1.TabIndex = 76;
+            // 
             // label5
             // 
             this.label5.AutoSize = true;
@@ -287,16 +310,6 @@ namespace LocalERP.WinForm
             this.label_customer.Size = new System.Drawing.Size(70, 14);
             this.label_customer.TabIndex = 41;
             this.label_customer.Text = "客    户:";
-            // 
-            // sellDataSet
-            // 
-            this.sellDataSet.DataSetName = "SellDataSet";
-            this.sellDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // sellDataSetBindingSource
-            // 
-            this.sellDataSetBindingSource.DataSource = this.sellDataSet;
-            this.sellDataSetBindingSource.Position = 0;
             // 
             // label_operator
             // 
@@ -357,115 +370,34 @@ namespace LocalERP.WinForm
             this.panel_basic.Controls.Add(this.label4);
             this.panel_basic.Controls.Add(this.textBox_serial);
             this.panel_basic.Controls.Add(this.label3);
-            this.panel_basic.Controls.Add(this.dateTime_sellTime);
+            this.panel_basic.Controls.Add(this.dateTime_cardTime);
             this.panel_basic.Controls.Add(this.label2);
             this.panel_basic.Location = new System.Drawing.Point(10, 96);
             this.panel_basic.Name = "panel_basic";
             this.panel_basic.Size = new System.Drawing.Size(847, 122);
             this.panel_basic.TabIndex = 60;
             // 
-            // lookupText1
+            // label6
             // 
-            this.lookupText1.BackColor = System.Drawing.Color.Transparent;
-            this.lookupText1.Location = new System.Drawing.Point(662, 7);
-            this.lookupText1.LookupForm = null;
-            this.lookupText1.LookupFormType = null;
-            this.lookupText1.Name = "lookupText1";
-            this.lookupText1.SelectButtonBackGround = global::LocalERP.Properties.Resources.user16;
-            this.lookupText1.Size = new System.Drawing.Size(153, 24);
-            this.lookupText1.TabIndex = 21;
-            this.lookupText1.Text_Lookup = "单击选择...";
-            this.lookupText1.Value_Lookup = null;
-            this.lookupText1.valueSetted += new LocalERP.WinForm.LookupText.ValueSetted(this.lookupText1_valueSetted);
+            this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label6.AutoSize = true;
+            this.label6.ForeColor = System.Drawing.Color.Black;
+            this.label6.Location = new System.Drawing.Point(589, 77);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(70, 14);
+            this.label6.TabIndex = 77;
+            this.label6.Text = "卡片类型:";
             // 
-            // toolStrip2
+            // label7
             // 
-            this.toolStrip2.BackgroundImage = global::LocalERP.Properties.Resources.toolBack;
-            this.toolStrip2.Font = new System.Drawing.Font("宋体", 10F);
-            this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripButton_save,
-            this.toolStripButton_approval,
-            this.toolStripButton_finish,
-            this.toolStripButton_finishCancel,
-            this.toolStripButton_print,
-            this.toolStripButton_printLetter,
-            this.toolStripButton1});
-            this.toolStrip2.Location = new System.Drawing.Point(0, 0);
-            this.toolStrip2.Name = "toolStrip2";
-            this.toolStrip2.Size = new System.Drawing.Size(879, 37);
-            this.toolStrip2.TabIndex = 10;
-            this.toolStrip2.Text = "toolStrip2";
-            // 
-            // toolStripButton_save
-            // 
-            this.toolStripButton_save.Image = global::LocalERP.Properties.Resources.save16;
-            this.toolStripButton_save.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton_save.Name = "toolStripButton_save";
-            this.toolStripButton_save.Size = new System.Drawing.Size(39, 34);
-            this.toolStripButton_save.Text = "保存";
-            this.toolStripButton_save.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.toolStripButton_save.Click += new System.EventHandler(this.toolStripButton_save_Click);
-            // 
-            // toolStripButton_approval
-            // 
-            this.toolStripButton_approval.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton_approval.Image")));
-            this.toolStripButton_approval.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton_approval.Name = "toolStripButton_approval";
-            this.toolStripButton_approval.Size = new System.Drawing.Size(53, 34);
-            this.toolStripButton_approval.Text = "已下单";
-            this.toolStripButton_approval.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.toolStripButton_approval.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.toolStripButton_approval.Visible = false;
-            // 
-            // toolStripButton_finish
-            // 
-            this.toolStripButton_finish.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton_finish.Image")));
-            this.toolStripButton_finish.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton_finish.Name = "toolStripButton_finish";
-            this.toolStripButton_finish.Size = new System.Drawing.Size(39, 34);
-            this.toolStripButton_finish.Text = "审核";
-            this.toolStripButton_finish.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.toolStripButton_finish.Click += new System.EventHandler(this.toolStripButton_finish_Click);
-            // 
-            // toolStripButton_finishCancel
-            // 
-            this.toolStripButton_finishCancel.Image = global::LocalERP.Properties.Resources.del161;
-            this.toolStripButton_finishCancel.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton_finishCancel.Name = "toolStripButton_finishCancel";
-            this.toolStripButton_finishCancel.Size = new System.Drawing.Size(39, 34);
-            this.toolStripButton_finishCancel.Text = "弃核";
-            this.toolStripButton_finishCancel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.toolStripButton_finishCancel.Click += new System.EventHandler(this.toolStripButton_finishCancel_Click);
-            // 
-            // toolStripButton_print
-            // 
-            this.toolStripButton_print.Image = global::LocalERP.Properties.Resources.print16;
-            this.toolStripButton_print.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton_print.Name = "toolStripButton_print";
-            this.toolStripButton_print.Size = new System.Drawing.Size(39, 34);
-            this.toolStripButton_print.Text = "打印";
-            this.toolStripButton_print.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.toolStripButton_print.Click += new System.EventHandler(this.toolStripButton_print_Click);
-            // 
-            // toolStripButton_printLetter
-            // 
-            this.toolStripButton_printLetter.Image = global::LocalERP.Properties.Resources.print16;
-            this.toolStripButton_printLetter.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton_printLetter.Name = "toolStripButton_printLetter";
-            this.toolStripButton_printLetter.Size = new System.Drawing.Size(67, 34);
-            this.toolStripButton_printLetter.Text = "打印封面";
-            this.toolStripButton_printLetter.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.toolStripButton_printLetter.Click += new System.EventHandler(this.toolStripButton_printLetter_Click);
-            // 
-            // toolStripButton1
-            // 
-            this.toolStripButton1.Image = global::LocalERP.Properties.Resources.cancel16;
-            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(39, 34);
-            this.toolStripButton1.Text = "取消";
-            this.toolStripButton1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton_cancel_Click);
+            this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label7.AutoSize = true;
+            this.label7.ForeColor = System.Drawing.Color.Black;
+            this.label7.Location = new System.Drawing.Point(299, 76);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(70, 14);
+            this.label7.TabIndex = 75;
+            this.label7.Text = "卡片次数:";
             // 
             // label18
             // 
@@ -499,56 +431,87 @@ namespace LocalERP.WinForm
             this.label_sum.TabIndex = 72;
             this.label_sum.Text = "卡片价格:";
             // 
-            // textBox_realTotal
+            // lookupText1
             // 
-            this.textBox_realTotal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.errorProvider1.SetIconPadding(this.textBox_realTotal, 20);
-            this.textBox_realTotal.Location = new System.Drawing.Point(92, 74);
-            this.textBox_realTotal.Name = "textBox_realTotal";
-            this.textBox_realTotal.Size = new System.Drawing.Size(151, 23);
-            this.textBox_realTotal.TabIndex = 68;
+            this.lookupText1.BackColor = System.Drawing.Color.Transparent;
+            this.lookupText1.Location = new System.Drawing.Point(662, 7);
+            this.lookupText1.LookupForm = null;
+            this.lookupText1.LookupFormType = null;
+            this.lookupText1.Name = "lookupText1";
+            this.lookupText1.SelectButtonBackGround = global::LocalERP.Properties.Resources.user16;
+            this.lookupText1.Size = new System.Drawing.Size(153, 24);
+            this.lookupText1.TabIndex = 21;
+            this.lookupText1.Text_Lookup = "单击选择...";
+            this.lookupText1.Value_Lookup = null;
+            this.lookupText1.valueSetted += new LocalERP.WinForm.LookupText.ValueSetted(this.lookupText1_valueSetted);
             // 
-            // textBox_thisPayed
+            // toolStrip2
             // 
-            this.textBox_thisPayed.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.errorProvider1.SetIconPadding(this.textBox_thisPayed, 20);
-            this.textBox_thisPayed.Location = new System.Drawing.Point(372, 73);
-            this.textBox_thisPayed.Name = "textBox_thisPayed";
-            this.textBox_thisPayed.Size = new System.Drawing.Size(173, 23);
-            this.textBox_thisPayed.TabIndex = 69;
+            this.toolStrip2.BackgroundImage = global::LocalERP.Properties.Resources.toolBack;
+            this.toolStrip2.Font = new System.Drawing.Font("宋体", 10F);
+            this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripButton_save,
+            this.toolStripButton_finish,
+            this.toolStripButton_finishCancel,
+            this.toolStripButton_print,
+            this.toolStripButton1});
+            this.toolStrip2.Location = new System.Drawing.Point(0, 0);
+            this.toolStrip2.Name = "toolStrip2";
+            this.toolStrip2.Size = new System.Drawing.Size(879, 37);
+            this.toolStrip2.TabIndex = 10;
+            this.toolStrip2.Text = "toolStrip2";
             // 
-            // label7
+            // toolStripButton_save
             // 
-            this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.label7.AutoSize = true;
-            this.label7.ForeColor = System.Drawing.Color.Black;
-            this.label7.Location = new System.Drawing.Point(300, 76);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(70, 14);
-            this.label7.TabIndex = 75;
-            this.label7.Text = "卡片次数:";
+            this.toolStripButton_save.Image = global::LocalERP.Properties.Resources.save16;
+            this.toolStripButton_save.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton_save.Name = "toolStripButton_save";
+            this.toolStripButton_save.Size = new System.Drawing.Size(39, 34);
+            this.toolStripButton_save.Text = "保存";
+            this.toolStripButton_save.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.toolStripButton_save.Click += new System.EventHandler(this.toolStripButton_save_Click);
             // 
-            // label6
+            // toolStripButton_finish
             // 
-            this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.label6.AutoSize = true;
-            this.label6.ForeColor = System.Drawing.Color.Black;
-            this.label6.Location = new System.Drawing.Point(589, 76);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(70, 14);
-            this.label6.TabIndex = 77;
-            this.label6.Text = "卡片类型:";
+            this.toolStripButton_finish.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton_finish.Image")));
+            this.toolStripButton_finish.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton_finish.Name = "toolStripButton_finish";
+            this.toolStripButton_finish.Size = new System.Drawing.Size(39, 34);
+            this.toolStripButton_finish.Text = "审核";
+            this.toolStripButton_finish.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.toolStripButton_finish.Click += new System.EventHandler(this.toolStripButton_finish_Click);
             // 
-            // textBox1
+            // toolStripButton_finishCancel
             // 
-            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.errorProvider1.SetIconPadding(this.textBox1, 20);
-            this.textBox1.Location = new System.Drawing.Point(661, 73);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(154, 23);
-            this.textBox1.TabIndex = 76;
+            this.toolStripButton_finishCancel.Image = global::LocalERP.Properties.Resources.del161;
+            this.toolStripButton_finishCancel.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton_finishCancel.Name = "toolStripButton_finishCancel";
+            this.toolStripButton_finishCancel.Size = new System.Drawing.Size(39, 34);
+            this.toolStripButton_finishCancel.Text = "弃核";
+            this.toolStripButton_finishCancel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.toolStripButton_finishCancel.Click += new System.EventHandler(this.toolStripButton_finishCancel_Click);
             // 
-            // ProductCirculationForm
+            // toolStripButton_print
+            // 
+            this.toolStripButton_print.Image = global::LocalERP.Properties.Resources.print16;
+            this.toolStripButton_print.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton_print.Name = "toolStripButton_print";
+            this.toolStripButton_print.Size = new System.Drawing.Size(39, 34);
+            this.toolStripButton_print.Text = "打印";
+            this.toolStripButton_print.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.toolStripButton_print.Click += new System.EventHandler(this.toolStripButton_print_Click);
+            // 
+            // toolStripButton1
+            // 
+            this.toolStripButton1.Image = global::LocalERP.Properties.Resources.cancel16;
+            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton1.Name = "toolStripButton1";
+            this.toolStripButton1.Size = new System.Drawing.Size(39, 34);
+            this.toolStripButton1.Text = "取消";
+            this.toolStripButton1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton_cancel_Click);
+            // 
+            // CardForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -563,14 +526,13 @@ namespace LocalERP.WinForm
             this.Controls.Add(this.toolStrip2);
             this.Font = new System.Drawing.Font("宋体", 10F);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "ProductCirculationForm";
+            this.Name = "CardForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "卡片信息单";
             this.Load += new System.EventHandler(this.ProductCirculationForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.sellDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.sellDataSetBindingSource)).EndInit();
             this.panel_basic.ResumeLayout(false);
             this.panel_basic.PerformLayout();
@@ -585,7 +547,7 @@ namespace LocalERP.WinForm
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.DateTimePicker dateTime_sellTime;
+        private System.Windows.Forms.DateTimePicker dateTime_cardTime;
         protected MyDataGridView dataGridView1;
         private System.Windows.Forms.ToolStrip toolStrip2;
         private System.Windows.Forms.ToolStripButton toolStripButton_save;
@@ -601,12 +563,10 @@ namespace LocalERP.WinForm
         private System.Windows.Forms.Label label_status;
         private System.Windows.Forms.ErrorProvider errorProvider1;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.ToolStripButton toolStripButton_approval;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label_customer;
         private System.Windows.Forms.BindingSource sellDataSetBindingSource;
-        private LocalERP.CrystalReport.SellDataSet sellDataSet;
         private System.Windows.Forms.Label label_operator;
         protected LookupText lookupText1;
         private System.Windows.Forms.Label label_title;
@@ -615,7 +575,6 @@ namespace LocalERP.WinForm
         protected System.Windows.Forms.Label label1_tip;
         private System.Windows.Forms.Panel panel_basic;
         private System.Windows.Forms.ToolStripButton toolStripButton_finishCancel;
-        private System.Windows.Forms.ToolStripButton toolStripButton_printLetter;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.Label label10;

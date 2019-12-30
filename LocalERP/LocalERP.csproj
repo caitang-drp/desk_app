@@ -53,11 +53,6 @@
     <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=10.2.3600.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
-    <Reference Include="CrystalDecisions.ReportSource, Version=10.2.3600.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
-    <Reference Include="CrystalDecisions.Shared, Version=10.2.3600.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
-    <Reference Include="CrystalDecisions.Web, Version=10.2.3600.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
-    <Reference Include="CrystalDecisions.Windows.Forms, Version=10.2.3600.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.ReportViewer.Common, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
     <Reference Include="Microsoft.ReportViewer.WinForms, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
     <Reference Include="System" />
@@ -75,28 +70,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CrystalReport\OrderCrystalReport.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>OrderCrystalReport.rpt</DependentUpon>
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="CrystalReport\OrderDataSet.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>OrderDataSet.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="CrystalReport\SellDataSet.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>SellDataSet.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="CrystalReport\SellCrystalReport.cs">
-      <DependentUpon>SellCrystalReport.rpt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <SubType>Component</SubType>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <Compile Include="DataAccess\DataDAO\CharactorValueDao.cs" />
     <Compile Include="DataAccess\DataDAO\PayReceiptDao.cs" />
     <Compile Include="DataAccess\DataDAO\ProductDao.cs" />
@@ -137,6 +110,7 @@
     <Compile Include="DataAccess\Data\ProductStainless.cs" />
     <Compile Include="DataAccess\Data\ProductClothesCirculationRecord.cs" />
     <Compile Include="DataAccess\Data\ProductStainlessCirculationRecord.cs" />
+    <Compile Include="DataAccess\Data\Card.cs" />
     <Compile Include="DataAccess\DbUtility\DbHelperAccess.cs" />
     <Compile Include="DataAccess\Utility\AuthUtility.cs" />
     <Compile Include="DataAccess\Utility\LabelUtility.cs" />
@@ -223,12 +197,6 @@
     </Compile>
     <Compile Include="WinForm\Query\QueryLibForm.Designer.cs">
       <DependentUpon>QueryLibForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="WinForm\Product\ProductSellReportForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="WinForm\Product\ProductSellReportForm.Designer.cs">
-      <DependentUpon>ProductSellReportForm.cs</DependentUpon>
     </Compile>
     <Compile Include="WinForm\Data\CategoryForm.cs">
       <SubType>Form</SubType>
@@ -411,14 +379,6 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="CrystalReport\OrderCrystalReport.rpt">
-      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>OrderCrystalReport.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="CrystalReport\SellCrystalReport.rpt">
-      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>SellCrystalReport.cs</LastGenOutput>
-    </EmbeddedResource>
     <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="WinForm\Data\ProductClothesForm.resx">
       <DependentUpon>ProductClothesForm.cs</DependentUpon>
@@ -458,10 +418,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="WinForm\Query\QueryLibForm.resx">
       <DependentUpon>QueryLibForm.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForm\Product\ProductSellReportForm.resx">
-      <DependentUpon>ProductSellReportForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForm\Data\CategoryForm.resx">
@@ -622,28 +578,6 @@
     <Content Include="ERP.mdb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <None Include="CrystalReport\OrderDataSet.xsc">
-      <DependentUpon>OrderDataSet.xsd</DependentUpon>
-    </None>
-    <None Include="CrystalReport\OrderDataSet.xsd">
-      <SubType>Designer</SubType>
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>OrderDataSet.Designer.cs</LastGenOutput>
-    </None>
-    <None Include="CrystalReport\OrderDataSet.xss">
-      <DependentUpon>OrderDataSet.xsd</DependentUpon>
-    </None>
-    <None Include="CrystalReport\SellDataSet.xsc">
-      <DependentUpon>SellDataSet.xsd</DependentUpon>
-    </None>
-    <None Include="CrystalReport\SellDataSet.xsd">
-      <SubType>Designer</SubType>
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>SellDataSet.Designer.cs</LastGenOutput>
-    </None>
-    <None Include="CrystalReport\SellDataSet.xss">
-      <DependentUpon>SellDataSet.xsd</DependentUpon>
-    </None>
     <None Include="images\16pix\apply16.png" />
     <None Include="images\16pix\add16-1.png" />
     <None Include="images\16pix\arrival24.png" />
@@ -709,25 +643,9 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <COMReference Include="grdes6Lib">
-      <Guid>{C5A16330-A084-48C9-BC0F-0D0B37A14123}</Guid>
-      <VersionMajor>6</VersionMajor>
-      <VersionMinor>0</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>tlbimp</WrapperTool>
-      <Isolated>False</Isolated>
-    </COMReference>
     <COMReference Include="gregn6Lib">
       <Guid>{4018F953-1BFE-441E-8A04-DC8BA1FF060E}</Guid>
       <VersionMajor>6</VersionMajor>
-      <VersionMinor>0</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>tlbimp</WrapperTool>
-      <Isolated>False</Isolated>
-    </COMReference>
-    <COMReference Include="grweb6Lib">
-      <Guid>{87093731-D899-4DF9-9ED6-37BE051CC8CB}</Guid>
-      <VersionMajor>1</VersionMajor>
       <VersionMinor>0</VersionMinor>
       <Lcid>0</Lcid>
       <WrapperTool>tlbimp</WrapperTool>
