@@ -22,6 +22,7 @@ namespace LocalERP.WinForm
 
             Label label = addRow(LabelUtility.CONSUME_MANAGE, new string[] {LabelUtility.CONSUME_LIST, LabelUtility.CONSUME_ADD }, 55);
             label = addRow(LabelUtility.CARD_MANAGE, new string[] { LabelUtility.CARD_LIST, LabelUtility.CARD_ADD }, label.Location.Y + 50);
+            label = addRow(LabelUtility.PURCHASE_MANAGE, new string[] { LabelUtility.PURCHASE_LIST, LabelUtility.PURCHASE, LabelUtility.PURCHASE_BACK }, label.Location.Y + 50);
         }
 
         private void linkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

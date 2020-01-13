@@ -91,10 +91,6 @@ namespace LocalERP.WinForm
                     FormSingletonFactory.getInstance().getProductSellBackForm().reload(openMode, ID);
                     break;
 
-                case LabelUtility.CARD_ADD:
-                    FormSingletonFactory.getInstance().getCardForm().Show(this.dockPanel1);
-                    break;
-
                 case LabelUtility.CASH_LIST:
                     FormSingletonFactory.getInstance().getPayReceiptListForm().Show(this.dockPanel1);
                     break;
@@ -162,6 +158,15 @@ namespace LocalERP.WinForm
                     ReportInfoForm form = new ReportInfoForm();
                     form.ShowDialog();
                     break;
+
+
+                case LabelUtility.CARD_LIST:
+                    FormSingletonFactory.getInstance().getCardListForm().Show(this.dockPanel1);
+                    break;
+                case LabelUtility.CARD_ADD:
+                    FormSingletonFactory.getInstance().getCardForm().Show(this.dockPanel1);
+                    break;
+
                 default:
                     break;
             }

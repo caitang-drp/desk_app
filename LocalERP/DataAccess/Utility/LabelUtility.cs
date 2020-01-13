@@ -11,7 +11,7 @@ namespace LocalERP.DataAccess.Utility
     public static class LabelUtility
     {
         public const String PURCHASE_MANAGE = "采购管理";
-        public const String PURCHASE_LIST = "采购单据列表";
+        public const String PURCHASE_LIST = "采购列表";
         public const String PURCHASE = "采购入库";
         public const String PURCHASE_BACK = "采购退货";
 

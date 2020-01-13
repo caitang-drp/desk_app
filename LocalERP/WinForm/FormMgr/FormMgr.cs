@@ -115,6 +115,18 @@ namespace LocalERP.WinForm
             }
             return cardForm;
         }
+        private CardListForm cardListForm = null;
+        public CardListForm getCardListForm()
+        {
+            if (cardListForm == null || cardListForm.IsDisposed)
+            {
+                cardListForm = new CardListForm(mainForm);
+                cardListForm.initVersions(getVersions(),
+                    UpdateType.PayReceiptUpdate, UpdateType.PayReceiptFinishUpdate, UpdateType.CustomerUpdate);
+                //appendEvent(payReceiptListForm);
+            }
+            return cardListForm;
+        }
 
 
         /****************cash circulation************************/
