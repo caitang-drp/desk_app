@@ -17,17 +17,17 @@ namespace LocalERP.DataAccess.Utility
 
         //added by stone 2017-02-04
         public const String MANU_MANAGE = "生产管理";
-        public const String MANUFACTURE_LIST = "生产单据列表";
+        public const String MANUFACTURE_LIST = "生产列表";
         public const string MANU_COST = "生产消耗";
         public const string MANU_IN = "生产入库";
 
         public const String SELL_MANAGE = "销售管理";
-        public const String SELL_LIST = "销售单据列表";
+        public const String SELL_LIST = "销售列表";
         public const String SELL = "销售出库";
         public const String SELL_BACK = "销售退货";
 
         public const String CASH_MANAGE = "收款付款";
-        public const String CASH_LIST = "收付单据列表";
+        public const String CASH_LIST = "收付列表";
         public const String CASH_PAY = "采购付款";
         public const String CASH_PAY_REFUND = "采购退点";
         public const String CASH_RECEIPT = "销售收款";
@@ -36,7 +36,7 @@ namespace LocalERP.DataAccess.Utility
         public const String CASH_OTHER_RECEIPT = "其他收款";
 
         public const String LIB_MANAGE = "库存盘点";
-        public const String LIB_LIST = "盘点单据列表";
+        public const String LIB_LIST = "盘点列表";
         public const String LIB_OVERFLOW = "盘点报溢";
         public const String LIB_LOSS = "盘点报损";
 

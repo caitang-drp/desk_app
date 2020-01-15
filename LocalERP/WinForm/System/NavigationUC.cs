@@ -23,39 +23,25 @@ namespace LocalERP.WinForm
         //navigation
         private void initNavigation()
         {
+
+            this.addPanderPanel(true, LabelUtility.PURCHASE_MANAGE, "purchase").Controls.Add(this.getTreeView(new string[] { LabelUtility.PURCHASE_LIST, LabelUtility.PURCHASE, LabelUtility.PURCHASE_BACK }));
+            
+            this.addPanderPanel(false, LabelUtility.MANU_MANAGE, "manu").Controls.Add(this.getTreeView( new string[] { LabelUtility.MANUFACTURE_LIST, LabelUtility.MANU_COST, LabelUtility.MANU_IN }));
+
+            this.addPanderPanel(false, LabelUtility.SELL_MANAGE, "sell").Controls.Add(this.getTreeView(new string[] { LabelUtility.SELL_LIST, LabelUtility.SELL, LabelUtility.SELL_BACK }));
+
+            this.addPanderPanel(false, LabelUtility.LIB_MANAGE, "lib").Controls.Add(this.getTreeView(new string[] { LabelUtility.LIB_LIST, LabelUtility.LIB_OVERFLOW, LabelUtility.LIB_LOSS }));
+
+            this.addPanderPanel(false, LabelUtility.CASH_MANAGE, "cash").Controls.Add(this.getTreeView(new string[] { LabelUtility.CASH_LIST, LabelUtility.CASH_PAY, LabelUtility.CASH_PAY_REFUND, LabelUtility.CASH_RECEIPT, LabelUtility.CASH_RECEIPT_REFUND, LabelUtility.CASH_OTHER_PAY, LabelUtility.CASH_OTHER_RECEIPT }));
+
+            this.addPanderPanel(false, LabelUtility.QUERY_MANAGE, "query").Controls.Add(this.getTreeView(new string[] { LabelUtility.QUERY_PRODUCT_DETAIL, LabelUtility.STATISTIC_PRODUCT, LabelUtility.QUERY_CASH_DETAIL, LabelUtility.STATISTIC_CASH}));
+
+            this.addPanderPanel(false, LabelUtility.DATA_SETTING, "data").Controls.Add(this.getTreeView(new string[] { LabelUtility.DATA_PRODUCT, LabelUtility.DATA_CUSTOMER, LabelUtility.DATA_COMPANY }));
+            
             /*
-            TreeView treeView_purchase = this.getTreeView(
-                new string[] { LabelUtility.PURCHASE_LIST, LabelUtility.PURCHASE, LabelUtility.PURCHASE_BACK });
-            this.xPanderPanel_pur.Controls.Add(treeView_purchase);
-
-            TreeView treeView_manufacture = this.getTreeView(
-                new string[] { LabelUtility.MANUFACTURE_LIST, LabelUtility.MANU_COST, LabelUtility.MANU_IN });
-            this.xPanderPanel_manu.Controls.Add(treeView_manufacture);
-
-            TreeView treeView_sell = this.getTreeView(
-                new string[] { LabelUtility.SELL_LIST, LabelUtility.SELL, LabelUtility.SELL_BACK });
-            this.xPanderPanel_sell.Controls.Add(treeView_sell);
-
-            TreeView treeView_lib = this.getTreeView(
-                new string[] {LabelUtility.LIB_LIST, LabelUtility.LIB_OVERFLOW, LabelUtility.LIB_LOSS });
-            this.xPanderPanel_lib.Controls.Add(treeView_lib);
-
-            // should pay, should receipt
-            TreeView treeView_should_pay_receipt = this.getTreeView(
-                new string[] { LabelUtility.CASH_LIST, LabelUtility.CASH_PAY, LabelUtility.CASH_PAY_REFUND, LabelUtility.CASH_RECEIPT, LabelUtility.CASH_RECEIPT_REFUND, LabelUtility.CASH_OTHER_PAY, LabelUtility.CASH_OTHER_RECEIPT });
-            this.xPanderPanel_should_pay_receipt.Controls.Add(treeView_should_pay_receipt);
-
-
-            TreeView treeView_queryStatistic = this.getTreeView(
-                new string[] { LabelUtility.QUERY_PRODUCT_DETAIL, LabelUtility.STATISTIC_PRODUCT, LabelUtility.QUERY_CASH_DETAIL, LabelUtility.STATISTIC_CASH});
-            //this.xPanderPanel_query.Controls.Add(treeView_queryStatistic);
-
-            this.addPanderPanel(false, LabelUtility.DATA_SETTING, "data").Controls.Add(this.getTreeView(new string[] { LabelUtility.DATA_PRODUCT, LabelUtility.DATA_CUSTOMER, LabelUtility.DATA_COMPANY }););
-            */
-
             this.addPanderPanel(true, LabelUtility.CONSUME_MANAGE, "consume").Controls.Add(this.getTreeView(new string[] {LabelUtility.CONSUME_LIST, LabelUtility.CONSUME_ADD }));
             this.addPanderPanel(false, LabelUtility.CARD_MANAGE, "card").Controls.Add(this.getTreeView(new string[] { LabelUtility.CARD_LIST, LabelUtility.CARD_ADD }));
-
+            */
         }
 
         void treeView_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
