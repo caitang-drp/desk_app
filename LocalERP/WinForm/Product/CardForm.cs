@@ -20,11 +20,11 @@ namespace LocalERP.WinForm
         //open mode       | 0:add 1:edit | 2:approval  | 3:partArrival | 4:arrival
         //status          | 1:apply      | 2:approval  | 3:partArrival | 4:arrival  
         protected int openMode = 0;
-        protected int circulationID = 0;
+        protected int cardID = 0;
 
         protected CirculationTypeConf conf;
 
-        private ProductCirculation circulation = null;
+        private Card card = null;
         public List<ProductCirculationRecord> records = null;
 
         protected bool needSave = false;
@@ -37,7 +37,7 @@ namespace LocalERP.WinForm
             InitializeComponent();
 
             openMode = 0;
-            circulationID = 0;
+            cardID = 0;
 
             this.conf = c;
 
@@ -60,7 +60,7 @@ namespace LocalERP.WinForm
                 return;
             
             openMode = mode;
-            circulationID = id;
+            cardID = id;
             initCirculation();
 
             this.lookupText1.Focus();
@@ -98,16 +98,7 @@ namespace LocalERP.WinForm
 
         protected virtual void setRecord(DataGridViewRow row, ProductCirculationRecord record) { }
 
-        private void backgroundWorker_DoWork(object sender, DoWorkEventArgs e)
-        {
-            int sellID = (int)e.Argument;
-            records = cirDao.getRecordDao().FindList(sellID);
-        }
-
-        private void backgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
-            
-        }
+        
         //end init
 
         private void switchMode(int mode) { 
@@ -172,36 +163,6 @@ namespace LocalERP.WinForm
         }
 
         /// <summary>
-        /// set datagridview value
-        /// </summary>
-        /// <param name="rowIndex"></param>
-        protected virtual void setSubTotalPrice(int rowIndex)
-        {
-            DataGridViewRow row = this.dataGridView1.Rows[rowIndex];
-            double price, num;
-            ValidateUtility.getDouble(row.Cells["price"], out price);
-            ValidateUtility.getDouble(row.Cells["num"], false, true, out num);
-            row.Cells["totalPrice"].Value = num * price;
-        }
-
-        //总价、折扣、退运费和实价的关系，有三种情况：
-        //1，总价有变化，联合折扣、退运费计算出实价
-        //2，折扣或退运费有变化，计算出实价
-        //3，实价有变化，反推出折扣
-        //1和2其实属于一种情况， 可以理解为正方向的计算，3可以理解为反方向的计算
-
-        //这是明细改动时，更新总价，也是第1种情况
-        protected void setTotalPrice()
-        {
-           
-        }
-
-        //通过total，cutoff，backFreight计算realTotal
-        private void calTotalBackAndRealTotal(){
-            
-        }
-
-        /// <summary>
         /// for get value from controls
         /// </summary>
 
@@ -210,75 +171,42 @@ namespace LocalERP.WinForm
             return true;
         }
 
-        protected bool getCirculation(out ProductCirculation circulation)
+        protected bool getCard(out Card card)
         {
-            circulation = new ProductCirculation();
-            circulation.ID = circulationID;
-            circulation.Type = (int)conf.type;
-            circulation.FlowType = conf.productDirection;
-            circulation.ArrearDirection = conf.arrearsDirection;
+            card = new Card();
+            card.ID = cardID;
 
             string name;
             if (ValidateUtility.getName(this.textBox_serial, this.errorProvider1, out name) == false)
                 return false;
-            circulation.Code = name;
+            card.Code = name;
 
             int customerID = -1;
             if (this.lookupText1.Visible == true && ValidateUtility.getLookupValueID(this.lookupText1, this.errorProvider1, out customerID) == false)
                 return false;
 
-            circulation.CustomerID = customerID;
+            card.CustomerID = customerID;
 
-            //circulation.CirculationTime = this.dateTime_sellTime.Value;
-            circulation.Comment = this.textBox_comment.Text;
-            circulation.Oper = this.textBox_operator.Text;
-            //circulation.LastPayReceipt = this.label_lastPayReceipt.Text;
+            card.CardTime = this.dateTime_cardTime.Value;
+            card.Comment = this.textBox_comment.Text;
+            card.Oper = this.textBox_operator.Text;
 
-            if (dataGridView2[1, 0].Value == null || dataGridView2[1, 0].Value.ToString() == "")
-                circulation.Total = 0;
-            else
-                circulation.Total = (double)dataGridView2[1, 0].Value;
-
-            circulation.CustomerName = this.lookupText1.Text_Lookup;
-
-            double total, backFreightPerPiece, cutoff, realTotal, previousArrears, thisPayed, freight;
             
-            /*
+
+            card.CustomerName = this.lookupText1.Text_Lookup;
+
+            double total;
+            int num;
+            
             if (ValidateUtility.getPrice(this.dataGridView2[1, 0], true, out total)
-                && ValidateUtility.getDouble(this.textBox_cutoff, this.errorProvider1, false, true, out cutoff)
-                && ValidateUtility.getPrice(this.textBox_backFreightPerPiece, this.errorProvider1, false, true, out backFreightPerPiece)
-                && ValidateUtility.getPrice(this.textBox_realTotal, this.errorProvider1, true, true, out realTotal)
-                && ValidateUtility.getPrice(this.textBox_previousArrears, this.errorProvider1, false, false, out previousArrears)
-                && ValidateUtility.getPrice(this.textBox_thisPayed, this.errorProvider1, false, true, out thisPayed)
-                && ValidateUtility.getPrice(this.textBox_freight, this.errorProvider1, false, true, out freight))
+                && ValidateUtility.getInt(this.textBox1, this.errorProvider1, true, true, out num))
             {
-                circulation.Total = total;
-                circulation.BackFreightPerPiece = backFreightPerPiece;
-                circulation.RealTotal = realTotal;
-                circulation.PreviousArrears = previousArrears;
-                circulation.ThisPayed = thisPayed;
-                circulation.Freight = freight;
+                card.Total = total;
+                
             }
             else
                 return false;
-            */
-
-
             return true;
-            return true;
-        }
-
-        private List<int> getSelectRows()
-        {
-            List<int> list = new List<int>();
-            foreach (DataGridViewRow row in dataGridView1.Rows)
-            {
-                DataGridViewCheckBoxCell cell = row.Cells["check"] as DataGridViewCheckBoxCell;
-                //commented by stone: this is not very reasonable
-                if ((bool)cell.EditedFormattedValue == true)
-                    list.Add(row.Index);
-            }
-            return list;
         }
 
         
@@ -304,12 +232,12 @@ namespace LocalERP.WinForm
             bool isRecordsCorrect = getRecords(out records);
 
             ProductCirculation circulation;
-            bool isSellCorrect = getCirculation(out circulation);
+            bool isSellCorrect = getCard(out card);
             if (isRecordsCorrect == false || isSellCorrect == false)
                 return;
 
             //
-            if (this.openMode == 1 && cirDao.FindByID(circulation.ID) == null)
+            if (this.openMode == 1 && cirDao.FindByID(card.ID) == null)
             {
                 MessageBox.Show("该单据已经被删除了。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 //this.Enabled = true;
@@ -320,15 +248,15 @@ namespace LocalERP.WinForm
             {
                 if (openMode == 0)
                 {
-                    circulation.Status = 1;
-                    cirDao.Insert(circulation, records, out circulationID);
+                    card.Status = 1;
+                    //cirDao.Insert(card, records, out cardID);
                     MessageBox.Show(string.Format("增加{0}成功!", this.Text), "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else if (openMode == 1)
                 {
-                    cirDao.UpdateBaiscInfo(circulation);
+                    //cirDao.UpdateBaiscInfo(circulation);
                     if (recordChanged)
-                        cirDao.updateRecords(circulation.ID, records);
+                        //cirDao.updateRecords(circulation.ID, records);
                     MessageBox.Show(string.Format("保存{0}成功!", this.Text), "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
 
@@ -339,19 +267,12 @@ namespace LocalERP.WinForm
             catch (Exception ex)
             {
                 if (openMode == 0)
-                    ProductStainlessCirculationDao.getInstance().DeleteByID(circulationID);
+                    ProductStainlessCirculationDao.getInstance().DeleteByID(cardID);
                 MessageBox.Show("保存有误,可能是往来单位或货品属性被修改过,请重新编辑!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
 
             //so important: if edit ,it should be refresh also, because edit will del exist item and add new item
             this.invokeUpdateNotify(conf.notifyType);
-        }
-
-        protected virtual void updateCostAndProfit(ProductCirculation cir, ProductCirculationRecord record) { 
-        }
-
-        protected virtual void cancelUpdateCostAndProfit(ProductCirculation cir, ProductCirculationRecord record)
-        {
         }
 
         //审核
@@ -381,64 +302,7 @@ namespace LocalERP.WinForm
             if (this.needSave && affirmQuit() != DialogResult.OK)
                 e.Cancel = true;
         }
-        //add detail
-        private void button_add_Click(object sender, EventArgs e)
-        {
-            //File.AppendAllText("e:\\debug.txt", string.Format("add click, dataGridView hash code={0}, dataGridView name={1}\r\n", dataGridView1.GetHashCode(), dataGridView1.Name));
-
-            this.dataGridView1.Rows.Add();
-            
-            DataGridViewRow row = this.dataGridView1.Rows[this.dataGridView1.Rows.Count - 1];
-            //这里不合理,在initDatagridview那里也有设置
-            this.setCellEnable(row.Cells["totalPrice"], false);
-            this.setCellEnable(row.Cells["serial"], false);
-            
-            //setSubTotalPrice(row.Index);
-            //setTotalPrice();
-
-            this.resetNeedSave(true);
-            this.recordChanged = true;
-        }
-
-        //del
-        private void button_del_Click(object sender, EventArgs e)
-        {
-            List<int> rowsIndex = this.getSelectRows();
-            if (rowsIndex.Count <= 0) {
-                MessageBox.Show("请选择项", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
-            }
-            for (int i = rowsIndex.Count - 1; i >= 0; i--)
-            {
-                this.dataGridView1.Rows.RemoveAt(rowsIndex[i]);
-            }
-            this.setTotalPrice();
-
-            this.resetNeedSave(true);
-            this.recordChanged = true;
-        }
-
-        //for event: caculate total price
-        protected virtual void dataGridView1_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e){}
-
-        protected virtual void productEditingControl_valueSetted(object sender, LookupArg arg) { }
-
-        protected virtual void editingControl_TextChanged(object sender, EventArgs e)
-        {
-            DataGridViewTextBoxEditingControl control = (sender as DataGridViewTextBoxEditingControl);
-            //File.AppendAllText("e:\\debug.txt", string.Format("editingControl text changed, dataGridView hash code={0}, dataGridView name={1}\r\n", control.EditingControlDataGridView.GetHashCode(), control.EditingControlDataGridView.Name));
-
-            DataGridViewCell cell = this.dataGridView1.CurrentCell;
-            String columnName = cell.OwningColumn.Name;
-            if (columnName == "price")
-            {
-                setSubTotalPrice(cell.RowIndex);
-                setTotalPrice();
-            }
-            this.resetNeedSave(true);
-            this.recordChanged = true;
-        }
-
+       
         private void textBox_serial_Validating(object sender, CancelEventArgs e)
         {
             string temp;
@@ -465,12 +329,6 @@ namespace LocalERP.WinForm
 
        
 
-        //这个函数是更新下cutoff
-        private void textBox_realTotal_TextChanged(object sender, EventArgs e)
-        {
-            
-        }
-
         //2017-11-20为了防止有多个窗口打开，同时审核出现的问题
         private void refreshArrears()
         {
@@ -484,12 +342,6 @@ namespace LocalERP.WinForm
 
         private void setLastPayReceipt(int customerId) {
             
-        }
-
-        //获取控件上的previousArrears, thisPayed, realTotal，然后计算出accumulative
-        private void setAccumulative(object sender, EventArgs e)
-        {
-           
         }
 
         /// <summary>
@@ -565,18 +417,18 @@ namespace LocalERP.WinForm
         //在C#中一次填入一条记录不能成功，只能使用一次将记录全部填充完的方式
         private void ReportFetchRecord()
         {
-            ProductCirculation sell;
+            Card sell;
             List<ProductCirculationRecord> records;
-            this.getCirculation(out sell);
+            this.getCard(out sell);
             this.getRecords(out records);
 
             if (sell.CustomerID == -1)
             {
-                load_without_customer(sell, records);
+                //load_without_customer(sell, records);
             }
             else
             {
-                load_with_customer(sell, records);
+                //load_with_customer(sell, records);
             }
         }
 

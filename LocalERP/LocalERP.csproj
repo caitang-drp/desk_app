@@ -585,6 +585,9 @@
     <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="ERP-init.mdb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="ERP.mdb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

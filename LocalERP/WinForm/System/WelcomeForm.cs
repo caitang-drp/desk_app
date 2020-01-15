@@ -20,15 +20,15 @@ namespace LocalERP.WinForm
             this.mainForm = form;
             InitializeComponent();
 
-            //Label label = addRow(LabelUtility.CONSUME_MANAGE, new string[] {LabelUtility.CONSUME_LIST, LabelUtility.CONSUME_ADD }, 55);
-            //label = addRow(LabelUtility.CARD_MANAGE, new string[] { LabelUtility.CARD_LIST, LabelUtility.CARD_ADD }, label.Location.Y + 50);
-            Label label = addRow(LabelUtility.PURCHASE_MANAGE, new string[] { LabelUtility.PURCHASE_LIST, LabelUtility.PURCHASE, LabelUtility.PURCHASE_BACK }, 55);
+            Label label = addRow(LabelUtility.CONSUME_MANAGE, new string[] {LabelUtility.CONSUME_LIST, LabelUtility.CONSUME_ADD }, 55);
+            label = addRow(LabelUtility.CARD_MANAGE, new string[] { LabelUtility.CARD_LIST, LabelUtility.CARD_ADD }, label.Location.Y + 50);
+            /*Label label = addRow(LabelUtility.PURCHASE_MANAGE, new string[] { LabelUtility.PURCHASE_LIST, LabelUtility.PURCHASE, LabelUtility.PURCHASE_BACK }, 55);
             label = addRow(LabelUtility.MANU_MANAGE, new string[] { LabelUtility.MANUFACTURE_LIST, LabelUtility.MANU_IN, LabelUtility.MANU_COST }, label.Location.Y + 50);
             label = addRow(LabelUtility.SELL_MANAGE, new string[] { LabelUtility.SELL_LIST, LabelUtility.SELL, LabelUtility.SELL_BACK }, label.Location.Y + 50);
             label = addRow(LabelUtility.CASH_MANAGE, new string[] { LabelUtility.CASH_PAY, LabelUtility.CASH_PAY_REFUND, LabelUtility.CASH_RECEIPT, LabelUtility.CASH_RECEIPT_REFUND, LabelUtility.CASH_OTHER_PAY, LabelUtility.CASH_OTHER_RECEIPT }, label.Location.Y + 50);
             label = addRow(LabelUtility.LIB_MANAGE, new string[] { LabelUtility.LIB_LIST, LabelUtility.LIB_OVERFLOW, LabelUtility.LIB_LOSS }, label.Location.Y + 50);
             label = addRow(LabelUtility.QUERY_MANAGE, new string[] { LabelUtility.QUERY_PRODUCT_DETAIL, LabelUtility.STATISTIC_PRODUCT, LabelUtility.QUERY_CASH_DETAIL, LabelUtility.STATISTIC_CASH }, label.Location.Y + 50);
-            label = addRow(LabelUtility.DATA_SETTING, new string[] { LabelUtility.DATA_PRODUCT, LabelUtility.DATA_CUSTOMER, LabelUtility.DATA_COMPANY}, label.Location.Y + 50);
+            label = addRow(LabelUtility.DATA_SETTING, new string[] { LabelUtility.DATA_PRODUCT, LabelUtility.DATA_CUSTOMER, LabelUtility.DATA_COMPANY}, label.Location.Y + 50);*/
         }
 
         private void linkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

@@ -50,7 +50,7 @@ namespace LocalERP.WinForm
             this.label_status = new System.Windows.Forms.Label();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.textBox_realTotal = new System.Windows.Forms.TextBox();
-            this.textBox_thisPayed = new System.Windows.Forms.TextBox();
+            this.textBox_num = new System.Windows.Forms.TextBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
@@ -190,7 +190,6 @@ namespace LocalERP.WinForm
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.dataGridView1.Size = new System.Drawing.Size(839, 233);
             this.dataGridView1.TabIndex = 33;
-            this.dataGridView1.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.dataGridView1_EditingControlShowing);
             // 
             // textBox_comment
             // 
@@ -253,14 +252,14 @@ namespace LocalERP.WinForm
             this.textBox_realTotal.Size = new System.Drawing.Size(151, 23);
             this.textBox_realTotal.TabIndex = 68;
             // 
-            // textBox_thisPayed
+            // textBox_num
             // 
-            this.textBox_thisPayed.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.errorProvider1.SetIconPadding(this.textBox_thisPayed, 20);
-            this.textBox_thisPayed.Location = new System.Drawing.Point(372, 73);
-            this.textBox_thisPayed.Name = "textBox_thisPayed";
-            this.textBox_thisPayed.Size = new System.Drawing.Size(173, 23);
-            this.textBox_thisPayed.TabIndex = 69;
+            this.textBox_num.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.errorProvider1.SetIconPadding(this.textBox_num, 20);
+            this.textBox_num.Location = new System.Drawing.Point(372, 73);
+            this.textBox_num.Name = "textBox_num";
+            this.textBox_num.Size = new System.Drawing.Size(173, 23);
+            this.textBox_num.TabIndex = 69;
             // 
             // textBox1
             // 
@@ -357,7 +356,7 @@ namespace LocalERP.WinForm
             this.panel_basic.Controls.Add(this.label10);
             this.panel_basic.Controls.Add(this.label_sum);
             this.panel_basic.Controls.Add(this.textBox_realTotal);
-            this.panel_basic.Controls.Add(this.textBox_thisPayed);
+            this.panel_basic.Controls.Add(this.textBox_num);
             this.panel_basic.Controls.Add(this.textBox_operator);
             this.panel_basic.Controls.Add(this.lookupText1);
             this.panel_basic.Controls.Add(this.label_operator);
@@ -580,7 +579,7 @@ namespace LocalERP.WinForm
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label_sum;
         private System.Windows.Forms.TextBox textBox_realTotal;
-        private System.Windows.Forms.TextBox textBox_thisPayed;
+        private System.Windows.Forms.TextBox textBox_num;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox textBox1;
         
