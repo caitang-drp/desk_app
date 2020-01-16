@@ -51,6 +51,7 @@ namespace LocalERP.WinForm
         }
 
         public void reload(int mode, int id) {
+            //因为设计只有一个card窗口，所以如果有其他card需要打开，需要代替掉原card的话，就要判断下
             if (needSave && affirmQuit() != DialogResult.OK)
                 return;
             
@@ -120,9 +121,6 @@ namespace LocalERP.WinForm
                 default:
                     break;
             }
-        }
-
-        protected virtual void initDatagridviewEnable(bool elementReadonly) {
         }
 
         private void initControlsEnable(bool save, bool finish, bool finishCancel, bool basicInfo)
@@ -276,20 +274,8 @@ namespace LocalERP.WinForm
             resetNeedSave(true);
         }
 
-       
-
-        //2017-11-20为了防止有多个窗口打开，同时审核出现的问题
-        private void refreshArrears()
-        {
-            
-        }
-
         private void lookupText1_valueSetted(object sender, LookupArg arg)
         {
-            
-        }
-
-        private void setLastPayReceipt(int customerId) {
             
         }
 
