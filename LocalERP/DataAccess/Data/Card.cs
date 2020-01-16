@@ -71,6 +71,14 @@ namespace LocalERP.DataAccess.Data
             set { total = value; }
         }
 
+        private int number;
+
+        public int Number
+        {
+            get { return number; }
+            set { number = value; }
+        }
+
         private string oper;
 
         public string Oper

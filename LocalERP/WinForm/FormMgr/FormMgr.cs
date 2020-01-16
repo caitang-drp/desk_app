@@ -110,7 +110,7 @@ namespace LocalERP.WinForm
             if (cardForm == null || cardForm.IsDisposed)
             {
                 //等进一步改造，把全部stainless、clothesDao的调用都放在一个地方
-                cardForm = new CardForm(ProductCirculation.CirculationTypeConf_Purchase, ProductStainlessCirculationDao.getInstance());
+                cardForm = new CardForm();
                 //appendEvent(buyPayBillForm);
             }
             return cardForm;

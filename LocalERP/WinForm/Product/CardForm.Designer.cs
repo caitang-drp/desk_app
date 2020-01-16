@@ -72,7 +72,6 @@ namespace LocalERP.WinForm
             this.toolStripButton_save = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton_finish = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton_finishCancel = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton_print = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -452,7 +451,6 @@ namespace LocalERP.WinForm
             this.toolStripButton_save,
             this.toolStripButton_finish,
             this.toolStripButton_finishCancel,
-            this.toolStripButton_print,
             this.toolStripButton1});
             this.toolStrip2.Location = new System.Drawing.Point(0, 0);
             this.toolStrip2.Name = "toolStrip2";
@@ -489,16 +487,6 @@ namespace LocalERP.WinForm
             this.toolStripButton_finishCancel.Text = "弃核";
             this.toolStripButton_finishCancel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.toolStripButton_finishCancel.Click += new System.EventHandler(this.toolStripButton_finishCancel_Click);
-            // 
-            // toolStripButton_print
-            // 
-            this.toolStripButton_print.Image = global::LocalERP.Properties.Resources.print16;
-            this.toolStripButton_print.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton_print.Name = "toolStripButton_print";
-            this.toolStripButton_print.Size = new System.Drawing.Size(39, 34);
-            this.toolStripButton_print.Text = "打印";
-            this.toolStripButton_print.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.toolStripButton_print.Click += new System.EventHandler(this.toolStripButton_print_Click);
             // 
             // toolStripButton1
             // 
@@ -551,7 +539,6 @@ namespace LocalERP.WinForm
         private System.Windows.Forms.ToolStrip toolStrip2;
         private System.Windows.Forms.ToolStripButton toolStripButton_save;
         private System.Windows.Forms.ToolStripButton toolStripButton_finish;
-        private System.Windows.Forms.ToolStripButton toolStripButton_print;
         private System.Windows.Forms.TextBox textBox_comment;
         private System.Windows.Forms.DataGridView dataGridView2;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
