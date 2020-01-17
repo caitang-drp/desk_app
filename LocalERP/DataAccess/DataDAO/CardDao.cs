@@ -40,16 +40,15 @@ namespace LocalERP.DataAccess.DataDAO
             return DbHelperAccess.executeNonQuery(commandText);
         }
 
-        public DataTable FindList(Category parent, string name)
+        public DataTable FindList(DateTime startTime, DateTime endTime, int status, string customerName)
         {
-            StringBuilder commandText = new StringBuilder("select * from Customer, CustomerCategory where Customer.parent=CustomerCategory.ID");
-            if (parent != null)
-                commandText.AppendFormat(" and CustomerCategory.lft>={0} and CustomerCategory.rgt<={1}", parent.Left, parent.Right);
+            StringBuilder commandText = null;
+            commandText = new StringBuilder(string.Format("select Card.*, Customer.name from Card, Customer where Customer.ID = Card.customerID and circulationTime between #{1}# and #{2}# ", startTime.ToString("yyyy-MM-dd"), endTime.ToString("yyyy-MM-dd")));
+            
+            if (!string.IsNullOrEmpty(customerName))
+                commandText.Append(string.Format(" and Customer.name like '%{0}%'", customerName));
 
-            if (!string.IsNullOrEmpty(name))
-                commandText.AppendFormat(" and Customer.name like '%{0}%'", name);
-
-            commandText.Append(" order by Customer.ID");
+            commandText.Append(string.Format(" order by {0}.circulationTime desc", tableName));
             return DbHelperAccess.executeQuery(commandText.ToString());
         }
 

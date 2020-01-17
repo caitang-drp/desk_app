@@ -51,7 +51,7 @@ namespace LocalERP.WinForm
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.textBox_realTotal = new System.Windows.Forms.TextBox();
             this.textBox_num = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.textBox_ = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
@@ -73,6 +73,7 @@ namespace LocalERP.WinForm
             this.toolStripButton_finish = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton_finishCancel = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
+            this.label11 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
@@ -201,12 +202,12 @@ namespace LocalERP.WinForm
             // 
             // textBox_serial
             // 
+            this.textBox_serial.Enabled = false;
             this.textBox_serial.Location = new System.Drawing.Point(372, 6);
             this.textBox_serial.Margin = new System.Windows.Forms.Padding(2);
             this.textBox_serial.Name = "textBox_serial";
             this.textBox_serial.Size = new System.Drawing.Size(173, 23);
             this.textBox_serial.TabIndex = 20;
-            this.textBox_serial.TextChanged += new System.EventHandler(this.Controls_TextChanged);
             this.textBox_serial.Validating += new System.ComponentModel.CancelEventHandler(this.textBox_serial_Validating);
             // 
             // label3
@@ -250,6 +251,7 @@ namespace LocalERP.WinForm
             this.textBox_realTotal.Name = "textBox_realTotal";
             this.textBox_realTotal.Size = new System.Drawing.Size(151, 23);
             this.textBox_realTotal.TabIndex = 68;
+            this.textBox_realTotal.TextChanged += new System.EventHandler(this.Controls_TextChanged);
             // 
             // textBox_num
             // 
@@ -259,15 +261,16 @@ namespace LocalERP.WinForm
             this.textBox_num.Name = "textBox_num";
             this.textBox_num.Size = new System.Drawing.Size(173, 23);
             this.textBox_num.TabIndex = 69;
+            this.textBox_num.TextChanged += new System.EventHandler(this.Controls_TextChanged);
             // 
-            // textBox1
+            // textBox_
             // 
-            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.errorProvider1.SetIconPadding(this.textBox1, 20);
-            this.textBox1.Location = new System.Drawing.Point(662, 74);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(154, 23);
-            this.textBox1.TabIndex = 76;
+            this.textBox_.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.errorProvider1.SetIconPadding(this.textBox_, 20);
+            this.textBox_.Location = new System.Drawing.Point(662, 74);
+            this.textBox_.Name = "textBox_";
+            this.textBox_.Size = new System.Drawing.Size(153, 23);
+            this.textBox_.TabIndex = 76;
             // 
             // label5
             // 
@@ -348,8 +351,9 @@ namespace LocalERP.WinForm
             // 
             // panel_basic
             // 
+            this.panel_basic.Controls.Add(this.label11);
             this.panel_basic.Controls.Add(this.label6);
-            this.panel_basic.Controls.Add(this.textBox1);
+            this.panel_basic.Controls.Add(this.textBox_);
             this.panel_basic.Controls.Add(this.label7);
             this.panel_basic.Controls.Add(this.label18);
             this.panel_basic.Controls.Add(this.label10);
@@ -384,7 +388,7 @@ namespace LocalERP.WinForm
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(70, 14);
             this.label6.TabIndex = 77;
-            this.label6.Text = "卡片类型:";
+            this.label6.Text = "平均价格:";
             // 
             // label7
             // 
@@ -412,7 +416,7 @@ namespace LocalERP.WinForm
             // 
             this.label10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(247, 77);
+            this.label10.Location = new System.Drawing.Point(247, 79);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(21, 14);
             this.label10.TabIndex = 73;
@@ -498,6 +502,16 @@ namespace LocalERP.WinForm
             this.toolStripButton1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton_cancel_Click);
             // 
+            // label11
+            // 
+            this.label11.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(817, 79);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(21, 14);
+            this.label11.TabIndex = 78;
+            this.label11.Text = "元";
+            // 
             // CardForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
@@ -568,7 +582,8 @@ namespace LocalERP.WinForm
         private System.Windows.Forms.TextBox textBox_realTotal;
         private System.Windows.Forms.TextBox textBox_num;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox textBox_;
+        private System.Windows.Forms.Label label11;
         
        
     }

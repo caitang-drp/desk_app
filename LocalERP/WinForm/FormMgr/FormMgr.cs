@@ -89,20 +89,6 @@ namespace LocalERP.WinForm
         protected ProductCirculationForm productLibLossForm = null;
         public abstract ProductCirculationForm getProductLibLossForm();
 
-        /*********** card ***********/
-        /*private CardForm cardForm = null;
-        public PayReceiptListForm getPayReceiptListForm()
-        {
-            if (payReceiptListForm == null || payReceiptListForm.IsDisposed)
-            {
-                payReceiptListForm = new PayReceiptListForm(mainForm);
-                payReceiptListForm.initVersions(getVersions(),
-                    UpdateType.PayReceiptUpdate, UpdateType.PayReceiptFinishUpdate, UpdateType.CustomerUpdate);
-                appendEvent(payReceiptListForm);
-            }
-            return payReceiptListForm;
-        }*/
-
         // ¿¨Æ¬
         private CardForm cardForm = null;
         public CardForm getCardForm()

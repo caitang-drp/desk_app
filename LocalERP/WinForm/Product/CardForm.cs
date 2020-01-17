@@ -44,6 +44,7 @@ namespace LocalERP.WinForm
             //initDatagridview(this.dataGridView1);
         }
 
+        //load 和 reload都是对外提供接口
         private void ProductCirculationForm_Load(object sender, EventArgs e)
         {
             this.lookupText1.LookupForm = FormSingletonFactory.getInstance().getCustomerCIForm_Select();
@@ -62,17 +63,12 @@ namespace LocalERP.WinForm
             this.lookupText1.Focus();
         }
 
-        /// <summary>
-        /// for init card
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        /// 
+        //对内提供服务的函数，调用switch mode
         private void initCard()
         {
             if (openMode == 0)
             {
-                switchMode(openMode);
+                
                 this.dateTime_cardTime.Value = DateTime.Now;
                 this.textBox_comment.Text = null;
                 this.lookupText1.LookupArg = null;
@@ -84,10 +80,8 @@ namespace LocalERP.WinForm
                 this.textBox_operator.Text = ConfDao.getInstance().Get(5).ToString();
                 this.dataGridView1.Rows.Clear();
                 //this.dataGridView2[1, 0].Value = null;
-
-                //this.resetNeedSave(false);
-                return;
             }
+            switchMode(openMode);
         }
         //end init
 
@@ -96,12 +90,12 @@ namespace LocalERP.WinForm
             switch(mode){
                 case 0:
                     this.label_status.Text = "新增";
-                    this.initControlsEnable(true, false, false, true);
+                    this.initControlsEnable(false, false, false, true);
                     break;
                 case 1:
                     //未审核，这种状态属于刚开始打开的编辑状态，以及弃核后的状态
                     this.label_status.Text = ProductCirculation.circulationStatusContext[0];
-                    //this.initControlsEnable(false, true, true, false, false, true, true, true, false, false,true);
+                    this.initControlsEnable(false, true, false, true);
                     break;
                 case 2:
                     //undefine
@@ -131,6 +125,8 @@ namespace LocalERP.WinForm
             this.panel_basic.Enabled = basicInfo;
         }
 
+
+        //get and set api
         protected bool getCard(out Card card)
         {
             card = new Card();
