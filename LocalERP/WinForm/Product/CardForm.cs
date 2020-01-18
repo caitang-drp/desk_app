@@ -66,9 +66,10 @@ namespace LocalERP.WinForm
         //对内提供服务的函数，调用switch mode
         private void initCard()
         {
+            //2020-1-18 这里只分两种情况，除了0之外，其他情况还要根据card的status来重设openMode
             if (openMode == 0)
             {
-                
+
                 this.dateTime_cardTime.Value = DateTime.Now;
                 this.textBox_comment.Text = null;
                 this.lookupText1.LookupArg = null;
@@ -76,10 +77,22 @@ namespace LocalERP.WinForm
 
                 int max = 1;// CirDao.getMaxCode(string.Format("CARD-{0}-", DateTime.Now.ToString("yyyyMMdd")));
                 this.textBox_serial.Text = string.Format("CARD-{0}-{1:0000}", DateTime.Now.ToString("yyyyMMdd"), max + 1);
-                
+
                 this.textBox_operator.Text = ConfDao.getInstance().Get(5).ToString();
                 this.dataGridView1.Rows.Clear();
                 //this.dataGridView2[1, 0].Value = null;
+            }
+            else {
+                card = CardDao.getInstance().FindByID(cardID);
+
+                this.textBox_serial.Text = card.Code;
+                this.dateTime_cardTime.Value = card.CardTime;
+                this.textBox_comment.Text = card.Comment;
+                this.textBox_operator.Text = card.Oper;
+                this.lookupText1.LookupArg = new LookupArg(card.CustomerID, card.CustomerName);
+                this.lookupText1.Text_Lookup = card.CustomerName;
+
+                openMode = card.Status;
             }
             switchMode(openMode);
         }

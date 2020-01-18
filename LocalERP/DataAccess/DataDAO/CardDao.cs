@@ -43,12 +43,12 @@ namespace LocalERP.DataAccess.DataDAO
         public DataTable FindList(DateTime startTime, DateTime endTime, int status, string customerName)
         {
             StringBuilder commandText = null;
-            commandText = new StringBuilder(string.Format("select Card.*, Customer.name from Card, Customer where Customer.ID = Card.customerID and circulationTime between #{1}# and #{2}# ", startTime.ToString("yyyy-MM-dd"), endTime.ToString("yyyy-MM-dd")));
+            commandText = new StringBuilder(string.Format("select Card.*, Customer.name from Card, Customer where Customer.ID = Card.customerID and cardTime between #{0}# and #{1}# ", startTime.ToString("yyyy-MM-dd"), endTime.ToString("yyyy-MM-dd")));
             
             if (!string.IsNullOrEmpty(customerName))
                 commandText.Append(string.Format(" and Customer.name like '%{0}%'", customerName));
 
-            commandText.Append(string.Format(" order by {0}.circulationTime desc", tableName));
+            commandText.Append(" order by Card.cardTime desc");
             return DbHelperAccess.executeQuery(commandText.ToString());
         }
 
@@ -80,12 +80,12 @@ namespace LocalERP.DataAccess.DataDAO
             return DbHelperAccess.executeNonQuery(commandText);
         }
 
-        public Customer getBeanFromDataRow(DataRow dr) {
-            Customer customer = new Customer();
+        public Card getBeanFromDataRow(DataRow dr) {
+            Card card = new Card();
             if (dr != null)
             {
-                customer.ID = (int)dr["ID"];
-                customer.Parent = (int)dr["parent"];
+                card.ID = (int)dr["ID"];
+                /*customer.Parent = (int)dr["parent"];
 
                 customer.Name = dr["name"] as string;
                 customer.Comment = dr["comment"] as string;
@@ -96,19 +96,19 @@ namespace LocalERP.DataAccess.DataDAO
                 double arrear, receipt;
                 ValidateUtility.getDouble(dr, "arrear", out arrear);
                 customer.arrear = arrear;
-
-                return customer;
+                */
+                return card;
             }
             return null;
         }
 
-        public Customer FindByID(int ID)
+        public Card FindByID(int ID)
         {
             string commandText = string.Format("select * from Customer where ID={0}", ID);
             DataRow dr = DbHelperAccess.executeQueryGetOneRow(commandText);
             return getBeanFromDataRow(dr);
         }
-
+        /*
         public List<Customer> FindByParentId(int parentId)
         {
             String commandText = string.Format("select * from Customer where parent = {0} order by ID", parentId);
@@ -122,7 +122,7 @@ namespace LocalERP.DataAccess.DataDAO
             }
 
             return categorys;
-        }
+        }*/
 
         public void ClearAllArrear() {
             string commandText = string.Format("update Customer set arrear=0");

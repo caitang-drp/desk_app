@@ -233,6 +233,8 @@ namespace LocalERP.WinForm
             this.textBox_freight.Text = circulation.Freight.ToString();
             ///搬过来
 
+
+            //2020-1-18 这个地方重新switch mode一下，感觉也不是很合理
             if (circulation != null)
                 openMode = circulation.Status;
             switchMode(openMode);

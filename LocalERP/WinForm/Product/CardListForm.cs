@@ -52,20 +52,19 @@ namespace LocalERP.WinForm
             this.comboBox1.DataSource = arrayList;
             this.comboBox1.ValueMember = "Key";
             this.comboBox1.DisplayMember = "Value";
+
+            
         }
 
-        public void hideControls() {
-            this.label8.Visible = false;
-            this.dataGridView1.Columns["customer"].Visible = false;
-            this.dataGridView1.Columns["realTotal"].Visible = false;
-            this.textBox_customer.Visible = false;
-        }
-
+        
         private void initList()
-        {/*
+        {
             try
             {
-                DataTable dataTable = cirDao.FindList(circulationType, this.dateTimePicker3.Value, this.dateTimePicker4.Value.AddDays(1), (int)(comboBox1.SelectedValue), textBox_customer.Text.Trim());
+                CardDao cardDao = CardDao.getInstance();
+                DateTime startTime = this.dateTimePicker3.Value;
+                DateTime endTime = this.dateTimePicker4.Value.AddDays(1);
+                DataTable dataTable = cardDao.FindList(startTime, endTime, /*(int)(comboBox1.SelectedValue)*/0, textBox_customer.Text.Trim());
                 this.dataGridView1.Rows.Clear();
                 double sum = 0;
                 int index = 0;
@@ -74,16 +73,14 @@ namespace LocalERP.WinForm
                     index = this.dataGridView1.Rows.Add();
                     this.dataGridView1.Rows[index].Cells["ID"].Value = dr["ID"];
                     this.dataGridView1.Rows[index].Cells["name"].Value = dr["code"];
-                    int type = (int)(dr["type"]);
+                    /*int type = (int)(dr["type"]);
                     this.dataGridView1.Rows[index].Cells["type"].Value = ProductCirculation.CirculationTypeConfs[type - 1].name;
-                    this.dataGridView1.Rows[index].Cells["typeValue"].Value = type;
+                    this.dataGridView1.Rows[index].Cells["typeValue"].Value = type;*/
 
-                    double realTotal = double.Parse(dr["realTotal"].ToString());
-                    if (type == 2 || type == 4)
-                        realTotal = -realTotal;
+                    double realTotal = double.Parse(dr["total"].ToString());
                     this.dataGridView1.Rows[index].Cells["realTotal"].Value = realTotal.ToString("0.00");
-                    sum += realTotal;
-
+                    
+                    /*
                     int status = (int)(dr["status"]);
                     this.dataGridView1.Rows[index].Cells["status"].Value = ProductCirculation.circulationStatusContext[status - 1];
                     if (status == 1)
@@ -96,30 +93,16 @@ namespace LocalERP.WinForm
                         this.dataGridView1.Rows[index].Cells["status"].Style.ForeColor = Color.Black;
                         this.dataGridView1.Rows[index].Cells["status"].Style.SelectionForeColor = Color.Black;
                     }
+                    */
 
-                    if (circulationType < 3)
-                        this.dataGridView1.Rows[index].Cells["customer"].Value = dr["name"];
-
-
-                    this.dataGridView1.Rows[index].Cells["sellTime"].Value = ((DateTime)dr["circulationTime"]).ToString("yyyy-MM-dd HH:mm:ss");
-                }
-
-                if (circulationType < 3)
-                {
-                    index = this.dataGridView1.Rows.Add();
-
-                    this.dataGridView1.Rows[index].Cells["name"].Value = "合计";
-                    this.dataGridView1.Rows[index].Cells["realTotal"].Value = sum.ToString("0.00");
-                    this.dataGridView1.Rows[index].DefaultCellStyle.ForeColor = Color.Red;
-                    this.dataGridView1.Rows[index].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-                    this.dataGridView1.Rows[index].DefaultCellStyle.Font = new Font("宋体", 10F, FontStyle.Bold);
+                    this.dataGridView1.Rows[index].Cells["sellTime"].Value = ((DateTime)dr["cardTime"]).ToString("yyyy-MM-dd HH:mm:ss");
                 }
 
             }
             catch (Exception ex)
             {
-                //MessageBox.Show("查询错误, 请输入正确的条件.", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }*/
+                MessageBox.Show("查询错误, 请输入正确的条件.", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
 
         /// <summary>
@@ -179,51 +162,19 @@ namespace LocalERP.WinForm
         {
             if (this.dataGridView1.SelectedRows == null || this.dataGridView1.SelectedRows.Count <= 0)
             {
-                MessageBox.Show("请选择货单!");
+                MessageBox.Show("请选择卡片!");
                 return;
             }
-            editCirculation(this.dataGridView1.SelectedRows[0]);
+            editCard(this.dataGridView1.SelectedRows[0]);
         }
 
-        private void editCirculation(DataGridViewRow row) {
-            if (row.Cells["typeValue"].Value == null)
-                return;
-
-            int typeValue = (int)row.Cells["typeValue"].Value;
+        private void editCard(DataGridViewRow row) {
+            
             int id = (int)row.Cells["ID"].Value;
 
             string formString = "";
-            switch (typeValue)
-            {
-                case (int)ProductCirculation.CirculationType.purchase:
-                    formString = LabelUtility.PURCHASE;
-                    break;
-                case (int)ProductCirculation.CirculationType.purchaseBack:
-                    formString = LabelUtility.PURCHASE_BACK;
-                    break;
-                case (int)ProductCirculation.CirculationType.manuCost:
-                    formString = LabelUtility.MANU_COST;
-                    break;
-                case (int)ProductCirculation.CirculationType.manuIn:
-                    formString = LabelUtility.MANU_IN;
-                    break;
-                case (int)ProductCirculation.CirculationType.sell:
-                    formString = LabelUtility.SELL;
-                    break;
-                case (int)ProductCirculation.CirculationType.sellBack:
-                    formString = LabelUtility.SELL_BACK;
-                    break;
-                case (int)ProductCirculation.CirculationType.libOverflow:
-                    formString = LabelUtility.LIB_OVERFLOW;
-                    break;
-                case (int)ProductCirculation.CirculationType.libLoss:
-                    formString = LabelUtility.LIB_LOSS;
-                    break;
-                default:
-                    break;
-
-            }
-            mainForm.setForm(formString, 1, id);
+            
+            mainForm.setForm(LabelUtility.CARD_ADD, 1, id);
         }
 
         private void button1_Click(object sender, EventArgs e)

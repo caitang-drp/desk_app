@@ -165,6 +165,7 @@ namespace LocalERP.WinForm
                     break;
                 case LabelUtility.CARD_ADD:
                     FormSingletonFactory.getInstance().getCardForm().Show(this.dockPanel1);
+                    FormSingletonFactory.getInstance().getCardForm().reload(openMode, ID);
                     break;
 
                 default:
