@@ -104,7 +104,7 @@ namespace LocalERP.DataAccess.DataDAO
 
         public Card FindByID(int ID)
         {
-            string commandText = string.Format("select * from Customer where ID={0}", ID);
+            string commandText = string.Format("select * from Card where ID={0}", ID);
             DataRow dr = DbHelperAccess.executeQueryGetOneRow(commandText);
             return getBeanFromDataRow(dr);
         }
