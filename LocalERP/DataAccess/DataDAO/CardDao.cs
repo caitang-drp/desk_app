@@ -73,30 +73,25 @@ namespace LocalERP.DataAccess.DataDAO
         {
         }
 
-        //目前只用到arrears，表示我方的欠款
-        public int update_arrear(int customer_id, double now)
-        {
-            string commandText = string.Format("update Customer set arrear={0} where ID={1}", now, customer_id);
-            return DbHelperAccess.executeNonQuery(commandText);
-        }
 
         public Card getBeanFromDataRow(DataRow dr) {
             Card card = new Card();
             if (dr != null)
             {
-                card.ID = (int)dr["ID"];
-                /*customer.Parent = (int)dr["parent"];
+                card.ID = (int)dr["Card.ID"];
+                card.Code = dr["code"] as string;
+                card.CardTime = (DateTime)dr["cardTime"];
+                card.CustomerID = (int)dr["customerID"];
+                double total = 0;
+                ValidateUtility.getDouble(dr, "total", out total);
+                card.Total = total;
+                card.Number = (int)dr["num"];
+                card.Comment = dr["Card.comment"] as string;
+                card.Oper = dr["operator"] as string;
+                card.Status = (int)dr["status"];
+                card.Type = (int)dr["type"];
+                card.CustomerName = dr["name"] as string;
 
-                customer.Name = dr["name"] as string;
-                customer.Comment = dr["comment"] as string;
-                customer.Tel = dr["tel"] as string;
-                customer.Phone = dr["phone"] as string;
-                customer.Address = dr["address"] as string;
-
-                double arrear, receipt;
-                ValidateUtility.getDouble(dr, "arrear", out arrear);
-                customer.arrear = arrear;
-                */
                 return card;
             }
             return null;
@@ -104,7 +99,7 @@ namespace LocalERP.DataAccess.DataDAO
 
         public Card FindByID(int ID)
         {
-            string commandText = string.Format("select * from Card where ID={0}", ID);
+            string commandText = string.Format("select * from Card, Customer where Card.ID={0} and Card.customerID = Customer.ID", ID);
             DataRow dr = DbHelperAccess.executeQueryGetOneRow(commandText);
             return getBeanFromDataRow(dr);
         }

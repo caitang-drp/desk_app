@@ -15,7 +15,7 @@ using gregn6Lib;
 
 namespace LocalERP.WinForm
 {
-    public partial class CardForm : MyDockContent
+    public partial class ConsumeForm : MyDockContent
     {
         //open mode       | 0:add 1:edit | 2:approval  | 3:partArrival | 4:arrival
         //status          | 1:apply      | 2:approval  | 3:partArrival | 4:arrival  
@@ -31,7 +31,7 @@ namespace LocalERP.WinForm
 
         //protected CardDao cirDao;
 
-        public CardForm()
+        public ConsumeForm()
         {
             InitializeComponent();
 
