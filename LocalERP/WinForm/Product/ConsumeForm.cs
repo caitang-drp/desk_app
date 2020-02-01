@@ -48,6 +48,8 @@ namespace LocalERP.WinForm
         private void ProductCirculationForm_Load(object sender, EventArgs e)
         {
             this.lookupText1.LookupForm = FormSingletonFactory.getInstance().getCustomerCIForm_Select();
+            this.lookupText2.LookupForm = FormSingletonFactory.getInstance().getCardListForm_select();
+
             initCard();
         }
 
@@ -79,7 +81,7 @@ namespace LocalERP.WinForm
                 this.textBox_serial.Text = string.Format("CARD-{0}-{1:0000}", DateTime.Now.ToString("yyyyMMdd"), max + 1);
 
                 this.textBox_operator.Text = ConfDao.getInstance().Get(5).ToString();
-                this.dataGridView1.Rows.Clear();
+                //this.dataGridView1.Rows.Clear();
                 //this.dataGridView2[1, 0].Value = null;
             }
             else {
@@ -87,8 +89,7 @@ namespace LocalERP.WinForm
 
                 this.textBox_serial.Text = card.Code;
                 this.dateTime_cardTime.Value = card.CardTime;
-                this.textBox_realTotal.Text = card.Total.ToString();
-                this.textBox_num.Text = card.Number.ToString();
+               
                 this.textBox_comment.Text = card.Comment;
                 this.textBox_operator.Text = card.Oper;
                 this.lookupText1.LookupArg = new LookupArg(card.CustomerID, card.CustomerName);
@@ -166,18 +167,8 @@ namespace LocalERP.WinForm
            
             card.CustomerName = this.lookupText1.Text_Lookup;
 
-            double total;
-            int num;
             
-            if (ValidateUtility.getDouble(this.textBox_realTotal, this.errorProvider1, true, true, out total)
-                && ValidateUtility.getInt(this.textBox_num, this.errorProvider1, true, true, out num))
-            {
-                card.Total = total;
-                card.Number = num;
-                
-            }
-            else
-                return false;
+           
             return true;
         }
 

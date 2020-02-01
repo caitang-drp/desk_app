@@ -13,20 +13,21 @@ using LocalERP.DataAccess.Utility;
 
 namespace LocalERP.WinForm
 {
-    public partial class CardListForm : MyDockContent
+    public partial class CardListForm : LookupAndNotifyDockContent
     {
         private MainForm mainForm;
+
+        private int openMode = 1;
         //private int circulationType;
 
         //private ProductCirculationDao cirDao;
 
-        public CardListForm(MainForm mf)
+        public CardListForm(MainForm mf, int openMode)
         {
             InitializeComponent();
 
             this.mainForm = mf;
-            //this.circulationType = type;
-            //this.Text = title;
+            this.openMode = openMode;
 
             DateTime dateTime = DateTime.Now;
             this.dateTimePicker3.Value = dateTime.AddMonths(-1);
@@ -160,12 +161,36 @@ namespace LocalERP.WinForm
         //
         private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (this.dataGridView1.SelectedRows == null || this.dataGridView1.SelectedRows.Count <= 0)
-            {
-                MessageBox.Show("ÇëÑ¡Ôñ¿¨Æ¬!");
+
+
+            if (e.RowIndex < 0)
                 return;
+
+            if (this.dataGridView1.Rows[e.RowIndex].Cells["ID"].Value == null)
+                return;
+
+            int id = (int)this.dataGridView1.Rows[e.RowIndex].Cells["ID"].Value;
+            //openMode == 0ÓÃÓÚÑ¡Ôñ
+            if (openMode == 0)
+            {
+                string name = this.dataGridView1.Rows[e.RowIndex].Cells["name"].Value.ToString();
+                LookupArg lookupArg = new LookupArg(id, name);
+                //lookupArg.ArgName = conf.CategoryName;
+
+                //File.AppendAllText("e:\\debug.txt", string.Format("double click, thread:{0}\r\n", System.Threading.Thread.CurrentThread.ManagedThreadId));
+
+                this.Close();
+                this.invokeLookupCallback(lookupArg);
             }
-            editCard(this.dataGridView1.SelectedRows[0]);
+            else if (openMode == 1)
+            {
+                /*if (this.dataGridView1.SelectedRows == null || this.dataGridView1.SelectedRows.Count <= 0)
+                {
+                    MessageBox.Show("ÇëÑ¡Ôñ¿¨Æ¬!");
+                    return;
+                }*/
+                editCard(this.dataGridView1.SelectedRows[0]);
+            }
         }
 
         private void editCard(DataGridViewRow row) {
@@ -200,6 +225,11 @@ namespace LocalERP.WinForm
                     cell.EditingCellFormattedValue = value;
                 cell.Value = value;
             }
+        }
+
+        public override void showDialog(object value)
+        {
+            this.ShowDialog();
         }
     }
 }

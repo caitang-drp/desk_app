@@ -105,7 +105,7 @@ namespace LocalERP.WinForm
         {
             if (cardListForm == null || cardListForm.IsDisposed)
             {
-                cardListForm = new CardListForm(mainForm);
+                cardListForm = new CardListForm(mainForm, 1);
                 cardListForm.initVersions(getVersions(),
                     UpdateType.PayReceiptUpdate, UpdateType.PayReceiptFinishUpdate, UpdateType.CustomerUpdate);
                 //appendEvent(payReceiptListForm);
@@ -113,6 +113,30 @@ namespace LocalERP.WinForm
             return cardListForm;
         }
 
+        private CardListForm cardListForm_select = null;
+        public CardListForm getCardListForm_select()
+        {
+            if (cardListForm_select == null || cardListForm_select.IsDisposed)
+            {
+                cardListForm_select = new CardListForm(mainForm, 0);
+                cardListForm_select.initVersions(getVersions(),
+                    UpdateType.PayReceiptUpdate, UpdateType.PayReceiptFinishUpdate, UpdateType.CustomerUpdate);
+                //appendEvent(payReceiptListForm);
+            }
+            return cardListForm_select;
+        }
+
+        //消费
+        private ConsumeForm consumeForm = null;
+        public ConsumeForm getConsumeForm()
+        {
+            if (consumeForm == null || consumeForm.IsDisposed)
+            {
+                consumeForm = new ConsumeForm();
+                //appendEvent(buyPayBillForm);
+            }
+            return consumeForm;
+        }
 
         /****************cash circulation************************/
         // 应收应付，单据列表

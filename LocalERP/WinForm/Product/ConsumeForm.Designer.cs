@@ -41,34 +41,28 @@ namespace LocalERP.WinForm
             this.label4 = new System.Windows.Forms.Label();
             this.label_status = new System.Windows.Forms.Label();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.textBox_realTotal = new System.Windows.Forms.TextBox();
-            this.textBox_num = new System.Windows.Forms.TextBox();
-            this.textBox_ = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label_customer = new System.Windows.Forms.Label();
-            this.sellDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.label_operator = new System.Windows.Forms.Label();
             this.label_title = new System.Windows.Forms.Label();
             this.textBox_operator = new System.Windows.Forms.TextBox();
             this.label1_tip = new System.Windows.Forms.Label();
             this.panel_basic = new System.Windows.Forms.Panel();
-            this.label11 = new System.Windows.Forms.Label();
+            this.lookupText2 = new LocalERP.WinForm.LookupText();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.label18 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label_sum = new System.Windows.Forms.Label();
             this.lookupText1 = new LocalERP.WinForm.LookupText();
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
             this.toolStripButton_save = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton_finish = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton_finishCancel = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
+            this.sellDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.sellDataSetBindingSource)).BeginInit();
             this.panel_basic.SuspendLayout();
             this.toolStrip2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.sellDataSetBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -83,18 +77,18 @@ namespace LocalERP.WinForm
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(299, 43);
+            this.label2.Location = new System.Drawing.Point(264, 45);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(70, 14);
             this.label2.TabIndex = 2;
-            this.label2.Text = "开卡日期:";
+            this.label2.Text = "消费日期:";
             // 
             // dateTime_cardTime
             // 
             this.dateTime_cardTime.CustomFormat = "yyyy-MM-dd HH:mm:ss";
             this.dateTime_cardTime.Enabled = false;
             this.dateTime_cardTime.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTime_cardTime.Location = new System.Drawing.Point(372, 38);
+            this.dateTime_cardTime.Location = new System.Drawing.Point(337, 40);
             this.dateTime_cardTime.Margin = new System.Windows.Forms.Padding(2);
             this.dateTime_cardTime.Name = "dateTime_cardTime";
             this.dateTime_cardTime.Size = new System.Drawing.Size(173, 23);
@@ -113,7 +107,7 @@ namespace LocalERP.WinForm
             // textBox_serial
             // 
             this.textBox_serial.Enabled = false;
-            this.textBox_serial.Location = new System.Drawing.Point(372, 6);
+            this.textBox_serial.Location = new System.Drawing.Point(337, 8);
             this.textBox_serial.Margin = new System.Windows.Forms.Padding(2);
             this.textBox_serial.Name = "textBox_serial";
             this.textBox_serial.Size = new System.Drawing.Size(173, 23);
@@ -123,7 +117,7 @@ namespace LocalERP.WinForm
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(299, 11);
+            this.label3.Location = new System.Drawing.Point(264, 13);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(70, 14);
             this.label3.TabIndex = 19;
@@ -136,7 +130,7 @@ namespace LocalERP.WinForm
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(70, 14);
             this.label4.TabIndex = 21;
-            this.label4.Text = "卡片状态:";
+            this.label4.Text = "消费状态:";
             // 
             // label_status
             // 
@@ -153,40 +147,11 @@ namespace LocalERP.WinForm
             // 
             this.errorProvider1.ContainerControl = this;
             // 
-            // textBox_realTotal
-            // 
-            this.textBox_realTotal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.errorProvider1.SetIconPadding(this.textBox_realTotal, 20);
-            this.textBox_realTotal.Location = new System.Drawing.Point(92, 74);
-            this.textBox_realTotal.Name = "textBox_realTotal";
-            this.textBox_realTotal.Size = new System.Drawing.Size(151, 23);
-            this.textBox_realTotal.TabIndex = 68;
-            this.textBox_realTotal.TextChanged += new System.EventHandler(this.Controls_TextChanged);
-            // 
-            // textBox_num
-            // 
-            this.textBox_num.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.errorProvider1.SetIconPadding(this.textBox_num, 20);
-            this.textBox_num.Location = new System.Drawing.Point(372, 73);
-            this.textBox_num.Name = "textBox_num";
-            this.textBox_num.Size = new System.Drawing.Size(173, 23);
-            this.textBox_num.TabIndex = 69;
-            this.textBox_num.TextChanged += new System.EventHandler(this.Controls_TextChanged);
-            // 
-            // textBox_
-            // 
-            this.textBox_.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.errorProvider1.SetIconPadding(this.textBox_, 20);
-            this.textBox_.Location = new System.Drawing.Point(662, 74);
-            this.textBox_.Name = "textBox_";
-            this.textBox_.Size = new System.Drawing.Size(153, 23);
-            this.textBox_.TabIndex = 76;
-            // 
             // label5
             // 
             this.label5.AutoSize = true;
             this.label5.ForeColor = System.Drawing.Color.Red;
-            this.label5.Location = new System.Drawing.Point(286, 11);
+            this.label5.Location = new System.Drawing.Point(251, 13);
             this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(14, 14);
@@ -197,7 +162,7 @@ namespace LocalERP.WinForm
             // 
             this.label9.AutoSize = true;
             this.label9.ForeColor = System.Drawing.Color.Red;
-            this.label9.Location = new System.Drawing.Point(576, 11);
+            this.label9.Location = new System.Drawing.Point(541, 13);
             this.label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(14, 14);
@@ -207,7 +172,7 @@ namespace LocalERP.WinForm
             // label_customer
             // 
             this.label_customer.AutoSize = true;
-            this.label_customer.Location = new System.Drawing.Point(589, 11);
+            this.label_customer.Location = new System.Drawing.Point(554, 13);
             this.label_customer.Name = "label_customer";
             this.label_customer.Size = new System.Drawing.Size(70, 14);
             this.label_customer.TabIndex = 41;
@@ -216,7 +181,7 @@ namespace LocalERP.WinForm
             // label_operator
             // 
             this.label_operator.AutoSize = true;
-            this.label_operator.Location = new System.Drawing.Point(589, 42);
+            this.label_operator.Location = new System.Drawing.Point(554, 79);
             this.label_operator.Name = "label_operator";
             this.label_operator.Size = new System.Drawing.Size(70, 14);
             this.label_operator.TabIndex = 45;
@@ -234,10 +199,10 @@ namespace LocalERP.WinForm
             // 
             // textBox_operator
             // 
-            this.textBox_operator.Location = new System.Drawing.Point(662, 38);
+            this.textBox_operator.Location = new System.Drawing.Point(627, 75);
             this.textBox_operator.Margin = new System.Windows.Forms.Padding(2);
             this.textBox_operator.Name = "textBox_operator";
-            this.textBox_operator.Size = new System.Drawing.Size(153, 23);
+            this.textBox_operator.Size = new System.Drawing.Size(205, 23);
             this.textBox_operator.TabIndex = 24;
             this.textBox_operator.TextChanged += new System.EventHandler(this.Controls_TextChanged);
             // 
@@ -252,15 +217,9 @@ namespace LocalERP.WinForm
             // 
             // panel_basic
             // 
-            this.panel_basic.Controls.Add(this.label11);
+            this.panel_basic.Controls.Add(this.lookupText2);
             this.panel_basic.Controls.Add(this.label6);
-            this.panel_basic.Controls.Add(this.textBox_);
             this.panel_basic.Controls.Add(this.label7);
-            this.panel_basic.Controls.Add(this.label18);
-            this.panel_basic.Controls.Add(this.label10);
-            this.panel_basic.Controls.Add(this.label_sum);
-            this.panel_basic.Controls.Add(this.textBox_realTotal);
-            this.panel_basic.Controls.Add(this.textBox_num);
             this.panel_basic.Controls.Add(this.textBox_operator);
             this.panel_basic.Controls.Add(this.lookupText1);
             this.panel_basic.Controls.Add(this.label_operator);
@@ -277,82 +236,51 @@ namespace LocalERP.WinForm
             this.panel_basic.Controls.Add(this.label2);
             this.panel_basic.Location = new System.Drawing.Point(10, 96);
             this.panel_basic.Name = "panel_basic";
-            this.panel_basic.Size = new System.Drawing.Size(847, 122);
+            this.panel_basic.Size = new System.Drawing.Size(847, 222);
             this.panel_basic.TabIndex = 60;
             // 
-            // label11
+            // lookupText2
             // 
-            this.label11.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(817, 79);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(21, 14);
-            this.label11.TabIndex = 78;
-            this.label11.Text = "元";
+            this.lookupText2.BackColor = System.Drawing.Color.Transparent;
+            this.lookupText2.Location = new System.Drawing.Point(627, 41);
+            this.lookupText2.LookupForm = null;
+            this.lookupText2.LookupFormType = null;
+            this.lookupText2.Name = "lookupText2";
+            this.lookupText2.SelectButtonBackGround = global::LocalERP.Properties.Resources.card;
+            this.lookupText2.Size = new System.Drawing.Size(205, 24);
+            this.lookupText2.TabIndex = 46;
+            this.lookupText2.Text_Lookup = "单击选择...";
+            this.lookupText2.Value_Lookup = null;
             // 
             // label6
             // 
-            this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label6.AutoSize = true;
-            this.label6.ForeColor = System.Drawing.Color.Black;
-            this.label6.Location = new System.Drawing.Point(589, 77);
+            this.label6.ForeColor = System.Drawing.Color.Red;
+            this.label6.Location = new System.Drawing.Point(541, 45);
+            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(70, 14);
-            this.label6.TabIndex = 77;
-            this.label6.Text = "平均价格:";
+            this.label6.Size = new System.Drawing.Size(14, 14);
+            this.label6.TabIndex = 48;
+            this.label6.Text = "*";
             // 
             // label7
             // 
-            this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label7.AutoSize = true;
-            this.label7.ForeColor = System.Drawing.Color.Black;
-            this.label7.Location = new System.Drawing.Point(299, 76);
+            this.label7.Location = new System.Drawing.Point(554, 45);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(70, 14);
-            this.label7.TabIndex = 75;
-            this.label7.Text = "卡片次数:";
-            // 
-            // label18
-            // 
-            this.label18.AutoSize = true;
-            this.label18.ForeColor = System.Drawing.Color.Red;
-            this.label18.Location = new System.Drawing.Point(2, 76);
-            this.label18.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(14, 14);
-            this.label18.TabIndex = 74;
-            this.label18.Text = "*";
-            // 
-            // label10
-            // 
-            this.label10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(247, 79);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(21, 14);
-            this.label10.TabIndex = 73;
-            this.label10.Text = "元";
-            // 
-            // label_sum
-            // 
-            this.label_sum.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.label_sum.AutoSize = true;
-            this.label_sum.ForeColor = System.Drawing.Color.Black;
-            this.label_sum.Location = new System.Drawing.Point(19, 77);
-            this.label_sum.Name = "label_sum";
-            this.label_sum.Size = new System.Drawing.Size(70, 14);
-            this.label_sum.TabIndex = 72;
-            this.label_sum.Text = "卡片价格:";
+            this.label7.TabIndex = 47;
+            this.label7.Text = "卡    片:";
             // 
             // lookupText1
             // 
             this.lookupText1.BackColor = System.Drawing.Color.Transparent;
-            this.lookupText1.Location = new System.Drawing.Point(662, 7);
+            this.lookupText1.Location = new System.Drawing.Point(627, 9);
             this.lookupText1.LookupForm = null;
             this.lookupText1.LookupFormType = null;
             this.lookupText1.Name = "lookupText1";
             this.lookupText1.SelectButtonBackGround = global::LocalERP.Properties.Resources.user16;
-            this.lookupText1.Size = new System.Drawing.Size(153, 24);
+            this.lookupText1.Size = new System.Drawing.Size(205, 24);
             this.lookupText1.TabIndex = 21;
             this.lookupText1.Text_Lookup = "单击选择...";
             this.lookupText1.Value_Lookup = null;
@@ -430,11 +358,11 @@ namespace LocalERP.WinForm
             this.Text = "消费单";
             this.Load += new System.EventHandler(this.ProductCirculationForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.sellDataSetBindingSource)).EndInit();
             this.panel_basic.ResumeLayout(false);
             this.panel_basic.PerformLayout();
             this.toolStrip2.ResumeLayout(false);
             this.toolStrip2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.sellDataSetBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -466,15 +394,9 @@ namespace LocalERP.WinForm
         protected System.Windows.Forms.Label label1_tip;
         private System.Windows.Forms.Panel panel_basic;
         private System.Windows.Forms.ToolStripButton toolStripButton_finishCancel;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label18;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Label label_sum;
-        private System.Windows.Forms.TextBox textBox_realTotal;
-        private System.Windows.Forms.TextBox textBox_num;
+        protected LookupText lookupText2;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox textBox_;
-        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label7;
         
        
     }

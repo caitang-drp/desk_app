@@ -642,6 +642,8 @@
     <None Include="images\16pix\tree-node-edit.16px.png" />
     <None Include="images\16pix\38095.png" />
     <None Include="images\16pix\512968.png" />
+    <None Include="images\32pix\orange\13013.png" />
+    <None Include="images\16pix\card.ico" />
     <Content Include="start.ico" />
     <None Include="images\32pix\cute\arrival.png" />
     <None Include="images\32pix\cute\del32.png" />
