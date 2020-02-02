@@ -96,7 +96,7 @@ namespace LocalERP.WinForm
             if (cardForm == null || cardForm.IsDisposed)
             {
                 cardForm = new CardForm();
-                //appendEvent(buyPayBillForm);
+                appendEvent(cardForm);
             }
             return cardForm;
         }
@@ -107,8 +107,8 @@ namespace LocalERP.WinForm
             {
                 cardListForm = new CardListForm(mainForm, 1);
                 cardListForm.initVersions(getVersions(),
-                    UpdateType.PayReceiptUpdate, UpdateType.PayReceiptFinishUpdate, UpdateType.CustomerUpdate);
-                //appendEvent(payReceiptListForm);
+                    UpdateType.CardUpdate, UpdateType.ConsumeUpdate, UpdateType.CustomerUpdate);
+                appendEvent(cardListForm);
             }
             return cardListForm;
         }
@@ -271,7 +271,7 @@ namespace LocalERP.WinForm
         public abstract MyDockContent getProductForm();
 
         //customer category item form
-        private CategoryItemForm customerCIForm = null;
+        protected CategoryItemForm customerCIForm = null;
         public virtual CategoryItemForm getCustomerCIForm()
         {
             if (customerCIForm == null || customerCIForm.IsDisposed)
@@ -283,7 +283,7 @@ namespace LocalERP.WinForm
             return customerCIForm;
         }
 
-        private CategoryItemForm customerCIForm_select = null;
+        protected CategoryItemForm customerCIForm_select = null;
         public virtual CategoryItemForm getCustomerCIForm_Select()
         {
             customerCIForm_select = new CustomerCategoryItemForm(0, CategoryItemTypeConfs.CategoryItemType_Customer, LabelUtility.DATA_CUSTOMER, this.mainForm);
@@ -300,6 +300,9 @@ namespace LocalERP.WinForm
             return customerForm;
         }
 
+
+
+        //category
         public virtual CategoryForm getCategoryForm(string categoryTableName, int mode, int id)
         {
             CategoryForm categoryForm = new CategoryForm(CategoryItemTypeConfs.CategoryItemType_ProductStainless, mode, id);
@@ -311,6 +314,7 @@ namespace LocalERP.WinForm
         protected void appendEvent(MyDockContent form)
         {
             //发布更新，会在form里面的函数调用，每个form都新增这个事件处理函数
+            //比如customerUpdate更新，会让customerUpdate的版本加一
             form.updateNotify += new MyDockContent.UpdateNotify(updateNotify);
 
             //界面等待

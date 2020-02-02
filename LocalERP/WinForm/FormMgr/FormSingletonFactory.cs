@@ -11,7 +11,7 @@ namespace LocalERP.WinForm
         public static FormMgr getInstance()
         {
             if (formMgr == null)
-                formMgr = new FormStainlessMgr();
+                formMgr = new FormCardMgr();
             return formMgr;
         }
     }

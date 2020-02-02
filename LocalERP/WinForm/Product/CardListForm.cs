@@ -29,6 +29,12 @@ namespace LocalERP.WinForm
             this.mainForm = mf;
             this.openMode = openMode;
 
+            if (openMode == 0) {
+                this.toolStrip1.Visible = false;
+                this.label_tip.Text = "双击选中卡片";
+                this.dataGridView1.Columns["check"].Visible = false;
+            }
+
             DateTime dateTime = DateTime.Now;
             this.dateTimePicker3.Value = dateTime.AddMonths(-1);
 
@@ -39,7 +45,7 @@ namespace LocalERP.WinForm
         {
             initCustomerCombox();
             initList();
-            this.dataGridView1.Columns["check"].ReadOnly = false;
+            
         }
 
         private void initCustomerCombox() {
@@ -74,14 +80,18 @@ namespace LocalERP.WinForm
                     index = this.dataGridView1.Rows.Add();
                     this.dataGridView1.Rows[index].Cells["ID"].Value = dr["ID"];
                     this.dataGridView1.Rows[index].Cells["name"].Value = dr["code"];
+                    this.dataGridView1.Rows[index].Cells["customer"].Value = dr["name"];
                     /*int type = (int)(dr["type"]);
                     this.dataGridView1.Rows[index].Cells["type"].Value = ProductCirculation.CirculationTypeConfs[type - 1].name;
                     this.dataGridView1.Rows[index].Cells["typeValue"].Value = type;*/
 
                     double realTotal = double.Parse(dr["total"].ToString());
                     this.dataGridView1.Rows[index].Cells["realTotal"].Value = realTotal.ToString("0.00");
+
+                    this.dataGridView1.Rows[index].Cells["num"].Value = dr["num"];
+                    //this.dataGridView1.Rows[index].Cells["status"].Value = dr["status"];
+
                     
-                    /*
                     int status = (int)(dr["status"]);
                     this.dataGridView1.Rows[index].Cells["status"].Value = ProductCirculation.circulationStatusContext[status - 1];
                     if (status == 1)
@@ -94,7 +104,7 @@ namespace LocalERP.WinForm
                         this.dataGridView1.Rows[index].Cells["status"].Style.ForeColor = Color.Black;
                         this.dataGridView1.Rows[index].Cells["status"].Style.SelectionForeColor = Color.Black;
                     }
-                    */
+                    
 
                     this.dataGridView1.Rows[index].Cells["sellTime"].Value = ((DateTime)dr["cardTime"]).ToString("yyyy-MM-dd HH:mm:ss");
                 }
@@ -174,7 +184,9 @@ namespace LocalERP.WinForm
             if (openMode == 0)
             {
                 string name = this.dataGridView1.Rows[e.RowIndex].Cells["name"].Value.ToString();
-                LookupArg lookupArg = new LookupArg(id, name);
+                string num = this.dataGridView1.Rows[e.RowIndex].Cells["num"].Value.ToString();
+                string customer = this.dataGridView1.Rows[e.RowIndex].Cells["customer"].Value.ToString();
+                LookupArg lookupArg = new LookupArg(id, string.Format("编号{0} | {1} | 总{2}次 ", name, customer, num));
                 //lookupArg.ArgName = conf.CategoryName;
 
                 //File.AppendAllText("e:\\debug.txt", string.Format("double click, thread:{0}\r\n", System.Threading.Thread.CurrentThread.ManagedThreadId));

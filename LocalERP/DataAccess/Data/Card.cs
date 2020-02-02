@@ -142,7 +142,7 @@ namespace LocalERP.DataAccess.Data
             return sb.ToString();
         }
 
-        public static string[] circulationStatusContext = new string[] {"Œ¥…Û∫À","undefined","undefined", "“—…Û∫À" };
+        public static string[] cardStatusContext = new string[] {"Œ¥…Û∫À","undefined","undefined", "“—…Û∫À" };
 
         //±ÿ–Î∏˙ ’∏∂“ª÷¬
         public enum CirculationType

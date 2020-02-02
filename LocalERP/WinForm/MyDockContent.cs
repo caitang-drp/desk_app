@@ -116,6 +116,10 @@ namespace LocalERP.WinForm
         ProductCategoryUpdate,
         
         CustomerUpdate,
-        CustomerCategoryUpdate
+        CustomerCategoryUpdate,
+
+        CardUpdate,
+        //ConsumeUpdate是否有必要
+        ConsumeUpdate
     }
 }

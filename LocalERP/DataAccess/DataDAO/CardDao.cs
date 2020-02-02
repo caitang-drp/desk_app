@@ -60,17 +60,12 @@ namespace LocalERP.DataAccess.DataDAO
             return DbHelperAccess.executeQuery(commandText);
         }
 
-        public int Update(Customer info)
+        public int Update(Card info)
         {
-            string commandText = string.Format("update Customer set name='{0}', comment='{1}', tel='{2}', phone='{3}', address='{4}', arrear={5}, receipt={6} where ID={7}",
-                info.Name, info.Comment, info.Tel, info.Phone, info.Address, info.arrear, info.receipt, info.ID);
+            string commandText = string.Format("update Card set code='{0}', cardTime='{1}', status={2}, customerID={3}, type={4}, total={5}, num={6}, operator='{7}', comment='{8}' where ID={9}",
+                info.Code, info.CardTime, info.Status, info.CustomerID, info.Type, info.Total, info.Number, info.Oper, info.Comment, info.ID);
 
             return DbHelperAccess.executeNonQuery(commandText);
-        }
-
-        // 更新用户的收款，也就是我们欠供应商的钱
-        public void update_receipt(int customer_id, double now)
-        {
         }
 
 
@@ -118,11 +113,6 @@ namespace LocalERP.DataAccess.DataDAO
 
             return categorys;
         }*/
-
-        public void ClearAllArrear() {
-            string commandText = string.Format("update Customer set arrear=0");
-            DbHelperAccess.executeNonQuery(commandText);
-        }
 
     }
 }

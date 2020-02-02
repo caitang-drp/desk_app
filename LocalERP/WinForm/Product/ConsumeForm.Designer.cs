@@ -68,7 +68,7 @@ namespace LocalERP.WinForm
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(19, 44);
+            this.label1.Location = new System.Drawing.Point(19, 93);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(70, 14);
             this.label1.TabIndex = 0;
@@ -77,7 +77,7 @@ namespace LocalERP.WinForm
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(264, 45);
+            this.label2.Location = new System.Drawing.Point(538, 13);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(70, 14);
             this.label2.TabIndex = 2;
@@ -88,16 +88,16 @@ namespace LocalERP.WinForm
             this.dateTime_cardTime.CustomFormat = "yyyy-MM-dd HH:mm:ss";
             this.dateTime_cardTime.Enabled = false;
             this.dateTime_cardTime.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTime_cardTime.Location = new System.Drawing.Point(337, 40);
+            this.dateTime_cardTime.Location = new System.Drawing.Point(611, 8);
             this.dateTime_cardTime.Margin = new System.Windows.Forms.Padding(2);
             this.dateTime_cardTime.Name = "dateTime_cardTime";
-            this.dateTime_cardTime.Size = new System.Drawing.Size(173, 23);
+            this.dateTime_cardTime.Size = new System.Drawing.Size(193, 23);
             this.dateTime_cardTime.TabIndex = 23;
             this.dateTime_cardTime.ValueChanged += new System.EventHandler(this.Controls_TextChanged);
             // 
             // textBox_comment
             // 
-            this.textBox_comment.Location = new System.Drawing.Point(92, 40);
+            this.textBox_comment.Location = new System.Drawing.Point(92, 89);
             this.textBox_comment.Margin = new System.Windows.Forms.Padding(2);
             this.textBox_comment.Name = "textBox_comment";
             this.textBox_comment.Size = new System.Drawing.Size(151, 23);
@@ -162,26 +162,28 @@ namespace LocalERP.WinForm
             // 
             this.label9.AutoSize = true;
             this.label9.ForeColor = System.Drawing.Color.Red;
-            this.label9.Location = new System.Drawing.Point(541, 13);
+            this.label9.Location = new System.Drawing.Point(541, 120);
             this.label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(14, 14);
             this.label9.TabIndex = 43;
             this.label9.Text = "*";
+            this.label9.Visible = false;
             // 
             // label_customer
             // 
             this.label_customer.AutoSize = true;
-            this.label_customer.Location = new System.Drawing.Point(554, 13);
+            this.label_customer.Location = new System.Drawing.Point(554, 120);
             this.label_customer.Name = "label_customer";
             this.label_customer.Size = new System.Drawing.Size(70, 14);
             this.label_customer.TabIndex = 41;
             this.label_customer.Text = "客    户:";
+            this.label_customer.Visible = false;
             // 
             // label_operator
             // 
             this.label_operator.AutoSize = true;
-            this.label_operator.Location = new System.Drawing.Point(554, 79);
+            this.label_operator.Location = new System.Drawing.Point(264, 94);
             this.label_operator.Name = "label_operator";
             this.label_operator.Size = new System.Drawing.Size(70, 14);
             this.label_operator.TabIndex = 45;
@@ -199,10 +201,10 @@ namespace LocalERP.WinForm
             // 
             // textBox_operator
             // 
-            this.textBox_operator.Location = new System.Drawing.Point(627, 75);
+            this.textBox_operator.Location = new System.Drawing.Point(337, 90);
             this.textBox_operator.Margin = new System.Windows.Forms.Padding(2);
             this.textBox_operator.Name = "textBox_operator";
-            this.textBox_operator.Size = new System.Drawing.Size(205, 23);
+            this.textBox_operator.Size = new System.Drawing.Size(173, 23);
             this.textBox_operator.TabIndex = 24;
             this.textBox_operator.TextChanged += new System.EventHandler(this.Controls_TextChanged);
             // 
@@ -236,18 +238,18 @@ namespace LocalERP.WinForm
             this.panel_basic.Controls.Add(this.label2);
             this.panel_basic.Location = new System.Drawing.Point(10, 96);
             this.panel_basic.Name = "panel_basic";
-            this.panel_basic.Size = new System.Drawing.Size(847, 222);
+            this.panel_basic.Size = new System.Drawing.Size(920, 222);
             this.panel_basic.TabIndex = 60;
             // 
             // lookupText2
             // 
             this.lookupText2.BackColor = System.Drawing.Color.Transparent;
-            this.lookupText2.Location = new System.Drawing.Point(627, 41);
+            this.lookupText2.Location = new System.Drawing.Point(92, 45);
             this.lookupText2.LookupForm = null;
             this.lookupText2.LookupFormType = null;
             this.lookupText2.Name = "lookupText2";
             this.lookupText2.SelectButtonBackGround = global::LocalERP.Properties.Resources.card;
-            this.lookupText2.Size = new System.Drawing.Size(205, 24);
+            this.lookupText2.Size = new System.Drawing.Size(712, 24);
             this.lookupText2.TabIndex = 46;
             this.lookupText2.Text_Lookup = "单击选择...";
             this.lookupText2.Value_Lookup = null;
@@ -256,7 +258,7 @@ namespace LocalERP.WinForm
             // 
             this.label6.AutoSize = true;
             this.label6.ForeColor = System.Drawing.Color.Red;
-            this.label6.Location = new System.Drawing.Point(541, 45);
+            this.label6.Location = new System.Drawing.Point(6, 49);
             this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(14, 14);
@@ -266,7 +268,7 @@ namespace LocalERP.WinForm
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(554, 45);
+            this.label7.Location = new System.Drawing.Point(19, 49);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(70, 14);
             this.label7.TabIndex = 47;
@@ -275,7 +277,7 @@ namespace LocalERP.WinForm
             // lookupText1
             // 
             this.lookupText1.BackColor = System.Drawing.Color.Transparent;
-            this.lookupText1.Location = new System.Drawing.Point(627, 9);
+            this.lookupText1.Location = new System.Drawing.Point(627, 116);
             this.lookupText1.LookupForm = null;
             this.lookupText1.LookupFormType = null;
             this.lookupText1.Name = "lookupText1";
@@ -284,6 +286,7 @@ namespace LocalERP.WinForm
             this.lookupText1.TabIndex = 21;
             this.lookupText1.Text_Lookup = "单击选择...";
             this.lookupText1.Value_Lookup = null;
+            this.lookupText1.Visible = false;
             this.lookupText1.valueSetted += new LocalERP.WinForm.LookupText.ValueSetted(this.lookupText1_valueSetted);
             // 
             // toolStrip2
@@ -297,7 +300,7 @@ namespace LocalERP.WinForm
             this.toolStripButton1});
             this.toolStrip2.Location = new System.Drawing.Point(0, 0);
             this.toolStrip2.Name = "toolStrip2";
-            this.toolStrip2.Size = new System.Drawing.Size(879, 37);
+            this.toolStrip2.Size = new System.Drawing.Size(942, 37);
             this.toolStrip2.TabIndex = 10;
             this.toolStrip2.Text = "toolStrip2";
             // 
@@ -346,7 +349,7 @@ namespace LocalERP.WinForm
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(879, 522);
+            this.ClientSize = new System.Drawing.Size(942, 522);
             this.Controls.Add(this.panel_basic);
             this.Controls.Add(this.label1_tip);
             this.Controls.Add(this.label_title);

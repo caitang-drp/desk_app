@@ -119,6 +119,9 @@
     <Compile Include="DataAccess\Utility\DataUtility.cs" />
     <Compile Include="DataAccess\Utility\ConfUtility.cs" />
     <Compile Include="UiDataProxy\CategoryItemTypeConf.cs" />
+    <Compile Include="WinForm\Data\CustomerCardForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="WinForm\Data\ProductClothesForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -149,8 +152,12 @@
     <Compile Include="WinForm\Data\CustomerCategoryItemForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="WinForm\Data\CustomerCardCategoryItemForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="WinForm\FormMgr\FormMgr.cs" />
     <Compile Include="WinForm\FormMgr\FormSingletonFactory.cs" />
+    <Compile Include="WinForm\FormMgr\FormCardMgr.cs" />
     <Compile Include="WinForm\MyDockContent.cs">
       <SubType>Form</SubType>
     </Compile>

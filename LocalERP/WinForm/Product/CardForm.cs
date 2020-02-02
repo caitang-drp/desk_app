@@ -22,14 +22,10 @@ namespace LocalERP.WinForm
         protected int openMode = 0;
         protected int cardID = 0;
 
-        //protected CirculationTypeConf conf;
-
         private Card card = null;
         //public List<ProductCirculationRecord> records = null;
 
         protected bool needSave = false;
-
-        //protected CardDao cirDao;
 
         public CardForm()
         {
@@ -38,14 +34,11 @@ namespace LocalERP.WinForm
             openMode = 0;
             cardID = 0;
 
-            
-            //this.cirDao = cirDao;
-
             //initDatagridview(this.dataGridView1);
         }
 
         //load 和 reload都是对外提供接口
-        private void ProductCirculationForm_Load(object sender, EventArgs e)
+        private void CardForm_Load(object sender, EventArgs e)
         {
             this.lookupText1.LookupForm = FormSingletonFactory.getInstance().getCustomerCIForm_Select();
             initCard();
@@ -110,7 +103,7 @@ namespace LocalERP.WinForm
                     break;
                 case 1:
                     //未审核，这种状态属于刚开始打开的编辑状态，以及弃核后的状态
-                    this.label_status.Text = ProductCirculation.circulationStatusContext[0];
+                    this.label_status.Text = Card.cardStatusContext[0];
                     this.initControlsEnable(false, true, false, true);
                     break;
                 case 2:
@@ -125,8 +118,8 @@ namespace LocalERP.WinForm
                     break;
                 case 4:
                     //审核
-                    this.label_status.Text = ProductCirculation.circulationStatusContext[3];
-                    //this.initControlsEnable(false, false, false, true, true, false, false, false, false, true, false);
+                    this.label_status.Text = Card.cardStatusContext[3];
+                    this.initControlsEnable(false, false, true, false);
                     break;
                 default:
                     break;
@@ -143,28 +136,36 @@ namespace LocalERP.WinForm
 
 
         //get and set api
-        protected bool getCard(out Card card)
+        protected bool getCard(out Card c)
         {
-            card = new Card();
-            card.ID = cardID;
+            //先获取status
+            int tempStatus = 1;
+            if (card != null)
+                tempStatus = card.Status;
+            
+            c = new Card();
+
+            c.Status = tempStatus;
+
+            c.ID = cardID;
 
             string code;
             if (ValidateUtility.getName(this.textBox_serial, this.errorProvider1, out code) == false)
                 return false;
-            card.Code = code;
+            c.Code = code;
 
             int customerID = -1;
             if (this.lookupText1.Visible == true && ValidateUtility.getLookupValueID(this.lookupText1, this.errorProvider1, out customerID) == false)
                 return false;
 
-            card.CustomerID = customerID;
+            c.CustomerID = customerID;
 
-            card.CardTime = this.dateTime_cardTime.Value;
-            card.Comment = this.textBox_comment.Text;
-            card.Oper = this.textBox_operator.Text;
+            c.CardTime = this.dateTime_cardTime.Value;
+            c.Comment = this.textBox_comment.Text;
+            c.Oper = this.textBox_operator.Text;
 
            
-            card.CustomerName = this.lookupText1.Text_Lookup;
+            c.CustomerName = this.lookupText1.Text_Lookup;
 
             double total;
             int num;
@@ -172,8 +173,8 @@ namespace LocalERP.WinForm
             if (ValidateUtility.getDouble(this.textBox_realTotal, this.errorProvider1, true, true, out total)
                 && ValidateUtility.getInt(this.textBox_num, this.errorProvider1, true, true, out num))
             {
-                card.Total = total;
-                card.Number = num;
+                c.Total = total;
+                c.Number = num;
                 
             }
             else
@@ -188,14 +189,12 @@ namespace LocalERP.WinForm
         ///
         protected void toolStripButton_save_Click(object sender, EventArgs e)
         {
-
-            Card circulation;
             bool isSellCorrect = getCard(out card);
             if (isSellCorrect == false)
                 return;
 
             //
-            if (this.openMode == 1 /*&& CardDao.FindByID(card.ID) == null*/)
+            if (this.openMode == 1 && CardDao.getInstance().FindByID(card.ID) == null)
             {
                 MessageBox.Show("该单据已经被删除了。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 //this.Enabled = true;
@@ -213,9 +212,7 @@ namespace LocalERP.WinForm
                 }
                 else if (openMode == 1)
                 {
-                    //cirDao.UpdateBaiscInfo(circulation);
-                    //if (recordChanged)
-                        //cirDao.updateRecords(circulation.ID, records);
+                    CardDao.getInstance().Update(card);
                     MessageBox.Show(string.Format("保存{0}成功!", this.Text), "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
 
@@ -231,13 +228,48 @@ namespace LocalERP.WinForm
             }
 
             //so important: if edit ,it should be refresh also, because edit will del exist item and add new item
-            //this.invokeUpdateNotify(conf.notifyType);
+            this.invokeUpdateNotify(UpdateType.CardUpdate);
         }
 
         //审核
         private void toolStripButton_finish_Click(object sender, EventArgs e)
         {
+            string tips = "是否审核？";
+            if (MessageBox.Show(tips, "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) != DialogResult.OK)
+                return;
+
+            this.getCard(out card);
+
+            //2018-4-20修复的bug
+            if (CardDao.getInstance().FindByID(card.ID) == null)
+            {
+                MessageBox.Show("该单据已经被删除了。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //this.Enabled = true;
+                return;
+            }
+
             
+
+            //2017-11-20，相应的信息也要更新
+            //sell.CirculationTime = DateTime.Now;
+            //this.dateTime_sellTime.Value = sell.CirculationTime;
+            //重置了dateTime控件后，neeSave会变为true，但是由于是系统自动更新时间，所以不需要用户保存！耦合度太高了
+            //this.needSave = false;
+            //cirDao.UpdateBaiscInfo(sell);
+
+            //cirDao.UpdateStatus(circulationID, 4);
+
+            card.Status = 4;
+            CardDao.getInstance().Update(card);
+
+            this.initCard();
+            
+            MessageBox.Show("审核成功!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            openMode = 4;
+            this.switchMode(4);
+
+            this.invokeUpdateNotify(UpdateType.CardUpdate);
         }
 
         //弃核
@@ -284,11 +316,6 @@ namespace LocalERP.WinForm
         private void Controls_TextChanged(object sender, EventArgs e)
         {
             resetNeedSave(true);
-        }
-
-        private void lookupText1_valueSetted(object sender, LookupArg arg)
-        {
-            
         }
 
     }

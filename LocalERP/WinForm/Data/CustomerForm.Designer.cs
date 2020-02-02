@@ -55,8 +55,10 @@
             this.label12 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.toolStrip2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -175,7 +177,7 @@
             // textBox_arrear
             // 
             this.errorProvider1.SetIconPadding(this.textBox_arrear, 20);
-            this.textBox_arrear.Location = new System.Drawing.Point(86, 268);
+            this.textBox_arrear.Location = new System.Drawing.Point(80, 3);
             this.textBox_arrear.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.textBox_arrear.Name = "textBox_arrear";
             this.textBox_arrear.Size = new System.Drawing.Size(261, 23);
@@ -263,7 +265,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(20, 271);
+            this.label11.Location = new System.Drawing.Point(14, 6);
             this.label11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(42, 14);
@@ -274,7 +276,7 @@
             // 
             this.label12.AutoSize = true;
             this.label12.ForeColor = System.Drawing.Color.Red;
-            this.label12.Location = new System.Drawing.Point(7, 304);
+            this.label12.Location = new System.Drawing.Point(6, 39);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(413, 14);
             this.label12.TabIndex = 50;
@@ -284,7 +286,7 @@
             // 
             this.label13.AutoSize = true;
             this.label13.ForeColor = System.Drawing.Color.Red;
-            this.label13.Location = new System.Drawing.Point(20, 328);
+            this.label13.Location = new System.Drawing.Point(14, 63);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(385, 14);
             this.label13.TabIndex = 51;
@@ -293,11 +295,23 @@
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(350, 272);
+            this.label14.Location = new System.Drawing.Point(344, 7);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(21, 14);
             this.label14.TabIndex = 52;
             this.label14.Text = "元";
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.label12);
+            this.panel1.Controls.Add(this.label14);
+            this.panel1.Controls.Add(this.label13);
+            this.panel1.Controls.Add(this.textBox_arrear);
+            this.panel1.Controls.Add(this.label11);
+            this.panel1.Location = new System.Drawing.Point(7, 265);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(433, 92);
+            this.panel1.TabIndex = 53;
             // 
             // CustomerForm
             // 
@@ -305,11 +319,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(419, 362);
-            this.Controls.Add(this.label14);
-            this.Controls.Add(this.label13);
-            this.Controls.Add(this.label12);
-            this.Controls.Add(this.textBox_arrear);
-            this.Controls.Add(this.label11);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.comboBoxTree1);
             this.Controls.Add(this.label9);
@@ -327,6 +336,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.textBox_name);
             this.Controls.Add(this.label1);
+            this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("宋体", 10F);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
@@ -336,6 +346,8 @@
             this.toolStrip2.ResumeLayout(false);
             this.toolStrip2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -368,5 +380,6 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label14;
+        protected System.Windows.Forms.Panel panel1;
     }
 }
