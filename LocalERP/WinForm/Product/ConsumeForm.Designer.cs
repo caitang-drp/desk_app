@@ -59,6 +59,8 @@ namespace LocalERP.WinForm
             this.toolStripButton_finishCancel = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.sellDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.label8 = new System.Windows.Forms.Label();
+            this.textBox_num = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.panel_basic.SuspendLayout();
             this.toolStrip2.SuspendLayout();
@@ -219,6 +221,7 @@ namespace LocalERP.WinForm
             // 
             // panel_basic
             // 
+            this.panel_basic.Controls.Add(this.textBox_num);
             this.panel_basic.Controls.Add(this.lookupText2);
             this.panel_basic.Controls.Add(this.label6);
             this.panel_basic.Controls.Add(this.label7);
@@ -235,6 +238,7 @@ namespace LocalERP.WinForm
             this.panel_basic.Controls.Add(this.textBox_serial);
             this.panel_basic.Controls.Add(this.label3);
             this.panel_basic.Controls.Add(this.dateTime_cardTime);
+            this.panel_basic.Controls.Add(this.label8);
             this.panel_basic.Controls.Add(this.label2);
             this.panel_basic.Location = new System.Drawing.Point(10, 96);
             this.panel_basic.Name = "panel_basic";
@@ -249,7 +253,7 @@ namespace LocalERP.WinForm
             this.lookupText2.LookupFormType = null;
             this.lookupText2.Name = "lookupText2";
             this.lookupText2.SelectButtonBackGround = global::LocalERP.Properties.Resources.card;
-            this.lookupText2.Size = new System.Drawing.Size(712, 24);
+            this.lookupText2.Size = new System.Drawing.Size(418, 24);
             this.lookupText2.TabIndex = 46;
             this.lookupText2.Text_Lookup = "单击选择...";
             this.lookupText2.Value_Lookup = null;
@@ -344,6 +348,24 @@ namespace LocalERP.WinForm
             this.toolStripButton1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton_cancel_Click);
             // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(538, 47);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(70, 14);
+            this.label8.TabIndex = 2;
+            this.label8.Text = "消费次数:";
+            // 
+            // textBox_num
+            // 
+            this.textBox_num.Enabled = false;
+            this.textBox_num.Location = new System.Drawing.Point(611, 44);
+            this.textBox_num.Margin = new System.Windows.Forms.Padding(2);
+            this.textBox_num.Name = "textBox_num";
+            this.textBox_num.Size = new System.Drawing.Size(193, 23);
+            this.textBox_num.TabIndex = 49;
+            // 
             // ConsumeForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
@@ -400,6 +422,8 @@ namespace LocalERP.WinForm
         protected LookupText lookupText2;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TextBox textBox_num;
+        private System.Windows.Forms.Label label8;
         
        
     }

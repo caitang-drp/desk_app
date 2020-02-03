@@ -127,7 +127,7 @@ namespace LocalERP.WinForm
 
         //del
         private void toolStripButton2_Click(object sender, EventArgs e)
-        {/*
+        {
             List<int> list = this.dataGridView1.getSelectIDs("ID", "check");
             if (list == null || list.Count <= 0)
             {
@@ -140,20 +140,21 @@ namespace LocalERP.WinForm
                 ids.Append(list[ii]);
                 ids.Append(" ");
             }
-            if (MessageBox.Show(string.Format("是否删除流水号为{0}的单据?", ids.ToString()), "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
+            if (MessageBox.Show(string.Format("是否删除流水号为{0}的卡片?", ids.ToString()), "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
             {
                 for (int i = 0; i < list.Count; i++)
                 {
-                    if (cirDao.FindByID(list[i]).Status > 1) {
-                        MessageBox.Show(string.Format("ID为{0}的单据已经审核, 无法删除!", list[i]), "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    if (CardDao.getInstance().FindByID(list[i]).Status > 1)
+                    {
+                        MessageBox.Show(string.Format("ID为{0}的卡片已经审核, 无法删除!", list[i]), "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         initList();
                         return;
                     }
-                    cirDao.DeleteByID(list[i]);
+                    CardDao.getInstance().Delete(list[i]);
                 }
                 initList();
                 MessageBox.Show("删除单据成功!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }*/
+            }
         }
 
         //edit

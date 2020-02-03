@@ -36,7 +36,7 @@ namespace LocalERP.DataAccess.DataDAO
 
         public int Delete(int id)
         {
-            string commandText = string.Format("delete from Customer where ID={0}", id);
+            string commandText = string.Format("delete from Card where ID={0}", id);
             return DbHelperAccess.executeNonQuery(commandText);
         }
 
@@ -51,14 +51,14 @@ namespace LocalERP.DataAccess.DataDAO
             commandText.Append(" order by Card.cardTime desc");
             return DbHelperAccess.executeQuery(commandText.ToString());
         }
-
+        /*
         public DataTable FindListForStatistic(Category parent)
         {
             string commandText = "select ID, name from Customer";
             if (parent != null)
                 commandText = string.Format("select Customer.ID, Customer.name from Customer, CustomerCategory where Customer.parent=CustomerCategory.ID and CustomerCategory.lft>={0} and CustomerCategory.rgt<={1}", parent.Left, parent.Right);
             return DbHelperAccess.executeQuery(commandText);
-        }
+        }*/
 
         public int Update(Card info)
         {
