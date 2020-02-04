@@ -20,12 +20,9 @@ namespace LocalERP.WinForm
         //open mode       | 0:add 1:edit | 2:approval  | 3:partArrival | 4:arrival
         //status          | 1:apply      | 2:approval  | 3:partArrival | 4:arrival  
         protected int openMode = 0;
-        protected int cardID = 0;
+        protected int consumeID = 0;
 
-        //protected CirculationTypeConf conf;
-
-        private Card card = null;
-        //public List<ProductCirculationRecord> records = null;
+        private Consume consume = null;
 
         protected bool needSave = false;
 
@@ -36,21 +33,16 @@ namespace LocalERP.WinForm
             InitializeComponent();
 
             openMode = 0;
-            cardID = 0;
-
-            
-            //this.cirDao = cirDao;
-
-            //initDatagridview(this.dataGridView1);
+            consumeID = 0;
         }
 
         //load 和 reload都是对外提供接口
-        private void ProductCirculationForm_Load(object sender, EventArgs e)
+        private void ConsumeForm_Load(object sender, EventArgs e)
         {
             this.lookupText1.LookupForm = FormSingletonFactory.getInstance().getCustomerCIForm_Select();
             this.lookupText2.LookupForm = FormSingletonFactory.getInstance().getCardListForm_select();
 
-            initCard();
+            initConsume();
         }
 
         public void reload(int mode, int id) {
@@ -59,43 +51,43 @@ namespace LocalERP.WinForm
                 return;
             
             openMode = mode;
-            cardID = id;
-            initCard();
+            consumeID = id;
+            initConsume();
 
             this.lookupText1.Focus();
         }
 
         //对内提供服务的函数，调用switch mode
-        private void initCard()
+        private void initConsume()
         {
             //2020-1-18 这里只分两种情况，除了0之外，其他情况还要根据card的status来重设openMode
             if (openMode == 0)
             {
 
-                this.dateTime_cardTime.Value = DateTime.Now;
+                this.dateTime_consumeTime.Value = DateTime.Now;
                 this.textBox_comment.Text = null;
                 this.lookupText1.LookupArg = null;
                 this.lookupText1.Text_Lookup = null;
 
                 int max = 1;// CirDao.getMaxCode(string.Format("CARD-{0}-", DateTime.Now.ToString("yyyyMMdd")));
-                this.textBox_serial.Text = string.Format("CARD-{0}-{1:0000}", DateTime.Now.ToString("yyyyMMdd"), max + 1);
+                this.textBox_code.Text = string.Format("CARD-{0}-{1:0000}", DateTime.Now.ToString("yyyyMMdd"), max + 1);
 
                 this.textBox_operator.Text = ConfDao.getInstance().Get(5).ToString();
                 //this.dataGridView1.Rows.Clear();
                 //this.dataGridView2[1, 0].Value = null;
             }
-            else {
+            else {/*
                 card = CardDao.getInstance().FindByID(cardID);
 
-                this.textBox_serial.Text = card.Code;
-                this.dateTime_cardTime.Value = card.CardTime;
+                this.textBox_code.Text = card.Code;
+                this.dateTime_consumeTime.Value = card.CardTime;
                
                 this.textBox_comment.Text = card.Comment;
                 this.textBox_operator.Text = card.Oper;
                 this.lookupText1.LookupArg = new LookupArg(card.CustomerID, card.CustomerName);
                 this.lookupText1.Text_Lookup = card.CustomerName;
 
-                openMode = card.Status;
+                openMode = card.Status;*/
             }
             switchMode(openMode);
             resetNeedSave(false);
@@ -144,30 +136,33 @@ namespace LocalERP.WinForm
 
 
         //get and set api
-        protected bool getCard(out Card card)
+        protected bool getConsume(out Consume consume)
         {
-            card = new Card();
-            card.ID = cardID;
+            consume = new Consume();
+            consume.ID = consumeID;
 
             string code;
-            if (ValidateUtility.getName(this.textBox_serial, this.errorProvider1, out code) == false)
+            if (ValidateUtility.getName(this.textBox_code, this.errorProvider1, out code) == false)
                 return false;
-            card.Code = code;
+            consume.Code = code;
 
+            /*
             int customerID = -1;
             if (this.lookupText1.Visible == true && ValidateUtility.getLookupValueID(this.lookupText1, this.errorProvider1, out customerID) == false)
                 return false;
+            */
 
-            card.CustomerID = customerID;
+            int cardID = -1;
+            if (this.lookupText2.Visible == true && ValidateUtility.getLookupValueID(this.lookupText1, this.errorProvider1, out cardID) == false)
+                return false;
 
-            card.CardTime = this.dateTime_cardTime.Value;
-            card.Comment = this.textBox_comment.Text;
-            card.Oper = this.textBox_operator.Text;
+            consume.CardID = cardID;
 
-           
-            card.CustomerName = this.lookupText1.Text_Lookup;
+            consume.ConsumeTime = this.dateTime_consumeTime.Value;
+            consume.Comment = this.textBox_comment.Text;
+            consume.Oper = this.textBox_operator.Text;
 
-            
+            //consume.CustomerName = this.lookupText1.Text_Lookup;
            
             return true;
         }
@@ -179,9 +174,7 @@ namespace LocalERP.WinForm
         ///
         protected void toolStripButton_save_Click(object sender, EventArgs e)
         {
-
-            Card circulation;
-            bool isSellCorrect = getCard(out card);
+            bool isSellCorrect = getConsume(out consume);
             if (isSellCorrect == false)
                 return;
 
@@ -197,9 +190,9 @@ namespace LocalERP.WinForm
             {
                 if (openMode == 0)
                 {
-                    card.Status = 1;
+                    consume.Status = 1;
                     
-                    CardDao.getInstance().Insert(card, out cardID);
+                    ConsumeDao.getInstance().Insert(consume, out consumeID);
                     MessageBox.Show(string.Format("增加{0}成功!", this.Text), "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else if (openMode == 1)
@@ -212,13 +205,13 @@ namespace LocalERP.WinForm
 
                 openMode = 1;
                 //重新更新circulation和record，因为ID不一样
-                this.initCard();
+                this.initConsume();
             }
             catch (Exception ex)
-            {
+            {/*
                 if (openMode == 0)
                     ProductStainlessCirculationDao.getInstance().DeleteByID(cardID);
-                MessageBox.Show("保存有误,可能是往来单位或货品属性被修改过,请重新编辑!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("保存有误,可能是往来单位或货品属性被修改过,请重新编辑!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);*/
             }
 
             //so important: if edit ,it should be refresh also, because edit will del exist item and add new item
@@ -256,7 +249,7 @@ namespace LocalERP.WinForm
         private void textBox_serial_Validating(object sender, CancelEventArgs e)
         {
             string temp;
-            ValidateUtility.getName(this.textBox_serial, this.errorProvider1, out temp);
+            ValidateUtility.getName(this.textBox_code, this.errorProvider1, out temp);
         }
 
         protected void resetNeedSave(bool value)

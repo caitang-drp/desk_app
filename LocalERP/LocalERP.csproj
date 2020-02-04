@@ -92,6 +92,7 @@
     <Compile Include="DataAccess\DataDAO\ProductStainlessCirculationRecordDao.cs" />
     <Compile Include="DataAccess\DataDAO\ProductCirculationRecordDao.cs" />
     <Compile Include="DataAccess\DataDAO\CardDao.cs" />
+    <Compile Include="DataAccess\DataDAO\ConsumeDao.cs" />
     <Compile Include="DataAccess\Data\Category.cs" />
     <Compile Include="DataAccess\Data\Charactor.cs" />
     <Compile Include="DataAccess\Data\PayReceipt.cs" />
@@ -112,6 +113,7 @@
     <Compile Include="DataAccess\Data\ProductClothesCirculationRecord.cs" />
     <Compile Include="DataAccess\Data\ProductStainlessCirculationRecord.cs" />
     <Compile Include="DataAccess\Data\Card.cs" />
+    <Compile Include="DataAccess\Data\Consume.cs" />
     <Compile Include="DataAccess\DbUtility\DbHelperAccess.cs" />
     <Compile Include="DataAccess\Utility\AuthUtility.cs" />
     <Compile Include="DataAccess\Utility\LabelUtility.cs" />

@@ -34,9 +34,9 @@ namespace LocalERP.WinForm
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ConsumeForm));
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.dateTime_cardTime = new System.Windows.Forms.DateTimePicker();
+            this.dateTime_consumeTime = new System.Windows.Forms.DateTimePicker();
             this.textBox_comment = new System.Windows.Forms.TextBox();
-            this.textBox_serial = new System.Windows.Forms.TextBox();
+            this.textBox_code = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label_status = new System.Windows.Forms.Label();
@@ -49,18 +49,18 @@ namespace LocalERP.WinForm
             this.textBox_operator = new System.Windows.Forms.TextBox();
             this.label1_tip = new System.Windows.Forms.Label();
             this.panel_basic = new System.Windows.Forms.Panel();
+            this.textBox_num = new System.Windows.Forms.TextBox();
             this.lookupText2 = new LocalERP.WinForm.LookupText();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.lookupText1 = new LocalERP.WinForm.LookupText();
+            this.label8 = new System.Windows.Forms.Label();
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
             this.toolStripButton_save = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton_finish = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton_finishCancel = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.sellDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.label8 = new System.Windows.Forms.Label();
-            this.textBox_num = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.panel_basic.SuspendLayout();
             this.toolStrip2.SuspendLayout();
@@ -85,17 +85,17 @@ namespace LocalERP.WinForm
             this.label2.TabIndex = 2;
             this.label2.Text = "消费日期:";
             // 
-            // dateTime_cardTime
+            // dateTime_consumeTime
             // 
-            this.dateTime_cardTime.CustomFormat = "yyyy-MM-dd HH:mm:ss";
-            this.dateTime_cardTime.Enabled = false;
-            this.dateTime_cardTime.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTime_cardTime.Location = new System.Drawing.Point(611, 8);
-            this.dateTime_cardTime.Margin = new System.Windows.Forms.Padding(2);
-            this.dateTime_cardTime.Name = "dateTime_cardTime";
-            this.dateTime_cardTime.Size = new System.Drawing.Size(193, 23);
-            this.dateTime_cardTime.TabIndex = 23;
-            this.dateTime_cardTime.ValueChanged += new System.EventHandler(this.Controls_TextChanged);
+            this.dateTime_consumeTime.CustomFormat = "yyyy-MM-dd HH:mm:ss";
+            this.dateTime_consumeTime.Enabled = false;
+            this.dateTime_consumeTime.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dateTime_consumeTime.Location = new System.Drawing.Point(611, 8);
+            this.dateTime_consumeTime.Margin = new System.Windows.Forms.Padding(2);
+            this.dateTime_consumeTime.Name = "dateTime_consumeTime";
+            this.dateTime_consumeTime.Size = new System.Drawing.Size(193, 23);
+            this.dateTime_consumeTime.TabIndex = 23;
+            this.dateTime_consumeTime.ValueChanged += new System.EventHandler(this.Controls_TextChanged);
             // 
             // textBox_comment
             // 
@@ -106,15 +106,15 @@ namespace LocalERP.WinForm
             this.textBox_comment.TabIndex = 22;
             this.textBox_comment.TextChanged += new System.EventHandler(this.Controls_TextChanged);
             // 
-            // textBox_serial
+            // textBox_code
             // 
-            this.textBox_serial.Enabled = false;
-            this.textBox_serial.Location = new System.Drawing.Point(337, 8);
-            this.textBox_serial.Margin = new System.Windows.Forms.Padding(2);
-            this.textBox_serial.Name = "textBox_serial";
-            this.textBox_serial.Size = new System.Drawing.Size(173, 23);
-            this.textBox_serial.TabIndex = 20;
-            this.textBox_serial.Validating += new System.ComponentModel.CancelEventHandler(this.textBox_serial_Validating);
+            this.textBox_code.Enabled = false;
+            this.textBox_code.Location = new System.Drawing.Point(337, 8);
+            this.textBox_code.Margin = new System.Windows.Forms.Padding(2);
+            this.textBox_code.Name = "textBox_code";
+            this.textBox_code.Size = new System.Drawing.Size(173, 23);
+            this.textBox_code.TabIndex = 20;
+            this.textBox_code.Validating += new System.ComponentModel.CancelEventHandler(this.textBox_serial_Validating);
             // 
             // label3
             // 
@@ -235,9 +235,9 @@ namespace LocalERP.WinForm
             this.panel_basic.Controls.Add(this.label5);
             this.panel_basic.Controls.Add(this.label_status);
             this.panel_basic.Controls.Add(this.label4);
-            this.panel_basic.Controls.Add(this.textBox_serial);
+            this.panel_basic.Controls.Add(this.textBox_code);
             this.panel_basic.Controls.Add(this.label3);
-            this.panel_basic.Controls.Add(this.dateTime_cardTime);
+            this.panel_basic.Controls.Add(this.dateTime_consumeTime);
             this.panel_basic.Controls.Add(this.label8);
             this.panel_basic.Controls.Add(this.label2);
             this.panel_basic.Location = new System.Drawing.Point(10, 96);
@@ -245,10 +245,19 @@ namespace LocalERP.WinForm
             this.panel_basic.Size = new System.Drawing.Size(920, 222);
             this.panel_basic.TabIndex = 60;
             // 
+            // textBox_num
+            // 
+            this.textBox_num.Enabled = false;
+            this.textBox_num.Location = new System.Drawing.Point(611, 46);
+            this.textBox_num.Margin = new System.Windows.Forms.Padding(2);
+            this.textBox_num.Name = "textBox_num";
+            this.textBox_num.Size = new System.Drawing.Size(193, 23);
+            this.textBox_num.TabIndex = 49;
+            // 
             // lookupText2
             // 
             this.lookupText2.BackColor = System.Drawing.Color.Transparent;
-            this.lookupText2.Location = new System.Drawing.Point(92, 45);
+            this.lookupText2.Location = new System.Drawing.Point(92, 47);
             this.lookupText2.LookupForm = null;
             this.lookupText2.LookupFormType = null;
             this.lookupText2.Name = "lookupText2";
@@ -292,6 +301,15 @@ namespace LocalERP.WinForm
             this.lookupText1.Value_Lookup = null;
             this.lookupText1.Visible = false;
             this.lookupText1.valueSetted += new LocalERP.WinForm.LookupText.ValueSetted(this.lookupText1_valueSetted);
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(538, 49);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(70, 14);
+            this.label8.TabIndex = 2;
+            this.label8.Text = "消费次数:";
             // 
             // toolStrip2
             // 
@@ -348,24 +366,6 @@ namespace LocalERP.WinForm
             this.toolStripButton1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton_cancel_Click);
             // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(538, 47);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(70, 14);
-            this.label8.TabIndex = 2;
-            this.label8.Text = "消费次数:";
-            // 
-            // textBox_num
-            // 
-            this.textBox_num.Enabled = false;
-            this.textBox_num.Location = new System.Drawing.Point(611, 44);
-            this.textBox_num.Margin = new System.Windows.Forms.Padding(2);
-            this.textBox_num.Name = "textBox_num";
-            this.textBox_num.Size = new System.Drawing.Size(193, 23);
-            this.textBox_num.TabIndex = 49;
-            // 
             // ConsumeForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
@@ -381,7 +381,7 @@ namespace LocalERP.WinForm
             this.Name = "ConsumeForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "消费单";
-            this.Load += new System.EventHandler(this.ProductCirculationForm_Load);
+            this.Load += new System.EventHandler(this.ConsumeForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.panel_basic.ResumeLayout(false);
             this.panel_basic.PerformLayout();
@@ -397,12 +397,12 @@ namespace LocalERP.WinForm
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.DateTimePicker dateTime_cardTime;
+        private System.Windows.Forms.DateTimePicker dateTime_consumeTime;
         private System.Windows.Forms.ToolStrip toolStrip2;
         private System.Windows.Forms.ToolStripButton toolStripButton_save;
         private System.Windows.Forms.ToolStripButton toolStripButton_finish;
         private System.Windows.Forms.TextBox textBox_comment;
-        private System.Windows.Forms.TextBox textBox_serial;
+        private System.Windows.Forms.TextBox textBox_code;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label_status;
