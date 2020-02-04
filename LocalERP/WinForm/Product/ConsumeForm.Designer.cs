@@ -253,6 +253,7 @@ namespace LocalERP.WinForm
             this.textBox_num.Name = "textBox_num";
             this.textBox_num.Size = new System.Drawing.Size(193, 23);
             this.textBox_num.TabIndex = 49;
+            this.textBox_num.TextChanged += new System.EventHandler(this.Controls_TextChanged);
             // 
             // lookupText2
             // 
@@ -266,6 +267,7 @@ namespace LocalERP.WinForm
             this.lookupText2.TabIndex = 46;
             this.lookupText2.Text_Lookup = "单击选择...";
             this.lookupText2.Value_Lookup = null;
+            this.lookupText2.valueSetted += new LocalERP.WinForm.LookupText.ValueSetted(this.lookupText2_valueSetted);
             // 
             // label6
             // 

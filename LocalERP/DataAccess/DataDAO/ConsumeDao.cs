@@ -69,24 +69,21 @@ namespace LocalERP.DataAccess.DataDAO
         }
 
 
-        public Card getBeanFromDataRow(DataRow dr) {
-            Card card = new Card();
+        public Consume getBeanFromDataRow(DataRow dr) {
+            Consume consume = new Consume();
             if (dr != null)
             {
-                card.ID = (int)dr["Card.ID"];
-                card.Code = dr["code"] as string;
-                card.CardTime = (DateTime)dr["cardTime"];
-                card.CustomerID = (int)dr["customerID"];
-                double total = 0;
-                ValidateUtility.getDouble(dr, "total", out total);
-                card.Total = total;
-                card.Number = (int)dr["num"];
-                card.Comment = dr["Card.comment"] as string;
-                card.Oper = dr["operator"] as string;
-                card.Status = (int)dr["status"];
-                card.Type = (int)dr["type"];
-                card.CustomerName = dr["name"] as string;
+                consume.ID = (int)dr["Card.ID"];
+                consume.Code = dr["code"] as string;
+                consume.CardTime = (DateTime)dr["cardTime"];
+                consume.CustomerID = (int)dr["customerID"];
 
+                consume.Number = (int)dr["num"];
+                consume.Comment = dr["Card.comment"] as string;
+                consume.Oper = dr["operator"] as string;
+                consume.Status = (int)dr["status"];
+                consume.Type = (int)dr["type"];
+              
                 return card;
             }
             return null;

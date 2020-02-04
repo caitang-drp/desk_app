@@ -153,7 +153,7 @@ namespace LocalERP.WinForm
             */
 
             int cardID = -1;
-            if (this.lookupText2.Visible == true && ValidateUtility.getLookupValueID(this.lookupText1, this.errorProvider1, out cardID) == false)
+            if (this.lookupText2.Visible == true && ValidateUtility.getLookupValueID(this.lookupText2, this.errorProvider1, out cardID) == false)
                 return false;
 
             consume.CardID = cardID;
@@ -273,6 +273,11 @@ namespace LocalERP.WinForm
         private void lookupText1_valueSetted(object sender, LookupArg arg)
         {
             
+        }
+
+        private void lookupText2_valueSetted(object sender, LookupArg arg)
+        {
+            resetNeedSave(true);
         }
 
     }
