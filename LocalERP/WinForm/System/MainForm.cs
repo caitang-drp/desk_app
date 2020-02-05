@@ -173,6 +173,11 @@ namespace LocalERP.WinForm
                     //FormSingletonFactory.getInstance().getCardForm().reload(openMode, ID);
                     break;
 
+                case LabelUtility.CONSUME_LIST:
+                    FormSingletonFactory.getInstance().getConsumeListForm().Show(this.dockPanel1);
+                    //FormSingletonFactory.getInstance().getCardForm().reload(openMode, ID);
+                    break;
+
                 default:
                     break;
             }

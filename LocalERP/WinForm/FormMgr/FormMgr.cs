@@ -138,6 +138,19 @@ namespace LocalERP.WinForm
             return consumeForm;
         }
 
+        private ConsumeListForm consumeListForm = null;
+        public ConsumeListForm getConsumeListForm()
+        {
+            if (consumeListForm == null || consumeListForm.IsDisposed)
+            {
+                consumeListForm = new ConsumeListForm(mainForm, 1);
+                /*consumeListForm.initVersions(getVersions(),
+                    UpdateType.CardUpdate, UpdateType.ConsumeUpdate, UpdateType.CustomerUpdate);
+                appendEvent(cardListForm);*/
+            }
+            return consumeListForm;
+        }
+
         /****************cash circulation************************/
         // 应收应付，单据列表
         private PayReceiptListForm payReceiptListForm = null;

@@ -40,6 +40,7 @@ namespace LocalERP.DataAccess.DataDAO
             return DbHelperAccess.executeNonQuery(commandText);
         }
 
+        /*
         public DataTable FindList(DateTime startTime, DateTime endTime, int status, string customerName)
         {
             StringBuilder commandText = null;
@@ -51,7 +52,7 @@ namespace LocalERP.DataAccess.DataDAO
             commandText.Append(" order by Card.cardTime desc");
             return DbHelperAccess.executeQuery(commandText.ToString());
         }
-        /*
+        
         public DataTable FindListForStatistic(Category parent)
         {
             string commandText = "select ID, name from Customer";
@@ -73,43 +74,43 @@ namespace LocalERP.DataAccess.DataDAO
             Consume consume = new Consume();
             if (dr != null)
             {
-                consume.ID = (int)dr["Card.ID"];
-                consume.Code = dr["code"] as string;
-                consume.CardTime = (DateTime)dr["cardTime"];
-                consume.CustomerID = (int)dr["customerID"];
+                consume.ID = (int)dr["Consume.ID"];
+                consume.Code = dr["Consume.code"] as string;
+                consume.ConsumeTime = (DateTime)dr["consumeTime"];
+                consume.CardID = (int)dr["cardID"];
 
-                consume.Number = (int)dr["num"];
-                consume.Comment = dr["Card.comment"] as string;
-                consume.Oper = dr["operator"] as string;
-                consume.Status = (int)dr["status"];
-                consume.Type = (int)dr["type"];
-              
-                return card;
+                consume.Number = (int)dr["Consume.num"];
+                consume.Comment = dr["Consume.comment"] as string;
+                consume.Oper = dr["Consume.operator"] as string;
+                consume.Status = (int)dr["Consume.status"];
+                consume.Type = (int)dr["Consume.type"];
+
+                return consume;
             }
             return null;
         }
 
-        public Card FindByID(int ID)
+        public Consume FindByID(int ID)
         {
-            string commandText = string.Format("select * from Card, Customer where Card.ID={0} and Card.customerID = Customer.ID", ID);
+            string commandText = string.Format("select * from Card, Customer, Consume where Consume.ID={0} and Consume.cardID = Card.ID and Card.customerID = Customer.ID", ID);
             DataRow dr = DbHelperAccess.executeQueryGetOneRow(commandText);
             return getBeanFromDataRow(dr);
         }
-        /*
-        public List<Customer> FindByParentId(int parentId)
+
+        public List<Consume> FindList(int parentId)
         {
-            String commandText = string.Format("select * from Customer where parent = {0} order by ID", parentId);
+            String commandText = string.Format("select * from Card, Customer, Consume where Consume.cardID = Card.ID and Card.customerID = Customer.ID order by Consume.ID");
             DataTable dt = DbHelperAccess.executeQuery(commandText);
 
-            List<Customer> categorys = new List<Customer>();
+            List<Consume> consumes = new List<Consume>();
 
             foreach (DataRow dr in dt.Rows)
             {
-                categorys.Add(this.getBeanFromDataRow(dr));
+                consumes.Add(this.getBeanFromDataRow(dr));
             }
 
-            return categorys;
-        }*/
+            return consumes;
+        }
 
     }
 }

@@ -63,52 +63,37 @@ namespace LocalERP.WinForm
         
         private void initList()
         {
-            try
-            {
-                DateTime startTime = this.dateTimePicker3.Value;
-                DateTime endTime = this.dateTimePicker4.Value.AddDays(1);
-                DataTable dataTable = cardDao.FindList(startTime, endTime, /*(int)(comboBox1.SelectedValue)*/0, textBox_customer.Text.Trim());
-                this.dataGridView1.Rows.Clear();
-                double sum = 0;
-                int index = 0;
-                foreach (DataRow dr in dataTable.Rows)
+            List<Consume> list = ConsumeDao.getInstance().FindList(0);
+
+            for(int i=0;i<list.Count;i++) {
+                Consume consume = list[i];
+                this.dataGridView1.Rows.Add();
+                this.dataGridView1.Rows[i].Cells["ID"].Value = consume.ID;
+                this.dataGridView1.Rows[i].Cells["name"].Value = consume.Code;
+                this.dataGridView1.Rows[i].Cells["customer"].Value = consume.CardID;
+                /*int type = (int)(dr["type"]);
+                this.dataGridView1.Rows[index].Cells["type"].Value = ProductCirculation.CirculationTypeConfs[type - 1].name;
+                this.dataGridView1.Rows[index].Cells["typeValue"].Value = type;*/
+
+                this.dataGridView1.Rows[i].Cells["num"].Value = consume.Number;
+                //this.dataGridView1.Rows[index].Cells["status"].Value = dr["status"];
+
+                /*
+                int status = (int)(dr["status"]);
+                this.dataGridView1.Rows[index].Cells["status"].Value = ProductCirculation.circulationStatusContext[status - 1];
+                if (status == 1)
                 {
-                    index = this.dataGridView1.Rows.Add();
-                    this.dataGridView1.Rows[index].Cells["ID"].Value = dr["ID"];
-                    this.dataGridView1.Rows[index].Cells["name"].Value = dr["code"];
-                    this.dataGridView1.Rows[index].Cells["customer"].Value = dr["name"];
-                    /*int type = (int)(dr["type"]);
-                    this.dataGridView1.Rows[index].Cells["type"].Value = ProductCirculation.CirculationTypeConfs[type - 1].name;
-                    this.dataGridView1.Rows[index].Cells["typeValue"].Value = type;*/
-
-                    double realTotal = double.Parse(dr["total"].ToString());
-                    this.dataGridView1.Rows[index].Cells["realTotal"].Value = realTotal.ToString("0.00");
-
-                    this.dataGridView1.Rows[index].Cells["num"].Value = dr["num"];
-                    //this.dataGridView1.Rows[index].Cells["status"].Value = dr["status"];
-
-                    
-                    int status = (int)(dr["status"]);
-                    this.dataGridView1.Rows[index].Cells["status"].Value = ProductCirculation.circulationStatusContext[status - 1];
-                    if (status == 1)
-                    {
-                        this.dataGridView1.Rows[index].Cells["status"].Style.ForeColor = Color.Red;
-                        this.dataGridView1.Rows[index].Cells["status"].Style.SelectionForeColor = Color.Red;
-                    }
-                    else
-                    {
-                        this.dataGridView1.Rows[index].Cells["status"].Style.ForeColor = Color.Black;
-                        this.dataGridView1.Rows[index].Cells["status"].Style.SelectionForeColor = Color.Black;
-                    }
-                    
-
-                    this.dataGridView1.Rows[index].Cells["sellTime"].Value = ((DateTime)dr["cardTime"]).ToString("yyyy-MM-dd HH:mm:ss");
+                    this.dataGridView1.Rows[index].Cells["status"].Style.ForeColor = Color.Red;
+                    this.dataGridView1.Rows[index].Cells["status"].Style.SelectionForeColor = Color.Red;
                 }
+                else
+                {
+                    this.dataGridView1.Rows[index].Cells["status"].Style.ForeColor = Color.Black;
+                    this.dataGridView1.Rows[index].Cells["status"].Style.SelectionForeColor = Color.Black;
+                }
+                */
 
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("查询错误, 请输入正确的条件.", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                this.dataGridView1.Rows[i].Cells["sellTime"].Value = consume.ConsumeTime.ToString("yyyy-MM-dd HH:mm:ss");
             }
         }
 
