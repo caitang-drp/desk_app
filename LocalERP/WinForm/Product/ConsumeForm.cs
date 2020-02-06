@@ -63,31 +63,30 @@ namespace LocalERP.WinForm
             //2020-1-18 这里只分两种情况，除了0之外，其他情况还要根据card的status来重设openMode
             if (openMode == 0)
             {
+                int max = 1;// CirDao.getMaxCode(string.Format("CARD-{0}-", DateTime.Now.ToString("yyyyMMdd")));
+                this.textBox_code.Text = string.Format("XF-{0}-{1:0000}", DateTime.Now.ToString("yyyyMMdd"), max + 1);
 
                 this.dateTime_consumeTime.Value = DateTime.Now;
                 this.textBox_comment.Text = null;
                 this.lookupText1.LookupArg = null;
                 this.lookupText1.Text_Lookup = null;
 
-                int max = 1;// CirDao.getMaxCode(string.Format("CARD-{0}-", DateTime.Now.ToString("yyyyMMdd")));
-                this.textBox_code.Text = string.Format("CARD-{0}-{1:0000}", DateTime.Now.ToString("yyyyMMdd"), max + 1);
-
                 this.textBox_operator.Text = ConfDao.getInstance().Get(5).ToString();
                 //this.dataGridView1.Rows.Clear();
                 //this.dataGridView2[1, 0].Value = null;
             }
-            else {/*
-                card = CardDao.getInstance().FindByID(cardID);
+            else {
+                consume = ConsumeDao.getInstance().FindByID(consumeID);
 
-                this.textBox_code.Text = card.Code;
-                this.dateTime_consumeTime.Value = card.CardTime;
+                this.textBox_code.Text = consume.Code;
+                this.dateTime_consumeTime.Value = consume.ConsumeTime;
                
-                this.textBox_comment.Text = card.Comment;
-                this.textBox_operator.Text = card.Oper;
-                this.lookupText1.LookupArg = new LookupArg(card.CustomerID, card.CustomerName);
-                this.lookupText1.Text_Lookup = card.CustomerName;
+                this.textBox_comment.Text = consume.Comment;
+                this.textBox_operator.Text = consume.Oper;
+                //this.lookupText1.LookupArg = new LookupArg(card.CustomerID, card.CustomerName);
+                //this.lookupText1.Text_Lookup = card.CustomerName;
 
-                openMode = card.Status;*/
+                openMode = consume.Status;
             }
             switchMode(openMode);
             resetNeedSave(false);

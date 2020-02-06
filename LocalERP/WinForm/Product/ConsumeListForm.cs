@@ -76,22 +76,20 @@ namespace LocalERP.WinForm
                 this.dataGridView1.Rows[index].Cells["typeValue"].Value = type;*/
 
                 this.dataGridView1.Rows[i].Cells["num"].Value = consume.Number;
-                //this.dataGridView1.Rows[index].Cells["status"].Value = dr["status"];
 
-                /*
-                int status = (int)(dr["status"]);
-                this.dataGridView1.Rows[index].Cells["status"].Value = ProductCirculation.circulationStatusContext[status - 1];
+                int status = consume.Status;
+                this.dataGridView1.Rows[i].Cells["status"].Value = Consume.consumeStatusContext[status - 1];
                 if (status == 1)
                 {
-                    this.dataGridView1.Rows[index].Cells["status"].Style.ForeColor = Color.Red;
-                    this.dataGridView1.Rows[index].Cells["status"].Style.SelectionForeColor = Color.Red;
+                    this.dataGridView1.Rows[i].Cells["status"].Style.ForeColor = Color.Red;
+                    this.dataGridView1.Rows[i].Cells["status"].Style.SelectionForeColor = Color.Red;
                 }
                 else
                 {
-                    this.dataGridView1.Rows[index].Cells["status"].Style.ForeColor = Color.Black;
-                    this.dataGridView1.Rows[index].Cells["status"].Style.SelectionForeColor = Color.Black;
+                    this.dataGridView1.Rows[i].Cells["status"].Style.ForeColor = Color.Black;
+                    this.dataGridView1.Rows[i].Cells["status"].Style.SelectionForeColor = Color.Black;
                 }
-                */
+                
 
                 this.dataGridView1.Rows[i].Cells["sellTime"].Value = consume.ConsumeTime.ToString("yyyy-MM-dd HH:mm:ss");
             }
@@ -161,30 +159,13 @@ namespace LocalERP.WinForm
             if (this.dataGridView1.Rows[e.RowIndex].Cells["ID"].Value == null)
                 return;
 
-            int id = (int)this.dataGridView1.Rows[e.RowIndex].Cells["ID"].Value;
-            //openMode == 0用于选择
-            if (openMode == 0)
+            if (this.dataGridView1.SelectedRows == null || this.dataGridView1.SelectedRows.Count <= 0)
             {
-                string name = this.dataGridView1.Rows[e.RowIndex].Cells["name"].Value.ToString();
-                string num = this.dataGridView1.Rows[e.RowIndex].Cells["num"].Value.ToString();
-                string customer = this.dataGridView1.Rows[e.RowIndex].Cells["customer"].Value.ToString();
-                LookupArg lookupArg = new LookupArg(id, string.Format("编号{0} | {1} | 总{2}次 ", name, customer, num));
-                //lookupArg.ArgName = conf.CategoryName;
-
-                //File.AppendAllText("e:\\debug.txt", string.Format("double click, thread:{0}\r\n", System.Threading.Thread.CurrentThread.ManagedThreadId));
-
-                this.Close();
-                this.invokeLookupCallback(lookupArg);
+                MessageBox.Show("请选择消费记录!");
+                return;
             }
-            else if (openMode == 1)
-            {
-                /*if (this.dataGridView1.SelectedRows == null || this.dataGridView1.SelectedRows.Count <= 0)
-                {
-                    MessageBox.Show("请选择卡片!");
-                    return;
-                }*/
-                editCard(this.dataGridView1.SelectedRows[0]);
-            }
+            editCard(this.dataGridView1.SelectedRows[0]);
+
         }
 
         private void editCard(DataGridViewRow row) {
@@ -193,12 +174,11 @@ namespace LocalERP.WinForm
 
             string formString = "";
             
-            mainForm.setForm(LabelUtility.CARD_ADD, 1, id);
+            mainForm.setForm(LabelUtility.CONSUME_ADD, 1, id);
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            initList();
         }
 
         private void toolStripButton_selectAll_Click(object sender, EventArgs e)
