@@ -71,12 +71,28 @@ namespace LocalERP.DataAccess.Data
             set { cardID = value; }
         }
 
+        private Card card;
+
+        public Card Card
+        {
+            get { return card; }
+            set { card = value; }
+        }
+
         private int number;
 
         public int Number
         {
             get { return number; }
             set { number = value; }
+        }
+
+        private int leftNumber;
+
+        public int LeftNumber
+        {
+            get { return leftNumber; }
+            set { leftNumber = value; }
         }
 
         private string oper;

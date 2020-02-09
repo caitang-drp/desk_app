@@ -22,8 +22,8 @@ namespace LocalERP.DataAccess.DataDAO
         {
             try
             {
-                string commandText = string.Format("insert into Card(code, cardTime, status, customerID, type, total, num, operator, comment) values('{0}', '{1}', {2}, {3}, {4}, {5}, {6}, '{7}', '{8}')",
-                    info.Code, info.CardTime, info.Status, info.CustomerID, info.Type, info.Total, info.Number, info.Oper, info.Comment);
+                string commandText = string.Format("insert into Card(code, cardTime, status, customerID, type, total, num, operator, comment, leftNum) values('{0}', '{1}', {2}, {3}, {4}, {5}, {6}, '{7}', '{8}', {9})",
+                    info.Code, info.CardTime, info.Status, info.CustomerID, info.Type, info.Total, info.Number, info.Oper, info.Comment, info.LeftNumber);
                 DbHelperAccess.executeNonQuery(commandText);
                 id = DbHelperAccess.executeMax("ID", "Card");
                 return true;
@@ -48,7 +48,10 @@ namespace LocalERP.DataAccess.DataDAO
             if (!string.IsNullOrEmpty(customerName))
                 commandText.Append(string.Format(" and Customer.name like '%{0}%'", customerName));
 
-            commandText.Append(" order by Card.cardTime desc");
+            if (status > 0)
+                commandText.Append(string.Format(" and Card.status={0}", status));
+            
+            commandText.Append(" order by Card.ID desc");
             return DbHelperAccess.executeQuery(commandText.ToString());
         }
         /*
@@ -62,8 +65,8 @@ namespace LocalERP.DataAccess.DataDAO
 
         public int Update(Card info)
         {
-            string commandText = string.Format("update Card set code='{0}', cardTime='{1}', status={2}, customerID={3}, type={4}, total={5}, num={6}, operator='{7}', comment='{8}' where ID={9}",
-                info.Code, info.CardTime, info.Status, info.CustomerID, info.Type, info.Total, info.Number, info.Oper, info.Comment, info.ID);
+            string commandText = string.Format("update Card set code='{0}', cardTime='{1}', status={2}, customerID={3}, type={4}, total={5}, num={6}, operator='{7}', comment='{8}', leftNum={9} where ID={10}",
+                info.Code, info.CardTime, info.Status, info.CustomerID, info.Type, info.Total, info.Number, info.Oper, info.Comment, info.LeftNumber, info.ID);
 
             return DbHelperAccess.executeNonQuery(commandText);
         }
@@ -81,6 +84,7 @@ namespace LocalERP.DataAccess.DataDAO
                 ValidateUtility.getDouble(dr, "total", out total);
                 card.Total = total;
                 card.Number = (int)dr["num"];
+                card.LeftNumber = (int)dr["leftNum"];
                 card.Comment = dr["Card.comment"] as string;
                 card.Oper = dr["operator"] as string;
                 card.Status = (int)dr["status"];

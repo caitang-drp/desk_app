@@ -22,8 +22,8 @@ namespace LocalERP.DataAccess.DataDAO
         {
             try
             {
-                string commandText = string.Format("insert into Consume(code, consumeTime, cardID, status, type, num, operator, comment) values('{0}', '{1}', {2}, {3}, {4}, {5}, '{6}', '{7}')",
-                    info.Code, info.ConsumeTime, info.CardID, info.Status, info.Type, info.Number, info.Oper, info.Comment);
+                string commandText = string.Format("insert into Consume(code, consumeTime, cardID, status, type, num, operator, comment, leftNum) values('{0}', '{1}', {2}, {3}, {4}, {5}, '{6}', '{7}', {8})",
+                    info.Code, info.ConsumeTime, info.CardID, info.Status, info.Type, info.Number, info.Oper, info.Comment, info.LeftNumber);
                 DbHelperAccess.executeNonQuery(commandText);
                 id = DbHelperAccess.executeMax("ID", "Consume");
                 return true;
@@ -36,35 +36,14 @@ namespace LocalERP.DataAccess.DataDAO
 
         public int Delete(int id)
         {
-            string commandText = string.Format("delete from Card where ID={0}", id);
+            string commandText = string.Format("delete from Consume where ID={0}", id);
             return DbHelperAccess.executeNonQuery(commandText);
         }
 
-        /*
-        public DataTable FindList(DateTime startTime, DateTime endTime, int status, string customerName)
+        public int Update(Consume info)
         {
-            StringBuilder commandText = null;
-            commandText = new StringBuilder(string.Format("select Card.*, Customer.name from Card, Customer where Customer.ID = Card.customerID and cardTime between #{0}# and #{1}# ", startTime.ToString("yyyy-MM-dd"), endTime.ToString("yyyy-MM-dd")));
-            
-            if (!string.IsNullOrEmpty(customerName))
-                commandText.Append(string.Format(" and Customer.name like '%{0}%'", customerName));
-
-            commandText.Append(" order by Card.cardTime desc");
-            return DbHelperAccess.executeQuery(commandText.ToString());
-        }
-        
-        public DataTable FindListForStatistic(Category parent)
-        {
-            string commandText = "select ID, name from Customer";
-            if (parent != null)
-                commandText = string.Format("select Customer.ID, Customer.name from Customer, CustomerCategory where Customer.parent=CustomerCategory.ID and CustomerCategory.lft>={0} and CustomerCategory.rgt<={1}", parent.Left, parent.Right);
-            return DbHelperAccess.executeQuery(commandText);
-        }*/
-
-        public int Update(Card info)
-        {
-            string commandText = string.Format("update Card set code='{0}', cardTime='{1}', status={2}, customerID={3}, type={4}, total={5}, num={6}, operator='{7}', comment='{8}' where ID={9}",
-                info.Code, info.CardTime, info.Status, info.CustomerID, info.Type, info.Total, info.Number, info.Oper, info.Comment, info.ID);
+            string commandText = string.Format("update Consume set code='{0}', consumeTime='{1}',cardID={2}, status={3}, type={4}, num={5}, operator='{6}', comment='{7}', leftNum={8} where ID={9}",
+                info.Code, info.ConsumeTime, info.CardID, info.Status, info.Type, info.Number, info.Oper, info.Comment, info.LeftNumber, info.ID);
 
             return DbHelperAccess.executeNonQuery(commandText);
         }
@@ -78,6 +57,8 @@ namespace LocalERP.DataAccess.DataDAO
                 consume.Code = dr["Consume.code"] as string;
                 consume.ConsumeTime = (DateTime)dr["consumeTime"];
                 consume.CardID = (int)dr["cardID"];
+
+                consume.Card = CardDao.getInstance().FindByID(consume.CardID);
 
                 consume.Number = (int)dr["Consume.num"];
                 consume.Comment = dr["Consume.comment"] as string;
@@ -97,9 +78,15 @@ namespace LocalERP.DataAccess.DataDAO
             return getBeanFromDataRow(dr);
         }
 
-        public List<Consume> FindList(int parentId)
+        public List<Consume> FindList(int cardId)
         {
-            String commandText = string.Format("select * from Card, Customer, Consume where Consume.cardID = Card.ID and Card.customerID = Customer.ID order by Consume.ID");
+            String commandText = string.Format("select * from Card, Customer, Consume where Consume.cardID = Card.ID and Card.customerID = Customer.ID");
+
+            if (cardId > 0)
+                commandText += string.Format(" and Consume.cardID={0}", cardId);
+
+            commandText += " order by Consume.ID desc";
+            
             DataTable dt = DbHelperAccess.executeQuery(commandText);
 
             List<Consume> consumes = new List<Consume>();

@@ -28,12 +28,21 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dataGridView1 = new LocalERP.WinForm.MyDataGridView();
+            this.check = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cardInfo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.customer = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sellTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.type = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.num = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.comment = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.status = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.button1 = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
@@ -56,15 +65,6 @@
             this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.textBox_customer = new System.Windows.Forms.TextBox();
             this.label_tip = new System.Windows.Forms.Label();
-            this.check = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cardInfo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.customer = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.sellTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.type = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.num = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.status = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.panel1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -89,6 +89,7 @@
             this.sellTime,
             this.type,
             this.num,
+            this.comment,
             this.status});
             this.dataGridView1.Location = new System.Drawing.Point(-1, 91);
             this.dataGridView1.Name = "dataGridView1";
@@ -100,6 +101,77 @@
             this.dataGridView1.Size = new System.Drawing.Size(886, 407);
             this.dataGridView1.TabIndex = 5;
             this.dataGridView1.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellDoubleClick);
+            // 
+            // check
+            // 
+            this.check.HeaderText = "选择";
+            this.check.Name = "check";
+            this.check.Width = 60;
+            // 
+            // ID
+            // 
+            this.ID.HeaderText = "ID";
+            this.ID.Name = "ID";
+            this.ID.ReadOnly = true;
+            this.ID.Width = 40;
+            // 
+            // name
+            // 
+            this.name.HeaderText = "编号";
+            this.name.Name = "name";
+            this.name.ReadOnly = true;
+            this.name.Width = 140;
+            // 
+            // cardInfo
+            // 
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.cardInfo.DefaultCellStyle = dataGridViewCellStyle1;
+            this.cardInfo.HeaderText = "卡号信息";
+            this.cardInfo.Name = "cardInfo";
+            this.cardInfo.ReadOnly = true;
+            this.cardInfo.Width = 220;
+            // 
+            // customer
+            // 
+            this.customer.HeaderText = "客户";
+            this.customer.Name = "customer";
+            this.customer.ReadOnly = true;
+            this.customer.Visible = false;
+            // 
+            // sellTime
+            // 
+            this.sellTime.HeaderText = "时间";
+            this.sellTime.Name = "sellTime";
+            this.sellTime.ReadOnly = true;
+            this.sellTime.Width = 120;
+            // 
+            // type
+            // 
+            this.type.HeaderText = "类型";
+            this.type.Name = "type";
+            this.type.ReadOnly = true;
+            this.type.Visible = false;
+            this.type.Width = 60;
+            // 
+            // num
+            // 
+            this.num.HeaderText = "消费次数";
+            this.num.Name = "num";
+            this.num.ReadOnly = true;
+            this.num.Width = 90;
+            // 
+            // comment
+            // 
+            this.comment.HeaderText = "备注";
+            this.comment.Name = "comment";
+            this.comment.Width = 120;
+            // 
+            // status
+            // 
+            this.status.HeaderText = "状态";
+            this.status.Name = "status";
+            this.status.ReadOnly = true;
+            this.status.Width = 80;
             // 
             // button1
             // 
@@ -136,17 +208,6 @@
             this.label1.TabIndex = 21;
             this.label1.Text = "开始时间:";
             // 
-            // label3
-            // 
-            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label3.AutoSize = true;
-            this.label3.BackColor = System.Drawing.SystemColors.Control;
-            this.label3.Location = new System.Drawing.Point(269, 20);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(70, 14);
-            this.label3.TabIndex = 25;
-            this.label3.Text = "售单状态:";
-            // 
             // label5
             // 
             this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -174,11 +235,11 @@
             this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label7.AutoSize = true;
             this.label7.BackColor = System.Drawing.SystemColors.Control;
-            this.label7.Location = new System.Drawing.Point(269, 20);
+            this.label7.Location = new System.Drawing.Point(290, 20);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(70, 14);
+            this.label7.Size = new System.Drawing.Size(42, 14);
             this.label7.TabIndex = 25;
-            this.label7.Text = "单据状态:";
+            this.label7.Text = "状态:";
             // 
             // comboBox1
             // 
@@ -275,7 +336,7 @@
             this.toolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton3.Name = "toolStripButton3";
             this.toolStripButton3.Size = new System.Drawing.Size(83, 22);
-            this.toolStripButton3.Text = "编辑单据";
+            this.toolStripButton3.Text = "编辑消费";
             this.toolStripButton3.Click += new System.EventHandler(this.toolStripButton3_Click);
             // 
             // toolStripButton2
@@ -284,7 +345,7 @@
             this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton2.Name = "toolStripButton2";
             this.toolStripButton2.Size = new System.Drawing.Size(83, 22);
-            this.toolStripButton2.Text = "删除单据";
+            this.toolStripButton2.Text = "删除消费";
             this.toolStripButton2.ToolTipText = "批量删除";
             this.toolStripButton2.Click += new System.EventHandler(this.toolStripButton2_Click);
             // 
@@ -353,70 +414,7 @@
             this.label_tip.Name = "label_tip";
             this.label_tip.Size = new System.Drawing.Size(97, 14);
             this.label_tip.TabIndex = 42;
-            this.label_tip.Text = "双击编辑卡片";
-            // 
-            // check
-            // 
-            this.check.HeaderText = "选择";
-            this.check.Name = "check";
-            this.check.Width = 60;
-            // 
-            // ID
-            // 
-            this.ID.HeaderText = "ID";
-            this.ID.Name = "ID";
-            this.ID.ReadOnly = true;
-            this.ID.Width = 60;
-            // 
-            // name
-            // 
-            this.name.HeaderText = "编号";
-            this.name.Name = "name";
-            this.name.ReadOnly = true;
-            this.name.Width = 150;
-            // 
-            // cardInfo
-            // 
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.cardInfo.DefaultCellStyle = dataGridViewCellStyle2;
-            this.cardInfo.HeaderText = "卡号信息";
-            this.cardInfo.Name = "cardInfo";
-            this.cardInfo.ReadOnly = true;
-            this.cardInfo.Width = 160;
-            // 
-            // customer
-            // 
-            this.customer.HeaderText = "客户";
-            this.customer.Name = "customer";
-            this.customer.ReadOnly = true;
-            // 
-            // sellTime
-            // 
-            this.sellTime.HeaderText = "时间";
-            this.sellTime.Name = "sellTime";
-            this.sellTime.ReadOnly = true;
-            this.sellTime.Width = 120;
-            // 
-            // type
-            // 
-            this.type.HeaderText = "类型";
-            this.type.Name = "type";
-            this.type.ReadOnly = true;
-            this.type.Width = 60;
-            // 
-            // num
-            // 
-            this.num.HeaderText = "总次数";
-            this.num.Name = "num";
-            this.num.ReadOnly = true;
-            this.num.Width = 80;
-            // 
-            // status
-            // 
-            this.status.HeaderText = "状态";
-            this.status.Name = "status";
-            this.status.ReadOnly = true;
-            this.status.Width = 80;
+            this.label_tip.Text = "双击编辑消费";
             // 
             // ConsumeListForm
             // 
@@ -430,7 +428,6 @@
             this.Controls.Add(this.dateTimePicker3);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.label7);
-            this.Controls.Add(this.label3);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label2);
@@ -462,7 +459,6 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
@@ -491,6 +487,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn sellTime;
         private System.Windows.Forms.DataGridViewTextBoxColumn type;
         private System.Windows.Forms.DataGridViewTextBoxColumn num;
+        private System.Windows.Forms.DataGridViewTextBoxColumn comment;
         private System.Windows.Forms.DataGridViewTextBoxColumn status;
     }
 }

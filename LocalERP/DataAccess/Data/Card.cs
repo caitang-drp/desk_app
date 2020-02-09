@@ -79,6 +79,14 @@ namespace LocalERP.DataAccess.Data
             set { number = value; }
         }
 
+        private int leftNumber;
+
+        public int LeftNumber
+        {
+            get { return leftNumber; }
+            set { leftNumber = value; }
+        }
+
         private string oper;
 
         public string Oper
@@ -142,7 +150,11 @@ namespace LocalERP.DataAccess.Data
             return sb.ToString();
         }
 
-        public static string[] cardStatusContext = new string[] {"未审核","undefined","undefined", "已审核" };
+        public string getInfo(int leftNum) {
+            return string.Format("{0}|{1}|总{2}次-剩{3}次", this.code, this.CustomerName, this.Number, leftNum);
+        }
+
+        public static string[] cardStatusContext = new string[] { "未审核", "undefined", "已审核", "已消费完" };
 
         //必须跟收付一致
         public enum CirculationType

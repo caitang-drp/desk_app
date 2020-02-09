@@ -51,7 +51,7 @@ namespace LocalERP.WinForm
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.textBox_realTotal = new System.Windows.Forms.TextBox();
             this.textBox_num = new System.Windows.Forms.TextBox();
-            this.textBox_ = new System.Windows.Forms.TextBox();
+            this.textBox_leftNum = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
@@ -62,7 +62,6 @@ namespace LocalERP.WinForm
             this.textBox_operator = new System.Windows.Forms.TextBox();
             this.label1_tip = new System.Windows.Forms.Label();
             this.panel_basic = new System.Windows.Forms.Panel();
-            this.label11 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
@@ -260,16 +259,17 @@ namespace LocalERP.WinForm
             this.textBox_num.Name = "textBox_num";
             this.textBox_num.Size = new System.Drawing.Size(173, 23);
             this.textBox_num.TabIndex = 69;
-            this.textBox_num.TextChanged += new System.EventHandler(this.Controls_TextChanged);
+            this.textBox_num.TextChanged += new System.EventHandler(this.Textbox_num_TextChanged);
             // 
-            // textBox_
+            // textBox_leftNum
             // 
-            this.textBox_.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.errorProvider1.SetIconPadding(this.textBox_, 20);
-            this.textBox_.Location = new System.Drawing.Point(656, 47);
-            this.textBox_.Name = "textBox_";
-            this.textBox_.Size = new System.Drawing.Size(159, 23);
-            this.textBox_.TabIndex = 76;
+            this.textBox_leftNum.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.textBox_leftNum.Enabled = false;
+            this.errorProvider1.SetIconPadding(this.textBox_leftNum, 20);
+            this.textBox_leftNum.Location = new System.Drawing.Point(656, 47);
+            this.textBox_leftNum.Name = "textBox_leftNum";
+            this.textBox_leftNum.Size = new System.Drawing.Size(182, 23);
+            this.textBox_leftNum.TabIndex = 76;
             // 
             // label5
             // 
@@ -350,9 +350,8 @@ namespace LocalERP.WinForm
             // 
             // panel_basic
             // 
-            this.panel_basic.Controls.Add(this.label11);
             this.panel_basic.Controls.Add(this.label6);
-            this.panel_basic.Controls.Add(this.textBox_);
+            this.panel_basic.Controls.Add(this.textBox_leftNum);
             this.panel_basic.Controls.Add(this.label7);
             this.panel_basic.Controls.Add(this.label18);
             this.panel_basic.Controls.Add(this.label10);
@@ -375,18 +374,8 @@ namespace LocalERP.WinForm
             this.panel_basic.Controls.Add(this.label2);
             this.panel_basic.Location = new System.Drawing.Point(10, 96);
             this.panel_basic.Name = "panel_basic";
-            this.panel_basic.Size = new System.Drawing.Size(847, 122);
+            this.panel_basic.Size = new System.Drawing.Size(869, 122);
             this.panel_basic.TabIndex = 60;
-            // 
-            // label11
-            // 
-            this.label11.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(817, 52);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(21, 14);
-            this.label11.TabIndex = 78;
-            this.label11.Text = "元";
             // 
             // label6
             // 
@@ -397,7 +386,7 @@ namespace LocalERP.WinForm
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(70, 14);
             this.label6.TabIndex = 77;
-            this.label6.Text = "平均价格:";
+            this.label6.Text = "剩余次数:";
             // 
             // label7
             // 
@@ -528,7 +517,6 @@ namespace LocalERP.WinForm
             this.Name = "CardForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "卡片信息单";
-            this.Load += new System.EventHandler(this.CardForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
@@ -580,8 +568,7 @@ namespace LocalERP.WinForm
         private System.Windows.Forms.TextBox textBox_realTotal;
         private System.Windows.Forms.TextBox textBox_num;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox textBox_;
-        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.TextBox textBox_leftNum;
         
        
     }

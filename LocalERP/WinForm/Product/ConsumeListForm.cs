@@ -34,8 +34,6 @@ namespace LocalERP.WinForm
 
             DateTime dateTime = DateTime.Now;
             this.dateTimePicker3.Value = dateTime.AddMonths(-1);
-
-            //this.cirDao = cirDao;
         }
 
         private void ConsumeListForm_Load(object sender, EventArgs e)
@@ -56,14 +54,14 @@ namespace LocalERP.WinForm
             this.comboBox1.DataSource = arrayList;
             this.comboBox1.ValueMember = "Key";
             this.comboBox1.DisplayMember = "Value";
-
-            
+ 
         }
 
         
         private void initList()
         {
             List<Consume> list = ConsumeDao.getInstance().FindList(0);
+            this.dataGridView1.Rows.Clear();
 
             for(int i=0;i<list.Count;i++) {
                 Consume consume = list[i];
@@ -77,19 +75,25 @@ namespace LocalERP.WinForm
 
                 this.dataGridView1.Rows[i].Cells["num"].Value = consume.Number;
 
+                int leftNum = 0;
+
                 int status = consume.Status;
                 this.dataGridView1.Rows[i].Cells["status"].Value = Consume.consumeStatusContext[status - 1];
                 if (status == 1)
                 {
                     this.dataGridView1.Rows[i].Cells["status"].Style.ForeColor = Color.Red;
                     this.dataGridView1.Rows[i].Cells["status"].Style.SelectionForeColor = Color.Red;
+
+                    leftNum = consume.Card.LeftNumber;
                 }
                 else
                 {
                     this.dataGridView1.Rows[i].Cells["status"].Style.ForeColor = Color.Black;
                     this.dataGridView1.Rows[i].Cells["status"].Style.SelectionForeColor = Color.Black;
+
+                    leftNum = consume.LeftNumber;
                 }
-                
+                this.dataGridView1.Rows[i].Cells["cardInfo"].Value = consume.Card.getInfo(leftNum);
 
                 this.dataGridView1.Rows[i].Cells["sellTime"].Value = consume.ConsumeTime.ToString("yyyy-MM-dd HH:mm:ss");
             }
@@ -119,20 +123,20 @@ namespace LocalERP.WinForm
                 ids.Append(list[ii]);
                 ids.Append(" ");
             }
-            if (MessageBox.Show(string.Format("是否删除流水号为{0}的卡片?", ids.ToString()), "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
+            if (MessageBox.Show(string.Format("是否删除ID号为{0}的消费?", ids.ToString()), "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
             {
                 for (int i = 0; i < list.Count; i++)
                 {
-                    if (CardDao.getInstance().FindByID(list[i]).Status > 1)
+                    if (ConsumeDao.getInstance().FindByID(list[i]).Status > 1)
                     {
-                        MessageBox.Show(string.Format("ID为{0}的卡片已经审核, 无法删除!", list[i]), "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show(string.Format("ID为{0}的消费已经审核, 无法删除!", list[i]), "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         initList();
                         return;
                     }
-                    CardDao.getInstance().Delete(list[i]);
+                    ConsumeDao.getInstance().Delete(list[i]);
                 }
                 initList();
-                MessageBox.Show("删除单据成功!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("删除消费成功!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 

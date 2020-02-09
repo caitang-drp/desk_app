@@ -18,9 +18,7 @@ namespace LocalERP.WinForm
         private MainForm mainForm;
 
         private int openMode = 1;
-        //private int circulationType;
-
-        //private ProductCirculationDao cirDao;
+        private bool firstLoad = true;
 
         public CardListForm(MainForm mf, int openMode)
         {
@@ -38,14 +36,8 @@ namespace LocalERP.WinForm
             DateTime dateTime = DateTime.Now;
             this.dateTimePicker3.Value = dateTime.AddMonths(-1);
 
-            //this.cirDao = cirDao;
-        }
-
-        private void ProductCirculationListForm_Load(object sender, EventArgs e)
-        {
             initCustomerCombox();
             initList();
-            
         }
 
         private void initCustomerCombox() {
@@ -54,6 +46,7 @@ namespace LocalERP.WinForm
 
             arrayList.Add(new DictionaryEntry(0, "-全部-"));
             arrayList.Add(new DictionaryEntry(1, ProductCirculation.circulationStatusContext[0]));
+            arrayList.Add(new DictionaryEntry(3, ProductCirculation.circulationStatusContext[2]));
             arrayList.Add(new DictionaryEntry(4, ProductCirculation.circulationStatusContext[3]));
 
             this.comboBox1.DataSource = arrayList;
@@ -71,9 +64,11 @@ namespace LocalERP.WinForm
                 CardDao cardDao = CardDao.getInstance();
                 DateTime startTime = this.dateTimePicker3.Value;
                 DateTime endTime = this.dateTimePicker4.Value.AddDays(1);
-                DataTable dataTable = cardDao.FindList(startTime, endTime, /*(int)(comboBox1.SelectedValue)*/0, textBox_customer.Text.Trim());
+                int statusQuery = 3;
+                if (openMode == 1)
+                    statusQuery = (int)(comboBox1.SelectedValue);
+                DataTable dataTable = cardDao.FindList(startTime, endTime, statusQuery, textBox_customer.Text.Trim());
                 this.dataGridView1.Rows.Clear();
-                double sum = 0;
                 int index = 0;
                 foreach (DataRow dr in dataTable.Rows)
                 {
@@ -89,11 +84,11 @@ namespace LocalERP.WinForm
                     this.dataGridView1.Rows[index].Cells["realTotal"].Value = realTotal.ToString("0.00");
 
                     this.dataGridView1.Rows[index].Cells["num"].Value = dr["num"];
-                    //this.dataGridView1.Rows[index].Cells["status"].Value = dr["status"];
+                    this.dataGridView1.Rows[index].Cells["leftNum"].Value = dr["leftNum"];
 
-                    
+
                     int status = (int)(dr["status"]);
-                    this.dataGridView1.Rows[index].Cells["status"].Value = ProductCirculation.circulationStatusContext[status - 1];
+                    this.dataGridView1.Rows[index].Cells["status"].Value = Card.cardStatusContext[status - 1];
                     if (status == 1)
                     {
                         this.dataGridView1.Rows[index].Cells["status"].Style.ForeColor = Color.Red;
@@ -104,7 +99,7 @@ namespace LocalERP.WinForm
                         this.dataGridView1.Rows[index].Cells["status"].Style.ForeColor = Color.Black;
                         this.dataGridView1.Rows[index].Cells["status"].Style.SelectionForeColor = Color.Black;
                     }
-                    
+
 
                     this.dataGridView1.Rows[index].Cells["sellTime"].Value = ((DateTime)dr["cardTime"]).ToString("yyyy-MM-dd HH:mm:ss");
                 }
@@ -113,6 +108,9 @@ namespace LocalERP.WinForm
             catch (Exception ex)
             {
                 MessageBox.Show("查询错误, 请输入正确的条件.", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            finally {
+                this.firstLoad = false;
             }
         }
 
@@ -184,13 +182,10 @@ namespace LocalERP.WinForm
             //openMode == 0用于选择
             if (openMode == 0)
             {
-                string name = this.dataGridView1.Rows[e.RowIndex].Cells["name"].Value.ToString();
-                string num = this.dataGridView1.Rows[e.RowIndex].Cells["num"].Value.ToString();
-                string customer = this.dataGridView1.Rows[e.RowIndex].Cells["customer"].Value.ToString();
-                LookupArg lookupArg = new LookupArg(id, string.Format("编号{0} | {1} | 总{2}次 ", name, customer, num));
-                //lookupArg.ArgName = conf.CategoryName;
-
-                //File.AppendAllText("e:\\debug.txt", string.Format("double click, thread:{0}\r\n", System.Threading.Thread.CurrentThread.ManagedThreadId));
+                Card card = CardDao.getInstance().FindByID(id);
+                LookupArg lookupArg = new LookupArg(id, card.getInfo(card.LeftNumber));
+                //借用这个传剩下数量
+                lookupArg.ArgName = card.LeftNumber.ToString();
 
                 this.Close();
                 this.invokeLookupCallback(lookupArg);
@@ -217,7 +212,8 @@ namespace LocalERP.WinForm
 
         private void button1_Click(object sender, EventArgs e)
         {
-            initList();
+            if (this.firstLoad == false)
+                initList();
         }
 
         private void toolStripButton_selectAll_Click(object sender, EventArgs e)

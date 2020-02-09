@@ -34,15 +34,9 @@ namespace LocalERP.WinForm
 
             openMode = 0;
             consumeID = 0;
-        }
 
-        //load 和 reload都是对外提供接口
-        private void ConsumeForm_Load(object sender, EventArgs e)
-        {
             this.lookupText1.LookupForm = FormSingletonFactory.getInstance().getCustomerCIForm_Select();
             this.lookupText2.LookupForm = FormSingletonFactory.getInstance().getCardListForm_select();
-
-            initConsume();
         }
 
         public void reload(int mode, int id) {
@@ -52,12 +46,11 @@ namespace LocalERP.WinForm
             
             openMode = mode;
             consumeID = id;
-            initConsume();
 
-            this.lookupText1.Focus();
+            initConsume();
         }
 
-        //对内提供服务的函数，调用switch mode
+        //对内提供服务的函数，如果是edit，会自动调整openMode，并调用switch mode
         private void initConsume()
         {
             //2020-1-18 这里只分两种情况，除了0之外，其他情况还要根据card的status来重设openMode
@@ -83,8 +76,21 @@ namespace LocalERP.WinForm
                
                 this.textBox_comment.Text = consume.Comment;
                 this.textBox_operator.Text = consume.Oper;
-                //this.lookupText1.LookupArg = new LookupArg(card.CustomerID, card.CustomerName);
-                //this.lookupText1.Text_Lookup = card.CustomerName;
+
+               
+                int leftNumber = 0;
+                //如果是为审核，那么需要定时更新
+                if(openMode == 1)
+                    leftNumber = consume.Card.LeftNumber;
+                else
+                    leftNumber = consume.LeftNumber; 
+                string cardInfo = consume.Card.getInfo(leftNumber);
+                
+                this.lookupText2.LookupArg = new LookupArg(consume.CardID, cardInfo);
+                //借这个存放leftNumber;
+                this.lookupText2.LookupArg.ArgName = leftNumber.ToString();
+                this.lookupText2.Text_Lookup = cardInfo;
+                
 
                 openMode = consume.Status;
             }
@@ -118,7 +124,7 @@ namespace LocalERP.WinForm
                 case 4:
                     //审核
                     this.label_status.Text = ProductCirculation.circulationStatusContext[3];
-                    //this.initControlsEnable(false, false, false, true, true, false, false, false, false, true, false);
+                    this.initControlsEnable(false, false, true, false);
                     break;
                 default:
                     break;
@@ -145,23 +151,24 @@ namespace LocalERP.WinForm
                 return false;
             consume.Code = code;
 
-            /*
-            int customerID = -1;
-            if (this.lookupText1.Visible == true && ValidateUtility.getLookupValueID(this.lookupText1, this.errorProvider1, out customerID) == false)
+            int num = 1;
+            if (ValidateUtility.getInt(this.textBox_num, this.errorProvider1, true, true, out num) == false)
                 return false;
-            */
+            consume.Number = num;
+
 
             int cardID = -1;
             if (this.lookupText2.Visible == true && ValidateUtility.getLookupValueID(this.lookupText2, this.errorProvider1, out cardID) == false)
                 return false;
 
             consume.CardID = cardID;
+            int leftNum = 0;
+            int.TryParse(this.lookupText2.LookupArg.ArgName, out leftNum);
+            consume.LeftNumber = leftNum;
 
             consume.ConsumeTime = this.dateTime_consumeTime.Value;
             consume.Comment = this.textBox_comment.Text;
             consume.Oper = this.textBox_operator.Text;
-
-            //consume.CustomerName = this.lookupText1.Text_Lookup;
            
             return true;
         }
@@ -177,59 +184,116 @@ namespace LocalERP.WinForm
             if (isSellCorrect == false)
                 return;
 
-            //
-            if (this.openMode == 1 /*&& CardDao.FindByID(card.ID) == null*/)
+            consume.Status = 1;
+
+            if (this.openMode == 1 && ConsumeDao.getInstance().FindByID(consumeID) == null)
             {
-                MessageBox.Show("该单据已经被删除了。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                //this.Enabled = true;
+                MessageBox.Show("该消费已经被删除了。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
             try
             {
                 if (openMode == 0)
-                {
-                    consume.Status = 1;
-                    
+                {   
                     ConsumeDao.getInstance().Insert(consume, out consumeID);
                     MessageBox.Show(string.Format("增加{0}成功!", this.Text), "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    openMode = 1;
                 }
                 else if (openMode == 1)
                 {
-                    //cirDao.UpdateBaiscInfo(circulation);
-                    //if (recordChanged)
-                        //cirDao.updateRecords(circulation.ID, records);
+                    ConsumeDao.getInstance().Update(consume);
                     MessageBox.Show(string.Format("保存{0}成功!", this.Text), "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
-
-                openMode = 1;
-                //重新更新circulation和record，因为ID不一样
+                //主要是保存按钮回到原来的状态
                 this.initConsume();
+
             }
             catch (Exception ex)
-            {/*
-                if (openMode == 0)
-                    ProductStainlessCirculationDao.getInstance().DeleteByID(cardID);
-                MessageBox.Show("保存有误,可能是往来单位或货品属性被修改过,请重新编辑!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);*/
+            {
+                /*if (openMode == 0)
+                    ConsumeDao.getInstance().DeleteByID(consumeID);*/
+                MessageBox.Show("保存有误,可能是往来单位或卡片被修改过,请重新编辑!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
 
-            //so important: if edit ,it should be refresh also, because edit will del exist item and add new item
-            //this.invokeUpdateNotify(conf.notifyType);
+            this.invokeUpdateNotify(UpdateType.ConsumeUpdate);
         }
 
         //审核
         private void toolStripButton_finish_Click(object sender, EventArgs e)
         {
+            string tips = "审核后将从卡里扣除次数，是否继续？";
+            if (MessageBox.Show(tips, "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) != DialogResult.OK)
+                return;
+
+            this.getConsume(out consume);
+            consume = ConsumeDao.getInstance().FindByID(consumeID);
+            //2018-4-20修复的bug
+            if (consume == null)
+            {
+                MessageBox.Show("该消费已经被删除了。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            Card card = consume.Card;
+            if (consume.Number > card.LeftNumber) {
+                MessageBox.Show("该消费次数超过剩余次数。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            consume.ConsumeTime = DateTime.Now;
+            consume.LeftNumber = card.LeftNumber;
+            consume.Status = 4;
+
+            ConsumeDao.getInstance().Update(consume);
+            card.LeftNumber = card.LeftNumber - consume.Number;
+            if (card.LeftNumber == 0)
+                card.Status = 4;
+
+            CardDao.getInstance().Update(card);
+
+            MessageBox.Show("审核成功!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
             
+            this.initConsume();
+            this.invokeUpdateNotify(UpdateType.ConsumeUpdate);
+            this.invokeUpdateNotify(UpdateType.CardUpdate);
         }
 
         //弃核
         private void toolStripButton_finishCancel_Click(object sender, EventArgs e)
         {
+            if (MessageBox.Show("是否弃核，退回到未审核状态？", "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) != DialogResult.OK)
+                return;
+
+            List<Consume> cons = ConsumeDao.getInstance().FindList(consume.CardID);
+            
+            if (cons[cons.Count - 1].ID > consume.ID)
+            {
+                MessageBox.Show("弃核失败，该卡片后面还有消费，请先删除相应的消费。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+            consume.Status = 1;
+            consume.ConsumeTime = DateTime.Now;
+            ConsumeDao.getInstance().Update(consume);
+
+            //注意这里，这样合不合理，如果通过dao find出来就没问题，如果是this.getConsume就不行，getConsume后，还是重新find一下，这样就没问题
+            Card card = consume.Card;
+            if (card.LeftNumber == 0)
+                card.Status = 3;
+            card.LeftNumber += consume.Number;
+            
+            CardDao.getInstance().Update(card);
+
+            MessageBox.Show("弃核成功!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            this.initConsume();
+
+            this.invokeUpdateNotify(UpdateType.CardUpdate);
+            this.invokeUpdateNotify(UpdateType.ConsumeUpdate);
         }
 
         private DialogResult affirmQuit() {
-            return MessageBox.Show("卡片尚未保存，是否放弃保存？", "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+            return MessageBox.Show("消费尚未保存，是否放弃保存？", "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
         }
 
         private void toolStripButton_cancel_Click(object sender, EventArgs e)

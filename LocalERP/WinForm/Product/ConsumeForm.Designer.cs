@@ -102,7 +102,7 @@ namespace LocalERP.WinForm
             this.textBox_comment.Location = new System.Drawing.Point(92, 89);
             this.textBox_comment.Margin = new System.Windows.Forms.Padding(2);
             this.textBox_comment.Name = "textBox_comment";
-            this.textBox_comment.Size = new System.Drawing.Size(151, 23);
+            this.textBox_comment.Size = new System.Drawing.Size(418, 23);
             this.textBox_comment.TabIndex = 22;
             this.textBox_comment.TextChanged += new System.EventHandler(this.Controls_TextChanged);
             // 
@@ -164,7 +164,7 @@ namespace LocalERP.WinForm
             // 
             this.label9.AutoSize = true;
             this.label9.ForeColor = System.Drawing.Color.Red;
-            this.label9.Location = new System.Drawing.Point(541, 120);
+            this.label9.Location = new System.Drawing.Point(549, 169);
             this.label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(14, 14);
@@ -175,7 +175,7 @@ namespace LocalERP.WinForm
             // label_customer
             // 
             this.label_customer.AutoSize = true;
-            this.label_customer.Location = new System.Drawing.Point(554, 120);
+            this.label_customer.Location = new System.Drawing.Point(562, 169);
             this.label_customer.Name = "label_customer";
             this.label_customer.Size = new System.Drawing.Size(70, 14);
             this.label_customer.TabIndex = 41;
@@ -185,7 +185,7 @@ namespace LocalERP.WinForm
             // label_operator
             // 
             this.label_operator.AutoSize = true;
-            this.label_operator.Location = new System.Drawing.Point(264, 94);
+            this.label_operator.Location = new System.Drawing.Point(538, 92);
             this.label_operator.Name = "label_operator";
             this.label_operator.Size = new System.Drawing.Size(70, 14);
             this.label_operator.TabIndex = 45;
@@ -203,10 +203,10 @@ namespace LocalERP.WinForm
             // 
             // textBox_operator
             // 
-            this.textBox_operator.Location = new System.Drawing.Point(337, 90);
+            this.textBox_operator.Location = new System.Drawing.Point(611, 88);
             this.textBox_operator.Margin = new System.Windows.Forms.Padding(2);
             this.textBox_operator.Name = "textBox_operator";
-            this.textBox_operator.Size = new System.Drawing.Size(173, 23);
+            this.textBox_operator.Size = new System.Drawing.Size(193, 23);
             this.textBox_operator.TabIndex = 24;
             this.textBox_operator.TextChanged += new System.EventHandler(this.Controls_TextChanged);
             // 
@@ -247,12 +247,12 @@ namespace LocalERP.WinForm
             // 
             // textBox_num
             // 
-            this.textBox_num.Enabled = false;
             this.textBox_num.Location = new System.Drawing.Point(611, 46);
             this.textBox_num.Margin = new System.Windows.Forms.Padding(2);
             this.textBox_num.Name = "textBox_num";
             this.textBox_num.Size = new System.Drawing.Size(193, 23);
             this.textBox_num.TabIndex = 49;
+            this.textBox_num.Text = "1";
             this.textBox_num.TextChanged += new System.EventHandler(this.Controls_TextChanged);
             // 
             // lookupText2
@@ -292,7 +292,7 @@ namespace LocalERP.WinForm
             // lookupText1
             // 
             this.lookupText1.BackColor = System.Drawing.Color.Transparent;
-            this.lookupText1.Location = new System.Drawing.Point(627, 116);
+            this.lookupText1.Location = new System.Drawing.Point(635, 165);
             this.lookupText1.LookupForm = null;
             this.lookupText1.LookupFormType = null;
             this.lookupText1.Name = "lookupText1";
@@ -383,7 +383,6 @@ namespace LocalERP.WinForm
             this.Name = "ConsumeForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "消费单";
-            this.Load += new System.EventHandler(this.ConsumeForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.panel_basic.ResumeLayout(false);
             this.panel_basic.PerformLayout();

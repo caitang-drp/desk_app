@@ -162,6 +162,7 @@ namespace LocalERP.WinForm
 
                 case LabelUtility.CARD_LIST:
                     FormSingletonFactory.getInstance().getCardListForm().Show(this.dockPanel1);
+                    //FormSingletonFactory.getInstance().getCardListForm().reload(openMode, ID);
                     break;
                 case LabelUtility.CARD_ADD:
                     FormSingletonFactory.getInstance().getCardForm().Show(this.dockPanel1);
@@ -175,7 +176,7 @@ namespace LocalERP.WinForm
 
                 case LabelUtility.CONSUME_LIST:
                     FormSingletonFactory.getInstance().getConsumeListForm().Show(this.dockPanel1);
-                    //FormSingletonFactory.getInstance().getCardForm().reload(openMode, ID);
+                    //FormSingletonFactory.getInstance().getConsumeListForm().reload(openMode, ID);
                     break;
 
                 default:

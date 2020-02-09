@@ -120,8 +120,8 @@ namespace LocalERP.WinForm
             {
                 cardListForm_select = new CardListForm(mainForm, 0);
                 cardListForm_select.initVersions(getVersions(),
-                    UpdateType.PayReceiptUpdate, UpdateType.PayReceiptFinishUpdate, UpdateType.CustomerUpdate);
-                //appendEvent(payReceiptListForm);
+                    UpdateType.CardUpdate);
+                appendEvent(cardListForm_select);
             }
             return cardListForm_select;
         }
@@ -133,7 +133,7 @@ namespace LocalERP.WinForm
             if (consumeForm == null || consumeForm.IsDisposed)
             {
                 consumeForm = new ConsumeForm();
-                //appendEvent(buyPayBillForm);
+                appendEvent(consumeForm);
             }
             return consumeForm;
         }
@@ -144,9 +144,9 @@ namespace LocalERP.WinForm
             if (consumeListForm == null || consumeListForm.IsDisposed)
             {
                 consumeListForm = new ConsumeListForm(mainForm, 1);
-                /*consumeListForm.initVersions(getVersions(),
-                    UpdateType.CardUpdate, UpdateType.ConsumeUpdate, UpdateType.CustomerUpdate);
-                appendEvent(cardListForm);*/
+                consumeListForm.initVersions(getVersions(),
+                    UpdateType.ConsumeUpdate, UpdateType.CustomerUpdate);
+                appendEvent(consumeListForm);
             }
             return consumeListForm;
         }

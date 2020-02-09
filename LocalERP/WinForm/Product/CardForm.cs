@@ -34,14 +34,7 @@ namespace LocalERP.WinForm
             openMode = 0;
             cardID = 0;
 
-            //initDatagridview(this.dataGridView1);
-        }
-
-        //load 和 reload都是对外提供接口
-        private void CardForm_Load(object sender, EventArgs e)
-        {
             this.lookupText1.LookupForm = FormSingletonFactory.getInstance().getCustomerCIForm_Select();
-            initCard();
         }
 
         public void reload(int mode, int id) {
@@ -53,27 +46,27 @@ namespace LocalERP.WinForm
             cardID = id;
             initCard();
 
-            this.lookupText1.Focus();
         }
 
-        //对内提供服务的函数，调用switch mode
+        //对内提供服务的函数，调用switch mode，其实可以把openMode作为参数
         private void initCard()
         {
             //2020-1-18 这里只分两种情况，除了0之外，其他情况还要根据card的status来重设openMode
             if (openMode == 0)
             {
-
+                int max = 1;// CirDao.getMaxCode(string.Format("CARD-{0}-", DateTime.Now.ToString("yyyyMMdd")));
+                this.textBox_serial.Text = string.Format("CARD-{0}-{1:0000}", DateTime.Now.ToString("yyyyMMdd"), max + 1);
                 this.dateTime_cardTime.Value = DateTime.Now;
+                this.textBox_num.Text = "";
+                this.textBox_realTotal.Text = "";
+
                 this.textBox_comment.Text = null;
+                this.textBox_operator.Text = ConfDao.getInstance().Get(5).ToString();
                 this.lookupText1.LookupArg = null;
                 this.lookupText1.Text_Lookup = null;
 
-                int max = 1;// CirDao.getMaxCode(string.Format("CARD-{0}-", DateTime.Now.ToString("yyyyMMdd")));
-                this.textBox_serial.Text = string.Format("CARD-{0}-{1:0000}", DateTime.Now.ToString("yyyyMMdd"), max + 1);
-
-                this.textBox_operator.Text = ConfDao.getInstance().Get(5).ToString();
                 this.dataGridView1.Rows.Clear();
-                //this.dataGridView2[1, 0].Value = null;
+                
             }
             else {
                 card = CardDao.getInstance().FindByID(cardID);
@@ -82,6 +75,7 @@ namespace LocalERP.WinForm
                 this.dateTime_cardTime.Value = card.CardTime;
                 this.textBox_realTotal.Text = card.Total.ToString();
                 this.textBox_num.Text = card.Number.ToString();
+                this.textBox_leftNum.Text = card.LeftNumber.ToString();
                 this.textBox_comment.Text = card.Comment;
                 this.textBox_operator.Text = card.Oper;
                 this.lookupText1.LookupArg = new LookupArg(card.CustomerID, card.CustomerName);
@@ -108,16 +102,16 @@ namespace LocalERP.WinForm
                     break;
                 case 2:
                     //undefine
-                    this.label_status.Text = ProductCirculation.circulationStatusContext[1];
+                    this.label_status.Text = Card.cardStatusContext[1];
                     //this.initControlsEnable(false, false, true, true, true, false, false, false, true, true, true);
                     break;
                 case 3:
-                    //undefine
-                    this.label_status.Text = ProductCirculation.circulationStatusContext[2];
-                    //this.initControlsEnable(false, false, false, true, true, false, false, false, true, true, true);
+                    //审核
+                    this.label_status.Text = Card.cardStatusContext[2];
+                    this.initControlsEnable(false, false, true, false);
                     break;
                 case 4:
-                    //审核
+                    //消费完
                     this.label_status.Text = Card.cardStatusContext[3];
                     this.initControlsEnable(false, false, true, false);
                     break;
@@ -168,14 +162,15 @@ namespace LocalERP.WinForm
             c.CustomerName = this.lookupText1.Text_Lookup;
 
             double total;
-            int num;
+            int num, leftNum;
             
             if (ValidateUtility.getDouble(this.textBox_realTotal, this.errorProvider1, true, true, out total)
-                && ValidateUtility.getInt(this.textBox_num, this.errorProvider1, true, true, out num))
+                && ValidateUtility.getInt(this.textBox_num, this.errorProvider1, true, true, out num)
+                && ValidateUtility.getInt(this.textBox_leftNum, this.errorProvider1, true, true, out leftNum))
             {
                 c.Total = total;
                 c.Number = num;
-                
+                c.LeftNumber = leftNum;
             }
             else
                 return false;
@@ -193,6 +188,7 @@ namespace LocalERP.WinForm
             if (isSellCorrect == false)
                 return;
 
+            card.Status = 1;
             //
             if (this.openMode == 1 && CardDao.getInstance().FindByID(card.ID) == null)
             {
@@ -204,11 +200,10 @@ namespace LocalERP.WinForm
             try
             {
                 if (openMode == 0)
-                {
-                    card.Status = 1;
-                    
+                {   
                     CardDao.getInstance().Insert(card, out cardID);
                     MessageBox.Show(string.Format("增加{0}成功!", this.Text), "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    openMode = 1;
                 }
                 else if (openMode == 1)
                 {
@@ -216,14 +211,11 @@ namespace LocalERP.WinForm
                     MessageBox.Show(string.Format("保存{0}成功!", this.Text), "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
 
-                openMode = 1;
-                //重新更新circulation和record，因为ID不一样
+                //主要是保存按钮恢复到初始状态
                 this.initCard();
             }
             catch (Exception ex)
             {
-                if (openMode == 0)
-                    ProductStainlessCirculationDao.getInstance().DeleteByID(cardID);
                 MessageBox.Show("保存有误,可能是往来单位或货品属性被修改过,请重新编辑!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
 
@@ -243,31 +235,18 @@ namespace LocalERP.WinForm
             //2018-4-20修复的bug
             if (CardDao.getInstance().FindByID(card.ID) == null)
             {
-                MessageBox.Show("该单据已经被删除了。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                //this.Enabled = true;
+                MessageBox.Show("该卡片已经被删除了。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            
+            card.CardTime = DateTime.Now;
+            card.Status = 3;
 
-            //2017-11-20，相应的信息也要更新
-            //sell.CirculationTime = DateTime.Now;
-            //this.dateTime_sellTime.Value = sell.CirculationTime;
-            //重置了dateTime控件后，neeSave会变为true，但是由于是系统自动更新时间，所以不需要用户保存！耦合度太高了
-            //this.needSave = false;
-            //cirDao.UpdateBaiscInfo(sell);
-
-            //cirDao.UpdateStatus(circulationID, 4);
-
-            card.Status = 4;
             CardDao.getInstance().Update(card);
 
             this.initCard();
             
             MessageBox.Show("审核成功!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-            openMode = 4;
-            this.switchMode(4);
 
             this.invokeUpdateNotify(UpdateType.CardUpdate);
         }
@@ -275,6 +254,23 @@ namespace LocalERP.WinForm
         //弃核
         private void toolStripButton_finishCancel_Click(object sender, EventArgs e)
         {
+            if (MessageBox.Show("是否弃核，退回到未审核状态？", "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) != DialogResult.OK)
+                return;
+
+            if (ConsumeDao.getInstance().FindList(cardID).Count > 0) {
+                MessageBox.Show("弃核失败，该卡片已经消费过，请先删除相应的消费。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+            card.Status = 1;
+            card.CardTime = DateTime.Now;
+
+            CardDao.getInstance().Update(card);
+
+            MessageBox.Show("弃核成功!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            this.initCard();
+
+            this.invokeUpdateNotify(UpdateType.CardUpdate);
         }
 
         private DialogResult affirmQuit() {
@@ -316,6 +312,11 @@ namespace LocalERP.WinForm
         private void Controls_TextChanged(object sender, EventArgs e)
         {
             resetNeedSave(true);
+        }
+
+        private void Textbox_num_TextChanged(object sender, EventArgs e)
+        {
+            this.textBox_leftNum.Text = this.textBox_num.Text;
         }
 
     }
