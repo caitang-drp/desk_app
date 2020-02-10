@@ -265,7 +265,7 @@ namespace LocalERP.WinForm
             if (MessageBox.Show("是否弃核，退回到未审核状态？", "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) != DialogResult.OK)
                 return;
 
-            List<Consume> cons = ConsumeDao.getInstance().FindList(consume.CardID);
+            List<Consume> cons = ConsumeDao.getInstance().FindList(consume.CardID, 0);
             
             if (cons[cons.Count - 1].ID > consume.ID)
             {

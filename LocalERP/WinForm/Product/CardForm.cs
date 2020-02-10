@@ -64,8 +64,6 @@ namespace LocalERP.WinForm
                 this.textBox_operator.Text = ConfDao.getInstance().Get(5).ToString();
                 this.lookupText1.LookupArg = null;
                 this.lookupText1.Text_Lookup = null;
-
-                this.dataGridView1.Rows.Clear();
                 
             }
             else {
@@ -81,6 +79,24 @@ namespace LocalERP.WinForm
                 this.lookupText1.LookupArg = new LookupArg(card.CustomerID, card.CustomerName);
                 this.lookupText1.Text_Lookup = card.CustomerName;
 
+                List<Consume> list = ConsumeDao.getInstance().FindList(cardID, 4);
+                this.dataGridView1.Rows.Clear();
+
+                for (int i = 0; i < list.Count; i++)
+                {
+                    Consume consume = list[i];
+                    this.dataGridView1.Rows.Add();
+                    this.dataGridView1.Rows[i].Cells["ID"].Value = consume.ID;
+                    this.dataGridView1.Rows[i].Cells["name"].Value = consume.Code;
+
+                    this.dataGridView1.Rows[i].Cells["num"].Value = consume.Number;
+
+                    int status = consume.Status;
+                    this.dataGridView1.Rows[i].Cells["status"].Value = Consume.consumeStatusContext[status - 1];
+                    
+                    this.dataGridView1.Rows[i].Cells["sellTime"].Value = consume.ConsumeTime.ToString("yyyy-MM-dd HH:mm:ss");
+                }
+
                 openMode = card.Status;
             }
             switchMode(openMode);
@@ -93,12 +109,12 @@ namespace LocalERP.WinForm
             switch(mode){
                 case 0:
                     this.label_status.Text = "新增";
-                    this.initControlsEnable(false, false, false, true);
+                    this.initControlsEnable(false, false, false, true, false);
                     break;
                 case 1:
                     //未审核，这种状态属于刚开始打开的编辑状态，以及弃核后的状态
                     this.label_status.Text = Card.cardStatusContext[0];
-                    this.initControlsEnable(false, true, false, true);
+                    this.initControlsEnable(false, true, false, true, false);
                     break;
                 case 2:
                     //undefine
@@ -108,24 +124,26 @@ namespace LocalERP.WinForm
                 case 3:
                     //审核
                     this.label_status.Text = Card.cardStatusContext[2];
-                    this.initControlsEnable(false, false, true, false);
+                    this.initControlsEnable(false, false, true, false, true);
                     break;
                 case 4:
                     //消费完
                     this.label_status.Text = Card.cardStatusContext[3];
-                    this.initControlsEnable(false, false, true, false);
+                    this.initControlsEnable(false, false, true, false, true);
                     break;
                 default:
                     break;
             }
         }
 
-        private void initControlsEnable(bool save, bool finish, bool finishCancel, bool basicInfo)
+        private void initControlsEnable(bool save, bool finish, bool finishCancel, bool basicInfo, bool consumeList)
         {
             this.toolStripButton_save.Enabled = save;
             this.toolStripButton_finish.Enabled = finish;
             this.toolStripButton_finishCancel.Enabled = finishCancel;
             this.panel_basic.Enabled = basicInfo;
+            this.label8.Visible = consumeList;
+            this.dataGridView1.Visible = consumeList;
         }
 
 
@@ -230,7 +248,8 @@ namespace LocalERP.WinForm
             if (MessageBox.Show(tips, "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) != DialogResult.OK)
                 return;
 
-            this.getCard(out card);
+            if (this.getCard(out card) == false)
+                return;
 
             //2018-4-20修复的bug
             if (CardDao.getInstance().FindByID(card.ID) == null)
@@ -257,7 +276,7 @@ namespace LocalERP.WinForm
             if (MessageBox.Show("是否弃核，退回到未审核状态？", "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) != DialogResult.OK)
                 return;
 
-            if (ConsumeDao.getInstance().FindList(cardID).Count > 0) {
+            if (ConsumeDao.getInstance().FindList(cardID, 0).Count > 0) {
                 MessageBox.Show("弃核失败，该卡片已经消费过，请先删除相应的消费。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }

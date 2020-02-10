@@ -60,7 +60,7 @@ namespace LocalERP.WinForm
         
         private void initList()
         {
-            List<Consume> list = ConsumeDao.getInstance().FindList(0);
+            List<Consume> list = ConsumeDao.getInstance().FindList(0, 0);
             this.dataGridView1.Rows.Clear();
 
             for(int i=0;i<list.Count;i++) {

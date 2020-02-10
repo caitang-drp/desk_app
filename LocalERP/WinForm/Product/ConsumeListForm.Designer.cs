@@ -129,7 +129,7 @@
             this.cardInfo.HeaderText = "卡号信息";
             this.cardInfo.Name = "cardInfo";
             this.cardInfo.ReadOnly = true;
-            this.cardInfo.Width = 220;
+            this.cardInfo.Width = 260;
             // 
             // customer
             // 

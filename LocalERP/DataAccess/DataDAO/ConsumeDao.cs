@@ -61,6 +61,7 @@ namespace LocalERP.DataAccess.DataDAO
                 consume.Card = CardDao.getInstance().FindByID(consume.CardID);
 
                 consume.Number = (int)dr["Consume.num"];
+                consume.LeftNumber = (int)dr["Consume.leftNum"];
                 consume.Comment = dr["Consume.comment"] as string;
                 consume.Oper = dr["Consume.operator"] as string;
                 consume.Status = (int)dr["Consume.status"];
@@ -78,12 +79,15 @@ namespace LocalERP.DataAccess.DataDAO
             return getBeanFromDataRow(dr);
         }
 
-        public List<Consume> FindList(int cardId)
+        public List<Consume> FindList(int cardId, int status)
         {
             String commandText = string.Format("select * from Card, Customer, Consume where Consume.cardID = Card.ID and Card.customerID = Customer.ID");
 
             if (cardId > 0)
                 commandText += string.Format(" and Consume.cardID={0}", cardId);
+
+            if(status > 0)
+                commandText += string.Format(" and Consume.status={0}", status);
 
             commandText += " order by Consume.ID desc";
             
