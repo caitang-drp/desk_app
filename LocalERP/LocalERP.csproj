@@ -615,9 +615,6 @@
     <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="ERP-init.mdb">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="ERP.mdb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -663,6 +660,10 @@
     <None Include="images\16pix\512968.png" />
     <None Include="images\32pix\orange\13013.png" />
     <None Include="images\16pix\card.ico" />
+    <None Include="images\32pix\card.png" />
+    <None Include="images\32pix\刷卡.png" />
+    <None Include="images\32pix\card1.png" />
+    <None Include="images\32pix\fuzzy\29828.png" />
     <Content Include="start.ico" />
     <None Include="images\32pix\cute\arrival.png" />
     <None Include="images\32pix\cute\del32.png" />

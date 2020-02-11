@@ -40,6 +40,20 @@ namespace LocalERP.WinForm
             FormSingletonFactory.getInstance().MainForm = this;
 
             Control.CheckForIllegalCrossThreadCalls = false;
+
+            if (ConfUtility.softType == 0) {
+                this.toolStripButton_card.Visible = false;
+                this.toolStripButton_consume.Visible = false;
+            }
+            else if (ConfUtility.softType == 1) {
+                this.toolStripButton_purchase.Visible = false;
+                this.toolStripButton_sell.Visible = false;
+                this.toolStripButton_queryLib.Visible = false;
+                this.toolStripButton_statistic.Visible = false;
+
+                this.允许ToolStripMenuItem.Visible = false;
+                this.单据设置ToolStripMenuItem.Visible = false;
+            }
         }
 
         //用于显示等待界面
@@ -282,29 +296,17 @@ namespace LocalERP.WinForm
             this.Close();
         }
 
-        private void toolStripButton_purchase_Click(object sender, EventArgs e)
-        {
-            this.setForm(LabelUtility.PURCHASE);
-        }
 
-        private void toolStripButton_sell_Click(object sender, EventArgs e)
-        {
-            this.setForm(LabelUtility.SELL);
-        }
 
-        private void toolStripButton_queryLib_Click(object sender, EventArgs e)
+        private void toolStripButton_Click(object sender, EventArgs e)
         {
-            this.setForm(LabelUtility.QUERY_PRODUCT_DETAIL);
+            ToolStripButton button = sender as ToolStripButton;
+            this.setForm(button.Text);
         }
 
         private void toolStripButton_close_Click(object sender, EventArgs e)
         {
             this.Close();
-        }
-
-        private void toolStripButton_statistic_Click(object sender, EventArgs e)
-        {
-            this.setForm(LabelUtility.QUERY_CASH_DETAIL);
         }
 
         private void 全部数据清空ToolStripMenuItem_Click(object sender, EventArgs e)

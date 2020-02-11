@@ -61,6 +61,7 @@
             this.设置ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.设置登陆密码ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.单据设置ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.备份设置ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.允许ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.permitNegativeItem = new System.Windows.Forms.ToolStripMenuItem();
             this.notPermitNegativeItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -69,14 +70,15 @@
             this.关于软件ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1 = new System.Windows.Forms.Panel();
             this.dockPanel1 = new WeifenLuo.WinFormsUI.Docking.DockPanel();
-            this.备份设置ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mySplitter1 = new LocalERP.WinForm.Utility.MySplitter(this.components);
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripButton_purchase = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton_sell = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton_queryLib = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton_statistic = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton_consume = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton_card = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton_close = new System.Windows.Forms.ToolStripButton();
-            this.mySplitter1 = new LocalERP.WinForm.Utility.MySplitter(this.components);
             this.statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -86,10 +88,10 @@
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 412);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 551);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 17, 0);
-            this.statusStrip1.Size = new System.Drawing.Size(615, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(849, 22);
             this.statusStrip1.TabIndex = 5;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -112,7 +114,7 @@
             this.帮助ToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(615, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(849, 24);
             this.menuStrip1.TabIndex = 11;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -207,16 +209,23 @@
             // 设置登陆密码ToolStripMenuItem
             // 
             this.设置登陆密码ToolStripMenuItem.Name = "设置登陆密码ToolStripMenuItem";
-            this.设置登陆密码ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.设置登陆密码ToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
             this.设置登陆密码ToolStripMenuItem.Text = "密码设置";
             this.设置登陆密码ToolStripMenuItem.Click += new System.EventHandler(this.设置登陆密码ToolStripMenuItem_Click);
             // 
             // 单据设置ToolStripMenuItem
             // 
             this.单据设置ToolStripMenuItem.Name = "单据设置ToolStripMenuItem";
-            this.单据设置ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.单据设置ToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
             this.单据设置ToolStripMenuItem.Text = "单据设置";
             this.单据设置ToolStripMenuItem.Click += new System.EventHandler(this.单据设置ToolStripMenuItem_Click);
+            // 
+            // 备份设置ToolStripMenuItem
+            // 
+            this.备份设置ToolStripMenuItem.Name = "备份设置ToolStripMenuItem";
+            this.备份设置ToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            this.备份设置ToolStripMenuItem.Text = "备份设置";
+            this.备份设置ToolStripMenuItem.Click += new System.EventHandler(this.备份设置ToolStripMenuItem_Click);
             // 
             // 允许ToolStripMenuItem
             // 
@@ -224,7 +233,7 @@
             this.permitNegativeItem,
             this.notPermitNegativeItem});
             this.允许ToolStripMenuItem.Name = "允许ToolStripMenuItem";
-            this.允许ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.允许ToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
             this.允许ToolStripMenuItem.Text = "允许负库存";
             // 
             // permitNegativeItem
@@ -269,7 +278,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.Location = new System.Drawing.Point(0, 63);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(212, 349);
+            this.panel1.Size = new System.Drawing.Size(212, 488);
             this.panel1.TabIndex = 15;
             // 
             // dockPanel1
@@ -281,7 +290,7 @@
             this.dockPanel1.Location = new System.Drawing.Point(222, 63);
             this.dockPanel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dockPanel1.Name = "dockPanel1";
-            this.dockPanel1.Size = new System.Drawing.Size(393, 349);
+            this.dockPanel1.Size = new System.Drawing.Size(627, 488);
             dockPanelGradient1.EndColor = System.Drawing.SystemColors.ControlLight;
             dockPanelGradient1.StartColor = System.Drawing.SystemColors.ControlLight;
             autoHideStripSkin1.DockStripGradient = dockPanelGradient1;
@@ -328,12 +337,17 @@
             this.dockPanel1.Skin = dockPanelSkin1;
             this.dockPanel1.TabIndex = 18;
             // 
-            // 备份设置ToolStripMenuItem
+            // mySplitter1
             // 
-            this.备份设置ToolStripMenuItem.Name = "备份设置ToolStripMenuItem";
-            this.备份设置ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.备份设置ToolStripMenuItem.Text = "备份设置";
-            this.备份设置ToolStripMenuItem.Click += new System.EventHandler(this.备份设置ToolStripMenuItem_Click);
+            this.mySplitter1.BackColor = System.Drawing.Color.LightGray;
+            this.mySplitter1.Location = new System.Drawing.Point(212, 63);
+            this.mySplitter1.MinExtra = 0;
+            this.mySplitter1.MinSize = 0;
+            this.mySplitter1.Name = "mySplitter1";
+            this.mySplitter1.Size = new System.Drawing.Size(10, 488);
+            this.mySplitter1.SplitterHide = false;
+            this.mySplitter1.TabIndex = 16;
+            this.mySplitter1.TabStop = false;
             // 
             // toolStrip1
             // 
@@ -346,11 +360,13 @@
             this.toolStripButton_sell,
             this.toolStripButton_queryLib,
             this.toolStripButton_statistic,
+            this.toolStripButton_consume,
+            this.toolStripButton_card,
             this.toolStripButton_close});
             this.toolStrip1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
             this.toolStrip1.Location = new System.Drawing.Point(0, 24);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(615, 39);
+            this.toolStrip1.Size = new System.Drawing.Size(849, 39);
             this.toolStrip1.TabIndex = 13;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -361,7 +377,7 @@
             this.toolStripButton_purchase.Name = "toolStripButton_purchase";
             this.toolStripButton_purchase.Size = new System.Drawing.Size(99, 36);
             this.toolStripButton_purchase.Text = "采购入库";
-            this.toolStripButton_purchase.Click += new System.EventHandler(this.toolStripButton_purchase_Click);
+            this.toolStripButton_purchase.Click += new System.EventHandler(this.toolStripButton_Click);
             // 
             // toolStripButton_sell
             // 
@@ -370,7 +386,7 @@
             this.toolStripButton_sell.Name = "toolStripButton_sell";
             this.toolStripButton_sell.Size = new System.Drawing.Size(99, 36);
             this.toolStripButton_sell.Text = "销售出库";
-            this.toolStripButton_sell.Click += new System.EventHandler(this.toolStripButton_sell_Click);
+            this.toolStripButton_sell.Click += new System.EventHandler(this.toolStripButton_Click);
             // 
             // toolStripButton_queryLib
             // 
@@ -379,7 +395,7 @@
             this.toolStripButton_queryLib.Name = "toolStripButton_queryLib";
             this.toolStripButton_queryLib.Size = new System.Drawing.Size(113, 36);
             this.toolStripButton_queryLib.Text = "进销存明细";
-            this.toolStripButton_queryLib.Click += new System.EventHandler(this.toolStripButton_queryLib_Click);
+            this.toolStripButton_queryLib.Click += new System.EventHandler(this.toolStripButton_Click);
             // 
             // toolStripButton_statistic
             // 
@@ -388,7 +404,25 @@
             this.toolStripButton_statistic.Name = "toolStripButton_statistic";
             this.toolStripButton_statistic.Size = new System.Drawing.Size(99, 36);
             this.toolStripButton_statistic.Text = "对账明细";
-            this.toolStripButton_statistic.Click += new System.EventHandler(this.toolStripButton_statistic_Click);
+            this.toolStripButton_statistic.Click += new System.EventHandler(this.toolStripButton_Click);
+            // 
+            // toolStripButton_consume
+            // 
+            this.toolStripButton_consume.Image = global::LocalERP.Properties.Resources.刷卡;
+            this.toolStripButton_consume.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton_consume.Name = "toolStripButton_consume";
+            this.toolStripButton_consume.Size = new System.Drawing.Size(99, 36);
+            this.toolStripButton_consume.Text = "新增消费";
+            this.toolStripButton_consume.Click += new System.EventHandler(this.toolStripButton_Click);
+            // 
+            // toolStripButton_card
+            // 
+            this.toolStripButton_card.Image = global::LocalERP.Properties.Resources._29828;
+            this.toolStripButton_card.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton_card.Name = "toolStripButton_card";
+            this.toolStripButton_card.Size = new System.Drawing.Size(99, 36);
+            this.toolStripButton_card.Text = "新增卡片";
+            this.toolStripButton_card.Click += new System.EventHandler(this.toolStripButton_Click);
             // 
             // toolStripButton_close
             // 
@@ -399,24 +433,12 @@
             this.toolStripButton_close.Text = "关闭系统";
             this.toolStripButton_close.Click += new System.EventHandler(this.toolStripButton_close_Click);
             // 
-            // mySplitter1
-            // 
-            this.mySplitter1.BackColor = System.Drawing.Color.LightGray;
-            this.mySplitter1.Location = new System.Drawing.Point(212, 63);
-            this.mySplitter1.MinExtra = 0;
-            this.mySplitter1.MinSize = 0;
-            this.mySplitter1.Name = "mySplitter1";
-            this.mySplitter1.Size = new System.Drawing.Size(10, 349);
-            this.mySplitter1.SplitterHide = false;
-            this.mySplitter1.TabIndex = 16;
-            this.mySplitter1.TabStop = false;
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(615, 434);
+            this.ClientSize = new System.Drawing.Size(849, 573);
             this.Controls.Add(this.dockPanel1);
             this.Controls.Add(this.mySplitter1);
             this.Controls.Add(this.panel1);
@@ -478,6 +500,8 @@
         protected System.Windows.Forms.ToolStripMenuItem notPermitNegativeItem;
         private System.Windows.Forms.ToolStripMenuItem 单据设置ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 备份设置ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripButton toolStripButton_card;
+        private System.Windows.Forms.ToolStripButton toolStripButton_consume;
 
     }
 }

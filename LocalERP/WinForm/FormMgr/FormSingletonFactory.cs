@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using LocalERP.DataAccess.Utility;
 
 namespace LocalERP.WinForm
 {
@@ -11,7 +12,12 @@ namespace LocalERP.WinForm
         public static FormMgr getInstance()
         {
             if (formMgr == null)
-                formMgr = new FormCardMgr();
+            {
+                if (ConfUtility.softType == 1)
+                    formMgr = new FormCardMgr();
+                else if (ConfUtility.softType == 0)
+                    formMgr = new FormStainlessMgr();
+            }
             return formMgr;
         }
     }

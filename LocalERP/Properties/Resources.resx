@@ -121,9 +121,6 @@
   <data name="print16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\images\16pix\print16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="selectall" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\images\16pix\selectall.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="cancel16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\images\16pix\cancel16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -133,11 +130,11 @@
   <data name="folder-open.16px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\images\16pix\folder-open.16px.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="statistic1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\images\32pix\cute\statistic1.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="folder-open.16px.1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\images\16pix\folder-open.16px.1.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="13013" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\images\32pix\orange\13013.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="add16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\images\16pix\add16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="tree-node-add.16px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\images\16pix\tree-node-add.16px.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -151,14 +148,14 @@
   <data name="del32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\images\32pix\fuzzy\26758.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="add16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\images\16pix\add16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="13013" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\images\32pix\orange\13013.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="arrival24" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\images\16pix\arrival24.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="del16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\images\16pix\del16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="card" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\images\16pix\card.ico;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="user16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\images\16pix\user16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -175,11 +172,17 @@
   <data name="yes1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\images\16pix\yes1.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="orderAdd32" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\images\32pix\cute\add32.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="manu" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\images\welcome\manu.jpg;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="arrival32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\images\32pix\cute\arrival.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="card11" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\images\32pix\card1.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="add16.2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\images\16pix\add16.2.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="cancel161" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\images\16pix\cancel16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -202,8 +205,8 @@
   <data name="cancel" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\images\16pix\cancel.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="orderDel32" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\images\32pix\cute\del32.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="orderAdd32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\images\32pix\cute\add32.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="exit32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\images\32pix\cute\1097638.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -211,8 +214,11 @@
   <data name="512968" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\images\16pix\512968.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="folder-open.16px.1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\images\16pix\folder-open.16px.1.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="selectall" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\images\16pix\selectall.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="刷卡" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\images\32pix\刷卡.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="apply16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\images\16pix\apply16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -222,6 +228,15 @@
   </data>
   <data name="38095" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\images\16pix\38095.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="statistic1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\images\32pix\cute\statistic1.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="del16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\images\16pix\del16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="card1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\images\32pix\card.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="arrivalSave16-2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\images\16pix\arrivalSave16-2.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -241,17 +256,14 @@
   <data name="add-brother" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\images\16pix\add-brother.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="add16.2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\images\16pix\add16.2.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="orderDel32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\images\32pix\cute\del32.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="add32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\images\32pix\fuzzy\27186.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="up16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\images\16pix\up16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="manu" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\images\welcome\manu.jpg;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="cash" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\images\welcome\cash.jpg;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -262,7 +274,7 @@
   <data name="search.16px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\images\16pix\search.16px.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="card" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\images\16pix\card.ico;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="29828" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\images\32pix\fuzzy\29828.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>
