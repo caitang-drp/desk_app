@@ -122,124 +122,154 @@
     <Compile Include="DataAccess\Utility\ConfUtility.cs" />
     <Compile Include="UiDataProxy\CategoryItemTypeConf.cs" />
     <Compile Include="WinForm\Data\CustomerCardForm.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="WinForm\Data\ProductClothesForm.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="WinForm\Data\ProductClothesForm.Designer.cs">
       <DependentUpon>ProductClothesForm.cs</DependentUpon>
     </Compile>
     <Compile Include="WinForm\Data\ProductClothesInputNumForm.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="WinForm\Data\ProductClothesInputNumForm.Designer.cs">
       <DependentUpon>ProductClothesInputNumForm.cs</DependentUpon>
     </Compile>
     <Compile Include="WinForm\Data\CharactorForm.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="WinForm\Data\CharactorForm.Designer.cs">
       <DependentUpon>CharactorForm.cs</DependentUpon>
     </Compile>
     <Compile Include="WinForm\Data\ProductStainlessCategoryItemForm.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="WinForm\Data\ProductStainlessForm.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="WinForm\Data\ProductStainlessForm.Designer.cs">
       <DependentUpon>ProductStainlessForm.cs</DependentUpon>
     </Compile>
     <Compile Include="WinForm\Data\CustomerCategoryItemForm.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="WinForm\Data\CustomerCardCategoryItemForm.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="WinForm\FormMgr\FormMgr.cs" />
     <Compile Include="WinForm\FormMgr\FormSingletonFactory.cs" />
     <Compile Include="WinForm\FormMgr\FormCardMgr.cs" />
     <Compile Include="WinForm\MyDockContent.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="WinForm\PayReceipt\PayReceiptForm.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="WinForm\PayReceipt\PayReceiptForm.Designer.cs">
       <DependentUpon>PayReceiptForm.cs</DependentUpon>
     </Compile>
     <Compile Include="WinForm\PayReceipt\PayReceiptListForm.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="WinForm\PayReceipt\PayReceiptListForm.Designer.cs">
       <DependentUpon>PayReceiptListForm.cs</DependentUpon>
     </Compile>
     <Compile Include="WinForm\PayReceipt\PayReceiptOtherForm.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="WinForm\Product\ProductStainlessCirculationForm.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="WinForm\Product\ProductClothesCirculationForm.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="WinForm\Product\CardForm.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="WinForm\Product\CardForm.Designer.cs">
       <DependentUpon>CardForm.cs</DependentUpon>
     </Compile>
     <Compile Include="WinForm\Product\CardListForm.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="WinForm\Product\CardListForm.Designer.cs">
       <DependentUpon>CardListForm.cs</DependentUpon>
     </Compile>
     <Compile Include="WinForm\Product\ConsumeForm.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="WinForm\Product\ConsumeForm.Designer.cs">
       <DependentUpon>ConsumeForm.cs</DependentUpon>
     </Compile>
     <Compile Include="WinForm\Product\ConsumeListForm.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="WinForm\Product\ConsumeListForm.Designer.cs">
       <DependentUpon>ConsumeListForm.cs</DependentUpon>
     </Compile>
     <Compile Include="WinForm\Query\QuerySellProfitForm.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="WinForm\Query\QuerySellProfitForm.Designer.cs">
       <DependentUpon>QuerySellProfitForm.cs</DependentUpon>
     </Compile>
     <Compile Include="WinForm\Query\QueryProductDetailForm.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="WinForm\Query\QueryProductDetailForm.Designer.cs">
       <DependentUpon>QueryProductDetailForm.cs</DependentUpon>
     </Compile>
     <Compile Include="WinForm\Query\QueryLibForm.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="WinForm\Query\QueryLibForm.Designer.cs">
       <DependentUpon>QueryLibForm.cs</DependentUpon>
     </Compile>
     <Compile Include="WinForm\Data\CategoryForm.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="WinForm\Data\CategoryForm.Designer.cs">
       <DependentUpon>CategoryForm.cs</DependentUpon>
     </Compile>
     <Compile Include="WinForm\Product\ProductCirculationForm.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="WinForm\Product\ProductCirculationForm.Designer.cs">
       <DependentUpon>ProductCirculationForm.cs</DependentUpon>
     </Compile>
     <Compile Include="WinForm\Product\ProductCirculationListForm.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="WinForm\Product\ProductCirculationListForm.Designer.cs">
       <DependentUpon>ProductCirculationListForm.cs</DependentUpon>
     </Compile>
     <Compile Include="WinForm\Query\StatisticProductForm.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="WinForm\Query\StatisticProductForm.Designer.cs">
       <DependentUpon>StatisticProductForm.cs</DependentUpon>
     </Compile>
     <Compile Include="WinForm\Query\QueryProductClothesDetailForm.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="WinForm\Query\QueryProductClothesDetailForm.Designer.cs">
       <DependentUpon>QueryProductClothesDetailForm.cs</DependentUpon>
     </Compile>
     <Compile Include="WinForm\Query\QueryProductStainlessDetailForm.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="WinForm\Query\StatisticProductStainlessForm.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="WinForm\Query\QueryCashDetailForm.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="WinForm\Query\QueryCashDetailForm.Designer.cs">
       <DependentUpon>QueryCashDetailForm.cs</DependentUpon>
     </Compile>
     <Compile Include="WinForm\Query\StatisticCashForm.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="WinForm\Query\StatisticCashForm.Designer.cs">
       <DependentUpon>StatisticCashForm.cs</DependentUpon>
@@ -257,11 +287,13 @@
       <DependentUpon>NavigationUC.cs</DependentUpon>
     </Compile>
     <Compile Include="WinForm\Data\CustomerForm.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="WinForm\Data\CustomerForm.Designer.cs">
       <DependentUpon>CustomerForm.cs</DependentUpon>
     </Compile>
     <Compile Include="WinForm\Data\CategoryItemForm.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="WinForm\Data\CategoryItemForm.Designer.cs">
       <DependentUpon>CategoryItemForm.cs</DependentUpon>
@@ -286,8 +318,10 @@
     </Compile>
     <Compile Include="WinForm\System\WaitFormService.cs" />
     <Compile Include="WinForm\LookupAndNotifyDockContent.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="WinForm\System\WelcomeForm.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="WinForm\System\WelcomeForm.Designer.cs">
       <DependentUpon>WelcomeForm.cs</DependentUpon>
