@@ -24,7 +24,7 @@ namespace LocalERP.WinForm
 
             if (ConfUtility.softType == 1)
             {
-                addRow(LabelUtility.CONSUME_MANAGE, new string[] { LabelUtility.CONSUME_LIST, LabelUtility.CONSUME_ADD }, 55);
+                label = addRow(LabelUtility.CONSUME_MANAGE, new string[] { LabelUtility.CONSUME_LIST, LabelUtility.CONSUME_ADD }, 55);
                 label = addRow(LabelUtility.CARD_MANAGE, new string[] { LabelUtility.CARD_LIST, LabelUtility.CARD_ADD }, label.Location.Y + 50);
                 label = addRow(LabelUtility.DATA_SETTING, new string[] { LabelUtility.DATA_CUSTOMER, LabelUtility.DATA_COMPANY }, label.Location.Y + 50);
             }
