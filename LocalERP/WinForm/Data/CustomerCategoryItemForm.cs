@@ -17,6 +17,7 @@ namespace LocalERP.WinForm.Data
         public CustomerCategoryItemForm(int openMode, CategoryItemTypeConf conf, string title, Form parentForm)
             :base(openMode, conf, title, parentForm)
         {
+            this.dataGridView1.IsLastRowSort = true;
         }
 
         protected override void initColumns()
@@ -28,11 +29,12 @@ namespace LocalERP.WinForm.Data
 
             string[] columnTexts = new string[] { "ID", "名称", "类别", "我方欠款/元\r(应付)", "对方欠款/元\r(应收)" };
             string[] columnNames = new string[] { "ID", "name", "category", "myArrear", "hisArrear" };
+            bool[] columnNums = new bool[] { false, false, false, true, true };
             int[] columnLengths = new int[] { 80, 120, 80, 120, 120 };
 
-            ControlUtility.initColumns(this.dataGridView1, columnNames, columnTexts, columnLengths);
+            ControlUtility.initColumns(this.dataGridView1, columnNames, columnTexts, columnLengths, columnNums);
             this.dataGridView1.Columns.Insert(0, check);
-        }
+        }        
 
         protected override DataTable getRecordsTable(int parentId, string name)
         {
@@ -62,34 +64,58 @@ namespace LocalERP.WinForm.Data
                 {
                     dataGridView1.Rows[index].Cells["myArrear"].Style.ForeColor = Color.Green;
                     dataGridView1.Rows[index].Cells["myArrear"].Style.SelectionForeColor = Color.Green;
-                    dataGridView1.Rows[index].Cells["myArrear"].Value = string.Format("{0:0.00}", arrear);
+                    dataGridView1.Rows[index].Cells["myArrear"].Value = arrear;
                     sumToPay += arrear;
                 }
                 else if (arrear < 0)
                 {
                     dataGridView1.Rows[index].Cells["hisArrear"].Style.ForeColor = Color.Red;
                     dataGridView1.Rows[index].Cells["hisArrear"].Style.SelectionForeColor = Color.Red;
-                    dataGridView1.Rows[index].Cells["hisArrear"].Value = string.Format("{0:0.00}", -arrear);
+                    dataGridView1.Rows[index].Cells["hisArrear"].Value = -arrear;
                     sumToRecepit += (-arrear);
                 }
             }
-
+            
             index = dataGridView1.Rows.Add();
 
             dataGridView1.Rows[index].Cells["name"].Value = "合计";
-
             dataGridView1.Rows[index].Cells["myArrear"].Style.ForeColor = Color.Green;
             dataGridView1.Rows[index].Cells["myArrear"].Style.SelectionForeColor = Color.Green;
-            dataGridView1.Rows[index].Cells["myArrear"].Value = string.Format("{0:0.00}", sumToPay);
+            dataGridView1.Rows[index].Cells["myArrear"].Value = sumToPay;
 
             dataGridView1.Rows[index].Cells["hisArrear"].Style.ForeColor = Color.Red;
             dataGridView1.Rows[index].Cells["hisArrear"].Style.SelectionForeColor = Color.Red;
-            dataGridView1.Rows[index].Cells["hisArrear"].Value = string.Format("{0:0.00}", sumToRecepit);
+            dataGridView1.Rows[index].Cells["hisArrear"].Value = sumToRecepit;
 
             dataGridView1.Rows[index].DefaultCellStyle.ForeColor = Color.Red;
             dataGridView1.Rows[index].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dataGridView1.Rows[index].DefaultCellStyle.Font = new Font("宋体", 10F, FontStyle.Bold);
         }
+
+        /*protected override void initRecords(DataTable dataTable)
+        {
+            DataTable dt = new DataTable();
+            DataColumn dc_name = new DataColumn("名称");
+            DataColumn dc_myArrear = new DataColumn("myArrear", typeof(double));
+            dt.Columns.Add(dc_name);
+            dt.Columns.Add(dc_myArrear);
+
+            int index = 0;
+            foreach (DataRow dataRow in dataTable.Rows)
+            {
+                DataRow dr = dt.NewRow();
+                dr["名称"] = dataRow["Customer.name"];
+                
+                double arrear = 0;
+                bool temp;
+                ValidateUtility.getDouble(dataRow, "arrear", out arrear, out temp);
+                dr["myArrear"] = arrear;
+
+                dt.Rows.Add(dr);
+            }
+
+            this.dataGridView1.DataSource = dt;
+        }*/
 
         protected override MyDockContent getItemForm(Form owner, int openMode, int ID)
         {

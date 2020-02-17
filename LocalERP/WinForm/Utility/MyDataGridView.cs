@@ -3,11 +3,46 @@ using System.Collections.Generic;
 using System.Text;
 using WeifenLuo.WinFormsUI.Docking;
 using System.Windows.Forms;
+using System.Data;
 
 namespace LocalERP.WinForm
 {
     public class MyDataGridView : DataGridView
     {
+        private bool isLastRowSort = false;
+
+        public bool IsLastRowSort
+        {
+            get { return isLastRowSort; }
+            set
+            {
+                isLastRowSort = value;
+                if (isLastRowSort == true)
+                {
+                    this.Sorted -= new EventHandler(dataGridView_Sorted);
+                    this.CellMouseClick -= new DataGridViewCellMouseEventHandler(dataGridView_CellMouseClick);
+                    this.Sorted += new EventHandler(dataGridView_Sorted);
+                    this.CellMouseClick += new DataGridViewCellMouseEventHandler(dataGridView_CellMouseClick);
+                }
+            }
+        }
+        private DataGridViewRow lastRow = null;
+        void dataGridView_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.RowIndex >= 0 || Rows.Count == 0)
+                return;
+            lastRow = Rows[Rows.Count - 1];
+            Rows.RemoveAt(Rows.Count - 1);
+        }
+        
+        void dataGridView_Sorted(object sender, EventArgs e)
+        {
+            if (lastRow == null)
+                return;
+            Rows.Add(lastRow);
+            lastRow = null;
+        }
+
         public MyDataGridView() : base() {
             this.CellPainting += new DataGridViewCellPaintingEventHandler(MyDataGridView_CellPainting);
             this.CellFormatting += new DataGridViewCellFormattingEventHandler(MyDataGridView_CellFormatting);

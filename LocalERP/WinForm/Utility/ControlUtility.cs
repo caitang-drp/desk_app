@@ -13,14 +13,19 @@ namespace LocalERP.WinForm.Utility
 {
     public static class ControlUtility
     {
-        public static void initColumns(DataGridView dgv, string[] columnNames, string [] columnTexts, int [] columnLengths)
+        public static void initColumns(DataGridView dgv, string[] columnNames, string [] columnTexts, int [] columnLengths, bool [] columnNums)
         {
             DataGridViewColumn[] columns = new DataGridViewColumn[columnNames.Length];
             for (int i = 0; i < columnNames.Length; i++)
             {
                 columns[i] = new DataGridViewTextBoxColumn();
+                
                 columns[i].HeaderText = columnTexts[i];
                 columns[i].Name = columnNames[i];
+
+                if (columnNums != null && columnNums[i] == true)
+                    columns[i].ValueType = typeof(double);
+                
                 columns[i].ReadOnly = true;
                 columns[i].Width = columnLengths[i];
                 if(columnLengths[i] == 0)

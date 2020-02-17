@@ -40,7 +40,7 @@ namespace LocalERP.WinForm
             string[] columnNames = new string[] {"sortTime", "time", "serial", "type", "detail", /*"needPay",*/ "needReceipt", "thisReceipt", /*"accNeedPay",*/ "accNeedReceipt", "comment" };
             int[] columnLengths = new int[] {0, 90, 140, 90, 260, 60, 60, 90, 120};
 
-            ControlUtility.initColumns(this.dataGridView1, columnNames, columnTexts, columnLengths);
+            ControlUtility.initColumns(this.dataGridView1, columnNames, columnTexts, columnLengths, null);
             
             //categoryDao.initTree与ControlUtility.initTree重复了，可以删掉一个
             CategoryDao.getInstance().initTreeView("CustomerCategory", this.treeView1);

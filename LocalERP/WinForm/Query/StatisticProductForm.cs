@@ -248,7 +248,7 @@ namespace LocalERP.WinForm
             ControlUtility.initColumns(this.dataGridView1, 
                 columnNames[(int)(this.comboBox1.SelectedValue)],
                 columnTexts[(int)(this.comboBox1.SelectedValue)],
-                columnLengths[(int)(this.comboBox1.SelectedValue)]);
+                columnLengths[(int)(this.comboBox1.SelectedValue)], null);
             backgroundWorker.RunWorkerAsync();
             this.invokeBeginLoadNotify();
         }

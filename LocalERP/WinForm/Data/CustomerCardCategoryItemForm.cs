@@ -30,7 +30,7 @@ namespace LocalERP.WinForm.Data
             string[] columnNames = new string[] { "ID", "name", "category"};
             int[] columnLengths = new int[] { 120, 140, 120};
 
-            ControlUtility.initColumns(this.dataGridView1, columnNames, columnTexts, columnLengths);
+            ControlUtility.initColumns(this.dataGridView1, columnNames, columnTexts, columnLengths, null);
             this.dataGridView1.Columns.Insert(0, check);
         }
 
