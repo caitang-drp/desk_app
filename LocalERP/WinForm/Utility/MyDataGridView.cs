@@ -17,7 +17,7 @@ namespace LocalERP.WinForm
             set
             {
                 isLastRowSort = value;
-                if (isLastRowSort == true)
+                if (isLastRowSort == false)
                 {
                     this.Sorted -= new EventHandler(dataGridView_Sorted);
                     this.CellMouseClick -= new DataGridViewCellMouseEventHandler(dataGridView_CellMouseClick);

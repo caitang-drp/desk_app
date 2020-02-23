@@ -39,6 +39,7 @@ namespace LocalERP.WinForm
             string[] columnTexts = new string[] {"排序时间", "时间", "业务单号", "业务类型", "明细(产品/单价/数量)", /*"本单应付/已付",*/ "本单应收", "本单已收", /*"累计欠款\r(应付)",*/ "累计欠款\r(应收)", "备注" };
             string[] columnNames = new string[] {"sortTime", "time", "serial", "type", "detail", /*"needPay",*/ "needReceipt", "thisReceipt", /*"accNeedPay",*/ "accNeedReceipt", "comment" };
             int[] columnLengths = new int[] {0, 90, 140, 90, 260, 60, 60, 90, 120};
+            bool[] columnNums = new bool[] { false, false, false, false, false, true, true, true, false };
 
             ControlUtility.initColumns(this.dataGridView1, columnNames, columnTexts, columnLengths, null);
             

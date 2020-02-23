@@ -17,7 +17,7 @@ namespace LocalERP.WinForm.Data
         public CustomerCategoryItemForm(int openMode, CategoryItemTypeConf conf, string title, Form parentForm)
             :base(openMode, conf, title, parentForm)
         {
-            this.dataGridView1.IsLastRowSort = true;
+            this.dataGridView1.IsLastRowSort = false;
         }
 
         protected override void initColumns()

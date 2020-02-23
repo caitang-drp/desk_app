@@ -32,6 +32,9 @@ namespace LocalERP.WinForm
             this.dateTimePicker3.Value = dateTime.AddMonths(-1);
 
             this.cirDao = cirDao;
+
+            this.dataGridView1.IsLastRowSort = false;
+            this.dataGridView1.Columns["realTotal"].ValueType = typeof(double);
         }
 
         private void ProductCirculationListForm_Load(object sender, EventArgs e)
@@ -81,7 +84,7 @@ namespace LocalERP.WinForm
                     double realTotal = double.Parse(dr["realTotal"].ToString());
                     if (type == 2 || type == 4)
                         realTotal = -realTotal;
-                    this.dataGridView1.Rows[index].Cells["realTotal"].Value = realTotal.ToString("0.00");
+                    this.dataGridView1.Rows[index].Cells["realTotal"].Value = realTotal;
                     sum += realTotal;
 
                     int status = (int)(dr["status"]);
@@ -109,7 +112,7 @@ namespace LocalERP.WinForm
                     index = this.dataGridView1.Rows.Add();
 
                     this.dataGridView1.Rows[index].Cells["name"].Value = "ºÏ¼Æ";
-                    this.dataGridView1.Rows[index].Cells["realTotal"].Value = sum.ToString("0.00");
+                    this.dataGridView1.Rows[index].Cells["realTotal"].Value = sum;
                     this.dataGridView1.Rows[index].DefaultCellStyle.ForeColor = Color.Red;
                     this.dataGridView1.Rows[index].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
                     this.dataGridView1.Rows[index].DefaultCellStyle.Font = new Font("ËÎÌå", 10F, FontStyle.Bold);

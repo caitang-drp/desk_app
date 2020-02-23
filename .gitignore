@@ -288,6 +288,7 @@ Authorization/
 
 LocalERP/DataAccess/Utility/AuthUtility.cs
 ERP-*.mdb
+readme.txt
 
 *.xls
 *.xlsx
