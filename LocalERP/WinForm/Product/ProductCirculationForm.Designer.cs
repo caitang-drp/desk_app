@@ -31,10 +31,10 @@ namespace LocalERP.WinForm
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ProductCirculationForm));
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -81,17 +81,17 @@ namespace LocalERP.WinForm
             this.label15 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
-            this.label_arrears = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.textBox_accumulative = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
-            this.label_sum = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label_thisPayed = new System.Windows.Forms.Label();
             this.label1_accumulative = new System.Windows.Forms.Label();
+            this.label_sum = new System.Windows.Forms.Label();
+            this.label_arrears = new System.Windows.Forms.Label();
             this.label1_tip = new System.Windows.Forms.Label();
             this.panel_basic = new System.Windows.Forms.Panel();
             this.lookupText1 = new LocalERP.WinForm.LookupText();
@@ -152,9 +152,9 @@ namespace LocalERP.WinForm
             this.dataGridView2.AllowUserToAddRows = false;
             this.dataGridView2.AllowUserToDeleteRows = false;
             this.dataGridView2.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.PaleGreen;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
-            this.dataGridView2.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.PaleGreen;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.Black;
+            this.dataGridView2.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
             this.dataGridView2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView2.BackgroundColor = System.Drawing.Color.Yellow;
@@ -173,9 +173,9 @@ namespace LocalERP.WinForm
             this.dataGridView2.Name = "dataGridView2";
             this.dataGridView2.ReadOnly = true;
             this.dataGridView2.RowHeadersVisible = false;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.Yellow;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.Yellow;
-            this.dataGridView2.RowsDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.Yellow;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.Yellow;
+            this.dataGridView2.RowsDefaultCellStyle = dataGridViewCellStyle6;
             this.dataGridView2.RowTemplate.DefaultCellStyle.BackColor = System.Drawing.Color.White;
             this.dataGridView2.RowTemplate.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.White;
             this.dataGridView2.RowTemplate.DefaultCellStyle.SelectionForeColor = System.Drawing.Color.Black;
@@ -201,9 +201,9 @@ namespace LocalERP.WinForm
             this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.AllowUserToDeleteRows = false;
             this.dataGridView1.AllowUserToResizeRows = false;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.PaleGreen;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black;
-            this.dataGridView1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.Color.PaleGreen;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.Color.Black;
+            this.dataGridView1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle7;
             this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
@@ -211,14 +211,15 @@ namespace LocalERP.WinForm
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.dataGridView1.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.dataGridView1.IsLastRowSort = false;
             this.dataGridView1.Location = new System.Drawing.Point(18, 203);
             this.dataGridView1.Margin = new System.Windows.Forms.Padding(2);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersVisible = false;
-            dataGridViewCellStyle4.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.Black;
-            this.dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle8.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.Color.Black;
+            this.dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle8;
             this.dataGridView1.RowTemplate.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.White;
             this.dataGridView1.RowTemplate.DefaultCellStyle.SelectionForeColor = System.Drawing.Color.Black;
             this.dataGridView1.RowTemplate.Height = 23;
@@ -314,7 +315,7 @@ namespace LocalERP.WinForm
             // 
             this.textBox_realTotal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.errorProvider1.SetIconPadding(this.textBox_realTotal, 20);
-            this.textBox_realTotal.Location = new System.Drawing.Point(351, 9);
+            this.textBox_realTotal.Location = new System.Drawing.Point(330, 9);
             this.textBox_realTotal.Name = "textBox_realTotal";
             this.textBox_realTotal.Size = new System.Drawing.Size(97, 23);
             this.textBox_realTotal.TabIndex = 41;
@@ -325,7 +326,7 @@ namespace LocalERP.WinForm
             this.textBox_previousArrears.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.textBox_previousArrears.Enabled = false;
             this.errorProvider1.SetIconPadding(this.textBox_previousArrears, 20);
-            this.textBox_previousArrears.Location = new System.Drawing.Point(351, 40);
+            this.textBox_previousArrears.Location = new System.Drawing.Point(330, 40);
             this.textBox_previousArrears.Name = "textBox_previousArrears";
             this.textBox_previousArrears.Size = new System.Drawing.Size(98, 23);
             this.textBox_previousArrears.TabIndex = 43;
@@ -334,7 +335,7 @@ namespace LocalERP.WinForm
             // 
             this.textBox_freight.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.errorProvider1.SetIconPadding(this.textBox_freight, 20);
-            this.textBox_freight.Location = new System.Drawing.Point(611, 9);
+            this.textBox_freight.Location = new System.Drawing.Point(583, 9);
             this.textBox_freight.Name = "textBox_freight";
             this.textBox_freight.Size = new System.Drawing.Size(97, 23);
             this.textBox_freight.TabIndex = 68;
@@ -541,20 +542,20 @@ namespace LocalERP.WinForm
             this.panel_payBasic.Controls.Add(this.label18);
             this.panel_payBasic.Controls.Add(this.label16);
             this.panel_payBasic.Controls.Add(this.textBox_previousArrears);
-            this.panel_payBasic.Controls.Add(this.label_arrears);
             this.panel_payBasic.Controls.Add(this.label17);
             this.panel_payBasic.Controls.Add(this.label10);
             this.panel_payBasic.Controls.Add(this.textBox_cutoff);
             this.panel_payBasic.Controls.Add(this.label11);
             this.panel_payBasic.Controls.Add(this.textBox_accumulative);
             this.panel_payBasic.Controls.Add(this.label13);
-            this.panel_payBasic.Controls.Add(this.label_sum);
             this.panel_payBasic.Controls.Add(this.label7);
             this.panel_payBasic.Controls.Add(this.label6);
             this.panel_payBasic.Controls.Add(this.textBox_realTotal);
             this.panel_payBasic.Controls.Add(this.textBox_thisPayed);
             this.panel_payBasic.Controls.Add(this.label_thisPayed);
             this.panel_payBasic.Controls.Add(this.label1_accumulative);
+            this.panel_payBasic.Controls.Add(this.label_sum);
+            this.panel_payBasic.Controls.Add(this.label_arrears);
             this.panel_payBasic.Location = new System.Drawing.Point(17, 33);
             this.panel_payBasic.Name = "panel_payBasic";
             this.panel_payBasic.Size = new System.Drawing.Size(835, 66);
@@ -564,7 +565,7 @@ namespace LocalERP.WinForm
             // 
             this.label_accCap.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label_accCap.AutoSize = true;
-            this.label_accCap.Location = new System.Drawing.Point(737, 44);
+            this.label_accCap.Location = new System.Drawing.Point(709, 44);
             this.label_accCap.Name = "label_accCap";
             this.label_accCap.Size = new System.Drawing.Size(0, 14);
             this.label_accCap.TabIndex = 76;
@@ -573,7 +574,7 @@ namespace LocalERP.WinForm
             // 
             this.label12.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(711, 13);
+            this.label12.Location = new System.Drawing.Point(683, 13);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(21, 14);
             this.label12.TabIndex = 70;
@@ -584,7 +585,7 @@ namespace LocalERP.WinForm
             this.label15.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label15.AutoSize = true;
             this.label15.ForeColor = System.Drawing.Color.Black;
-            this.label15.Location = new System.Drawing.Point(538, 13);
+            this.label15.Location = new System.Drawing.Point(510, 13);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(70, 14);
             this.label15.TabIndex = 69;
@@ -594,7 +595,7 @@ namespace LocalERP.WinForm
             // 
             this.label18.AutoSize = true;
             this.label18.ForeColor = System.Drawing.Color.Red;
-            this.label18.Location = new System.Drawing.Point(237, 13);
+            this.label18.Location = new System.Drawing.Point(216, 13);
             this.label18.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(14, 14);
@@ -605,28 +606,18 @@ namespace LocalERP.WinForm
             // 
             this.label16.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(451, 44);
+            this.label16.Location = new System.Drawing.Point(430, 44);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(21, 14);
             this.label16.TabIndex = 66;
             this.label16.Text = "元";
-            // 
-            // label_arrears
-            // 
-            this.label_arrears.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.label_arrears.AutoSize = true;
-            this.label_arrears.Location = new System.Drawing.Point(237, 44);
-            this.label_arrears.Name = "label_arrears";
-            this.label_arrears.Size = new System.Drawing.Size(112, 14);
-            this.label_arrears.TabIndex = 64;
-            this.label_arrears.Text = "以上欠款(应付):";
             // 
             // label17
             // 
             this.label17.AutoSize = true;
             this.label17.Font = new System.Drawing.Font("宋体", 10F);
             this.label17.ForeColor = System.Drawing.Color.Red;
-            this.label17.Location = new System.Drawing.Point(727, 13);
+            this.label17.Location = new System.Drawing.Point(699, 13);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(105, 14);
             this.label17.TabIndex = 71;
@@ -636,7 +627,7 @@ namespace LocalERP.WinForm
             // 
             this.label10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(451, 13);
+            this.label10.Location = new System.Drawing.Point(430, 13);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(21, 14);
             this.label10.TabIndex = 63;
@@ -656,7 +647,7 @@ namespace LocalERP.WinForm
             // 
             this.textBox_accumulative.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.textBox_accumulative.Enabled = false;
-            this.textBox_accumulative.Location = new System.Drawing.Point(612, 40);
+            this.textBox_accumulative.Location = new System.Drawing.Point(584, 40);
             this.textBox_accumulative.Name = "textBox_accumulative";
             this.textBox_accumulative.Size = new System.Drawing.Size(97, 23);
             this.textBox_accumulative.TabIndex = 44;
@@ -671,22 +662,11 @@ namespace LocalERP.WinForm
             this.label13.TabIndex = 59;
             this.label13.Text = "整单折扣:";
             // 
-            // label_sum
-            // 
-            this.label_sum.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.label_sum.AutoSize = true;
-            this.label_sum.ForeColor = System.Drawing.Color.Black;
-            this.label_sum.Location = new System.Drawing.Point(250, 13);
-            this.label_sum.Name = "label_sum";
-            this.label_sum.Size = new System.Drawing.Size(98, 14);
-            this.label_sum.TabIndex = 58;
-            this.label_sum.Text = "本单实计应付:";
-            // 
             // label7
             // 
             this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(711, 44);
+            this.label7.Location = new System.Drawing.Point(683, 44);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(21, 14);
             this.label7.TabIndex = 56;
@@ -718,11 +698,32 @@ namespace LocalERP.WinForm
             this.label1_accumulative.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label1_accumulative.AutoSize = true;
             this.label1_accumulative.ForeColor = System.Drawing.Color.Black;
-            this.label1_accumulative.Location = new System.Drawing.Point(496, 44);
+            this.label1_accumulative.Location = new System.Drawing.Point(468, 44);
             this.label1_accumulative.Name = "label1_accumulative";
             this.label1_accumulative.Size = new System.Drawing.Size(112, 14);
             this.label1_accumulative.TabIndex = 46;
             this.label1_accumulative.Text = "累计欠款(应付):";
+            // 
+            // label_sum
+            // 
+            this.label_sum.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label_sum.AutoSize = true;
+            this.label_sum.ForeColor = System.Drawing.Color.Black;
+            this.label_sum.Location = new System.Drawing.Point(229, 13);
+            this.label_sum.Name = "label_sum";
+            this.label_sum.Size = new System.Drawing.Size(98, 14);
+            this.label_sum.TabIndex = 58;
+            this.label_sum.Text = "本单实计应付:";
+            // 
+            // label_arrears
+            // 
+            this.label_arrears.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label_arrears.AutoSize = true;
+            this.label_arrears.Location = new System.Drawing.Point(216, 44);
+            this.label_arrears.Name = "label_arrears";
+            this.label_arrears.Size = new System.Drawing.Size(112, 14);
+            this.label_arrears.TabIndex = 64;
+            this.label_arrears.Text = "以上欠款(应付):";
             // 
             // label1_tip
             // 

@@ -20,6 +20,9 @@ namespace LocalERP.WinForm
 
         private ProductCirculationDao cirDao;
 
+        //如果是首次生成Form的话，因为查询控件初始化，会多次调用initList()
+        private bool isFirstLoad = true;
+
         public ProductCirculationListForm(MainForm mf, int type, string title, ProductCirculationDao cirDao)
         {
             InitializeComponent();
@@ -35,13 +38,19 @@ namespace LocalERP.WinForm
 
             this.dataGridView1.IsLastRowSort = false;
             this.dataGridView1.Columns["realTotal"].ValueType = typeof(double);
-        }
 
-        private void ProductCirculationListForm_Load(object sender, EventArgs e)
-        {
             initCustomerCombox();
             initList();
             this.dataGridView1.Columns["check"].ReadOnly = false;
+        }
+
+        /// <summary>
+        /// event
+        /// </summary>
+
+        public override void refresh()
+        {
+            this.initList();
         }
 
         private void initCustomerCombox() {
@@ -123,15 +132,9 @@ namespace LocalERP.WinForm
             {
                 //MessageBox.Show("查询错误, 请输入正确的条件.", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-        }
-
-        /// <summary>
-        /// event
-        /// </summary>
-
-        public override void refresh()
-        {
-            this.initList();
+            finally {
+                isFirstLoad = false;
+            }
         }
 
         //del
@@ -231,7 +234,8 @@ namespace LocalERP.WinForm
 
         private void button1_Click(object sender, EventArgs e)
         {
-            initList();
+            if(isFirstLoad == false)
+                initList();
         }
 
         private void toolStripButton_selectAll_Click(object sender, EventArgs e)

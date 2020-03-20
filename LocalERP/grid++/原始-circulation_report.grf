@@ -1,5 +1,5 @@
 ﻿{
-	"Version":"6.1.0.5",
+	"Version":"6.6.2.0",
 	"Font":{
 		"Name":"宋体",
 		"Size":105000,
@@ -382,7 +382,7 @@
 					"Width":15.0019,
 					"Height":1.00542,
 					"Font":{
-						"Name":"华文楷体",
+						"Name":"宋体",
 						"Size":180000,
 						"Bold":true,
 						"Underline":true,
@@ -395,9 +395,9 @@
 					"Type":"MemoBox",
 					"Name":"MemoBox2",
 					"Anchor":"[Top|Right]",
-					"Left":16.4571,
+					"Left":15.1871,
 					"Top":0.211667,
-					"Width":5.3975,
+					"Width":5.42396,
 					"Height":0.582083,
 					"Text":"第[#SystemVar(PageNumber)#]页 共[#SystemVar(PageCount)#]页"
 				},
@@ -415,13 +415,13 @@
 					"Name":"addressValue",
 					"Left":2.2225,
 					"Top":1.00542,
-					"Width":6.8,
+					"Width":8.17563,
 					"Height":0.58
 				},
 				{
 					"Type":"StaticBox",
 					"Name":"tel",
-					"Left":9.31333,
+					"Left":10.6098,
 					"Top":2.11667,
 					"Width":1.79917,
 					"Height":0.582083,
@@ -430,23 +430,23 @@
 				{
 					"Type":"StaticBox",
 					"Name":"telValue",
-					"Left":11.139,
+					"Left":12.409,
 					"Top":2.11667,
-					"Width":6.8,
+					"Width":5.52979,
 					"Height":0.58
 				},
 				{
 					"Type":"StaticBox",
 					"Name":"phoneValue",
-					"Left":11.1125,
+					"Left":12.409,
 					"Top":1.56104,
-					"Width":6.69,
+					"Width":5.3975,
 					"Height":0.58
 				},
 				{
 					"Type":"StaticBox",
 					"Name":"phone",
-					"Left":9.31333,
+					"Left":10.6098,
 					"Top":1.56104,
 					"Width":1.69333,
 					"Height":0.582083,
@@ -466,13 +466,13 @@
 					"Name":"commentValue",
 					"Left":2.2225,
 					"Top":2.11667,
-					"Width":6.69,
+					"Width":8.17563,
 					"Height":0.58
 				},
 				{
 					"Type":"StaticBox",
 					"Name":"contractor",
-					"Left":9.31333,
+					"Left":10.6098,
 					"Top":0.9525,
 					"Width":1.72,
 					"Height":0.58,
@@ -481,9 +481,9 @@
 				{
 					"Type":"StaticBox",
 					"Name":"contractorValue",
-					"Left":11.1125,
+					"Left":12.409,
 					"Top":0.978958,
-					"Width":6.8,
+					"Width":5.50333,
 					"Height":0.58
 				},
 				{
@@ -500,7 +500,7 @@
 					"Name":"bankValue",
 					"Left":2.2225,
 					"Top":1.56104,
-					"Width":6.69,
+					"Width":8.17563,
 					"Height":0.58
 				}
 			],

@@ -8,8 +8,9 @@
 	},
 	"Printer":{
 		"Size":256,
+		"Width":23,
 		"Height":14,
-		"LeftMargin":1,
+		"LeftMargin":1.7,
 		"TopMargin":1,
 		"RightMargin":1,
 		"BottomMargin":1,
@@ -382,7 +383,7 @@
 					"Width":15.0019,
 					"Height":1.00542,
 					"Font":{
-						"Name":"华文楷体",
+						"Name":"宋体",
 						"Size":180000,
 						"Bold":true,
 						"Underline":true,
@@ -395,7 +396,7 @@
 					"Type":"MemoBox",
 					"Name":"MemoBox2",
 					"Anchor":"[Top|Right]",
-					"Left":16.4571,
+					"Left":15.9015,
 					"Top":0.211667,
 					"Width":5.3975,
 					"Height":0.582083,
@@ -421,7 +422,7 @@
 				{
 					"Type":"StaticBox",
 					"Name":"tel",
-					"Left":9.31333,
+					"Left":11.721,
 					"Top":2.11667,
 					"Width":1.79917,
 					"Height":0.582083,
@@ -430,23 +431,23 @@
 				{
 					"Type":"StaticBox",
 					"Name":"telValue",
-					"Left":11.139,
+					"Left":13.5467,
 					"Top":2.11667,
-					"Width":6.8,
+					"Width":6.21771,
 					"Height":0.58
 				},
 				{
 					"Type":"StaticBox",
 					"Name":"phoneValue",
-					"Left":11.1125,
+					"Left":13.5202,
 					"Top":1.56104,
-					"Width":6.69,
+					"Width":6.24417,
 					"Height":0.58
 				},
 				{
 					"Type":"StaticBox",
 					"Name":"phone",
-					"Left":9.31333,
+					"Left":11.721,
 					"Top":1.56104,
 					"Width":1.69333,
 					"Height":0.582083,
@@ -472,7 +473,7 @@
 				{
 					"Type":"StaticBox",
 					"Name":"contractor",
-					"Left":9.31333,
+					"Left":11.721,
 					"Top":0.9525,
 					"Width":1.72,
 					"Height":0.58,
@@ -481,9 +482,9 @@
 				{
 					"Type":"StaticBox",
 					"Name":"contractorValue",
-					"Left":11.1125,
+					"Left":13.5202,
 					"Top":0.978958,
-					"Width":6.8,
+					"Width":6.24417,
 					"Height":0.58
 				},
 				{
@@ -500,7 +501,7 @@
 					"Name":"bankValue",
 					"Left":2.2225,
 					"Top":1.56104,
-					"Width":6.69,
+					"Width":9.36625,
 					"Height":0.58
 				}
 			],
