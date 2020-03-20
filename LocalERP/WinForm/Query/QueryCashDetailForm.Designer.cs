@@ -47,6 +47,7 @@
             this.label5 = new System.Windows.Forms.Label();
             this.button_print = new System.Windows.Forms.Button();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -143,6 +144,7 @@
             this.dataGridView1.BackgroundColor = System.Drawing.Color.White;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
+            this.dataGridView1.IsLastRowSort = false;
             this.dataGridView1.Location = new System.Drawing.Point(3, 29);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
@@ -239,6 +241,7 @@
             // 
             // splitContainer1.Panel1
             // 
+            this.splitContainer1.Panel1.Controls.Add(this.label2);
             this.splitContainer1.Panel1.Controls.Add(this.treeView1);
             // 
             // splitContainer1.Panel2
@@ -248,6 +251,16 @@
             this.splitContainer1.Size = new System.Drawing.Size(954, 569);
             this.splitContainer1.SplitterDistance = 186;
             this.splitContainer1.TabIndex = 65;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.ForeColor = System.Drawing.Color.Red;
+            this.label2.Location = new System.Drawing.Point(12, 8);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(105, 14);
+            this.label2.TabIndex = 56;
+            this.label2.Text = "请选择往来单位";
             // 
             // QueryCashDetailForm
             // 
@@ -274,6 +287,7 @@
             this.Load += new System.EventHandler(this.Form2_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.splitContainer1.Panel1.ResumeLayout(false);
+            this.splitContainer1.Panel1.PerformLayout();
             this.splitContainer1.Panel2.ResumeLayout(false);
             this.splitContainer1.Panel2.PerformLayout();
             this.splitContainer1.ResumeLayout(false);
@@ -306,5 +320,6 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button button_print;
         private System.Windows.Forms.SplitContainer splitContainer1;
+        private System.Windows.Forms.Label label2;
     }
 }

@@ -210,7 +210,7 @@ namespace LocalERP.WinForm
             mainForm.setForm(LabelUtility.CARD_ADD, 1, id);
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void search_Condition_Changed(object sender, EventArgs e)
         {
             if (this.firstLoad == false)
                 initList();

@@ -183,7 +183,7 @@
             this.button1.Text = "查询";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Visible = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.button1.Click += new System.EventHandler(this.search_Condition_Changed);
             // 
             // label2
             // 
@@ -261,7 +261,7 @@
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(86, 21);
             this.comboBox1.TabIndex = 26;
-            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.button1_Click);
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.search_Condition_Changed);
             // 
             // dateTimePicker3
             // 
@@ -271,7 +271,7 @@
             this.dateTimePicker3.Name = "dateTimePicker3";
             this.dateTimePicker3.Size = new System.Drawing.Size(119, 23);
             this.dateTimePicker3.TabIndex = 20;
-            this.dateTimePicker3.ValueChanged += new System.EventHandler(this.button1_Click);
+            this.dateTimePicker3.ValueChanged += new System.EventHandler(this.search_Condition_Changed);
             // 
             // dateTimePicker4
             // 
@@ -281,7 +281,7 @@
             this.dateTimePicker4.Name = "dateTimePicker4";
             this.dateTimePicker4.Size = new System.Drawing.Size(118, 23);
             this.dateTimePicker4.TabIndex = 22;
-            this.dateTimePicker4.ValueChanged += new System.EventHandler(this.button1_Click);
+            this.dateTimePicker4.ValueChanged += new System.EventHandler(this.search_Condition_Changed);
             // 
             // label8
             // 
@@ -412,7 +412,7 @@
             this.textBox_customer.Name = "textBox_customer";
             this.textBox_customer.Size = new System.Drawing.Size(100, 23);
             this.textBox_customer.TabIndex = 30;
-            this.textBox_customer.TextChanged += new System.EventHandler(this.button1_Click);
+            this.textBox_customer.TextChanged += new System.EventHandler(this.search_Condition_Changed);
             // 
             // label_tip
             // 
