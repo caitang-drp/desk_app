@@ -28,7 +28,17 @@ namespace LocalERP
                 if (signForm.DialogResult != DialogResult.OK)
                     return;
             }
-                
+
+            /*AuthUtility.checkSN()获取数据库sn号，然后进行验证*/
+            if (ConfUtility.isDebug == true)
+            {
+                if (DateTime.Compare(DateTime.Now, ConfUtility.dateLine) >= 0)
+                {
+                    MessageBox.Show("试用期已过!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+            }
+
             LoginForm loginForm = new LoginForm();
             loginForm.ShowDialog();
             if (loginForm.DialogResult == DialogResult.OK)
