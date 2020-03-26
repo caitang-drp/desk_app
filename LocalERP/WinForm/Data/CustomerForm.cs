@@ -52,7 +52,7 @@ namespace LocalERP.WinForm
             this.textBox_arrear.Text = customer.arrear.ToString();
             
             //2020-3-24，不能再修改了，因为修改后生成的单据删除不了，如果需要修改可以用退点
-            //this.textBox_arrear.Enabled = false;
+            this.textBox_arrear.Enabled = false;
 
             this.comboBoxTree1.setSelectNode(customer.Parent.ToString());
         }
