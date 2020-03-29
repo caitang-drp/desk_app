@@ -1032,20 +1032,21 @@ namespace LocalERP.WinForm
                 Report.ControlByName("customerAddr").AsStaticBox.Text = "客户地址: " + customer.Address;
 
             // (日期)
-            Report.ControlByName("date").AsStaticBox.Text = conf.business + "时间: " + sell.CirculationTime.ToString("yyyy年MM月dd日");
+            Report.ControlByName("date").AsStaticBox.Text = "开单时间: " + sell.CirculationTime.ToString("yyyy年MM月dd日");
 
             // 右(单号)
             if (Report.ControlByName("serial") != null)
                 Report.ControlByName("serial").AsStaticBox.Text = "单号: NO." + sell.Code;
 
             // 备注
-            //Report.ControlByName("total").AsStaticBox.Text = string.Format("{0:0.00}元", sell.Total);
+            if (Report.ControlByName("cirComment") != null)
+                Report.ControlByName("cirComment").AsStaticBox.Text = string.Format("备注：{0}", sell.Comment);
 
             Report.ControlByName("realTotal").AsStaticBox.Text = string.Format("{0:0.00}元", sell.RealTotal);
             if (Report.ControlByName("text_backFreight") != null)
                 Report.ControlByName("text_backFreight").AsStaticBox.Text = string.Format("{0}件×{1}元 = {2}元", this.label_totalPieces.Text, this.textBox_backFreightPerPiece.Text, this.label_totalBackFreight.Text);
 
-            if (Report.ControlByName("lastPayReceipt") != null)
+            if (ConfUtility.GetLastPayReceiptOpen() == "lastPayReceiptOpen" && Report.ControlByName("lastPayReceipt") != null)
                 Report.ControlByName("lastPayReceipt").AsStaticBox.Text = this.label_lastPayReceipt.Text;
 
             Report.ControlByName("label_pay").AsStaticBox.Text = this.label_thisPayed.Text;
