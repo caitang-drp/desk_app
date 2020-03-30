@@ -43,10 +43,10 @@ namespace LocalERP.DataAccess.Data
         public static string[] statusContext = new string[] { "未审核", "undefined", "undefined", "已审核" };
 
         //用于控制PayReceipt窗口的具体类型
-        public static PayReceiptTypeConf PayReceiptTypeConf_BuyPay = new PayReceiptTypeConf(PayReceipt.BillType.BuyPay, UpdateType.PayReceiptUpdate, UpdateType.PayReceiptFinishUpdate, 1, -1, "采购付款", "CGFK", "供 应 商:", "付款");
-        public static PayReceiptTypeConf PayReceiptTypeConf_BuyRefund = new PayReceiptTypeConf(PayReceipt.BillType.BuyRefund, UpdateType.PayReceiptUpdate, UpdateType.PayReceiptFinishUpdate, 1, 1, "采购退点", "CGTD", "供 应 商:", "退点");
-        public static PayReceiptTypeConf PayReceiptTypeConf_SellReceipt = new PayReceiptTypeConf(PayReceipt.BillType.SellReceipt, UpdateType.PayReceiptUpdate, UpdateType.PayReceiptFinishUpdate, -1, 1, "销售收款", "XSSK", "客    户:", "收款");
-        public static PayReceiptTypeConf PayReceiptTypeConf_SellRefund = new PayReceiptTypeConf(PayReceipt.BillType.SellRefund, UpdateType.PayReceiptUpdate, UpdateType.PayReceiptFinishUpdate, -1, -1, "销售退点", "XSTD", "客    户:", "退点");
+        public static PayReceiptTypeConf PayReceiptTypeConf_BuyPay = new PayReceiptTypeConf(PayReceipt.BillType.BuyPay, UpdateType.PayReceiptUpdate, UpdateType.PayReceiptFinishUpdate, 1, -1, "采购付款", "CGFK", "供应商:", "付款");
+        public static PayReceiptTypeConf PayReceiptTypeConf_BuyRefund = new PayReceiptTypeConf(PayReceipt.BillType.BuyRefund, UpdateType.PayReceiptUpdate, UpdateType.PayReceiptFinishUpdate, 1, 1, "采购退点", "CGTD", "供应商:", "退点");
+        public static PayReceiptTypeConf PayReceiptTypeConf_SellReceipt = new PayReceiptTypeConf(PayReceipt.BillType.SellReceipt, UpdateType.PayReceiptUpdate, UpdateType.PayReceiptFinishUpdate, -1, 1, "销售收款", "XSSK", "客户:", "收款");
+        public static PayReceiptTypeConf PayReceiptTypeConf_SellRefund = new PayReceiptTypeConf(PayReceipt.BillType.SellRefund, UpdateType.PayReceiptUpdate, UpdateType.PayReceiptFinishUpdate, -1, -1, "销售退点", "XSTD", "客户:", "退点");
         public static PayReceiptTypeConf PayReceiptTypeConf_OtherPay = new PayReceiptTypeConf(PayReceipt.BillType.OtherPay, UpdateType.PayReceiptUpdate, UpdateType.PayReceiptFinishUpdate, 1, -1,"其他付款", "QTFK", "往来单位", "付款");
         public static PayReceiptTypeConf PayReceiptTypeConf_OtherReceipt = new PayReceiptTypeConf(PayReceipt.BillType.OtherReceipt, UpdateType.PayReceiptUpdate, UpdateType.PayReceiptFinishUpdate,-1, 1, "其他收款", "QTSK", "往来单位", "收款");
         public static PayReceiptTypeConf PayReceiptTypeConf_ChangeArrear = new PayReceiptTypeConf(PayReceipt.BillType.ChangeArrear, UpdateType.PayReceiptUpdate, UpdateType.PayReceiptFinishUpdate, 0, 0, "欠款调整", "QKTZ", "", "");

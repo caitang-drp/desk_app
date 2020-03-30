@@ -345,7 +345,6 @@ namespace LocalERP.WinForm
             this.toolStripButton_print.Size = new System.Drawing.Size(39, 34);
             this.toolStripButton_print.Text = "打印";
             this.toolStripButton_print.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.toolStripButton_print.Visible = false;
             this.toolStripButton_print.Click += new System.EventHandler(this.toolStripButton_print_Click);
             // 
             // toolStripButton1

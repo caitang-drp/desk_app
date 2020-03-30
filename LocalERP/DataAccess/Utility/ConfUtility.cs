@@ -17,15 +17,16 @@ namespace LocalERP.DataAccess.Utility
         //0为经销存，1为卡片消费
         public static int softType = 0;
         
-        //public static string debugPath = "";
-        //public static string debugPathReport = "";
+        public static string debugPath = "";
+        public static string debugPathReport = "";
 
-        public static string debugPath = "\\..\\..";
-        public static string debugPathReport = debugPath + "\\grid++";
+        //public static string debugPath = "\\..\\..";
+        //public static string debugPathReport = debugPath + "\\grid++";
 
         //mdb会自动从根目录拷贝到release下，而rpt不会，是不是设置的问题
         public static readonly string CONN_STRING = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + Application.StartupPath + debugPath + "\\ERP.mdb;Persist Security Info=True";   //正式发布时数量库路径，放在bin目录下
         public static string cir_report_path = Application.StartupPath + debugPathReport + "\\circulation_report.grf";
+        public static string payReceipt_report_path = Application.StartupPath + debugPathReport + "\\payReceipt_report.grf";
         public static string letter_report_path = Application.StartupPath + debugPathReport + "\\letter_report.grf";
         public static string check_report_path = Application.StartupPath + debugPathReport + "\\check_report.grf";
 

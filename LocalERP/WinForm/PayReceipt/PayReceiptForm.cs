@@ -11,6 +11,7 @@ using LocalERP.UiDataProxy;
 using LocalERP.DataAccess.Utility;
 using LocalERP.WinForm.Utility;
 using System.IO;
+using gregn6Lib;
 
 namespace LocalERP.WinForm
 {
@@ -46,10 +47,10 @@ namespace LocalERP.WinForm
             this.label_title.Text = this.Text;
             this.label_customer.Text = conf.customer;
 
-            this.label_date.Text = conf.business + "时间:";
+            this.label_date.Text = "开单时间:";
 
             if (conf.type == PayReceipt.BillType.BuyRefund || conf.type == PayReceipt.BillType.SellRefund)
-                this.label_needPayed.Text = conf.cashDirection == -1 ? "退点金额(应付):" : "退点金额(应收):";
+                this.label_needPayed.Text = conf.cashDirection == -1 ? "退点金额(应收):" : "退点金额(应付):";
             this.label_thisPayed.Text = conf.cashDirection == -1 ? "本单已付:" : "本单已收:";
             this.label_arrears.Text = conf.arrearDirection == 1 ? "以上欠款(应付):" : "以上欠款(应收):";
             this.label_accumulative.Text = conf.arrearDirection == 1 ? "累计欠款(应付):" : "累计欠款(应收):";
@@ -159,7 +160,7 @@ namespace LocalERP.WinForm
                     break;*/
                 case 4:
                     this.label_status.Text = ProductCirculation.circulationStatusContext[3];
-                    this.initControlsEnable(false, false, true, false, false);
+                    this.initControlsEnable(false, false, true, true, false);
                     break;
                 default:
                     break;
@@ -197,6 +198,8 @@ namespace LocalERP.WinForm
             payReceipt.bill_type = conf.type;
             payReceipt.bill_time = this.dateTime_time.Value;
             payReceipt.handle_people = textBox_operator.Text;
+            payReceipt.comment = textBox_comment.Text;
+
             payReceipt.cashDirection = conf.cashDirection;
             payReceipt.arrearDirection = conf.arrearDirection;
 
@@ -352,8 +355,6 @@ namespace LocalERP.WinForm
             this.invokeUpdateNotify(this.conf.finishNotifyType);
         }
 
-        private void toolStripButton_print_Click(object sender, EventArgs e){}
-
         private DialogResult affirmQuit() {
             return MessageBox.Show(string.Format("{0}单据尚未保存，是否放弃保存？", conf.name), "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
         }
@@ -426,6 +427,82 @@ namespace LocalERP.WinForm
             }
             else
                 this.textBox_previousArrears.Text = "";
+        }
+
+
+        private void toolStripButton_print_Click(object sender, EventArgs e)
+        {
+            // 载入报表模板数据
+            string report_template_path = ConfUtility.payReceipt_report_path;
+            Report.LoadFromFile(report_template_path);
+            //一定要先-=，要不会重复数据
+            Report.FetchRecord -= new _IGridppReportEvents_FetchRecordEventHandler(load_print_info);
+            Report.FetchRecord += new _IGridppReportEvents_FetchRecordEventHandler(load_print_info);
+            // 打印预览
+            Report.PrintPreview(true);
+        }
+
+        //定义Grid++Report报表主对象
+        private GridppReport Report = new GridppReport();
+
+        private void load_print_info()
+        {
+            Customer customer = CustomerDao.getInstance().FindByID(payReceipt.customer_id);
+            DataTable dt = ConfDao.getInstance().GetAll();
+
+            Report.ControlByName("title").AsStaticBox.Text = ConfDao.getInstance().Get(3).ToString() + conf.name + "单";
+            
+            if (Report.ControlByName("addressValue") != null)
+                Report.ControlByName("addressValue").AsStaticBox.Text = dt.Rows[3]["conf"].ToString();
+
+            if (Report.ControlByName("bankValue") != null)
+                Report.ControlByName("bankValue").AsStaticBox.Text = dt.Rows[7]["conf"].ToString();
+
+            if (Report.ControlByName("commentValue") != null)
+                Report.ControlByName("commentValue").AsStaticBox.Text = dt.Rows[8]["conf"].ToString();
+
+            if (Report.ControlByName("contractorValue") != null)
+                Report.ControlByName("contractorValue").AsStaticBox.Text = dt.Rows[4]["conf"].ToString();
+
+            if (Report.ControlByName("telValue") != null)
+                Report.ControlByName("telValue").AsStaticBox.Text = dt.Rows[5]["conf"].ToString();
+
+            if (Report.ControlByName("phoneValue") != null)
+                Report.ControlByName("phoneValue").AsStaticBox.Text = dt.Rows[6]["conf"].ToString();
+
+            // (用户，供应商)
+            Report.ControlByName("customer").AsStaticBox.Text = string.Format("{0}{1}{2}", conf.customer, payReceipt.customerName, String.IsNullOrEmpty(customer.Phone) ? "" : "(手机:" + customer.Phone + ")");
+
+            if (Report.ControlByName("customerAddr") != null)
+                Report.ControlByName("customerAddr").AsStaticBox.Text = "客户地址: " + customer.Address;
+
+            // (日期)
+            Report.ControlByName("date").AsStaticBox.Text = "开单时间: " + payReceipt.bill_time.ToString("yyyy年MM月dd日");
+
+            // 右(单号)
+            if (Report.ControlByName("serial") != null)
+                Report.ControlByName("serial").AsStaticBox.Text = "单号: NO." + payReceipt.serial;
+
+            
+            // 备注
+            if (Report.ControlByName("text_comment") != null)
+                Report.ControlByName("text_comment").AsStaticBox.Text = payReceipt.comment;
+
+           
+            Report.ControlByName("label_pay").AsStaticBox.Text = this.label_thisPayed.Text;
+            Report.ControlByName("text_pay").AsStaticBox.Text = string.Format("{0:0.00}元", double.Parse(this.textBox_thisPayed.Text));
+
+            Report.ControlByName("label_arr").AsStaticBox.Text = this.label_arrears.Text;
+            Report.ControlByName("text_arr").AsStaticBox.Text = string.Format("{0:0.00}元", double.Parse(this.textBox_previousArrears.Text));
+
+            Report.ControlByName("label_acc").AsStaticBox.Text = this.label_accumulative.Text;
+            decimal temp1;
+            decimal.TryParse(this.textBox_accumulative.Text, out temp1);
+            Report.ControlByName("text_acc").AsStaticBox.Text = string.Format("{0:0.00}元 ({1})", this.textBox_accumulative.Text, DataUtility.CmycurD(temp1));
+            //因为有些单据是没有的
+            if (Report.ControlByName("oper") != null)
+                Report.ControlByName("oper").AsStaticBox.Text = payReceipt.handle_people;
+            
         }
     }
 }

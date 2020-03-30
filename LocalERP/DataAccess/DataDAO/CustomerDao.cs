@@ -63,8 +63,8 @@ namespace LocalERP.DataAccess.DataDAO
 
         public int Update(Customer info)
         {
-            string commandText = string.Format("update Customer set name='{0}', comment='{1}', tel='{2}', phone='{3}', address='{4}', arrear={5}, receipt={6} where ID={7}",
-                info.Name, info.Comment, info.Tel, info.Phone, info.Address, info.arrear, info.receipt, info.ID);
+            string commandText = string.Format("update Customer set name='{0}', comment='{1}', tel='{2}', phone='{3}', address='{4}', arrear={5}, receipt={6}, parent={7} where ID={8}",
+                info.Name, info.Comment, info.Tel, info.Phone, info.Address, info.arrear, info.receipt, info.Parent, info.ID);
 
             return DbHelperAccess.executeNonQuery(commandText);
         }
