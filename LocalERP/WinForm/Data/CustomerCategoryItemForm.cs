@@ -81,11 +81,12 @@ namespace LocalERP.WinForm.Data
             dataGridView1.Rows[index].Cells["name"].Value = "合计";
             dataGridView1.Rows[index].Cells["myArrear"].Style.ForeColor = Color.Green;
             dataGridView1.Rows[index].Cells["myArrear"].Style.SelectionForeColor = Color.Green;
-            dataGridView1.Rows[index].Cells["myArrear"].Value = sumToPay;
+            //四舍五入，取最后两位
+            dataGridView1.Rows[index].Cells["myArrear"].Value = Math.Round(sumToPay, 2);
 
             dataGridView1.Rows[index].Cells["hisArrear"].Style.ForeColor = Color.Red;
             dataGridView1.Rows[index].Cells["hisArrear"].Style.SelectionForeColor = Color.Red;
-            dataGridView1.Rows[index].Cells["hisArrear"].Value = sumToRecepit;
+            dataGridView1.Rows[index].Cells["hisArrear"].Value = Math.Round(sumToRecepit, 2);
 
             dataGridView1.Rows[index].DefaultCellStyle.ForeColor = Color.Red;
             dataGridView1.Rows[index].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;

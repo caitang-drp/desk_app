@@ -399,7 +399,7 @@ namespace LocalERP.WinForm
             double.TryParse(this.textBox_thisPayed.Text, out pay);
             double.TryParse(this.textBox_sum.Text, out sum);
 
-            double accumulative = (conf.arrearDirection * arrear - conf.cashDirection * sum + conf.cashDirection * pay) * conf.arrearDirection;
+            double accumulative = (conf.arrearDirection * arrear - conf.arrearDirection * sum + conf.cashDirection * pay) * conf.arrearDirection;
             this.textBox_accumulative.Text = accumulative.ToString("0.00");//("N2");
         }
 
@@ -488,7 +488,9 @@ namespace LocalERP.WinForm
             if (Report.ControlByName("text_comment") != null)
                 Report.ControlByName("text_comment").AsStaticBox.Text = payReceipt.comment;
 
-           
+            if ((conf.type == PayReceipt.BillType.BuyRefund || conf.type == PayReceipt.BillType.SellRefund) && Report.ControlByName("amount") != null)
+                Report.ControlByName("amount").AsStaticBox.Text = string.Format("{0}    {1:0.00}Ԫ", this.label_needPayed.Text, double.Parse(this.textBox_sum.Text));
+
             Report.ControlByName("label_pay").AsStaticBox.Text = this.label_thisPayed.Text;
             Report.ControlByName("text_pay").AsStaticBox.Text = string.Format("{0:0.00}Ԫ", double.Parse(this.textBox_thisPayed.Text));
 

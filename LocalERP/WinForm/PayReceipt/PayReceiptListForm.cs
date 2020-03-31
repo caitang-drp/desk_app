@@ -26,6 +26,9 @@ namespace LocalERP.WinForm
 
             DateTime dateTime = DateTime.Now;
             this.dateTimePicker3.Value = dateTime.AddMonths(-1);
+
+            this.dataGridView1.IsLastRowSort = false;
+            
         }
 
         private void PayReceiptListForm_Load(object sender, EventArgs e)
