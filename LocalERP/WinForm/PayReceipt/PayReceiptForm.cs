@@ -341,6 +341,7 @@ namespace LocalERP.WinForm
                 return;
             }
 
+            //直接取以前的欠款，简单
             double arrear;
             double.TryParse(this.textBox_previousArrears.Text, out arrear);
 
