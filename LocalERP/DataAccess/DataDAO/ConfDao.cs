@@ -24,7 +24,7 @@ namespace LocalERP.DataAccess.DataDAO
             return DbHelperAccess.executeNonQuery(commandText);
         }
 
-        public void UpdateCompanyInfo(string company, string address, string contract, string phone, string mobile, string bank, string other) {
+        public void UpdateCompanyInfo(string company, string address, string contract, string phone, string mobile, string bank, string other, string pic) {
             string commandText = string.Format("update Conf set conf='{0}' where ID=3", company);
             DbHelperAccess.executeNonQuery(commandText);
 
@@ -44,6 +44,9 @@ namespace LocalERP.DataAccess.DataDAO
             DbHelperAccess.executeNonQuery(commandText);
 
             commandText = string.Format("update Conf set conf='{0}' where ID=9", other);
+            DbHelperAccess.executeNonQuery(commandText);
+
+            commandText = string.Format("update Conf set conf='{0}' where ID=10", pic);
             DbHelperAccess.executeNonQuery(commandText);
         }
 

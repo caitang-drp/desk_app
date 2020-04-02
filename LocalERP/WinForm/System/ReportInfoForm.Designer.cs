@@ -49,8 +49,12 @@
             this.textBox_other = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.button_select_image = new System.Windows.Forms.Button();
             this.toolStrip2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -240,12 +244,43 @@
             this.label8.TabIndex = 43;
             this.label8.Text = "*这些信息在打印表里显示!";
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Location = new System.Drawing.Point(99, 344);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(111, 108);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 44;
+            this.pictureBox1.TabStop = false;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(18, 344);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(77, 14);
+            this.label9.TabIndex = 45;
+            this.label9.Text = "图片信息：";
+            // 
+            // button_select_image
+            // 
+            this.button_select_image.Location = new System.Drawing.Point(225, 344);
+            this.button_select_image.Name = "button_select_image";
+            this.button_select_image.Size = new System.Drawing.Size(80, 23);
+            this.button_select_image.TabIndex = 46;
+            this.button_select_image.Text = "选择图片";
+            this.button_select_image.UseVisualStyleBackColor = true;
+            this.button_select_image.Click += new System.EventHandler(this.button_select_image_Click);
+            // 
             // ReportInfoForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(469, 343);
+            this.ClientSize = new System.Drawing.Size(469, 475);
+            this.Controls.Add(this.button_select_image);
+            this.Controls.Add(this.label9);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.textBox_other);
             this.Controls.Add(this.label7);
@@ -272,6 +307,7 @@
             this.toolStrip2.ResumeLayout(false);
             this.toolStrip2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -298,5 +334,8 @@
         private System.Windows.Forms.TextBox textBox_other;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Button button_select_image;
     }
 }
