@@ -1025,6 +1025,10 @@ namespace LocalERP.WinForm
             if (Report.ControlByName("phoneValue") != null)
                 Report.ControlByName("phoneValue").AsStaticBox.Text = dt.Rows[6]["conf"].ToString();
 
+            if (Report.ControlByName("PictureBox1") != null)
+                Report.ControlByName("PictureBox1").AsPictureBox.LoadFromFile(Application.StartupPath + ConfUtility.debugPath + "\\" +ConfDao.getInstance().Get(10));
+
+
             // (用户，供应商)
             Report.ControlByName("customer").AsStaticBox.Text = string.Format("{0}{1}{2}", conf.customer, sell.CustomerName, String.IsNullOrEmpty(customer.Phone) ? "" : "(手机:" + customer.Phone + ")");
 

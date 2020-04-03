@@ -8,6 +8,7 @@ using System.Windows.Forms;
 using LocalERP.DataAccess.DataDAO;
 using LocalERP.DataAccess.Data;
 using System.IO;
+using LocalERP.DataAccess.Utility;
 
 namespace LocalERP.WinForm
 {
@@ -29,7 +30,7 @@ namespace LocalERP.WinForm
             this.textBox_mobile.Text = dt.Rows[6]["conf"].ToString();
             this.textBox_bank.Text = dt.Rows[7]["conf"].ToString();
             this.textBox_other.Text = dt.Rows[8]["conf"].ToString();
-            this.pictureBox1.ImageLocation = dt.Rows[9]["conf"].ToString();  
+            this.pictureBox1.ImageLocation = Application.StartupPath + ConfUtility.debugPath + "\\" + dt.Rows[9]["conf"].ToString();  
         }
 
         /// <summary>
@@ -41,15 +42,15 @@ namespace LocalERP.WinForm
         private void toolStripButton3_Click(object sender, EventArgs e)
         {
             string[] names = pictureBox1.ImageLocation.Split('\\');
-            string picLocation = names[names.Length - 1];
+            string picLocation = Application.StartupPath + ConfUtility.debugPath + "\\" + names[names.Length - 1];
 
-            try { File.Delete(Application.StartupPath + "\\" +ConfDao.getInstance().Get(10)); }
+            try { File.Delete(Application.StartupPath + ConfUtility.debugPath + "\\" +ConfDao.getInstance().Get(10)); }
             catch { }
 
             File.Copy(pictureBox1.ImageLocation, picLocation, true);
 
             ConfDao.getInstance().UpdateCompanyInfo(this.textBox_company.Text, this.textBox_address.Text, this.textBox_contact.Text,
-                this.textBox_phone.Text, this.textBox_mobile.Text, this.textBox_bank.Text, this.textBox_other.Text, picLocation);
+                this.textBox_phone.Text, this.textBox_mobile.Text, this.textBox_bank.Text, this.textBox_other.Text, names[names.Length - 1]);
                 MessageBox.Show("保存信息成功!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.Close();     
         }
