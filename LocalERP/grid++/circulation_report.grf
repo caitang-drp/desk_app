@@ -1,5 +1,5 @@
 ﻿{
-	"Version":"6.1.0.5",
+	"Version":"6.6.2.0",
 	"Font":{
 		"Name":"宋体",
 		"Size":105000,
@@ -9,9 +9,9 @@
 	"Printer":{
 		"Size":256,
 		"Height":14,
-		"LeftMargin":1,
+		"LeftMargin":1.5,
 		"TopMargin":1,
-		"RightMargin":1,
+		"RightMargin":1.5,
 		"BottomMargin":1,
 		"PrintOffsetSaveToLocal":true
 	},
@@ -59,39 +59,27 @@
 		"Column":[
 			{
 				"Name":"serial",
-				"Width":2.77813
+				"Width":2.96333
 			},
 			{
 				"Name":"product",
-				"Width":3.78354
-			},
-			{
-				"Name":"cnt_one_piece",
-				"Width":1.5875
-			},
-			{
-				"Name":"pieces",
-				"Width":1.21708
+				"Width":6.00604
 			},
 			{
 				"Name":"unit",
-				"Width":1.00542
-			},
-			{
-				"Name":"cnt",
-				"Width":1.5875
-			},
-			{
-				"Name":"price",
 				"Width":1.40229
 			},
 			{
-				"Name":"sum_price",
-				"Width":3.20146
+				"Name":"cnt",
+				"Width":2.19604
 			},
 			{
-				"Name":"comment",
-				"Width":2.40771
+				"Name":"price",
+				"Width":2.01083
+			},
+			{
+				"Name":"sum_price",
+				"Width":3.38667
 			}
 		],
 		"ColumnContent":{
@@ -104,16 +92,6 @@
 				{
 					"Column":"product",
 					"DataField":"product"
-				},
-				{
-					"Column":"cnt_one_piece",
-					"TextAlign":"MiddleCenter",
-					"DataField":"cnt_one_piece"
-				},
-				{
-					"Column":"pieces",
-					"TextAlign":"MiddleCenter",
-					"DataField":"pieces"
 				},
 				{
 					"Column":"unit",
@@ -134,11 +112,6 @@
 					"Column":"sum_price",
 					"TextAlign":"MiddleCenter",
 					"DataField":"sum_price"
-				},
-				{
-					"Column":"comment",
-					"TextAlign":"MiddleCenter",
-					"DataField":"comment"
 				}
 			]
 		},
@@ -157,18 +130,6 @@
 					"Column":"product",
 					"TextAlign":"MiddleCenter",
 					"Text":"产品"
-				},
-				{
-					"GroupTitle":false,
-					"Column":"cnt_one_piece",
-					"TextAlign":"MiddleCenter",
-					"Text":"每件数量"
-				},
-				{
-					"GroupTitle":false,
-					"Column":"pieces",
-					"TextAlign":"MiddleCenter",
-					"Text":"件数"
 				},
 				{
 					"GroupTitle":false,
@@ -193,12 +154,6 @@
 					"Column":"sum_price",
 					"TextAlign":"MiddleCenter",
 					"Text":"小计/元"
-				},
-				{
-					"GroupTitle":false,
-					"Column":"comment",
-					"TextAlign":"MiddleCenter",
-					"Text":"备注"
 				}
 			]
 		},
@@ -215,7 +170,7 @@
 						{
 							"Type":"SummaryBox",
 							"Name":"SummaryBox2",
-							"Left":13.3879,
+							"Left":14.6579,
 							"Width":3.20146,
 							"Height":0.608542,
 							"TextAlign":"MiddleCenter",
@@ -232,13 +187,7 @@
 						{
 							"Type":"Line",
 							"Name":"Line3",
-							"Left":13.3085,
-							"Height":0.608542
-						},
-						{
-							"Type":"Line",
-							"Name":"Line4",
-							"Left":16.51,
+							"Left":14.5256,
 							"Height":0.608542
 						}
 					]
@@ -251,86 +200,82 @@
 					"Height":0
 				},
 				"GroupFooter":{
-					"Height":1.11125,
+					"Height":1.19063,
 					"Control":[
 						{
 							"Type":"StaticBox",
 							"Name":"realTotal",
-							"Left":2.59292,
-							"Top":-0.0264583,
-							"Width":3.70417,
-							"Height":0.529167,
+							"Left":2.91042,
+							"Width":2.88396,
+							"Height":0.608542,
 							"EndEllipsis":true
 						},
 						{
 							"Type":"StaticBox",
 							"Name":"StaticBox5",
-							"Left":0.291042,
-							"Top":-0.0264583,
-							"Width":2.30188,
-							"Height":0.529167,
-							"Text":"本单总价："
+							"Left":0.105833,
+							"Width":2.80458,
+							"Height":0.608542,
+							"Text":"本单实计总价："
 						},
 						{
 							"Type":"StaticBox",
 							"Name":"label_pay",
-							"Left":0.291042,
-							"Top":0.529167,
-							"Width":2.19604,
+							"Left":6.05896,
+							"Width":2.01083,
 							"Height":0.608542,
 							"Text":"本次来款："
 						},
 						{
 							"Type":"StaticBox",
 							"Name":"text_pay",
-							"Left":2.59292,
-							"Top":0.529167,
-							"Width":3.73063,
+							"Left":8.09625,
+							"Width":3.59833,
 							"Height":0.608542,
 							"EndEllipsis":true
 						},
 						{
 							"Type":"StaticBox",
 							"Name":"label_arr",
-							"Left":6.79979,
-							"Top":-0.0529167,
-							"Width":2.06375,
-							"Height":0.529167,
+							"Left":0.132292,
+							"Top":0.582083,
+							"Width":2.80458,
+							"Height":0.608542,
 							"Text":"以上欠款："
 						},
 						{
 							"Type":"StaticBox",
 							"Name":"text_arr",
-							"Left":9.04875,
-							"Width":3.14854,
-							"Height":0.529167,
+							"Left":2.91042,
+							"Top":0.582083,
+							"Width":2.88396,
+							"Height":0.608542,
 							"EndEllipsis":true
 						},
 						{
 							"Type":"StaticBox",
 							"Name":"text_acc",
-							"Left":8.99583,
-							"Top":0.529167,
-							"Width":9.81604,
+							"Left":8.09625,
+							"Top":0.608542,
+							"Width":8.99583,
 							"Height":0.582083,
 							"EndEllipsis":true
 						},
 						{
 							"Type":"StaticBox",
 							"Name":"label_acc",
-							"Left":6.79979,
-							"Top":0.529167,
-							"Width":2.19604,
+							"Left":6.05896,
+							"Top":0.608542,
+							"Width":2.01083,
 							"Height":0.608542,
 							"Text":"累计欠款："
 						},
 						{
 							"Type":"StaticBox",
 							"Name":"lastPayReceipt",
-							"Left":12.1973,
-							"Top":-0.0264583,
-							"Width":6.61458,
-							"Height":0.502708,
+							"Left":11.8004,
+							"Width":6.05896,
+							"Height":0.608542,
 							"EndEllipsis":true
 						}
 					]
@@ -341,13 +286,13 @@
 	"ReportHeader":[
 		{
 			"Name":"ReportHeader1",
-			"Height":3.7,
+			"Height":2.80458,
 			"Control":[
 				{
 					"Type":"StaticBox",
 					"Name":"customer",
-					"Top":2.59292,
-					"Width":10.2129,
+					"Top":2.19604,
+					"Width":6.00604,
 					"Height":0.608542,
 					"Font":{
 						"Name":"宋体",
@@ -360,9 +305,9 @@
 				{
 					"Type":"StaticBox",
 					"Name":"date",
-					"Left":10.1865,
-					"Top":2.59292,
-					"Width":5.79438,
+					"Left":6.11188,
+					"Top":2.19604,
+					"Width":5.60917,
 					"Height":0.608542,
 					"Font":{
 						"Name":"宋体",
@@ -374,10 +319,10 @@
 				{
 					"Type":"StaticBox",
 					"Name":"serial",
-					"Left":10.1335,
-					"Top":3.12208,
+					"Left":11.9327,
+					"Top":2.19604,
 					"Width":5.79438,
-					"Height":0.582083,
+					"Height":0.608542,
 					"Font":{
 						"Name":"宋体",
 						"Size":105000,
@@ -390,8 +335,8 @@
 				{
 					"Type":"StaticBox",
 					"Name":"title",
-					"Left":1.98438,
-					"Width":12.991,
+					"Left":-0.0264583,
+					"Width":12.3825,
 					"Height":1.00542,
 					"Font":{
 						"Name":"宋体",
@@ -407,9 +352,9 @@
 					"Type":"MemoBox",
 					"Name":"MemoBox2",
 					"Anchor":"[Top|Right]",
-					"Left":15.1871,
+					"Left":12.3825,
 					"Top":0.211667,
-					"Width":2.80458,
+					"Width":3.38667,
 					"Height":0.582083,
 					"Text":"第[#SystemVar(PageNumber)#]页 共[#SystemVar(PageCount)#]页"
 				},
@@ -418,196 +363,75 @@
 					"Name":"address",
 					"Left":-0.0264583,
 					"Top":0.978958,
-					"Width":1.71979,
+					"Width":1.16417,
 					"Height":0.582083,
-					"Font":{
-						"Name":"宋体",
-						"Size":90000,
-						"Weight":400,
-						"Charset":134
-					},
-					"Text":"地    址："
+					"Text":"地址："
 				},
 				{
 					"Type":"StaticBox",
 					"Name":"addressValue",
-					"Left":1.79917,
-					"Top":1.00542,
-					"Width":8.17563,
-					"Height":0.58,
-					"Font":{
-						"Name":"宋体",
-						"Size":90000,
-						"Weight":400,
-						"Charset":134
-					}
+					"Left":1.16417,
+					"Top":1.05833,
+					"Width":6.79979,
+					"Height":0.47625
 				},
 				{
 					"Type":"StaticBox",
 					"Name":"tel",
-					"Left":10.1865,
-					"Top":2.01083,
-					"Width":1.79917,
+					"Left":-0.0264583,
+					"Top":1.56104,
+					"Width":1.16417,
 					"Height":0.582083,
-					"Font":{
-						"Name":"宋体",
-						"Size":90000,
-						"Weight":400,
-						"Charset":134
-					},
-					"Text":"电话号码："
+					"Text":"电话："
 				},
 				{
 					"Type":"StaticBox",
 					"Name":"telValue",
-					"Left":11.9856,
-					"Top":2.01083,
-					"Width":3.99521,
-					"Height":0.58,
-					"Font":{
-						"Name":"宋体",
-						"Size":90000,
-						"Weight":400,
-						"Charset":134
-					}
+					"Left":1.16417,
+					"Top":1.66688,
+					"Width":6.79979,
+					"Height":0.396875
 				},
 				{
 					"Type":"StaticBox",
 					"Name":"phoneValue",
-					"Left":11.9856,
-					"Top":1.50813,
-					"Width":3.99521,
-					"Height":0.58,
-					"Font":{
-						"Name":"宋体",
-						"Size":90000,
-						"Weight":400,
-						"Charset":134
-					}
+					"Left":9.18104,
+					"Top":1.66688,
+					"Width":6.53521,
+					"Height":0.396875
 				},
 				{
 					"Type":"StaticBox",
 					"Name":"phone",
-					"Left":10.1865,
-					"Top":1.50813,
-					"Width":1.79917,
+					"Left":7.99042,
+					"Top":1.56104,
+					"Width":1.19063,
 					"Height":0.582083,
-					"Font":{
-						"Name":"宋体",
-						"Size":90000,
-						"Weight":400,
-						"Charset":134
-					},
-					"Text":"手机号码："
+					"Text":"手机："
 				},
 				{
 					"Type":"StaticBox",
 					"Name":"comment",
-					"Left":-0.0264583,
-					"Top":2.01083,
-					"Width":1.64042,
+					"Left":7.99042,
+					"Top":0.978958,
+					"Width":1.19063,
 					"Height":0.582083,
-					"Font":{
-						"Name":"宋体",
-						"Size":90000,
-						"Weight":400,
-						"Charset":134
-					},
-					"Text":"其他信息："
+					"Text":"仓库："
 				},
 				{
 					"Type":"StaticBox",
 					"Name":"commentValue",
-					"Left":1.79917,
-					"Top":2.01083,
-					"Width":8.17563,
-					"Height":0.58,
-					"Font":{
-						"Name":"宋体",
-						"Size":90000,
-						"Weight":400,
-						"Charset":134
-					}
-				},
-				{
-					"Type":"StaticBox",
-					"Name":"contractor",
-					"Left":10.1865,
-					"Top":0.9525,
-					"Width":1.72,
-					"Height":0.58,
-					"Font":{
-						"Name":"宋体",
-						"Size":90000,
-						"Weight":400,
-						"Charset":134
-					},
-					"Text":"联 系 人："
-				},
-				{
-					"Type":"StaticBox",
-					"Name":"contractorValue",
-					"Left":11.9856,
+					"Left":9.18104,
 					"Top":0.978958,
-					"Width":3.99521,
-					"Height":0.58,
-					"Font":{
-						"Name":"宋体",
-						"Size":90000,
-						"Weight":400,
-						"Charset":134
-					}
-				},
-				{
-					"Type":"StaticBox",
-					"Name":"bank",
-					"Left":-0.0264583,
-					"Top":1.50813,
-					"Width":1.64042,
-					"Height":0.582083,
-					"Font":{
-						"Name":"宋体",
-						"Size":90000,
-						"Weight":400,
-						"Charset":134
-					},
-					"Text":"银行账号："
-				},
-				{
-					"Type":"StaticBox",
-					"Name":"bankValue",
-					"Left":1.79917,
-					"Top":1.50813,
-					"Width":8.17563,
-					"Height":0.58,
-					"Font":{
-						"Name":"宋体",
-						"Size":90000,
-						"Weight":400,
-						"Charset":134
-					}
-				},
-				{
-					"Type":"StaticBox",
-					"Name":"cirComment",
-					"Top":3.12208,
-					"Width":10.2129,
-					"Height":0.608542,
-					"Font":{
-						"Name":"宋体",
-						"Size":105000,
-						"Bold":true,
-						"Charset":134
-					},
-					"EndEllipsis":true
+					"Width":6.53521,
+					"Height":0.608542
 				},
 				{
 					"Type":"PictureBox",
 					"Name":"PictureBox1",
-					"Left":16.1925,
-					"Top":0.846667,
-					"Width":2.61938,
-					"Height":2.59292
+					"Left":15.7427,
+					"Width":2.19604,
+					"Height":2.11667
 				}
 			],
 			"RepeatOnPage":true
@@ -616,7 +440,7 @@
 	"ReportFooter":[
 		{
 			"Name":"ReportFooter1",
-			"Height":0.95,
+			"Height":1.00542,
 			"Control":[
 				{
 					"Type":"StaticBox",
@@ -631,22 +455,22 @@
 						"Weight":400,
 						"Charset":134
 					},
-					"Text":"注：如有质量问题，请收到货后七个工作日内向本厂（书面或传真）提出处理，否则本厂恕不负责！"
+					"Text":"注：如出现质量问题，请及时通知调换，恕不负任何经济损失。该单签名后即变更为欠款依据。"
 				},
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox7",
 					"Left":0.264583,
-					"Top":0.47625,
+					"Top":0.502708,
 					"Width":1.50813,
 					"Height":0.608542,
-					"Text":"经办人："
+					"Text":"发货人："
 				},
 				{
 					"Type":"StaticBox",
 					"Name":"oper",
 					"Left":1.82563,
-					"Top":0.47625,
+					"Top":0.502708,
 					"Width":2.72521,
 					"Height":0.608542
 				},
@@ -654,10 +478,10 @@
 					"Type":"StaticBox",
 					"Name":"StaticBox8",
 					"Left":9.60438,
-					"Top":0.47625,
-					"Width":1.98438,
+					"Top":0.502708,
+					"Width":2.59292,
 					"Height":0.608542,
-					"Text":"客户确认："
+					"Text":"收货人(签名)："
 				}
 			],
 			"RepeatOnPage":true

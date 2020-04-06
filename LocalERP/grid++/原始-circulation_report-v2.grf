@@ -259,7 +259,7 @@
 							"Left":2.59292,
 							"Top":-0.0264583,
 							"Width":3.70417,
-							"Height":0.555625,
+							"Height":0.529167,
 							"EndEllipsis":true
 						},
 						{
@@ -268,7 +268,7 @@
 							"Left":0.291042,
 							"Top":-0.0264583,
 							"Width":2.30188,
-							"Height":0.555625,
+							"Height":0.529167,
 							"Text":"本单总价："
 						},
 						{
@@ -295,7 +295,7 @@
 							"Left":6.79979,
 							"Top":-0.0529167,
 							"Width":2.06375,
-							"Height":0.555625,
+							"Height":0.529167,
 							"Text":"以上欠款："
 						},
 						{
@@ -330,7 +330,7 @@
 							"Left":12.1973,
 							"Top":-0.0264583,
 							"Width":6.61458,
-							"Height":0.529167,
+							"Height":0.502708,
 							"EndEllipsis":true
 						}
 					]
@@ -418,7 +418,7 @@
 					"Name":"address",
 					"Left":-0.0264583,
 					"Top":0.978958,
-					"Width":1.74625,
+					"Width":1.71979,
 					"Height":0.582083,
 					"Font":{
 						"Name":"宋体",
@@ -505,7 +505,7 @@
 					"Name":"comment",
 					"Left":-0.0264583,
 					"Top":2.01083,
-					"Width":1.66688,
+					"Width":1.64042,
 					"Height":0.582083,
 					"Font":{
 						"Name":"宋体",
@@ -563,7 +563,7 @@
 					"Name":"bank",
 					"Left":-0.0264583,
 					"Top":1.50813,
-					"Width":1.66688,
+					"Width":1.64042,
 					"Height":0.582083,
 					"Font":{
 						"Name":"宋体",
@@ -600,6 +600,14 @@
 						"Charset":134
 					},
 					"EndEllipsis":true
+				},
+				{
+					"Type":"PictureBox",
+					"Name":"PictureBox1",
+					"Left":16.1925,
+					"Top":0.846667,
+					"Width":2.61938,
+					"Height":2.59292
 				}
 			],
 			"RepeatOnPage":true
