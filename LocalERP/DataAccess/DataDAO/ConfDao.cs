@@ -46,7 +46,7 @@ namespace LocalERP.DataAccess.DataDAO
             commandText = string.Format("update Conf set conf='{0}' where ID=9", other);
             DbHelperAccess.executeNonQuery(commandText);
 
-            commandText = string.Format("update Conf set conf='{0}' where ID=10", pic);
+            commandText = string.Format("update Conf set conf='{0}' where ID=14", pic);
             DbHelperAccess.executeNonQuery(commandText);
         }
 

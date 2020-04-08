@@ -1026,7 +1026,7 @@ namespace LocalERP.WinForm
                 Report.ControlByName("phoneValue").AsStaticBox.Text = dt.Rows[6]["conf"].ToString();
 
             if (Report.ControlByName("PictureBox1") != null)
-                Report.ControlByName("PictureBox1").AsPictureBox.LoadFromFile(Application.StartupPath + ConfUtility.debugPath + "\\" +ConfDao.getInstance().Get(10));
+                Report.ControlByName("PictureBox1").AsPictureBox.LoadFromFile(Application.StartupPath + ConfUtility.debugPath + "\\" +ConfDao.getInstance().Get(14));
 
 
             // (用户，供应商)

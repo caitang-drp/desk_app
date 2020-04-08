@@ -30,7 +30,7 @@ namespace LocalERP.WinForm
             this.textBox_mobile.Text = dt.Rows[6]["conf"].ToString();
             this.textBox_bank.Text = dt.Rows[7]["conf"].ToString();
             this.textBox_other.Text = dt.Rows[8]["conf"].ToString();
-            this.pictureBox1.ImageLocation = Application.StartupPath + ConfUtility.debugPath + "\\" + dt.Rows[9]["conf"].ToString();  
+            this.pictureBox1.ImageLocation = Application.StartupPath + ConfUtility.debugPath + "\\" + dt.Rows[13]["conf"].ToString();  
         }
 
         /// <summary>
@@ -44,7 +44,7 @@ namespace LocalERP.WinForm
             string[] names = pictureBox1.ImageLocation.Split('\\');
             string picLocation = Application.StartupPath + ConfUtility.debugPath + "\\" + names[names.Length - 1];
 
-            try { File.Delete(Application.StartupPath + ConfUtility.debugPath + "\\" +ConfDao.getInstance().Get(10)); }
+            try { File.Delete(Application.StartupPath + ConfUtility.debugPath + "\\" +ConfDao.getInstance().Get(14)); }
             catch { }
 
             File.Copy(pictureBox1.ImageLocation, picLocation, true);
