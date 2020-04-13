@@ -44,10 +44,11 @@ namespace LocalERP.WinForm
             string[] names = pictureBox1.ImageLocation.Split('\\');
             string picLocation = Application.StartupPath + ConfUtility.debugPath + "\\" + names[names.Length - 1];
 
-            try { File.Delete(Application.StartupPath + ConfUtility.debugPath + "\\" +ConfDao.getInstance().Get(14)); }
+            try { 
+                File.Delete(Application.StartupPath + ConfUtility.debugPath + "\\" +ConfDao.getInstance().Get(14));
+                File.Copy(pictureBox1.ImageLocation, picLocation, true);
+            }
             catch { }
-
-            File.Copy(pictureBox1.ImageLocation, picLocation, true);
 
             ConfDao.getInstance().UpdateCompanyInfo(this.textBox_company.Text, this.textBox_address.Text, this.textBox_contact.Text,
                 this.textBox_phone.Text, this.textBox_mobile.Text, this.textBox_bank.Text, this.textBox_other.Text, names[names.Length - 1]);
