@@ -6,6 +6,8 @@ using LocalERP.WinForm;
 namespace LocalERP.DataAccess.Data
 {
     // 该类对应数据库表单： PayReceipt
+
+    //2020-05-10：有两个参数，一个是arrearDirection，表示累计的应付应收, cashDirection表示本单的收还是付。
     public class PayReceipt
     {
         // 应收应付，(采购付款， 采购退点， 销售收款， 销售退点)

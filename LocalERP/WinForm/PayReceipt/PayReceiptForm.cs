@@ -50,7 +50,7 @@ namespace LocalERP.WinForm
             this.label_date.Text = "开单时间:";
 
             if (conf.type == PayReceipt.BillType.BuyRefund || conf.type == PayReceipt.BillType.SellRefund)
-                this.label_needPayed.Text = conf.cashDirection == -1 ? "退点金额(应收):" : "退点金额(应付):";
+                this.label_needPayed.Text = conf.cashDirection == -1 ? "退点金额(应付):" : "退点金额(应收):";
             this.label_thisPayed.Text = conf.cashDirection == -1 ? "本单已付:" : "本单已收:";
             this.label_arrears.Text = conf.arrearDirection == 1 ? "以上欠款(应付):" : "以上欠款(应收):";
             this.label_accumulative.Text = conf.arrearDirection == 1 ? "累计欠款(应付):" : "累计欠款(应收):";

@@ -138,6 +138,13 @@ namespace LocalERP.DataAccess.DataDAO
             return this.formatProductCirculation(dr);
         }
 
+        public ProductCirculation FindLastestAccReceiptZero(int customerID)
+        {
+            string commandText = string.Format("select {0}.*, Customer.name from {0} left join Customer on Customer.ID = {0}.customerID where Customer.ID={1} and (arrearDirection * previousArrears + flowType * (realTotal - thisPayed)) * arrearDirection = 0", tableName, customerID);
+            DataRow dr = DbHelperAccess.executeQueryGetOneRow(commandText);
+            return this.formatProductCirculation(dr);
+        }
+
         public virtual List<ProductCirculation> FindProductCirculationList(int typeStart, int typeEnd, DateTime? startTime, DateTime? endTime, int status, string name, int parent)
         {
             //要注意，这个语句会筛选掉没有Customer信息的

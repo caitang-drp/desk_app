@@ -118,6 +118,15 @@ namespace LocalERP.DataAccess.DataDAO
             return formatPayReceipt(dr);
         }
 
+       
+        public PayReceipt FindLastestAccReceiptZero(int customerID)
+        {
+            string commandText = string.Format("select PayReceipt.*, Customer.name from PayReceipt left join Customer on PayReceipt.customer_id = Customer.ID where Customer.ID={0} and  (arrearDirection * previousArrears - cashDirection * (amount - thisPayed)) * arrearDirection = 0", customerID);
+            DataRow dr = DbHelperAccess.executeQueryGetOneRow(commandText);
+            //要测试字段是否正确
+            return formatPayReceipt(dr);
+        }
+
         //DateTime? 相当于Nullable<DateTime>，调用时必须增加.value
         public List<PayReceipt> FindPayReceiptList(DateTime? startTime, DateTime? endTime, int status, string name, int parent, int hide)
         {
