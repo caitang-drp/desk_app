@@ -423,6 +423,8 @@ namespace LocalERP.WinForm
             // 
             // panel_lastPayReceipt
             // 
+            this.panel_lastPayReceipt.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.panel_lastPayReceipt.Controls.Add(this.label22);
             this.panel_lastPayReceipt.Controls.Add(this.label_lastPayReceipt);
             this.panel_lastPayReceipt.Location = new System.Drawing.Point(466, 6);
@@ -435,9 +437,9 @@ namespace LocalERP.WinForm
             this.label22.AutoSize = true;
             this.label22.Location = new System.Drawing.Point(3, 4);
             this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(112, 14);
+            this.label22.Size = new System.Drawing.Size(84, 14);
             this.label22.TabIndex = 88;
-            this.label22.Text = "上次收付款信息:";
+            this.label22.Text = "上次收付款:";
             // 
             // label_lastPayReceipt
             // 

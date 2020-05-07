@@ -11,7 +11,7 @@ namespace LocalERP.DataAccess.Utility
     public static class ConfUtility
     {
         //
-        public static bool isDebug = true;
+        public static bool isDebug = false;
         public static DateTime dateLine = Convert.ToDateTime("2020-4-30");
 
         //0为经销存，1为卡片消费
@@ -30,8 +30,8 @@ namespace LocalERP.DataAccess.Utility
         public static string letter_report_path = Application.StartupPath + debugPathReport + "\\letter_report.grf";
         public static string check_report_path = Application.StartupPath + debugPathReport + "\\check_report.grf";
 
-        private const String SOFT_NAME = "鹏达科技";
-        private const String PRODUCT_NAME = "鹏达企业软件13632041235";
+        private const String SOFT_NAME = "飞翔科技";
+        private const String PRODUCT_NAME = "飞翔企业软件";
 
         //2018-3-22，如果数据库Conf表有设置软件的名称，则用数据库的，否则使用默认
         public static String GetSoftName()

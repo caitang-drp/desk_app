@@ -927,7 +927,10 @@ namespace LocalERP.WinForm
             if (lastPayReceipt == 0 || cashDirection == 0)
                 label_lastPayReceipt.Text = "";
             else
-                label_lastPayReceipt.Text = string.Format("{0} {1:0.00}元({2:yyyy年MM月dd日})", cashDirection == -1 ? LabelUtility.LAST_PAY : LabelUtility.LAST_RECEIPT, lastPayReceipt, dt);
+            {
+                TimeSpan ts = DateTime.Now.Subtract(dt);
+                label_lastPayReceipt.Text = string.Format("{0}{1:0.00}元({2:yyyy/MM/dd},欠款{3}天)", cashDirection == -1 ? LabelUtility.LAST_PAY : LabelUtility.LAST_RECEIPT, lastPayReceipt, dt, ts.Days);
+            }
         
         }
 
