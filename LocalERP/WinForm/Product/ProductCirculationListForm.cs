@@ -121,7 +121,8 @@ namespace LocalERP.WinForm
                     index = this.dataGridView1.Rows.Add();
 
                     this.dataGridView1.Rows[index].Cells["name"].Value = "合计";
-                    this.dataGridView1.Rows[index].Cells["realTotal"].Value = sum;
+                    //四舍五入
+                    this.dataGridView1.Rows[index].Cells["realTotal"].Value = Math.Round(sum, 2);
                     this.dataGridView1.Rows[index].DefaultCellStyle.ForeColor = Color.Red;
                     this.dataGridView1.Rows[index].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
                     this.dataGridView1.Rows[index].DefaultCellStyle.Font = new Font("宋体", 10F, FontStyle.Bold);
