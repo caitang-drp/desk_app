@@ -121,7 +121,7 @@ namespace LocalERP.DataAccess.DataDAO
        
         public PayReceipt FindLastestAccReceiptZero(int customerID)
         {
-            string commandText = string.Format("select PayReceipt.*, Customer.name from PayReceipt left join Customer on PayReceipt.customer_id = Customer.ID where Customer.ID={0} and  (arrearDirection * previousArrears - cashDirection * (amount - thisPayed)) * arrearDirection = 0", customerID);
+            string commandText = string.Format("select top 1 PayReceipt.*, Customer.name from PayReceipt left join Customer on PayReceipt.customer_id = Customer.ID where Customer.ID={0} and  (arrearDirection * previousArrears - cashDirection * (amount - thisPayed)) < 0 and previousArrears >=0 order by PayReceipt.ID desc", customerID);
             DataRow dr = DbHelperAccess.executeQueryGetOneRow(commandText);
             //要测试字段是否正确
             return formatPayReceipt(dr);

@@ -928,8 +928,27 @@ namespace LocalERP.WinForm
                 label_lastPayReceipt.Text = "";
             else
             {
-                TimeSpan ts = DateTime.Now.Subtract(dt);
-                label_lastPayReceipt.Text = string.Format("{0}{1:0.00}元({2:yyyy/MM/dd},欠款{3}天)", cashDirection == -1 ? LabelUtility.LAST_PAY : LabelUtility.LAST_RECEIPT, lastPayReceipt, dt, ts.Days);
+                label_lastPayReceipt.Text = string.Format("{0}{1:0.00}元({2:yyyy/MM/dd})", cashDirection == -1 ? LabelUtility.LAST_PAY : LabelUtility.LAST_RECEIPT, lastPayReceipt, dt);
+            }
+
+            Customer customer = CustomerDao.getInstance().FindByID(customerId);
+            if (customer.arrear < 0) {
+                ProductCirculation lastCir = cirDao.FindLastestAccReceiptZero(customerId);
+                PayReceipt lastPay = PayReceiptDao.getInstance().FindLastestAccReceiptZero(customerId);
+                DateTime lastDt;
+                if (lastCir != null && lastPay != null)
+                    lastDt = lastCir.CirculationTime.CompareTo(lastPay.bill_time) > 0 ? lastCir.CirculationTime : lastPay.bill_time;
+                else if (lastCir == null && lastPay != null)
+                    lastDt = lastPay.bill_time;
+                else if (lastCir != null && lastPay == null)
+                    lastDt = lastCir.CirculationTime;
+                else
+                    return;
+
+                
+                TimeSpan ts = DateTime.Now.Subtract(lastDt);
+                label_lastPayReceipt.Text += string.Format("欠款{0}天", ts.Days);
+                
             }
         
         }

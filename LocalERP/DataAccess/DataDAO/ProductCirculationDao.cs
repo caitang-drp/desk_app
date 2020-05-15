@@ -140,7 +140,7 @@ namespace LocalERP.DataAccess.DataDAO
 
         public ProductCirculation FindLastestAccReceiptZero(int customerID)
         {
-            string commandText = string.Format("select top 1 {0}.*, Customer.name from {0} left join Customer on Customer.ID = {0}.customerID where Customer.ID={1} and (arrearDirection * previousArrears + flowType * (realTotal - thisPayed)) < 0 and arrearDirection * previousArrears >=0", tableName, customerID);
+            string commandText = string.Format("select top 1 {0}.*, Customer.name from {0} left join Customer on Customer.ID = {0}.customerID where Customer.ID={1} and (arrearDirection * previousArrears + flowType * (realTotal - thisPayed)) < 0 and arrearDirection * previousArrears >=0 order by {0}.ID desc", tableName, customerID);
             DataRow dr = DbHelperAccess.executeQueryGetOneRow(commandText);
             return this.formatProductCirculation(dr);
         }
