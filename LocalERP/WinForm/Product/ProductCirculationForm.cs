@@ -937,7 +937,7 @@ namespace LocalERP.WinForm
                 PayReceipt lastPay = PayReceiptDao.getInstance().FindLastestAccReceiptZero(customerId);
                 DateTime lastDt;
                 if (lastCir != null && lastPay != null)
-                    lastDt = lastCir.CirculationTime.CompareTo(lastPay.bill_time) > 0 ? lastCir.CirculationTime : lastPay.bill_time;
+                    lastDt = lastCir.CirculationTime.CompareTo(lastPay.bill_time) < 0 ? lastCir.CirculationTime : lastPay.bill_time;
                 else if (lastCir == null && lastPay != null)
                     lastDt = lastPay.bill_time;
                 else if (lastCir != null && lastPay == null)
