@@ -1,2 +1,9 @@
+初次使用:
+
 先点击Grid++Report6.1.exe，安装。
 添加引用：在COM类中，选中跟Grid++相关的3个选项
+
+在项目文件夹里打开git gui here，或者在其他地方打开git gui，选择open existing respository，然后选择项目文件夹
+然后staged，然后commit，commit前要在"git bash"里运行
+1,git config --global user.email 267298093@qq.com
+2,git config --global user.name MrBingo2008
