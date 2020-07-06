@@ -1,7 +1,7 @@
 初次使用:
 
 先点击Grid++Report6.1.exe，安装。
-添加引用：在COM类中，选中跟Grid++相关的3个选项
+添加引用：在COM类中，选中跟Grid++相关的一个选项gregn6Lib，LocalERP.csproj会更新，但是不同机器更新的内容是一样的，所以LocalERP.csproj也要加入版本库里。
 
 在项目文件夹里打开git gui here，或者在其他地方打开git gui，选择open existing respository，然后选择项目文件夹
 然后staged，然后commit，commit前要在"git bash"里运行

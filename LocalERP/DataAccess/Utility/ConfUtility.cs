@@ -11,7 +11,7 @@ namespace LocalERP.DataAccess.Utility
     public static class ConfUtility
     {
         //
-        public static bool isDebug = false;
+        public static bool isTrial = false;
         public static DateTime dateLine = Convert.ToDateTime("2020-4-30");
 
         //0为经销存，1为卡片消费

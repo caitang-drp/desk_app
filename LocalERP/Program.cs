@@ -22,7 +22,7 @@ namespace LocalERP
             Application.SetCompatibleTextRenderingDefault(false);
 
             /*AuthUtility.checkSN()获取数据库sn号，然后进行验证*/
-            if (ConfUtility.isDebug == false && AuthUtility.checkSN() == false) {
+            if (ConfUtility.isTrial == false && AuthUtility.checkSN() == false) {
                 SignForm signForm = new SignForm();
                 signForm.ShowDialog();
                 if (signForm.DialogResult != DialogResult.OK)
@@ -30,7 +30,7 @@ namespace LocalERP
             }
 
             /*AuthUtility.checkSN()获取数据库sn号，然后进行验证*/
-            if (ConfUtility.isDebug == true)
+            if (ConfUtility.isTrial == true)
             {
                 if (DateTime.Compare(DateTime.Now, ConfUtility.dateLine) >= 0)
                 {
